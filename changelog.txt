@@ -9,8 +9,6 @@
 - Issue #142: Fixed Wrong monster stat, Piranha; [NattWara]
 - Issue #143: Added Missing Dungeon, Brasilis Dungeon; [NattWara]
 - Issue #144: Fixed Monster name wrong spelling - Arclouse -> Arclouze; [NattWara]
-- Issue #62: [Missing Item] - Enhanced Corsair [NattWara]
-- Issue #63: [Missing Item] - Enhanced Bone Helm [NattWara]
 - Issue #29: Added Lord of the Dead Helm [NattWara]
 - Issue #62: Added Enhanced Corsair [NattWara]
 - Issue #63: Added Enhanced Bone Helm [NattWara]
