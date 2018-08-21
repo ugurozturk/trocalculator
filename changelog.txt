@@ -1,3 +1,6 @@
+[2018-08-21]
+- Fixed loading of old URL saves with SQI bonuses [Loa]
+
 [2018-08-11]
 - Fixed Poison Knife itemid [Loa]
 - Fixed FLEE reduction when mobbed [Loa]

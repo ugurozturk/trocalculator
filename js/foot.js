@@ -8619,29 +8619,31 @@ with(document.calcForm){
 			document.calcForm.A_HSE_HEAD1.value = StoN2(w.substr(x+1,2));
 			x+=2;
 		}
-		//custom TalonRO Kris Enchantment LOAD URL
-		/*
-		if(A_weapon1.value == 1472){
-			A_KE11.value = StoN2(w.substr(x+1,2));
-			A_KE12.value = StoN2(w.substr(x+3,2));
-			x+=4
-		}
-		if (typeof(A_weapon2) != "undefined"){
-			if(A_weapon2.value == 1472){
-				A_KE21.value = StoN2(w.substr(x+1,2));
-				A_KE22.value = StoN2(w.substr(x+3,2));
+		// custom TalonRO Kris Enchantment LOAD URL
+		if(!StoN2(w.substr(x+10,2))){
+			if(A_weapon1.value == 1472){
+				A_KE11.value = StoN2(w.substr(x+1,2));
+				A_KE12.value = StoN2(w.substr(x+3,2));
 				x+=4
 			}
+			if (typeof(A_weapon2) != "undefined"){
+				if(A_weapon2.value == 1472){
+					A_KE21.value = StoN2(w.substr(x+1,2));
+					A_KE22.value = StoN2(w.substr(x+3,2));
+					x+=4
+				}
+			}
+		}else{
+			A_KE11.value = StoN2(w.substr(x+1,2));
+			A_KE12.value = StoN2(w.substr(x+3,2));
+			A_KE21.value = StoN2(w.substr(x+5,2));
+			A_KE22.value = StoN2(w.substr(x+7,2));
+			x+=8
 		}
-		*/
-		A_KE11.value = StoN2(w.substr(x+1,2));
-		A_KE12.value = StoN2(w.substr(x+3,2));
-		A_KE21.value = StoN2(w.substr(x+5,2));
-		A_KE22.value = StoN2(w.substr(x+7,2));
-		x+=8
 
 		//custom TalonRO SQI interface SAVE URL
-		x_sqibonus=StoN2(w.substr(x+1,1));					//check if any sqi bonus was activated (0=none;1=activated)
+		//check if any sqi bonus was activated (0=none;1=activated)
+		x_sqibonus=StoN2(w.substr(x+1,1));
 		x+=1;
 		if (x_sqibonus){
 			SQI_Bonus_Effect[0] = StoN2(w.substr(x+1,2));
