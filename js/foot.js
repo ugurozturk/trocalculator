@@ -734,6 +734,10 @@ function StAllCalc()
 	if(EquipNumSearch(972)){
 		n_tok[94] += 10;
 	}
+	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(934)){
+		n_tok[73] -= 20;
+		n_tok[74] += 20;
+	}
 
 //[TalonRO Custom 2018-07-25 - Brave Gladiator Blade + 5% MATK for Rogue/Stalker or Crusader/Paladin] [Amor]
 if(EquipNumSearch(900)){
@@ -3404,9 +3408,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_A_CAST *= (100 - 15 * n_A_PassSkill2[13]) /100;
 	if(SkillSearch(322))
 		n_A_CAST = n_A_CAST /2;
-
-	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(934))
-		n_tok[74] += 20;
 	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
 		n_tok[74] += 5;
 	if(EquipNumSearch(936))
