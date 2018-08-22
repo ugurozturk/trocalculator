@@ -1,6 +1,7 @@
 [2018-08-21]
 - Fixed loading of old URL saves with SQI bonuses [Loa]
 - Fixed Tegron stats [Loa]
+- Fixed BG staves jobid [Loa]
 
 [2018-08-11]
 - Fixed Poison Knife itemid [Loa]
