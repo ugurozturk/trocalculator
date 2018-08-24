@@ -3225,11 +3225,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1079) && EquipNumSearch(1376)) {
 			w += 5 + (2 * n_A_Weapon_ATKplus);
 	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class] [Amor]
-	if(EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
-			w += 5 + (2 * n_A_Weapon_ATKplus);
-	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class] [Amor]
+	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class + 2% per Refine] [Amor]
 	if(EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
 			w += 5 + (2 * n_A_Weapon_ATKplus);
 	}
@@ -3571,9 +3567,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1545)){
 		n_tok[25] -= (n_A_HEAD_DEF_PLUS - 5);
 	}
-	//[Custom TalonRO - 2018-07-28 - Glorious Hunter Bow - 2% DS damage (added here as ranged damage)] [Kato]
-	if(EquipNumSearch(1089)){
-		n_tok[25] += 2;
+	//[Custom TalonRO - 2018-07-28 - Glorious Hunter Bow - 2% DS damage per refine (added here as ranged damage)] [Kato]
+	if(EquipNumSearch(1089) && n_A_ActiveSkill == 40){
+		n_tok[25] += (2 * n_A_Weapon_ATKplus);
 	}
 
 	//[Custom TalonRO 2018-06-15 - Malandgo Enchantment for Expert Archer] [Kato]

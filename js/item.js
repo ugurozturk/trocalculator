@@ -17,7 +17,7 @@
    Accessory: 64 = Accessory
    Digits after description. Each digit after description can mean different values: Example(1,1 = Str + 1, 4,1 = Int + 1)
    After description values: 0 NONE,1 STR,2 AGI,3 VIT,4 INT,5 DEX,6 LUK,7 ALL STATS,8 HIT,9 FLEE,10 CRIT,11 Perfect Dodge,12 ASPD,13 MHP,14 MSP,15 MHP%,16 MSP%,17 ATK,18 DEF,19 MDEF
-*/
+*/ 
 
 ItemOBJ = [
 [0,0,0,0,1,0,0,0,"(Unarmed)","",0,0]
