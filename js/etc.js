@@ -251,10 +251,10 @@ PET_OBJ = [[0,"No Pet",0,0]
 ,[47,"Loli Ruri [MHP +3%, 5% to cast Heal Lv. 1 on the owner receiving Physical Damage]","When receiving Physical Damage, has a certain chance to use Heal Lv.1",15,3,0]
 //custom TalonRO pets
 ,[48,"Acidus [FLEE +10]",0,9,10,0]
-,[49,"Baby Leopard [ASPD +3%]",0,12,3,0]
+,[49,"Baby Leopard [ASPD +5%]",0,12,5,0]
 ,[50,"Develing [Shadow Resistance +3%]",0,67,3,0]
 ,[51,"Garm Baby [Water Resistance +7%]",0,61,7,0]
-,[52,"Green Ferus [Increase damage against Dragon by 5% and Demon by 2%]",0,31,2,39,5,0]
+,[52,"Green Ferus [Increase damage against Dragon by 5% and Demon by 2%]",0,39,5,36,2,0]
 ,[53,"Headless Mule [DEX+1, Shadow Resistance +3%]",0,5,1,67,3,0]
 ,[54,"Jakk [Shadow Resistance +3%, Holy Resistance -3%]",0,66,-3,67,3,0]
 ,[55,"Myst Case [Shadow Resistance -3%, Holy Resistance +3%]",0,66,3,67,-3,0]
@@ -294,7 +294,7 @@ PET_OBJ = [[0,"No Pet",0,0]
 ,[87,"Domovoi [AGI +2]",0,2,2,0]
 ,[88,"Dumpling Child [Neutral Resistance +1%]",0,60,1,0]
 ,[89,"Eggyra [AGI +3]",0,2,3,0]
-,[90,"Ferus [Increase damage against Dragon by 5% & Undead by 2%]",0,59,5,51,5,0]
+,[90,"Ferus [Increase damage against Dragon by 5% & Undead by 2%]",0,39,5,31,2,0]
 ,[91,"Freezer [STR +1, Water Resistance 2%]",0,1,1,61,2,0]
 ,[92,"Garden Keeper [INT +1, AGI +1, Holy Resistance +2%]",0,4,1,2,1,66,2,0]
 ,[93,"Galapago [AGI +2, LUK +4 if equipped with Galapago Cap]",0,2,2,0]
@@ -345,28 +345,28 @@ ITEM_SP_TIME_OBJ =[
 ,[3,"Atroce Card","ASPD+100%",2,463,12,100,0]
 ,[4,"Anolian Card","Improve Concentration Lv1",2,224,0]
 ,[5,"Alchemist Card Set","Adrenaline Rush",2,461,0]
-,[6,"Valorous Assassin Damascus","Ice Pick Effect",1,898,23,1,0]
+,[6,"Valorous Assassin Damascus","MATK + 10% and ASPD + 20%",4,898,73,20,89,10,0]
 ,[7,"Ixion Wings","ASPD + 7%",1,821,12,7,0]
 ,[8,"Vanberk Card","CRIT + 100",2,471,10,100,0]
 ,[9,"Wolfheiden","Receive -20% Physical Damage, +20% Magical Damage[Stone Skin Lv6]",1,708,0]
 ,[10,"Angelic Ring","Heal/Sanctuary/Potion Pitcher Effectiveness + 20%",1,1000,91,20,94,20,0]
 ,[11,"Glorious Grenade Launcher","ASPD + 20%",1,1103,12,20,0]
-,[12,"Glorious Jamadhar[+9]","ASPD + 100%",1,1091,12,100,0]
-,[13,"Glorious Tablet","ATK + 200",1,1094,17,200,0]
-,[14,"Glorious Shuriken","Throw Fuuma Shuriken/Final Strike Damage + 100%",1,1098,5396,100,5405,100,5438,100,0]
+,[12,"Glorious Jamadhar[+9]","ASPD + 100%",0,0,0] //1,1091,12,100,0
+,[13,"Glorious Tablet","ATK + 20",1,1094,17,20,0] //1,1094,17,200,0
+,[14,"Glorious Shuriken","Throw Fuuma Shuriken/Final Strike Damage + 100%",0,0,0] //,1,1098,5396,100,5405,100,5438,100,0
 ,[15,"Glorious Bloody Roar[+9]","ASPD + 100%",1,1090,12,100,0]
 ,[16,"Naght Sieger Twin-Blade [Red]","Ignore [Non-Boss] Monster Defense",1,933,22,1,0]
-,[17,"Her National Treasury","Loud Exclamation",1,1012,0]
+,[17,"Her National Treasury","none",0,0,0] //replace me
 ,[18,"Desert Twilight + Desert Wind","190 ASPD",1,818,12,100,0]
 ,[19,"Shadow Guard Set [Shadow Walk + Shadow Guard]","FLEE + 20",1,995,9,20,0]
-,[20,"Valorous Huuma Front Shuriken","Throw Fuuma Shuriken/Final Strike Damage + 100%",1,931,5396,100,5405,100,5438,100,0]
+,[20,"Huuma Front Shuriken (Valorous)","Throw Fuuma Shuriken/Final Strike Damage + 100%",0,0,0] //1,931,5396,100,5405,100,5438,100,0
 ,[21,"Naght Sieger Twin-Blade [Blue]","Ignore [Non-Boss] Monster Defense",1,932,22,1,0]
 ,[22,"Soldier Gatling Gun","ATK + 80",1,927,17,80,0]
 ,[23,"Soldier Grenade Launcher","ATK + 300",1,929,17,300,0]
 ,[24,"Soldier Revolver","ASPD + 100%",1,925,12,100,0]
 ,[25,"Tae Goo Lyeon [JobLV70]","ATK + 50",1,934,17,50,0]
 ,[26,"Brave Battle Fist","Asura Strike Cast Time -100%",1,916,7197,100,7321,100,0]
-,[27,"Armor of Naga","ATK + 20",1,989,17,20,0]
+,[27,"Naga Scale Armor","ATK + 20",1,989,17,20,0]
 ,[28,"Noble Hat","Adrenaline Rush",1,1129,0]
 ,[29,"Violet Fear","Ignore [Non-Boss] Monster Defense",1,935,22,1,0]
 ,[30,"Bloody Eater","CRIT + 100, ATK + 50",1,819,10,100,17,50,0]
@@ -376,14 +376,14 @@ ITEM_SP_TIME_OBJ =[
 ,[34,"Ring of Flame Lord","Critical Explosion Lv1",1,728,0]
 ,[35,"Lord Knight Card","Berserk",2,178,0]
 ,[36,"Soldier Shotgun","ATK + 80",1,928,17,80,0]
-,[37,"Biner","Physical Damage + 10%",1,1157,80,10,0]
+,[37,"Voina Dagger","Physical Damage + 10%",1,1157,80,10,0]
 ,[38,"Roubel","Bash / Bowling Bash Damage +20%",1,1158,5006,20,5076,20,0]
 ,[39,"Chronos","MATK + 12%",1,1172,89,12,0]
 ,[40,"Nemesis","ATK + 50",1,820,17,50,0]
 ,[41,"Sorin Doll Hat","ATK + 50",1,892,17,50,0]
 ,[42,"Sagittarius Diadem","+10 DEX/AGI",1,1288,2,10,5,10,0]
 ,[43,"Virgo Crown","+20 DEX",1,1294,5,20,0]
-,[44,"Benit Doll Hat","ASPD + 5%",1,1028,12,5,0]
+,[44,"Vinit Doll Hat","ASPD + 5%",1,1028,12,5,0]
 ,[45,"Dark Knight Glove[Type A]","ASPD + 2%",1,1052,12,2,0]
 ,[46,"Dark Knight Glove[Type B]","MHP + 10%",1,1310,15,10,0]
 ,[47,"Jaguar Hat","Loud Exclamation",1,1317,1,4,0] //custom TalonRO, really?
@@ -393,24 +393,25 @@ ITEM_SP_TIME_OBJ =[
 ];
 //ITEM_SP_TIME_OBJ_SORT = [0,5,10,4,27,3,44,37,30,31,26,39,49,45,46,18,48,15,11,12,14,13,17,32,1,7,47,35,33,21,16,40,28,34,38,42,19,22,23,24,36,41,25,6,20,8,29,43];
 
+//2nd value is bonus brewing success rate in %
 Potion_Type =[
-[0,28.4,"Red Potion"]
-,[1,28.4,"Yellow Potion"]
-,[2,28.4,"White Potion"]
-,[3,3.4,"Blue Potion"]
-,[4,3.4,"Slim Red Potion"]
-,[5,0.9,"Slim Yellow Potion"]
+[0,20,"Red Potion"]
+,[1,20,"Yellow Potion"]
+,[2,20,"White Potion"]
+,[3,0,"Blue Potion"]
+,[4,0,"Slim Red Potion"]
+,[5,0,"Slim Yellow Potion"]
 ,[6,0,"Slim White Potion"]
-,[7,18.4,"Alcohol"]
-,[8,8.4,"Acid Bottle"]
-,[9,8.4,"Bottle Grenade"]
-,[10,8.4,"Plant Bottle"]
-,[11,8.4,"Marine Sphere Bottle"]
+,[7,10,"Alcohol"]
+,[8,0,"Acid Bottle"]
+,[9,0,"Bottle Grenade"]
+,[10,0,"Plant Bottle"]
+,[11,0,"Marine Sphere Bottle"]
 ,[12,0,"Glistening Coat"]
-,[13,3.4,"Anodyne"]
-,[14,3.4,"Aloevera"]
-,[15,3.4,"Embryo"]
-,[16,3.4,"Elemental Resist Potions"]
+,[13,0,"Anodyne"]
+,[14,0,"Aloevera"]
+,[15,0,"Embryo"]
+,[16,0,"Elemental Resist Potions"]
 ];
 Potion_Max = 17;
 
@@ -638,7 +639,7 @@ SQI_BONUS =[
 ];
 
 EXTENDED_INFO = [
-	["","-"]
+[0,"-"]
  ,[1,"Heal Amount"]
  ,[16,"Sanctuary Healing Amount"]
  ,[2,"Increased HP Recovery"]
@@ -732,51 +733,612 @@ CARD_SHORTCUT = [
 ];
 
 KRIS_ENCHANTMENT = [
-  [1,"DEF+2"]
- ,[2,"DEF+3"]
- ,[3,"DEF+4"]
- ,[11,"MDEF+2"]
- ,[12,"MDEF+3"]
- ,[13,"MDEF+4"]
- ,[21,"HP+100"]
- ,[22,"HP+200"]
- ,[23,"HP+300"]
- ,[31,"SP+50"]
- ,[41,"VIT+1"]
- ,[42,"VIT+2"]
- ,[43,"VIT+3"]
- ,[51,"INT+1"]
- ,[52,"INT+2"]
- ,[53,"INT+3"]
- ,[61,"DEX+1"]
- ,[62,"DEX+2"]
- ,[63,"DEX+3"]
- ,[71,"LUK+1"]
- ,[72,"LUK+2"]
- ,[73,"LUK+3"]
- ,[81,"MATK+1%"]
- ,[82,"MATK+2%"]
- ,[91,"ATK+3%"]
+  [102,"DEF+2"]
+ ,[103,"DEF+3"]
+ ,[104,"DEF+4"]
+ ,[112,"MDEF+2"]
+ ,[113,"MDEF+3"]
+ ,[114,"MDEF+4"]
+ ,[131,"HP+100"]
+ ,[132,"HP+200"]
+ ,[133,"HP+300"]
+ ,[134,"HP+400"]
+ ,[141,"SP+50"]
+ ,[31,"VIT+1"]
+ ,[32,"VIT+2"]
+ ,[33,"VIT+3"]
+ ,[41,"INT+1"]
+ ,[42,"INT+2"]
+ ,[43,"INT+3"]
+ ,[51,"DEX+1"]
+ ,[52,"DEX+2"]
+ ,[53,"DEX+3"]
+ ,[61,"LUK+1"]
+ ,[62,"LUK+2"]
+ ,[63,"LUK+3"]
+ ,[891,"MATK+1%"]
+ ,[892,"MATK+2%"]
+ ,[173,"ATK+3%"]
 ];
 
 HS_ENCHANTS = [
-	[0,"(Hidden Slot Enchant, Armor)"]
- ,[1,"STR+1"]
- ,[2,"STR+2"]
- ,[3,"STR+3"]
- ,[11,"AGI+1"]
- ,[12,"AGI+2"]
- ,[13,"AGI+3"]
- ,[21,"VIT+1"]
- ,[22,"VIT+2"]
- ,[23,"VIT+3"]
- ,[31,"INT+1"]
- ,[32,"INT+2"]
- ,[33,"INT+3"]
- ,[41,"DEX+1"]
- ,[42,"DEX+2"]
- ,[43,"DEX+3"]
- ,[51,"LUK+1"]
- ,[52,"LUK+2"]
- ,[53,"LUK+3"]
+	//[0,"(Hidden Slot Enchant, Armor)"]
+  [11,"STR+1"]
+ ,[12,"STR+2"]
+ ,[13,"STR+3"]
+ ,[21,"AGI+1"]
+ ,[22,"AGI+2"]
+ ,[23,"AGI+3"]
+ ,[31,"VIT+1"]
+ ,[32,"VIT+2"]
+ ,[33,"VIT+3"]
+ ,[41,"INT+1"]
+ ,[42,"INT+2"]
+ ,[43,"INT+3"]
+ ,[51,"DEX+1"]
+ ,[52,"DEX+2"]
+ ,[53,"DEX+3"]
+ ,[61,"LUK+1"]
+ ,[62,"LUK+2"]
+ ,[63,"LUK+3"]
+ ,[102,"DEF+2"]
+ ,[103,"DEF+3"]
+ ,[104,"DEF+4"]
+ ,[112,"MDEF+2"]
+ ,[113,"MDEF+3"]
+ ,[114,"MDEF+4"]
+ ,[152,"CRIT+2"]
+ ,[153,"CRIT+3"]
+ ,[154,"CRIT+4"]
+ ,[121,"ASPD+1%"]
+ ,[122,"ASPD+2%"]
+ ,[123,"ASPD+3%"]
+ ,[302,"FLEE+2"]
+ ,[304,"FLEE+4"]
+ ,[306,"FLEE+6"]
+ ,[311,"HIT+4"]
+ ,[312,"HIT+8"]
+ ,[313,"HIT+12"]
 ];
+
+MALANGDO_ENCHANTS = [
+		[131, "MHP +100"]
+		,[132, "MHP +200"]
+		//,[133, "MHP +300"]
+		,[141, "MSP +50"]
+		,[142, "MSP +100"]
+		,[11, "STR+1"]
+		,[12, "STR+2"]
+		,[13, "STR+3"]
+		,[21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[23, "AGI+3"]
+		,[31, "VIT+1"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[43, "INT+3"]
+		,[51, "DEX+1"]
+		,[52, "DEX+2"]
+		,[53, "DEX+3"]
+		,[61, "LUK+1"]
+		//,[301, "ASPD+1%"]
+		//,[302, "ASPD+2%"]
+		,[123, "ASPD+3%"]
+		,[171, "ATK 1%"]
+		,[891, "MATK 1%"]
+		,[892, "MATK 2%"]
+		//,[1781,"Fighting Spirit 1"]
+		//,[1782,"Fighting Spirit 2"]
+		//,[1783,"Fighting Spirit 3"]
+		,[1784,"Fighting Spirit 4"]
+		,[1785,"Fighting Spirit 5"]
+		,[1786,"Fighting Spirit 6"]
+		,[1787,"Fighting Spirit 7"]
+		,[1788,"Fighting Spirit 8"]
+		//,[1789,"Fighting Spirit 9"]
+		//,[1790,"Fighting Spirit 10"]
+		//,[1081,"Sharp 1"]
+		,[1082,"Sharp 2"]
+		,[1083,"Sharp 3"]
+		,[1084,"Sharp 4"]
+		,[1085,"Sharp 5"]
+		//,[251,"Expert Archer 1"]
+		,[252,"Expert Archer 2"]
+		,[253,"Expert Archer 3"]
+		,[254,"Expert Archer 4"]
+		,[255,"Expert Archer 5"]
+		,[256,"Expert Archer 6"]
+		,[261,"Spell 1"]
+		,[262,"Spell 2"]
+		,[263,"Spell 3"]
+		,[264,"Spell 4"]
+		,[265,"Spell 5"]
+		,[266,"Spell 6"]
+		,[267,"Spell 7"]
+];
+
+ME_ENCHANTABLE = [
+/* [Daggers] */
+	 [390,0] //Swordbreaker
+	,[391,0] //Mailbreaker
+	,[392,0] //Weeder Knife
+	,[387,0] //Kitchen Knife
+	,[12,0] //Fortune Sword
+	,[13,0] //Assassin Dagger
+	,[394,0] //Exorciser
+	,[396,0] //Azoth
+	,[14,0] //Sucsamad
+	,[15,0] //Grimtooth
+	,[389,0] //Princess Knife
+	,[397,0] //Cursed Dagger
+	,[398,0] //Dagger of Counter
+	,[799,0] //Holy Dagger
+	,[1156,0] //Krieg
+	,[1157,0] //Weihna
+	,[1463,0] //Black Wing
+	,[12,0] //Fortune Sword
+	,[393,53,0] //Combat Knife - Except DEX+3
+	,[11,0] //Moonlight Dagger
+	,[388,0] //Ice Pick
+	,[395,41,42,43,53,0] //Bazerald Except INT enchants or DEX+3
+	,[1618,0] //Ancient Dagger
+/* [Katars] */
+	,[634,0] //Bloody Blades [2]
+	,[482,0] //Unholy Touch
+	,[633,0] //Drill Katar [1]
+	,[1175,0] //Krishna [2]
+	,[1176,0] //Chakram [2]
+	,[631,0] //Ogre's Toenail [1]
+	,[632,0] //Inverse Scare
+	,[483,0] //Bloody Roar
+	,[113,0] //Infiltrator
+/* [One Handed Axes] */
+	,[415,0] //Cleaver
+	,[1164,0] //Berchel Axe [2]
+/* [Two Handed Axes] */
+	,[70,0] //Great Axe
+	,[416,0] //Sabbath
+	,[1166,0] //Bradium Stone Hammer
+	,[417,0] //Slaughter
+	,[418,0] //Tomahawk
+	,[1167,0] //Giant Axe [1]
+	,[419,0] //Guillotine
+	,[68,0] //Bloody Axe
+	,[623,0] //Heart Breaker [1]
+	,[624,0] //Hurricane Fury [1]
+	,[69,0] //Light Epsilon
+	,[621,0] //Doom Slayer
+/* [One Handed Swords] */
+	,[32,0] //Ice Falchion
+	,[33,0] //Fireblend
+	,[401,0] //Caesar's Sword
+	,[34,0] //Cutlus
+	,[31,0] //Solar Sword
+	,[35,0] //Mysteltainn
+	,[36,0] //Tirfing
+	,[403,0] //Byeollungum
+	,[404,0] //Immaterial Sword
+	,[470,0] //Star Dust Blade [1]
+	,[1158,0] //Roubel Sword [1]
+	,[1623,0] //Chrome Metal Sword
+	,[402,41,42,43,53,0] //Excalibur - Except INT Enchant and DEX+3
+	,[399,0] //Nagan
+	,[400,0] //Edge
+/* [Two Handed Swords] */
+	,[44,0] //Muramasa
+	,[405,0] //Dragon Slayer
+	,[406,0] //Schweizersabel
+	,[46,0] //Zweihander
+	,[45,0] //Katzbalger
+	,[615,0] //Muscle Cutter [2]
+	,[934,0] //Tae Goo Lyeon [2]
+	,[819,0] //Bloody Eater [2]
+	,[1159,0] //Veteran Sword [1]
+	,[1160,0] //Krasnaya [3]
+	,[1456,0] //Chrome Metal Two-Handed Sword
+	,[47,0] //Masamune
+	,[43,0] //Executioner
+	,[614,0] //Atroce's Blade [1]
+	,[935,0] //Violet Fear [2]
+	,[940,0] //Death Guidance [2]
+/* [One Handed Spears] */
+	,[616,0] //Long Horn [1]
+	,[52,0] //Gungnir
+	,[408,0] //Gelerdria
+	,[410,0] //Tjungkuletti
+	,[1460,0] //Imperial Spear [1]
+	,[409,0] //Brocca
+	,[617,0] //Battle Hook [1]
+	,[618,0] //Hunting Spear [1]
+/* [Two Handed Spears] */
+	,[60,0] //Crescent Scythe
+	,[411,0] //Bill Guisarme
+	,[59,0] //Zephyrus
+	,[412,0] //Longinus's Spear
+	,[413,0] //Brionac
+	,[414,0] //Hellfire
+	,[471,0] //Gae Bolg
+	,[619,0] //Phantom Spear
+	,[620,0] //Ahlspiess
+	,[942,0] //Carled [1]
+/* [One Handed Staves] - Staves Except DEX+2/+3 */
+	,[478,52,53,0] //Wing Staff
+	,[1041,52,53,0] //Gentleman Staff
+	,[863,52,53,0] //Holy Stick
+	,[1168,52,53,0] //Dead Tree Staff
+	,[1508,52,53,0] //Mental Stick
+	,[936,52,53,0] //Dark Thorn Staff
+	,[948,52,53,0] //Eraser
+/* [Two Handed Staves] - Staves Except DEX+2/+3 */
+	,[92,52,53,0] //Wizardry Staff
+	,[1172,52,53,0] //Chronos
+	,[1640,52,53,0] //Staff Of Thea [1]
+	,[647,52,53,0] //Divine Cross
+	,[646,52,53,0] //Staff of Destruction
+/* [Maces] */
+	,[81,0] //Golden Mace [1]
+	,[82,0] //Long Mace
+	,[422,0] //Quadrille
+	,[820,0] //Nemesis
+	,[1162,0] //Erde [2]
+	,[1559,0] //Red Square Bag [2]
+	,[1458,0] //Red Ether Bag [1]
+	,[420,0] //Spike
+	,[421,0] //Slash
+	,[83,0] //Grand Cross
+/* [Books] */
+	,[122,0] //Book of the Apocalypse
+	,[121,0] //Girl's Diary [1]
+	,[486,0] //Legacy of Dragon
+	,[485,0] //Hardcover Book [1]
+	,[812,0] //Battlefield Textbook [1]
+	,[641,0] //Book of the Dead  [2]
+/* [Knuckles] */
+	,[423,0] //Kaiser Knuckle
+	,[424,0] //Berserk
+	,[487,0] //Garm Claw [1]
+	,[1512,0] //Sura's Rampage
+/* [Bows] */
+	,[102,0] //Roguemaster's Bow
+	,[103,0] //Ballista
+	,[479,0] //Dragon Wing
+	,[1061,0] //Minstrel Bow [1]
+	,[821,0] //Ixion Wings [1]
+	,[945,0] //Nepenthes Bow [2]
+	,[946,0] //Cursed Lyre [1]
+	,[1174,0] //Falken Blitz [2]
+	,[1457,0] //Mystic Bow
+	,[104,0] //Rudra Bow
+/* [Instruments] */
+	,[492,0] //Oriental Lute
+	,[649,0] //Spirited Guitar
+	,[950,0] //Harp of Nepenthes [2]
+	,[1462,0] //Green Whistle [1]
+/* [Whips] */
+	,[425,0] //Lariat Whip
+	,[426,0] //Rapture Rose
+	,[141,0] //Chemeti Whip
+	,[498,0] //Blade Whip
+	,[499,0] //Queen's Whip
+	,[651,0] //Electric Eel [2]
+	,[652,0] //Foot of the Sea Witch [1]
+	,[653,0] //Carrot Whip
+	,[951,0] //Stem of Nepenthes [2]
+	,[1454,0] //Stem Whip [1]
+	,[1622,0] //Rosevine
+];
+
+BIOLAB_ENCHANTS_WEAPON = [
+		 [11, "STR+1"]
+		,[12, "STR+2"]
+		,[21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[31, "VIT+1"]
+		,[32, "VIT+2"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[51, "DEX+1"]
+		,[52, "DEX+2"]
+		,[61, "LUK+1"]
+		,[62, "LUK+2"]
+		,[1781,"Fighting Spirit 1"]
+		,[1782,"Fighting Spirit 2"]
+		,[1783,"Fighting Spirit 3"]
+		,[1081,"Sharp 1"]
+		,[1082,"Sharp 2"]
+		,[1083,"Sharp 3"]
+		,[251,"Expert Archer 1"]
+		,[252,"Expert Archer 2"]
+		,[253,"Expert Archer 3"]
+		,[261,"Spell 1"]
+		,[262,"Spell 2"]
+		,[263,"Spell 3"]
+		,[264,"Spell 4"]
+		,[123, "ASPD+3%"]
+];
+
+BIOLAB_ENCHANTS_ARMOR = [
+		 [11, "STR+1"]
+		,[12, "STR+2"]
+		,[21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[31, "VIT+1"]
+		,[32, "VIT+2"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[51, "DEX+1"]
+		,[61, "LUK+1"]
+		,[62, "LUK+2"]
+		,[101,"DEF+1"]
+		,[102,"DEF+2"]
+		//,[111,"MDEF+1"]
+		,[112,"MDEF+2"]
+		,[113,"MDEF+3"]
+		,[114,"MDEF+4"]
+		,[301,"FLEE+1"]
+		,[302,"FLEE+2"]
+		,[303,"FLEE+3"]
+		,[304,"FLEE+4"]
+		,[131, "MHP +100"]
+		,[132, "MHP +200"]
+		,[133, "MHP +300"]
+		,[141, "MSP +50"]
+];
+
+BE_ENCHANTABLE_WEAPON = [
+/* [Daggers] */
+	 [1625,0] //Aztoe Nail
+	,[1624,0] //Scarletto Nail
+/* [Katars] */
+	,[1627,0] //Agent Katar
+	,[1549,0] //Guillotine Katar
+/* [Two Handed Axes] */
+	,[1617,0] //Ygnus Stale
+	,[1616,0] //End Sektura
+/* [One Handed Spears] */
+	,[1516,0] //Cannon Spear
+/* [Two Handed Spears] */
+	,[1315,0] //Gigantic Lance
+/* [One Handed Staves] */
+	,[1511,0] //Recovery Light
+/* [Maces] */
+	,[1499,0] //Bloody Cross
+/* [Books] */
+	,[1653,0] //Chilly Spell Book
+/* [Bows] */
+	,[1515,0] //Catapult
+	,[1045,0] //Giant Crossbow
+	,[1506,0] //Creeper Bow
+];
+
+BE_ENCHANTABLE_ARMOR = [
+/* [Upper Headgear] */
+	 [1663,0] //Ancient Gold Ornament
+/* [Armors] */
+	,[1513,0] //Green Surgical Gown
+/* [Shields] */
+	,[1500,0] //Giant Shield
+	,[1520,0] //Geffenia Water Book
+	,[1507,0] //Bible of Promise(2nd Vol.)
+/* [Garments] */
+	,[1498,0] //Salvage Cape
+/* [Accessory] */
+	,[1517,0] //Assassin's Glove
+];
+
+EDEN_ENCHANTS_HAT = [
+		 [11, "STR+1"]
+		,[12, "STR+2"]
+		,[21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[31, "VIT+1"]
+		,[32, "VIT+2"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[51, "DEX+1"]
+		,[61, "LUK+1"]
+		,[62, "LUK+2"]
+];
+
+EDEN_ENCHANTS_ARMOR_FIRST = [
+		 [11, "STR+1"]
+		,[12, "STR+2"]
+		,[21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[31, "VIT+1"]
+		,[32, "VIT+2"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[61, "LUK+1"]
+		,[62, "LUK+2"]
+		,[111,"MDEF+1"]
+		,[112,"MDEF+2"]
+		,[113,"MDEF+3"]
+		,[302,"FLEE+2"]
+];
+
+EDEN_ENCHANTS_ARMOR_SECOND = [
+		 [11, "STR+1"]
+		,[12, "STR+2"]
+		,[21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[31, "VIT+1"]
+		,[32, "VIT+2"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[51, "DEX+1"]
+		,[61, "LUK+1"]
+		,[62, "LUK+2"]
+		,[111,"MDEF+1"]
+		,[112,"MDEF+2"]
+		,[113,"MDEF+3"]
+		,[114,"MDEF+4"]
+		,[302,"FLEE+2"]
+		,[303,"FLEE+3"]
+		,[304,"FLEE+4"]
+		,[151,"CRIT+1"]
+		,[152,"CRIT+2"]
+		,[153,"CRIT+3"]
+		,[154,"CRIT+4"]
+];
+
+EDEN_ENCHANTS_WEAPON_FIRST = [
+		 [172, "ATK+2%"]
+		,[892, "MATK+2%"]
+];
+
+EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL = [
+		 [2030, "Physical Damage vs Formless + 10%"]
+		,[2031, "Physical Damage vs Undead + 10%"]
+		,[2032, "Physical Damage vs Brute + 10%"]
+		,[2033, "Physical Damage vs Plant + 10%"]
+		,[2034, "Physical Damage vs Insect + 10%"]
+		,[2035, "Physical Damage vs Fish + 10%"]
+		,[2036, "Physical Damage vs Demon + 10%"]
+		,[2037, "Physical Damage vs Demi-Human + 10%"]
+		,[2038, "Physical Damage vs Angel + 10%"]
+		,[2039, "Physical Damage vs Dragon + 10%"]
+];
+
+EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL = [
+		 [2170, "Magical Damage vs Formless + 5%"]
+		,[2171, "Magical Damage vs Undead + 5%"]
+		,[2172, "Magical Damage vs Brute + 5%"]
+		,[2173, "Magical Damage vs Plant + 5%"]
+		,[2174, "Magical Damage vs Insect + 5%"]
+		,[2175, "Magical Damage vs Fish + 5%"]
+		,[2176, "Magical Damage vs Demon + 5%"]
+		,[2177, "Magical Damage vs Demi-Human + 5%"]
+		,[2178, "Magical Damage vs Angel + 5%"]
+		,[2179, "Magical Damage vs Dragon + 5%"]
+];
+
+//EDEN_ENCHANTS_WEAPON_FIRST = FIRST + SECOND, depends on former choice.
+
+EDEN_ENCHANTABLE_HAT = [
+	 [1576,0] //Eden Group Hat
+	,[1577,0] //Eden Group Hat II
+];
+
+EDEN_ENCHANTABLE_ARMOR = [
+	 [1603,0] //Eden Group Uniform IV
+	,[1585,0] //Eden Group Manteau II
+	,[1567,0] //Eden Group Boots IV
+];
+
+EDEN_ENCHANTABLE_WEAPON = [
+	 [1570,0] //Eden Group Bow III
+	,[1573,0] //Eden Group Dagger III
+	,[1574,0] //Eden Group Dictonary I
+	,[1575,0] //Eden Group Guitar I
+	,[1578,0] //Eden Group Huuma Shuriken I
+	,[1579,0] //Eden Group Katar I
+	,[1580,0] //Eden Group Knuckle I
+	,[1583,0] //Eden Group Mace III
+	,[1588,0] //Eden Group Revolver III
+	,[1591,0] //Eden Group Saber III
+	,[1594,0] //Eden Group Slayer III
+	,[1595,0] //Eden Group Spear I
+	,[1598,0] //Eden Group Staff III
+	,[1599,0] //Eden Group Two Handed Axe I
+	,[1604,0] //Eden Group Whip I
+];
+
+//El Dicaste Enchants slot 1
+ED_ENCHANTS_SLOT_ONE = [
+		 [172, "ATK+2%"]
+		,[173, "ATK+3%"]
+		,[891, "MATK+1%"]
+		,[892, "MATK+2%"]
+		,[155, "CRIT+5"]
+		,[157, "CRIT+7"]
+		,[306, "FLEE+6"]
+		,[312, "FLEE+12"]
+];
+//El Dicaste Enchants slot 2 for equipment
+ED_ENCHANTS_SLOT_TWO = [
+		 [21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[31, "VIT+1"]
+		,[32, "VIT+2"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+];
+//El Dicaste Enchants slot 2 & 3 for Light of El Dicaste
+ED_ENCHANTS_LIGHT_SLOT_TWO_THREE = [
+		 [21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[51, "DEX+1"]
+		,[52, "DEX+2"]
+];
+//El Dicaste Enchants slot 3 for equipment
+ED_ENCHANTS_SLOT_THREE = [
+		 [21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[23, "AGI+3"]
+		,[33, "VIT+3"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[43, "INT+3"]
+		,[51, "DEX+1"]
+		,[52, "DEX+2"]
+];
+//El Dicaste Enchants slot 3 for golden trickle
+ED_ENCHANTS_GT_SLOT_THREE = [
+		 [21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[41, "INT+1"]
+		,[42, "INT+2"]
+		,[51, "DEX+1"]
+		,[52, "DEX+2"]
+];
+ED_LIGHT_OF_EL_DICASTE = [
+	 [1201,0] //Light of El Dicastes
+];
+
+ED_ENCHANTABLE = [
+	 [446,0] //Feral Tail
+	,[448,0] //Feral Boots
+	// ,[449,23,33,43,0] //Golden Trickle ("Golden Bell" in wiki), Exclude AGI+3, VIT+3, and INT+3
+	,[449,0]
+];
+
+//Mora Enchants
+MORA_ENCHANTS_SLOT_ONE = [
+		 [172, "ATK+2%"]
+		,[173, "ATK+3%"]
+		,[891, "MATK+1%"]
+		,[892, "MATK+2%"]
+		,[155, "CRIT+5"]
+		,[157, "CRIT+7"]
+		,[306, "FLEE+6"]
+		,[312, "FLEE+12"]
+];
+MORA_ENCHANTS_SLOT_TWO = [
+		 [41, "INT+1"]
+		,[42, "INT+2"]
+		,[51, "DEX+1"]
+		,[52, "DEX+2"]
+		,[61, "LUK+1"]
+		,[62, "LUK+2"]
+];
+MORA_ENCHANTS_SLOT_THREE = [
+		 [11, "STR+1"]
+		,[12, "STR+2"]
+		,[21, "AGI+1"]
+		,[22, "AGI+2"]
+		,[31, "VIT+1"]
+		,[32, "VIT+2"]
+];
+
+MORA_ENCHANTABLE = [
+		 [1664,0] //Army Padding
+		,[1605,0] //Loki's Muffler
+		,[1665,0] //Pendant Of Guardian
+];
+
+//exceptions list for items and cards disabled in vanilla
+restrictedEquips = [319,347,348,444,576,603,604,605,606,670,1320,1329,1334,1336,1339,1340,1344,1348,1354,1356,1365,1371,1375,1376,1377,1378,1379,1380,1381,1382,1383,1384,1385,1386,1387,1388,1389,1390,1391,1393,1491,1492,1493,1522,1526,1548,1560,1607,1608,1609,1610,1615];
+restrictedCards = [32,42,44,45,47,52,95,119,120,126,127,134,136,138,140,141,152,161,162,166,178,219,255,256,277,284,310,312,313,320,322,323,332,338,349,357,361,363,374,375,392,394,404,409,420,421,423,424,425,463,475,478,486,492,515,521,526,529,532];

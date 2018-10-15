@@ -1,5 +1,9 @@
 myInnerHtml("PR1","",0);
 myInnerHtml("DELHTML",' <Font size=2><A Href="del.html">[delete saved data]</A></Font>',0);
+//array of armor select elements
+armorLoc = [document.calcForm.A_head1, document.calcForm.A_head2, document.calcForm.A_head3, document.calcForm.A_body, document.calcForm.A_left, document.calcForm.A_shoulder, document.calcForm.A_shoes, document.calcForm.A_acces1, document.calcForm.A_acces2];
+//array of card select elements not including left weapon cards
+cardLoc = [document.calcForm.A_weapon1_card1, document.calcForm.A_weapon1_card2, document.calcForm.A_weapon1_card3, document.calcForm.A_weapon1_card4, document.calcForm.A_head1_card, document.calcForm.A_head2_card, document.calcForm.A_left_card, document.calcForm.A_body_card, document.calcForm.A_shoulder_card, document.calcForm.A_shoes_card, document.calcForm.A_acces1_card, document.calcForm.A_acces2_card];
 
 for(var i=1;i<=99;i++){
 with(document.calcForm){
@@ -110,10 +114,62 @@ function SuperNoviceFullWeapon(nSNFW)
 		A_acces2.value = n_A_Equip[10];
 	}
 }
+//stat cap and rebirth job removal for baby classes - [Loa] - 2018-06-21
+function BabyJobs(){
+with(document.calcForm){
+	//Remove rebirth classes when adopted is checked
+	var adopted = eval(A_youshi.checked);
+	if(adopted && A_JOB.options.length > 26){
+		var jobJump = 0;
+		while(A_JOB.options.length > 26){
+			if(A_JOB.selectedIndex == 21){
+					jobJump = 1;
+			}
+			A_JOB.options.remove(21);
+		}
+		if(jobJump == 1){
+			ClickJob(0);
+		}
+	}
+	//Add rebirth classes when adopted unchecked
+	else if(!adopted && A_JOB.options.length < 47){
+		for(i = 21; i < 41; i++){
+			var option = document.createElement("option");
+			option.value = (i);
+			option.text = (JobName[i]);
+			A_JOB.add(option,i);
+		}
+	}
+	//Cap stats at 80 when adopted is checked
+	if(adopted && A_STR.options.length > 79){
+		for(i = A_STR.options.length - 1; i > 79; i--){
+			A_STR.remove(i);
+			A_STR.remove(i);
+			A_AGI.remove(i);
+			A_VIT.remove(i);
+			A_INT.remove(i);
+			A_DEX.remove(i);
+			A_LUK.remove(i);
+		}
+	}
+	//Raise stat cap to 99 if adopted is unchecked
+	else if(!adopted && A_STR.options.length < 100){
+		for(i = A_STR.options.length + 1; i < 100; i++){
+			A_STR.options[i-1] = new Option(i,i);
+			A_AGI.options[i-1] = new Option(i,i);
+			A_VIT.options[i-1] = new Option(i,i);
+			A_INT.options[i-1] = new Option(i,i);
+			A_DEX.options[i-1] = new Option(i,i);
+			A_LUK.options[i-1] = new Option(i,i);
+		}
+	}
+}}
 
 function StAllCalc()
 {with(document.calcForm){
+	BabyJobs();
 	n_A_JobSet();
+	VanillaWep();
 	if(n_A_JOB == 20){
 		if(SuperNoviceFullWeaponCHECK == 0 && eval(A_skill9.value) == 1)
 			SuperNoviceFullWeapon(1);
@@ -210,6 +266,47 @@ function StAllCalc()
 
 	//custom TalonRO Kris Enchantment
 	Click_KrisEnchantment();
+
+	//[Custom TalonRO 2018-06-14 - Malangdo Enchantment] [Kato]
+	tRO_Click_MalangdoEnchantment(n_A_Equip[0],n_A_Equip[1]);
+
+	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment] [NattWara]
+	Click_BiolabWeaponEnchantment(n_A_Equip[0],n_A_Equip[1]);
+
+	//[Custom TalonRO 2018-07-12 - Eden Weapon Enchantment] [NattWara]
+	Click_EdenWeaponEnchantment(n_A_Equip[0],n_A_Equip[1]);
+
+	//[Custom TalonRO 2018-07-12 - Headgear Enchantment (Biolab & Eden)] [NattWara]
+	Click_HeadgearEnchantment(n_A_Equip[2]);
+
+	//[Custom TalonRO 2018-07-12 - Armor Enchantment (Biolab & Eden)] [NattWara]
+	Click_BiolabArmorBodyEnchantment(n_A_Equip[6]);
+	Click_EdenArmorBodyEnchantment(n_A_Equip[6]);
+
+	//[Custom TalonRO 2018-07-12 - Shield Enchantment (Biolab)] [NattWara]
+	Click_BiolabArmorShieldEnchantment(n_A_Equip[5]);
+
+	//[Custom TalonRO 2018-07-12 - Garment Enchantment (Biolab & Eden)] [NattWara]
+	Click_GarmentEnchantment(n_A_Equip[7]);
+
+	//[Custom TalonRO 2018-07-12 - Footgear Enchantment (Eden)] [NattWara]
+	Click_FootgearEnchantment(n_A_Equip[8]);
+
+	//[Custom TalonRO 2018-07-12 - Accessory Enchantment (Biolab)] [NattWara]
+	Click_AccessoryEnchantment(n_A_Equip[9],n_A_Equip[10]);
+
+	//Mora & El Dicaste Enchant have 3 option. Can't fit that in with Biolab & Eden so I'm making new <tr> for it so different function.
+
+	//[Custom TalonRO 2018-07-12 - El Dicaste Enchants] [NattWara]
+	Click_EDGarmentEnchantment(n_A_Equip[7]);
+	Click_EDFootgearEnchantment(n_A_Equip[8]);
+	Click_EDAccessoryEnchantment(n_A_Equip[9],n_A_Equip[10]);
+	Click_LOEDEnchantment(n_A_Equip[9],n_A_Equip[10]);
+
+	//[Custom TalonRO 2018-07-12 - Mora Enchants] [NattWara]
+	Click_MoraArmorEnchantment(n_A_Equip[6]);
+	Click_MoraGarmentEnchantment(n_A_Equip[7]);
+	Click_MoraAccessoryEnchantment(n_A_Equip[9],n_A_Equip[10]);
 
 	if(n_Nitou){
 		W_REF2 = 0;
@@ -430,6 +527,8 @@ function StAllCalc()
 		n_A_PassSkill8[10] = eval(A8_Skill10.value);
 		n_A_PassSkill8[11] = eval(A8_Skill11.value);
 		n_A_PassSkill8[12] = eval(A8_Skill12.value);
+		n_A_PassSkill8[33] = eval(A8_Skill33.value);
+		n_A_PassSkill8[34] = eval(A8_Skill34.value);
 
 		n_A_PassSkill8[14] = eval(A8_Skill14.value);
 		n_A_PassSkill8[15] = eval(A8_Skill15.value);
@@ -538,12 +637,11 @@ function StAllCalc()
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
-	for(i=290;i<=339;i++){
+	for(i=290;i<=359;i++){
 		n_tok[i] = 0;
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
-
 	StPlusCalc();
 
 	if(n_A_WeaponType != 10 && n_A_WeaponType !=14 && n_A_WeaponType !=15 && n_A_WeaponType !=17 && n_A_WeaponType !=18 && n_A_WeaponType !=19 && n_A_WeaponType !=20 && n_A_WeaponType !=21){
@@ -553,6 +651,109 @@ function StAllCalc()
 		n_A_ATK_w = Math.round(Math.floor(n_A_DEX/10) * Math.floor(n_A_DEX/10));
 		n_A_ATK   = n_A_DEX + n_A_ATK_w + Math.floor(n_A_STR / 5) + Math.floor(n_A_LUK / 5);
 	}
+	//Galaxy Circlet - [Loa] - 2018-07-03
+	if(EquipNumSearch(1163)){
+		n_tok[13] += n_A_HEAD_DEF_PLUS * 10;
+		n_tok[14] += n_A_HEAD_DEF_PLUS * 10;
+		n_tok[61] += Math.floor(n_A_HEAD_DEF_PLUS/2);
+		n_tok[62] += Math.floor(n_A_HEAD_DEF_PLUS/2);
+		n_tok[63] += Math.floor(n_A_HEAD_DEF_PLUS/2);
+	}
+	//Jolly Roger Hat -[Loa] - 2018-07-03
+	if(EquipNumSearch(1186)){
+		if(n_A_HEAD_DEF_PLUS > 7){
+			n_tok[41] += 3;
+		}
+		if(n_A_HEAD_DEF_PLUS > 8){
+			n_tok[61] += 3;
+		}
+	}
+	//White King Tiger Doll Hat - [Loa] - 2018-07-03
+	if(EquipNumSearch(1214)){
+		n_tok[32] += n_A_HEAD_DEF_PLUS;
+	}
+	//Jade Rabbit Hat -[Loa] - 2017-07-03
+	if(EquipNumSearch(1218) && n_A_HEAD_DEF_PLUS > 4){
+		n_tok[17] += n_A_HEAD_DEF_PLUS - 4;
+		n_tok[89] += n_A_HEAD_DEF_PLUS - 4;
+	}
+	//Sakura Coronet + Romantic Flower - [Loa] - 2018-07-04
+	if(EquipNumSearch(1236) && n_A_HEAD_DEF_PLUS > 7){
+		n_tok[16] += n_A_HEAD_DEF_PLUS;
+	}
+	//Sakura Coronet + White Petal - [Loa] - 2018-07-04
+	if(EquipNumSearch(1237) && n_A_HEAD_DEF_PLUS > 5){
+		n_tok[73] -= Math.floor(n_A_HEAD_DEF_PLUS / 2);
+	}
+	//Sakura Coronet + Romantic Leaf - [Loa] - 2018-07-04
+	if(EquipNumSearch(1238) && n_A_HEAD_DEF_PLUS > 3){
+		n_tok[14] += n_A_HEAD_DEF_PLUS * 5;
+	}
+	//White Feather - [Loa] - 2018-07-04
+	if(EquipNumSearch(1255) && n_A_HEAD_DEF_PLUS >= 5){
+		n_tok[8] -= 10;
+		n_tok[15] += 10;
+		if(n_A_HEAD_DEF_PLUS >= 7){
+			n_tok[8] -= 3;
+			n_tok[15] += 3;
+			if(n_A_HEAD_DEF_PLUS >= 9){
+				n_tok[8] -= 3;
+				n_tok[15] += 3;
+			}
+		}
+	}
+	//White Feather + Pipe - [Loa] - 2018-07-04
+	if(EquipNumSearch(1257) && n_A_HEAD_DEF_PLUS >= 7){
+		n_tok[8] += 1;
+		n_tok[15] += 2;
+		if(n_A_HEAD_DEF_PLUS >= 9){
+			n_tok[8] += 1;
+			n_tok[15] += 2;
+		}
+	}
+	//brave assassin damacus [Loa] 2018-07-24
+	if(EquipNumSearch(897)){
+		if(n_A_JobSearch2() == 14){
+			n_tok[89] += 15;
+			//skill damage in head.js
+		}
+		else if(n_A_JOB == 44){
+			n_tok[89] += 15;
+			n_tok[10] += 20;
+			n_tok[70] += 10;
+		}
+		else if(n_A_JOB == 43){
+			n_tok[10] += 50;
+		}
+	}
+	//angra mantis [Loa] 2018-08-05
+	if(CardNumSearch(422) && n_A_JobSearch() == 2){
+		n_tok[70] += Math.floor(n_A_HEAD_DEF_PLUS / 2);
+	}
+	//elite engineer armor set potion pitcher bonus
+	if(EquipNumSearch(972)){
+		n_tok[94] += 10;
+	}
+
+//[TalonRO Custom 2018-07-25 - Brave Gladiator Blade + 5% MATK for Rogue/Stalker or Crusader/Paladin] [Amor]
+if(EquipNumSearch(900)){
+		if(n_A_JobSearch2() == 14 || n_A_JobSearch2() == 13) {
+			n_tok[89] += 5;
+		}
+}
+//[TalonRO Custom 2018-07-26 - Valorous Assassin Damascus + 15% MATK for Rogue/Stalker or Ninja] [Amor]
+if(EquipNumSearch(898)){
+		if(n_A_JobSearch2() == 14 || n_A_JOB == 44) {
+			n_tok[89] += 15;
+		}
+}
+//[TalonRO Custom 2018-07-29 - Glorious Staff of Recovery + 15% MATK for Priest/HP] [Amor]
+if(EquipNumSearch(1085)){
+		if(n_A_JobSearch2() == 9) {
+			n_tok[89] += 15;
+		}
+}
+
 
 
 	w=n_tok[17];
@@ -569,11 +770,27 @@ function StAllCalc()
 		w += 20;
 	if(SU_LUK >= 90 && EquipNumSearch(1164))
 		w += 20;
-	if(EquipNumSearch(676))
-		w += n_A_HEAD_DEF_PLUS * 2;
 	if(CardNumSearch(492))
 		w += Math.floor(n_A_JobLV /5) * CardNumSearch(492); //custom TalonRO Ifrit Card +1atk every 5 Joblv
 		//w += Math.floor(n_A_JobLV /10) * CardNumSearch(492); //original Ifrit Card +1atk every 10 Joblv
+
+	//[Custom TalonRO 2018-06-25 - Malangdo Enchantment for Fighting Spirit - ATK] [NattWara]
+	// Actual damage part.
+		for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+			var vME = tRO_MalangdoEnchantment[i];
+			if(vME >= 1781 && vME <= 1788) {
+				w += (4 + (2 * (parseInt(vME.substr(-1)) - 1)));
+			}
+		}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for Fighting Spirit - ATK] [NattWara]
+	// Actual damage part.
+		for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+			var vBE = tRO_BiolabWeaponEnchantment[i];
+			if(vBE >= 1781 && vBE <= 1788) {
+				w += (4 + (2 * (parseInt(vBE.substr(-1)) - 1)));
+			}
+		}
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Hat of the Sun God [1] - ATK part [Nattwara]
 	/*
@@ -604,10 +821,6 @@ function StAllCalc()
 		w += 10;
 	if(EquipNumSearch(1165))
 		w += 10 * SkillSearch(311);
-
-	if(EquipNumSearch(953) || EquipNumSearch(1261))
-		w += Math.floor(n_A_JobLV *2 /7);
-
 	if(n_A_PassSkill6[0] == 0 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==3)
 		w += n_A_PassSkill6[1] * 10;
 
@@ -629,9 +842,7 @@ function StAllCalc()
 		w += 15;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1275)){
 		w += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1280)){
-		w += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1282)){
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){
 		w += 15;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1291)){
 		w += 5;}
@@ -649,21 +860,38 @@ function StAllCalc()
 	if(CardNumSearch(528))
 		w += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_STR >= 80 && EquipNumSearch(1526))
+	if(SU_STR >= 80 && EquipNumSearch(1526)){
 		w += 30;
+	}
 
 	n_A_ATK += w;
+
+	//Note - Issue#252
+	//Need checking on all of these items.
+	//ATK% stuff
 	w= 0;
 
-	if(n_A_Equip[9] == 978 || n_A_Equip[9] == 979 || n_A_Equip[9] == 980 || n_A_Equip[9] == 981 || n_A_Equip[9] == 982 || n_A_Equip[9] == 983 || n_A_Equip[9] == 984){
-		w += n_A_ATK*.05;}
-	if(n_A_Equip[10] == 978 || n_A_Equip[10] == 979 || n_A_Equip[10] == 980 || n_A_Equip[10] == 981 || n_A_Equip[10] == 982 || n_A_Equip[10] == 983 || n_A_Equip[10] == 984){
-		w += n_A_ATK*.05;}
-	if(EquipNumSearch(1208) && EquipNumSearch(381)){
-		w += n_A_ATK*.05;}
+	//BG Medallions
+	//Moved to "Fix for Issue#252"
+	/*
+	if(n_A_Equip[9] == 978 || n_A_Equip[9] == 979 || n_A_Equip[9] == 980 || n_A_Equip[9] == 981 || n_A_Equip[9] == 982 || n_A_Equip[9] == 983 || n_A_Equip[9] == 984)
+	{
+		w += n_A_ATK*.05;
+	}
+	if(n_A_Equip[10] == 978 || n_A_Equip[10] == 979 || n_A_Equip[10] == 980 || n_A_Equip[10] == 981 || n_A_Equip[10] == 982 || n_A_Equip[10] == 983 || n_A_Equip[10] == 984)
+	{
+		w += n_A_ATK*.05;
+	}
+	*/
+
+	//Wrong Effect - Little Red Riding Hood Scarf
+	/*
 	if(EquipNumSearch(1312)){
 		w += n_A_ATK*.05;}
+	*/
 
+	//Moved to "Fix for Issue#252"
+	/*
 	//custom TalonRO Chewing Bubblegum +1% atk
 	if(EquipNumSearch(1395))
 		w += n_A_ATK*.01;
@@ -677,6 +905,70 @@ function StAllCalc()
 	//custom TalonRO Angeling Fur Hat +1% atk
 	if(EquipNumSearch(1469))
 		w += n_A_ATK*.01;
+	*/
+	//Yellow/Green/Pink Sheila Hairnet [Refine Rate 9+] Increase ATK by 2% [Refine Rate 10] Increase ATK by 2% - [Loa] - 2016-06-29
+	if(EquipNumSearch(1022) || EquipNumSearch(1026) || EquipNumSearch(1073)){
+		if(n_A_HEAD_DEF_PLUS >= 9){
+			w += n_A_ATK*.02;
+		}
+		if(n_A_HEAD_DEF_PLUS == 10){
+			w += n_A_ATK*.02;
+		}
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Claw - +5% per refine more, damage when usng Triple Attack, Chain Combo, and Combo Finish] [Amor]
+	if(EquipNumSearch(1096) && (n_A_ActiveSkill >= 187 || n_A_ActiveSkill <= 189)){
+		w += n_A_Weapon_ATKplus * (n_A_ATK*.05);
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Claw - +5% per 6+ refine, more damage when usng Tiger Knuckle Fist and Chain Crush Combo] [Amor]
+	if(EquipNumSearch(1096) && (n_A_ActiveSkill == 289 || n_A_ActiveSkill == 290)){
+		if(n_A_Weapon_ATKplus >= 6)
+			w += (n_A_Weapon_ATKplus - 5) * (n_A_ATK*.05);
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Claymore - +1% more damage when [Bowling Bash] and [Charge Attack]] [Amor]
+	if(EquipNumSearch(1080) && (n_A_ActiveSkill == 76 || n_A_ActiveSkill == 308)){
+		w += n_A_Weapon_ATKplus * (n_A_ATK*.01);
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Cleaver - +1% more damage when [Mammonite]] [Amor]
+	if(EquipNumSearch(1088) && (n_A_ActiveSkill == 65)){
+		w += n_A_Weapon_ATKplus * (n_A_ATK*.01);
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Flamberge - +2% more damage when [Bash] , [Mammonite], [Back Stab]] [Amor]
+	if(EquipNumSearch(1077) && (n_A_ActiveSkill == 65 || n_A_ActiveSkill == 6 || n_A_ActiveSkill == 169)){
+		w += n_A_Weapon_ATKplus * (n_A_ATK*.02);
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Grenade Launcher - +2% more damage with [Ground Drift]] [Amor]
+	if(EquipNumSearch(1103) && n_A_ActiveSkill == 437){
+		w += n_A_ATK*.02;
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Grenade Launcher - +1% more damage with [Triple Action]] [Amor]
+	if(EquipNumSearch(1103) && n_A_ActiveSkill == 418){
+		w += n_A_ATK*.01;
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Huuma Shuriken - +3% more damage with [Throw Huuma Shuriken]] [Amor]
+	if(EquipNumSearch(1098) && n_A_ActiveSkill == 396){
+		w += n_A_ATK*.03;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Revolver - +1% more damage with [Rapid Shower]] [Amor]
+	if(EquipNumSearch(1099) && n_A_ActiveSkill == 428){
+		w += n_A_ATK*.01;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Rifle - +3% more damage with [Tracking] and [Piercing Shot]] [Amor]
+	if(EquipNumSearch(1100) && (n_A_ActiveSkill == 430 || n_A_ActiveSkill == 432)){
+		w += n_A_ATK*.03;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Grenade Launcher/Glorious Rifle/Glorious Shotgun - +30% more damage with [Triple Action] if not wearing Scouter] [Amor]
+	if(!EquipNumSearch(1387) && (EquipNumSearch(1103) || EquipNumSearch(1100) || EquipNumSearch(1102)) && n_A_ActiveSkill == 418){
+		w += n_A_ATK*.30;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Shotgun - +2% more damage with [Spread Attack]] [Amor]
+	if(EquipNumSearch(1102) && n_A_ActiveSkill == 436){
+		w += n_A_ATK*.02;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Two Handed Axe - +2% more damage with [Mammonite]] [Amor]
+	if(EquipNumSearch(1087) && n_A_ActiveSkill == 65){
+		w += n_A_ATK*.02;
+	}
+
 
 	w = Math.round(w);
 
@@ -760,7 +1052,6 @@ function StAllCalc()
 			n_A_MaxHP = Math.floor(wKenseiHP[n_A_BaseLV-90] * (100 + n_A_VIT) / 100);
 	}
 
-
 //[Custom TalonRO 2018-06-02 - Advanced Fin Helm Gives Maximum HP + 6 * Base Level] [Kato]
 if(EquipNumSearch(1561)) {
 	n_A_MaxHP += 6 * n_A_BaseLV;
@@ -781,8 +1072,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w -= 40 * n_A_BODY_DEF_PLUS;
 	if(EquipNumSearch(836))
 		w += n_A_BaseLV *10;
-	if(EquipNumSearch(859))
-		w += n_A_BaseLV *20;
 	if(n_A_Equip[8]==536){
 		wHPVS = n_A_JobSearch();
 		if(wHPVS==3 || wHPVS==4 || wHPVS==5)
@@ -794,18 +1083,12 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += 500 * CardNumSearch(477);
 	if(EquipNumSearch(883) && n_A_BaseLV <= 79)
 		w += 400 * EquipNumSearch(883);
-	if(EquipNumSearch(762))
-		w += 20 * n_A_BaseLV;
 	if(EquipNumSearch(1116) && n_A_JobSearch()==0)
-		w += 30;
-	if(EquipNumSearch(770))
-		w += 3 * n_A_BaseLV;
+		w += 60;
 	if(EquipNumSearch(986))
 		w += 7 * n_A_BaseLV;
 	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1168))
-		w -= 200*(n_A_Weapon_ATKplus-5);
-	if(EquipNumSearch(1058)){
-		w += n_A_BaseLV*10;}
+		w -= 200;
 	//custom TalonRO Chronos fix, +50 HP instead of SP each 2 refine levels
 	if(EquipNumSearch(1172))
 		w += 50 * Math.floor(n_A_Weapon_ATKplus / 2);
@@ -817,13 +1100,37 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += 800;
 	//custom TalonRO Kris enchant HP
 	var KEbonus = [A_KE11.value,A_KE12.value,A_KE21.value,A_KE22.value];
-	for (i=0;i<4;i++){
+	for (i=0;i<KEbonus.length;i++){
 		var wKE = KEbonus[i];
 		if(wKE){
-			var w_enchant = wKE % 10;
-			if(21 <= wKE && wKE <= 29)
-				w += w_enchant*100;
+			if(131 <= wKE && wKE <= 139){
+				w += parseInt(wKE.substr(-1)) * 100;
+			}
 		}
+	}
+
+	//tiraya bonnet + 20hp per refine - [Loa] 2018-07-02
+	if(EquipNumSearch(1048)){
+		w += n_A_HEAD_DEF_PLUS * 20;
+	}
+  //[TalonRO Custom - Glorious Huuma Shuriken - + 150 HP per refine level] [Amor]
+	if(EquipNumSearch(1098)) {
+		w += (150 * n_A_Weapon_ATKplus);
+	}
+	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for MaxHP] [Kato]
+	for(i=0;i<tRO_MalangdoEnchantment.length;i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+			if(vME >= 131 && vME <= 133) {
+					w += parseInt(vME.substr(-1)) * 100;
+			}
+	}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Armor Enchantment for MaxHP] [NattWara]
+	for(i=0;i<tRO_BiolabArmorEnchantment.length;i++) {
+		var vBE = tRO_BiolabArmorEnchantment[i];
+			if(vBE >= 131 && vBE <= 133) {
+					w += parseInt(vBE.substr(-1)) * 100;
+			}
 	}
 
 	n_A_MaxHP += w;
@@ -1024,8 +1331,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	if(SkillSearch(372))
 		w += 30 * SkillSearch(372);
-	if(EquipNumSearch(859))
-		w += n_A_BaseLV *5;
 	if(n_A_Equip[8]==536){
 		wSPVS = n_A_JobSearch();
 		if(wSPVS==1 || wSPVS==2 || wSPVS==6)
@@ -1035,37 +1340,47 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += 300;
 	if(EquipNumSearch(883) && n_A_BaseLV <= 79)
 		w += 200 * EquipNumSearch(883);
-	if(EquipNumSearch(762))
-		w += 5 * n_A_BaseLV;
 	if(EquipNumSearch(1118) && n_A_JobSearch()==3)
 		w += 50;
-	if(EquipNumSearch(770))
-		w += n_A_JobLV;
 	if(EquipNumSearch(986))
 		w += Math.floor(0.5 * n_A_BaseLV);
 	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1168))
-		w -= 100*(n_A_Weapon_ATKplus-5);
+		w -= 100;
 	if(EquipNumSearch(1193))
 		w += Math.floor(n_A_BaseLV / 3) + n_A_SHOULDER_DEF_PLUS * 10;
-	if(EquipNumSearch(1058)){
-		w += n_A_BaseLV*2;}
-
-	//custom Talonro Improved Magician Hat: Every refine level adds Maximum SP + 5 - slaptro - 2018-06-07
+	//custom Talonro Improved Magician Hat: Every refine level adds Maximum SP + 5 - [Loa] - 2018-06-07
 	if(EquipNumSearch(1646)){
 		w += n_A_HEAD_DEF_PLUS * 5;
 	}
-
+	//Red Minstrel Hat [For Every Refine > 5] MDEF + 1, MSP + 10 - [Loa] - 2018-07-03
+	if(EquipNumSearch(1139) && n_A_HEAD_DEF_PLUS > 5){
+		w += (n_A_HEAD_DEF_PLUS - 5) * 10;
+		n_tok[19] += n_A_HEAD_DEF_PLUS - 5;
+	}
 	//custom TalonRO Kris enchant SP
 	var KEbonus = [A_KE11.value,A_KE12.value,A_KE21.value,A_KE22.value];
-	for (i=0;i<4;i++){
+	for (i=0;i<KEbonus.length;i++){
 		var wKE = KEbonus[i];
 		if(wKE){
-			var w_enchant = wKE % 10;
-			if(31 <= wKE && wKE <= 39)
-				w += w_enchant*50;
+			if(141 <= wKE && wKE <= 149){
+				w += parseInt(wKE.substr(-1)) * 50;
+			}
 		}
 	}
-
+	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for MaxSP] [Kato]
+	for(i=0;i<tRO_MalangdoEnchantment.length;i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+			if(vME == 141 || vME == 142) {
+					w += parseInt(vME.substr(-1)) * 50;
+			}
+	}
+	//[Custom TalonRO 2018-07-10 - Biolab Armor Enchantment for MaxSP] [NattWara]
+	for(i=0;i<tRO_BiolabArmorEnchantment.length;i++) {
+		var vBE = tRO_BiolabArmorEnchantment[i];
+			if(vBE == 141) {
+					w += 50;
+			}
+	}
 	n_A_MaxSP += w;
 
 	if(n_A_MaxSP < 0)
@@ -1140,8 +1455,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){n_A_DEF += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1280)){n_A_DEF += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1282)){n_A_DEF += 1;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1292)){n_A_DEF += 2;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1293)){n_A_DEF += 2;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1286)){n_A_DEF += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1287)){n_A_DEF += 1;}
 	if(EquipNumSearch(658))
 		n_A_DEF += n_A_Weapon_ATKplus;
 	if(EquipNumSearch(715))
@@ -1166,31 +1481,37 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(809))
 		n_A_DEFplus -= n_A_HEAD_DEF_PLUS;
 
-	//custom Talonro Advanced Safety Ring: Every 30 VIT reduces DEF by 1 - slaptro - 2016-06-07
+	//custom Talonro Advanced Safety Ring: Every 30 VIT reduces DEF by 1 - [Loa] - 2016-06-07
 	if(EquipNumSearch(1641)){
-		n_A_DEF -= Math.floor(SU_VIT / 30);
+		n_A_DEF -= EquipNumSearch(1641) * Math.floor(SU_VIT / 30);
 	}
 
-	//Custom TalonRO - 2018-06-07 - Enhanced Bone Helm [1] - +1 DEF each refine past +4 until +8 [Nattwara]
+	//Custom TalonRO - 2018-06-07 - Enhanced Bone Helm [1] - +1 DEF each refine past +4 until +8 [Nattwara/Loa]
 	if(EquipNumSearch(1656) && n_A_HEAD_DEF_PLUS > 4)
 		n_A_DEFplus -= Math.min(n_A_HEAD_DEF_PLUS-4,4);
 
 	//custom TalonRO Armor enchant DEF
-	var wHSE = eval(A_HSE.value);
+	var wHSE = A_HSE.value;
 	if(wHSE){
-		var w_enchant = wHSE % 10;
-		if(61 <= wHSE && wHSE <= 69)
-			n_A_DEF += w_enchant+1;
+		if(101 <= wHSE && wHSE <= 109)
+			n_A_DEF += parseInt(wHSE.substr(-1));
 	}
 	//custom TalonRO Kris enchant DEF
 	var KEbonus = [document.calcForm.A_KE11.value,document.calcForm.A_KE12.value,document.calcForm.A_KE21.value,document.calcForm.A_KE22.value];
-	for (i=0;i<4;i++){
+	for (i=0;i<KEbonus.length;i++){
 		var wKE = KEbonus[i];
 		if(wKE){
-			var w_enchant = wKE % 10;
-			if(1 <= wKE && wKE <= 9)
-				n_A_DEF += w_enchant+1;
+			if(101 <= wKE && wKE <= 109){
+				n_A_DEF += parseInt(wKE.substr(-1));
+			}
 		}
+	}
+	//[Custom TalonRO 2018-07-10 - Biolab Armor Enchantment for DEF] [NattWara]
+	for(i=0;i<tRO_BiolabArmorEnchantment.length;i++) {
+		var vBE = tRO_BiolabArmorEnchantment[i];
+			if(vBE >= 101 && vBE <= 102) {
+					n_A_DEF += parseInt(vBE.substr(-1));
+			}
 	}
 
 	n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 7 / 10);
@@ -1203,14 +1524,19 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(SkillSearch(256))
 			n_A_totalDEF = Math.floor(n_A_totalDEF * (1 - 0.05 * SkillSearch(256)));
 
-	if(n_A_IJYOU[2])
+	if(n_A_IJYOU[2]){
 		n_A_totalDEF -= Math.floor(n_A_totalDEF * 25 / 100);
+	}
+	//def reduction when mobbed updated [Loa] 2018-07-24
+	let defReduc = (n_A_PassSkill8[12] + (n_A_PassSkill8[33] * 2) + (n_A_PassSkill8[34] * 3)) * 3 / 100;
+	if(defReduc > 1){defReduc = 1;}
+	if(defReduc){
+		n_A_totalDEF = Math.floor(n_A_totalDEF * (1 - defReduc));
+	}
 
-	if(SkillSearch(196))
+	if(SkillSearch(196)){
 		n_A_totalDEF = 90;
-
-	if(n_A_PassSkill8[12] >= 3)
-		n_A_totalDEF -= Math.floor(n_A_totalDEF * (n_A_PassSkill8[12] - 2) * 5 / 100);
+	}
 
 	/*if(n_A_totalDEF >= 100)
 		n_A_totalDEF = 99;*/
@@ -1316,11 +1642,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		for(i=0;i<=2;i++)
 			n_A_VITDEF[i] = 0;
 	}
-
-	if(n_A_PassSkill8[12] >= 3){
-		for(i=0;i<=2;i++)
-			n_A_VITDEF[i] -= Math.floor(n_A_VITDEF[i] * (n_A_PassSkill8[12] - 2) * 5 / 100);
-	}
+	//soft def reduction when mobbed updated [Loa] 2081-08-11
+	if(defReduc){
+		for(i=0;i<=2;i++){
+			n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] * (1 - defReduc));
+	}}
 
 	n_A_MDEF = n_tok[19];
 
@@ -1374,7 +1700,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_A_MDEF += 3;
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){n_A_MDEF += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1281)){n_A_MDEF += 7;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1286)){n_A_MDEF += 5;}
 
 	if(SkillSearch(9)){
 		n_A_MDEF += SkillSearch(9);
@@ -1383,24 +1708,44 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	}
 
 	//custom TalonRO Armor enchant MDEF
-	var wHSE = eval(document.calcForm.A_HSE.value);
+	var wHSE = A_HSE.value;
 	if(wHSE){
-		var w_enchant = wHSE % 10;
-		if(71 <= wHSE && wHSE <= 79)
-			n_A_MDEF += w_enchant+1;
+		if(111 <= wHSE && wHSE <= 119)
+			n_A_DEF += parseInt(wHSE.substr(-1));
 	}
+
 	//custom TalonRO Kris enchant MDEF
 	var KEbonus = [document.calcForm.A_KE11.value,document.calcForm.A_KE12.value,document.calcForm.A_KE21.value,document.calcForm.A_KE22.value];
-	for (i=0;i<4;i++){
+	for (i=0;i<KEbonus.length;i++){
 		var wKE = KEbonus[i];
 		if(wKE){
-			var w_enchant = wKE % 10;
-			if(11 <= wKE && wKE <= 19)
-				n_A_MDEF += w_enchant+1;
+			if(111 <= wKE && wKE <= 119){
+				n_A_MDEF += parseInt(wKE.substr(-1));
+			}
 		}
 	}
-	//custom TalonRO Bayani Nightmare Bangungot Boots
-	if(EquipNumSearch(1544)){n_A_MDEF += n_A_SHOES_DEF_PLUS;}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Armor Enchantment for MDEF] [NattWara]
+	for(i=0;i<tRO_BiolabArmorEnchantment.length;i++) {
+		var vBE = tRO_BiolabArmorEnchantment[i];
+			if(vBE >= 111 && vBE <= 114) {
+					n_A_MDEF += parseInt(vBE.substr(-1));
+			}
+	}
+
+	//[Custom TalonRO 2018-07-12 - Eden Armor Enchantment for MDEF] [NattWara]
+	for(i=0; i < tRO_EdenArmorEnchantment.length; i++) {
+		var vEE = tRO_EdenArmorEnchantment[i];
+		if(111 <= vEE && vEE <= 119) {
+			var val = parseInt(vEE.substr(-1));
+			n_A_MDEF += val;
+		}
+	}
+
+	//custom TalonRO Nightmare Bangungot Boots
+	if(EquipNumSearch(1544) || EquipNumSearch(1014)){
+		n_A_MDEF += n_A_SHOES_DEF_PLUS;
+	}
 
 	//custom TalonRO Alnoldi Card: +5 MDEF if refined above +9
 	if(n_A_LEFT_DEF_PLUS >= 9 && CardNumSearch(518))
@@ -1424,6 +1769,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	n_A_HIT = n_A_BaseLV + n_A_DEX;
 
 	n_A_HIT += n_tok[8];
+
+	// //negative hit correction- [Loa] - 2018-06-18
+	// if(n_A_HIT < 0){
+	// 	n_A_HIT -= n_A_HIT;
+	// }
 
 	if(EquipNumSearch(656))
 		n_A_HIT -= Math.floor(SU_DEX / 3);
@@ -1506,111 +1856,190 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_PassSkill3[4])
 		n_A_HIT += 10 + n_A_PassSkill3[4] * 2 + n_A_PassSkill3[34] + Math.floor(n_A_PassSkill3[24] /10);
 
-	//custom TalonRO Armor enchant HIT
-	var wHSE = eval(document.calcForm.A_HSE.value);
-	if(wHSE){
-		var w_enchant = wHSE % 10;
-		if(111 <= wHSE && wHSE <= 119)
-			n_A_HIT += w_enchant*4;
+	//[TalonRO Custom - 2018-07-28 - Glorious Cleaver  +2HIT per refne] [Amor]
+	if(EquipNumSearch(1088)) {
+		n_A_HIT += (2 * n_A_Weapon_ATKplus);
 	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Gladius  +2HIT per refne to [Rogue/Stalker or Ninja]] [Amor]
+	if(EquipNumSearch(1076) && (n_A_JobSearch2() == 14 || n_A_JOB == 44)) {
+		n_A_HIT += (2 * n_A_Weapon_ATKplus);
+	}
+
+	//custom TalonRO Armor enchant HIT
+	var wHSE = document.calcForm.A_HSE.value;
+	if(wHSE){
+		if(311 <= wHSE && wHSE <= 319)
+			n_A_HIT += (parseInt(wHSE.substr(-1)) * 4);
+	}
+
+	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for Fighting Spirit/Sharp - HIT] [Kato]
+		for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+			var vME = tRO_MalangdoEnchantment[i];
+			if(vME >= 1781 && vME <= 1788) { //FS
+				if(vME.substr(-1) <= 4)
+					n_A_HIT += 1 + parseInt(vME.substr(-1));
+				 else
+					n_A_HIT += 5;
+			}
+
+			if(vME >= 1081 && vME <= 1085) { //Sharp
+				n_A_HIT += 1 + parseInt(vME.substr(-1));
+			}
+		}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for Fighting Spirit/Sharp - HIT] [NattWara]
+		for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+			var vBE = tRO_BiolabWeaponEnchantment[i];
+			if(vBE >= 1781 && vBE <= 1788) { //FS
+				if(vBE.substr(-1) <= 4)
+					n_A_HIT += 1 + parseInt(vBE.substr(-1));
+				 else
+					n_A_HIT += 5;
+			}
+
+			if(vBE >= 1081 && vBE <= 1085) { //Sharp
+				n_A_HIT += 1 + parseInt(vBE.substr(-1));
+			}
+		}
 
 	myInnerHtml("A_HIT",n_A_HIT,0);
 
 	n_A_FLEE = n_A_BaseLV + n_A_AGI;
-
 	n_A_FLEE += n_tok[9];
 
-	if(n_A_JobSearch()==2 && CardNumSearch(295))
+	if(n_A_JobSearch()==2 && CardNumSearch(295)){
 		n_A_FLEE += 20;
-	if(n_A_SHOULDER_DEF_PLUS >= 9 && CardNumSearch(271))
-		n_A_FLEE += 20;
-	if(n_A_SHOULDER_DEF_PLUS <= 4 && CardNumSearch(401))
-		n_A_FLEE += 10;
-	if(n_A_SHOULDER_DEF_PLUS >= 9 && CardNumSearch(403))
-		n_A_FLEE += 5;
-	if(SU_STR >= 90 && EquipNumSearch(442))
-		n_A_FLEE += 10 * EquipNumSearch(442);
-	if(n_A_PassSkill6[0] == 2 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==4)
-		n_A_FLEE += n_A_PassSkill6[1] *3;
-
-	if(n_A_Equip[0]==483)
-		n_A_FLEE -= (n_A_BaseLV + SU_AGI);
-	if(n_A_JOB==8||n_A_JOB==14||n_A_JOB==22||n_A_JOB==28)
-		n_A_FLEE += 4 * SkillSearch(14);
-	else
-		n_A_FLEE += 3 * SkillSearch(14);
-
-	if(SkillSearch(421))
-		n_A_FLEE += 30;
-	if(SkillSearch(433)){
-		if(n_A_WeaponType==20 || n_A_WeaponType==0)
-			n_A_FLEE -= 5 * SkillSearch(433);
 	}
-	Mikiri = new Array(0,1,3,4,6,7,9,10,12,13,15);
-	n_A_FLEE += Mikiri[SkillSearch(191)];
-
-
-	if(n_A_JOB == 24)
-		n_A_FLEE += Math.round(SkillSearch(273) /2);
-	if(n_A_PassSkill2[9] && SkillSearch(273)==0)
-		n_A_FLEE += Math.round(n_A_PassSkill2[9] /2);
-
-
-	if(SkillSearch(383))
+	if(n_A_SHOULDER_DEF_PLUS >= 9 && CardNumSearch(271)){
+		n_A_FLEE += 20;
+	}
+	if(n_A_SHOULDER_DEF_PLUS <= 4 && CardNumSearch(401)){
 		n_A_FLEE += 10;
+	}
+	if(n_A_SHOULDER_DEF_PLUS >= 9 && CardNumSearch(403)){
+		n_A_FLEE += 5;
+	}
+	if(SU_STR >= 90 && EquipNumSearch(442)){
+		n_A_FLEE += 10 * EquipNumSearch(442);
+	}
+	if(n_A_PassSkill6[0] == 2 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==4){
+		n_A_FLEE += n_A_PassSkill6[1] *3;
+	}
+	//Bloody Roar FLEE -160 - [Loa] - 2018-06-11
+	if(EquipNumSearch(483)){
+			n_A_FLEE -= 160;
+	}
 
-
-	if(SkillSearch(356))
-		n_A_FLEE += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10);
-
-	if(n_A_PassSkill5[4])
+	if(n_A_JOB == 24){
+		n_A_FLEE += Math.round(SkillSearch(273) /2);
+	}
+	if(n_A_PassSkill2[9] && SkillSearch(273)==0){
+		n_A_FLEE += Math.round(n_A_PassSkill2[9] /2);
+	}
+	if(n_A_PassSkill5[4]){
 		n_A_FLEE += 50;
-
-	if(n_A_PassSkill7[1])
+	}
+	if(n_A_PassSkill7[1]){
 		n_A_FLEE += 30;
-
+	}
 	if(n_A_PassSkill8[30]){
-		n_A_FLEE += 33;}//BGFOOD DE FLEE
-
-	if(n_A_PassSkill3[0])
+		n_A_FLEE += 33;
+	}
+	if(n_A_PassSkill3[0]){
 		n_A_FLEE += n_A_PassSkill3[0] + Math.floor(n_A_PassSkill3[30] /2) + Math.floor(n_A_PassSkill3[20] /10);
-
-	if(SkillSearch(258))
-		n_A_FLEE /= 2;
-
-	if(n_A_PassSkill8[12] >= 3){
-		var w = n_A_PassSkill8[12] - 2;
-		if(w > 10)
-			w = 10;
-		n_A_FLEE -= Math.floor(n_A_FLEE * w * 10 / 100);
 	}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){
-		n_A_FLEE += 10;}
+		n_A_FLEE += 10;
+	}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1280)){
-		n_A_FLEE += 10;}
+		n_A_FLEE += 10;
+	}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1282)){
-		n_A_FLEE += 10;}
+		n_A_FLEE += 10;
+	}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1283)){
-		n_A_FLEE += 10;}
+		n_A_FLEE += 10;
+	}
 	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1285)){
-		w += 5;}
-
+		w += 5;
+	}
 	//custom TalonRO Armor enchant FLEE
-	var wHSE = eval(document.calcForm.A_HSE.value);
+	var wHSE = document.calcForm.A_HSE.value;
 	if(wHSE){
-		var w_enchant = wHSE % 10;
-		if(101 <= wHSE && wHSE <= 109)
-			n_A_FLEE += w_enchant*2;
+		//var w_enchant = wHSE % 10;
+		if(301 <= wHSE && wHSE <= 309)
+			n_A_FLEE += parseInt(wHSE.substr(-1));
+	}
+	//[Custom TalonRO 2018-07-10 - Biolab Armor Enchantment for FLEE] [NattWara]
+	for(i=0;i<tRO_BiolabArmorEnchantment.length;i++) {
+		var vBE = tRO_BiolabArmorEnchantment[i];
+		if(vBE >= 301 && vBE <= 309) {
+			n_A_FLEE += parseInt(vBE.substr(-1));
+		}
+	}
+	//[Custom TalonRO 2018-07-12 - Eden Armor Enchantment for FLEE] [NattWara]
+	for(i=0; i < tRO_EdenArmorEnchantment.length; i++) {
+		var vEE = tRO_EdenArmorEnchantment[i];
+		if(301 <= vEE && vEE <= 309) {
+			n_A_FLEE += parseInt(vEE.substr(-1));
+		}
+	}
+	//[Custom TalonRO 2018-07-12 - El Dicaste Enchantment for FLEE] [NattWara]
+	for(i=0; i < tRO_EDEnchantment.length; i++) {
+		var vED = tRO_EDEnchantment[i];
+		if(301 <= vED && vED <= 312) {
+			n_A_FLEE += parseInt(vED.substr(-2));
+		}
+	}
+	//[Custom TalonRO 2018-07-12 - Mora Enchantment for FLEE] [NattWara]
+	for(i=0; i < tRO_MoraEnchantment.length; i++) {
+		var vMORA = tRO_MoraEnchantment[i];
+		if(301 <= vMORA && vMORA <= 312) {
+			n_A_FLEE += parseInt(vMORA.substr(-2));
+		}
 	}
 	//custom TalonRO Sedora Card (fixed (2015-12-21),(fixed (2016-11-02))
-	if(n_A_JobSearch()==2 && CardNumSearch(524))
+	if(n_A_JobSearch()==2 && CardNumSearch(524)){
 		n_A_FLEE += 4*CardNumSearch(524);
+	}
+	//flee reduction when mobbed updated [Loa] 2018-08-11
+	let fleeReduc = n_A_PassSkill8[12] + n_A_PassSkill8[33] + n_A_PassSkill8[34]
+	if(fleeReduc > 2){
+		n_A_FLEE -= Math.floor(n_A_FLEE * ((fleeReduc - 2) * 0.1));
+	}
+	/*****BELOW HERE SHOULD ONLY BE DIRECT SKILL BONUSES TO FLEE*****/
+	//dodge
+	monkDodge = new Array(0,1,3,4,6,7,9,10,12,13,15);
+	n_A_FLEE += monkDodge[SkillSearch(191)];
+	//close confine
+	if(SkillSearch(383)){
+		n_A_FLEE += 10;}
+	//comfort of the moon
+	if(SkillSearch(356)){
+		n_A_FLEE += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10);}
+	//improve dodge
+	if(n_A_JOB==8||n_A_JOB==14||n_A_JOB==22||n_A_JOB==28){
+		n_A_FLEE += 4 * SkillSearch(14);
+	}else{
+		n_A_FLEE += 3 * SkillSearch(14);}
+	//adjustment
+	if(SkillSearch(421)){
+		n_A_FLEE += 30;}
+	//gatling fever
+	if(SkillSearch(433)){
+		if(n_A_WeaponType==20 || n_A_WeaponType==0){
+			n_A_FLEE -= 5 * SkillSearch(433);
+	}}
+	//berserk
+	if(SkillSearch(258)){
+		n_A_FLEE /= 2;}
+	//negative flee
+	if (n_A_FLEE < 0){
+		n_A_FLEE = 0;}
 
 	myInnerHtml("A_FLEE",n_A_FLEE + "<br><b>WOE: </b>" + Math.floor(n_A_FLEE*.8),0);
 
 	n_A_LUCKY = 1 + n_A_LUK * 0.1;
-
-
 	n_A_LUCKY += n_tok[11];
 
 	//A Whistle Skill - bugado, falta ver que variavel usar em vez de n_A_PassSkill3[20]
@@ -1642,9 +2071,19 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_PassSkill8[20])
 		n_A_LUCKY += 20;
 
-	//custom Talonro Improved Kitsune Mask: If refine > 6 Perfect Dodge + 4 - slaptro - 2016-06-07
+	//custom Talonro Improved Kitsune Mask: If refine > 6 Perfect Dodge + 4 - [Loa] - 2016-06-07
 	if(EquipNumSearch(1652) && n_A_HEAD_DEF_PLUS > 6){
 		n_A_LUCKY += 4;
+	}
+
+	//Bloody Roar Perfect Dodge -160 - [Loa] - 2018-06-11
+	if(EquipNumSearch(483)){
+		if(n_A_LUCKY < 160){
+			n_A_LUCKY -= n_A_LUCKY;
+		}
+		else{
+			n_A_LUCKY -= 160;
+		}
 	}
 
 	n_A_LUCKY = Math.round(n_A_LUCKY *10)/10;
@@ -1698,8 +2137,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += n_A_Weapon_ATKplus;
 	if(EquipNumSearch(1122) && n_A_JobSearch()==6)
 		w += 5;
-	if(n_A_Weapon_ATKplus >= 6 && n_B[2]==7 && EquipNumSearch(1091))
-		w += 5;
 	if(EquipNumSearch(1161))
 		w += (2 * SkillSearch(89));
 	if(SU_DEX >= 90 && EquipNumSearch(1164))
@@ -1730,13 +2167,25 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_PassSkill8[21])
 		w += 7;
 
-	//custom TalonRO Armor enchant CRIT
-	var wHSE = eval(document.calcForm.A_HSE.value);
-	if(wHSE){
-		var w_enchant = wHSE % 10;
-		if(81 <= wHSE && wHSE <= 89)
-			w += w_enchant+1;
+	//[TalonRO Custom - 2018-07-26 - Valorous Battle CrossBow +25 CRIT for Archer Classes] [Amor]
+	if(EquipNumSearch(913) && n_A_JobSearch() == 4) {
+		w +=25;
 	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Gatiling Gun +3 CRIT per refine] [Amor]
+	if(EquipNumSearch(1101)) {
+		w += (3 * n_A_Weapon_ATKplus);
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Gladious +10 CRIT per refine for Soul Linker] [Amor]
+	if(EquipNumSearch(1076) && n_A_JOB == 43) {
+		w += (10 * n_A_Weapon_ATKplus);
+	}
+	//custom TalonRO Armor enchant CRIT
+	var wHSE = document.calcForm.A_HSE.value;
+	if(wHSE){
+		if(151 <= wHSE && wHSE <= 159)
+			w += parseInt(wHSE.substr(-1));
+	}
+
 	//custom TalonRO Halloween Midas Whisper
 	if(SU_LUK >= 80 && EquipNumSearch(1526))
 		w += 5;
@@ -1747,21 +2196,86 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += n_A_SHOES_DEF_PLUS * EquipNumSearch(1554);
 	}
 
+	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for Sharp - CRIT [Kato]
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+		if(vME >= 1081 && vME <= 1085) {
+			if(vME.substr(-1) == 1){
+				w += 3;
+			}
+			else
+			{
+				w += 3 + parseInt(vME.substr(-1));
+			}
+		}
+	}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for Sharp - CRIT [NattWara]
+	for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+		var vBE = tRO_BiolabWeaponEnchantment[i];
+		if(vBE >= 1081 && vBE <= 1085) {
+			if(vBE.substr(-1) == 1){
+				w += 3;
+			}
+			else
+			{
+				w += 3 + parseInt(vBE.substr(-1));
+			}
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - Eden Armor Enchantment for CRIT] [NattWara]
+	for(i=0; i < tRO_EdenArmorEnchantment.length; i++) {
+		var vEE = tRO_EdenArmorEnchantment[i];
+		if(151 <= vEE && vEE <= 159) {
+			var val = parseInt(vEE.substr(-1));
+			w += val;
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - El Dicaste Enchantment for CRIT] [NattWara]
+	for(i=0; i < tRO_EDEnchantment.length; i++) {
+		var vED = tRO_EDEnchantment[i];
+		if(151 <= vED && vED <= 159) {
+			var val = parseInt(vED.substr(-1));
+			w += val;
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - Mora Enchantment for CRIT] [NattWara]
+	for(i=0; i < tRO_MoraEnchantment.length; i++) {
+		var vMORA = tRO_MoraEnchantment[i];
+		if(151 <= vMORA && vMORA <= 159) {
+			var val = parseInt(vMORA.substr(-1));
+			w += val;
+		}
+	}
+
+	//[TalonRO Custom 2018-07-25 - Assaulter Lance +30 CRIT Crusader/Paladin] [Amor]
+	if(EquipNumSearch(904) && n_A_JobSearch2() == 13){
+		w += 30;
+	}
+
 	n_A_CRI += w;
 
-	if(n_A_PassSkill3[5])
+	if(n_A_PassSkill3[5]){
 		n_A_CRI += 10 + n_A_PassSkill3[5] + Math.floor(n_A_PassSkill3[35] /2) + Math.floor(n_A_PassSkill3[25] /10);
+	}
 
 	//custom TalonRO Gryphon Card
-	if(CardNumSearch(277)) {n_A_CRI -= Math.floor(SU_STR /11)*2*CardNumSearch(277);}
+	if(CardNumSearch(277)) {
+		n_A_CRI -= Math.floor(SU_STR /11) * 2 * CardNumSearch(277);
+	}
 
-	if(n_A_WeaponType == 11)
+	if(n_A_WeaponType == 11) {
 		n_A_CRI *= 2;
+	}
 
 	n_A_CRI = Math.round(n_A_CRI * 10) / 10;
 
-	if(n_A_PassSkill8[16])
+	if(n_A_PassSkill8[16]){
 		n_A_CRI = 0;
+	}
 
 	myInnerHtml("A_CRI",n_A_CRI,0);
 
@@ -1821,7 +2335,19 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		if(n_A_HEAD_DEF_PLUS>7)
 			C_ATK += 6;
 	}
-
+	//vesper core 02 [rental] atk display
+	if(EquipNumSearch(1359)){
+		C_ATK += 5;
+	}
+	//bloodied shackle ball [rental] atk display
+	if(EquipNumSearch(1366)){
+		C_ATK += 30;
+	}
+	if(SU_STR >= 80 && EquipNumSearch(1526)){
+		C_ATK += 30;
+	}
+	if(EquipNumSearch(1120) && n_A_JobSearch()==4)
+		C_ATK += 10;
 	//custom TalonRO Incanation Samurai Card
 	if(CardNumSearch(255)){C_ATK += CardNumSearch(255)*65;}
 	//custom TalonRO Bloody Knight Card
@@ -1839,6 +2365,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1250))
 		C_ATK += 5;
 
+	//[Custom TalonRO 2018-06-23 - Krishina and Assassin's Glove combo not working, added here] [Kato]
+	if(EquipNumSearch(1518)){
+		C_ATK += 25;
+	}
 
 	C_ATK += n_A_PassSkill9[40];
 
@@ -1847,7 +2377,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	for(var i=8;i<12;i++){
 		if(n_A_PassSkill8[i] == 30 && EquipNumSearch(819)){C_ATK += 50;}
-		if(n_A_PassSkill8[i] == 13 && EquipNumSearch(1094)){C_ATK += 200;}
+		//if(n_A_PassSkill8[i] == 13 && EquipNumSearch(1094)){C_ATK += 200;}
 		if(n_A_PassSkill8[i] == 40 && EquipNumSearch(820)){	C_ATK += 50;}
 		if(n_A_PassSkill8[i] == 22 && EquipNumSearch(927)){C_ATK += 80;}
 		if(n_A_PassSkill8[i] == 36 && EquipNumSearch(928)){C_ATK += 80;}
@@ -1859,35 +2389,54 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		if(n_A_PassSkill8[i] == 50 && EquipNumSearch(1538)){C_ATK += 100;}
 	}
 
-	//outros gears que dão atk
+	//ATK bonus display portion
 	if(EquipNumSearch(953)){C_ATK += ((n_A_JobLV*2)/7);}
-	if(EquipNumSearch(1261)){C_ATK += ((n_A_JobLV*2)/7);}
 	if(EquipNumSearch(666) && EquipNumSearch(721) && EquipNumSearch(701) && EquipNumSearch(722)){C_ATK += 18;}
 	if(EquipNumSearch(666)){C_ATK += 3;}
-	if(EquipNumSearch(721)){C_ATK += 5;}
+	if(EquipNumSearch(721)){C_ATK += 5 * EquipNumSearch(721);}
 	if(EquipNumSearch(806)){C_ATK += 5;}
 	if(EquipNumSearch(1651)){C_ATK += 5;}
 	if(EquipNumSearch(1654)){C_ATK += 10;}
 	if(EquipNumSearch(676)){C_ATK += n_A_HEAD_DEF_PLUS*2;}
 	if(EquipNumSearch(323) && EquipNumSearch(725)){C_ATK += 50;}
-	if(EquipNumSearch(442) && SU_AGI > 89){C_ATK += 10;}
+	if(EquipNumSearch(442) && SU_AGI > 89){C_ATK += 10 * EquipNumSearch(442);}
 	if(EquipNumSearch(1165)){C_ATK += 10 * SkillSearch(311);}
 	if(EquipNumSearch(1164) && SU_LUK >=90){C_ATK += 20;}
 	if(EquipNumSearch(1160) && SU_STR >=95){C_ATK += 20;}
+	if(EquipNumSearch(1496)){C_ATK += 10};
 	if(A_acces1.value == 728){C_ATK += 15;}
 	if(A_acces2.value == 728){C_ATK += 15;}
 	if(A_acces1.value == 525){C_ATK += 10;}
 	if(A_acces2.value == 525){C_ATK += 10;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1274)){C_ATK += 15;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1275)){C_ATK += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1280)){C_ATK += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1282)){C_ATK += 15;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){C_ATK += 15;}
+	if(EquipNumSearch(1282)){C_ATK += 15;}
+	if(EquipNumSearch(1283)){C_ATK += 5;}
+	if(EquipNumSearch(1285)){C_ATK += 7;}
+	if(n_A_HEAD_DEF_PLUS == 10 && EquipNumSearch(1290)){C_ATK += 5;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1291)){C_ATK += 5;}
-
+	if(EquipNumSearch(1150)){C_ATK += 15};
+	if(EquipNumSearch(1218)){C_ATK += 5};
+	//Jade Rabbit Hat -[Loa] - 2017-07-03
+	if(EquipNumSearch(1218) && n_A_HEAD_DEF_PLUS > 4){C_ATK += n_A_HEAD_DEF_PLUS - 4;}
 	//skils que dão atk[parte 1]
 	if (SkillSearch(146)){C_ATK +=3;}
 	if(n_A_PassSkill3[9]){C_ATK += 50+(25*(n_A_PassSkill3[9]-1));}
 	if(n_A_PassSkill6[0] == 0 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==3){C_ATK += n_A_PassSkill6[1] *10;}
+
+	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for Fighting Spirit - ATK] [Kato]
+	// ATK status part.
+		for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+			var vME = tRO_MalangdoEnchantment[i];
+			if(vME >= 1781 && vME <= 1788) {
+					C_ATK += (4 + (2 * (parseInt(vME.substr(-1)) - 1)));
+			}
+		}
+		//[Custom TalonRO 2018-07-30 - Glorious Two-handed Axe - 100+ ATK for merchant class] [Amor...]
+		if(EquipNumSearch(1087) && n_A_JobSearch() == 6) {
+				C_ATK += 100;
+		}
 
 	//refines das armas
 	if(n_A_WeaponLV == 1){W_REF = n_A_Weapon_ATKplus * 2;}
@@ -1897,10 +2446,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	else{W_REF = 0;}
 
 	if(n_Nitou){
-		if(n_A_WeaponLV == 1){W_REF2 = n_A_Weapon2_ATKplus * 2;}
-		else if(n_A_WeaponLV == 2){W_REF2 = n_A_Weapon2_ATKplus * 3;}
-		else if(n_A_WeaponLV == 3){W_REF2 = n_A_Weapon2_ATKplus * 5;}
-		else if(n_A_WeaponLV == 4){W_REF2 = n_A_Weapon2_ATKplus * 7;}
+		if(n_A_Weapon2LV == 1){W_REF2 = n_A_Weapon2_ATKplus * 2;}
+		else if(n_A_Weapon2LV == 2){W_REF2 = n_A_Weapon2_ATKplus * 3;}
+		else if(n_A_Weapon2LV == 3){W_REF2 = n_A_Weapon2_ATKplus * 5;}
+		else if(n_A_Weapon2LV == 4){W_REF2 = n_A_Weapon2_ATKplus * 7;}
 	W_ATKD = n_A_Weapon_ATK + n_A_Weapon2_ATK;}
 	else{W_ATKD = n_A_Weapon_ATK;
 		 W_REF2 = 0;}
@@ -1940,11 +2489,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			if(n_A_PassSkill2[12]){P_ATK += Math.floor(P_ATK*0.05);}
 		}
 		//Maiden Hat - ZoneSoldier - 6/6/2018
-		//Increase ATK + 1% per upgrade past 7.
-	if(n_A_HEAD_DEF_PLUS > 7 && EquipNumSearch(1628)){
-		p_ATK += 1 * (n_A_HEAD_DEF_PLUS - 7);
+		//Increase ATK + 1% per upgrade past 6.
+	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
+		P_ATK += 1 * (n_A_HEAD_DEF_PLUS - 6);
 	}
 
+	/*
+	//Note - Issue#252
+	//Moved to "Fix for Issue#252"
 	//custom TalonRO Chewing Bubblegum +1% atk
 	if(EquipNumSearch(1395))
 		P_ATK += P_ATK*.01;
@@ -1955,6 +2507,18 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1447))
 		if(n_A_HEAD_DEF_PLUS>=7)
 			P_ATK += P_ATK*.01;
+	*/
+
+	//Note - Issue#252
+	//Moved to "Fix for Issue#252"
+	//[Custom TalonRO 2018-06-16 - Malangdo Enchantment for ATK%] [Kato]
+	/*
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+
+		if(vME == 171) P_ATK += P_ATK * parseInt(vME.substr(-1))/100;
+	}
+	*/
 
 	if (P_ATK < 0){P_ATK = 0;}
 
@@ -1963,8 +2527,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_Equip[9] == 978 || n_A_Equip[9] == 979 || n_A_Equip[9] == 980 || n_A_Equip[9] == 981 || n_A_Equip[9] == 982 || n_A_Equip[9] == 983 || n_A_Equip[9] == 984){
 		H_ATK += H_ATK*.05;}
 	if(n_A_Equip[10] == 978 || n_A_Equip[10] == 979 || n_A_Equip[10] == 980 || n_A_Equip[10] == 981 || n_A_Equip[10] == 982 || n_A_Equip[10] == 983 || n_A_Equip[10] == 984){
-		H_ATK += H_ATK*.05;}
-	if(EquipNumSearch(1208) && EquipNumSearch(381)){
 		H_ATK += H_ATK*.05;}
 	if(EquipNumSearch(1312)){
 		H_ATK += H_ATK*.05;}
@@ -1992,6 +2554,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	w = Math.floor(n_A_INT / 5);
 	n_A_MATK[2] = n_A_INT + w * w;
 
+	//MATK% stuff
 	w = 100;
 
 	w += n_tok[89];
@@ -2008,28 +2571,20 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += n_A_HEAD_DEF_PLUS - 5;
 	if(n_A_PassSkill6[2])
 		w += 10;
-	if(EquipNumSearch(897) && (n_A_JobSearch2() == 14 || n_A_JOB == 44))
-		w += 15 * EquipNumSearch(897);
-	if(EquipNumSearch(898) && (n_A_JobSearch2() == 14 || n_A_JOB == 44))
-		w += 15 * EquipNumSearch(898);
-	if(EquipNumSearch(1083))
-		w += n_A_Weapon_ATKplus;
-	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1084))
-		w += 5;
-	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1095))
-		w += 5;
 	if(n_A_JobSearch()==5 && CardNumSearch(454))
 		w +=3;
 	if(n_A_HEAD_DEF_PLUS >= 9 && n_A_card[8]==177)
 		w += 2;
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1284)){
 		w += 3;}
-	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1284)){
-		w += 5;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1286)){
 		w += 2;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1287)){
 		w += 2;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1292)){
+		w += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1293)){
+		w += 1;}
 	if(EquipNumSearch(1520) && SU_INT == 99)
 		w += 1;
 	if(n_A_Equip[0]==484 && SU_INT >= 70)
@@ -2041,30 +2596,240 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//sag diadem
 	if(n_A_HEAD_DEF_PLUS == 10 && EquipNumSearch(1289)){
 		w += 4;}
-	//dress hat
-	if(n_A_HEAD_DEF_PLUS >= 6 && EquipNumSearch(565)){
-		w += 1;}
 
 	//Entweihen Hairband - zonesoldier - 6/2/2018
 	//Increase MATK + 1% per upgrade past 5th upgrade
-	if(n_A_HEAD_DEF_PLUS > 5 && EquipNumSearch(1620))
+	if(n_A_HEAD_DEF_PLUS > 4 && EquipNumSearch(1620))
 	{
-		w += 1 * (n_A_HEAD_DEF_PLUS - 5);
+		w += 1 * (n_A_HEAD_DEF_PLUS - 4);
 	}
 	//Maiden Hat - ZoneSoldier - 6/6/2018
-	//Increase MATK + 1% per upgrade past 7.
-	if(n_A_HEAD_DEF_PLUS > 7 && EquipNumSearch(1628)){
-		w += 1 * (n_A_HEAD_DEF_PLUS - 7);
+	//Increase MATK + 1% per upgrade past 6.
+	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
+		w += 1 * (n_A_HEAD_DEF_PLUS - 6);
 	}
-
-	//custom TalonRO Staff of Thea: Increase MATK by 1% for every 2 upgrades - slaptro - 2016-06-07
+	//custom TalonRO Staff of Thea: Increase MATK by 1% for every 2 upgrades - [Loa] - 2016-06-07
 	if(EquipNumSearch(1640)){
 		w += Math.floor(n_A_Weapon_ATKplus / 2);
 	}
-
-	//custom TalonRO Improved Mage Hat: Increase MATK by 1% for every 2 upgrades - slaptro - 2016-06-07
+	//custom TalonRO Improved Mage Hat: Increase MATK by 1% for every 2 upgrades - [Loa] - 2016-06-07
 	if(EquipNumSearch(1645)){
 		w += Math.floor(n_A_HEAD_DEF_PLUS / 2);
+	}
+	//Yellow/Green/Pink Sheila Hairnet [Refine Rate 9+] Increase MATK by 2% [Refine Rate 10] Increase MATK by 2% - [Loa] - 2016-06-29
+	if(EquipNumSearch(1022) || EquipNumSearch(1026) || EquipNumSearch(1073)){
+		if(n_A_HEAD_DEF_PLUS >= 9){
+			w += 2;
+		}
+		if(n_A_HEAD_DEF_PLUS == 10){
+			w += 2;
+		}
+	}
+	//Silver/Violet/Orange/Blue Sheila Hairnet [Refine Rate 9+] Increase Physical Damage and MATK by 2% [Refine Rate 10] Cast Time - 10% - [Loa] - 2016-06-29
+	if(EquipNumSearch(1024) || EquipNumSearch(1025) || EquipNumSearch(1062) || EquipNumSearch(1074)){
+		if(n_A_HEAD_DEF_PLUS >= 9){
+			n_tok[80] += 2;
+			w += 2;
+		}
+		if(n_A_HEAD_DEF_PLUS == 10){
+			n_tok[73] -= 10;
+		}
+	}
+	//[TalonRO Custom - 2018-07-26 - Valorous Battle Strategy Book - Sage/Professor, Decrease [Fire Bolt], [Cold Bolt], and [Lightning Bolt] cast times by 15%.] [Amor]
+	if(EquipNumSearch(912) && (n_A_JobSearch2() == 18) && (n_A_ActiveSkill == 56 || n_A_ActiveSkill == 51 || n_A_ActiveSkill == 54 )){
+		n_tok[73] -= 15;
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse- Sage/Professor, Decrease [Fire Bolt], [Cold Bolt], and [Lightning Bolt] cast times by 15%.] [Amor]
+	if(EquipNumSearch(1095) && (n_A_JobSearch2() == 18) && (n_A_ActiveSkill == 56 || n_A_ActiveSkill == 51 || n_A_ActiveSkill == 54 )){
+		n_tok[73] -= 25;
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse/Glorious Arc Wand  - Every Refine Level gives -1% Casting Time] [Amor]
+	if(EquipNumSearch(1095) || EquipNumSearch(1084)){
+		n_tok[73] -= n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar - Gives -10% [Soul Breaker] Casting Time] [Amor]
+	if(EquipNumSearch(1090) && n_A_ActiveSkill == 263){
+		n_tok[73] -= 10;
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Claymore - Gives -3% [Charge Attack] Casting Time] [Amor]
+	if(EquipNumSearch(1080) && n_A_ActiveSkill == 308){
+		n_tok[73] -= 3 * n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Claymore - Refine +6 > Gives -10% [Bowling Bash] Casting Time] [Amor]
+	if(EquipNumSearch(1080) && n_A_ActiveSkill == 76){
+		if(n_A_Weapon_ATKplus >= 6) {
+				n_tok[73] -= 10 * (n_A_Weapon_ATKplus - 5);
+		}
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Fists - Gives -5% less casting time for [Asura Stike] per refine] [Amor]
+	if(EquipNumSearch(1097) && n_A_ActiveSkill == 197){
+				n_tok[73] -= 5 * (n_A_Weapon_ATKplus);
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Holy Avenger - -5% [Grand Cross] cast time used with Aegis] [Amor]
+	if(EquipNumSearch(1079) && EquipNumSearch(1376) && n_A_ActiveSkill == 162) {
+			n_tok[73] -= 5;
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Holy Avenger - [Grand Cross] -1% cast time per refine] [Amor]
+	if(EquipNumSearch(1079) && n_A_ActiveSkill == 162) {
+			n_tok[73] -= n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Rifle - [Tracking] -1% cast time per refine] [Amor]
+	if(EquipNumSearch(1100) && n_A_ActiveSkill == 430) {
+			n_tok[73] -= n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Staff of Destruction - Every Refine Level gives -2% Casting Time] [Amor]
+	if(EquipNumSearch(1083)){
+		n_tok[73] -= (2 * n_A_Weapon_ATKplus);
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Jamadhar - +1 CRIT in demi-human per refine] [Amor]
+	if(EquipNumSearch(1091) && n_B[2] == 7) {
+			n_tok[117] -= n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Shotgun - +10% Blind Resistence per refine] [Amor]
+	if(EquipNumSearch(1102)) {
+			n_tok[154] += (10 * n_A_Weapon_ATKplus);
+			if(n_tok[154] > 100) n_tok[154] = 100;
+	}
+
+
+	//Note 2018-07-12 [NattWara]
+	//Fix for Issue#252
+	/*
+		Those +ATK% stuff are supposed to be around here I supposed.
+		Because they use bonus2 bAddRace,RC_NonBoss,(ATK%);
+						 bonus2 bAddRace,RC_Boss,(ATK%);
+						 bonus2 bAddRace2,5,(ATK%);
+		like Turtle General Card even though the description is saying +ATK%.
+		so I'm using n_tok[80] for +ATK% as I'm sticking to the script.
+	*/
+
+	if(n_A_Equip[9] == 978 || n_A_Equip[9] == 979 || n_A_Equip[9] == 980 || n_A_Equip[9] == 981 || n_A_Equip[9] == 982 || n_A_Equip[9] == 983 || n_A_Equip[9] == 984)
+	{
+		n_tok[80] += 5;
+	}
+	if(n_A_Equip[10] == 978 || n_A_Equip[10] == 979 || n_A_Equip[10] == 980 || n_A_Equip[10] == 981 || n_A_Equip[10] == 982 || n_A_Equip[10] == 983 || n_A_Equip[10] == 984)
+	{
+		n_tok[80] += 5;
+	}
+
+	//custom TalonRO Chewing Bubblegum +1% atk
+	if(EquipNumSearch(1395)){
+		n_tok[80] += 1;
+	}
+	//custom TalonRO Choco Stick In Mouth -1% atk
+	if(EquipNumSearch(1438)){
+		n_tok[80] -= 1;
+	}
+	//custom TalonRO Rainbow Poring Hat +1% atk
+	if(EquipNumSearch(1447)){
+		if(n_A_HEAD_DEF_PLUS>=7){
+			n_tok[80] += 1;
+		}
+	}
+	//custom TalonRO Angeling Fur Hat +1% atk
+	if(EquipNumSearch(1469)){
+		n_tok[80] += 1;
+	}
+
+	//custom TalonRO Evil Marching Hat: if refine rate >=9 +5% ATK
+	if(EquipNumSearch(1539) && n_A_HEAD_DEF_PLUS >= 9){
+		n_tok[80] += 5;
+	}
+
+	//[Custom TalonRO - 2018-07-09 Ancient Gold Adornment - ATK% & MATK%] [NattWara]
+	if(EquipNumSearch(1663)){
+		var wHPVS = n_A_JobSearch();
+		if(wHPVS==1 || wHPVS==2 || wHPVS==6){
+			n_tok[80] += 4;
+		}
+		if(wHPVS==3 || wHPVS==5){
+			w += 4;
+		}
+	}
+
+	//Red Wing Hat [Refine Rate > 6] Physical Damge + 2%, MATK + 2% [Refine Rate > 8] Physical Damge + 2%, MATK + 2% - [Loa] - 2018-07-03
+	if(EquipNumSearch(1135)){
+		if(n_A_HEAD_DEF_PLUS > 6){
+			n_tok[80] += 2;
+			w += 2;
+		}
+		if(n_A_HEAD_DEF_PLUS > 8){
+			n_tok[80] += 2;
+			w += 2;
+		}
+	}
+
+	//custom TalonRO Kris enchant ATK%
+	var KEbonus = [document.calcForm.A_KE11.value,document.calcForm.A_KE12.value,document.calcForm.A_KE21.value,document.calcForm.A_KE22.value];
+	for (i=0;i<KEbonus.length;i++){
+		var wKE = KEbonus[i];
+		if(wKE){
+			if(171 <= wKE && wKE <= 179)
+				n_tok[80] += parseInt(wKE.substr(-1));
+		}
+	}
+
+	//[Custom TalonRO 2018-06-16 - Malangdo Enchantment for ATK%] [Kato]
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+		if (vME >= 171 && vME <= 179) {
+			n_tok[80] += parseInt(vME.substr(-1));
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - Eden Weapon Enchantment] [NattWara]
+	for(i=0; i < tRO_EdenWeaponEnchantment.length; i++) {
+		var vEE = tRO_EdenWeaponEnchantment[i];
+
+		//ATK + 2%
+		if (vEE >= 171 && vEE <= 179) {
+			n_tok[80] += parseInt(vEE.substr(-1));
+		}
+
+		//MATK + 2%
+		if (vEE >= 891 && vEE <= 899) {
+			w += parseInt(vEE.substr(-1));
+		}
+
+		//Physical vs Race + 10%
+		if (vEE >= 2030 && vEE <= 2039) {
+			n_tok[eval(vEE) - 2000] += 10;
+		}
+
+		//Magical vs Race + 5%
+		if (vEE >= 2170 && vEE <= 2179) {
+			n_tok[eval(vEE) - 2000] += 5;
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - El Dicaste Enchantment] [NattWara]
+	for(i=0; i < tRO_EDEnchantment.length; i++) {
+		var vED = tRO_EDEnchantment[i];
+
+		//ATK + 2%, ATK + 3%
+		if (vED >= 171 && vED <= 179) {
+			n_tok[80] += parseInt(vED.substr(-1));
+		}
+
+		//MATK + 1%, MATK + 2%
+		if (vED >= 891 && vED <= 899) {
+			w += parseInt(vED.substr(-1));
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - Mora Enchantment] [NattWara]
+	for(i=0; i < tRO_MoraEnchantment.length; i++) {
+		var vMORA = tRO_MoraEnchantment[i];
+
+		//ATK + 2%, ATK + 3%
+		if (vMORA >= 171 && vMORA <= 179) {
+			n_tok[80] += parseInt(vMORA.substr(-1));
+		}
+
+		//MATK + 1%, MATK + 2%
+		if (vMORA >= 891 && vMORA <= 899) {
+			w += parseInt(vMORA.substr(-1));
+		}
 	}
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Hat of the Sun God [1] - MATK part [Nattwara]
@@ -2113,20 +2878,38 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//custom TalonRO Halloween Midas Whisper
 	if(SU_INT >= 80 && EquipNumSearch(1526))
 		w += 3;
-	//custom TalonRO Kris enchant %-MATK
+	//custom TalonRO Kris enchant MATK%
 	var KEbonus = [document.calcForm.A_KE11.value,document.calcForm.A_KE12.value,document.calcForm.A_KE21.value,document.calcForm.A_KE22.value];
-	for (i=0;i<4;i++){
+	for (i=0;i<KEbonus.length;i++){
 		var wKE = KEbonus[i];
 		if(wKE){
-			var w_enchant = wKE % 10;
-			if(81 <= wKE && wKE <= 89)
-				w += w_enchant;
+			if(891 <= wKE && wKE <= 899){
+				w += parseInt(wKE.substr(-1));
+			}
+		}
+	}
+
+	//[TalonRO Custom - 2018-07-28 - Glorious Holy Avenger - 5% MATK used with Aegis] [Amor]
+	if(EquipNumSearch(1079) && EquipNumSearch(1376)) {
+			w += 5;
+	}
+
+	// [Custom TalonRO 2018-06-16 - Malangdo Enchantment for MATK%] [Kato]
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+
+		if(vME >= 891 && vME <= 899) {
+			w += parseInt(vME.substr(-1));
 		}
 	}
 
 	n_A_MATK[0] = Math.floor(n_A_MATK[0] * w / 100);
 	n_A_MATK[2] = Math.floor(n_A_MATK[2] * w / 100);
-
+	//Gemini Crown - [Loa] - 2018-07-04
+	if(EquipNumSearch(1280) && n_A_HEAD_DEF_PLUS >= 7){
+		n_A_MATK[0] += 15;
+		n_A_MATK[2] += 15;
+	}
 	//Balloon Hat Matk Bonus
 	if(EquipNumSearch(849)){
 		n_A_MATK[0] += Math.floor(n_A_MATK[0]*(n_A_HEAD_DEF_PLUS/2)/100);
@@ -2309,8 +3092,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += Math.floor(SU_AGI / 14);
 	if(n_A_Equip[0]==484 && SU_STR >= 50)
 		w += 5;
-	if(SU_STR >= 95 && EquipNumSearch(621))
-		w -= 40;
 	if(EquipNumSearch(624))
 		w += (n_A_Weapon_ATKplus);
 	if(EquipNumSearch(641))
@@ -2319,28 +3100,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += 20;
 	if(SU_STR >= 77 && EquipNumSearch(944))
 		w += 4;
-	if(n_A_Weapon_ATKplus >= 7 && n_A_Equip[0] == 1077){
-		w += 5;
-		if(n_A_Weapon_ATKplus >= 9)
-			w += 5;
-	}
-	if(n_A_Weapon2_ATKplus >= 7 && n_A_Equip[1] == 1077){
-		w += 5;
-		if(n_A_Weapon2_ATKplus >= 9)
-			w += 5;
-	}
-	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1081))
-		w += 10;
-	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1086)){
-		w += 5;
-		if(n_A_Weapon_ATKplus >= 9)
-			w += 5;
-	}
-	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1088)){
-		w += 5;
-		if(n_A_Weapon_ATKplus >= 9)
-			w += 5;
-	}
 	if(n_A_JOB == 21 && EquipNumSearch(855))
 		w -= 5;
 	if(EquipNumSearch(1121) && n_A_JobSearch()==2)
@@ -2361,7 +3120,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1455))
 		w += 3*Math.floor(n_A_Weapon_ATKplus/2);
 
-	//custom TalonRO Gigantic Lance: For every refine above +4, increase ASPD by 1% - slaptro - 2016-06-07
+	//custom TalonRO Gigantic Lance: For every refine above +4, increase ASPD by 1% - [Loa] - 2016-06-07
 	if(EquipNumSearch(1315) && n_A_Weapon_ATKplus>4){
 			w += n_A_Weapon_ATKplus - 4;
 	}
@@ -2437,12 +3196,12 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//}
 
 	//custom TalonRO Armor enchant ASPD
-	var wHSE = eval(document.calcForm.A_HSE.value);
+	var wHSE = document.calcForm.A_HSE.value;
 	if(wHSE){
-		var w_enchant = wHSE % 10;
-		if(91 <= wHSE && wHSE <= 99)
-			w += w_enchant;
+		if(121 <= wHSE && wHSE <= 129)
+			w += parseInt(wHSE.substr(-1));
 	}
+
 	//Thief Ring & Cold Heart aspd boost fix
 	if(EquipNumSearch(1003)& EquipNumSearch(442)){
 		w += (n_A_Weapon_ATKplus/2);}
@@ -2457,6 +3216,63 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//custom TalonRO Halloween Midas Whisper
 	if(SU_AGI >= 80 && EquipNumSearch(1526))
 		w += 5;
+
+	//[TalonRO Custom - 2018-07-26 - Valorous Battle CrossBow - + 10% ASPD for Thief Class] [Amor]
+	if(EquipNumSearch(913) && n_A_JobSearch() == 2) {
+		w += 10;
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse 1095/Glorious Cleaver 1088/Glorious Flamberge 1077/Glorious Guitar 1092/Glorious Jamadhar 1091/Glorious Lariat 1093/Glorious Morning Star 1086/Glorious Spear 1081/Glorious Two Handed Axe 1087 - Every Refine Level gives APSD + 1%][Amor]
+	if(EquipNumSearch(1095) || EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1092) || EquipNumSearch(1091) || EquipNumSearch(1093) || EquipNumSearch(1086) || EquipNumSearch(1081) || EquipNumSearch(1087)){
+			w += n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Gladius - 5% ASPD for Rogue/Stalker/Ninja/SL][Amor]
+	if(EquipNumSearch(1076) && (n_A_JobSearch2() == 14 || n_A_JOB== 43 || n_A_JOB == 44)){
+			w += 5;
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Gladius  +1% ASPD per refine to [SL/Ninja]] [Amor]
+	if(EquipNumSearch(1076) && (n_A_JOB== 43 || n_A_JOB == 44)) {
+			w += n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Holy Avenger - 5% ASPD + 2% ASPD per refine used with Aegis] [Amor]
+	if(EquipNumSearch(1079) && EquipNumSearch(1376)) {
+			w += 5 + (2 * n_A_Weapon_ATKplus);
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class] [Amor]
+	if(EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
+			w += 5 + (2 * n_A_Weapon_ATKplus);
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class] [Amor]
+	if(EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
+			w += 5 + (2 * n_A_Weapon_ATKplus);
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Two Handed Axe - 1% ASPD more if refine 6>] [Amor]
+	if(EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6){
+			w += (n_A_Weapon_ATKplus - 5);
+	}
+
+	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for ASPD] [Kato]
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+
+		if(vME){
+			if(121 <= vME && vME <= 129)
+				w += parseInt(vME.substr(-1));
+		}
+	}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for ASPD] [NattWara]
+	for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+		var vBE = tRO_BiolabWeaponEnchantment[i];
+
+		if(vBE){
+			if(121 <= vBE && vBE <= 129)
+				w += parseInt(vBE.substr(-1));
+		}
+	}
+
+	if(EquipNumSearch(1045) && SU_AGI >= 90){
+		w += 2;
+	}
 
 	n_A_ASPD += (200 - n_A_ASPD) * (w / 100);
 
@@ -2520,13 +3336,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_JobSearch()==5 && CardNumSearch(454))
 		w -= 15;
 	if((n_A_JOB==18 || n_A_JOB==32) && CardNumSearch(460))
-		w -= 15;
+		w -= 20;
 	if(EquipNumSearch(750))
 		w -= n_A_Weapon_ATKplus;
 	if(n_A_card[8]==177)
 		w -= n_A_HEAD_DEF_PLUS;
-	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1084))
-		w -= 5;
 	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
 		w -= 5;
 	if(n_A_PassSkill3[2] != 0)
@@ -2536,7 +3350,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w -= 50;
 	if(EquipNumSearch(1005)& EquipNumSearch(442)){
 		w -= (n_A_Weapon_ATKplus/2);}
-
+	//parade hat [refine >= 6] -5 cast time - [Loa] 2018-07-02
+	if(EquipNumSearch(1036) && n_A_HEAD_DEF_PLUS >= 6){
+		w -= 5;
+	}
 	//custom TalonRO SQI Bonus Mjolnir: 30% cast reduction with Charge Attack
 	if(n_A_ActiveSkill == 308)
 		if(EquipNumSearch(84))
@@ -2576,9 +3393,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w -= StPlusCalc2(7000+n_A_ActiveSkill);
 	if(StPlusCard(7000+n_A_ActiveSkill) != 0)
 		w -= StPlusCard(7000+n_A_ActiveSkill);
-	if(n_A_ActiveSkill==321 || n_A_ActiveSkill==197)
+	/*if(n_A_ActiveSkill==321 || n_A_ActiveSkill==197)
 		if(SkillSearch(195) && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1097))
-			w -= 100;
+			w -= 100;*/
 	if(w < 0)
 		w = 0;
 	n_A_CAST *= w /100;
@@ -2590,20 +3407,26 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(934))
 		n_tok[74] += 20;
-	if(EquipNumSearch(1036) && n_A_HEAD_DEF_PLUS >= 6)
-		n_tok[74] += n_A_HEAD_DEF_PLUS - 5;
-	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1084))
-		n_tok[74] += 5;
 	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
 		n_tok[74] += 5;
 	if(EquipNumSearch(936))
-		n_tok[74] += (n_A_Weapon_ATKplus * 1);
+		n_tok[74] += (n_A_Weapon_ATKplus * 3 / 2);
 	//custom TalonRO Magical Booster & Staff of Piercing Combo
 	if(EquipNumSearch(1430)& EquipNumSearch(473)){
 		if(n_A_Weapon_ATKplus==10){
 			n_tok[74] += 10;
 		}
 	}
+
+	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse/Glorious Arc Wand - Every /2 upgrade gives after-cast delay -1%] [Amor]
+	if(EquipNumSearch(1095) || EquipNumSearch(1095) ){
+		n_tok[74] += (1 * Math.floor(n_A_Weapon2_ATKplus / 2));
+	}
+	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar/Glorious Guitar/Glorious Lariat - Every Upgrade gives after-cast delay -1%] [Amor]
+	if(EquipNumSearch(1090) || EquipNumSearch(1092) || EquipNumSearch(1093)){
+		n_tok[74] += n_A_Weapon2_ATKplus;
+	}
+
 	var w = n_A_PassSkill3[2];
 	if(w){
 		// custom TalonRO Poem of Bragi after cast delay
@@ -2635,10 +3458,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	w += n_tok[75];
 	if(SU_LUK >= 77)
 		w += 100 * CardNumSearch(221);
-	//beer hat
-	if(EquipNumSearch(1240) && (n_A_JOB!=1||n_A_JOB!=7||n_A_JOB!=13||n_A_JOB!=20||n_A_JOB!=21||n_A_JOB!=27)){
-		w += Math.floor((5 + n_A_MaxHP / 500) * 3);}
-
 	if(n_A_JobSearch()==41 && EquipNumSearch(672))
 		w += 3;
 	if(n_A_SHOES_DEF_PLUS <= 4 && CardNumSearch(407))
@@ -2652,6 +3471,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//[Custom TalonRO - 2018-06-02 - Aegir Helm + Cloak - Increases natural HP recovery by 5% per refinement rate of Aegir Cloak.] [Kato/Nattwara]
 	if(EquipNumSearch(1555))
 		w += 5 * n_A_SHOULDER_DEF_PLUS;
+
+	// //[Custom TalonRO - 2018-07-17 - Nightmare Verit - For every 2 refines, increases the HP recovery chance by an additional 1%] [Kato]
+	// if(CardNumSearch(547)) {
+	// 		w += 1 * Math.floor(n_A_SHOES_DEF_PLUS / 2);
+	// }
 
 	n_A_HPR = Math.floor(n_A_HPR * w /100);
 
@@ -2670,10 +3494,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	if(SU_LUK >= 77)
 		w += 100 * CardNumSearch(221);
-	//beer hat
-	if(EquipNumSearch(1240) && (n_A_JOB!=5||n_A_JOB!=9||n_A_JOB!=11||n_A_JOB!=18||n_A_JOB!=20||n_A_JOB!=23||n_A_JOB!=25||n_A_JOB!=32||n_A_JOB!=39)){
-		w += Math.floor((3 + n_A_MaxSP / 500) * 3);}
-
 	if(n_A_JobSearch()==41 && EquipNumSearch(673))
 		w += 3;
 	if(n_A_HEAD_DEF_PLUS <= 4 && n_A_card[8]==179)
@@ -2696,6 +3516,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1429) && SU_LUK > 55)
 		w += 10;
 
+	// //[Custom TalonRO - 2018-07-17 - Nightmare Verit - For every 2 refines, increases the SP recovery chance by an additional 1%] [Kato]
+	// if(CardNumSearch(547)) {
+	// 		w += 1 * Math.floor(n_A_SHOES_DEF_PLUS / 2);
+	// }
+
 	n_A_SPR = Math.floor(n_A_SPR * w /100);
 
 	if(n_A_INT>=120)
@@ -2711,45 +3536,17 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(SkillSearch(234))
 		n_tok[39] += SkillSearch(234) *4;
 
-	if(n_A_Weapon_ATKplus >= 6){
-		if(n_A_Equip[0] == 1076 || n_A_Equip[0] == 1077 || n_A_Equip[0] == 1081 || n_A_Equip[0] == 1082 || n_A_Equip[0] == 1086 || (1088 <= n_A_Equip[0] && n_A_Equip[0] <= 1094) || n_A_Equip[0] == 1096 || n_A_Equip[0] == 1097 || (1099 <= n_A_Equip[0] && n_A_Equip[0] <= 1103)){
-			if(n_A_Weapon_ATKplus == 6)
-				n_tok[37] += 4;
-			if(n_A_Weapon_ATKplus == 7)
-				n_tok[37] += 9;
-			if(n_A_Weapon_ATKplus == 8)
-				n_tok[37] += 16;
-			if(n_A_Weapon_ATKplus == 9)
-				n_tok[37] += 25;
-			if(n_A_Weapon_ATKplus >= 10)
-				n_tok[37] += 36;
-		}
+	if(EquipNumSearch(1428) && n_A_HEAD_DEF_PLUS > 5)
+		n_tok[37] += 2*(n_A_HEAD_DEF_PLUS-5);
 
-		if(n_A_Equip[0] == 1080 || n_A_Equip[0] == 1087 || n_A_Equip[0] == 1098){
-			if(n_A_Weapon_ATKplus == 6)
-				n_tok[37] += 9;
-			if(n_A_Weapon_ATKplus == 7)
-				n_tok[37] += 16;
-			if(n_A_Weapon_ATKplus == 8)
-				n_tok[37] += 25;
-			if(n_A_Weapon_ATKplus == 9)
-				n_tok[37] += 36;
-			if(n_A_Weapon_ATKplus >= 10)
-				n_tok[37] += 49;
-		}
-
-	}
-	if(EquipNumSearch(1428) && n_A_HEAD_DEF_PLUS >= 5)
-		n_tok[37] += 2*(n_A_HEAD_DEF_PLUS-4);
-
-	//custom Talonro Imrpoved Munak Hat: If refine > 6 increase damage against Undead monster by 10% - slaptro - 2018-06-07
+	//custom Talonro Imrpoved Munak Hat: If refine > 6 increase damage against Undead monster by 10% - [Loa] - 2018-06-07
 	if(EquipNumSearch(1649) && n_A_HEAD_DEF_PLUS > 6){
-		n_tok[31] += 10
+		n_tok[31] += 10;
 	}
 
-	//custom Talonro Imrpoved Bongun Hat: If refine > 6 increase damage against Demon monster by 10% - slaptro - 2018-06-07
+	//custom Talonro Imrpoved Bongun Hat: If refine > 6 increase damage against Demon monster by 10% - [Loa] - 2018-06-07
 	if(EquipNumSearch(1650) && n_A_HEAD_DEF_PLUS > 6){
-		n_tok[36] += 10
+		n_tok[36] += 10;
 	}
 
 	if(EquipNumSearch(628) && n_A_Arrow == 4)
@@ -2767,8 +3564,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//custom TalnRO Elven Bow + Elven Arrow: +50% dmg
 	if(EquipNumSearch(1477) && n_A_Arrow == 18)
 		n_tok[25] += 50;
-	if(EquipNumSearch(1217))
-		n_tok[25] += n_A_HEAD_DEF_PLUS;
 	if(n_A_HEAD_DEF_PLUS >= 9 &&EquipNumSearch(1288)){
 		n_tok[25] += 5;}//sagittarius crown
 
@@ -2776,9 +3571,37 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_HEAD_DEF_PLUS >= 9 &&EquipNumSearch(1539)){
 		n_tok[25] += 5;}
 
+	//[Custom TalonRO - 2018-07-09 Ancient Gold Adornment 5% Range Physical Damage] [NattWara]
+	if(EquipNumSearch(1663)){
+		var wHPVS = n_A_JobSearch();
+		if(wHPVS==4){
+			n_tok[25] += 5;
+		}
+	}
+
 	//[Custom TalonRO - 2018-06-01 - Palace Guard if refine rate >=7 add -1% ranged reduction] [Kato]
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1545)){
 		n_tok[25] -= (n_A_HEAD_DEF_PLUS - 5);
+	}
+	//[Custom TalonRO - 2018-07-28 - Glorious Hunter Bow - 2% DS damage (added here as ranged damage)] [Kato]
+	if(EquipNumSearch(1089)){
+		n_tok[25] += 2;
+	}
+
+	//[Custom TalonRO 2018-06-15 - Malandgo Enchantment for Expert Archer] [Kato]
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+		if(vME >= 251 && vME <= 256) {
+				n_tok[25] += 2 * parseInt(vME.substr(-1));
+		}
+	}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for Expert Archer] [NattWara]
+	for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+		var vBE = tRO_BiolabWeaponEnchantment[i];
+		if(vBE >= 251 && vBE <= 253) {
+				n_tok[25] += 2 * parseInt(vBE.substr(-1));
+		}
 	}
 
 	//Custom TalonRO - 2018-06-07 - Lord of the Dead Helm [1] + Abysmal Knight Card - +5% damage on boss monsters  [Nattwara]
@@ -2793,15 +3616,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_tok[80] += 3;}//libra diadem
 	if(n_A_JOB==14 || n_A_JOB==28)
 		n_tok[80] += 10 * CardNumSearch(479);
-	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1101))
-		n_tok[80] += n_A_Weapon_ATKplus;
 
 	//custom TalonRO Lady Tanee Card: +1% ATK per 8 base VIT
 	if(CardNumSearch(409))
 		n_tok[80] += Math.floor(SU_VIT / 8);
 
-	if(EquipNumSearch(1089))
-		n_tok[70] += (2 * n_A_Weapon_ATKplus);
 	//custom TalonRO Little Feather Hat: if combined with Sharp Arrow +5% critical damage
 	if(EquipNumSearch(1488) && n_A_Arrow==15)
 		n_tok[70] += 5;
@@ -2812,21 +3631,25 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1539) && n_A_HEAD_DEF_PLUS >= 7)
 		n_tok[70] += 10;
 
-	//custom TalonRO Improved Joker Jester: If refine rate >6 +5% critical damage - slaptro - 2018-06-07
+	//custom TalonRO Improved Joker Jester: If refine rate >6 +5% critical damage - [Loa] - 2018-06-07
 	if(EquipNumSearch(1647) && n_A_HEAD_DEF_PLUS > 6){
 		n_tok[70] += 5;
 	}
+  //[TalonRO Custom 2018-07-25 - Assaulter Lance + 20% Critical Damage for Crusader/Paladin] [Amor]
+	if(EquipNumSearch(904) && n_A_JobSearch2() == 13){
+		n_tok[70] += 20;
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 2% Critical Damge for Hunter Class] [Amor]
+	if(EquipNumSearch(1089) && n_A_JobSearch2() == 10) {
+			w += (2 * n_A_Weapon_ATKplus);
+	}
 
-	if(EquipNumSearch(1083)){
-		if(n_A_Weapon_ATKplus >= 6)
-			n_tok[177] += 2 * (n_A_Weapon_ATKplus - 5);
-		}
 	if(CardNumSearch(452) && n_A_JobSearch()==3){
 		n_tok[51] += 30;
 		n_tok[56] += 30;
 	}
-	if(EquipNumSearch(1428) && n_A_HEAD_DEF_PLUS >= 5)
-		n_tok[57] += 2*(n_A_HEAD_DEF_PLUS-4);
+	if(EquipNumSearch(1428) && n_A_HEAD_DEF_PLUS > 5)
+		n_tok[57] += 2*(n_A_HEAD_DEF_PLUS-5);
 	if(n_A_PassSkill2[14] && n_A_JOB != 13 && n_A_JOB != 27)
 		n_tok[56] += n_A_PassSkill2[14] * 5;
 	if(SkillSearch(234))
@@ -2844,12 +3667,43 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			n_tok[59] -= 200;
 		}
 	}
+	//Orc Hero Headdress [For Every Refine > 5] Physical Damage against Demi-Human monsters + 1%, Damage from Demi-Human monster - 2% - [Loa] - 2018-07-03
+	if(EquipNumSearch(1142) && n_A_HEAD_DEF_PLUS > 5){
+		n_tok[37] += n_A_HEAD_DEF_PLUS - 5;
+		n_tok[57] += (n_A_HEAD_DEF_PLUS - 5) * 2;
+	}
+
+	//[TalonRO Custom - 2018-07-26 - Valorous Battlefield Morning Star/Glorious Morning Star - [+Aegis Shield or Monk/Champion] Reduces physical attack against Demi-human monster by 20%] [Amor]
+	if((EquipNumSearch(907) || EquipNumSearch(1086)) && ((EquipNumSearch(1376) || n_A_JobSearch2() == 15))) {
+		n_tok[37] -= 20;
+	}
+	//[TalonRO Custom - 2018-07-26 - Glorious Cleaver/Glorious Flamberge/Glorious Gladius - [+Aegis Shield] Reduces physical attack against Demi-human monster by 20%] [Amor]
+	if((EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1076)) && EquipNumSearch(1376)) {
+		n_tok[37] -= 20;
+	}
+	//[TalonRO Custom - 2018-07-28 - Glorious Lance - Job Crusader/Paladin Reduces physical attack against Demi-human monster by 30%] [Amor]
+	if(EquipNumSearch(1082) && n_A_JobSearch2() == 13) {
+		n_tok[37] -= 30;
+	}
+	//[TalonRO Custom - 2018-07-26 - Glorious Claymore/Glorious Cleaver/Glorious Flamberge/Glorious Gladius/Glorious Grenade Launcher/ Glorious Tablet - +1% Inceases physical attack Demi-human damage per refine] [Amor]
+	if(EquipNumSearch(1080) || EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1076) || EquipNumSearch(1103) || EquipNumSearch(1094)) {
+		n_tok[37] += n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - 2018-07-26 - Glorious Gatiling Gun/Glorious Grenade Launcher/Glorious Lance/Glorious Rifle/Glorious Shotgun - +2% Inceases physical attack Demi-human damage per refine] [Amor]
+	if(EquipNumSearch(1101) || EquipNumSearch(1103) || EquipNumSearch(1082) || EquipNumSearch(1100) || EquipNumSearch(1102)) {
+		n_tok[37] += (2 * n_A_Weapon_ATKplus);
+	}
+	//[TalonRO Custom - 2018-07-26 -  Glorious Spear - [+Aegis Shield] Reduces physical attack against Demi-human monster by 20%] [Amor]
+	if(EquipNumSearch(1081) && EquipNumSearch(1376)) {
+		n_tok[37] -= 30;
+	}
+
 
 	//[Custom TalonRO - 2018-06-02 - Aegir Helm + Armor Combo - 1% less damage from Fish race monster for each refine] [Kato/Nattwara]
 	if(EquipNumSearch(1556))
 		n_tok[55] += n_A_BODY_DEF_PLUS;
 
-	//Custom TalonRO - 2018-06-07 - Enhanced Bone Helm [1] - 1% less damage Neutral element attack for each refine past +4 until +8 [Nattwara]
+	//Custom TalonRO - 2018-06-07 - Enhanced Bone Helm [1] - 1% less damage Neutral element attack for each refine past +4 until +8 [Nattwara/Loa]
 	if(EquipNumSearch(1656) && n_A_HEAD_DEF_PLUS > 4)
 		n_tok[60] += Math.min(n_A_HEAD_DEF_PLUS-4,4);
 
@@ -2865,14 +3719,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	if(EquipNumSearch(737))
 		n_tok[60] += n_A_SHOULDER_DEF_PLUS * 3;
-	if(EquipNumSearch(957)){
-		for(i=0;i<=9;i++)
-			n_tok[60+i] += 30;
-	}
 	if(n_A_SHOULDER_DEF_PLUS >= 9 && CardNumSearch(403))
 		n_tok[60] += 5;
-	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1244))
-		n_tok[61] += 5;
 	if(SkillSearch(150)){
 		n_tok[60] += SkillSearch(150);
 		n_tok[63] += 4 * SkillSearch(150);
@@ -2916,18 +3764,53 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(SkillSearch(421))
 		n_tok[78] += 20;
 
-	if(EquipNumSearch(1085)){
-		if(n_A_Weapon_ATKplus >= 6){
-				n_tok[91] += 5 + (2 * (n_A_Weapon_ATKplus - 5));
-				n_tok[94] += 5 + (2 * (n_A_Weapon_ATKplus - 5));
-		}
-		if(n_A_Weapon_ATKplus >= 10){
-			n_tok[91] += 10;
-			n_tok[94] += 10;
+	//maiden hat +1% heal per refine > 6 - [Loa] - 2018-06-25
+	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
+		n_tok[91] += n_A_HEAD_DEF_PLUS - 6;
+		n_tok[94] += n_A_HEAD_DEF_PLUS - 6;
+	}
+
+	//[Custom TalonRO - 2018-07-09 Ancient Gold Adornment - Inrease Heal Effectiveness by 7% (Exclude Sanctuary)] [NattWara]
+	if(EquipNumSearch(1663)){
+		var wHPVS = n_A_JobSearch();
+		if(wHPVS==3 || wHPVS==5){
+			n_tok[91] += 7;
 		}
 	}
+
+	//[Custom TalonRO - 2018-07-13 Love Guard - If refine 7+ Inrease Effectiveness of Heal, Potion Pitcher, and Sanctuary by 2%] [NattWara]
+	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1667)){
+		n_tok[91] += 2;
+		n_tok[94] += 2;
+	}
+
+	//[Custom TalonRO - 2018-07-27 Elite Engineer Armor - Effectiviness of Potion Pitcher 10%] [Amor]
+	if(EquipNumSearch(973)){
+		n_tok[94] += 10;
+	}
+	//[Custom TalonRO - 2018-07-29 Glorious Staff of Recovery - Effectiviness of Potion Pitcher/Heal 1% per refine] [Amor]
+	if(EquipNumSearch(1085)){
+		n_tok[91] += n_A_Weapon_ATKplus;
+		n_tok[94] += n_A_Weapon_ATKplus;
+	}
+
+	//[Custom TalonRO - 2018-07-27 Glorious Arc Wand - Every 2 refine 1% MATK for demi-human] [Amor]
+	if(EquipNumSearch(1084)) {
+		n_tok[177] += (1 * Math.floor(n_A_Weapon_ATKplus/2));
+	}
+	//[Custom TalonRO - 2018-07-28 Glorious Gladius - Every 2 refine 1% MATK for demi-human for 6+ >] [Amor]
+	if(EquipNumSearch(1076)) {
+		if(n_A_Weapon_ATKplus >= 6)
+				n_tok[177] += (n_A_Weapon_ATKplus - 5);
+	}
+	//[Custom TalonRO - 2018-07-29 Glorious Staff of Destruction - +1% MATK every refine for demi-human] [Amor]
+	if(EquipNumSearch(1083)) {
+		n_tok[177] += n_A_Weapon_ATKplus
+	}
+
 	if(EquipNumSearch(1161))
 		n_tok[91] += SkillSearch(23);
+		n_tok[94] += SkillSearch(23);
 
 	if(EquipNumSearch(534)){
 		wSPVS = n_A_JobSearch();
@@ -2935,6 +3818,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			n_tok[151] += 50;
 		if(wSPVS==3 || wSPVS==4 || wSPVS==5)
 			n_tok[156] += 50;
+	}
+	//custom TalonRO Recovery Light bHealPower refine * 3
+	if(EquipNumSearch(1511)){
+		n_tok[91] += Math.floor(n_A_Weapon_ATKplus * 3);
+		n_tok[94] += Math.floor(n_A_Weapon_ATKplus * 3);
 	}
 
 	//custom Talonro Chameleon Armor: [Swordsman, Merchant, Thief] DEF + 3 [Magician, Archer, Acolyte] MDEF + 5
@@ -2945,7 +3833,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		if(wSPVS==3 || wSPVS==4 || wSPVS==5)
 			n_tok[19] += 5;
 	}
-	
+
 	if(EquipNumSearch(828)){
 		n_tok[151] += 2 * n_A_HEAD_DEF_PLUS;
 		n_tok[152] += 2 * n_A_HEAD_DEF_PLUS;
@@ -2962,26 +3850,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		}
 	}
 
-	if(n_A_PassSkill8[0] == 42 && EquipNumSearch(1218))
-		n_tok[151] += 10;
-
 	n_A_zokusei = new Array();
 	for(i=0;i<=9;i++){
 		n_A_zokusei[i] = zokusei[n_A_BodyZokusei * 10 +1][i] * 100;
 		n_A_zokusei[i] = n_A_zokusei[i] - Math.floor(n_A_zokusei[i] * n_tok[60+i]) / 100;
-	}
-
-	if(n_A_Equip[1] == 1076 || n_A_Equip[1] == 1077){
-		if(n_A_Weapon2_ATKplus >= 6)
-			n_tok[307] += 5;
-	}
-	if(n_A_Equip[0] == 1076 || n_A_Equip[0] == 1077 || n_A_Equip[0] == 1080 || n_A_Equip[0] == 1081 || n_A_Equip[0] == 1086 || (1088 <= n_A_Equip[0] && n_A_Equip[0] <= 1090) || n_A_Equip[0] == 1092 || n_A_Equip[0] == 1093 || (1097 <= n_A_Equip[0]  && n_A_Equip[0] <= 1103)){
-		if(n_A_Weapon_ATKplus >= 6)
-			n_tok[307] += 5;
-	}
-	if(n_A_Equip[0] == 1082 || n_A_Equip[0] == 1087 || n_A_Equip[0] == 1094 || n_A_Equip[0] == 1096){
-		if(n_A_Weapon_ATKplus >= 6)
-			n_tok[307] += 5;
 	}
 	if(EquipNumSearch(645))
 		n_tok[295] += 10 + n_A_Weapon_ATKplus;
@@ -3014,24 +3886,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_B[19] == 1)
 		n_tok[295] += n_tok[297];
 
-	if(EquipNumSearch(1084) || EquipNumSearch(1095)){
-		if(n_A_Weapon_ATKplus >= 6)
-			n_tok[317] += 5;
-	}
-	if(EquipNumSearch(1085)){
-		if(n_A_Weapon_ATKplus >= 6)
-			n_tok[317] += 5;
-	}
-	//Maiden Hat - ZoneSoldier - 6/6/2018
-	//Additional Heal effectiveness + 1% per upgrade past 7.
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1628)){
-		n_tok[317] =+ 1 * (n_A_HEAD_DEF_PLUS - 7);
-	}
-
-	if(EquipNumSearch(1083)){
-		if(n_A_Weapon_ATKplus >= 6)
-			n_tok[317] += 5 + (2 * (n_A_Weapon_ATKplus - 5));
-	}
+	// //Maiden Hat - ZoneSoldier - 6/6/2018
+	// //Additional Heal effectiveness + 1% per upgrade past 7.
+	// if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1628)){
+	// 	n_tok[317] =+ 1 * (n_A_HEAD_DEF_PLUS - 7);
+	// }
 
 
 	n_tok[70] += n_tok[320+n_B[2]];
@@ -3053,6 +3912,117 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(CardNumSearch(536) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23 || n_A_JOB == 15 || n_A_JOB == 33)) {
 		n_tok[91] += 1 * Math.floor(n_A_HEAD_DEF_PLUS/2);
 	}
+	//[TalonRO Custom - Assaulter Lance  + 25% DEF Bypass for Knight/ Lord Knight] [Amor]
+	if(EquipNumSearch(904) && n_A_JobSearch2() == 7){
+		n_tok[307] += 25;
+	}
+	//[TalonRO Custom - Glorious Cleaver 1088/Glorious Flamberge 1077/Glorious Gatiling Gun 1101/Glorious Guitar 1092/Glorious Lariat 1093/Glorious Rifle 1100/Glorious Shotgun 1102/Glorious Spear 1081/Glorious Tablet 1094/Glorious Two Handed Axe 1087 + 1% DEF Bypass for every upgrade] [Amor]
+	if(EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1101) || EquipNumSearch(1092) || EquipNumSearch(1093) || EquipNumSearch(1100) || EquipNumSearch(1102) || EquipNumSearch(1081) || EquipNumSearch(1094) || EquipNumSearch(1087)){
+		n_tok[307] += n_A_Weapon_ATKplus;
+	}
+	//[TalonRO Custom - Glorious Lance - +1% DEF Bypass if Knight/Lord Knight] [Amor]
+	if(EquipNumSearch(1082) && n_A_JobSearch2() == 7){
+		n_tok[307] += n_A_Weapon_ATKplus;
+	}
+
+	//[TalonRO Custom - Glorious Lance - 100% DEF Bypass if Crusader/Palladin] [Amor]
+	if(EquipNumSearch(1082)){
+		n_tok[307] = 100;
+	}
+
+	/*[Custom TalonRO 2018-06-15 - Malangdo Enchantment for Spell Element] [Kato]
+		Well I couldn't find a n_tok for magical damage based on element.
+		Since we don't have it, I will separate the skills by element (skills.js) and apply the magical damage for all races [170-179]
+		*** Snap, the math was bugus, the only way I found here was to keep the modifier that was here and add the new one
+	*/
+	var eTypes = [0,0,0,0,0]; // 0 Neural, 1 Water, 2 Earth, 3 Fire, 4 Wind
+	var aMSnoEle = [373,374,375]; // Magical skills without proper element (will change depending on n_A_Weapon_zokusei)
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+		if(vME >= 261 && vME <= 267) {
+			switch(vME.substr(-1)){
+				case '1' : eTypes[3] += 2; break;
+				case '2' : eTypes[1] += 2; break;
+				case '3' : eTypes[4] += 2; break;
+				case '4' : eTypes[2] += 2; break;
+				case '5' : eTypes[3] += 4; break;
+				case '6' : eTypes[1] += 5; break;
+				case '7' : eTypes[4] += 6; break;
+			}
+
+			for(k=1; k<5; k++) {
+				if(TRO_MAGICALSKILL_ELEMENTS[k].indexOf(n_A_ActiveSkill) != -1){
+					for(j=0; j<10; j++) {
+						n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + eTypes[k]) / 100) - 100; // ***
+					}
+				}
+			}
+			if(aMSnoEle.indexOf(n_A_ActiveSkill) != -1 && n_A_Weapon_zokusei <= 5){
+				for(j=0; j<10; j++) {
+					n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + eTypes[n_A_Weapon_zokusei]) / 100) - 100; // ***
+				}
+			}
+		}
+	}
+	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for Spell Element] [NattWara]
+	var eTypes = [0,0,0,0,0]; // 0 Neural, 1 Water, 2 Earth, 3 Fire, 4 Wind
+	var aMSnoEle = [373,374,375]; // Magical skills without proper element (will change depending on n_A_Weapon_zokusei)
+	for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+		var vBE = tRO_BiolabWeaponEnchantment[i];
+		if(vBE >= 261 && vBE <= 264) {
+			switch(vBE.substr(-1)){
+				case '1' : eTypes[3] += 2; break;
+				case '2' : eTypes[1] += 2; break;
+				case '3' : eTypes[4] += 2; break;
+				case '4' : eTypes[2] += 2; break;
+			}
+
+			for(k=1; k<5; k++) {
+				if(TRO_MAGICALSKILL_ELEMENTS[k].indexOf(n_A_ActiveSkill) != -1){
+					for(j=0; j<10; j++) {
+						n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + eTypes[k]) / 100) - 100; // ***
+					}
+				}
+			}
+			if(aMSnoEle.indexOf(n_A_ActiveSkill) != -1 && n_A_Weapon_zokusei <= 5){
+				for(j=0; j<10; j++) {
+					n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + eTypes[n_A_Weapon_zokusei]) / 100) - 100; // ***
+				}
+			}
+		}
+	}
+	//increase damage of skills based on element for n_tok[340-349] - [Loa]
+	for(i=0;i<TRO_MAGICALSKILL_ELEMENTS.length;i++){
+		if(TRO_MAGICALSKILL_ELEMENTS[i].indexOf(n_A_ActiveSkill) != -1){
+			for(j=0; j<10; j++) {
+				n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + n_tok[340 + i]) / 100) - 100;
+			}
+		}
+	}
+
+//[TalonRO Custom 2018-07-17 - Add (4 * Refine/3) Magical Fire Damage Nightmare Ancient Mummy] [Kato]
+if(CardNumSearch(546)) {
+	if(TRO_MAGICALSKILL_ELEMENTS[3].indexOf(n_A_ActiveSkill) != -1){
+		for(j=0; j<10; j++) {
+			n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + 	4 * Math.floor(n_A_SHOULDER_DEF_PLUS/3)) / 100) - 100; // ***
+		}
+	}
+}
+
+//[TalonRO Custom 2018-07-17 - Add 3% Magical damage boost Nightmare Verit] [Kato]
+if(CardNumSearch(547)) {
+	var iMDMG = 3;
+	if(n_A_SHOES_DEF_PLUS >= 5) iMDMG++; // Refine >=5 +1%
+	if(n_A_SHOES_DEF_PLUS >= 7) iMDMG++;// Refine >=7 +1%
+	for(i=0;i<TRO_MAGICALSKILL_ELEMENTS.length;i++){
+		if(TRO_MAGICALSKILL_ELEMENTS[i].indexOf(n_A_ActiveSkill) != -1){
+			for(j=0; j<10; j++) {
+				n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + iMDMG) / 100) - 100;
+			}
+		}
+	}
+}
+
 
 	ClickB_Enemy();
 	KakutyouKansuu();
@@ -3093,7 +4063,7 @@ function StPlusCalc()
 	wSPC_LUK += StPlusCalc2(6) + wSPCall;
 
 	wSPC_DEX += SkillSearch(38);
-	if(SkillSearch(68) || TimeItemNumSearch(17))
+	if(SkillSearch(68))
 		wSPC_STR += 4;
 	wSPC_STR += SkillSearch(146);
 	wSPC_STR += SkillSearch(404);
@@ -3151,24 +4121,7 @@ function StPlusCalc()
 		wSPC_INT += 3;
 	if(EquipNumSearch(1172))
 		wSPC_INT += Math.floor(n_A_Weapon_ATKplus / 2);
-	if(n_A_Equip[0]==1078 || n_A_Equip[0]==1079){
-		wSPC_INT += (n_A_Weapon_ATKplus -5);
-		if(n_A_Equip[0]==1078)
-			if(n_A_Weapon_ATKplus >= 9)
-				wSPC_INT += 5;
-		if(n_A_Equip[0]==1079)
-			if(n_A_Weapon_ATKplus >= 10)
-				wSPC_INT += 5;
-	}
-	if(n_A_Equip[1]==1078 || n_A_Equip[1]==1079){
-		wSPC_INT += (n_A_Weapon2_ATKplus -5);
-		if(n_A_Equip[1]==1078)
-			if(n_A_Weapon2_ATKplus >= 9)
-				wSPC_INT += 5;
-		if(n_A_Equip[1]==1079)
-			if(n_A_Weapon2_ATKplus >= 10)
-				wSPC_INT += 3;
-	}
+
 	if(EquipNumSearch(649))
 		wSPC_DEX -= SU_DEX;
 
@@ -3204,12 +4157,12 @@ function StPlusCalc()
 			wSPC_DEX += 1;
 	}
 
-	//custom TalonRo Improved Mage Hat: Every Refine level 7 or higher adds INT + 1 - slaptro - 2018-06-07
+	//custom TalonRo Improved Mage Hat: Every Refine level 7 or higher adds INT + 1 - [Loa] - 2018-06-07
 	if(EquipNumSearch(1645) && n_A_HEAD_DEF_PLUS > 6){
 		wSPC_INT += n_A_HEAD_DEF_PLUS - 6;
 	}
 
-	//custom TalonRo Improved Magician Hat: Every Refine level 7 or higher adds DEX + 1 - slaptro - 2018-06-07
+	//custom TalonRo Improved Magician Hat: Every Refine level 7 or higher adds DEX + 1 - [Loa] - 2018-06-07
 	if(EquipNumSearch(1646) && n_A_HEAD_DEF_PLUS > 6){
 		wSPC_DEX += n_A_HEAD_DEF_PLUS - 6;
 	}
@@ -3232,6 +4185,21 @@ function StPlusCalc()
 		}
 	}
 
+	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar - Every Upgrade gives + 1 INT] [Amor]
+	if(EquipNumSearch(1090)){
+		wSPC_INT += n_A_Weapon2_ATKplus;
+	}
+
+	//[TalonRO Custom - 2018-07-28 - Glorious Gladius - +5 DEX for Rogue/Stalker/Ninja/SL][Amor]
+	if(EquipNumSearch(1076) && (n_A_JobSearch2() == 14 || n_A_JOB== 43 || n_A_JOB == 44)){
+			wSPC_DEX += 5;
+	}
+	//[TalonRO Custom - 2018-07-29 - Glorious Rapier - +1 INT per Refine][Amor]
+	if(EquipNumSearch(1078)){
+			wSPC_INT += n_A_Weapon_ATKplus;
+	}
+
+
 	wSPC_STR += StPlusCard(1) + wSPCall;
 	wSPC_AGI += StPlusCard(2) + wSPCall;
 	wSPC_VIT += StPlusCard(3) + wSPCall;
@@ -3249,18 +4217,32 @@ function StPlusCalc()
 	//zodiac hats
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1272)){wSPC_VIT += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1273)){wSPC_VIT += 1;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){n_tok[91] += 3;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){n_tok[91] += 3;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){n_tok[91] += 3;n_tok[94] += 3;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1279)){wSPC_INT += 2;}
-	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1279)){n_tok[91] += 4;}
+	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1279)){n_tok[91] += 4;n_tok[94] += 4;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1280)){n_tok[64] += 5;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1281)){n_tok[64] += 5;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1287)){wSPC_INT += 3;}
 	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1288)){wSPC_AGI += 2;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1291)){wSPC_DEX += 1;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1292)){n_tok[62] += 5;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1293)){wSPC_VIT += 2;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1292)){wSPC_DEX += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1293)){wSPC_DEX += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1294)){n_tok[62] += 5;}
+
+	//[Custom TalonRO - 2018-07-09 Ancient Gold Adornment - Stats] [NattWara]
+	if(EquipNumSearch(1663)){
+		if(n_A_JobLV == 70){
+			wSPC_STR += 1;
+			wSPC_AGI += 1;
+			wSPC_VIT += 1;
+			wSPC_INT += 1;
+			wSPC_DEX += 1;
+			wSPC_LUK += 1;
+		}
+		var wHPVS = n_A_JobSearch();
+		if(wHPVS==4){
+			wSPC_DEX += 1;
+		}
+	}
 
 	//custom TalonRO Giant Shield +5% resistance against Large sized monster if refined +9-10
 	if(n_A_LEFT_DEF_PLUS >= 9 && EquipNumSearch(1500))
@@ -3322,22 +4304,21 @@ function StPlusCalc()
 	if(n_A_card[14] == 98 && CardNumSearch(273)){wSPC_STR += 3;}
 	if(n_A_card[15] == 98 && CardNumSearch(273)){wSPC_STR += 3;}
 	if(n_A_card[14] == 98 && n_A_card[15] == 98 && CardNumSearch(273) == 1){wSPC_STR -= 3;}
+	//Orc Hero Headdress [For Every 4 Refines] STR + 1 - [Loa] - 2018-07-03
+	if(EquipNumSearch(1142)){
+		wSPC_STR += Math.floor(n_A_HEAD_DEF_PLUS/4);
+	}
 	//Phoenix Crown
 	if(EquipNumSearch(872)){
 		n_tok[77] += n_A_HEAD_DEF_PLUS;}
-	//custom TalonRO Bayani Bakonawa Scale Armor
-	if(EquipNumSearch(1541)){
-		n_tok[77] += Math.floor(n_A_BODY_DEF_PLUS /2);}
-	//custom TalonRO Bayani Kalasag
-	if(EquipNumSearch(1543)){
-		n_tok[77] += Math.floor(n_A_BODY_DEF_PLUS /3);}
-	//dress hat
-	if(n_A_HEAD_DEF_PLUS >= 6 && EquipNumSearch(565)){
-		n_tok[80] += 1;
-		n_tok[91] += 1;
-		n_tok[94] += 1;
+	//custom TalonRO Bakonawa Scale Armor
+	if(EquipNumSearch(1541) || EquipNumSearch(1015)){
+		n_tok[77] += Math.floor(n_A_BODY_DEF_PLUS /2);
 	}
-
+	//custom TalonRO Kalasag
+	if(EquipNumSearch(1543) || EquipNumSearch(1013)){
+		n_tok[77] += Math.floor(n_A_LEFT_DEF_PLUS /3);
+	}
 	if(EquipNumSearch(1268))wSPC_INT += Math.floor(SU_INT/24);
 
 	if(CardNumSearch(405)){
@@ -3437,6 +4418,8 @@ function StPlusCalc()
 	if(n_A_PassSkill7[8])
 		wSPC_LUK += n_A_PassSkill7[8];
 
+	//Armor Hidden Slot Enchant STAT
+	/*
 	var wHSE = eval(document.calcForm.A_HSE.value);
 	if(wHSE){
 		var w = wHSE % 10;
@@ -3453,7 +4436,24 @@ function StPlusCalc()
 		if(51 <= wHSE && wHSE <= 59)
 			wSPC_LUK += w;
 	}
+	*/
+	var wHSE = document.calcForm.A_HSE.value;
+	if(11 <= wHSE && wHSE <= 69) {
+		var op = wHSE.substr(0,1);
+		var val = parseInt(wHSE.substr(-1));
+
+		switch(op) {
+				case '1': wSPC_STR += val; break;
+				case '2': wSPC_AGI += val; break;
+				case '3': wSPC_VIT += val; break;
+				case '4': wSPC_INT += val; break;
+				case '5': wSPC_DEX += val; break;
+				case '6': wSPC_LUK += val; break;
+		}
+	}
+
 	//custom TalonRO Kris enchant stats
+	/*
 	var KEbonus = [document.calcForm.A_KE11.value,document.calcForm.A_KE12.value,document.calcForm.A_KE21.value,document.calcForm.A_KE22.value];
 	for (i=0;i<4;i++){
 		var wKE = KEbonus[i];
@@ -3469,6 +4469,139 @@ function StPlusCalc()
 				wSPC_LUK += w;
 		}
 	}
+	*/
+	//Custom TalonRO Kris Enchantment for stats
+	var KEbonus = [document.calcForm.A_KE11.value,document.calcForm.A_KE12.value,document.calcForm.A_KE21.value,document.calcForm.A_KE22.value];
+	for(i=0; i < KEbonus.length; i++) {
+		var wKE = KEbonus[i];
+
+		if(wKE == 0 || wKE.length > 2) continue;
+
+		var op = wKE.substr(0,1);
+		var val = parseInt(wKE.substr(-1));
+
+		switch(op) {
+				case '3': wSPC_VIT += val; break;
+				case '4': wSPC_INT += val; break;
+				case '5': wSPC_DEX += val; break;
+				case '6': wSPC_LUK += val; break;
+		}
+	}
+
+	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for STR/AGI/VIT/INT/DEX/LUK] [Kato]
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+
+		if(vME == 0 || vME.length > 2) continue;
+
+		var op = vME.substr(0,1);
+		var val = parseInt(vME.substr(-1));
+
+		switch(op) {
+				case '1': wSPC_STR += val; break;
+				case '2': wSPC_AGI += val; break;
+				case '3': wSPC_VIT += val; break;
+				case '4': wSPC_INT += val; break;
+				case '5': wSPC_DEX += val; break;
+				case '6': wSPC_LUK += val; break;
+		}
+	}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for STR/AGI/VIT/INT/DEX/LUK] [NattWara]
+	for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+		var vBE = tRO_BiolabWeaponEnchantment[i];
+
+		if(vBE == 0 || vBE.length > 2) continue;
+
+		var op = vBE.substr(0,1);
+		var val = parseInt(vBE.substr(-1));
+
+		switch(op) {
+				case '1': wSPC_STR += val; break;
+				case '2': wSPC_AGI += val; break;
+				case '3': wSPC_VIT += val; break;
+				case '4': wSPC_INT += val; break;
+				case '5': wSPC_DEX += val; break;
+				case '6': wSPC_LUK += val; break;
+		}
+	}
+
+	//[Custom TalonRO 2018-07-10 - Biolab Armor Enchantment for STR/AGI/VIT/INT/DEX/LUK] [NattWara]
+	for(i=0; i < tRO_BiolabArmorEnchantment.length; i++) {
+		var vBE = tRO_BiolabArmorEnchantment[i];
+
+		if(vBE == 0 || vBE.length > 2) continue;
+
+		var op = vBE.substr(0,1);
+		var val = parseInt(vBE.substr(-1));
+
+		switch(op) {
+				case '1': wSPC_STR += val; break;
+				case '2': wSPC_AGI += val; break;
+				case '3': wSPC_VIT += val; break;
+				case '4': wSPC_INT += val; break;
+				case '5': wSPC_DEX += val; break;
+				case '6': wSPC_LUK += val; break;
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - Eden Armor Enchantment for STR/AGI/VIT/INT/DEX/LUK] [NattWara]
+	for(i=0; i < tRO_EdenArmorEnchantment.length; i++) {
+		var vEE = tRO_EdenArmorEnchantment[i];
+
+		if(vEE == 0 || vEE.length > 2) continue;
+
+		var op = vEE.substr(0,1);
+		var val = parseInt(vEE.substr(-1));
+
+		switch(op) {
+				case '1': wSPC_STR += val; break;
+				case '2': wSPC_AGI += val; break;
+				case '3': wSPC_VIT += val; break;
+				case '4': wSPC_INT += val; break;
+				case '5': wSPC_DEX += val; break;
+				case '6': wSPC_LUK += val; break;
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - El Dicaste Enchantment for STR/AGI/VIT/INT/DEX/LUK] [NattWara]
+	for(i=0; i < tRO_EDEnchantment.length; i++) {
+		var vED = tRO_EDEnchantment[i];
+
+		if(vED == 0 || vED.length > 2) continue;
+
+		var op = vED.substr(0,1);
+		var val = parseInt(vED.substr(-1));
+
+		switch(op) {
+				case '1': wSPC_STR += val; break;
+				case '2': wSPC_AGI += val; break;
+				case '3': wSPC_VIT += val; break;
+				case '4': wSPC_INT += val; break;
+				case '5': wSPC_DEX += val; break;
+				case '6': wSPC_LUK += val; break;
+		}
+	}
+
+	//[Custom TalonRO 2018-07-12 - Mora Enchantment for STR/AGI/VIT/INT/DEX/LUK] [NattWara]
+	for(i=0; i < tRO_MoraEnchantment.length; i++) {
+		var vMORA = tRO_MoraEnchantment[i];
+
+		if(vMORA == 0 || vMORA.length > 2) continue;
+
+		var op = vMORA.substr(0,1);
+		var val = parseInt(vMORA.substr(-1));
+
+		switch(op) {
+				case '1': wSPC_STR += val; break;
+				case '2': wSPC_AGI += val; break;
+				case '3': wSPC_VIT += val; break;
+				case '4': wSPC_INT += val; break;
+				case '5': wSPC_DEX += val; break;
+				case '6': wSPC_LUK += val; break;
+		}
+	}
+
 	/*var wHSE2 = eval(document.calcForm.A_HSE_HEAD1.value);
 	if(wHSE2){
 		var w = wHSE2 % 10;
@@ -3558,14 +4691,51 @@ function StPlusCalc()
 			else
 				wSPC_LUK = (99 - n_A_LUK);
 		}
+
+	//Marionette stat compensation rework - [Loa] - 2018-06-17
 	}else if(n_A_PassSkill3[11] && n_A_PassSkill3[18]){
-		wSPC_STR += Math.floor(n_A_PassSkill3[12]/2);
-		wSPC_AGI += Math.floor(n_A_PassSkill3[13]/2);
-		wSPC_VIT += Math.floor(n_A_PassSkill3[14]/2);
-		wSPC_INT += Math.floor(n_A_PassSkill3[15]/2);
-		wSPC_DEX += Math.floor(n_A_PassSkill3[16]/2);
-		wSPC_LUK += Math.floor(n_A_PassSkill3[17]/2);
+			if(n_A_STR + w2[0] + Math.floor(n_A_PassSkill3[12]/2) < 99){
+				wSPC_STR += Math.floor(n_A_PassSkill3[12]/2);
+			}
+			else{
+				wSPC_STR += Math.max((99 - n_A_STR - w2[0]), 0);
+			}
+			if(n_A_AGI + w2[1] + Math.floor(n_A_PassSkill3[13]/2) < 99){
+				wSPC_AGI += Math.floor(n_A_PassSkill3[13]/2);
+			}
+			else{
+				wSPC_AGI += Math.max((99 - n_A_AGI - w2[1]), 0);
+			}
+			if(n_A_VIT + w2[2] + Math.floor(n_A_PassSkill3[14]/2) < 99){
+				wSPC_VIT += Math.floor(n_A_PassSkill3[14]/2);
+			}
+			else{
+				wSPC_VIT += Math.max((99 - n_A_VIT - w2[2]), 0);
+			}
+			if(n_A_INT + w2[3] + Math.floor(n_A_PassSkill3[15]/2) < 99){
+				wSPC_INT += Math.floor(n_A_PassSkill3[15]/2);
+			}
+			else{
+				wSPC_INT += Math.max((99 - n_A_INT - w2[3]), 0);
+			}
+			if(n_A_DEX + w2[4] + Math.floor(n_A_PassSkill3[16]/2) < 99){
+				wSPC_DEX += Math.floor(n_A_PassSkill3[16]/2);
+			}
+			else{
+				wSPC_DEX += Math.max((99 - n_A_DEX - w2[4]), 0);
+			}
+			if(n_A_LUK + w2[5] + Math.floor(n_A_PassSkill3[17]/2) < 99){
+				wSPC_LUK += Math.floor(n_A_PassSkill3[17]/2);
+			}
+			else{
+				wSPC_LUK += Math.max((99 - n_A_LUK - w2[5]), 0);
+			}
 	}
+
+		//[Custom TalonRO - 2018-07-26 - Speedy Recovery Wand +3 INT to Acolyte/Priest/High Priest] [Amor]
+		if(EquipNumSearch(920) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23)){
+			wSPC_INT += 3;
+		}
 
 	//CUSTOM (1st Transcendent Spirit)
 	if(SkillSearch(392) && (n_Tensei == 1) && (n_A_BaseLV > 10) && (n_A_BaseLV < 70)){
@@ -3840,11 +5010,10 @@ function WeaponSet()
 
 	work = new Array();
 	j = 0;
-	for (i=0;i<=ItemMax; i++)	{
-		if(ItemOBJ[i][1] == n_A_WeaponType && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+	for (i=0;i<=ItemMax; i++){
+		if(ItemOBJ[i][1] == n_A_WeaponType && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || debugMode == 1)){
 			work[j] = i;
 			j++;
-
 		}
 		//custom TalonRO fix showing lv 4 weapon on active Super Novice Link
 		//old stuff showed much more than lv 4 weaps only, like Stunner (lv 3)
@@ -3867,11 +5036,10 @@ function WeaponSet()
 	}
 	work[j] = "EOF";
 
-
 	work = sort(work);
 	for (i=0;i<j; i++)
 		document.calcForm.A_weapon1.options[i] = new Option(ItemOBJ[work[i]][8],ItemOBJ[work[i]][0]);
-
+	removedWep1 = [];
 }
 
 function WeaponSetLeft()
@@ -3894,6 +5062,7 @@ function WeaponSetLeft()
 	work = sort(work);
 	for (i=0;i<j; i++)
 		document.calcForm.A_weapon2.options[i] = new Option(ItemOBJ[work[i]][8],ItemOBJ[work[i]][0]);
+	removedWep2 = [];
 }
 
 function WeaponSet2(){
@@ -3947,35 +5116,35 @@ with(document.calcForm){
 	for(i=0;i<=7;i++)
 		wsj[i]=0;
 	for(i=0;i<=ItemMax; i++){
-		if(ItemOBJ[i][1] == 50 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK)){
+		if(ItemOBJ[i][1] == 50 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK || debugMode == 1)){
 			workB[0][wsj[0]] = i;
 			wsj[0]++;
 		}
-		else if(ItemOBJ[i][1] == 51 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK)){
+		else if(ItemOBJ[i][1] == 51 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK || debugMode == 1)){
 			workB[1][wsj[1]] = i;
 			wsj[1]++;
 		}
-		else if(ItemOBJ[i][1] == 52 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK)){
+		else if(ItemOBJ[i][1] == 52 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || SuperNoviceFullWeaponCHECK || debugMode == 1)){
 			workB[2][wsj[2]] = i;
 			wsj[2]++;
 		}
-		else if(ItemOBJ[i][1] == 61 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 61 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || debugMode == 1)){
 			workB[3][wsj[3]] = i;
 			wsj[3]++;
 		}
-		else if(ItemOBJ[i][1] == 60 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 60 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || debugMode == 1)){
 			workB[4][wsj[4]] = i;
 			wsj[4]++;
 		}
-		else if(ItemOBJ[i][1] == 62 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 62 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || debugMode == 1)){
 			workB[5][wsj[5]] = i;
 			wsj[5]++;
 		}
-		else if(ItemOBJ[i][1] == 63 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 63 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || debugMode == 1)){
 			workB[6][wsj[6]] = i;
 			wsj[6]++;
 		}
-		else if(ItemOBJ[i][1] == 64 && JobEquipItemSearch(ItemOBJ[i][2]) == 1){
+		else if(ItemOBJ[i][1] == 64 && (JobEquipItemSearch(ItemOBJ[i][2]) == 1 || debugMode == 1)){
 			workB[7][wsj[7]] = i;
 			wsj[7]++;
 		}
@@ -3987,7 +5156,6 @@ with(document.calcForm){
 		workB[m] = sort(workB[m]);
 
 	var z = 0;
-
 	//custom TalonRO so LKH appears as the first option on the Headgear list
 	//old:
 	for(i=0;i<wsj[0];i++){
@@ -4033,12 +5201,14 @@ with(document.calcForm){
 		A_acces1.options[i] = new Option(ItemOBJ[z][8],ItemOBJ[z][0]);
 		A_acces2.options[i] = new Option(ItemOBJ[z][8],ItemOBJ[z][0]);
 	}
+	removedArmor = [];
 }}
 
 function FirstNovis(){
 	if(first_check == 1){
 		first_check = 2;
 		WeaponSet2();
+		VanillaArmor();
 	}
 }
 
@@ -4073,21 +5243,21 @@ function n_A_JobSearch(){
 	if(n_A_JOB <= 6)
 		return n_A_JOB;
 	if(n_A_JOB == 20)
-		return 0;
+		return 0; //super novice
 	if(n_A_JOB == 7 || n_A_JOB == 13 || n_A_JOB == 21 || n_A_JOB == 27)
-		return 1;
+		return 1; //swordman classes
 	if(n_A_JOB == 8 || n_A_JOB == 14 || n_A_JOB == 22 || n_A_JOB == 28)
-		return 2;
+		return 2; //thief classes
 	if(n_A_JOB == 9 || n_A_JOB == 15 || n_A_JOB == 23 || n_A_JOB == 29)
-		return 3;
+		return 3; //acolyte classes
 	if(n_A_JOB == 10 || n_A_JOB == 16 || n_A_JOB == 17 || n_A_JOB == 24 || n_A_JOB == 30 || n_A_JOB == 31)
-		return 4;
+		return 4; //archer classes
 	if(n_A_JOB == 11 || n_A_JOB == 18 || n_A_JOB == 25 || n_A_JOB == 32)
-		return 5;
+		return 5; //mage classes
 	if(n_A_JOB == 12 || n_A_JOB == 19 || n_A_JOB == 26 || n_A_JOB == 33)
-		return 6;
+		return 6; //merchant classes
 	if(n_A_JOB == 41 || n_A_JOB == 42 || n_A_JOB == 43)
-		return 41;
+		return 41; //taekwon classes
 	return 7;
 }
 
@@ -4242,11 +5412,11 @@ function ActiveSkillSetPlus()
 		w_ASSP9[j] = 2096;
 		j++;
 	}
-	if(EquipNumSearch(1096) && n_A_JobSearch2() != 9){
+	/*if(EquipNumSearch(1096) && n_A_JobSearch2() != 9){
 		w_ASSP0[j] = 193;
 		w_ASSP9[j] = 2108;
 		j++;
-	}
+	}*/
 	if(n_A_PassSkill7[15]){
 		var wSC = [33,34,35,36,13,37,38,39,7];
 		for(var i=0;i<=8;i++){
@@ -4322,6 +5492,11 @@ function KakutyouKansuu(){
 			HPRLV = eval(document.calcForm.A_KakutyouSelNum.value);
 			w = Math.floor((5 + n_A_MaxHP / 500) * HPRLV);
 			myInnerHtml("A_KakutyouData","<br>Regen: "+w,0);
+		}
+		//Beer Hat - [Loa] - 2018-07-04
+		else if(EquipNumSearch(1240)){
+			w = Math.floor((5 + n_A_MaxHP / 500) * 3);
+			myInnerHtml("A_KakutyouData","<br>Regen: "+w,0);
 		}else
 			myInnerHtml("A_KakutyouData","",0);
 	}
@@ -4329,6 +5504,11 @@ function KakutyouKansuu(){
 		if(n_A_JOB==5||n_A_JOB==9||n_A_JOB==11||n_A_JOB==18||n_A_JOB==20||n_A_JOB==23||n_A_JOB==25||n_A_JOB==32||n_A_JOB==39||n_A_JOB==44){
 			SPRLV = eval(document.calcForm.A_KakutyouSelNum.value);
 			w = Math.floor((3 + n_A_MaxSP / 500) * SPRLV);
+			myInnerHtml("A_KakutyouData","<br>Regen: "+w,0);
+		}
+		//Beer Hat - [Loa] - 2018-07-04
+		else if(EquipNumSearch(1240)){
+			w = Math.floor((3 + n_A_MaxSP / 500) * 3);
 			myInnerHtml("A_KakutyouData","<br>Regen: "+w,0);
 		}else
 			myInnerHtml("A_KakutyouData","",0);
@@ -4343,36 +5523,36 @@ function KakutyouKansuu(){
 			myInnerHtml("A_KakutyouData","",0);
 	}
 	else if(wKK == 5){
-		syozijob =[0,800,400,400,600,200,800,800,400,600,700,400,1000,800,400,600,700,700,400,1000,0,800,400,600,700,400,1000,800,400,600,700,700,400,1000,0,0,0,0,0,0,0,800,800,400,600,800];
-		syoziryou = 2000 + syozijob[n_A_JOB];
-		syoziryou += eval(document.calcForm.A_KakutyouSelNum2.value) * 200;
-		if(eval(document.calcForm.A_youshi.checked))
-			syoziryou = 2000;
-		syoziryou += eval(document.calcForm.A_STR.value) * 30;
-		if(SkillSearch(78))
-			syoziryou += 1000;
-		if(n_A_JOB==6||n_A_JOB==12||n_A_JOB==19||n_A_JOB==20||n_A_JOB==26||n_A_JOB==33)
-			syoziryou += eval(document.calcForm.A_KakutyouSelNum.value) * 200;
-		EquipKG = 0;
-		for(i=0;i<=10;i++)
-			EquipKG += ItemOBJ[n_A_Equip[i]][6];
+			syozijob =[0,800,400,400,600,200,800,800,400,600,700,400,1000,800,400,600,700,700,400,1000,0,800,400,600,700,400,1000,800,400,600,700,700,400,1000,0,0,0,0,0,0,0,800,800,400,600,800];
+			syoziryou = 2000 + syozijob[n_A_JOB];
+			// syoziryou += eval(document.calcForm.A_KakutyouSelNum2.value) * 200;
+			if(eval(document.calcForm.A_youshi.checked))
+				syoziryou = 2000;
+			syoziryou += eval(document.calcForm.A_STR.value) * 30;
+			if(SkillSearch(78))
+				syoziryou += 1000;
+			if(n_A_JOB==6||n_A_JOB==12||n_A_JOB==19||n_A_JOB==20||n_A_JOB==26||n_A_JOB==33)
+				syoziryou += eval(document.calcForm.A_KakutyouSelNum.value) * 200;
+			EquipKG = 0;
+			for(i=0;i<=10;i++)
+				EquipKG += ItemOBJ[n_A_Equip[i]][6];
 
-		w = "<table border=0>";
-		//w += "<tr><td><b><font color=grey>White Slim Potion: </font></b>" + '<td><select name="A_WPS" onChange="StAllCalc()"></select>' + "</td>";
-		//w += "<td><b><font color=blue>Blue Potion: </font></b>" + '<td><select name="A_BP" onChange="StAllCalc()"></select>' + "</td></tr>";
-		w += "<tr><td><b><font color=red>Weight Limit: </font></b>" + syoziryou + "</td></tr><tr><td><b>Total Weight of Items: </b>"+EquipKG;
-		w += "</td></tr></table>";
+			w = "<table border=0>";
+			//w += "<tr><td><b><font color=grey>White Slim Potion: </font></b>" + '<td><select name="A_WPS" onChange="StAllCalc()"></select>' + "</td>";
+			//w += "<td><b><font color=blue>Blue Potion: </font></b>" + '<td><select name="A_BP" onChange="StAllCalc()"></select>' + "</td></tr>";
+			w += "<tr><td><b><font color=red>Weight Limit: </font></b>" + syoziryou + "</td></tr><tr><td><b>Total Weight of Items: </b>"+EquipKG;
+			w += "</td></tr></table>";
 
-		/*for(i=0;i<1000;i++)
-					document.calcForm.A_WPS.options[i] = new Option(i,i);
-					document.calcForm.A_WPS.value=0;}
-		for(i=0;i<1000;i++)
-					document.calcForm.A_BP.options[i] = new Option(i,i);
-					document.calcForm.A_BP.value=0;}*/
+			/*for(i=0;i<1000;i++)
+						document.calcForm.A_WPS.options[i] = new Option(i,i);
+						document.calcForm.A_WPS.value=0;}
+			for(i=0;i<1000;i++)
+						document.calcForm.A_BP.options[i] = new Option(i,i);
+						document.calcForm.A_BP.value=0;}*/
 
-		myInnerHtml("A_KakutyouData",w,0);
+			myInnerHtml("A_KakutyouData",w,0);
 
-		//myInnerHtml("A_KakutyouData","Weight Limit: "+syoziryou+"<BR>Total Weight of Equipment: "+EquipKG,0);
+			//myInnerHtml("A_KakutyouData","Weight Limit: "+syoziryou+"<BR>Total Weight of Equipment: "+EquipKG,0);
 	}
 	else if(wKK == 6){
 		var JyoutaiTaisei = new Array();
@@ -4776,12 +5956,10 @@ function KakutyouKansuu(){
 		if(n_A_Equip[10] == 1111){H_Bonus += 0.05;}//2º Glorious Ring
 		if(EquipNumSearch(1258)){H_Bonus += 0.1;}//anubis hat
 		if(EquipNumSearch(1194)){H_Bonus += 0.05;}//life tree wooden shoes
-		if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){H_Bonus += 0.03;}//cancer crown
-		if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){H_Bonus += 0.03;}//cancer diadem
-		if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1279)){H_Bonus += 0.04;}//Capricorn Diadem
 		if(n_A_Equip[9] == 1111 && n_A_Equip[10] == 983){H_Bonus += 0.05;}//Glorious Ring Set[5% ]
 		if(EquipNumSearch(1104) && EquipNumSearch(1107) && EquipNumSearch(1110)){H_Bonus += 0.03;}//kvm set[3%]
 		if(EquipNumSearch(959) && EquipNumSearch(965) && EquipNumSearch(968)){H_Bonus += 0.1;}//merc bg set gear[10%]
+		if(EquipNumSearch(1484)){H_Bonus += 0.03;}
 		/*if(EquipNumSearch(958) && EquipNumSearch(965) && EquipNumSearch(968)){H_Bonus += 0.1;}//sword bg set gear[10%][Impossivel usar lawl] mas devia adicionar uma key de on/off disto*/
 		//slims não são afectadas por rank bonus em pitch nem heal stuff como bacso card
 
@@ -4864,35 +6042,67 @@ function KakutyouKansuu(){
 			homunevolved = eval(document.calcForm.A_HomunEvolved.value);
 			//end
 			potrate = Potion_Type[selpot][1];
-
 			//custom TalonRO Update 2014-09-29
 			pharmacyboost = homunlevel * 0.025;
 			if (homunevolved)
 				pharmacyboost *= 2;
-
-
 			adopted = eval(document.calcForm.A_youshi.checked);
-
-			srate = Math.floor((potionr*0.5 + preparep*3 + n_A_JobLV*0.2 + (n_A_DEX +n_A_LUK + (n_A_INT/2)) * 0.1 + potrate + pharmacyboost)*100)/100;
-			if(srate < 0)srate = 0;
-			//custom TalonRO Update 2015-12-21
-			if(srate > 100)srate = 100;
-
+			//Brewing rework - [Loa] - 2018-06-17
+			srate = potionr * 50 + preparep * 300 + n_A_JobLV * 20 + (n_A_DEX + n_A_LUK + (n_A_INT/2)) * 10 + potrate * 100 + pharmacyboost * 100;
+			//selpot values in etc.js
+			if(selpot == 3 //blue pot
+				|| selpot == 4 //slim red
+				|| selpot == 13 //anodyne
+				|| selpot == 14 //aloevera
+				|| selpot == 15 //embryo
+				|| selpot == 16) //elemental
+			{
+				brate = 0;
+			}
+			else if(selpot == 5) //slim yellow
+			{
+				brate = -500;
+			}
+			else if(selpot == 0 //red pot
+				|| selpot == 1 //yellow pot
+				|| selpot == 2 //white pot
+				|| selpot == 7 //alcohol
+				|| selpot == 8 //acid
+				|| selpot == 9 //grenade
+				|| selpot == 10 //plant
+				|| selpot == 11) //marine
+			{
+				brate = 1000;
+			}
+			else if(selpot == 6 //slim white
+				|| selpot == 12) //glisten
+			{
+				brate = -1000;
+			}
+			//add brewing variance
+			if(brate < 0){srate1 = srate - 10;}
+			else if(brate > 0){srate1 = srate + 10;}
+			else{srate1 = srate;}
+			srate2 = srate + (brate/2);
+			srate3 = srate + brate;
+			//baby alchemist penalty
 			if(adopted){
-				srate = Math.floor((srate * 0.7));}
-
-			if(selpot == 3 || selpot == 4 || selpot == 13 || selpot == 14 || selpot == 15 || selpot == 16){
-				brate = 0;}
-			if(selpot == 5){brate = 2.5;}
-			if(selpot == 0 || selpot == 1 || selpot == 2 || selpot == 6 || selpot == 7 || selpot == 8 || selpot == 9 || selpot == 10 || selpot == 11 || selpot == 12){
-				brate = 5;}
-
-			frate1 = Math.floor((srate - brate)*100)/100;
-			if(frate1 < 0){frate1 = 0;}
-			frate2 = Math.floor((srate + brate)*100)/100;
-			if(frate2 < 0){frate2 = 0;}
-
-			myInnerHtml("A_KakutyouData","<b><br>Success rate: </b>" + srate + " %" + " [ " + frate1 + " % ~ " + frate2 + " % ]",0);
+				srate1 = Math.floor(srate1 * 70) / 100;
+				srate2 = Math.floor(srate2 * 70) / 100;
+				srate3 = Math.floor(srate3 * 70) / 100;
+			}
+			//limit success range to 0-100%
+			if(srate1 > 10000){srate1 = 10000;}
+			if(srate1 < 0){srate1 = 0;}
+			if(srate2 > 10000){srate2 = 10000;}
+			if(srate2 < 0){srate2 = 0;}
+			if(srate3 > 10000){srate3 = 10000;}
+			if(srate3 < 0){srate3 = 0;}
+			srate_avg = Math.floor((srate1 + srate2 + srate3)/3)/100;
+			srate_min = Math.floor(Math.min(srate1, srate2, srate3))/100;
+			srate_med = Math.floor(srate2)/100;
+			srate_max = Math.floor(Math.max(srate1, srate2, srate3))/100;
+			myInnerHtml("A_KakutyouData","<b><br>Success rate range (Minimum ~ Median ~ Maximum):</b> " + srate_min + " % ~ " + srate_med + " % ~ " + srate_max + " %" + "<br><b>Success rate averge:</b> " + srate_avg + " %",0);
 		}
 		else if(n_A_JOB==22){
 			myInnerHtml("A_KakutyouSel","Potion to Create: " + '<select name="A_KakutyouSelNum" onChange="StAllCalc()"></select><BR>',0);
@@ -4905,7 +6115,7 @@ function KakutyouKansuu(){
 
 		}else{myInnerHtml("A_KakutyouData","Not Available for this Class",0);}
 	}
-	/*else if(wKK == 14){
+	/*else if(wKK == 1 4){
 		var wkk14;
 		if(n_A_JOB == 19 || n_A_JOB == 33 ){
 			Amistr = n_A_STR + n_A_AGI + n_A_VIT;
@@ -4929,38 +6139,7 @@ function KakutyouKansuu(){
 	}*/
 	else if(wKK == 14){//banana
 		var wkk14;
-
-		if((CardNumSearch(157) && CardNumSearch(413)) && (n_A_JOB != 14 || n_A_JOB != 28)){
-			S_LV1 = eval(document.calcForm.S2_LV.value);
-			E_DEX1 = eval(document.calcForm.E2_DEX.value);
-			Strip = 5 + (5*S_LV1) + ((n_A_DEX - E_DEX1)/5);
-			S_Time = 60 + (15* S_LV1) + ((n_A_DEX - E_DEX1)/2);
-			if (Strip < 5+5*S_LV1){Strip = 5+5*S_LV1;}
-			if (S_Time < 60){S_Time = 60;}
-
-			wkk14 = "<table border=0><tr><td><b>Chance to Strip [Weapon], [Armor]: </b></td><td>" + Math.floor(Strip*10)/10 + " %</td></tr>";
-			wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(S_Time*10)/10 + " Seconds</td></tr></table>";}
-		else if(CardNumSearch(413) && (n_A_JOB != 14 || n_A_JOB != 28)){
-			S_LV1 = eval(document.calcForm.S3_LV.value);
-			E_DEX1 = eval(document.calcForm.E2_DEX.value);
-			Strip = 5 + (5*S_LV1) + ((n_A_DEX - E_DEX1)/5);
-			S_Time = 60 + (15* S_LV1) + ((n_A_DEX - E_DEX1)/2);
-			if (Strip < 5+5*S_LV1){Strip = 5+5*S_LV1;}
-			if (S_Time < 60){S_Time = 60;}
-
-			wkk14 = "<table border=0><tr><td><b>Chance to Strip [Armor]: </b></td><td>" + Math.floor(Strip*10)/10 + " %</td></tr>";
-			wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(S_Time*10)/10 + " Seconds</td></tr></table>";}
-		else if(CardNumSearch(157) && (n_A_JOB != 14 || n_A_JOB != 28)){
-			S_LV1 = eval(document.calcForm.S2_LV.value);
-			E_DEX1 = eval(document.calcForm.E2_DEX.value);
-			Strip = 5 + (5*S_LV1) + ((n_A_DEX - E_DEX1)/5);
-			S_Time = 60 + (15* S_LV1) + ((n_A_DEX - E_DEX1)/2);
-			if (Strip < 5+5*S_LV1){Strip = 5+5*S_LV1;}
-			if (S_Time < 60){S_Time = 60;}
-
-			wkk14 = "<table border=0><tr><td><b>Chance to Strip [Weapon]: </b></td><td>" + Math.floor(Strip*10)/10 + " %</td></tr>";
-			wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(S_Time*10)/10 + " Seconds</td></tr></table>";}
-		else if(n_A_JOB == 14 || n_A_JOB == 28){
+		if(n_A_JOB == 14 || n_A_JOB == 28){
 			if(n_A_JOB == 14 || n_A_JOB == 28){
 				S_LV1 = eval(document.calcForm.S_LV.value);
 				E_DEX1 = eval(document.calcForm.E_DEX.value);
@@ -4973,20 +6152,64 @@ function KakutyouKansuu(){
 				FS_LV1 = eval(document.calcForm.FS_LV.value);
 				FStrip = 5 + (2*FS_LV1) + ((n_A_DEX - E_DEX1)/5);
 				FS_Time = 135 + ((n_A_DEX - E_DEX1)/2);
-			if (FStrip < 5+2*FS_LV1){FStrip = 5+2*FS_LV1;}
-			if (FS_Time < 135){FS_Time = 135;}
+				if (FStrip < 5+2*FS_LV1){FStrip = 5+2*FS_LV1;}
+				if (FS_Time < 135){FS_Time = 135;}
 			}
 
 			if(n_A_JOB == 14){
 				wkk14 = "<table border=0><tr><td><b>Chance to Strip [Helm], [Armor], [Weapon] or [Shield]: </b></td><td>" + Math.floor(Strip*10)/10 + " %</td></tr>";
 				wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(S_Time*10)/10 + " Seconds</td></tr></table>";}
-			if(n_A_JOB == 28){
+			else if(n_A_JOB == 28){
 				wkk14 = "<table border = 0><tr><td><b>Chance to Strip [Helm], [Armor], [Weapon] or [Shield]: </b></td><td>" + Math.floor(Strip*10)/10 + " %</td></tr>";
 				wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(S_Time*10)/10 + " Seconds</td></tr>";
 				wkk14 += "<tr><td><b>Chance to Full Strip: </b></td><td>" + Math.floor(FStrip*10)/10 + " %</td></tr>";
 				wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(FS_Time*10)/10 + " Seconds</td></tr></table>";}
 			}
-		}else {wkk14 = "Not Available for this Class";}
+		}
+		else if(CardNumSearch(157) || CardNumSearch(413)){
+			// S_LV1 = eval(document.calcForm.S2_LV.value);
+			S_LV1 = 1;
+			E_DEX1 = eval(document.calcForm.E2_DEX.value);
+			Strip = 5 + (5*S_LV1) + ((n_A_DEX - E_DEX1)/5);
+			S_Time = 60 + (15* S_LV1) + ((n_A_DEX - E_DEX1)/2);
+			if (Strip < 5+5*S_LV1){Strip = 5+5*S_LV1;}
+			if (S_Time < 60){S_Time = 60;}
+
+			if(CardNumSearch(157) && CardNumSearch(413)){
+				strip_type = "[Weapon], [Armor]";
+			}
+			else if(CardNumSearch(157)){
+				strip_type = "[Weapon]";
+			}
+			else if(CardNumSearch(413)){
+				strip_type = "[Armor]";
+			}
+			wkk14 = "<table border=0><tr><td><b>Chance to Strip " + strip_type + ": </b></td><td>" + Math.floor(Strip*10)/10 + " %</td></tr>";
+			wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(S_Time*10)/10 + " Seconds</td></tr></table>";}
+		// else if(CardNumSearch(413)){
+		// 	// S_LV1 = eval(document.calcForm.S3_LV.value);
+		// 	S_LV1 = 1;
+		// 	E_DEX1 = eval(document.calcForm.E2_DEX.value);
+		// 	Strip = 5 + (5*S_LV1) + ((n_A_DEX - E_DEX1)/5);
+		// 	S_Time = 60 + (15* S_LV1) + ((n_A_DEX - E_DEX1)/2);
+		// 	if (Strip < 5+5*S_LV1){Strip = 5+5*S_LV1;}
+		// 	if (S_Time < 60){S_Time = 60;}
+
+		// 	wkk14 = "<table border=0><tr><td><b>Chance to Strip [Armor]: </b></td><td>" + Math.floor(Strip*10)/10 + " %</td></tr>";
+		// 	wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(S_Time*10)/10 + " Seconds</td></tr></table>";}
+		// else if(CardNumSearch(157)){
+		// 	// S_LV1 = eval(document.calcForm.S2_LV.value);
+		// 	S_LV1 = 1;
+		// 	E_DEX1 = eval(document.calcForm.E2_DEX.value);
+		// 	Strip = 5 + (5*S_LV1) + ((n_A_DEX - E_DEX1)/5);
+		// 	S_Time = 60 + (15* S_LV1) + ((n_A_DEX - E_DEX1)/2);
+		// 	if (Strip < 5+5*S_LV1){Strip = 5+5*S_LV1;}
+		// 	if (S_Time < 60){S_Time = 60;}
+
+		// 	wkk14 = "<table border=0><tr><td><b>Chance to Strip [Weapon]: </b></td><td>" + Math.floor(Strip*10)/10 + " %</td></tr>";
+		// 	wkk14 += "<tr><td><font color=red><b>Duration Time: </b></font></td><td>" + Math.floor(S_Time*10)/10 + " Seconds</td></tr></table>";
+		// }
+		else {wkk14 = "Not Available for this Class";}
 		myInnerHtml("A_KakutyouData",wkk14,0);
 	}
 	else if(wKK == 15){
@@ -5060,10 +6283,7 @@ function KakutyouKansuu(){
 		if(n_A_JOB==9 || n_A_JOB==23){
 			var wX = 100+n_tok[94];
 			if(EquipNumSearch(644))
-				wX += Math.floor(n_A_Weapon_ATKplus * 1.5);
-			//custom TalonRO Recovery Light
-			if(EquipNumSearch(1511))
-				wX += Math.floor(n_A_Weapon_ATKplus * 3);
+				wX += n_A_Weapon_ATKplus * 1.5;
 			wkk16+="<table border=0>";
 			wkk16+="<tr><td><b>Sanctuary Level 1</b></td><td>"+Math.floor(100 * wX /100)+"</td></tr>";
 			wkk16+="<tr><td><b>Sanctuary Level 2</b></td><td>"+Math.floor(200 * wX /100)+"</td></tr>";
@@ -5119,6 +6339,11 @@ function KakutyouKansuu2(){
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
 			document.calcForm.A_KakutyouSelNum.value=10;
 			return;
+		}
+		//Beer Hat - [Loa] - 2018-07-04
+		else if(EquipNumSearch(1240)){
+			myInnerHtml("A_KakutyouSel","Increased HP Recovery Level: 3",0);
+			return;
 		}else{
 			myInnerHtml("A_KakutyouSel","Not Available for this Class",0);
 			return;
@@ -5133,6 +6358,11 @@ function KakutyouKansuu2(){
 			for(i=0;i<=10;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
 			document.calcForm.A_KakutyouSelNum.value=10;
+			return;
+		}
+		//Beer Hat - [Loa] - 2018-07-04
+		else if(EquipNumSearch(1240)){
+			myInnerHtml("A_KakutyouSel","Increased SP Recovery Level: 3",0);
 			return;
 		}else{
 			myInnerHtml("A_KakutyouSel","Not Available for this Class",0);
@@ -5153,20 +6383,22 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 5){
 		if(n_A_JOB==6||n_A_JOB==12||n_A_JOB==19||n_A_JOB==20||n_A_JOB==26||n_A_JOB==33){
-			myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select><BR>'
-			+"Enlarge Weight Limit R Lv: " + '<select name="A_KakutyouSelNum2"onChange="StAllCalc()"></select><BR>',0);
-			for(i=0;i<=10;i++)
-				document.calcForm.A_KakutyouSelNum2.options[i] = new Option(i,i);
+			// myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select><BR>'
+			// +"Enlarge Weight Limit R Lv: " + '<select name="A_KakutyouSelNum2"onChange="StAllCalc()"></select><BR>',0);
+			myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select><BR>',0);
+			// for(i=0;i<=10;i++)
+			// 	document.calcForm.A_KakutyouSelNum2.options[i] = new Option(i,i);
 			for(i=0;i<=10;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
-			if(n_A_JOB==20)
-				document.calcForm.A_KakutyouSelNum.value=0;
-			else
+			// if(n_A_JOB==20)
+			// 	document.calcForm.A_KakutyouSelNum.value=0;
+			// else
 				document.calcForm.A_KakutyouSelNum.value=10;
 		}else{
-			myInnerHtml("A_KakutyouSel","Enlarge Weight Limit R Lv: " + '<select name="A_KakutyouSelNum2"onChange="StAllCalc()"></select><BR>',0);
-			for(i=0;i<=10;i++)
-				document.calcForm.A_KakutyouSelNum2.options[i] = new Option(i,i);
+			// myInnerHtml("A_KakutyouSel","Enlarge Weight Limit R Lv: " + '<select name="A_KakutyouSelNum2"onChange="StAllCalc()"></select><BR>',0);
+			// for(i=0;i<=10;i++)
+			// 	document.calcForm.A_KakutyouSelNum2.options[i] = new Option(i,i);
+			myInnerHtml("A_KakutyouSel","",0);
 		}
 		return;
 	}
@@ -5312,8 +6544,9 @@ function KakutyouKansuu2(){
 					document.calcForm.ISP.value=0;
 			for(i=0;i<=10;i++)
 					document.calcForm.IRP.options[i] = new Option(i,i);
-					document.calcForm.IRP.value=0;}
-			return;
+					document.calcForm.IRP.value=0;
+		}else{myInnerHtml("A_KakutyouSel","",0);}
+		return;
 	}
 	if(wKK == 13){
 		if(n_A_JOB==12||n_A_JOB==26){
@@ -5388,7 +6621,7 @@ function KakutyouKansuu2(){
 				document.calcForm.A_HomunEvolved.options[i] = new Option(HomunEvolvedOption[i],i);
 				document.calcForm.A_HomunEvolved.value=0;
 			//end
-		}
+		}else{myInnerHtml("A_KakutyouSel","",0);}
 		return;
 	}
 	if(wKK == 14){
@@ -5396,17 +6629,18 @@ function KakutyouKansuu2(){
 		if(n_A_JOB == 14 || n_A_JOB == 28){
 			striptext += "<table border=0><tr><td>Strip [Helm], [Armor], [Weapon] or [Shield] Level:</td>" + '<td><select name="S_LV" onChange="StAllCalc()"></select></td>';
 			striptext += "<td>Enemy DEX:</td>" + '<td><select name="E_DEX" onChange="StAllCalc()"></select>';
-		if(n_A_JOB == 28){
-			striptext += "<tr><td>Full Strip Level:</td>" + '<td><select name="FS_LV" onChange="StAllCalc()"></select>';}
+			if(n_A_JOB == 28){
+				striptext += "<tr><td>Full Strip Level:</td>" + '<td><select name="FS_LV" onChange="StAllCalc()"></select>';}
+			striptext += "</td></tr></table>";
 		}
-		else if((CardNumSearch(157) || CardNumSearch(413)) && (n_A_JOB != 14 || n_A_JOB != 28)){
-			striptext += "<table border=0><tr><td>Enemy DEX:</td>" + '<td><select name="E2_DEX" onChange="StAllCalc()"></select></td></tr><tr>';}
-		if(CardNumSearch(157)){
-			striptext += "<td>Strip [Weapon] Level:</td>" + '<td><select name="S2_LV" onChange="StAllCalc()"></select></td>';}
-		if(CardNumSearch(413)){
-			striptext += "<td>Strip [Armor] Level:</td>" + '<td><select name="S3_LV" onChange="StAllCalc()"></select></td>';}
-		striptext += "</td></tr></table>";
-		myInnerHtml("A_KakutyouSel",striptext + "<br>",0);
+		else if((CardNumSearch(157) || CardNumSearch(413)) && (n_A_JOB != 14 && n_A_JOB != 28)){
+			striptext += "<table border=0><tr><td>Enemy DEX:</td>" + '<td><select name="E2_DEX" onChange="StAllCalc()"></select></td></tr>';
+			if(CardNumSearch(157)){
+				striptext += "<td>Strip [Weapon] Level: 1</td>";}
+			if(CardNumSearch(413)){
+			striptext += "<td>Strip [Armor] Level: 1</td>";}
+		}
+		myInnerHtml("A_KakutyouSel",striptext,0);
 		if(n_A_JOB == 14 || n_A_JOB == 28){
 			for(i=1;i<=5;i++){
 				document.calcForm.S_LV.options[i-1] = new Option(i,i);
@@ -5420,16 +6654,22 @@ function KakutyouKansuu2(){
 					document.calcForm.FS_LV.value=1;}
 			}
 		}
-		if(CardNumSearch(157) || CardNumSearch(413)){
+		else if(CardNumSearch(157) || CardNumSearch(413)){
 			for(i=0;i<=200;i++){
 				document.calcForm.E2_DEX.options[i] = new Option(i,i);
 				document.calcForm.E2_DEX.value=0;}
-			if(CardNumSearch(157)){
-				document.calcForm.S2_LV.options[0] = new Option("1",0);
-				document.calcForm.S2_LV.value=0;}
-			if(CardNumSearch(413)){
-				document.calcForm.S3_LV.options[0] = new Option("1",0);
-				document.calcForm.S3_LV.value=0;}
+			// if(CardNumSearch(157)){
+			// 	document.calcForm.S2_LV.options[0] = new Option("1",0);
+			// 	document.calcForm.S2_LV.value=0;}
+			// else if(CardNumSearch(413)){
+			// 	document.calcForm.S3_LV.options[0] = new Option("1",0);
+			// 	document.calcForm.S3_LV.value=0;}
+			// else{
+			// 	document.calcForm.S2_LV.options[0] = new Option("1",0);
+			// 	document.calcForm.S2_LV.value=0;
+			// 	document.calcForm.S3_LV.options[0] = new Option("1",0);
+			// 	document.calcForm.S3_LV.value=0;
+			// }
 		}
 		return;
 	}
@@ -5441,7 +6681,7 @@ function KakutyouKansuu2(){
 		myInnerHtml("A_KakutyouSel",cooktext + "<br>",0);
 		for(i=1;i<=10;i++){
 			document.calcForm.Flv.options[i-1] = new Option(i,i);
-			document.calcForm.Flv.value=0;}
+			document.calcForm.Flv.value=1;}
 		for(i=0;i<=5;i++){
 			document.calcForm.FStat.options[i] = new Option(Stat_Food[i][1],i);
 			document.calcForm.FStat.value=0;}
@@ -5706,15 +6946,16 @@ function StoN(n){
 			return i;
 }
 
-SaveStr2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14, 15,16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96];
-SaveStr1 = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1,  3, 1,  3,  3,  3,  3,  3, 1,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2];
+SaveStr2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14, 15,16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159]; // Add to 159
+SaveStr1 = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1,  3, 1,  3,  3,  3,  3,  3, 1,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 
 function SaveCookie(){
 with(document.calcForm){
 	SaveData = new Array();
 
-	for(i=0;i<=91;i++)
+	for(i=0;i<=159;i++){
 		SaveData[i]=0;
+	}
 
 	SaveData[0] = eval(A_JOB.value);
 	SaveData[1] = eval(A_BaseLV.value);
@@ -5852,14 +7093,111 @@ with(document.calcForm){
 		SaveData[96] = 0;
 	}
 
+	//[Custom TalonRO 2018-06-14 - Save Cookie for Malangdo] [Kato]
+	SaveData[97] = ((A_ME11.value) ? eval(A_ME11.value) : 0);
+	SaveData[98] = ((A_ME12.value) ? eval(A_ME12.value) : 0);
+
+	if (typeof(A_weapon2) != "undefined"){
+			SaveData[99] = ((A_ME21.value) ? eval(A_ME21.value) : 0);
+			SaveData[100] = ((A_ME22.value) ? eval(A_ME22.value) : 0);
+	}else{
+			SaveData[99] = 0;
+			SaveData[100] = 0;
+	}
+
+	//[Custom TalonRO 2018-07-10 - Save Cookie for Biolab Weapon] [NattWara]
+	SaveData[101] = ((A_BE11.value) ? eval(A_BE11.value) : 0);
+	SaveData[102] = ((A_BE12.value) ? eval(A_BE12.value) : 0);
+
+	if (typeof(A_weapon2) != "undefined"){
+			SaveData[103] = ((A_BE21.value) ? eval(A_BE21.value) : 0);
+			SaveData[104] = ((A_BE22.value) ? eval(A_BE22.value) : 0);
+	}else{
+			SaveData[103] = 0;
+			SaveData[104] = 0;
+	}
+
+	//[Custom TalonRO 2018-07-13 - Save Cookie for Eden Weapon] [NattWara]
+	SaveData[105] = ((A_EE11.value) ? eval(A_EE11.value) : 0);
+	SaveData[106] = ((A_EE12.value) ? eval(A_EE12.value) : 0);
+	SaveData[107] = ((A_EE13.value) ? eval(A_EE13.value) : 0);
+
+	if (typeof(A_weapon2) != "undefined"){
+			SaveData[108] = ((A_EE21.value) ? eval(A_EE21.value) : 0);
+			SaveData[109] = ((A_EE22.value) ? eval(A_EE22.value) : 0);
+			SaveData[110] = ((A_EE23.value) ? eval(A_EE23.value) : 0);
+	}else{
+			SaveData[108] = 0;
+			SaveData[109] = 0;
+			SaveData[110] = 0;
+	}
+
+	//[Custom TalonRO 2018-07-13 - Save Cookie for Biolab Armor] [NattWara]
+	SaveData[111] = ((A_BEH1.value) ? eval(A_BEH1.value) : 0);
+	SaveData[112] = ((A_BEH2.value) ? eval(A_BEH2.value) : 0);
+	SaveData[113] = ((A_BEA1.value) ? eval(A_BEA1.value) : 0);
+	SaveData[114] = ((A_BEA2.value) ? eval(A_BEA2.value) : 0);
+	SaveData[115] = ((A_BES1.value) ? eval(A_BES1.value) : 0);
+	SaveData[116] = ((A_BES2.value) ? eval(A_BES2.value) : 0);
+	SaveData[117] = ((A_BEG1.value) ? eval(A_BEG1.value) : 0);
+	SaveData[118] = ((A_BEG2.value) ? eval(A_BEG2.value) : 0);
+	SaveData[119] = ((A_BEAC11.value) ? eval(A_BEAC11.value) : 0);
+	SaveData[120] = ((A_BEAC12.value) ? eval(A_BEAC12.value) : 0);
+	SaveData[121] = ((A_BEAC21.value) ? eval(A_BEAC21.value) : 0);
+	SaveData[122] = ((A_BEAC22.value) ? eval(A_BEAC22.value) : 0);
+
+	//[Custom TalonRO 2018-07-13 - Save Cookie for Eden Armor] [NattWara]
+	SaveData[123] = ((A_EEH.value) ? eval(A_EEH.value) : 0);
+	SaveData[124] = ((A_EEA1.value) ? eval(A_EEA1.value) : 0);
+	SaveData[125] = ((A_EEA2.value) ? eval(A_EEA2.value) : 0);
+	SaveData[126] = ((A_EEG1.value) ? eval(A_EEG1.value) : 0);
+	SaveData[127] = ((A_EEG2.value) ? eval(A_EEG2.value) : 0);
+	SaveData[128] = ((A_EEF1.value) ? eval(A_EEF1.value) : 0);
+	SaveData[129] = ((A_EEF2.value) ? eval(A_EEF2.value) : 0);
+
+	//[Custom TalonRO 2018-07-13 - Save Cookie for El Dicaste] [NattWara]
+	SaveData[130] = ((A_EDG1.value) ? eval(A_EDG1.value) : 0);
+	SaveData[131] = ((A_EDG2.value) ? eval(A_EDG2.value) : 0);
+	SaveData[132] = ((A_EDG3.value) ? eval(A_EDG3.value) : 0);
+	SaveData[133] = ((A_EDF1.value) ? eval(A_EDF1.value) : 0);
+	SaveData[134] = ((A_EDF2.value) ? eval(A_EDF2.value) : 0);
+	SaveData[135] = ((A_EDF3.value) ? eval(A_EDF3.value) : 0);
+	SaveData[136] = ((A_EDAC11.value) ? eval(A_EDAC11.value) : 0);
+	SaveData[137] = ((A_EDAC12.value) ? eval(A_EDAC12.value) : 0);
+	SaveData[138] = ((A_EDAC13.value) ? eval(A_EDAC13.value) : 0);
+	SaveData[139] = ((A_EDAC21.value) ? eval(A_EDAC21.value) : 0);
+	SaveData[140] = ((A_EDAC22.value) ? eval(A_EDAC22.value) : 0);
+	SaveData[141] = ((A_EDAC23.value) ? eval(A_EDAC23.value) : 0);
+	SaveData[142] = ((A_EDLOED11.value) ? eval(A_EDLOED11.value) : 0);
+	SaveData[143] = ((A_EDLOED12.value) ? eval(A_EDLOED12.value) : 0);
+	SaveData[144] = ((A_EDLOED13.value) ? eval(A_EDLOED13.value) : 0);
+	SaveData[145] = ((A_EDLOED21.value) ? eval(A_EDLOED21.value) : 0);
+	SaveData[146] = ((A_EDLOED22.value) ? eval(A_EDLOED22.value) : 0);
+	SaveData[147] = ((A_EDLOED23.value) ? eval(A_EDLOED23.value) : 0);
+
+	//[Custom TalonRO 2018-07-13 - Save Cookie for Mora] [NattWara]
+	SaveData[148] = ((A_MORAEA1.value) ? eval(A_MORAEA1.value) : 0);
+	SaveData[149] = ((A_MORAEA2.value) ? eval(A_MORAEA2.value) : 0);
+	SaveData[150] = ((A_MORAEA3.value) ? eval(A_MORAEA3.value) : 0);
+	SaveData[151] = ((A_MORAEG1.value) ? eval(A_MORAEG1.value) : 0);
+	SaveData[152] = ((A_MORAEG2.value) ? eval(A_MORAEG2.value) : 0);
+	SaveData[153] = ((A_MORAEG3.value) ? eval(A_MORAEG3.value) : 0);
+	SaveData[154] = ((A_MORAEAC11.value) ? eval(A_MORAEAC11.value) : 0);
+	SaveData[155] = ((A_MORAEAC12.value) ? eval(A_MORAEAC12.value) : 0);
+	SaveData[156] = ((A_MORAEAC13.value) ? eval(A_MORAEAC13.value) : 0);
+	SaveData[157] = ((A_MORAEAC21.value) ? eval(A_MORAEAC21.value) : 0);
+	SaveData[158] = ((A_MORAEAC22.value) ? eval(A_MORAEAC22.value) : 0);
+	SaveData[159] = ((A_MORAEAC23.value) ? eval(A_MORAEAC23.value) : 0);
+
 	//wak1="";
 	//for(i=0;i<=96;i++)
 	//	wak1+=i+": "+SaveData[i]+"\n";
-	for(i=0;i<=96;i++)
+	for(i=0;i<=159;i++)
 		SaveData[i] = NtoS(SaveData[i],SaveStr1[i]);
 	//for(i=0;i<=96;i++)
 	//	wak1+=i+": "+SaveData[i]+"\n";
 	//alert(wak1);
+
 	cookieNum = A_SaveSlot.value;
 
 	wDay = 99000;
@@ -5870,9 +7208,18 @@ with(document.calcForm){
 
 	wStr = "" +SaveData[0];
 
-	for(i=1;i<=96;i++){
+	for(i=1;i<=159;i++){
 		wStr += ""+SaveData[i];
 	}
+
+	//Compress String - [NattWara] - 2018-07-15
+	var comp_wStr = Base64.toBase64(RawDeflate.deflate(wStr));
+	comp_wStr = comp_wStr.replace(/=/g, '');
+
+	if (comp_wStr.length < wStr.length-1) {
+		wStr = '_' + comp_wStr;
+	}
+
 	document.cookie = cookieNum +"="+ wStr +"; expires="+ expDay;
 
 	bkcN = cookieNum;
@@ -5886,6 +7233,18 @@ with(document.calcForm){
 	cookieNum = A_SaveSlot.value;
 	SaveData = document.cookie.split("; ");
 	wStr = "";
+	//clear baby job status before load - [Loa] - 2018-06-22
+	if(A_youshi.checked){
+		A_youshi.checked = false;
+		BabyJobs();
+	}
+	//clear vanilla modes and refill items before load - [Loa] - 2018-07-09
+	if(vanilla.checked){
+		vanilla.checked = false;
+		VanillaWep();
+		VanillaArmor();
+		VanillaCard();
+	}
 
 	for(i=0;SaveData[i];i++){
 		if (SaveData[i].substr(0,6) == cookieNum +"="){
@@ -5893,11 +7252,20 @@ with(document.calcForm){
 			break;
 		}
 	}
-	for(i=0;i<=96;i++)
+
+	//Decompress String - [NattWara] - 2018-07-15
+	if (wStr.substr(0,1) == '_'){
+		wStr = wStr.replace(/_/g, '');
+		wStr += '='.repeat(4 - wStr.length % 4);
+		wStr = Base64.btou(RawDeflate.inflate(Base64.fromBase64(wStr)));
+	}
+
+	for(i=0;i<=159;i++){
 		SaveData[i] = 0;
+	}
 
 	j=0;
-	for(i=0;i<=96;i++){
+	for(i=0;i<=159;i++){
 		if(SaveStr1[i] == 1){
 			SaveData[i] = wStr.substr(j,1);
 			j++;
@@ -5909,7 +7277,8 @@ with(document.calcForm){
 			j+=3;
 		}
 	}
-	for(i=0;i<=96;i++){
+
+	for(i=0;i<=159;i++){
 		if(SaveStr1[i] == 1)
 			SaveData[i] = StoN(SaveData[i]);
 		if(SaveStr1[i] == 2)
@@ -5917,7 +7286,8 @@ with(document.calcForm){
 		if(SaveStr1[i] == 3)
 			SaveData[i] = StoN(SaveData[i].substr(0,1)) + SaveData[i].substr(1,2);
 	}
-	for(i=0;i<=96;i++){
+
+	for(i=0;i<=159;i++){
 		if(SaveStr1[i] == 3 && SaveData[i].substr(0,2) == "00")
 			SaveData[i] = SaveData[i].substr(2,1);
 		else if(SaveStr1[i] == 3 && SaveData[i].substr(0,1) == "0")
@@ -5936,8 +7306,21 @@ with(document.calcForm){
 		}
 	}
 
-	for(i=0;i<=96;i++)
-		SaveData[i] = eval(SaveData[i]);
+	//  97-100 Malangdo
+	// 101-104 Biolab Weapon
+	// 105-110 Eden Weapon
+	// 111-122 Biolab Armor
+	// 123-129 Eden Armor
+	// 130-147 El Dicaste
+	// 148-159 Mora
+	for(i=97;i<=159;i++){
+		if (typeof(SaveData[i]) == "undefined"){
+			SaveData[i] = 0;
+		}
+	}
+
+	for(i=0;i<=159;i++)
+			SaveData[i] = eval(SaveData[i]);
 
 	if(eval(SaveData[0]) == 20 && eval(SaveData[54]) == 1)
 		SuperNoviceFullWeaponCHECK = 1;
@@ -6085,13 +7468,228 @@ with(document.calcForm){
 	SQI_Bonus_Effect[2] = SaveData[95];
 	SQI_Bonus_Effect[3] = SaveData[96];
 
+	// [Custom TalonRO - 2018-06-15 - Load Cookie for Malangdo Enchants] [Kato]
+	A_ME11.value = SaveData[97];
+	A_ME12.value = SaveData[98];
+	A_ME21.value = SaveData[99];
+	A_ME22.value = SaveData[100];
+
+	// [Custom TalonRO - 2018-07-10 - Load Cookie for Biolab Weapon Enchants] [NattWara]
+	A_BE11.value = SaveData[101];
+	A_BE12.value = SaveData[102];
+	A_BE21.value = SaveData[103];
+	A_BE22.value = SaveData[104];
+
+	// [Custom TalonRO - 2018-07-13 - Load Cookie for Eden Weapon Enchants Slot 1] [NattWara]
+	A_EE11.value = SaveData[105];
+	A_EE21.value = SaveData[108];
+
+	//Populate option for slot 2 depending on choice of slot 1
+	//Weapon 1
+	switch(A_EE11.value) {
+	case "172":
+
+			//Add Physical Damage 10% vs Race Option for Enchant slot 2.
+			removeOptions(A_EE12);
+			A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+			for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length; i++) {
+				A_EE12.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0]);
+			}
+
+		break;
+	case "892":
+
+			//Add Magical Damage 5% vs Race Option for Enchant slot 2.
+			removeOptions(A_EE12);
+			A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+			for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length; i++) {
+				A_EE12.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0]);
+			}
+
+		break;
+	default:
+		//Clear weapon 1 slot 2
+		removeOptions(A_EE12);
+		A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+	}
+
+	//Weapon 2
+	switch(A_EE21.value) {
+	case "172":
+
+			//Add Physical Damage 10% vs Race Option for Enchant slot 2.
+			removeOptions(A_EE22);
+			A_EE22.options[0] = new Option("(Eden Enchant 2-"+ A_EE22.name.substr(-1) +")",0);
+			for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length; i++) {
+				A_EE22.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0]);
+			}
+
+		break;
+	case "892":
+
+			//Add Magical Damage 5% vs Race Option for Enchant slot 2.
+			removeOptions(A_EE22);
+			A_EE22.options[0] = new Option("(Eden Enchant 2-"+ A_EE22.name.substr(-1) +")",0);
+			for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length; i++) {
+				A_EE22.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0]);
+			}
+
+		break;
+	default:
+		//Clear weapon 2 slot 2
+		removeOptions(A_EE22);
+		A_EE22.options[0] = new Option("(Eden Enchant "+ A_EE22.name.substr(-1) +")",0);
+	}
+
+	// [Custom TalonRO - 2018-07-13 - Load Cookie for Eden Weapon Enchants Slot 2] [NattWara]
+	A_EE12.value = SaveData[106];
+	A_EE22.value = SaveData[109];
+
+	//Populate option for slot 3 depending on choice of slot 1 and slot 2
+	//Weapon 1
+
+	//Clear weapon 1 slot 3
+	removeOptions(A_EE13);
+	A_EE13.options[0] = new Option("(Eden Enchant "+ A_EE13.name.substr(-1) +")",0);
+
+	if (A_EE11.value != 0 && A_EE12.value != 0) {
+		var option1Text = option2Text = "";
+
+		for (i = EDEN_ENCHANTS_WEAPON_FIRST.length - 1; i >= 0; i--) {
+			if (EDEN_ENCHANTS_WEAPON_FIRST[i][0] == A_EE11.value) {
+				option1Text = EDEN_ENCHANTS_WEAPON_FIRST[i][1];
+				break;
+			}
+		}
+
+		if (A_EE12.value >= 2030 && A_EE12.value <= 2039) {
+			for (i = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0] == A_EE12.value) {
+					option2Text = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1];
+					break;
+				}
+			}
+		}
+
+		if (A_EE12.value >= 2170 && A_EE12.value <= 2179) {
+			for (i = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0] == A_EE12.value) {
+					option2Text = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1];
+					break;
+				}
+			}
+		}
+
+		A_EE13.options[1] = new Option(option1Text,A_EE11.value);
+		A_EE13.options[2] = new Option(option2Text,A_EE12.value);
+	}
+
+	//Weapon 2
+
+	//Clear weapon 2 slot 3
+	removeOptions(A_EE23);
+	A_EE23.options[0] = new Option("(Eden Enchant 2-"+ A_EE23.name.substr(-1) +")",0);
+
+	if (A_EE21.value != 0 || A_EE22.value != 0) {
+		var option1Text = option2Text = "";
+
+		for (i = EDEN_ENCHANTS_WEAPON_FIRST.length - 1; i >= 0; i--) {
+			if (EDEN_ENCHANTS_WEAPON_FIRST[i][0] == A_EE21.value) {
+				option1Text = EDEN_ENCHANTS_WEAPON_FIRST[i][1];
+				break;
+			}
+		}
+
+		if (A_EE22.value >= 2030 && A_EE22.value <= 2039) {
+			for (i = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0] == A_EE22.value) {
+					option2Text = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1];
+					break;
+				}
+			}
+		}
+
+		if (A_EE22.value >= 2170 && A_EE22.value <= 2179) {
+			for (i = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0] == A_EE22.value) {
+					option2Text = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1];
+					break;
+				}
+			}
+		}
+
+		A_EE23.options[1] = new Option(option1Text,A_EE21.value);
+		A_EE23.options[2] = new Option(option2Text,A_EE22.value);
+	}
+
+	// [Custom TalonRO - 2018-07-13 - Load Cookie for Eden Weapon Enchants Slot 3] [NattWara]
+	A_EE13.value = SaveData[107];
+	A_EE23.value = SaveData[110];
+
+	// [Custom TalonRO - 2018-07-13 - Load Cookie for Biolab Armor Enchants] [NattWara]
+	A_BEH1.value = SaveData[111];
+	A_BEH2.value = SaveData[112];
+	A_BEA1.value = SaveData[113];
+	A_BEA2.value = SaveData[114];
+	A_BES1.value = SaveData[115];
+	A_BES2.value = SaveData[116];
+	A_BEG1.value = SaveData[117];
+	A_BEG2.value = SaveData[118];
+	A_BEAC11.value = SaveData[119];
+	A_BEAC12.value = SaveData[120];
+	A_BEAC21.value = SaveData[121];
+	A_BEAC22.value = SaveData[122];
+
+	// [Custom TalonRO - 2018-07-13 - Load Cookie for Eden Armor Enchants] [NattWara]
+	A_EEH.value = SaveData[123];
+	A_EEA1.value = SaveData[124];
+	A_EEA2.value = SaveData[125];
+	A_EEG1.value = SaveData[126];
+	A_EEG2.value = SaveData[127];
+	A_EEF1.value = SaveData[128];
+	A_EEF2.value = SaveData[129];
+
+	// [Custom TalonRO - 2018-07-13 - Load Cookie for El Dicaste Enchants] [NattWara]
+	A_EDG1.value = SaveData[130];
+	A_EDG2.value = SaveData[131];
+	A_EDG3.value = SaveData[132];
+	A_EDF1.value = SaveData[133];
+	A_EDF2.value = SaveData[134];
+	A_EDF3.value = SaveData[135];
+	A_EDAC11.value = SaveData[136];
+	A_EDAC12.value = SaveData[137];
+	A_EDAC13.value = SaveData[138];
+	A_EDAC21.value = SaveData[139];
+	A_EDAC22.value = SaveData[140];
+	A_EDAC23.value = SaveData[141];
+	A_EDLOED11.value = SaveData[142];
+	A_EDLOED12.value = SaveData[143];
+	A_EDLOED13.value = SaveData[144];
+	A_EDLOED21.value = SaveData[145];
+	A_EDLOED22.value = SaveData[146];
+	A_EDLOED23.value = SaveData[147];
+
+	// [Custom TalonRO - 2018-07-13 - Load Cookie for Mora Enchants] [NattWara]
+	A_MORAEA1.value = SaveData[148];
+	A_MORAEA2.value = SaveData[149];
+	A_MORAEA3.value = SaveData[150];
+	A_MORAEG1.value = SaveData[151];
+	A_MORAEG2.value = SaveData[152];
+	A_MORAEG3.value = SaveData[153];
+	A_MORAEAC11.value = SaveData[154];
+	A_MORAEAC12.value = SaveData[155];
+	A_MORAEAC13.value = SaveData[156];
+	A_MORAEAC21.value = SaveData[157];
+	A_MORAEAC22.value = SaveData[158];
+	A_MORAEAC23.value = SaveData[159];
+
 	Click_SQI_Bonus(0);
 
 	StCalc(1);
 	StAllCalc();
 	ActiveSkillSetPlus();
 }}
-
+/*
 function LoadCookieSP(){
 with(document.calcForm){
 	var wStr = "";
@@ -6131,7 +7729,7 @@ with(document.calcForm){
 	}
 	myInnerHtml("PR1",wStr,0);
 }}
-
+*/
 function LoadCookie3(){
 
 	SaveData = new Array();
@@ -6155,6 +7753,13 @@ function LoadCookie3(){
 			}
 		}
 
+		//Decompress String - [NattWara] - 2018-07-15
+		if (wStr.substr(0,1) == '_'){
+			wStr = wStr.replace(/_/g, '');
+			wStr += '='.repeat(4 - wStr.length % 4);
+			wStr = Base64.btou(RawDeflate.inflate(Base64.fromBase64(wStr)));
+		}
+
 		if(wStr.substr(27,1) >= 1){
 			SaveData[0] = wStr.substr(0,2);
 			SaveData[0] = eval(SaveData[0]);
@@ -6176,7 +7781,7 @@ function LoadCookie3(){
 			document.calcForm.A_SaveSlot.options[k-1] = new Option("Save "+k +": No Data",cookieNum);
 	}
 }
-
+/*
 function SaveCookieConf(){
 	SaveData = new Array();
 
@@ -6186,12 +7791,12 @@ function SaveCookieConf(){
 	wCookie.setTime(wCookie.getTime()+(wDay*1000*60*60*24));
 	expDay = wCookie.toGMTString();
 
-
 	wStr = "a" + NtoS2(eval(document.calcForm.Conf01.value),2) + "00000";
 
 	document.cookie = "ConfData" +"="+ wStr +"; expires="+ expDay;
 }
-
+*/
+/*
 function LoadCookieConf(){
 
 	SaveData = new Array();
@@ -6207,17 +7812,18 @@ function LoadCookieConf(){
 		}
 	}
 
-	/*if(wLCF == 1){
-		if(wStr.substr(0,1) == "0"){
-			document.calcForm.Conf01.value = wStr.substr(1,2);
-			SaveCookieConf();
-		}else
-			document.calcForm.Conf01.value = StoN2(wStr.substr(1,2));
-	}else{
-		document.calcForm.Conf01.value = 33;
-	}*/
+	//if(wLCF == 1){
+	//	if(wStr.substr(0,1) == "0"){
+	//		document.calcForm.Conf01.value = wStr.substr(1,2);
+	//		SaveCookieConf();
+	//	}else
+	//		document.calcForm.Conf01.value = StoN2(wStr.substr(1,2));
+	//}else{
+	//	document.calcForm.Conf01.value = 33;
+	//}
 }
-
+*/
+/*
 function SaveCookieChangelogDisplay(){
 	var disp;
 	if (document.getElementById('ChangelogDisplay').style.display=='inline'){
@@ -6237,7 +7843,9 @@ function SaveCookieChangelogDisplay(){
 
 	document.cookie = "ChangelogDisplay" +"="+ disp +"; expires="+ expDay;
 }
+*/
 
+/*
 function LoadCookieChangelogDisplay(){
 
 	SaveData = new Array();
@@ -6259,6 +7867,7 @@ function LoadCookieChangelogDisplay(){
 		}
 	}
 }
+*/
 
 function NtoS2(n,keta){
 	var strX = "";
@@ -6290,7 +7899,6 @@ function NtoS01(wb,wc,wd,we,wf){
 		n += 1;
 	return NtoS2(n,1);
 }
-
 
 function NtoS05(wa,wb){
 	var n;
@@ -6540,18 +8148,26 @@ with(document.calcForm){
 	x+=1;
 
 	//custom TalonRO Kris Enchantment SAVE URL
+	/*
 	if(A_weapon1.value == 1472){
-		SaveData[x+1] = NtoS2(parseInt(document.calcForm.A_KE11.value),2);
-		SaveData[x+2] = NtoS2(parseInt(document.calcForm.A_KE12.value),2);
+		SaveData[x+1] = NtoS2(parseInt(A_KE11.value),2);
+		SaveData[x+2] = NtoS2(parseInt(A_KE12.value),2);
 		x+=2;
 	}
 	if (typeof(A_weapon2) != "undefined"){
 		if(A_weapon2.value == 1472){
-			SaveData[x+1] = NtoS2(parseInt(document.calcForm.A_KE21.value),2);
-			SaveData[x+2] = NtoS2(parseInt(document.calcForm.A_KE22.value),2);
+			SaveData[x+1] = NtoS2(parseInt(A_KE21.value),2);
+			SaveData[x+2] = NtoS2(parseInt(A_KE22.value),2);
 			x+=2;
 		}
 	}
+	*/
+	SaveData[x+1] = NtoS2(parseInt(A_KE11.value),2);
+	SaveData[x+2] = NtoS2(parseInt(A_KE12.value),2);
+	SaveData[x+3] = NtoS2(parseInt(A_KE21.value),2);
+	SaveData[x+4] = NtoS2(parseInt(A_KE22.value),2);
+	x+=4;
+
 	//custom TalonRO SQI interface
 	x_sqibonus=0;
 	SaveData[x+1] = NtoS2(0,1);
@@ -6571,10 +8187,113 @@ with(document.calcForm){
 		x+=4;
 	}
 
+	//[Custom TalonRO 2018-06-15 - SAVE URL] [Kato]
+	/*
+	SaveData[x+1] = NtoS2(parseInt(document.calcForm.A_ME11.value),2);
+	SaveData[x+2] = NtoS2(parseInt(document.calcForm.A_ME12.value),2);
+	x+=2;
+	if (typeof(A_weapon2) != "undefined"){
+		SaveData[x+1] = NtoS2(parseInt(document.calcForm.A_ME21.value),2);
+		SaveData[x+2] = NtoS2(parseInt(document.calcForm.A_ME22.value),2);
+	}
+	x+=2;
+	*/
+	SaveData[x+1] = NtoS2(parseInt(document.calcForm.A_ME11.value),2);
+	SaveData[x+2] = NtoS2(parseInt(document.calcForm.A_ME12.value),2);
+	SaveData[x+3] = NtoS2(parseInt(document.calcForm.A_ME21.value),2);
+	SaveData[x+4] = NtoS2(parseInt(document.calcForm.A_ME22.value),2);
+	x+=4;
+
+	//[Custom TalonRO 2018-07-14 - Save URL for Biolab Weapon] [NattWara]
+	SaveData[x+1] = NtoS2(parseInt(A_BE11.value),2);
+	SaveData[x+2] = NtoS2(parseInt(A_BE12.value),2);
+	SaveData[x+3] = NtoS2(parseInt(A_BE21.value),2);
+	SaveData[x+4] = NtoS2(parseInt(A_BE22.value),2);
+	x+=4;
+
+	//[Custom TalonRO 2018-07-14 - Save URL for Eden Weapon] [NattWara]
+	SaveData[x+1] = NtoS2(parseInt(A_EE11.value),2);
+	SaveData[x+2] = NtoS2(parseInt(A_EE12.value),2);
+	SaveData[x+3] = NtoS2(parseInt(A_EE13.value),2);
+	SaveData[x+4] = NtoS2(parseInt(A_EE21.value),2);
+	SaveData[x+5] = NtoS2(parseInt(A_EE22.value),2);
+	SaveData[x+6] = NtoS2(parseInt(A_EE23.value),2);
+	x+=6;
+
+	//[Custom TalonRO 2018-07-14 - Save URL for Biolab Armor] [NattWara]
+	SaveData[x+1] = NtoS2(parseInt(A_BEH1.value),2);
+	SaveData[x+2] = NtoS2(parseInt(A_BEH2.value),2);
+	SaveData[x+3] = NtoS2(parseInt(A_BEA1.value),2);
+	SaveData[x+4] = NtoS2(parseInt(A_BEA2.value),2);
+	SaveData[x+5] = NtoS2(parseInt(A_BES1.value),2);
+	SaveData[x+6] = NtoS2(parseInt(A_BES2.value),2);
+	SaveData[x+7] = NtoS2(parseInt(A_BEG1.value),2);
+	SaveData[x+8] = NtoS2(parseInt(A_BEG2.value),2);
+	SaveData[x+9] = NtoS2(parseInt(A_BEAC11.value),2);
+	SaveData[x+10] = NtoS2(parseInt(A_BEAC12.value),2);
+	SaveData[x+11] = NtoS2(parseInt(A_BEAC21.value),2);
+	SaveData[x+12] = NtoS2(parseInt(A_BEAC22.value),2);
+	x+=12;
+
+	//[Custom TalonRO 2018-07-14 - Save URL for Eden Armor] [NattWara]
+	SaveData[x+1] = NtoS2(parseInt(A_EEH.value),2);
+	SaveData[x+2] = NtoS2(parseInt(A_EEA1.value),2);
+	SaveData[x+3] = NtoS2(parseInt(A_EEA2.value),2);
+	SaveData[x+4] = NtoS2(parseInt(A_EEG1.value),2);
+	SaveData[x+5] = NtoS2(parseInt(A_EEG2.value),2);
+	SaveData[x+6] = NtoS2(parseInt(A_EEF1.value),2);
+	SaveData[x+7] = NtoS2(parseInt(A_EEF2.value),2);
+	x+=7;
+
+	//[Custom TalonRO 2018-07-14 - Save URL for El Dicaste] [NattWara]
+	SaveData[x+1] = NtoS2(parseInt(A_EDG1.value),2);
+	SaveData[x+2] = NtoS2(parseInt(A_EDG2.value),2);
+	SaveData[x+3] = NtoS2(parseInt(A_EDG3.value),2);
+	SaveData[x+4] = NtoS2(parseInt(A_EDF1.value),2);
+	SaveData[x+5] = NtoS2(parseInt(A_EDF2.value),2);
+	SaveData[x+6] = NtoS2(parseInt(A_EDF3.value),2);
+	SaveData[x+7] = NtoS2(parseInt(A_EDAC11.value),2);
+	SaveData[x+8] = NtoS2(parseInt(A_EDAC12.value),2);
+	SaveData[x+9] = NtoS2(parseInt(A_EDAC13.value),2);
+	SaveData[x+10] = NtoS2(parseInt(A_EDAC21.value),2);
+	SaveData[x+11] = NtoS2(parseInt(A_EDAC22.value),2);
+	SaveData[x+12] = NtoS2(parseInt(A_EDAC23.value),2);
+	SaveData[x+13] = NtoS2(parseInt(A_EDLOED11.value),2);
+	SaveData[x+14] = NtoS2(parseInt(A_EDLOED12.value),2);
+	SaveData[x+15] = NtoS2(parseInt(A_EDLOED13.value),2);
+	SaveData[x+16] = NtoS2(parseInt(A_EDLOED21.value),2);
+	SaveData[x+17] = NtoS2(parseInt(A_EDLOED22.value),2);
+	SaveData[x+18] = NtoS2(parseInt(A_EDLOED23.value),2);
+	x+=18;
+
+	//[Custom TalonRO 2018-07-14 - Save URL for Mora] [NattWara]
+	SaveData[x+1] = NtoS2(parseInt(A_MORAEA1.value),2);
+	SaveData[x+2] = NtoS2(parseInt(A_MORAEA2.value),2);
+	SaveData[x+3] = NtoS2(parseInt(A_MORAEA3.value),2);
+	SaveData[x+4] = NtoS2(parseInt(A_MORAEG1.value),2);
+	SaveData[x+5] = NtoS2(parseInt(A_MORAEG2.value),2);
+	SaveData[x+6] = NtoS2(parseInt(A_MORAEG3.value),2);
+	SaveData[x+7] = NtoS2(parseInt(A_MORAEAC11.value),2);
+	SaveData[x+8] = NtoS2(parseInt(A_MORAEAC12.value),2);
+	SaveData[x+9] = NtoS2(parseInt(A_MORAEAC13.value),2);
+	SaveData[x+10] = NtoS2(parseInt(A_MORAEAC21.value),2);
+	SaveData[x+11] = NtoS2(parseInt(A_MORAEAC22.value),2);
+	SaveData[x+12] = NtoS2(parseInt(A_MORAEAC23.value),2);
+	x+=12;
+
 	wStr = "" +SaveData[0];
 	for(i=1;i<=x;i++){
 		wStr += ""+SaveData[i];
 	}
+
+	//Compress String - [NattWara] - 2018-07-15
+	var comp_wStr = Base64.toBase64(RawDeflate.deflate(wStr));
+	comp_wStr = comp_wStr.replace(/=/g, '');
+
+	if (comp_wStr.length < wStr.length-1) {
+		wStr = '_' + comp_wStr;
+	}
+
 	var w = location.href.split("?");
 	URL_TEXT.value = w[0] +"?"+ wStr;
 	URL_TEXT.select();
@@ -6618,6 +8337,13 @@ with(document.calcForm){
 		var SaveData = new Array();
 		SaveData = location.href.split("?");
 		var w = SaveData[1];
+
+		//Decompress String - [NattWara] - 2018-07-15
+		if (w.substr(0,1) == '_'){
+			w = w.replace(/_/g, '');
+			w += '='.repeat(4 - w.length % 4);
+			w = Base64.btou(RawDeflate.inflate(Base64.fromBase64(w)));
+		}
 
 		if(StoN2(w.substr(1,2)) == 20 && StoN2(w.substr(90,1)))
 			SuperNoviceFullWeaponCHECK = 1;
@@ -6716,7 +8442,8 @@ with(document.calcForm){
 
 
 		var BackupX = x;
-/*		A_ActiveSkill.value = StoN2(w.substr(x+1,2));
+		/*
+		A_ActiveSkill.value = StoN2(w.substr(x+1,2));
 
 		ClickActiveSkill();
 		A_ActiveSkillLV.value = StoN2(w.substr(x+3,1));
@@ -6725,8 +8452,8 @@ with(document.calcForm){
 			SkillSubNum.value = StoN2(w.substr(x+4,3));
 
 		B_Enemy.value = StoN2(w.substr(x+7,2));
-
-*/		x+=8;
+		*/
+		x+=8;
 
 		x+=1;
 		if(StoN2(w.substr(x,1)) == 1){
@@ -6893,6 +8620,7 @@ with(document.calcForm){
 			x+=2;
 		}
 		//custom TalonRO Kris Enchantment LOAD URL
+		/*
 		if(A_weapon1.value == 1472){
 			A_KE11.value = StoN2(w.substr(x+1,2));
 			A_KE12.value = StoN2(w.substr(x+3,2));
@@ -6905,6 +8633,13 @@ with(document.calcForm){
 				x+=4
 			}
 		}
+		*/
+		A_KE11.value = StoN2(w.substr(x+1,2));
+		A_KE12.value = StoN2(w.substr(x+3,2));
+		A_KE21.value = StoN2(w.substr(x+5,2));
+		A_KE22.value = StoN2(w.substr(x+7,2));
+		x+=8
+
 		//custom TalonRO SQI interface SAVE URL
 		x_sqibonus=StoN2(w.substr(x+1,1));					//check if any sqi bonus was activated (0=none;1=activated)
 		x+=1;
@@ -6915,6 +8650,253 @@ with(document.calcForm){
 			SQI_Bonus_Effect[3] = StoN2(w.substr(x+7,2));
 			x+=8;
 		}
+
+		//[Custom TalonRO 2018-06-15 - LOAD URL] [Kato]
+		/*
+		if((StoN2(w.substr(x+1,2)) != "undefined"))
+			A_ME11.value = StoN2(w.substr(x+1,2));
+		else
+			A_ME11.value = 0;
+
+		if((StoN2(w.substr(x+3,2)) != "undefined"))
+			A_ME12.value = StoN2(w.substr(x+3,2));
+		else
+			A_ME12.value = 0;
+
+		x+=4;
+
+		if((StoN2(w.substr(x+1,2)) != "undefined"))
+			A_ME21.value = StoN2(w.substr(x+1,2));
+		else
+			A_ME21.value = 0;
+
+		if((StoN2(w.substr(x+3,2)) != "undefined"))
+			A_ME22.value = StoN2(w.substr(x+3,2));
+		else
+			A_ME22.value = 0;
+
+		x+=4;
+		*/
+		A_ME11.value = StoN2(w.substr(x+1,2));
+		A_ME12.value = StoN2(w.substr(x+3,2));
+		A_ME21.value = StoN2(w.substr(x+5,2));
+		A_ME22.value = StoN2(w.substr(x+7,2));
+		x+=8;
+
+		// [Custom TalonRO - 2018-07-14 - Load URL for Biolab Weapon Enchants] [NattWara]
+		A_BE11.value = StoN2(w.substr(x+1,2));
+		A_BE12.value = StoN2(w.substr(x+3,2));
+		A_BE21.value = StoN2(w.substr(x+5,2));
+		A_BE22.value = StoN2(w.substr(x+7,2));
+		x+=8;
+
+		// [Custom TalonRO - 2018-07-14 - Load URL for Eden Weapon Enchants Slot 1] [NattWara]
+		A_EE11.value = StoN2(w.substr(x+1,2));
+		A_EE21.value = StoN2(w.substr(x+7,2));
+
+		//Populate option for slot 2 depending on choice of slot 1
+		//Weapon 1
+		switch(A_EE11.value) {
+		case "172":
+			if (!(A_EE12.value >= 2030 && A_EE12.value <= 2039)) {
+				//Add Physical Damage 10% vs Race Option for Enchant slot 2.
+				removeOptions(A_EE12);
+				A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+				for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length; i++) {
+					A_EE12.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0]);
+				}
+			}
+			break;
+		case "892":
+			if (!(A_EE12.value >= 2170 && A_EE12.value <= 2179)) {
+				//Add Magical Damage 5% vs Race Option for Enchant slot 2.
+				removeOptions(A_EE12);
+				A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+				for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length; i++) {
+					A_EE12.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0]);
+				}
+			}
+			break;
+		default:
+			//Clear weapon 1 slot 2
+			removeOptions(A_EE12);
+			A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+		}
+
+		//Weapon 2
+		switch(A_EE21.value) {
+		case "172":
+			if (!(A_EE22.value >= 2030 && A_EE22.value <= 2039)) {
+				//Add Physical Damage 10% vs Race Option for Enchant slot 2.
+				removeOptions(A_EE22);
+				A_EE22.options[0] = new Option("(Eden Enchant 2-"+ A_EE22.name.substr(-1) +")",0);
+				for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length; i++) {
+					A_EE22.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0]);
+				}
+			}
+			break;
+		case "892":
+			if (!(A_EE22.value >= 2170 && A_EE22.value <= 2179)) {
+				//Add Magical Damage 5% vs Race Option for Enchant slot 2.
+				removeOptions(A_EE22);
+				A_EE22.options[0] = new Option("(Eden Enchant 2-"+ A_EE22.name.substr(-1) +")",0);
+				for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length; i++) {
+					A_EE22.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0]);
+				}
+			}
+			break;
+		default:
+			//Clear weapon 2 slot 2
+			removeOptions(A_EE22);
+			A_EE22.options[0] = new Option("(Eden Enchant "+ A_EE22.name.substr(-1) +")",0);
+		}
+
+		// [Custom TalonRO - 2018-07-14 - Load URL for Eden Weapon Enchants Slot 2] [NattWara]
+		A_EE12.value = StoN2(w.substr(x+3,2));
+		A_EE22.value = StoN2(w.substr(x+9,2));
+
+		//Populate option for slot 3 depending on choice of slot 1 and slot 2
+		//Weapon 1
+
+		//Clear weapon 1 slot 3
+		removeOptions(A_EE13);
+		A_EE13.options[0] = new Option("(Eden Enchant "+ A_EE13.name.substr(-1) +")",0);
+
+		if (A_EE11.value != 0 && A_EE12.value != 0) {
+			var option1Text = option2Text = "";
+
+			for (i = EDEN_ENCHANTS_WEAPON_FIRST.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_FIRST[i][0] == A_EE11.value) {
+					option1Text = EDEN_ENCHANTS_WEAPON_FIRST[i][1];
+					break;
+				}
+			}
+
+			if (A_EE12.value >= 2030 && A_EE12.value <= 2039) {
+				for (i = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length - 1; i >= 0; i--) {
+					if (EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0] == A_EE12.value) {
+						option2Text = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1];
+						break;
+					}
+				}
+			}
+
+			if (A_EE12.value >= 2170 && A_EE12.value <= 2179) {
+				for (i = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length - 1; i >= 0; i--) {
+					if (EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0] == A_EE12.value) {
+						option2Text = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1];
+						break;
+					}
+				}
+			}
+
+			A_EE13.options[1] = new Option(option1Text,A_EE11.value);
+			A_EE13.options[2] = new Option(option2Text,A_EE12.value);
+		}
+
+		//Weapon 2
+
+		//Clear weapon 2 slot 3
+		removeOptions(A_EE23);
+		A_EE23.options[0] = new Option("(Eden Enchant 2-"+ A_EE23.name.substr(-1) +")",0);
+
+		if (A_EE21.value != 0 || A_EE22.value != 0) {
+			var option1Text = option2Text = "";
+
+			for (i = EDEN_ENCHANTS_WEAPON_FIRST.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_FIRST[i][0] == A_EE21.value) {
+					option1Text = EDEN_ENCHANTS_WEAPON_FIRST[i][1];
+					break;
+				}
+			}
+
+			if (A_EE22.value >= 2030 && A_EE22.value <= 2039) {
+				for (i = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length - 1; i >= 0; i--) {
+					if (EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0] == A_EE22.value) {
+						option2Text = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1];
+						break;
+					}
+				}
+			}
+
+			if (A_EE22.value >= 2170 && A_EE22.value <= 2179) {
+				for (i = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length - 1; i >= 0; i--) {
+					if (EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0] == A_EE22.value) {
+						option2Text = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1];
+						break;
+					}
+				}
+			}
+
+			A_EE23.options[1] = new Option(option1Text,A_EE21.value);
+			A_EE23.options[2] = new Option(option2Text,A_EE22.value);
+		}
+
+		// [Custom TalonRO - 2018-07-14 - Load URL for Eden Weapon Enchants Slot 3] [NattWara]
+		A_EE13.value = StoN2(w.substr(x+5,2));
+		A_EE23.value = StoN2(w.substr(x+11,2));
+		x+=12;
+
+		// [Custom TalonRO - 2018-07-14 - Load URL for Biolab Armor Enchants] [NattWara]
+		A_BEH1.value = StoN2(w.substr(x+1,2));
+		A_BEH2.value = StoN2(w.substr(x+3,2));
+		A_BEA1.value = StoN2(w.substr(x+5,2));
+		A_BEA2.value = StoN2(w.substr(x+7,2));
+		A_BES1.value = StoN2(w.substr(x+9,2));
+		A_BES2.value = StoN2(w.substr(x+11,2));
+		A_BEG1.value = StoN2(w.substr(x+13,2));
+		A_BEG2.value = StoN2(w.substr(x+15,2));
+		A_BEAC11.value = StoN2(w.substr(x+17,2));
+		A_BEAC12.value = StoN2(w.substr(x+19,2));
+		A_BEAC21.value = StoN2(w.substr(x+21,2));
+		A_BEAC22.value = StoN2(w.substr(x+23,2));
+		x+=24;
+
+		// [Custom TalonRO - 2018-07-14 - Load URL for Eden Armor Enchants] [NattWara]
+		A_EEH.value = StoN2(w.substr(x+1,2));
+		A_EEA1.value = StoN2(w.substr(x+3,2));
+		A_EEA2.value = StoN2(w.substr(x+5,2));
+		A_EEG1.value = StoN2(w.substr(x+7,2));
+		A_EEG2.value = StoN2(w.substr(x+9,2));
+		A_EEF1.value = StoN2(w.substr(x+11,2));
+		A_EEF2.value = StoN2(w.substr(x+13,2));
+		x+=14;
+
+		// [Custom TalonRO - 2018-07-14 - Load URL for El Dicaste Enchants] [NattWara]
+		A_EDG1.value = StoN2(w.substr(x+1,2));
+		A_EDG2.value = StoN2(w.substr(x+3,2));
+		A_EDG3.value = StoN2(w.substr(x+5,2));
+		A_EDF1.value = StoN2(w.substr(x+7,2));
+		A_EDF2.value = StoN2(w.substr(x+9,2));
+		A_EDF3.value = StoN2(w.substr(x+11,2));
+		A_EDAC11.value = StoN2(w.substr(x+13,2));
+		A_EDAC12.value = StoN2(w.substr(x+15,2));
+		A_EDAC13.value = StoN2(w.substr(x+17,2));
+		A_EDAC21.value = StoN2(w.substr(x+19,2));
+		A_EDAC22.value = StoN2(w.substr(x+21,2));
+		A_EDAC23.value = StoN2(w.substr(x+23,2));
+		A_EDLOED11.value = StoN2(w.substr(x+25,2));
+		A_EDLOED12.value = StoN2(w.substr(x+27,2));
+		A_EDLOED13.value = StoN2(w.substr(x+29,2));
+		A_EDLOED21.value = StoN2(w.substr(x+31,2));
+		A_EDLOED22.value = StoN2(w.substr(x+33,2));
+		A_EDLOED23.value = StoN2(w.substr(x+35,2));
+		x+=36;
+
+		// [Custom TalonRO - 2018-07-14 - Load URL for Mora Enchants] [NattWara]
+		A_MORAEA1.value = StoN2(w.substr(x+1,2));
+		A_MORAEA2.value = StoN2(w.substr(x+3,2));
+		A_MORAEA3.value = StoN2(w.substr(x+5,2));
+		A_MORAEG1.value = StoN2(w.substr(x+7,2));
+		A_MORAEG2.value = StoN2(w.substr(x+9,2));
+		A_MORAEG3.value = StoN2(w.substr(x+11,2));
+		A_MORAEAC11.value = StoN2(w.substr(x+13,2));
+		A_MORAEAC12.value = StoN2(w.substr(x+15,2));
+		A_MORAEAC13.value = StoN2(w.substr(x+17,2));
+		A_MORAEAC21.value = StoN2(w.substr(x+19,2));
+		A_MORAEAC22.value = StoN2(w.substr(x+21,2));
+		A_MORAEAC23.value = StoN2(w.substr(x+23,2));
+		x+=24;
 
 		calc();
 
@@ -6932,15 +8914,57 @@ with(document.calcForm){
 
 		B_Enemy.value = StoN2(w.substr(x+7,2));
 
-
 		calc();
 	}
 }}
 
 JobName =
-["Novice","Swordsman","Thief","Acolyte","Archer","Magician","Merchant","Knight","Assassin","Priest","Hunter","Wizard","Blacksmith","Crusader","Rogue","Monk","Bard","Dancer","Sage","Alchemist",
-"Super Novice","Lord Knight","Assassin Cross","High Priest","Sniper","High Wizard","Whitesmith","Paladin","Stalker","Champion","Clown","Gypsy","Professor","Creator",
-"High Novice","High Swordsman","High Thief","High Acolyte","High Archer","High Magician","High Merchant","Taekwon Kid","Star Gladiator","Soul Linker","Ninja","Gunslinger"];
+["Novice", //0
+"Swordsman", //1
+"Thief", //2
+"Acolyte", //3
+"Archer", //4
+"Magician", //5
+"Merchant", //6
+"Knight", //7
+"Assassin", //8
+"Priest", //9
+"Hunter", //10
+"Wizard", //11
+"Blacksmith", //12
+"Crusader", //13
+"Rogue", //14
+"Monk", //15
+"Bard", //16
+"Dancer", //17
+"Sage", //18
+"Alchemist", //19
+"Super Novice", //20
+"Lord Knight", //21
+"Assassin Cross", //22
+"High Priest", //23
+"Sniper", //24
+"High Wizard", //25
+"Whitesmith", //26
+"Paladin", //27
+"Stalker", //28
+"Champion", //29
+"Clown", //30
+"Gypsy", //31
+"Professor", //32
+"Creator", //33
+"High Novice", //34
+"High Swordsman", //35
+"High Thief", //36
+"High Acolyte", //37
+"High Archer", //38
+"High Magician", //39
+"High Merchant", //40
+"Taekwon Kid", //41
+"Star Gladiator", //42
+"Soul Linker", //43
+"Ninja", //44
+"Gunslinger"]; //45
 
 for (i=0;i<=45;i++)
 	document.calcForm.A_JOB.options[i] = new Option(JobName[i],i);
@@ -7040,6 +9064,7 @@ for(i=0;i<=72;i++)
 //original
 //var HSEname = ["STR","AGI","VIT","INT","DEX","LUK"];
 //new:
+/*
 var HSEname = ["STR","AGI","VIT","INT","DEX","LUK","DEF","MDEF","CRIT","ASPD","FLEE","HIT"];
 document.calcForm.A_HSE.options[0] = new Option("(Hidden Slot Enchant, Armor)",0);
 var iHSE=1;
@@ -7072,8 +9097,12 @@ for(var j=1;j<=3;j++){
 	document.calcForm.A_HSE.options[iHSE] = new Option(HSEname[11] + "+"+ j*4,(11 * 10) + j);
 	iHSE++;
 }
+*/
 //end - custom TalonRO extra enchants
+
+
 //Enchant Headgear thing
+var HSEname = ["STR","AGI","VIT","INT","DEX","LUK","DEF","MDEF","CRIT","ASPD","FLEE","HIT"];
 document.calcForm.A_HSE_HEAD1.options[0] = new Option("(Hidden Slot Enchant, Headgear)",0);
 var iHSE=1;
 for(i=0;i<=5;i++){
@@ -7122,8 +9151,12 @@ n_A_PassSkill8 = new Array();
 for(i=0;i<=27;i++)
 	n_A_PassSkill8[i] = 0;
 
-	n_A_PassSkill8[3] = 7; //[Custom TalonRO - 6/4/2018 - Fixed the default value for BaseEXP to 8x] [Kato]
-	n_A_PassSkill8[7] = 7; //[Custom TalonRO - 6/4/2018 - Fixed the default value for JobEXP to 8x] [Kato]
+n_A_PassSkill8[3] = 7; //[Custom TalonRO - 6/4/2018 - Fixed the default value for BaseEXP to 8x] [Kato]
+n_A_PassSkill8[7] = 7; //[Custom TalonRO - 6/4/2018 - Fixed the default value for JobEXP to 8x] [Kato]
+
+//updated def reduction when mobbed [Loa] 2018-07-24
+n_A_PassSkill8[33] = 0;
+n_A_PassSkill8[34] = 0;
 
 n_A_PassSkill9 = new Array();
 for(i=0;i<=52;i++)
@@ -7174,6 +9207,9 @@ for(i=0;i<ITEM_SP_TIME_OBJ.length;i++){
 	}
 }
 
+//[Custom TalonRO - 2018-06-03 - Populate combos in index] [Kato]
+tRO_PopulateCombos();
+
 document.calcForm.A_JOB.value = 0;
 ClickJob(0);
 if(Taijin==0)
@@ -7181,12 +9217,9 @@ if(Taijin==0)
 StCalc();
 calc();
 
-//[Custom TalonRO - 2018-06-03 - Populate combos in index] [Kato]
-tRO_PopulateCombos();
-
 LoadCookie3();
-LoadCookieConf();
-LoadCookieChangelogDisplay();
+//LoadCookieConf();
+//LoadCookieChangelogDisplay();
 URLIN();
 
 Click_Skill3SW();

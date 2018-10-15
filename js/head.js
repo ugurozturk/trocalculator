@@ -1,3 +1,4 @@
+debugMode = 0;
 n_Nitou=0;
 n_Tensei=0;
 n_Ses=0;
@@ -60,6 +61,32 @@ EQB = [0,0,0];
 //custom TalonRO fix ignore effects on left/offhand like Ice Pick or Weeder Knife
 IgnoreEffectOnLeftHand = 0;
 
+//[Custom TalonRO 2018-06-15 - Global for Malangdo Enchants values] [Kato]
+tRO_MalangdoEnchantment = [0,0,0,0];
+
+//[Custom TalonRO 2018-07-10 - Global for Biolab Weapon Enchants values] [NattWara]
+tRO_BiolabWeaponEnchantment = [0,0,0,0];
+
+//[Custom TalonRO 2018-07-12 - Global for Eden Weapon Enchants values] [NattWara]
+tRO_EdenWeaponEnchantment = [0,0,0,0,0,0];
+
+//[Custom TalonRO 2018-07-10 - Global for Biolab Armor Enchants values] [NattWara]
+//[Headgear1,Headgear2,Armor1,Armor2,Shield1,Shield2,Garment1,Garment2,Acc1_1,Acc1_2,Acc2_1,Acc2_2]
+tRO_BiolabArmorEnchantment = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+//[Custom TalonRO 2018-07-12 - Global for Eden Armor Enchants values] [NattWara]
+//[Hat,Armor1,Armor2,Garment1,Garment2,Footgear1,Footgear2]
+tRO_EdenArmorEnchantment = [0,0,0,0,0,0,0];
+
+//[Custom TalonRO 2018-07-12 - Global for El Dicaste Enchants values] [NattWara]
+//[Garment1,Garment2,Garment3,Footgear1,Footgear2,Footgear3,Accessory1_1,Accessory1_2,Accessory1_3,Accessory2_1,Accessory2_2,Accessory2_3]
+//Added values new values for Golden Trickle so it's not overwritten by Light of El Dicastes [Loa]
+tRO_EDEnchantment = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+//[Custom TalonRO 2018-07-12 - Global for Mora Enchants values] [NattWara]
+//[Armor1,Armor2,Armor3,Garment1,Garment2,Garment3,Accessory1_1,Accessory1_2,Accessory1_3,Accessory2_1,Accessory2_2,Accessory2_3]
+tRO_MoraEnchantment = [0,0,0,0,0,0,0,0,0,0,0,0];
+
 function myInnerHtml(wIH1,wIH2,wIH3)
 {
 	if(wIH3 == 0){
@@ -75,7 +102,7 @@ function myInnerHtml(wIH1,wIH2,wIH3)
 	}
 }
 
-WeaponName = ["Unarmed","Dagger","Sword","Two-handed Sword","Spear","Two-handed Spear","Axe","Two-handed Axe","Mace","Rod","Bow","Katar","Book","Knuckle","Instrument","Whip","Huuma Shuriken","Handgun","Rifle","Shotgun","Gatling Gun","Grenade Launcher"];
+WeaponName = ["Unarmed","Dagger","Sword","Two-handed Sword","Spear","Two-handed Spear","Axe","Two-handed Axe","Mace","Staff","Bow","Katar","Book","Knuckle","Instrument","Whip","Huuma Shuriken","Revolver","Rifle","Shotgun","Gatling Gun","Grenade Launcher"];
 
 ArrowOBJ = [
 [25,0,"Arrow"],//0
@@ -144,40 +171,40 @@ KunaiOBJ = [
 ];
 
 JobEquipItemOBJ = [
-[0,50,90,100,999],
-[0, 1, 51,101, 70, 71, 72, 74, 75,78,83,84,85,86,87,90,91,999],
-[0, 1, 52,102, 72, 74, 75,78, 80,83,84,85,90,91,999],
-[0, 1, 53,103, 71, 73, 74, 77,78,85,89,152,999],//Acolyte //custom TalonRO (152) Diadem of Bruenhild
-[0, 1, 54,104, 75, 76,83,89,999],
-[0, 1, 55,105, 71, 77,89,152,999],//Magician //custom TalonRO (152) Diadem of Bruenhild
-[0, 1, 56,106, 70, 71, 72, 73, 74, 75,78,83,84,85,86,90,91,999],
-[0, 1, 51, 61,107, 70, 71, 72, 74, 75,78,79,83,84,85,86,87,90,91,999],
-[0, 1, 52, 62,108, 72, 74, 75,78,79,81,83,84,85,90,91,999],
+[0,50,90,100,999], //Novice
+[0, 1, 51,101, 70, 71, 72, 74, 75,78,83,84,85,86,87,90,91,999], //Swordman
+[0, 1, 52,102, 72, 74, 75,78, 80,83,84,85,90,91,92,999], //Thief
+[0, 1, 53,103, 71, 73, 74, 77,78,85,89,152,999], //Acolyte
+[0, 1, 54,104, 75, 76,83,89,92,999], //Archer
+[0, 1, 55,105, 71, 77,89,152,999], //Mage
+[0, 1, 56,106, 70, 71, 72, 73, 74, 75,78,83,84,85,86,90,91,999], //Merchant
+[0, 1, 51, 61,107, 70, 71, 72, 74, 75,78,79,83,84,85,86,87,90,91,999], //Knight
+[0, 1, 52, 62,108, 72, 74, 75,78,79,81,83,84,85,90,91,999], //Assassin
 [0, 1, 53, 63,109, 71, 73, 74, 77,78,79,81,85,89,999], //Priest
-[0, 1, 54, 64,110, 75, 76,79,80,83,88,89,999],
+[0, 1, 54, 64,110, 75, 76,79,80,83,88,89,92,999], //Hunter
 [0, 1, 55, 65,111, 71, 77,79,89,999], //Wizard
-[0, 1, 56, 66,112, 70, 71, 72, 73, 74, 75,78,79,83,84,85,86,90,91,999],
-[0, 1, 51, 61,113, 70, 71, 72, 74, 75,78,79,83,84,85,86,87,90,91,999],
-[0, 1, 52, 62,114, 72, 74, 75, 76,78,79,80,83,84,85,88,91,999],
-[0, 1, 53, 63,115, 71, 73, 74, 77,78,79,85,89,999],
-[0, 1, 54, 64,116, 74, 75, 76,79,83,89,999],
-[0, 1, 54, 64,117, 74, 75, 76,79,83,89,999],
-[0, 1, 55, 65,118, 71, 77,79,89,999],
-[0, 1, 56, 66,119, 70, 71, 72, 73, 74, 75,78,79,83,84,85,86,90,91,999],
-[0,50,90,120,999],
-[0, 1, 51, 61,107,121, 70, 71, 72, 74, 75,78,79,82,83,84,85,86,87,90,91,999],
-[0, 1, 52, 62,108,122, 72, 74, 75,78,79,81,82,83,84,85,90,91,999],
-[0, 1, 53, 63,109,123, 71, 73, 74, 77,78,79,81,82,85,89,151,152,999],//High Priest //custom TalonRO (151) SQI Bonus for Salvage Cape //custom TalonRO (152) Diadem of Bruenhild
-[0, 1, 54, 64,110,124, 75, 76,79,80,82,83,88,89,999],
-[0, 1, 55, 65,111,125, 71, 77,79,82,89,151,152,999],//High Wizard //custom TalonRO (151) SQI Bonus for Salvage Cape //custom TalonRO (152) Diadem of Bruenhild
-[0, 1, 56, 66,112,126, 70, 71, 72, 73, 74, 75,78,79,82,83,84,85,86,90,91,999],
-[0, 1, 51, 61,113,127, 70, 71, 72, 74, 75,78,79,82,83,84,85,86,87,90,91,999],
-[0, 1, 52, 62,114,128, 72, 74, 75, 76,78,79,80,82,83,84,85,88,91,999],
-[0, 1, 53, 63,115,129, 71, 73, 74,77,78,79,82,85,89,152,999],//Champion //custom TalonRO (152) Diadem of Bruenhild
-[0, 1, 54, 64,116,130, 74, 75, 76,79,82,83,89,153,999],//Clown
-[0, 1, 54, 64,117,131, 74, 75, 76,79,82,83,89,153,999],//Gypsy
-[0, 1, 55, 65,118,132, 71,77,79,82,89,152,999],//Professor //custom TalonRO (152) Diadem of Bruenhild
-[0, 1, 56, 66,119,133, 70, 71, 72, 73, 74, 75,78,79,82,83,84,85,86,90,91,999],
+[0, 1, 56, 66,112, 70, 71, 72, 73, 74, 75,78,79,83,84,85,86,90,91,999], //Blacksmith
+[0, 1, 51, 61,113, 70, 71, 72, 74, 75,78,79,83,84,85,86,87,90,91,999], //Crusader
+[0, 1, 52, 62,114, 72, 74, 75, 76,78,79,80,83,84,85,88,91,92,999], //Rogue
+[0, 1, 53, 63,115, 71, 73, 74, 77,78,79,85,89,999], //Monk
+[0, 1, 54, 64,116, 74, 75, 76,79,83,89,92,999], //Bard
+[0, 1, 54, 64,117, 74, 75, 76,79,83,89,92,999], //Dancer
+[0, 1, 55, 65,118, 71, 77,79,89,999], //Sage
+[0, 1, 56, 66,119, 70, 71, 72, 73, 74, 75,78,79,83,84,85,86,90,91,999], //Alchemist
+[0,50,90,120,999], //High Novice
+[0, 1, 51, 61,107,121, 70, 71, 72, 74, 75,78,79,82,83,84,85,86,87,90,91,999], //Lord Knight
+[0, 1, 52, 62,108,122, 72, 74, 75,78,79,81,82,83,84,85,90,91,999], //Assassin Cross
+[0, 1, 53, 63,109,123, 71, 73, 74, 77,78,79,81,82,85,89,151,152,999], //High Priest
+[0, 1, 54, 64,110,124, 75, 76,79,80,82,83,88,89,92,999], //Sniper
+[0, 1, 55, 65,111,125, 71, 77,79,82,89,151,152,999], //High Wizard
+[0, 1, 56, 66,112,126, 70, 71, 72, 73, 74, 75,78,79,82,83,84,85,86,90,91,999], //Whitesmith
+[0, 1, 51, 61,113,127, 70, 71, 72, 74, 75,78,79,82,83,84,85,86,87,90,91,999], //Paladin
+[0, 1, 52, 62,114,128, 72, 74, 75, 76,78,79,80,82,83,84,85,88,91,92,999], //Stalker
+[0, 1, 53, 63,115,129, 71, 73, 74,77,78,79,82,85,89,152,999], //Champion
+[0, 1, 54, 64,116,130, 74, 75, 76,79,82,83,89,153,92,999], //Clown
+[0, 1, 54, 64,117,131, 74, 75, 76,79,82,83,89,153,92,999], //Gypsy
+[0, 1, 55, 65,118,132, 71,77,79,82,89,152,999], //Professor
+[0, 1, 56, 66,119,133, 70, 71, 72, 73, 74, 75,78,79,82,83,84,85,86,90,91,999], //Creator
 [0],
 [0],
 [0],
@@ -185,25 +212,25 @@ JobEquipItemOBJ = [
 [0],
 [0],
 [0],
-[0, 1,141, 83,84,85,86,150,999], //Taekwon Kid //custom TalonRO (150) SQI Bonus for Eversong Greaves
-[0, 1,142, 79,83,84,85,86,87,91,150,999], //Star Gladiator //custom TalonRO (150) SQI Bonus for Eversong Greaves
-[0, 1,143, 55, 65,111, 71, 77,79,89,999],
-[0, 1,144, 58, 52,91,999],
-[0, 1,145, 59, 83,145,999],
+[0, 1,141, 83,84,85,86,150,999], //Taekwon Kid //custom
+[0, 1,142, 79,83,84,85,86,87,91,150,999], //Star Gladiator
+[0, 1,143, 55, 65, 71, 77,79,89,999], //Soul Linker
+[0, 1,144, 58, 52,91,999], //Ninja
+[0, 1,145, 59, 83,145,999], //Gunslinger
 ];
 
 /*
-	JobEquipItemOBJ values:
+	JobEquipItemOBJ values - [Loa] - 2018-06-03
 
 		0 = all jobs
 		1 = every job except novice
 
 		50 = novice
 		51 = swordman class
-		52 = thief class
+		52 = thief class, ninja
 		53 = acolyte class
 		54 = archer class
-		55 = mage class
+		55 = mage class, soul linker
 		56 = merchant class
 		58 = ninja
 		59 = gunslinger
@@ -237,6 +264,7 @@ JobEquipItemOBJ = [
 		89 = mage class, acolyte class, archer class, soul linker
 		90 = novice, swordman class, merchant class, thief, assassin
 		91 = swordman class, merchant class, thief class, star gladiator, ninja
+		92 = archer class, thief, rogue
 
 		100 = novice ONLY
 		101 = swordman ONLY
@@ -281,16 +309,20 @@ JobEquipItemOBJ = [
 		144 = ninja
 		145 = gunslinger
 		150 = taekwon, star gladiator //for SQI
+		151 = priest, wizard
+		152 = mage ONLY, acolyte ONLY, high priest, high wizard, champion, professor
 
 	Unless otherwise stated, upper classes are included.
 		Example 1: 109 = priest //includes high priest
 		Example 2: 80 = thief, hunter, rogue //does not include assassin
+		Example 3: 101 = swordman ONLY //no other classes included
 	Adding 1000 makes it rebirth classes only.
 		Example 1: 1 = every job except novice, 1001 = every rebirth job except high novice
 		Example 2: 51 = swordman class, 1051 = trans swordman class
 	If a class cannot equip an item type, even if the JobEquipItemOBJ value includes that class, it will not show up in the calculator
 		For example: the JobEquipItemOBJ value of Jamadhar (id:112) is 0 (all classes)
 		Since only assassins can equip katars, the item will only be an option for assassins in the calculator since no other classes can choose a katar as the weapon
+	To add new jobids, simply add the new value to the subarrays in JobEquipItemOBJ for the classes that should be able to equip the item
 */
 
 SyuzokuOBJ = ["Formless","Undead","Brute","Plant","Insect","Fish","Demon","Demi-Human","Angel","Dragon"];
@@ -1736,7 +1768,10 @@ function BattleCalc999()
 			wbairitu += 8 + (n_A_MaxSP-1) /10;
 
 		//custom TalonRO fix (checked rAthena calculation)
-		wbairitu += 1;
+		//wbairitu += 1;
+
+		//[Custom TalonRO - 2018-07-09 fix asura damage] [NattWara/Loa]
+		wbairitu = Math.floor(wbairitu);
 
 		wASYU = 250 + n_A_ActiveSkillLV * 150;
 
@@ -1757,7 +1792,27 @@ function BattleCalc999()
 			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
 				w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
-			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b] + EDP_DMG(b);
+			//Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b] + EDP_DMG(b);
+			w_DMG[b] += EDP_DMG(b);
+
+			//[Custom TalonRO - 2018-07-09 Soft-Cap Asura damage above 200k] [NattWara/Loa]
+			//100% accurate for below 200k damage.
+			//~1% error for 200k-400k damage.
+			//No data available for above 400k damage.
+
+			if(w_DMG[b] > 200000){
+				var AsuraExcessD = w_DMG[b] - 200000;
+				var AsuraNerfD = (0.5963 - 0.1471) * Math.exp(-0.000002230 * AsuraExcessD) + 0.1471;
+				w_DMG[b] = Math.floor(200000 + (AsuraExcessD * AsuraNerfD));
+			}
+
+			//Lex Aeterna for Asura Strike after soft-cap
+			if(n_B_IJYOU[6] && wLAch==0){
+				w_DMG[b] *= 2;
+			}
+
+			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b]
+
 			InnStr[b] += Last_DMG_A[b];
 		}
 
@@ -2157,24 +2212,28 @@ function BattleCalc999()
 		n_Enekyori=2;
 		wbairitu = 1;
 		n_bunkatuHIT = 0;
+		//fire bolt
 		if(n_A_ActiveSkill==51){
 			n_A_Weapon_zokusei = 3;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2] = 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
+		//cold bolt
 		else if(n_A_ActiveSkill==54){
 			n_A_Weapon_zokusei = 1;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2]= 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
+		//lightning bolt
 		else if(n_A_ActiveSkill==56){
 			n_A_Weapon_zokusei = 4;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2] = 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
+		//fire ball
 		else if(n_A_ActiveSkill==52){
 			n_A_Weapon_zokusei = 3;
 			if(n_A_ActiveSkillLV <=5){
@@ -2193,6 +2252,7 @@ function BattleCalc999()
 			n_Delay[2] = 0.1;
 			wbairitu = 0.5;
 		}
+		//frost diver
 		else if(n_A_ActiveSkill==55){
 			n_A_Weapon_zokusei = 1;
 			wCast = 0.8;
@@ -2223,6 +2283,7 @@ function BattleCalc999()
 				n_Delay[2] = 1;
 			wbairitu = 0.7 + n_A_ActiveSkillLV * 0.1;
 		}
+		//soul strike
 		else if(n_A_ActiveSkill==47){
 			n_A_Weapon_zokusei = 8;
 			wHITsuu = Math.round(n_A_ActiveSkillLV / 2);
@@ -2497,19 +2558,26 @@ function ATKbai01()
 			wA01 += 10;
 		if(StPlusCalc2(87))
 			wA01 += StPlusCalc2(87);
-		//custom TalonRO Kris enchant %-ATK
+
+		//Note - Issue#252
+		//Moved to foot.js
+		//custom TalonRO Kris enchant ATK%
+		/*
 		var KEbonus = [document.calcForm.A_KE11.value,document.calcForm.A_KE12.value,document.calcForm.A_KE21.value,document.calcForm.A_KE22.value];
-		for (i=0;i<4;i++){
+		for (i=0;i<KEbonus.length;i++){
 			var wKE = KEbonus[i];
 			if(wKE){
-				var w_enchant = wKE % 10;
-				if(81 <= wKE && wKE <= 89)
-					wA01 += w_enchant*3;
+				if(171 <= wKE && wKE <= 179)
+					wA01 += parseInt(wKE.substr(-1));
 			}
-		}
+		}*/
+		//Note - Issue#252
+		//Moved to foot.js
 		//custom TalonRO Evil Marching Hat: if refine rate >=9 +5% ATK
+		/*
 		if(EquipNumSearch(1539) && n_A_HEAD_DEF_PLUS >= 9)
 			wA01 += 5;
+		*/
 
 		if(n_A_IJYOU[3])
 			wA01 -= 25;
@@ -2645,7 +2713,7 @@ function HealCalc(HealLv,HealType)
 	if(HealType == 1)
 		wX += n_tok[92];
 	if(EquipNumSearch(644))
-		wX += Math.floor(n_A_Weapon_ATKplus * 1.5);
+		wX += n_A_Weapon_ATKplus * 1.5;
 	//custom TalonRO Recovery Light
 	if(EquipNumSearch(1511))
 		wX += Math.floor(n_A_Weapon_ATKplus * 3);
@@ -2944,7 +3012,7 @@ function BattleHiDam(){
 		}
 	}
 	//custom TalonRO SQI Bonus Sherwood Bow: 15% Melee resistance
-	if(n_B[20]==0)
+	if(n_B[20]==0){
 		if(EquipNumSearch(1388))
 			for(i=0;i<SQI_Bonus_Effect.length;i++)
 				if(SQI_Bonus_Effect[i]==135) {
@@ -2952,7 +3020,16 @@ function BattleHiDam(){
 						w_HiDam[j] -= Math.floor(w_HiDam[j] * 15 /100);
 					break;
 				}
-
+	}
+	//Port Malaya set damage reduction - [Loa] - 2018-06-29
+	portMalayaMob = [596,597,598,599,600,601,602,603,671,672,673,674,676,677]
+	if(EquipNumSearch(1017)){
+		if(portMalayaMob.includes(n_B[0])){
+			for(i=0;i<=6;i++){
+				w_HiDam[i] -= Math.floor(w_HiDam[i] * 30 / 100);
+			}
+		}
+	}
 
 	if(n_B[19]==1){
 		for(i=0;i<=6;i++)
@@ -3091,8 +3168,8 @@ function BattleMagicCalc(wBMC)
 	if(90 <= n_B[3] && n_A_ActiveSkill==47)
 		wBMC2 = Math.floor(wBMC2 * (1 + 0.05 * n_A_ActiveSkillLV));
 
-
 	var wX = n_tok[170+n_B[2]];
+	wX += n_tok[350+Math.floor(n_B[3]/10)];
 	if(n_B[2]==9  && SkillSearch(234))
 		wX += SkillSearch(234) *2;
 	wBMC2 = wBMC2 * (100 + wX) /100;
@@ -3105,20 +3182,20 @@ function BattleMagicCalc(wBMC)
 			wX += 20 * CardNumSearch(474);
 	if(n_A_ActiveSkill==132 || n_A_ActiveSkill==133)
 		if(EquipNumSearch(1146))
-			wX += n_A_HEAD_DEF_PLUS;
+			wX += n_A_Weapon_ATKplus;
 	if(n_A_ActiveSkill==131)
 		if(EquipNumSearch(1169))
 			wX += n_A_Weapon_ATKplus;
-		
+
 	//Custom TalonRO - 2018-06-07 - Chilly Spell Book - Storm Gust & Cold Bolt damage +3% per refine [Nattwara]
 	if(n_A_ActiveSkill==54 || n_A_ActiveSkill==131)
 		if(EquipNumSearch(1653))
 			wX += (3 * n_A_Weapon_ATKplus);
-		
+
 	if(n_A_ActiveSkill==37||n_A_ActiveSkill==387){
 		if(n_A_JobSearch() == 3 && EquipNumSearch(1247)){
 			wX += 5;
-			if(n_A_HEAD_DEF_PLUS >= 7)
+			if(n_A_HEAD_DEF_PLUS > 7)
 				wX += 5;
 		}
 	}
@@ -3205,7 +3282,7 @@ with(document.calcForm){
 	j = 0;
 	for (i=0; i<=21; i++)
 	{
-		if(JobASPD[n][i] != 0)
+		if(JobASPD[n][i] != 0  || debugMode == 1)
 		{
 			A_WeaponType.options[j] = new Option(WeaponName[i],i);
 			j++;
@@ -3290,6 +3367,7 @@ with(document.calcForm){
 
 	ClickActiveSkill();
 	WeaponSet2();
+	VanillaArmor();
 
 	//custom TalonRO SQI Bonus interface - reset SQI-Bonus after class-change
 	SQI_Bonus_SW.checked=0;
@@ -3351,7 +3429,6 @@ with(document.calcForm){
 	}
 	WeaponSet();
 
-
 	if(n == 0){
 		myInnerHtml("A_seirenchi_name","",0);
 		A_Weapon_ATKplus.style.visibility = "hidden";
@@ -3363,9 +3440,11 @@ with(document.calcForm){
 	}
 
 	n_A_JobSet();
+
 	if((n_A_JOB == 8 || n_A_JOB == 22) && n != 11){
-		if(n_Nitou == 0)
+		if(n_Nitou == 0){
 			myInnerHtml("A_SobWeaponName","Left Hand: "+'<select name="A_Weapon2Type" onChange = "ClickWeaponType2(this[this.selectedIndex].value) | StAllCalc()">	<option value="0">Fist or Shield<option value="1">Dagger<option value="2">Sword<option value="6">Axe</select>',0);
+		}
 	}
 	else{
 		myInnerHtml("A_SobWeaponName","",0);
@@ -3381,16 +3460,36 @@ with(document.calcForm){
 		A_left.style.visibility = "visible"
 		A_left_card.style.visibility = "visible"
 	}
+
+	//hide shield when using two-handed weapons - [Loa] - 2018-06-29
+	if(n == 3 || n == 5 || n == 7 || n == 10 || n == 11 || n == 16 || n == 17 || n == 18 || n == 19 || n == 20 || n == 21){
+		A_LEFT_DEF_PLUS.style.visibility = "hidden";
+		A_LEFT_DEF_PLUS.value = 0;
+		A_left.style.visibility = "hidden";
+		A_left.value = 305;
+		A_left_card.style.visibility = "hidden";
+		A_left_card.value = 0;
+	}
+	//n_Nitou == 0 means no off-hand weapon for assasins equipped
+	else if(n_Nitou == 0){
+		A_LEFT_DEF_PLUS.style.visibility = "visible";
+		A_left.style.visibility = "visible";
+		A_left_card.style.visibility = "visible";
+	}
+
 	n_A_Equip[0] = eval(A_weapon1.value);
 	ActiveSkillSetPlus();
 	ClickB_Item(n_A_Equip[0]);
 }}
 
-
 function ClickWeaponType2(n){
 with(document.calcForm){
 
 	n_A_JobSet();
+	//document.getElementById("T_WDiv2").style.display = ((n != 0) ? "" : "none");
+	document.getElementById("T_W2").style.display = ((n != 0) ? "" : "none");
+	document.getElementById("T_WC2").style.display = ((n != 0) ? "" : "none");
+
 	if(n != 0){
 		if(n_Nitou == 0){
 			myInnerHtml("spanA_weapon2",'Left hand: <select name="A_weapon2"onChange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)"></select>',0);
@@ -3404,14 +3503,8 @@ with(document.calcForm){
 			myInnerHtml("nA_weapon2_c3",'<select name="A_weapon2_card3"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)"></select>',0);
 			myInnerHtml("nA_weapon2_c4",'<select name="A_weapon2_card4"onChange="StAllCalc()|Click_Card(this[this.selectedIndex].value)"></select>',0);
 
-			for(i=0;CardSortOBJ[0][i]!="NULL";i++)
-				A_weapon2_card1.options[i] = new Option(cardOBJ[CardSortOBJ[0][i]][2],cardOBJ[CardSortOBJ[0][i]][0]);
-			for(i=0;CardSortOBJ[1][i]!="NULL";i++){
-				A_weapon2_card2.options[i] = new Option(cardOBJ[CardSortOBJ[1][i]][2],cardOBJ[CardSortOBJ[1][i]][0]);
-				A_weapon2_card3.options[i] = new Option(cardOBJ[CardSortOBJ[1][i]][2],cardOBJ[CardSortOBJ[1][i]][0]);
-				A_weapon2_card4.options[i] = new Option(cardOBJ[CardSortOBJ[1][i]][2],cardOBJ[CardSortOBJ[1][i]][0]);
-			}
-			A_weapon2_card4.options[4] = new Option("Top10",106);
+			PopulateCardsLeft();
+			VanillaCardLeft();
 
 			A_LEFT_DEF_PLUS.style.visibility = "hidden";
 			A_LEFT_DEF_PLUS.value = 0;
@@ -4412,6 +4505,8 @@ with(document.calcForm){
 		str += '<TR><TD colspan="2" id="EN809"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Stuff</B></Font></TD></TR>';
 		str += '<TR><TD id="EN810"></TD><TD id="EN811"></TD></TR>';
+		str += '<TR><TD id="EN838"></TD><TD id="EN839"></TD></TR>';
+		str += '<TR><TD id="EN840"></TD><TD id="EN841"></TD></TR>';
 		str += '<TR><TD id="EN812"></TD><TD id="EN813"></TD></TR>';
 		str += '<TR><TD id="EN814"></TD><TD id="EN815"></TD></TR>';
 		str += '<TR><TD id="EN807"></TD></TR>';
@@ -4500,9 +4595,16 @@ with(document.calcForm){
 			A8_Skill10.options[i] = new Option(ITEM_SP_TIME_OBJ_copy[i][1] +" ["+ ITEM_SP_TIME_OBJ_copy[i][2] +"]",ITEM_SP_TIME_OBJ_copy[i][0]);
 			A8_Skill11.options[i] = new Option(ITEM_SP_TIME_OBJ_copy[i][1] +" ["+ ITEM_SP_TIME_OBJ_copy[i][2] +"]",ITEM_SP_TIME_OBJ_copy[i][0]);
 		}
-		myInnerHtml("EN810",'Number of Enemies hitting you <select name="A8_Skill12" onChange="Click_A8(1)"></select>',0);
-		for(i=0;i<=22;i++)
+		//updated def reduction based on mob number [Loa] 2018-07-24
+		myInnerHtml("EN810",'Number of Normal Enemies hitting you <select name="A8_Skill12" onChange="Click_A8(1)"></select>',0);
+		for(i=0;i<=34;i++)
 			A8_Skill12.options[i] = new Option(i + "",i);
+		myInnerHtml("EN838",'Number of Boss Type Enemies hitting you <select name="A8_Skill33" onChange="Click_A8(1)"></select>',0);
+		for(i=0;i<=17;i++)
+			A8_Skill33.options[i] = new Option(i + "",i);
+		myInnerHtml("EN840",'Number of MVP Enemies hitting you <select name="A8_Skill34" onChange="Click_A8(1)"></select>',0);
+		for(i=0;i<=12;i++)
+			A8_Skill34.options[i] = new Option(i + "",i);
 
 
 		myInnerHtml("EN812",'Special Environment <select name="A8_Skill14" onChange="Click_A8(1)"></select>',0);
@@ -4564,6 +4666,8 @@ with(document.calcForm){
 		A8_Skill10.value = n_A_PassSkill8[10];
 		A8_Skill11.value = n_A_PassSkill8[11];
 		A8_Skill12.value = n_A_PassSkill8[12];
+		A8_Skill33.value = n_A_PassSkill8[33];
+		A8_Skill34.value = n_A_PassSkill8[34];
 
 		A8_Skill14.value = n_A_PassSkill8[14];
 		A8_Skill15.value = n_A_PassSkill8[15];
@@ -4698,38 +4802,32 @@ function Click_SQI_Bonus(n){
 function Click_KrisEnchantment(){
 with(document.calcForm){
 	if(A_weapon1.value == 1472){
-		myInnerHtml("A_KEText11","Kris Enchantment 1",0);
-		A_KE11.style.visibility = "visible";
-		myInnerHtml("A_KEText12","Kris Enchantment 2",0);
-		A_KE12.style.visibility = "visible";
+		document.getElementById("T_KE1").style.display = "";
 	}
 	else{
-		myInnerHtml("A_KEText11","",0);
-		A_KE11.style.visibility = "hidden";
+		document.getElementById("T_KE1").style.display = "none";
 		A_KE11.value = 0;
-		myInnerHtml("A_KEText12","",0);
-		A_KE12.style.visibility = "hidden";
 		A_KE12.value = 0;
 	}
 	if (typeof(A_weapon2) != "undefined"){
 		if(A_weapon2.value == 1472){
-			myInnerHtml("A_KEText21","Kris Enchantment 1",0);
-			A_KE21.style.visibility = "visible";
-			myInnerHtml("A_KEText22","Kris Enchantment 2",0);
-			A_KE22.style.visibility = "visible";
+			document.getElementById("T_KE2").style.display = "";
+		}
+		else
+		{
+			document.getElementById("T_KE2").style.display = "none";
+			A_KE21.value = 0;
+			A_KE22.value = 0;
 		}
 	}else{
-		myInnerHtml("A_KEText21","",0);
-		A_KE21.style.visibility = "hidden";
+		document.getElementById("T_KE2").style.display = "none";
 		A_KE21.value = 0;
-		myInnerHtml("A_KEText22","",0);
-		A_KE22.style.visibility = "hidden";
 		A_KE22.value = 0;
 	}
 }}
 /*[Custom TalonRO - 2018-06-03
 Function to populate combos by using definitions from etc.js;
-Definitions are: +0 to +10, Kris/HS Enchants, Extended Info and Card Shorcuts] [Kato]
+Definitions are: +0 to +10, Kris/HS/Malangdo Enchants, Extended Info and Card Shorcuts] [Kato]
 */
 function tRO_PopulateCombos() {
 	with(document.calcForm){
@@ -4745,9 +4843,16 @@ function tRO_PopulateCombos() {
 			A_SHOES_DEF_PLUS.options[i] = new Option("+"+i,i);
 		}
 
+		//Cards
 		for(i=0; i<CARD_SHORTCUT.length; i++) {
 			A_cardshort.options[i] = new Option(CARD_SHORTCUT[i][1],CARD_SHORTCUT[i][0]);
 		}
+
+		//Kris
+		myInnerHtml("A_KEText11","Kris Enchantment 1",0);
+		myInnerHtml("A_KEText12","Kris Enchantment 2",0);
+		myInnerHtml("A_KEText21","Kris Enchantment 1",0);
+		myInnerHtml("A_KEText22","Kris Enchantment 2",0);
 
 		A_KE11.options[0] = new Option("(Kris Enchantment "+ A_KE11.name.substr(-1) +")",0);
 		A_KE12.options[0] = new Option("(Kris Enchantment "+ A_KE12.name.substr(-1) +")",0);
@@ -4761,11 +4866,1263 @@ function tRO_PopulateCombos() {
 				A_KE22.options[i+1] = new Option(KRIS_ENCHANTMENT[i][1],KRIS_ENCHANTMENT[i][0]);
 		}
 
+		//Malangdo
+		myInnerHtml("A_METext11","Malangdo 1: ",0);
+		myInnerHtml("A_METext12","Malangdo 2: ",0);
+		myInnerHtml("A_METext21","Malangdo 1: ",0);
+		myInnerHtml("A_METext22","Malangdo 2: ",0);
+
+		A_ME11.options[0] = new Option("(Malangdo Enchant "+ A_ME11.name.substr(-1) +")",0);
+		A_ME12.options[0] = new Option("(Malangdo Enchant "+ A_ME12.name.substr(-1) +")",0);
+		A_ME21.options[0] = new Option("(Malangdo Enchant 2-"+ A_ME21.name.substr(-1) +")",0);
+		A_ME22.options[0] = new Option("(Malangdo Enchant 2-"+ A_ME22.name.substr(-1) +")",0);
+
+		for(i=0; i<MALANGDO_ENCHANTS.length; i++) {
+			A_ME11.options[i+1] = new Option(MALANGDO_ENCHANTS[i][1],MALANGDO_ENCHANTS[i][0]);
+			A_ME12.options[i+1] = new Option(MALANGDO_ENCHANTS[i][1],MALANGDO_ENCHANTS[i][0]);
+			A_ME21.options[i+1] = new Option(MALANGDO_ENCHANTS[i][1],MALANGDO_ENCHANTS[i][0]);
+			A_ME22.options[i+1] = new Option(MALANGDO_ENCHANTS[i][1],MALANGDO_ENCHANTS[i][0]);
+		}
+
+		//Biolab (Weapon)
+		myInnerHtml("A_BEText11","Biolab 1: ",0);
+		myInnerHtml("A_BEText12","Biolab 2: ",0);
+		myInnerHtml("A_BEText21","Biolab 1: ",0);
+		myInnerHtml("A_BEText22","Biolab 2: ",0);
+
+		A_BE11.options[0] = new Option("(Biolab Enchant "+ A_BE11.name.substr(-1) +")",0);
+		A_BE12.options[0] = new Option("(Biolab Enchant "+ A_BE12.name.substr(-1) +")",0);
+		A_BE21.options[0] = new Option("(Biolab Enchant 2-"+ A_BE21.name.substr(-1) +")",0);
+		A_BE22.options[0] = new Option("(Biolab Enchant 2-"+ A_BE22.name.substr(-1) +")",0);
+
+		for(i=0; i<BIOLAB_ENCHANTS_WEAPON.length; i++) {
+			A_BE11.options[i+1] = new Option(BIOLAB_ENCHANTS_WEAPON[i][1],BIOLAB_ENCHANTS_WEAPON[i][0]);
+			A_BE12.options[i+1] = new Option(BIOLAB_ENCHANTS_WEAPON[i][1],BIOLAB_ENCHANTS_WEAPON[i][0]);
+			A_BE21.options[i+1] = new Option(BIOLAB_ENCHANTS_WEAPON[i][1],BIOLAB_ENCHANTS_WEAPON[i][0]);
+			A_BE22.options[i+1] = new Option(BIOLAB_ENCHANTS_WEAPON[i][1],BIOLAB_ENCHANTS_WEAPON[i][0]);
+		}
+
+		//Biolab (Headgear)
+		myInnerHtml("A_BETextH1","Biolab 1: ",0);
+		myInnerHtml("A_BETextH2","Biolab 2: ",0);
+
+		A_BEH1.options[0] = new Option("(Biolab Headgear Enchant "+ A_BEH1.name.substr(-1) +")",0);
+		A_BEH2.options[0] = new Option("(Biolab Headgear Enchant "+ A_BEH2.name.substr(-1) +")",0);
+
+		for(i=0; i<BIOLAB_ENCHANTS_ARMOR.length; i++) {
+			A_BEH1.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+			A_BEH2.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+		}
+
+		//Biolab (Armor)
+		myInnerHtml("A_BETextA1","Biolab 1: ",0);
+		myInnerHtml("A_BETextA2","Biolab 2: ",0);
+
+		A_BEA1.options[0] = new Option("(Biolab Armor Enchant "+ A_BEA1.name.substr(-1) +")",0);
+		A_BEA2.options[0] = new Option("(Biolab Armor Enchant "+ A_BEA2.name.substr(-1) +")",0);
+
+		for(i=0; i<BIOLAB_ENCHANTS_ARMOR.length; i++) {
+			A_BEA1.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+			A_BEA2.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+		}
+
+		//Biolab (Shield)
+		myInnerHtml("A_BETextS1","Biolab 1: ",0);
+		myInnerHtml("A_BETextS2","Biolab 2: ",0);
+
+		A_BES1.options[0] = new Option("(Biolab Shield Enchant "+ A_BES1.name.substr(-1) +")",0);
+		A_BES2.options[0] = new Option("(Biolab Shield Enchant "+ A_BES2.name.substr(-1) +")",0);
+
+		for(i=0; i<BIOLAB_ENCHANTS_ARMOR.length; i++) {
+			A_BES1.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+			A_BES2.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+		}
+
+		//Biolab (Garment)
+		myInnerHtml("A_BETextG1","Biolab 1: ",0);
+		myInnerHtml("A_BETextG2","Biolab 2: ",0);
+
+		A_BEG1.options[0] = new Option("(Biolab Garment Enchant "+ A_BEG1.name.substr(-1) +")",0);
+		A_BEG2.options[0] = new Option("(Biolab Garment Enchant "+ A_BEG2.name.substr(-1) +")",0);
+
+		for(i=0; i<BIOLAB_ENCHANTS_ARMOR.length; i++) {
+			A_BEG1.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+			A_BEG2.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+		}
+
+		//Biolab (Accessory)
+		myInnerHtml("A_BETextAC11","Biolab 1: ",0);
+		myInnerHtml("A_BETextAC12","Biolab 2: ",0);
+		myInnerHtml("A_BETextAC21","Biolab 1: ",0);
+		myInnerHtml("A_BETextAC22","Biolab 2: ",0);
+
+		A_BEAC11.options[0] = new Option("(Biolab Accessory Enchant "+ A_BEAC11.name.substr(-1) +")",0);
+		A_BEAC12.options[0] = new Option("(Biolab Accessory Enchant "+ A_BEAC12.name.substr(-1) +")",0);
+		A_BEAC21.options[0] = new Option("(Biolab Accessory Enchant "+ A_BEAC21.name.substr(-1) +")",0);
+		A_BEAC22.options[0] = new Option("(Biolab Accessory Enchant "+ A_BEAC22.name.substr(-1) +")",0);
+
+		for(i=0; i<BIOLAB_ENCHANTS_ARMOR.length; i++) {
+			A_BEAC11.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+			A_BEAC12.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+			A_BEAC21.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+			A_BEAC22.options[i+1] = new Option(BIOLAB_ENCHANTS_ARMOR[i][1],BIOLAB_ENCHANTS_ARMOR[i][0]);
+		}
+
+		//Eden (Weapon)
+		myInnerHtml("A_EEText11","Eden 1: ",0);
+		myInnerHtml("A_EEText12","Eden 2: ",0);
+		myInnerHtml("A_EEText13","Eden 3: ",0);
+		myInnerHtml("A_EEText21","Eden 1: ",0);
+		myInnerHtml("A_EEText22","Eden 2: ",0);
+		myInnerHtml("A_EEText23","Eden 3: ",0);
+
+		A_EE11.options[0] = new Option("(Eden Enchant "+ A_EE11.name.substr(-1) +")",0);
+		A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+		A_EE13.options[0] = new Option("(Eden Enchant "+ A_EE13.name.substr(-1) +")",0);
+		A_EE21.options[0] = new Option("(Eden Enchant 2-"+ A_EE21.name.substr(-1) +")",0);
+		A_EE22.options[0] = new Option("(Eden Enchant 2-"+ A_EE22.name.substr(-1) +")",0);
+		A_EE23.options[0] = new Option("(Eden Enchant 2-"+ A_EE23.name.substr(-1) +")",0);
+
+		for(i=0; i<EDEN_ENCHANTS_WEAPON_FIRST.length; i++) {
+			A_EE11.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_FIRST[i][1],EDEN_ENCHANTS_WEAPON_FIRST[i][0]);
+			A_EE21.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_FIRST[i][1],EDEN_ENCHANTS_WEAPON_FIRST[i][0]);
+		}
+
+		//Eden (Headgear)
+		myInnerHtml("A_EETextH","Eden Hat: ",0);
+		//myInnerHtml("A_EETextH2","Eden 2: ",0);
+
+		A_EEH.options[0] = new Option("(Eden Hat Enchant "+ A_EEH.name.substr(-1) +")",0);
+
+		for(i=0; i<EDEN_ENCHANTS_HAT.length; i++) {
+			A_EEH.options[i+1] = new Option(EDEN_ENCHANTS_HAT[i][1],EDEN_ENCHANTS_HAT[i][0]);
+		}
+
+		//Eden (Armor)
+		myInnerHtml("A_EETextA1","Eden 1: ",0);
+		myInnerHtml("A_EETextA2","Eden 2: ",0);
+
+		A_EEA1.options[0] = new Option("(Eden Uniform Enchant "+ A_EEA1.name.substr(-1) +")",0);
+		A_EEA2.options[0] = new Option("(Eden Uniform Enchant "+ A_EEA2.name.substr(-1) +")",0);
+
+		for(i=0; i<EDEN_ENCHANTS_ARMOR_FIRST.length; i++) {
+			A_EEA1.options[i+1] = new Option(EDEN_ENCHANTS_ARMOR_FIRST[i][1],EDEN_ENCHANTS_ARMOR_FIRST[i][0]);
+		}
+		for(i=0; i<EDEN_ENCHANTS_ARMOR_SECOND.length; i++) {
+			A_EEA2.options[i+1] = new Option(EDEN_ENCHANTS_ARMOR_SECOND[i][1],EDEN_ENCHANTS_ARMOR_SECOND[i][0]);
+		}
+
+		//Eden (Garment)
+		myInnerHtml("A_EETextG1","Eden 1: ",0);
+		myInnerHtml("A_EETextG2","Eden 2: ",0);
+
+		A_EEG1.options[0] = new Option("(Eden Manteau Enchant "+ A_EEG1.name.substr(-1) +")",0);
+		A_EEG2.options[0] = new Option("(Eden Manteau Enchant "+ A_EEG2.name.substr(-1) +")",0);
+
+		for(i=0; i<EDEN_ENCHANTS_ARMOR_FIRST.length; i++) {
+			A_EEG1.options[i+1] = new Option(EDEN_ENCHANTS_ARMOR_FIRST[i][1],EDEN_ENCHANTS_ARMOR_FIRST[i][0]);
+		}
+		for(i=0; i<EDEN_ENCHANTS_ARMOR_SECOND.length; i++) {
+			A_EEG2.options[i+1] = new Option(EDEN_ENCHANTS_ARMOR_SECOND[i][1],EDEN_ENCHANTS_ARMOR_SECOND[i][0]);
+		}
+
+		//Eden (Footgear)
+		myInnerHtml("A_EETextF1","Eden 1: ",0);
+		myInnerHtml("A_EETextF2","Eden 2: ",0);
+
+		A_EEF1.options[0] = new Option("(Eden Boots Enchant "+ A_EEF1.name.substr(-1) +")",0);
+		A_EEF2.options[0] = new Option("(Eden Boots Enchant "+ A_EEF2.name.substr(-1) +")",0);
+
+		for(i=0; i<EDEN_ENCHANTS_ARMOR_FIRST.length; i++) {
+			A_EEF1.options[i+1] = new Option(EDEN_ENCHANTS_ARMOR_FIRST[i][1],EDEN_ENCHANTS_ARMOR_FIRST[i][0]);
+		}
+		for(i=0; i<EDEN_ENCHANTS_ARMOR_SECOND.length; i++) {
+			A_EEF2.options[i+1] = new Option(EDEN_ENCHANTS_ARMOR_SECOND[i][1],EDEN_ENCHANTS_ARMOR_SECOND[i][0]);
+		}
+
+		//El Dicaste (Garment)
+		myInnerHtml("A_EDTextG1","El Dicaste 1: ",0);
+		myInnerHtml("A_EDTextG2","El Dicaste 2: ",0);
+		myInnerHtml("A_EDTextG3","El Dicaste 3: ",0);
+
+		A_EDG1.options[0] = new Option("(Feral Tails Enchant "+ A_EDG1.name.substr(-1) +")",0);
+		A_EDG2.options[0] = new Option("(Feral Tails Enchant "+ A_EDG2.name.substr(-1) +")",0);
+		A_EDG3.options[0] = new Option("(Feral Tails Enchant "+ A_EDG3.name.substr(-1) +")",0);
+
+		for(i=0; i<ED_ENCHANTS_SLOT_ONE.length; i++) {
+			A_EDG1.options[i+1] = new Option(ED_ENCHANTS_SLOT_ONE[i][1],ED_ENCHANTS_SLOT_ONE[i][0]);
+		}
+		for(i=0; i<ED_ENCHANTS_SLOT_TWO.length; i++) {
+			A_EDG2.options[i+1] = new Option(ED_ENCHANTS_SLOT_TWO[i][1],ED_ENCHANTS_SLOT_TWO[i][0]);
+		}
+		for(i=0; i<ED_ENCHANTS_SLOT_THREE.length; i++) {
+			A_EDG3.options[i+1] = new Option(ED_ENCHANTS_SLOT_THREE[i][1],ED_ENCHANTS_SLOT_THREE[i][0]);
+		}
+
+		//El Dicaste (Footgear)
+		myInnerHtml("A_EDTextF1","El Dicaste 1: ",0);
+		myInnerHtml("A_EDTextF2","El Dicaste 2: ",0);
+		myInnerHtml("A_EDTextF3","El Dicaste 3: ",0);
+
+		A_EDF1.options[0] = new Option("(Feral Boots Enchant "+ A_EDF1.name.substr(-1) +")",0);
+		A_EDF2.options[0] = new Option("(Feral Boots Enchant "+ A_EDF2.name.substr(-1) +")",0);
+		A_EDF3.options[0] = new Option("(Feral Boots Enchant "+ A_EDF3.name.substr(-1) +")",0);
+
+		for(i=0; i<ED_ENCHANTS_SLOT_ONE.length; i++) {
+			A_EDF1.options[i+1] = new Option(ED_ENCHANTS_SLOT_ONE[i][1],ED_ENCHANTS_SLOT_ONE[i][0]);
+		}
+		for(i=0; i<ED_ENCHANTS_SLOT_TWO.length; i++) {
+			A_EDF2.options[i+1] = new Option(ED_ENCHANTS_SLOT_TWO[i][1],ED_ENCHANTS_SLOT_TWO[i][0]);
+		}
+		for(i=0; i<ED_ENCHANTS_SLOT_THREE.length; i++) {
+			A_EDF3.options[i+1] = new Option(ED_ENCHANTS_SLOT_THREE[i][1],ED_ENCHANTS_SLOT_THREE[i][0]);
+		}
+
+		//El Dicaste (Accessory)
+		myInnerHtml("A_EDTextAC11","El Dicaste 1: ",0);
+		myInnerHtml("A_EDTextAC12","El Dicaste 2: ",0);
+		myInnerHtml("A_EDTextAC13","El Dicaste 3: ",0);
+		myInnerHtml("A_EDTextAC21","El Dicaste 1: ",0);
+		myInnerHtml("A_EDTextAC22","El Dicaste 2: ",0);
+		myInnerHtml("A_EDTextAC23","El Dicaste 3: ",0);
+
+		A_EDAC11.options[0] = new Option("(Golden Trickle Enchant "+ A_EDAC11.name.substr(-1) +")",0);
+		A_EDAC12.options[0] = new Option("(Golden Trickle Enchant "+ A_EDAC12.name.substr(-1) +")",0);
+		A_EDAC13.options[0] = new Option("(Golden Trickle Enchant "+ A_EDAC13.name.substr(-1) +")",0);
+		A_EDAC21.options[0] = new Option("(Golden Trickle Enchant "+ A_EDAC21.name.substr(-1) +")",0);
+		A_EDAC22.options[0] = new Option("(Golden Trickle Enchant "+ A_EDAC22.name.substr(-1) +")",0);
+		A_EDAC23.options[0] = new Option("(Golden Trickle Enchant "+ A_EDAC23.name.substr(-1) +")",0);
+
+		for(i=0; i<ED_ENCHANTS_SLOT_ONE.length; i++) {
+			A_EDAC11.options[i+1] = new Option(ED_ENCHANTS_SLOT_ONE[i][1],ED_ENCHANTS_SLOT_ONE[i][0]);
+			A_EDAC21.options[i+1] = new Option(ED_ENCHANTS_SLOT_ONE[i][1],ED_ENCHANTS_SLOT_ONE[i][0]);
+		}
+		for(i=0; i<ED_ENCHANTS_SLOT_TWO.length; i++) {
+			A_EDAC12.options[i+1] = new Option(ED_ENCHANTS_SLOT_TWO[i][1],ED_ENCHANTS_SLOT_TWO[i][0]);
+			A_EDAC22.options[i+1] = new Option(ED_ENCHANTS_SLOT_TWO[i][1],ED_ENCHANTS_SLOT_TWO[i][0]);
+		}
+		for(i=0; i<ED_ENCHANTS_GT_SLOT_THREE.length; i++) {
+			A_EDAC13.options[i+1] = new Option(ED_ENCHANTS_GT_SLOT_THREE[i][1],ED_ENCHANTS_GT_SLOT_THREE[i][0]);
+			A_EDAC23.options[i+1] = new Option(ED_ENCHANTS_GT_SLOT_THREE[i][1],ED_ENCHANTS_GT_SLOT_THREE[i][0]);
+		}
+
+		//El Dicaste (Light of El Dicaste)
+		myInnerHtml("A_EDTextLOED11","El Dicaste 1: ",0);
+		myInnerHtml("A_EDTextLOED12","El Dicaste 2: ",0);
+		myInnerHtml("A_EDTextLOED13","El Dicaste 3: ",0);
+		myInnerHtml("A_EDTextLOED21","El Dicaste 1: ",0);
+		myInnerHtml("A_EDTextLOED22","El Dicaste 2: ",0);
+		myInnerHtml("A_EDTextLOED23","El Dicaste 3: ",0);
+
+		A_EDLOED11.options[0] = new Option("(Light of El Dicaste Enchant "+ A_EDLOED11.name.substr(-1) +")",0);
+		A_EDLOED12.options[0] = new Option("(Light of El Dicaste Enchant "+ A_EDLOED12.name.substr(-1) +")",0);
+		A_EDLOED13.options[0] = new Option("(Light of El Dicaste Enchant "+ A_EDLOED13.name.substr(-1) +")",0);
+		A_EDLOED21.options[0] = new Option("(Light of El Dicaste Enchant "+ A_EDLOED21.name.substr(-1) +")",0);
+		A_EDLOED22.options[0] = new Option("(Light of El Dicaste Enchant "+ A_EDLOED22.name.substr(-1) +")",0);
+		A_EDLOED23.options[0] = new Option("(Light of El Dicaste Enchant "+ A_EDLOED23.name.substr(-1) +")",0);
+
+		for(i=0; i<ED_ENCHANTS_SLOT_ONE.length; i++) {
+			A_EDLOED11.options[i+1] = new Option(ED_ENCHANTS_SLOT_ONE[i][1],ED_ENCHANTS_SLOT_ONE[i][0]);
+			A_EDLOED21.options[i+1] = new Option(ED_ENCHANTS_SLOT_ONE[i][1],ED_ENCHANTS_SLOT_ONE[i][0]);
+		}
+		for(i=0; i<ED_ENCHANTS_LIGHT_SLOT_TWO_THREE.length; i++) {
+			A_EDLOED12.options[i+1] = new Option(ED_ENCHANTS_LIGHT_SLOT_TWO_THREE[i][1],ED_ENCHANTS_LIGHT_SLOT_TWO_THREE[i][0]);
+			A_EDLOED22.options[i+1] = new Option(ED_ENCHANTS_LIGHT_SLOT_TWO_THREE[i][1],ED_ENCHANTS_LIGHT_SLOT_TWO_THREE[i][0]);
+		}
+		for(i=0; i<ED_ENCHANTS_LIGHT_SLOT_TWO_THREE.length; i++) {
+			A_EDLOED13.options[i+1] = new Option(ED_ENCHANTS_LIGHT_SLOT_TWO_THREE[i][1],ED_ENCHANTS_LIGHT_SLOT_TWO_THREE[i][0]);
+			A_EDLOED23.options[i+1] = new Option(ED_ENCHANTS_LIGHT_SLOT_TWO_THREE[i][1],ED_ENCHANTS_LIGHT_SLOT_TWO_THREE[i][0]);
+		}
+
+		//Mora (Armor)
+		myInnerHtml("A_MORAETextA1","Mora 1: ",0);
+		myInnerHtml("A_MORAETextA2","Mora 2: ",0);
+		myInnerHtml("A_MORAETextA3","Mora 3: ",0);
+
+		A_MORAEA1.options[0] = new Option("(Army Padding Enchant "+ A_MORAEA1.name.substr(-1) +")",0);
+		A_MORAEA2.options[0] = new Option("(Army Padding Enchant "+ A_MORAEA2.name.substr(-1) +")",0);
+		A_MORAEA3.options[0] = new Option("(Army Padding Enchant "+ A_MORAEA3.name.substr(-1) +")",0);
+
+		for(i=0; i<MORA_ENCHANTS_SLOT_ONE.length; i++) {
+			A_MORAEA1.options[i+1] = new Option(MORA_ENCHANTS_SLOT_ONE[i][1],MORA_ENCHANTS_SLOT_ONE[i][0]);
+		}
+		for(i=0; i<MORA_ENCHANTS_SLOT_TWO.length; i++) {
+			A_MORAEA2.options[i+1] = new Option(MORA_ENCHANTS_SLOT_TWO[i][1],MORA_ENCHANTS_SLOT_TWO[i][0]);
+		}
+		for(i=0; i<MORA_ENCHANTS_SLOT_THREE.length; i++) {
+			A_MORAEA3.options[i+1] = new Option(MORA_ENCHANTS_SLOT_THREE[i][1],MORA_ENCHANTS_SLOT_THREE[i][0]);
+		}
+
+		//Mora (Garment)
+		myInnerHtml("A_MORAETextG1","Mora 1: ",0);
+		myInnerHtml("A_MORAETextG2","Mora 2: ",0);
+		myInnerHtml("A_MORAETextG3","Mora 3: ",0);
+
+		A_MORAEG1.options[0] = new Option("(Loki's Muffler Enchant "+ A_MORAEG1.name.substr(-1) +")",0);
+		A_MORAEG2.options[0] = new Option("(Loki's Muffler Enchant "+ A_MORAEG2.name.substr(-1) +")",0);
+		A_MORAEG3.options[0] = new Option("(Loki's Muffler Enchant "+ A_MORAEG3.name.substr(-1) +")",0);
+
+		for(i=0; i<MORA_ENCHANTS_SLOT_ONE.length; i++) {
+			A_MORAEG1.options[i+1] = new Option(MORA_ENCHANTS_SLOT_ONE[i][1],MORA_ENCHANTS_SLOT_ONE[i][0]);
+		}
+		for(i=0; i<MORA_ENCHANTS_SLOT_TWO.length; i++) {
+			A_MORAEG2.options[i+1] = new Option(MORA_ENCHANTS_SLOT_TWO[i][1],MORA_ENCHANTS_SLOT_TWO[i][0]);
+		}
+		for(i=0; i<MORA_ENCHANTS_SLOT_THREE.length; i++) {
+			A_MORAEG3.options[i+1] = new Option(MORA_ENCHANTS_SLOT_THREE[i][1],MORA_ENCHANTS_SLOT_THREE[i][0]);
+		}
+
+		//Mora (Accessory)
+		myInnerHtml("A_MORAETextAC11","Mora 1: ",0);
+		myInnerHtml("A_MORAETextAC12","Mora 2: ",0);
+		myInnerHtml("A_MORAETextAC13","Mora 3: ",0);
+		myInnerHtml("A_MORAETextAC21","Mora 1: ",0);
+		myInnerHtml("A_MORAETextAC22","Mora 2: ",0);
+		myInnerHtml("A_MORAETextAC23","Mora 3: ",0);
+
+		A_MORAEAC11.options[0] = new Option("(Pendant Of Guardian Enchant "+ A_MORAEAC11.name.substr(-1) +")",0);
+		A_MORAEAC12.options[0] = new Option("(Pendant Of Guardian Enchant "+ A_MORAEAC12.name.substr(-1) +")",0);
+		A_MORAEAC13.options[0] = new Option("(Pendant Of Guardian Enchant "+ A_MORAEAC13.name.substr(-1) +")",0);
+		A_MORAEAC21.options[0] = new Option("(Pendant Of Guardian Enchant "+ A_MORAEAC21.name.substr(-1) +")",0);
+		A_MORAEAC22.options[0] = new Option("(Pendant Of Guardian Enchant "+ A_MORAEAC22.name.substr(-1) +")",0);
+		A_MORAEAC23.options[0] = new Option("(Pendant Of Guardian Enchant "+ A_MORAEAC23.name.substr(-1) +")",0);
+
+		for(i=0; i<MORA_ENCHANTS_SLOT_ONE.length; i++) {
+			A_MORAEAC11.options[i+1] = new Option(MORA_ENCHANTS_SLOT_ONE[i][1],MORA_ENCHANTS_SLOT_ONE[i][0]);
+			A_MORAEAC21.options[i+1] = new Option(MORA_ENCHANTS_SLOT_ONE[i][1],MORA_ENCHANTS_SLOT_ONE[i][0]);
+		}
+		for(i=0; i<MORA_ENCHANTS_SLOT_TWO.length; i++) {
+			A_MORAEAC12.options[i+1] = new Option(MORA_ENCHANTS_SLOT_TWO[i][1],MORA_ENCHANTS_SLOT_TWO[i][0]);
+			A_MORAEAC22.options[i+1] = new Option(MORA_ENCHANTS_SLOT_TWO[i][1],MORA_ENCHANTS_SLOT_TWO[i][0]);
+		}
+		for(i=0; i<MORA_ENCHANTS_SLOT_THREE.length; i++) {
+			A_MORAEAC13.options[i+1] = new Option(MORA_ENCHANTS_SLOT_THREE[i][1],MORA_ENCHANTS_SLOT_THREE[i][0]);
+			A_MORAEAC23.options[i+1] = new Option(MORA_ENCHANTS_SLOT_THREE[i][1],MORA_ENCHANTS_SLOT_THREE[i][0]);
+		}
+
+		//Hidden Slot Enchant (Armor)
+		A_HSE.options[0] = new Option("(Hidden Slot Enchant, Armor)",0);
 		for(var i=0; i<HS_ENCHANTS.length; i++) {
-			A_HSE.options[i] = new Option(HS_ENCHANTS[i][1],HS_ENCHANTS[i][0]);
+			A_HSE.options[i+1] = new Option(HS_ENCHANTS[i][1],HS_ENCHANTS[i][0]);
 		}
 	}
 }
+
+/*
+	[Custom TalonRO 2018-06-14 - Function to perform the click changes,
+	it's responsible for elements displays changes and enchant removal exceptions
+	Requires etc.js->arrays: ME_ENCHANTABLE and MALANGDO_ENCHANTS, index.html->select: A_ME11, A_ME12, A_ME21, A_ME22
+	] [Kato]
+*/
+function tRO_Click_MalangdoEnchantment(w1,w2){
+
+	var bEnchant1 = bEnchant2 = false;
+	var kID1 = kID2 = 0;
+	if(w1) {
+			for(i=0; i<ME_ENCHANTABLE.length; i++) {
+				if(ME_ENCHANTABLE[i][0] == w1) {
+					bEnchant1 = true;
+					kID1 = i;
+					break;
+				}
+			}
+	}
+	if(w2) {
+			for(i=0;i<ME_ENCHANTABLE.length;i++) {
+				if(ME_ENCHANTABLE[i][0] == w2) {
+					bEnchant2 = true;
+					kID2 = i;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_ME1").style.display = ((bEnchant1) ? "" : "none");
+	document.getElementById("T_ME2").style.display = ((bEnchant2) ? "" : "none");
+
+	if(bEnchant1 == false) {
+		document.calcForm.A_ME11.value = 0;
+		document.calcForm.A_ME12.value = 0;
+	}
+	if(bEnchant2 == false) {
+		document.calcForm.A_ME21.value = 0;
+		document.calcForm.A_ME22.value = 0;
+	}
+
+	with(document.calcForm){
+		if(ME_ENCHANTABLE[kID1][1] != 0) {
+				var arEx = [];
+				for(i=1; i<ME_ENCHANTABLE[kID1].length; i++){
+					if(ME_ENCHANTABLE[kID1][i] != 0) {
+						arEx.push(ME_ENCHANTABLE[kID1][i].toString());
+					}
+					else break;
+				}
+				if(arEx.length > 0 ) {
+					for (j = A_ME11.length - 1; j >= 0; j--) {
+						if(parseInt(arEx.indexOf(A_ME11.options[j].value)) != -1) {
+								A_ME11.options[j].disabled = true;
+								A_ME11.options[j].classList.add('prohibited');
+						}
+					}
+					for(j = A_ME12.length - 1; j >= 0; j--){
+							if(parseInt(arEx.indexOf(A_ME12.options[j].value)) != -1) {
+								A_ME12.options[j].disabled = true;
+								A_ME12.options[j].classList.add('prohibited');
+							}
+					}
+				}
+		} else {
+			for(j = MALANGDO_ENCHANTS.length - 1; j >= 0; j--){
+				A_ME11.options[j].disabled = A_ME12.options[j].disabled = false;
+				A_ME11.options[j].classList.remove('prohibited');
+				A_ME12.options[j].classList.remove('prohibited');
+			}
+		}
+
+		if(ME_ENCHANTABLE[kID2][1] != 0) {
+			var arEx = [];
+			for(i=1;i< ME_ENCHANTABLE[kID2].length;i++){
+				if(ME_ENCHANTABLE[kID2][i] != 0)
+					arEx.push(ME_ENCHANTABLE[kID2][i].toString());
+				else break;
+			}
+
+				for (j = A_ME21.length - 1; j >= 0; j--) {
+					if(arEx.indexOf(A_ME21.options[j].value) != -1) {
+						A_ME21.options[j].disabled = true;
+						A_ME21.options[j].classList.add('prohibited');
+					}
+				}
+				for (j = A_ME22.length - 1; j >= 0; j--) {
+						if(arEx.indexOf(A_ME22.options[j].value) != -1) {
+							A_ME22.options[j].disabled = true;
+							A_ME22.options[j].classList.add('prohibited');
+						}
+				}
+		} else {
+			for(j = MALANGDO_ENCHANTS.length - 1; j >= 0; j--){
+				A_ME21.options[j].disabled = A_ME22.options[j].disabled = false;
+				A_ME21.options[j].classList.remove('prohibited');
+				A_ME22.options[j].classList.remove('prohibited');
+			}
+		}
+	}
+	tRO_MalangdoEnchantment = [document.calcForm.A_ME11.value,document.calcForm.A_ME12.value,document.calcForm.A_ME21.value,document.calcForm.A_ME22.value];
+}
+
+//custom TalonRO Biolab Weapon Enchantment
+function Click_BiolabWeaponEnchantment(w1, w2){
+with(document.calcForm){
+	var bEnchant1 = bEnchant2 = false;
+	var kID1 = kID2 = 0;
+	if(w1) {
+			for(i=0; i<BE_ENCHANTABLE_WEAPON.length; i++) {
+				if(BE_ENCHANTABLE_WEAPON[i][0] == w1) {
+					bEnchant1 = true;
+					kID1 = i;
+					break;
+				}
+			}
+	}
+	if(w2) {
+			for(i=0;i<BE_ENCHANTABLE_WEAPON.length;i++) {
+				if(BE_ENCHANTABLE_WEAPON[i][0] == w2) {
+					bEnchant2 = true;
+					kID2 = i;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_BE1").style.display = ((bEnchant1) ? "" : "none");
+	document.getElementById("T_BE2").style.display = ((bEnchant2) ? "" : "none");
+
+	if(bEnchant1 == false) {
+		document.calcForm.A_BE11.value = 0;
+		document.calcForm.A_BE12.value = 0;
+	}
+	if(bEnchant2 == false) {
+		document.calcForm.A_BE21.value = 0;
+		document.calcForm.A_BE22.value = 0;
+	}
+
+	tRO_BiolabWeaponEnchantment = [document.calcForm.A_BE11.value,document.calcForm.A_BE12.value,document.calcForm.A_BE21.value,document.calcForm.A_BE22.value];
+}}
+
+function Click_EdenWeaponEnchantment(w1,w2){
+
+	var bEnchant1 = bEnchant2 = false;
+	if(w1) {
+			for(i=0; i<EDEN_ENCHANTABLE_WEAPON.length; i++) {
+				if(EDEN_ENCHANTABLE_WEAPON[i][0] == w1) {
+					bEnchant1 = true;
+					break;
+				}
+			}
+	}
+	if(w2) {
+			for(i=0;i<EDEN_ENCHANTABLE_WEAPON.length;i++) {
+				if(EDEN_ENCHANTABLE_WEAPON[i][0] == w2) {
+					bEnchant2 = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_EE1").style.display = ((bEnchant1) ? "" : "none");
+	document.getElementById("T_EE2").style.display = ((bEnchant2) ? "" : "none");
+
+	if(bEnchant1 == false) {
+		document.calcForm.A_EE11.value = 0;
+		document.calcForm.A_EE12.value = 0;
+		document.calcForm.A_EE13.value = 0;
+	}
+	if(bEnchant2 == false) {
+		document.calcForm.A_EE21.value = 0;
+		document.calcForm.A_EE22.value = 0;
+		document.calcForm.A_EE23.value = 0;
+	}
+
+	with(document.calcForm){
+		//Populate option for slot 2 depending on choice of slot 1
+		//Weapon 1
+		switch(A_EE11.value) {
+		case "172":
+			if (!(A_EE12.value >= 2030 && A_EE12.value <= 2039)) {
+				//Add Physical Damage 10% vs Race Option for Enchant slot 2.
+				removeOptions(A_EE12);
+				A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+				for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length; i++) {
+					A_EE12.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0]);
+				}
+			}
+			break;
+		case "892":
+			if (!(A_EE12.value >= 2170 && A_EE12.value <= 2179)) {
+				//Add Magical Damage 5% vs Race Option for Enchant slot 2.
+				removeOptions(A_EE12);
+				A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+				for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length; i++) {
+					A_EE12.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0]);
+				}
+			}
+			break;
+		default:
+			//Clear weapon 1 slot 2
+			removeOptions(A_EE12);
+			A_EE12.options[0] = new Option("(Eden Enchant "+ A_EE12.name.substr(-1) +")",0);
+		}
+
+		//Weapon 2
+		switch(A_EE21.value) {
+		case "172":
+			if (!(A_EE22.value >= 2030 && A_EE22.value <= 2039)) {
+				//Add Physical Damage 10% vs Race Option for Enchant slot 2.
+				removeOptions(A_EE22);
+				A_EE22.options[0] = new Option("(Eden Enchant 2-"+ A_EE22.name.substr(-1) +")",0);
+				for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length; i++) {
+					A_EE22.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0]);
+				}
+			}
+			break;
+		case "892":
+			if (!(A_EE22.value >= 2170 && A_EE22.value <= 2179)) {
+				//Add Magical Damage 5% vs Race Option for Enchant slot 2.
+				removeOptions(A_EE22);
+				A_EE22.options[0] = new Option("(Eden Enchant 2-"+ A_EE22.name.substr(-1) +")",0);
+				for(i=0; i<EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length; i++) {
+					A_EE22.options[i+1] = new Option(EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1],EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0]);
+				}
+			}
+			break;
+		default:
+			//Clear weapon 2 slot 2
+			removeOptions(A_EE22);
+			A_EE22.options[0] = new Option("(Eden Enchant "+ A_EE22.name.substr(-1) +")",0);
+		}
+
+		//Populate option for slot 3 depending on choice of slot 1 and slot 2
+		//Weapon 1
+		var EE13_Value = A_EE13.value;
+
+		var option1Text = option2Text = "";
+
+		for (i = EDEN_ENCHANTS_WEAPON_FIRST.length - 1; i >= 0; i--) {
+			if (EDEN_ENCHANTS_WEAPON_FIRST[i][0] == A_EE11.value) {
+				option1Text = EDEN_ENCHANTS_WEAPON_FIRST[i][1];
+				break;
+			}
+		}
+
+		if (A_EE12.value >= 2030 && A_EE12.value <= 2039) {
+			for (i = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0] == A_EE12.value) {
+					option2Text = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1];
+					break;
+				}
+			}
+		}
+
+		if (A_EE12.value >= 2170 && A_EE12.value <= 2179) {
+			for (i = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0] == A_EE12.value) {
+					option2Text = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1];
+					break;
+				}
+			}
+		}
+
+		//Clear weapon 1 slot 3, populate options based on slot 1 & 2
+		removeOptions(A_EE13);
+		A_EE13.options[0] = new Option("(Eden Enchant "+ A_EE13.name.substr(-1) +")",0);
+		A_EE13.options[1] = new Option(option1Text,A_EE11.value);
+		A_EE13.options[2] = new Option(option2Text,A_EE12.value);
+
+		A_EE13.value = 0;
+		if (EE13_Value == A_EE11.value) {
+			A_EE13.value = A_EE11.value;
+		}
+		if (EE13_Value == A_EE12.value) {
+			A_EE13.value = A_EE12.value;
+		}
+
+		//Weapon 2
+		var EE23_Value = A_EE23.value;
+
+		var option1Text = option2Text = "";
+
+		for (i = EDEN_ENCHANTS_WEAPON_FIRST.length - 1; i >= 0; i--) {
+			if (EDEN_ENCHANTS_WEAPON_FIRST[i][0] == A_EE21.value) {
+				option1Text = EDEN_ENCHANTS_WEAPON_FIRST[i][1];
+				break;
+			}
+		}
+
+		if (A_EE22.value >= 2030 && A_EE22.value <= 2039) {
+			for (i = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][0] == A_EE22.value) {
+					option2Text = EDEN_ENCHANTS_WEAPON_SECOND_PHYSICAL[i][1];
+					break;
+				}
+			}
+		}
+
+		if (A_EE22.value >= 2170 && A_EE22.value <= 2179) {
+			for (i = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL.length - 1; i >= 0; i--) {
+				if (EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][0] == A_EE22.value) {
+					option2Text = EDEN_ENCHANTS_WEAPON_SECOND_MAGICAL[i][1];
+					break;
+				}
+			}
+		}
+
+		//Clear weapon 2 slot 3, populate options based on slot 1 & 2
+		removeOptions(A_EE23);
+		A_EE23.options[0] = new Option("(Eden Enchant 2-"+ A_EE23.name.substr(-1) +")",0);
+		A_EE23.options[1] = new Option(option1Text,A_EE21.value);
+		A_EE23.options[2] = new Option(option2Text,A_EE22.value);
+
+		A_EE23.value = 0;
+		if (EE23_Value == A_EE21.value) {
+			A_EE23.value = A_EE21.value;
+		}
+		if (EE23_Value == A_EE22.value) {
+			A_EE23.value = A_EE22.value;
+		}
+	}
+
+	tRO_EdenWeaponEnchantment = [document.calcForm.A_EE11.value,document.calcForm.A_EE12.value,document.calcForm.A_EE13.value,document.calcForm.A_EE21.value,document.calcForm.A_EE22.value,document.calcForm.A_EE23.value];
+}
+
+//custom TalonRO Headgear Enchantment (Biolab & Eden)
+function Click_HeadgearEnchantment(h){
+with(document.calcForm){
+	var bEnchant;
+	if(h) {
+			for(i=0; i<BE_ENCHANTABLE_ARMOR.length; i++) {
+				if(BE_ENCHANTABLE_ARMOR[i][0] == h) {
+					bEnchant = "biolab";
+					break;
+				}
+			}
+	}
+	if(h) {
+			for(i=0; i<EDEN_ENCHANTABLE_HAT.length; i++) {
+				if(EDEN_ENCHANTABLE_HAT[i][0] == h) {
+					bEnchant = "eden";
+					break;
+				}
+			}
+	}
+
+	//Hide other enchant options
+	document.getElementById("T_EEH").style.display = "none";
+	document.getElementById("T_BEH1").style.display = "none";
+	document.getElementById("T_BEH2").style.display = "none";
+	document.getElementById("T_HEAD1_TEMP").style.display = "none";
+	document.getElementById("T_HEAD2_TEMP").style.display = "none";
+
+	switch(bEnchant) {
+    case "biolab":
+		//Show enchant option for Biolab
+		document.getElementById("T_BEH1").style.display = "";
+		document.getElementById("T_BEH2").style.display = "";
+		//Clear other enchant option values
+		document.calcForm.A_EEH.value = 0;
+        break;
+    case "eden":
+		//Show enchant option for Eden
+		document.getElementById("T_EEH").style.display = "";
+		document.getElementById("T_HEAD2_TEMP").style.display = "";
+		//Clear other enchant option values
+		document.calcForm.A_BEH1.value = 0;
+		document.calcForm.A_BEH2.value = 0;
+        break;
+    default:
+		//Show blank placeholder <td>
+		document.getElementById("T_HEAD1_TEMP").style.display = "";
+		document.getElementById("T_HEAD2_TEMP").style.display = "";
+		//Clear all enchant option for headgear
+		document.calcForm.A_BEH1.value = 0;
+		document.calcForm.A_BEH2.value = 0;
+		document.calcForm.A_EEH.value = 0;
+	}
+
+	tRO_BiolabArmorEnchantment[0] = document.calcForm.A_BEH1.value;
+	tRO_BiolabArmorEnchantment[1] = document.calcForm.A_BEH2.value;
+	tRO_EdenArmorEnchantment[0] = document.calcForm.A_EEH.value;
+}}
+
+//custom TalonRO Biolab Armor Enchantment
+function Click_BiolabArmorBodyEnchantment(a){
+with(document.calcForm){
+	var bEnchant = false;
+	if(a) {
+			for(i=0; i<BE_ENCHANTABLE_ARMOR.length; i++) {
+				if(BE_ENCHANTABLE_ARMOR[i][0] == a) {
+					bEnchant = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_BEA").style.display = ((bEnchant) ? "" : "none");
+
+	if(bEnchant == false) {
+		document.calcForm.A_BEA1.value = 0;
+		document.calcForm.A_BEA2.value = 0;
+	}
+
+	tRO_BiolabArmorEnchantment[2] = document.calcForm.A_BEA1.value;
+	tRO_BiolabArmorEnchantment[3] = document.calcForm.A_BEA2.value;
+}}
+
+//custom TalonRO Eden Armor Enchantment
+function Click_EdenArmorBodyEnchantment(a){
+with(document.calcForm){
+	var bEnchant = false;
+	if(a) {
+			for(i=0; i<EDEN_ENCHANTABLE_ARMOR.length; i++) {
+				if(EDEN_ENCHANTABLE_ARMOR[i][0] == a) {
+					bEnchant = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_EEA").style.display = ((bEnchant) ? "" : "none");
+
+	if(bEnchant == false) {
+		document.calcForm.A_EEA1.value = 0;
+		document.calcForm.A_EEA2.value = 0;
+	}
+
+	tRO_EdenArmorEnchantment[1] = document.calcForm.A_EEA1.value;
+	tRO_EdenArmorEnchantment[2] = document.calcForm.A_EEA2.value;
+}}
+
+//custom TalonRO Mora Armor Enchantment
+function Click_MoraArmorEnchantment(a){
+with(document.calcForm){
+	var bEnchant = false;
+	if(a) {
+			for(i=0; i<MORA_ENCHANTABLE.length; i++) {
+				if(MORA_ENCHANTABLE[i][0] == a) {
+					bEnchant = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_MORAEA").style.display = ((bEnchant) ? "" : "none");
+
+	if(bEnchant == false) {
+		document.calcForm.A_MORAEA1.value = 0;
+		document.calcForm.A_MORAEA2.value = 0;
+		document.calcForm.A_MORAEA3.value = 0;
+	}
+
+	tRO_MoraEnchantment[0] = document.calcForm.A_MORAEA1.value;
+	tRO_MoraEnchantment[1] = document.calcForm.A_MORAEA2.value;
+	tRO_MoraEnchantment[2] = document.calcForm.A_MORAEA3.value;
+}}
+
+//custom TalonRO Biolab Shield Enchantment
+function Click_BiolabArmorShieldEnchantment(s){
+with(document.calcForm){
+	var bEnchant = false;
+	if(s) {
+			for(i=0; i<BE_ENCHANTABLE_ARMOR.length; i++) {
+				if(BE_ENCHANTABLE_ARMOR[i][0] == s) {
+					bEnchant = true;
+					break;
+				}
+			}
+	}
+
+	if (bEnchant) {
+		document.getElementById("T_BES1_TEMP").style.display = "none";
+		document.getElementById("T_BES2_TEMP").style.display = "none";
+		document.getElementById("T_BES1").style.display = "";
+		document.getElementById("T_BES2").style.display = "";
+	} else {
+		document.getElementById("T_BES1").style.display = "none";
+		document.getElementById("T_BES2").style.display = "none";
+		document.getElementById("T_BES1_TEMP").style.display = "";
+		document.getElementById("T_BES2_TEMP").style.display = "";
+	}
+
+	if(bEnchant == false) {
+		document.calcForm.A_BES1.value = 0;
+		document.calcForm.A_BES2.value = 0;
+	}
+
+	tRO_BiolabArmorEnchantment[4] = document.calcForm.A_BES1.value;
+	tRO_BiolabArmorEnchantment[5] = document.calcForm.A_BES2.value;
+}}
+
+//custom TalonRO Garment Enchantment (Biolab & Eden)
+function Click_GarmentEnchantment(g){
+with(document.calcForm){
+	var bEnchant;
+	if(g) {
+			for(i=0; i<BE_ENCHANTABLE_ARMOR.length; i++) {
+				if(BE_ENCHANTABLE_ARMOR[i][0] == g) {
+					bEnchant = "biolab";
+					break;
+				}
+			}
+	}
+	if(g) {
+			for(i=0; i<EDEN_ENCHANTABLE_ARMOR.length; i++) {
+				if(EDEN_ENCHANTABLE_ARMOR[i][0] == g) {
+					bEnchant = "eden";
+					break;
+				}
+			}
+	}
+
+	switch(bEnchant) {
+    case "biolab":
+		//Hide other enchant option for garment
+		document.getElementById("T_EEG1").style.display = "none";
+		document.getElementById("T_EEG2").style.display = "none";
+		document.getElementById("T_GAR1_TEMP").style.display = "none";
+		document.getElementById("T_GAR2_TEMP").style.display = "none";
+		//Show enchant option for Biolab garment
+		document.getElementById("T_BEG1").style.display = "";
+		document.getElementById("T_BEG2").style.display = "";
+		//Clear other enchant option values
+		document.calcForm.A_EEG1.value = 0;
+		document.calcForm.A_EEG2.value = 0;
+        break;
+    case "eden":
+		//Hide other enchant option for garment
+		document.getElementById("T_BEG1").style.display = "none";
+		document.getElementById("T_BEG2").style.display = "none";
+		document.getElementById("T_GAR1_TEMP").style.display = "none";
+		document.getElementById("T_GAR2_TEMP").style.display = "none";
+		//Show enchant option for Eden garment
+		document.getElementById("T_EEG1").style.display = "";
+		document.getElementById("T_EEG2").style.display = "";
+		//Clear other enchant option values
+		document.calcForm.A_BEG1.value = 0;
+		document.calcForm.A_BEG2.value = 0;
+        break;
+    default:
+		//Hide all enchant option for garment
+		document.getElementById("T_BEG1").style.display = "none";
+		document.getElementById("T_BEG2").style.display = "none";
+		document.getElementById("T_EEG1").style.display = "none";
+		document.getElementById("T_EEG2").style.display = "none";
+		//Show blank placeholder <td>
+		document.getElementById("T_GAR1_TEMP").style.display = "";
+		document.getElementById("T_GAR2_TEMP").style.display = "";
+		//Clear all enchant option for garment
+		document.calcForm.A_BEG1.value = 0;
+		document.calcForm.A_BEG2.value = 0;
+		document.calcForm.A_EEG1.value = 0;
+		document.calcForm.A_EEG2.value = 0;
+	}
+
+	tRO_BiolabArmorEnchantment[6] = document.calcForm.A_BEG1.value;
+	tRO_BiolabArmorEnchantment[7] = document.calcForm.A_BEG2.value;
+	tRO_EdenArmorEnchantment[3] = document.calcForm.A_EEG1.value;
+	tRO_EdenArmorEnchantment[4] = document.calcForm.A_EEG2.value;
+}}
+
+//custom TalonRO El Dicaste Garment Enchantment
+function Click_EDGarmentEnchantment(g){
+with(document.calcForm){
+	var bEnchant = false;
+	if(g) {
+			for(i=0; i<ED_ENCHANTABLE.length; i++) {
+				if(ED_ENCHANTABLE[i][0] == g) {
+					bEnchant = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_EDG").style.display = ((bEnchant) ? "" : "none");
+
+	if(bEnchant == false) {
+		document.calcForm.A_EDG1.value = 0;
+		document.calcForm.A_EDG2.value = 0;
+		document.calcForm.A_EDG3.value = 0;
+	}
+
+	tRO_EDEnchantment[0] = document.calcForm.A_EDG1.value;
+	tRO_EDEnchantment[1] = document.calcForm.A_EDG2.value;
+	tRO_EDEnchantment[2] = document.calcForm.A_EDG3.value;
+}}
+
+//custom TalonRO Mora Garment Enchantment
+function Click_MoraGarmentEnchantment(g){
+with(document.calcForm){
+	var bEnchant = false;
+	if(g) {
+			for(i=0; i<MORA_ENCHANTABLE.length; i++) {
+				if(MORA_ENCHANTABLE[i][0] == g) {
+					bEnchant = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_MORAEG").style.display = ((bEnchant) ? "" : "none");
+
+	if(bEnchant == false) {
+		document.calcForm.A_MORAEG1.value = 0;
+		document.calcForm.A_MORAEG2.value = 0;
+		document.calcForm.A_MORAEG3.value = 0;
+	}
+
+	tRO_MoraEnchantment[3] = document.calcForm.A_MORAEG1.value;
+	tRO_MoraEnchantment[4] = document.calcForm.A_MORAEG2.value;
+	tRO_MoraEnchantment[5] = document.calcForm.A_MORAEG3.value;
+}}
+
+//custom TalonRO Eden Footgear Enchantment
+function Click_FootgearEnchantment(f) {
+with(document.calcForm){
+	var bEnchant = false;
+	if(f) {
+			for(i=0; i<EDEN_ENCHANTABLE_ARMOR.length; i++) {
+				if(EDEN_ENCHANTABLE_ARMOR[i][0] == f) {
+					bEnchant = true;
+					break;
+				}
+			}
+	}
+
+	if (bEnchant) {
+		document.getElementById("T_FOOT1_TEMP").style.display = "none";
+		document.getElementById("T_FOOT2_TEMP").style.display = "none";
+		document.getElementById("T_EEF1").style.display = "";
+		document.getElementById("T_EEF2").style.display = "";
+	} else {
+		document.getElementById("T_EEF1").style.display = "none";
+		document.getElementById("T_EEF2").style.display = "none";
+		document.getElementById("T_FOOT1_TEMP").style.display = "";
+		document.getElementById("T_FOOT2_TEMP").style.display = "";
+	}
+
+	if(bEnchant == false) {
+		document.calcForm.A_EEF1.value = 0;
+		document.calcForm.A_EEF2.value = 0;
+	}
+
+	tRO_EdenArmorEnchantment[5] = document.calcForm.A_EEF1.value;
+	tRO_EdenArmorEnchantment[6] = document.calcForm.A_EEF2.value;
+}}
+
+//custom TalonRO El Dicaste Footgear Enchantment
+function Click_EDFootgearEnchantment(f){
+with(document.calcForm){
+	var bEnchant = false;
+	if(f) {
+			for(i=0; i<ED_ENCHANTABLE.length; i++) {
+				if(ED_ENCHANTABLE[i][0] == f) {
+					bEnchant = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_EDF").style.display = ((bEnchant) ? "" : "none");
+
+	if(bEnchant == false) {
+		document.calcForm.A_EDF1.value = 0;
+		document.calcForm.A_EDF2.value = 0;
+		document.calcForm.A_EDF3.value = 0;
+	}
+
+	tRO_EDEnchantment[3] = document.calcForm.A_EDF1.value;
+	tRO_EDEnchantment[4] = document.calcForm.A_EDF2.value;
+	tRO_EDEnchantment[5] = document.calcForm.A_EDF3.value;
+}}
+
+//custom TalonRO Biolab Accessory Enchantment
+function Click_AccessoryEnchantment(a1, a2){
+with(document.calcForm){
+	var bEnchant1 = bEnchant2 = false;
+	if(a1) {
+			for(i=0; i<BE_ENCHANTABLE_ARMOR.length; i++) {
+				if(BE_ENCHANTABLE_ARMOR[i][0] == a1) {
+					bEnchant1 = true;
+					break;
+				}
+			}
+	}
+	if(a2) {
+			for(i=0;i<BE_ENCHANTABLE_ARMOR.length;i++) {
+				if(BE_ENCHANTABLE_ARMOR[i][0] == a2) {
+					bEnchant2 = true;
+					break;
+				}
+			}
+	}
+
+	if (bEnchant1) {
+		document.getElementById("T_BEAC11").style.display = "";
+		document.getElementById("T_BEAC12").style.display = "";
+		document.getElementById("T_ACC11_TEMP").style.display = "none";
+		document.getElementById("T_ACC12_TEMP").style.display = "none";
+	} else {
+		document.getElementById("T_BEAC11").style.display = "none";
+		document.getElementById("T_BEAC12").style.display = "none";
+		document.getElementById("T_ACC11_TEMP").style.display = "";
+		document.getElementById("T_ACC12_TEMP").style.display = "";
+	}
+
+	if (bEnchant2) {
+		document.getElementById("T_BEAC21").style.display = "";
+		document.getElementById("T_BEAC22").style.display = "";
+		document.getElementById("T_ACC21_TEMP").style.display = "none";
+		document.getElementById("T_ACC22_TEMP").style.display = "none";
+	} else {
+		document.getElementById("T_BEAC21").style.display = "none";
+		document.getElementById("T_BEAC22").style.display = "none";
+		document.getElementById("T_ACC21_TEMP").style.display = "";
+		document.getElementById("T_ACC22_TEMP").style.display = "";
+	}
+
+	if(bEnchant1 == false) {
+		document.calcForm.A_BEAC11.value = 0;
+		document.calcForm.A_BEAC12.value = 0;
+	}
+	if(bEnchant2 == false) {
+		document.calcForm.A_BEAC21.value = 0;
+		document.calcForm.A_BEAC22.value = 0;
+	}
+
+	tRO_BiolabArmorEnchantment[8] = document.calcForm.A_BEAC11.value;
+	tRO_BiolabArmorEnchantment[9] = document.calcForm.A_BEAC12.value;
+	tRO_BiolabArmorEnchantment[10] = document.calcForm.A_BEAC21.value;
+	tRO_BiolabArmorEnchantment[11] = document.calcForm.A_BEAC22.value;
+}}
+
+//custom TalonRO Light of El Dicaste Enchantment
+function Click_LOEDEnchantment(ac1, ac2){
+with(document.calcForm){
+	var bEnchant1 = bEnchant2 = false;
+	if(ac1) {
+			for(i=0; i<ED_LIGHT_OF_EL_DICASTE.length; i++) {
+				if(ED_LIGHT_OF_EL_DICASTE[i][0] == ac1) {
+					bEnchant1 = true;
+					break;
+				}
+			}
+	}
+	if(ac2) {
+			for(i=0; i<ED_LIGHT_OF_EL_DICASTE.length; i++) {
+				if(ED_LIGHT_OF_EL_DICASTE[i][0] == ac2) {
+					bEnchant2 = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_EDLOED1").style.display = ((bEnchant1) ? "" : "none");
+	document.getElementById("T_EDLOED2").style.display = ((bEnchant2) ? "" : "none");
+
+	if(bEnchant1 == false) {
+		document.calcForm.A_EDLOED11.value = 0;
+		document.calcForm.A_EDLOED12.value = 0;
+		document.calcForm.A_EDLOED13.value = 0;
+	}
+	if(bEnchant2 == false) {
+		document.calcForm.A_EDLOED21.value = 0;
+		document.calcForm.A_EDLOED22.value = 0;
+		document.calcForm.A_EDLOED23.value = 0;
+	}
+
+	tRO_EDEnchantment[6] = document.calcForm.A_EDLOED11.value;
+	tRO_EDEnchantment[7] = document.calcForm.A_EDLOED12.value;
+	tRO_EDEnchantment[8] = document.calcForm.A_EDLOED13.value;
+	tRO_EDEnchantment[9] = document.calcForm.A_EDLOED21.value;
+	tRO_EDEnchantment[10] = document.calcForm.A_EDLOED22.value;
+	tRO_EDEnchantment[11] = document.calcForm.A_EDLOED23.value;
+}}
+
+//custom TalonRO El Dicaste Accessory Enchantment
+function Click_EDAccessoryEnchantment(ac1, ac2){
+with(document.calcForm){
+	var kID1 = kID2 = 0;
+	var bEnchant1 = bEnchant2 = false;
+	if(ac1) {
+			for(i=0; i<ED_ENCHANTABLE.length; i++) {
+				if(ED_ENCHANTABLE[i][0] == ac1) {
+					bEnchant1 = true;
+					kID1 = i;
+					break;
+				}
+			}
+	}
+	if(ac2) {
+			for(i=0; i<ED_ENCHANTABLE.length; i++) {
+				if(ED_ENCHANTABLE[i][0] == ac2) {
+					bEnchant2 = true;
+					kID2 = i;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_EDAC1").style.display = ((bEnchant1) ? "" : "none");
+	document.getElementById("T_EDAC2").style.display = ((bEnchant2) ? "" : "none");
+
+	if(bEnchant1 == false) {
+		document.calcForm.A_EDAC11.value = 0;
+		document.calcForm.A_EDAC12.value = 0;
+		document.calcForm.A_EDAC13.value = 0;
+	}
+	if(bEnchant2 == false) {
+		document.calcForm.A_EDAC21.value = 0;
+		document.calcForm.A_EDAC22.value = 0;
+		document.calcForm.A_EDAC23.value = 0;
+	}
+
+	// with(document.calcForm){
+	// 	if(ED_ENCHANTABLE[kID1][1] != 0) {
+	// 			var arEx = [];
+	// 			for(i=1; i<ED_ENCHANTABLE[kID1].length; i++){
+	// 				if(ED_ENCHANTABLE[kID1][i] != 0) {
+	// 					arEx.push(ED_ENCHANTABLE[kID1][i].toString());
+	// 				}
+	// 				else break;
+	// 			}
+	// 			if(arEx.length > 0 ) {
+	// 				for (j = A_EDAC13.length - 1; j >= 0; j--) {
+	// 					if(parseInt(arEx.indexOf(A_EDAC13.options[j].value)) != -1) {
+	// 							A_EDAC13.options[j].disabled = true;
+	// 							A_EDAC13.options[j].classList.add('prohibited');
+	// 					}
+	// 				}
+	// 			}
+	// 	} else {
+	// 		for(j = ED_ENCHANTS_SLOT_THREE.length - 1; j >= 0; j--){
+	// 			A_EDAC13.options[j].disabled = false;
+	// 			A_EDAC13.options[j].classList.remove('prohibited');
+	// 		}
+	// 	}
+
+	// 	if(ED_ENCHANTABLE[kID2][1] != 0) {
+	// 			var arEx = [];
+	// 			for(i=1; i<ED_ENCHANTABLE[kID1].length; i++){
+	// 				if(ED_ENCHANTABLE[kID1][i] != 0) {
+	// 					arEx.push(ED_ENCHANTABLE[kID1][i].toString());
+	// 				}
+	// 				else break;
+	// 			}
+	// 			if(arEx.length > 0 ) {
+	// 				for (j = A_EDAC23.length - 1; j >= 0; j--) {
+	// 					if(parseInt(arEx.indexOf(A_EDAC23.options[j].value)) != -1) {
+	// 							A_EDAC23.options[j].disabled = true;
+	// 							A_EDAC23.options[j].classList.add('prohibited');
+	// 					}
+	// 				}
+	// 			}
+	// 	} else {
+	// 		for(j = ED_ENCHANTS_SLOT_THREE.length - 1; j >= 0; j--){
+	// 			A_EDAC23.options[j].disabled = false;
+	// 			A_EDAC23.options[j].classList.remove('prohibited');
+	// 		}
+	// 	}
+	// }
+
+	tRO_EDEnchantment[12] = document.calcForm.A_EDAC11.value;
+	tRO_EDEnchantment[13] = document.calcForm.A_EDAC12.value;
+	tRO_EDEnchantment[14] = document.calcForm.A_EDAC13.value;
+	tRO_EDEnchantment[15] = document.calcForm.A_EDAC21.value;
+	tRO_EDEnchantment[16] = document.calcForm.A_EDAC22.value;
+	tRO_EDEnchantment[17] = document.calcForm.A_EDAC23.value;
+}}
+
+//custom TalonRO Mora Accessory Enchantment
+function Click_MoraAccessoryEnchantment(ac1, ac2){
+with(document.calcForm){
+	var bEnchant1 = bEnchant2 = false;
+	if(ac1) {
+			for(i=0; i<MORA_ENCHANTABLE.length; i++) {
+				if(MORA_ENCHANTABLE[i][0] == ac1) {
+					bEnchant1 = true;
+					break;
+				}
+			}
+	}
+	if(ac2) {
+			for(i=0; i<MORA_ENCHANTABLE.length; i++) {
+				if(MORA_ENCHANTABLE[i][0] == ac2) {
+					bEnchant2 = true;
+					break;
+				}
+			}
+	}
+
+	document.getElementById("T_MORAEAC1").style.display = ((bEnchant1) ? "" : "none");
+	document.getElementById("T_MORAEAC2").style.display = ((bEnchant2) ? "" : "none");
+
+	if(bEnchant1 == false) {
+		document.calcForm.A_MORAEAC11.value = 0;
+		document.calcForm.A_MORAEAC12.value = 0;
+		document.calcForm.A_MORAEAC13.value = 0;
+	}
+	if(bEnchant2 == false) {
+		document.calcForm.A_MORAEAC21.value = 0;
+		document.calcForm.A_MORAEAC22.value = 0;
+		document.calcForm.A_MORAEAC23.value = 0;
+	}
+
+	tRO_MoraEnchantment[6] = document.calcForm.A_MORAEAC11.value;
+	tRO_MoraEnchantment[7] = document.calcForm.A_MORAEAC12.value;
+	tRO_MoraEnchantment[8] = document.calcForm.A_MORAEAC13.value;
+	tRO_MoraEnchantment[9] = document.calcForm.A_MORAEAC21.value;
+	tRO_MoraEnchantment[10] = document.calcForm.A_MORAEAC22.value;
+	tRO_MoraEnchantment[11] = document.calcForm.A_MORAEAC23.value;
+}}
 
 function Click_Skill9SW(){
 with(document.calcForm){
@@ -5218,7 +6575,7 @@ with(document.calcForm){
 		html_SKILL[2] = '<input type="checkbox" name="B_KYOUKA2"onClick="calc()|Click_AK(1)">';
 		html_SKILL[3] = '<input type="checkbox" name="B_KYOUKA3"onClick="calc()|Click_AK(1)">';
 		html_SKILL[4] = '<input type="checkbox" name="B_KYOUKA4"onClick="calc()|Click_AK(1)">';
-		html_SKILL[5] = '<input type="checkbox" name="B_KYOUKA5"onClick="calc()|Click_AK(1)">';
+		html_SKILL[5] = '<select name="B_KYOUKA5"onChange="calc()|Click_AK(1)"></select>';
 		html_SKILL[6] = '<select name="B_KYOUKA6"onChange="calc()|Click_AK(1)"></select>';
 		html_SKILL[7] = '<select name="B_KYOUKA7"onChange="calc()|Click_AK(1)"></select>';
 		html_SKILL[8] = '<select name="B_KYOUKA8"onChange="calc()|Click_AK(1)"></select>';
@@ -5238,6 +6595,7 @@ with(document.calcForm){
 			for(i=2;i<=9;i++)
 				myInnerHtml("ID_Kb"+i,html_SKILL[i],0);
 			for(i=0;i<=5;i++){
+				B_KYOUKA5.options[i] = new Option(i,i);
 				B_KYOUKA7.options[i] = new Option(i,i);
 				B_KYOUKA8.options[i] = new Option(i,i);
 			}
@@ -5248,7 +6606,7 @@ with(document.calcForm){
 			B_KYOUKA2.checked = n_B_KYOUKA[2];
 			B_KYOUKA3.checked = n_B_KYOUKA[3];
 			B_KYOUKA4.checked = n_B_KYOUKA[4];
-			B_KYOUKA5.checked = n_B_KYOUKA[5];
+			B_KYOUKA5.value = n_B_KYOUKA[5];
 			B_KYOUKA6.value = n_B_KYOUKA[6];
 			B_KYOUKA7.value = n_B_KYOUKA[7];
 			B_KYOUKA8.value = n_B_KYOUKA[8];
@@ -5353,7 +6711,7 @@ with(document.calcForm){
 	}
 	//custom TalonRO Thanatos Card
 	if(CardNumSearch(166)){
-		n_B[14] = Math.round(n_B[14]/100*70);
+		n_B[14] = Math.round(n_B[14]/100*(100-30*CardNumSearch(166)));
 	}
 	n_B2[25] = Math.floor(n_B[7] / 2) + n_B[9];
 	n_B2[26] = n_B[5] + n_B[10];
@@ -5395,7 +6753,7 @@ with(document.calcForm){
 			n_B_KYOUKA[2] = B_KYOUKA2.checked;
 			n_B_KYOUKA[3] = B_KYOUKA3.checked;
 			n_B_KYOUKA[4] = B_KYOUKA4.checked;
-			n_B_KYOUKA[5] = B_KYOUKA5.checked;
+			n_B_KYOUKA[5] = eval(B_KYOUKA5.value);
 			n_B_KYOUKA[6] = eval(B_KYOUKA6.value);
 			n_B_KYOUKA[7] = eval(B_KYOUKA7.value);
 			n_B_KYOUKA[8] = eval(B_KYOUKA8.value);
@@ -5454,6 +6812,10 @@ with(document.calcForm){
 
 	if(n_B_KYOUKA[0])
 		n_B[8] += 2 + n_B_KYOUKA[0];
+
+	//[2018-08-03 - Fix NPC Flee Up to pre-renewal mechanic] [NattWara]
+	if(n_B_KYOUKA[5])
+		n_B[8] = n_B[8] * (2 + (0.2 * n_B_KYOUKA[5]));
 
 	if(n_B_IJYOU[1]){
 		var w;
@@ -5530,8 +6892,8 @@ if(n_B_IJYOU[1]){
 		n_B[24] = n_B[7] + (Math.floor(n_B[7]/20) * Math.floor(n_B[7]/20) -1);
 	//custom TalonRO Thanatos Card
 	if(CardNumSearch(166)){
-		n_B[23] = Math.round(n_B[23]/100*70);
-		n_B[24] = Math.round(n_B[24]/100*70);
+		n_B[23] = Math.round(n_B[23]/100*(100-30*CardNumSearch(166)));
+		n_B[24] = Math.round(n_B[24]/100*(100-30*CardNumSearch(166)));
 	}
 		if(n_B[23] > n_B[24])
 			n_B[24] = n_B[23];
@@ -5564,7 +6926,6 @@ if(n_B_IJYOU[1]){
 		if(n_B_IJYOU[2])
 			n_B[14] -= Math.floor(n_B[14] * 25 / 100);
 	}
-
 
 	var w = 0;
 	w += n_tok[290];
@@ -5635,8 +6996,6 @@ if(n_B_IJYOU[1]){
 		n_B[24] = 0;
 	}
 
-
-
 	var w = 0;
 	w += n_tok[295];
 	w += n_tok[310+n_B[2]];
@@ -5683,12 +7042,16 @@ if(n_B_IJYOU[1]){
 
 	/* Truncate calculation speed enhancement after dark (FLEE * 2) in planning */
 	if(n_B[19] == 0){
-		if(n_B_IJYOU[3])
+		if(n_B_IJYOU[3]){
 			n_B[27] -= Math.floor(n_B[27] * 25 / 100);
+		}
 	}
 
+	//[2018-08-03 - Fix NPC Flee Up to pre-renewal mechanic] [NattWara]
+	/*
 	if(n_B_KYOUKA[5])
 		n_B[27] = n_B[27] * 2;
+	*/
 
 	if(n_B_IJYOU[17]){
 		n_B[27] -= 50;
@@ -5924,19 +7287,22 @@ function calc()
 		else
 			wDA = 5;
 	}
+	if(EquipNumSearch(399) || EquipNumSearch(1348)){ //Nagan/Nagan [Rental] double attack - [Loa] -2018-06-26
+			wDA = 25;
+	}
 	if(EquipNumSearch(570) && n_A_WeaponType != 0){
 		if(SkillSearch(13) > 1)
 			wDA = SkillSearch(13) * 5;
 		else
 			wDA = 10;
 	}
-	//if(EquipNumSearch(399)){
-	if(EquipNumSearch(399) || EquipNumSearch(1348)){ //custom TalonRO rental: enable Double Attack lv 5 for Nagan R
-		if(SkillSearch(13) > 5)
-			wDA = SkillSearch(13) * 5;
-		else
-			wDA = 25;
-	}
+	// //if(EquipNumSearch(399)){
+	// if(EquipNumSearch(399) || EquipNumSearch(1348)){ //custom TalonRO rental: enable Double Attack lv 5 for Nagan R
+	// 	if(SkillSearch(13) > 5)
+	// 		wDA = SkillSearch(13) * 5;
+	// 	else
+	// 		wDA = 25;
+	// }
 	if(EquipNumSearch(1495)){ //custom TalonRO rental: enable Double Attack lv 1 for Snake Head Hat
 		if(SkillSearch(13) > 1)
 			wDA = SkillSearch(13) * 5;
@@ -5993,11 +7359,14 @@ function calc()
 	else
 		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK-1 + wImp)* wCSize);
 
+	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
+	//if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 		n_A_DMG[2] += Math.floor((ArrowOBJ[n_A_Arrow][0]-1) * wCSize);
 
-
-	if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
+	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
+	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
+	if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	{
 		w1 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_Weapon_ATK / 100 * wCSize) + Math.floor(wImp * wCSize);
 		w2 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_workDEX / 100 * wCSize) + Math.floor(wImp * wCSize);
@@ -6009,10 +7378,9 @@ function calc()
 		if(n_A_DMG[2] < w1)n_A_DMG[2] = w1;
 	}
 
-
-
-
-	if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
+	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
+	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
+	if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	{
 		n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_Weapon_ATK / 100 +wImp) * wCSize);
 		w = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_workDEX / 100 + wImp) * wCSize);
@@ -6469,8 +7837,8 @@ function BaiCI(wBaiCI)
 		debug_atk+="\n --- (BaiCI) card-skill Modifier ---";
 		debug_atk+="\nb_wBaiCI:"+wBaiCI;
 	}
+	//specific skill %damage bonus
 	w1=0;
-
 	if(n_A_ActiveSkill == 6)
 		if(n_A_SHOES_DEF_PLUS >= 9 && CardNumSearch(362))
 			w1 += 10;
@@ -6538,15 +7906,30 @@ function BaiCI(wBaiCI)
 					w1 += 35;
 					break;
 				}
+	if(n_A_ActiveSkill == 272 && EquipNumSearch(1045)){
+		w1 += n_A_Weapon_ATKplus * 3;
+	}
 	//custom TalonRO Imperial Guard: Shield Chain damage +2% each refine above 6
 	if(n_A_ActiveSkill == 324)
 		if(EquipNumSearch(1459))
 			if(n_A_LEFT_DEF_PLUS > 6)
 				w1 += 2*(n_A_LEFT_DEF_PLUS-6);
-	//custom TalonRO Black Wing: Back Stab damage +2% each refine
-	if(n_A_ActiveSkill == 169)
-		if(EquipNumSearch(1463))
+	if(n_A_ActiveSkill == 169){ //backstab
+		//custom TalonRO Black Wing: Back Stab damage +2% each refine
+		if(EquipNumSearch(1463)){
 			w1 += 2*n_A_Weapon_ATKplus;
+		}
+		//brave assassin damascus [Loa] 2018-07-24
+		if(EquipNumSearch(897) && n_A_JobSearch2() == 14){
+			w1 += 10;
+		}
+	}
+	if(n_A_ActiveSkill == 171){ //raid
+		//brave assassin damascus [Loa] 2018-07-24
+		if(EquipNumSearch(897) && n_A_JobSearch2() == 14){
+			w1 += 10;
+		}
+	}
 	//custom TalonRO Cannon Spear: Head Crush damage +5% each 3rd refine
 	if(n_A_ActiveSkill == 260)
 		if(EquipNumSearch(1516))
@@ -6568,7 +7951,7 @@ function BaiCI(wBaiCI)
 		if(n_A_ActiveSkillLV == 10 && EquipNumSearch(1159))
 			w1 += 50;
 	if(n_A_ActiveSkill == 65)
-		if(SU_LUK >= 90 && SU_DEX >= 90 && EquipNumSearch(1164))
+		if((SU_LUK >= 90 || SU_DEX >= 90) && EquipNumSearch(1164))
 			w1 += 15;
 	if(n_A_ActiveSkill == 264)
 		if(EquipNumSearch(1176) && SkillSearch(81) == 10)
@@ -6796,13 +8179,6 @@ function CastAndDelay(){
 	var strSUB2name = "";
 	var strSUB2 = "";
 
-
-
-
-
-
-
-
 	wDelay = 0;
 	var w = 0;
 	if(n_Delay[1] > wDelay){
@@ -6886,9 +8262,6 @@ function CastAndDelay(){
 	myInnerHtml("bSUB2",strSUB2,0);
 }
 
-
-
-
 function tPlusDamCut(wPDC){
 	if(Taijin == 0){
 
@@ -6961,8 +8334,22 @@ function tPlusDamCut(wPDC){
 	}
 
 	if(wBTw1==0){
+
+		//If Lex Aeterna DMG x2
+		//old:
+		/*
 		if(n_B_IJYOU[6] && wLAch==0)
 			wPDC *= 2;
+		*/
+		//new:
+		//Remove Lex Aeterna Calculation For Asura Strike.
+		//Moved Calculation to after Asura Soft-Cap Nerf
+		if(n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321) {
+			if(n_B_IJYOU[6] && wLAch==0){
+				wPDC *= 2;
+			}
+		}
+
 		if(n_B_IJYOU[17] && n_A_Weapon_zokusei == 3)
 			wPDC *= 2;
 		baizok = [110,114,117,119,120];
@@ -6991,7 +8378,6 @@ function tPlusDamCut(wPDC){
 	return wPDC;
 }
 
-
 function tPlusEnemyClick(){
 if(Taijin){
 	n_B = new Array();
@@ -7006,8 +8392,6 @@ if(Taijin){
 	document.calcForm.B_DEF.value = n_B[14];
 	document.calcForm.B_MDEF.value = n_B[15];
 }}
-
-
 
 function tPlusTaiseiSyokia(){
 if(Taijin){
@@ -7076,8 +8460,7 @@ if(Taijin){
 }
 else{
 	return wPL;
-}
-}
+}}
 
 function tPlusAG(){
 if(Taijin){
@@ -7088,3 +8471,145 @@ if(Taijin){
 		w_DMG[2] *= (wPAG /100);
 	}
 }}
+/*
+	vanilla mode - [Loa] - 2018-07-09
+		remove non-vanilla select options of equips and cards and store them in arrays below
+			add back removed options when vanilla mode is turned off
+		list of non-vanilla items in restrictedEquips and restrictedCards arrays in etc.js
+		armor and cards functions dependent on armorLoc, cardLoc, and cardLocLeft arrays in foot.js and card.js
+		options of select elements for equips/cards are regenerated under different circumstances
+			therefore, each vanilla mode function is called in different ways
+			arrays below also reset to empty when respective select elements are refilled
+				code for this is found at places where options are regenerated
+		vanilla mode is turned off before loading and options refilled in LoadCookie()
+*/
+removedWep1 = [];
+removedWep2 = [];
+removedArmor = [];
+removedCards = [];
+removedCardsLeft = [];
+//vanilla weapons function; called in StAllCalc(); options generation by WeaponSet() and WeaponSetLeft()
+function VanillaWep(){
+with(document.calcForm){
+	//remove weapons when vanilla mode
+	if(vanilla.checked){
+		for(i = 0; i < A_weapon1.length; i++){
+			if(restrictedEquips.includes(parseInt(A_weapon1[i].value))){
+				removedWep1.push([A_weapon1[i], i]);
+				A_weapon1.options.remove(i);
+				i -= 1;
+			}
+		}
+	}
+	//add back weapons when turned off
+	else if(!vanilla.checked && removedWep1.length){
+		for(i = removedWep1.length - 1; i >= 0; i--){
+			removedWep1[i][0].selected = false;
+			A_weapon1.add(removedWep1[i][0], removedWep1[i][1]);
+			removedWep1.splice(i,1);
+		}
+	}
+	if(n_Nitou){
+		//remove left weapons when vanilla mode
+		if(vanilla.checked){
+			for(i = 0; i < A_weapon2.length; i++){
+				if(restrictedEquips.includes(Number(A_weapon2[i].value))){
+					removedWep2.push([A_weapon2[i], i]);
+					A_weapon2.remove(i);
+					i -= 1;
+				}
+			}
+		}
+		//add back left weapons when turned off
+		else if(!vanilla.checked && removedWep2.length){
+			for(i = removedWep2.length - 1; i >= 0; i--){
+				removedWep2[i][0].selected = false;
+				A_weapon2.add(removedWep2[i][0], removedWep2[i][1]);
+				removedWep2.splice(i,1);
+			}
+		}
+	}
+}}
+//vanilla armors; called in ClickJob(), FirstNovis(), and index.html; options generation by WeaponSet2()
+function VanillaArmor(){
+	//remove armors when vanilla mode
+	if(document.calcForm.vanilla.checked){
+		for(i = 0; i < armorLoc.length; i++){
+			for(j = 0; j < armorLoc[i].length; j++){
+				if(restrictedEquips.includes(parseInt(armorLoc[i][j].value))){
+					removedArmor.push([armorLoc[i][j], j, i])
+					armorLoc[i].remove(j);
+					j -= 1;
+				}
+			}
+		}
+	}
+	//add back armors when turned off
+	else if(!document.calcForm.vanilla.checked && removedArmor.length){
+		for(i = removedArmor.length - 1; i >= 0; i--){
+			removedArmor[i][0].selected = false;
+			armorLoc[removedArmor[i][2]].add(removedArmor[i][0], removedArmor[i][1]);
+			removedArmor.splice(i,1);
+		}
+	}
+}
+//vanilla cards; called in index.html; options generation by PopulateCards()
+function VanillaCard(){
+	//remove cards when vanilla mode
+	if(document.calcForm.vanilla.checked){
+		for(i = 0; i < cardLoc.length; i++){
+			for(j = 0; j < cardLoc[i].length; j++){
+				if(restrictedCards.includes(parseInt(cardLoc[i][j].value))){
+					removedCards.push([cardLoc[i][j], j, i]);
+					cardLoc[i].remove(j);
+					j -= 1;
+				}
+			}
+		}
+	}
+	//add back cards when turned off
+	else if(!document.calcForm.vanilla.checked && removedCards.length){
+		for(i = removedCards.length - 1; i >= 0; i--){
+			removedCards[i][0].selected = false;
+			cardLoc[removedCards[i][2]].add(removedCards[i][0], removedCards[i][1]);
+			removedCards.splice(i,1);
+		}
+	}
+	//trigger filter for left weapon cards when dual wielding
+	if(n_Nitou){
+		VanillaCardLeft();
+	}
+}
+//vanilla cards left weapon; called in index.html through VanillaCard() and in ClickWeaponType2(); options generation by PopulateCardsLeft()
+function VanillaCardLeft(){
+	//remove left weapon cards when vanilla mode
+	if(document.calcForm.vanilla.checked){
+		for(i = 0; i < cardLocLeft.length; i++){
+			for(j = 0; j < cardLocLeft[i].length; j++){
+				if(restrictedCards.includes(parseInt(cardLocLeft[i][j].value))){
+					removedCardsLeft.push([cardLocLeft[i][j], j, i]);
+					cardLocLeft[i].remove(j);
+					j -= 1;
+				}
+			}
+		}
+	}
+	//add back left weapon cards when turned off
+	else if(!document.calcForm.vanilla.checked && removedCardsLeft.length){
+		for(i = removedCardsLeft.length - 1; i >= 0; i--){
+			removedCardsLeft[i][0].selected = false;
+			cardLocLeft[removedCardsLeft[i][2]].add(removedCardsLeft[i][0], removedCardsLeft[i][1]);
+			removedCardsLeft.splice(i,1);
+		}
+	}
+}
+
+//for clearing options from select. (For Eden Weapon Enchant Slot 2 & 3)
+function removeOptions(selectbox)
+{
+    var i;
+    for(i = selectbox.options.length - 1 ; i >= 0 ; i--)
+    {
+        selectbox.remove(i);
+    }
+}
