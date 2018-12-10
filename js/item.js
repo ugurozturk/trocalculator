@@ -17,7 +17,7 @@
    Accessory: 64 = Accessory
    Digits after description. Each digit after description can mean different values: Example(1,1 = Str + 1, 4,1 = Int + 1)
    After description values: 0 NONE,1 STR,2 AGI,3 VIT,4 INT,5 DEX,6 LUK,7 ALL STATS,8 HIT,9 FLEE,10 CRIT,11 Perfect Dodge,12 ASPD,13 MHP,14 MSP,15 MHP%,16 MSP%,17 ATK,18 DEF,19 MDEF
-*/
+*/ 
 
 ItemOBJ = [
 [0,0,0,0,1,0,0,0,"(Unarmed)","",0,0]
@@ -1716,17 +1716,6 @@ ItemOBJ = [
 ,[1671,100,0,0,0,0,0,0,"Assaulter Spear + Aegis Shield","",0,37,-30,0]
 ,[1672,100,0,0,0,0,0,0,"Brave Assassin Damascus + Aegis Shield","",0,37,-20,0]
 ,[1673,100,0,0,0,0,0,0,"Valorous Gladiator Blade + Aegis Shield","",0,37,-20,0]
-,[1674,62,0,1,0,0,20,0,"Oxygen Bottle","","Oxygen bottles that facilitate the underwater activity. <br/>Every refine level adds HIT + 1, FLEE + 1.",12,2,0]
-,[1675,63,0,1,0,0,20,0,"Summer Sandals","","Advanced sandals summer in a well-ventilated area. Good report is made easily attend.<br>When being attacked, there is a 5% chance to increase movement speed for 30 seconds.",9,5,0]
-,[1676,60,0,1,0,0,10,0,"Surfer Swimsuit","","A swimsuit designed for a profesional surfer.",15,5,14,30,152,30,0]
-,[1677,100,0,0,0,0,0,0,"Oxygen Bottle + Scuba Mask[0]","",0,12,3,0]
-,[1678,100,0,0,0,0,0,0,"Oxygen Bottle + Scuba Mask[0] & Surfer Swimsuit",0,"10% more EXP gained from Fish and Formless race monsters.<br/>Increases physical and magical attack against Fire and Water element monsters by 5%.<br />Casting can't be interrupted.",0]
-,[1679,9,125,100,4,1,0,70,"Staff of Geffen","","Whenever you receive Magical Damage there is small chance to reflect all offensive magic against you at 40% chance for 2 seconds.",89,25,5,3,18,5,19,5,0]
-,[1680,64,0,1,4,1,0,60,"Silversmith Bracelet","","Enables use of level 1 Spell Breaker.",19,3,0]
-,[1681,1,0,120,4,2,0,1,"Goldsmithing Dagger","","Increases Mammonite damage by 20%.<br />Spend 10% less zeny when using Mammonite.",194,1,89,25,0]
-,[1682,2,72,150,4,0,0,40,"Ceremonial Sword","","Increases Holy Cross damage by 25%.",89,15,12,10,8,10,0]
-,[1683,60,121,6,4,1,0,80,"Engraved Armor","","",78,10,0]
-,[1684,3,121,330,4,1,0,70,"Heavy Sword","","5% chance to auto-cast level 1 Critical Wounds when using Head Crush; for every refinement level, the cast time of Charge Attack will be decreased by 3%; for refinement rates 9 through 10, 5% chance to auto-cast level 2 Critical Wounds.",78,10,0]
 ];
 
 
@@ -3435,16 +3424,6 @@ ItemID = [
 ,[1671,2,0]
 ,[1672,2,0]
 ,[1673,2,0]
-,[1674,1,21114]
-,[1675,1,21112]
-,[1676,1,21113]
-,[1677,2,0]
-,[1678,2,0]
-,[1679,1,""]
-,[1680,1,""]
-,[1681,1,""]
-,[1682,1,""]
-,[1683,1,""]
 ];
 
 /*
@@ -4026,8 +4005,6 @@ w_SE = [[737,436,475,"NULL"]
 ,[1671,903,1376,"NULL"]
 ,[1672,897,1376,"NULL"]
 ,[1673,899,1376,"NULL"] //Custom TalonRO - 2018-07-26 - Valorous Gladiator Blade + Aegis Shield [Amor]
-,[1677,1674,1213,"NULL"] //Custom TalonRO - 2018-12-10 - Oxygen Bottle + Scuba Mask[0] [Amor]
-,[1678,1674,1213,1676,"NULL"] //Custom TalonRO - 2018-12-10 - Oxygen Bottle + Scuba Mask[0] & Surfer Swimsuit [Amor]
 ];
 SE_MAXnum = w_SE.length -1;
 for(var i=0;i<=SE_MAXnum;i++){

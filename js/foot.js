@@ -968,19 +968,7 @@ if(EquipNumSearch(1085)){
 	if(EquipNumSearch(1087) && n_A_ActiveSkill == 65){
 		w += n_A_ATK*.02;
 	}
-	//[TalonRO Custom - 2018-12-10 - Goldsmithing Dagger - +20% more damage when [Mammonite]] [Amor]
-	if(EquipNumSearch(1681) && (n_A_ActiveSkill == 65)){
-		w += n_A_Weapon_ATKplus * (n_A_ATK*.20);
-	}
-	//[TalonRO Custom - 2018-12-10 - Ceremonial Sword - +25% more damage when [Holy Cross]] [Amor]
-	if(EquipNumSearch(1682) && (n_A_ActiveSkill == 161)){
-		w += n_A_Weapon_ATKplus * (n_A_ATK*.25);
-	}
-	//[TalonRO Custom - 2018-12-10 - Heavy Sword - +30% more damage with  [Head Crush] and +20% more damage with [Charge Attack] ] [Amor]
-	if(EquipNumSearch(1683)){
-		if(n_A_ActiveSkill == 260) w += n_A_Weapon_ATKplus * (n_A_ATK*.30);
-		if(n_A_ActiveSkill == 308) w += n_A_Weapon_ATKplus * (n_A_ATK*.20);
-	}
+
 
 	w = Math.round(w);
 
@@ -1369,11 +1357,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += (n_A_HEAD_DEF_PLUS - 5) * 10;
 		n_tok[19] += n_A_HEAD_DEF_PLUS - 5;
 	}
-	//[TalonRO Custom - 2018-12-10 - Surfer Swimsuit +2 SP per refine] [Amor]
-	if(EquipNumSearch(1676)) {
-		w += (2 * n_A_BODY_DEF_PLUS);
-	}
-
 	//custom TalonRO Kris enchant SP
 	var KEbonus = [A_KE11.value,A_KE12.value,A_KE21.value,A_KE22.value];
 	for (i=0;i<KEbonus.length;i++){
@@ -1881,10 +1864,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1076) && (n_A_JobSearch2() == 14 || n_A_JOB == 44)) {
 		n_A_HIT += (2 * n_A_Weapon_ATKplus);
 	}
-	//[TalonRO Custom - 2018-12-10 - Oxygen Bottle +1 HIT per refine] [Amor]
-	if(EquipNumSearch(1674)) {
-		n_A_HIT += n_A_SHOULDER_DEF_PLUS;
-	}
 
 	//custom TalonRO Armor enchant HIT
 	var wHSE = document.calcForm.A_HSE.value;
@@ -1984,11 +1963,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1285)){
 		w += 5;
 	}
-	//[TalonRO Custom - 2018-12-10 - Oxygen Bottle +1 Flee per refine] [Amor]
-	if(EquipNumSearch(1674)) {
-		n_A_FLEE += n_A_SHOULDER_DEF_PLUS;
-	}
-
 	//custom TalonRO Armor enchant FLEE
 	var wHSE = document.calcForm.A_HSE.value;
 	if(wHSE){
@@ -2068,11 +2042,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	n_A_LUCKY = 1 + n_A_LUK * 0.1;
 	n_A_LUCKY += n_tok[11];
 
-	//TalonRO Custom - 2018-12-10 - New formula, need some more testing :( [Amor]
-	if(n_A_PassSkill3[0]) {
+	//A Whistle Skill - bugado, falta ver que variavel usar em vez de n_A_PassSkill3[20]
+	//if(n_A_PassSkill3[0])
 		//n_A_LUCKY += Math.floor(n_A_PassSkill3[0]/2) + Math.floor(n_A_PassSkill3[30]/2) + Math.floor(n_A_PassSkill3[20] /10);
-		n_A_LUCKY +=	Math.round(n_A_PassSkill3[0]/2) + Math.floor(n_A_LUK/10) + Math.floor(n_A_PassSkill[3] /2);
-	}
 
 	if(n_A_JobSearch()==2)
 		n_A_LUCKY += 5 * CardNumSearch(391);
