@@ -972,7 +972,7 @@ if(EquipNumSearch(1085)){
 
 	w = Math.round(w);
 
-	n_A_ATK += w;
+	n_A_ATK += w; 
 
 	wImp = n_A_PassSkill2[2] *5;
 
