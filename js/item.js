@@ -1716,6 +1716,7 @@ ItemOBJ = [
 ,[1671,100,0,0,0,0,0,0,"Assaulter Spear + Aegis Shield","",0,37,-30,0]
 ,[1672,100,0,0,0,0,0,0,"Brave Assassin Damascus + Aegis Shield","",0,37,-20,0]
 ,[1673,100,0,0,0,0,0,0,"Valorous Gladiator Blade + Aegis Shield","",0,37,-20,0]
+,[1674,50,0,0,0,0,10,10,"Saiyan Hair","",0,1,3,12,7,0]
 ];
 
 
@@ -3424,6 +3425,7 @@ ItemID = [
 ,[1671,2,0]
 ,[1672,2,0]
 ,[1673,2,0]
+,[1674,1,18740]
 ];
 
 /*
