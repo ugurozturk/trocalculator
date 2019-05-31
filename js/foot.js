@@ -28,17 +28,17 @@ function StCalc(nSC)
 
 	StPoint = 0;
 	for(i=2;i<=n_A_STR;i++)
-		StPoint += StCalc2(i);
+		StPoint += getStatPointCost(i);
 	for(i=2;i<=n_A_AGI;i++)
-		StPoint += StCalc2(i);
+		StPoint += getStatPointCost(i);
 	for(i=2;i<=n_A_VIT;i++)
-		StPoint += StCalc2(i);
+		StPoint += getStatPointCost(i);
 	for(i=2;i<=n_A_INT;i++)
-		StPoint += StCalc2(i);
+		StPoint += getStatPointCost(i);
 	for(i=2;i<=n_A_DEX;i++)
-		StPoint += StCalc2(i);
+		StPoint += getStatPointCost(i);
 	for(i=2;i<=n_A_LUK;i++)
-		StPoint += StCalc2(i);
+		StPoint += getStatPointCost(i);
 
 	n_A_BaseLV = eval(A_BaseLV.value);
 
@@ -61,7 +61,7 @@ function StCalc(nSC)
 	myInnerHtml("A_STPOINT",wStPoint - StPoint,0);
 }}
 
-function StCalc2(nSC2)
+function getStatPointCost(nSC2)
 {
 	return Math.floor((nSC2 - 2) /10) + 2;
 }
