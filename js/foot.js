@@ -5,6 +5,7 @@ armorLoc = [document.calcForm.A_head1, document.calcForm.A_head2, document.calcF
 //array of card select elements not including left weapon cards
 cardLoc = [document.calcForm.A_weapon1_card1, document.calcForm.A_weapon1_card2, document.calcForm.A_weapon1_card3, document.calcForm.A_weapon1_card4, document.calcForm.A_head1_card, document.calcForm.A_head2_card, document.calcForm.A_left_card, document.calcForm.A_body_card, document.calcForm.A_shoulder_card, document.calcForm.A_shoes_card, document.calcForm.A_acces1_card, document.calcForm.A_acces2_card];
 
+//populate base stat select elements
 for(var i=1;i<=99;i++){
 with(document.calcForm){
 	A_BaseLV.options[i-1] = new Option(i,i);
@@ -19,6 +20,7 @@ with(document.calcForm){
 function StCalc(nSC)
 {with(document.calcForm){
 
+	//get initial base stat value from select box
 	n_A_STR = eval(A_STR.value);
 	n_A_AGI = eval(A_AGI.value);
 	n_A_VIT = eval(A_VIT.value);
@@ -26,6 +28,7 @@ function StCalc(nSC)
 	n_A_INT = eval(A_INT.value);
 	n_A_LUK = eval(A_LUK.value);
 
+	//calculate total stat points spent
 	StPoint = 0;
 	for(i=2;i<=n_A_STR;i++)
 		StPoint += getStatPointCost(i);
@@ -40,8 +43,10 @@ function StCalc(nSC)
 	for(i=2;i<=n_A_LUK;i++)
 		StPoint += getStatPointCost(i);
 
+	//get base level
 	n_A_BaseLV = eval(A_BaseLV.value);
 
+	//calculate stat points available based on trans class status
 	n_A_JobSet();
 	if(isTransClass)
 		wStPoint = 100;
@@ -49,18 +54,24 @@ function StCalc(nSC)
 		wStPoint = 48;
 
 	if(nSC == 1 || BLVauto.checked == 0){
+		//set total stat points available based on base level
 		for(i=1;i<n_A_BaseLV;i++)
 			wStPoint += Math.floor((i) / 5) + 3;
 	}
 	else{
+		//calculate base level as i when auto adjust base level is checked
 		for(i=1;StPoint > wStPoint && i<99;i++)
 			wStPoint += Math.floor((i) / 5) + 3;
 	}
+	//cap max level at 99
 	if(i > 99)i=99;
+	//set base level to i from previous scaling
 	A_BaseLV.value = i;
+	//update html value for stat points available for use
 	myInnerHtml("A_STPOINT",wStPoint - StPoint,0);
 }}
 
+//get stat point cost for base stat
 function getStatPointCost(statValue)
 {
 	return Math.floor((statValue - 2) /10) + 2;
@@ -114,6 +125,7 @@ function SuperNoviceFullWeapon(nSNFW)
 		A_acces2.value = n_A_Equip[10];
 	}
 }
+
 //stat cap and rebirth job removal for baby classes - [Loa] - 2018-06-21
 function BabyJobs(){
 with(document.calcForm){
