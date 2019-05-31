@@ -185,7 +185,7 @@ function StAllCalc()
 	n_A_DEX = eval(A_DEX.value);
 	n_A_INT = eval(A_INT.value);
 	n_A_LUK = eval(A_LUK.value);
-	SU_STR = n_A_STR;
+	baseStr = n_A_STR;
 	SU_AGI = n_A_AGI;
 	SU_VIT = n_A_VIT;
 	SU_DEX = n_A_DEX;
@@ -762,15 +762,15 @@ if(EquipNumSearch(1085)){
 
 	w=n_tok[17];
 
-	if(SU_STR >= 80 && CardNumSearch(267))
+	if(baseStr >= 80 && CardNumSearch(267))
 		w += 20;
-	if(SU_STR >= 95 && EquipNumSearch(621))
+	if(baseStr >= 95 && EquipNumSearch(621))
 		w += 340;
-	if(SU_STR >= 44 && EquipNumSearch(625))
+	if(baseStr >= 44 && EquipNumSearch(625))
 		w += 44;
 	if(SU_AGI >= 90 && EquipNumSearch(442))
 		w += 10 * EquipNumSearch(442);
-	if(SU_STR >= 95 && EquipNumSearch(1160))
+	if(baseStr >= 95 && EquipNumSearch(1160))
 		w += 20;
 	if(SU_LUK >= 90 && EquipNumSearch(1164))
 		w += 20;
@@ -864,7 +864,7 @@ if(EquipNumSearch(1085)){
 	if(CardNumSearch(528))
 		w += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_STR >= 80 && EquipNumSearch(1526)){
+	if(baseStr >= 80 && EquipNumSearch(1526)){
 		w += 30;
 	}
 
@@ -1805,9 +1805,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 				break;
 			}
 
-	if(SU_STR >= 90 && EquipNumSearch(442))
+	if(baseStr >= 90 && EquipNumSearch(442))
 		n_A_HIT += 10 * EquipNumSearch(442);
-	if(SU_STR >= 95 && EquipNumSearch(1167))
+	if(baseStr >= 95 && EquipNumSearch(1167))
 		n_A_HIT += 10;
 	if(EquipNumSearch(1176) && SkillSearch(81) == 10)
 		n_A_HIT += 10;
@@ -1923,7 +1923,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_SHOULDER_DEF_PLUS >= 9 && CardNumSearch(403)){
 		n_A_FLEE += 5;
 	}
-	if(SU_STR >= 90 && EquipNumSearch(442)){
+	if(baseStr >= 90 && EquipNumSearch(442)){
 		n_A_FLEE += 10 * EquipNumSearch(442);
 	}
 	if(n_A_PassSkill6[0] == 2 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==4){
@@ -2268,7 +2268,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	//custom TalonRO Gryphon Card
 	if(CardNumSearch(277)) {
-		n_A_CRI -= Math.floor(SU_STR /11) * 2 * CardNumSearch(277);
+		n_A_CRI -= Math.floor(baseStr /11) * 2 * CardNumSearch(277);
 	}
 
 	if(n_A_WeaponType == 11) {
@@ -2303,7 +2303,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	//não são cartas de armas
 	if(CardNumSearch(235) && CardNumSearch(306)){C_ATK += 20;}
-	if(SU_STR >= 80 && CardNumSearch(267)){C_ATK += 20;}
+	if(baseStr >= 80 && CardNumSearch(267)){C_ATK += 20;}
 	if(CardNumSearch(184)){C_ATK += -25;}
 	if(CardNumSearch(183)){C_ATK += 25;}
 	if(CardNumSearch(492)){
@@ -2347,7 +2347,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1366)){
 		C_ATK += 30;
 	}
-	if(SU_STR >= 80 && EquipNumSearch(1526)){
+	if(baseStr >= 80 && EquipNumSearch(1526)){
 		C_ATK += 30;
 	}
 	if(EquipNumSearch(1120) && n_A_JobSearch()==4)
@@ -2377,7 +2377,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	C_ATK += n_A_PassSkill9[40];
 
 	//armas+gears que estão nos effects especiais
-	if(SU_STR >= 95 && EquipNumSearch(621)){C_ATK += 340;}
+	if(baseStr >= 95 && EquipNumSearch(621)){C_ATK += 340;}
 
 	for(var i=8;i<12;i++){
 		if(n_A_PassSkill8[i] == 30 && EquipNumSearch(819)){C_ATK += 50;}
@@ -2406,7 +2406,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(442) && SU_AGI > 89){C_ATK += 10 * EquipNumSearch(442);}
 	if(EquipNumSearch(1165)){C_ATK += 10 * SkillSearch(311);}
 	if(EquipNumSearch(1164) && SU_LUK >=90){C_ATK += 20;}
-	if(EquipNumSearch(1160) && SU_STR >=95){C_ATK += 20;}
+	if(EquipNumSearch(1160) && baseStr >=95){C_ATK += 20;}
 	if(EquipNumSearch(1496)){C_ATK += 10};
 	if(A_acces1.value == 728){C_ATK += 15;}
 	if(A_acces2.value == 728){C_ATK += 15;}
@@ -3094,7 +3094,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	}
 	if(EquipNumSearch(654))
 		w += Math.floor(SU_AGI / 14);
-	if(n_A_Equip[0]==484 && SU_STR >= 50)
+	if(n_A_Equip[0]==484 && baseStr >= 50)
 		w += 5;
 	if(EquipNumSearch(624))
 		w += (n_A_Weapon_ATKplus);
@@ -3102,13 +3102,13 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += n_A_Weapon_ATKplus;
 	if(EquipNumSearch(903) && n_A_JobSearch2() == 13)
 		w += 20;
-	if(SU_STR >= 77 && EquipNumSearch(944))
+	if(baseStr >= 77 && EquipNumSearch(944))
 		w += 4;
 	if(n_A_JOB == 21 && EquipNumSearch(855))
 		w -= 5;
 	if(EquipNumSearch(1121) && n_A_JobSearch()==2)
 		w += 3;
-	if(SU_STR >= 95 && EquipNumSearch(1167))
+	if(baseStr >= 95 && EquipNumSearch(1167))
 		w += 3;
 
 	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon] +30% ASPD
@@ -4253,11 +4253,11 @@ function StPlusCalc()
 	if(CardNumSearch(187))bonusStr += Math.floor(SU_INT /18);
 	if(CardNumSearch(189))bonusLuk += Math.floor(SU_AGI /18);
 	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
-	if(CardNumSearch(196))bonusInt += Math.floor(SU_STR /18);
+	if(CardNumSearch(196))bonusInt += Math.floor(baseStr /18);
 	if(CardNumSearch(197))bonusDex += Math.floor(SU_VIT /18);
 
 	//custom TalonRO Gryphon Card
-	if(CardNumSearch(277))bonusLuk += Math.floor(SU_STR /11)*2*CardNumSearch(277);
+	if(CardNumSearch(277))bonusLuk += Math.floor(baseStr /11)*2*CardNumSearch(277);
 
 	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon Master] +15 LUK
 	if(EquipNumSearch(1383))
@@ -4740,7 +4740,7 @@ function StPlusCalc()
 
 	//CUSTOM (1st Transcendent Spirit)
 	if(SkillSearch(392) && (isTransClass == 1) && (n_A_BaseLV > 10) && (n_A_BaseLV < 70)){
-	//alert("bonusStr:"+bonusStr+"\nn_A_STR:"+n_A_STR+"\nSU_STR:"+SU_STR);
+	//alert("bonusStr:"+bonusStr+"\nn_A_STR:"+n_A_STR+"\nbaseStr:"+baseStr);
 		var linkboni = n_A_BaseLV - 10;
 		//custom TALONRO fix
 		//new:
