@@ -29,19 +29,19 @@ function StCalc(nSC)
 	n_A_LUK = eval(A_LUK.value);
 
 	//calculate total stat points spent
-	StPoint = 0;
+	statPointsSpent = 0;
 	for(i=2;i<=n_A_STR;i++)
-		StPoint += getStatPointCost(i);
+		statPointsSpent += getStatPointCost(i);
 	for(i=2;i<=n_A_AGI;i++)
-		StPoint += getStatPointCost(i);
+		statPointsSpent += getStatPointCost(i);
 	for(i=2;i<=n_A_VIT;i++)
-		StPoint += getStatPointCost(i);
+		statPointsSpent += getStatPointCost(i);
 	for(i=2;i<=n_A_INT;i++)
-		StPoint += getStatPointCost(i);
+		statPointsSpent += getStatPointCost(i);
 	for(i=2;i<=n_A_DEX;i++)
-		StPoint += getStatPointCost(i);
+		statPointsSpent += getStatPointCost(i);
 	for(i=2;i<=n_A_LUK;i++)
-		StPoint += getStatPointCost(i);
+		statPointsSpent += getStatPointCost(i);
 
 	//get base level
 	n_A_BaseLV = eval(A_BaseLV.value);
@@ -60,7 +60,7 @@ function StCalc(nSC)
 	}
 	else{
 		//calculate base level as i when auto adjust base level is checked
-		for(i=1;StPoint > statPointsAvailable && i<99;i++)
+		for(i=1;statPointsSpent > statPointsAvailable && i<99;i++)
 			statPointsAvailable += Math.floor((i) / 5) + 3;
 	}
 	//cap max level at 99
@@ -68,7 +68,7 @@ function StCalc(nSC)
 	//set base level to i from previous scaling
 	A_BaseLV.value = i;
 	//update html value for stat points available for use
-	myInnerHtml("A_STPOINT",statPointsAvailable - StPoint,0);
+	myInnerHtml("A_STPOINT",statPointsAvailable - statPointsSpent,0);
 }}
 
 //get stat point cost for base stat
