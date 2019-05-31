@@ -1,6 +1,6 @@
 debugMode = 0;
 n_Nitou=0;
-n_Tensei=0;
+isTransClass=0;
 n_Ses=0;
 n_Enekyori=0;
 w_AG=[100,95,90,86,82,79,76,74,72,71,70];

@@ -43,7 +43,7 @@ function StCalc(nSC)
 	n_A_BaseLV = eval(A_BaseLV.value);
 
 	n_A_JobSet();
-	if(n_Tensei)
+	if(isTransClass)
 		wStPoint = 100;
 	else
 		wStPoint = 48;
@@ -1026,7 +1026,7 @@ if(EquipNumSearch(1085)){
 	if(n_A_JOB == 20 && n_A_BaseLV == 99)
 		n_A_MaxHP += 2000;
 
-	if(n_Tensei)
+	if(isTransClass)
 		n_A_MaxHP = Math.floor(n_A_MaxHP *125 /100);
 	if(eval(A_youshi.checked))
 		n_A_MaxHP = Math.floor(n_A_MaxHP *70 /100);
@@ -1265,7 +1265,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		else if(n_A_BaseLV <= 78) n_A_MaxSP = 306 +(n_A_BaseLV-75)*6;
 		else n_A_MaxSP = 330 +(n_A_BaseLV-78)*6;
 	}
-	if(n_Tensei)
+	if(isTransClass)
 		n_A_MaxSP = Math.floor(n_A_MaxSP * 125 /100);
 	if(eval(A_youshi.checked))
 		n_A_MaxSP = Math.floor(n_A_MaxSP *70 /100);
@@ -4037,7 +4037,7 @@ function StPlusCalc()
 	var w2 = [0,0,0,0,0,0];
 	for(var i=0;JobBOBJ[n_A_JOB][i] <= n_A_JobLV && JobBOBJ[n_A_JOB][i] != "n";i+=2)
 			w2[JobBOBJ[n_A_JOB][i+1]] += 1;
-	if(n_A_JOB == 0 && n_Tensei){
+	if(n_A_JOB == 0 && isTransClass){
 		for(var i=0;JobBOBJ[34][i] <= n_A_JobLV && JobBOBJ[34][i] != "n";i+=2)
 				w2[JobBOBJ[34][i+1]] += 1;
 	}
@@ -4639,7 +4639,7 @@ function StPlusCalc()
 	}*/
 	//E lá se foi todo o headgear calc e etc...
 	if(n_A_PassSkill8[17]){
-		 if(n_Tensei && 1<= n_A_JOB && n_A_JOB <= 6 && n_A_BaseLV < 70){
+		 if(isTransClass && 1<= n_A_JOB && n_A_JOB <= 6 && n_A_BaseLV < 70){
 			if(n_A_STR + wSPC_STR <= 50)
 					wSPC_STR = 50 - n_A_STR;
 			if(n_A_AGI + wSPC_AGI <= 50)
@@ -4739,7 +4739,7 @@ function StPlusCalc()
 		}
 
 	//CUSTOM (1st Transcendent Spirit)
-	if(SkillSearch(392) && (n_Tensei == 1) && (n_A_BaseLV > 10) && (n_A_BaseLV < 70)){
+	if(SkillSearch(392) && (isTransClass == 1) && (n_A_BaseLV > 10) && (n_A_BaseLV < 70)){
 	//alert("wSPC_STR:"+wSPC_STR+"\nn_A_STR:"+n_A_STR+"\nSU_STR:"+SU_STR);
 		var linkboni = n_A_BaseLV - 10;
 		//custom TALONRO fix
@@ -5216,7 +5216,7 @@ function FirstNovis(){
 function JobEquipItemSearch(nJEIS)
 {
 	if(nJEIS >= 1000){
-		if(n_Tensei == 1)
+		if(isTransClass == 1)
 			nJEIS -= 1000;
 		else
 			return 0;
@@ -5233,11 +5233,11 @@ function n_A_JobSet()
 {
 	n_A_JOB = eval(document.calcForm.A_JOB.value);
 	if(21 <= n_A_JOB && n_A_JOB <= 40){
-		n_Tensei = 1;
+		isTransClass = 1;
 		if(34 <= n_A_JOB && n_A_JOB <= 40)
 			n_A_JOB -= 34;
 	}else
-		n_Tensei = 0;
+		isTransClass = 0;
 }
 
 function n_A_JobSearch(){
@@ -5828,11 +5828,11 @@ function KakutyouKansuu(){
 			document.calcForm.A_KakutyouSelNum2.value = 0;
 		}
 		var JobType=0;
-		if(n_A_JOB == 0 && n_Tensei)
+		if(n_A_JOB == 0 && isTransClass)
 			JobType = 1;
 		if((1 <= n_A_JOB && n_A_JOB <= 6) || n_A_JOB == 41 || n_A_JOB == 20){
 			JobType = 2;
-			if(n_Tensei)
+			if(isTransClass)
 				JobType = 3;
 		}
 		if((7 <= n_A_JOB && n_A_JOB <= 19) || n_A_JOB == 43)
@@ -5844,17 +5844,17 @@ function KakutyouKansuu(){
 		if(n_A_JOB == 44 || n_A_JOB == 45)
 			JobType = 6;
 
-		NowBaseExp = Math.floor(PC_BaseExp[n_Tensei][n_A_BaseLV] * NowBaseExp / 100);
+		NowBaseExp = Math.floor(PC_BaseExp[isTransClass][n_A_BaseLV] * NowBaseExp / 100);
 
 
 		var wkk11;
-		wkk11 = "<Font size=2>Required BaseExp for Base Up: <B>"+ Kanma(PC_BaseExp[n_Tensei][n_A_BaseLV] - NowBaseExp) +" </B>exp<BR>";
+		wkk11 = "<Font size=2>Required BaseExp for Base Up: <B>"+ Kanma(PC_BaseExp[isTransClass][n_A_BaseLV] - NowBaseExp) +" </B>exp<BR>";
 
 		var MonsterNum=0;
 		var OneCheck = 0;
 		if(n_B[16] != 0){
 			for(i=n_A_BaseLV;i<99;i++){
-				var LvUpExp = PC_BaseExp[n_Tensei][i];
+				var LvUpExp = PC_BaseExp[isTransClass][i];
 
 				var w1 = Math.floor((LvUpExp - NowBaseExp) / n_B[16]);
 				MonsterNum += w1;
