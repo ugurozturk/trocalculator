@@ -187,7 +187,7 @@ function StAllCalc()
 	n_A_LUK = eval(A_LUK.value);
 	baseStr = n_A_STR;
 	baseAgi = n_A_AGI;
-	SU_VIT = n_A_VIT;
+	baseVit = n_A_VIT;
 	SU_DEX = n_A_DEX;
 	SU_INT = n_A_INT;
 	SU_LUK = n_A_LUK;
@@ -1146,7 +1146,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	w += n_tok[15];
 
-	if(SU_VIT >= 80 && CardNumSearch(267))
+	if(baseVit >= 80 && CardNumSearch(267))
 		w += 3;
 
 	if(CardNumSearch(405)){
@@ -1200,7 +1200,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//custom TalonRO Lady Tanee Card: +1% HP per 8 base AGI
 	if(CardNumSearch(409))
 		w += Math.floor(baseAgi / 8);
-	if(SU_VIT >= 80 && EquipNumSearch(1526))
+	if(baseVit >= 80 && EquipNumSearch(1526))
 		w += 5;
 
 		//[Custom TalonRO - Deviruchi Headphones (1426) -1% MHP] [Kato]
@@ -1487,7 +1487,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	//custom Talonro Advanced Safety Ring: Every 30 VIT reduces DEF by 1 - [Loa] - 2016-06-07
 	if(EquipNumSearch(1641)){
-		n_A_DEF -= EquipNumSearch(1641) * Math.floor(SU_VIT / 30);
+		n_A_DEF -= EquipNumSearch(1641) * Math.floor(baseVit / 30);
 	}
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Bone Helm [1] - +1 DEF each refine past +4 until +8 [Nattwara/Loa]
@@ -2868,7 +2868,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	//custom TalonRO Lady Tanee Card: +1% MATK  per 8 base VIT
 	if (CardNumSearch(409))
-		w += Math.floor(SU_VIT / 8);
+		w += Math.floor(baseVit / 8);
 	//custom TalonRO Rainbow Poring Hat +1% matk
 	if(EquipNumSearch(1447))
 		if(n_A_HEAD_DEF_PLUS>=7)
@@ -3620,7 +3620,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	//custom TalonRO Lady Tanee Card: +1% ATK per 8 base VIT
 	if(CardNumSearch(409))
-		n_tok[80] += Math.floor(SU_VIT / 8);
+		n_tok[80] += Math.floor(baseVit / 8);
 
 	//custom TalonRO Little Feather Hat: if combined with Sharp Arrow +5% critical damage
 	if(EquipNumSearch(1488) && n_A_Arrow==15)
@@ -3845,7 +3845,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			n_tok[151] += 30 * CardNumSearch(176);
 			n_tok[156] += 30 * CardNumSearch(176);
 		}
-		if(SU_VIT >= 80){
+		if(baseVit >= 80){
 			n_tok[155] += 50 * CardNumSearch(176);
 			n_tok[159] += 50 * CardNumSearch(176);
 		}
@@ -4254,7 +4254,7 @@ function StPlusCalc()
 	if(CardNumSearch(189))bonusLuk += Math.floor(baseAgi /18);
 	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
 	if(CardNumSearch(196))bonusInt += Math.floor(baseStr /18);
-	if(CardNumSearch(197))bonusDex += Math.floor(SU_VIT /18);
+	if(CardNumSearch(197))bonusDex += Math.floor(baseVit /18);
 
 	//custom TalonRO Gryphon Card
 	if(CardNumSearch(277))bonusLuk += Math.floor(baseStr /11)*2*CardNumSearch(277);
