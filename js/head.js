@@ -7951,7 +7951,7 @@ function BaiCI(wBaiCI)
 		if(n_A_ActiveSkillLV == 10 && EquipNumSearch(1159))
 			w1 += 50;
 	if(n_A_ActiveSkill == 65)
-		if((SU_LUK >= 90 || baseDex >= 90) && EquipNumSearch(1164))
+		if((baseLuk >= 90 || baseDex >= 90) && EquipNumSearch(1164))
 			w1 += 15;
 	if(n_A_ActiveSkill == 264)
 		if(EquipNumSearch(1176) && SkillSearch(81) == 10)

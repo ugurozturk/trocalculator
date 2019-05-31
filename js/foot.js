@@ -190,7 +190,7 @@ function StAllCalc()
 	baseVit = n_A_VIT;
 	baseDex = n_A_DEX;
 	baseInt = n_A_INT;
-	SU_LUK = n_A_LUK;
+	baseLuk = n_A_LUK;
 
 	n_A_WeaponType = eval(A_WeaponType.value);
 
@@ -772,7 +772,7 @@ if(EquipNumSearch(1085)){
 		w += 10 * EquipNumSearch(442);
 	if(baseStr >= 95 && EquipNumSearch(1160))
 		w += 20;
-	if(SU_LUK >= 90 && EquipNumSearch(1164))
+	if(baseLuk >= 90 && EquipNumSearch(1164))
 		w += 20;
 	if(CardNumSearch(492))
 		w += Math.floor(n_A_JobLV /5) * CardNumSearch(492); //custom TalonRO Ifrit Card +1atk every 5 Joblv
@@ -1834,7 +1834,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		Add 1 HIT for every 2 LUK.
 	*/
 	if(EquipNumSearch(1627)){
-		n_A_HIT += Math.floor(SU_LUK / 2);
+		n_A_HIT += Math.floor(baseLuk / 2);
 	}
 
 	if(n_A_ActiveSkill==324)
@@ -2070,7 +2070,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	//custom TalonRO Lady Tanee Card: +1 Perfect Dodge per 8 base LUK
 	if(CardNumSearch(409))
-		n_A_LUCKY += Math.floor(SU_LUK / 8);
+		n_A_LUCKY += Math.floor(baseLuk / 8);
 	//custom TalonRO Schwartzwald Pine Jubilee fix: +20 Perfect Dodge instead of +20 Flee
 	if(n_A_PassSkill8[20])
 		n_A_LUCKY += 20;
@@ -2108,7 +2108,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		if(n_B[2]==1 || n_B[2]==6)
 			w += 9 * CardNumSearch(253);
 	}
-	if(SU_LUK >= 80 && CardNumSearch(267))
+	if(baseLuk >= 80 && CardNumSearch(267))
 		w += 3;
 	if(n_A_WeaponType==3 || n_A_WeaponType==2)
 		w += CardNumSearch(464) * 5;
@@ -2119,11 +2119,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_HEAD_DEF_PLUS >= 6 && EquipNumSearch(785))
 		w += (n_A_HEAD_DEF_PLUS -5);
 	if(EquipNumSearch(640))
-		w += Math.floor(SU_LUK / 5);
+		w += Math.floor(baseLuk / 5);
 
 	//custom TalonRO rental Giant Encyclopedia +1crit each 5luk
 	if(EquipNumSearch(1324))
-		w += Math.floor(SU_LUK / 5);
+		w += Math.floor(baseLuk / 5);
 
 	//custom Talonro Improved Bunny Band: If refine > 6 CRIT + 5
 	if(EquipNumSearch(1648) && n_A_HEAD_DEF_PLUS > 6){
@@ -2131,7 +2131,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	}
 
 	if(EquipNumSearch(689))
-		w += Math.floor(SU_LUK / 10);
+		w += Math.floor(baseLuk / 10);
 	if(baseAgi >= 90 && EquipNumSearch(442))
 		w += 10 * EquipNumSearch(442);
 
@@ -2191,7 +2191,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	}
 
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_LUK >= 80 && EquipNumSearch(1526))
+	if(baseLuk >= 80 && EquipNumSearch(1526))
 		w += 5;
 
 
@@ -2405,7 +2405,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(323) && EquipNumSearch(725)){C_ATK += 50;}
 	if(EquipNumSearch(442) && baseAgi > 89){C_ATK += 10 * EquipNumSearch(442);}
 	if(EquipNumSearch(1165)){C_ATK += 10 * SkillSearch(311);}
-	if(EquipNumSearch(1164) && SU_LUK >=90){C_ATK += 20;}
+	if(EquipNumSearch(1164) && baseLuk >=90){C_ATK += 20;}
 	if(EquipNumSearch(1160) && baseStr >=95){C_ATK += 20;}
 	if(EquipNumSearch(1496)){C_ATK += 10};
 	if(A_acces1.value == 728){C_ATK += 15;}
@@ -3457,7 +3457,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_A_HPR = 1;
 	w = 100;
 	w += n_tok[75];
-	if(SU_LUK >= 77)
+	if(baseLuk >= 77)
 		w += 100 * CardNumSearch(221);
 	if(n_A_JobSearch()==41 && EquipNumSearch(672))
 		w += 3;
@@ -3466,7 +3466,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_PassSkill8[18])
 		w += 3;
 	//custom TalonRO Knit Rabbit Ear Hat
-	if(EquipNumSearch(1429) && SU_LUK > 55)
+	if(EquipNumSearch(1429) && baseLuk > 55)
 		w += 10;
 
 	//[Custom TalonRO - 2018-06-02 - Aegir Helm + Cloak - Increases natural HP recovery by 5% per refinement rate of Aegir Cloak.] [Kato/Nattwara]
@@ -3493,7 +3493,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	w += n_tok[76];
 
-	if(SU_LUK >= 77)
+	if(baseLuk >= 77)
 		w += 100 * CardNumSearch(221);
 	if(n_A_JobSearch()==41 && EquipNumSearch(673))
 		w += 3;
@@ -3514,7 +3514,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_PassSkill8[18])
 		w += 3;
 	//custom TalonRO Knit Rabbit Ear Hat
-	if(EquipNumSearch(1429) && SU_LUK > 55)
+	if(EquipNumSearch(1429) && baseLuk > 55)
 		w += 10;
 
 	// //[Custom TalonRO - 2018-07-17 - Nightmare Verit - For every 2 refines, increases the SP recovery chance by an additional 1%] [Kato]
@@ -4252,7 +4252,7 @@ function StPlusCalc()
 	if(CardNumSearch(185))bonusVit += Math.floor(baseDex /18);
 	if(CardNumSearch(187))bonusStr += Math.floor(baseInt /18);
 	if(CardNumSearch(189))bonusLuk += Math.floor(baseAgi /18);
-	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
+	if(CardNumSearch(191))bonusAgi += Math.floor(baseLuk /18);
 	if(CardNumSearch(196))bonusInt += Math.floor(baseStr /18);
 	if(CardNumSearch(197))bonusDex += Math.floor(baseVit /18);
 
