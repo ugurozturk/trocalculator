@@ -188,7 +188,7 @@ function StAllCalc()
 	baseStr = n_A_STR;
 	baseAgi = n_A_AGI;
 	baseVit = n_A_VIT;
-	SU_DEX = n_A_DEX;
+	baseDex = n_A_DEX;
 	SU_INT = n_A_INT;
 	SU_LUK = n_A_LUK;
 
@@ -1780,7 +1780,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	// }
 
 	if(EquipNumSearch(656))
-		n_A_HIT -= Math.floor(SU_DEX / 3);
+		n_A_HIT -= Math.floor(baseDex / 3);
 	if(n_A_WeaponType==3 || n_A_WeaponType==2)
 		n_A_HIT += CardNumSearch(464) * 5;
 	if(n_A_WeaponType==10)
@@ -2143,7 +2143,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += 5;
 	if(EquipNumSearch(1161))
 		w += (2 * SkillSearch(89));
-	if(SU_DEX >= 90 && EquipNumSearch(1164))
+	if(baseDex >= 90 && EquipNumSearch(1164))
 		w += 5;
 	//custom TalonRO fix so crit rate is increased for Sharp Shooting too by Drosera/Sharp Arrow
 	if(n_A_WeaponType == 10 && n_A_Arrow == 15)
@@ -3384,7 +3384,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w -= n_A_LEFT_DEF_PLUS*2;
 	}
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_DEX >= 80 && EquipNumSearch(1526))
+	if(baseDex >= 80 && EquipNumSearch(1526))
 		w -= 5;
 
 	if(w < 0){w = 0;}
@@ -4124,7 +4124,7 @@ function StPlusCalc()
 		bonusInt += Math.floor(n_A_Weapon_ATKplus / 2);
 
 	if(EquipNumSearch(649))
-		bonusDex -= SU_DEX;
+		bonusDex -= baseDex;
 
 	if(n_A_WeaponType==9)
 		bonusInt += CardNumSearch(466);
@@ -4249,7 +4249,7 @@ function StPlusCalc()
 	if(n_A_LEFT_DEF_PLUS >= 9 && EquipNumSearch(1500))
 		n_tok[192] +=5;
 
-	if(CardNumSearch(185))bonusVit += Math.floor(SU_DEX /18);
+	if(CardNumSearch(185))bonusVit += Math.floor(baseDex /18);
 	if(CardNumSearch(187))bonusStr += Math.floor(SU_INT /18);
 	if(CardNumSearch(189))bonusLuk += Math.floor(baseAgi /18);
 	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
