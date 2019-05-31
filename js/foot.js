@@ -4047,7 +4047,7 @@ function StPlusCalc()
 	}
 	var bonusStr = w2[0];
 	var bonusAgi = w2[1];
-	var wSPC_VIT = w2[2];
+	var bonusVit = w2[2];
 	var wSPC_INT = w2[3];
 	var wSPC_DEX = w2[4];
 	var wSPC_LUK = w2[5];
@@ -4056,8 +4056,8 @@ function StPlusCalc()
 	wSPCall = StPlusCalc2(7);
 	bonusStr += StPlusCalc2(1) + wSPCall;
 	bonusAgi += StPlusCalc2(2) + wSPCall;
-	wSPC_VIT += StPlusCalc2(3) + wSPCall;
-	wSPC_VIT += StPlusCalc2(213);
+	bonusVit += StPlusCalc2(3) + wSPCall;
+	bonusVit += StPlusCalc2(213);
 	wSPC_INT += StPlusCalc2(4) + wSPCall;
 	wSPC_INT += StPlusCalc2(214);
 	wSPC_DEX += StPlusCalc2(5) + wSPCall;
@@ -4203,7 +4203,7 @@ function StPlusCalc()
 
 	bonusStr += StPlusCard(1) + wSPCall;
 	bonusAgi += StPlusCard(2) + wSPCall;
-	wSPC_VIT += StPlusCard(3) + wSPCall;
+	bonusVit += StPlusCard(3) + wSPCall;
 	wSPC_INT += StPlusCard(4) + wSPCall;
 	wSPC_DEX += StPlusCard(5) + wSPCall;
 	wSPC_LUK += StPlusCard(6) + wSPCall;
@@ -4213,11 +4213,11 @@ function StPlusCalc()
 	if(CardNumSearch(173))wSPC_INT += n_A_LEFT_DEF_PLUS;
 	if(CardNumSearch(402))wSPC_LUK += n_A_SHOULDER_DEF_PLUS;
 	if(CardNumSearch(406))bonusAgi += n_A_SHOES_DEF_PLUS;
-	if(CardNumSearch(198))wSPC_VIT += n_A_BODY_DEF_PLUS;
+	if(CardNumSearch(198))bonusVit += n_A_BODY_DEF_PLUS;
 	if(n_A_card[8] == 180)bonusStr += n_A_HEAD_DEF_PLUS;
 	//zodiac hats
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1272)){wSPC_VIT += 1;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1273)){wSPC_VIT += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1272)){bonusVit += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1273)){bonusVit += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){n_tok[91] += 3;n_tok[94] += 3;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1279)){wSPC_INT += 2;}
 	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1279)){n_tok[91] += 4;n_tok[94] += 4;}
@@ -4234,7 +4234,7 @@ function StPlusCalc()
 		if(n_A_JobLV == 70){
 			bonusStr += 1;
 			bonusAgi += 1;
-			wSPC_VIT += 1;
+			bonusVit += 1;
 			wSPC_INT += 1;
 			wSPC_DEX += 1;
 			wSPC_LUK += 1;
@@ -4249,7 +4249,7 @@ function StPlusCalc()
 	if(n_A_LEFT_DEF_PLUS >= 9 && EquipNumSearch(1500))
 		n_tok[192] +=5;
 
-	if(CardNumSearch(185))wSPC_VIT += Math.floor(SU_DEX /18);
+	if(CardNumSearch(185))bonusVit += Math.floor(SU_DEX /18);
 	if(CardNumSearch(187))bonusStr += Math.floor(SU_INT /18);
 	if(CardNumSearch(189))wSPC_LUK += Math.floor(SU_AGI /18);
 	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
@@ -4345,7 +4345,7 @@ function StPlusCalc()
 	{
 		bonusStr += 5;
 		bonusAgi += 5;
-		wSPC_VIT += 5;
+		bonusVit += 5;
 		wSPC_DEX += 5;
 		wSPC_INT += 5;
 		wSPC_LUK += 5;
@@ -4360,14 +4360,14 @@ function StPlusCalc()
 		wSPC_INT += 5;
 	}
 	bonusStr += n_A_PassSkill3[41];
-	wSPC_VIT += n_A_PassSkill3[42];
+	bonusVit += n_A_PassSkill3[42];
 	bonusAgi += n_A_PassSkill3[43];
 	wSPC_DEX += n_A_PassSkill3[44];
 
 	if(n_A_PassSkill5[0]){
 		bonusStr += 20;
 		bonusAgi += 20;
-		wSPC_VIT += 20;
+		bonusVit += 20;
 		wSPC_DEX += 20;
 		wSPC_INT += 20;
 		wSPC_LUK += 20;
@@ -4376,7 +4376,7 @@ function StPlusCalc()
 	if(n_A_PassSkill6[2] == 1){
 		bonusStr += 3;
 		bonusAgi += 3;
-		wSPC_VIT += 3;
+		bonusVit += 3;
 		wSPC_DEX += 3;
 		wSPC_INT += 3;
 		wSPC_LUK += 3;
@@ -4384,7 +4384,7 @@ function StPlusCalc()
 	if(n_A_PassSkill6[2] == 2){
 		bonusStr += 5;
 		bonusAgi += 5;
-		wSPC_VIT += 5;
+		bonusVit += 5;
 		wSPC_DEX += 5;
 		wSPC_INT += 5;
 		wSPC_LUK += 5;
@@ -4392,7 +4392,7 @@ function StPlusCalc()
 	if(n_A_PassSkill8[4]){
 		bonusStr += 1;
 		bonusAgi += 1;
-		wSPC_VIT += 1;
+		bonusVit += 1;
 		wSPC_DEX += 1;
 		wSPC_INT += 1;
 		wSPC_LUK += 1;
@@ -4400,7 +4400,7 @@ function StPlusCalc()
 	if(SkillSearch(310)){
 		bonusStr -= 1;
 		bonusAgi -= 1;
-		wSPC_VIT -= 1;
+		bonusVit -= 1;
 		wSPC_DEX -= 1;
 		wSPC_INT -= 1;
 		wSPC_LUK -= 1;
@@ -4411,7 +4411,7 @@ function StPlusCalc()
 	if(n_A_PassSkill7[4])
 		bonusAgi += n_A_PassSkill7[4];
 	if(n_A_PassSkill7[5])
-		wSPC_VIT += n_A_PassSkill7[5];
+		bonusVit += n_A_PassSkill7[5];
 	if(n_A_PassSkill7[6])
 		wSPC_INT += n_A_PassSkill7[6];
 	if(n_A_PassSkill7[7])
@@ -4429,7 +4429,7 @@ function StPlusCalc()
 		if(11 <= wHSE && wHSE <= 19)
 			bonusAgi += w;
 		if(21 <= wHSE && wHSE <= 29)
-			wSPC_VIT += w;
+			bonusVit += w;
 		if(31 <= wHSE && wHSE <= 39)
 			wSPC_INT += w;
 		if(41 <= wHSE && wHSE <= 49)
@@ -4446,7 +4446,7 @@ function StPlusCalc()
 		switch(op) {
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
-				case '3': wSPC_VIT += val; break;
+				case '3': bonusVit += val; break;
 				case '4': wSPC_INT += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
@@ -4461,7 +4461,7 @@ function StPlusCalc()
 		if(wKE){
 			var w = wKE % 10;
 			if(41 <= wKE && wKE <= 49)
-				wSPC_VIT += w;
+				bonusVit += w;
 			if(51 <= wKE && wKE <= 59)
 				wSPC_INT += w;
 			if(61 <= wKE && wKE <= 69)
@@ -4482,7 +4482,7 @@ function StPlusCalc()
 		var val = parseInt(wKE.substr(-1));
 
 		switch(op) {
-				case '3': wSPC_VIT += val; break;
+				case '3': bonusVit += val; break;
 				case '4': wSPC_INT += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
@@ -4501,7 +4501,7 @@ function StPlusCalc()
 		switch(op) {
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
-				case '3': wSPC_VIT += val; break;
+				case '3': bonusVit += val; break;
 				case '4': wSPC_INT += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
@@ -4520,7 +4520,7 @@ function StPlusCalc()
 		switch(op) {
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
-				case '3': wSPC_VIT += val; break;
+				case '3': bonusVit += val; break;
 				case '4': wSPC_INT += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
@@ -4539,7 +4539,7 @@ function StPlusCalc()
 		switch(op) {
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
-				case '3': wSPC_VIT += val; break;
+				case '3': bonusVit += val; break;
 				case '4': wSPC_INT += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
@@ -4558,7 +4558,7 @@ function StPlusCalc()
 		switch(op) {
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
-				case '3': wSPC_VIT += val; break;
+				case '3': bonusVit += val; break;
 				case '4': wSPC_INT += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
@@ -4577,7 +4577,7 @@ function StPlusCalc()
 		switch(op) {
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
-				case '3': wSPC_VIT += val; break;
+				case '3': bonusVit += val; break;
 				case '4': wSPC_INT += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
@@ -4596,7 +4596,7 @@ function StPlusCalc()
 		switch(op) {
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
-				case '3': wSPC_VIT += val; break;
+				case '3': bonusVit += val; break;
 				case '4': wSPC_INT += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
@@ -4611,7 +4611,7 @@ function StPlusCalc()
 		if(11 <= wHSE2 && wHSE2 <= 19)
 			bonusAgi += w;
 		if(21 <= wHSE2 && wHSE2 <= 29)
-			wSPC_VIT += w;
+			bonusVit += w;
 		if(31 <= wHSE2 && wHSE2 <= 39)
 			wSPC_INT += w;
 		if(41 <= wHSE2 && wHSE2 <= 49)
@@ -4629,7 +4629,7 @@ function StPlusCalc()
 		if(11 <= wHSE && wHSE <= 19)
 			bonusAgi -= w1;
 		if(21 <= wHSE && wHSE <= 29)
-			wSPC_VIT -= w1;
+			bonusVit -= w1;
 		if(31 <= wHSE && wHSE <= 39)
 			wSPC_INT -= w1;
 		if(41 <= wHSE && wHSE <= 49)
@@ -4644,8 +4644,8 @@ function StPlusCalc()
 					bonusStr = 50 - n_A_STR;
 			if(n_A_AGI + bonusAgi <= 50)
 					bonusAgi = 50 - n_A_AGI;
-			if(n_A_VIT + wSPC_VIT <= 50)
-					wSPC_VIT = 50 - n_A_VIT;
+			if(n_A_VIT + bonusVit <= 50)
+					bonusVit = 50 - n_A_VIT;
 			if(n_A_INT + wSPC_INT <= 50)
 					wSPC_INT = 50 - n_A_INT;
 			if(n_A_DEX + wSPC_DEX <= 50)
@@ -4668,11 +4668,11 @@ function StPlusCalc()
 			else
 				bonusAgi = (99 - n_A_AGI);
 		}
-		if(n_A_VIT + wSPC_VIT < 99){
-			if(n_A_VIT + wSPC_VIT + Math.floor(n_A_PassSkill3[14]/2) < 99)
-				wSPC_VIT += Math.floor(n_A_PassSkill3[14]/2);
+		if(n_A_VIT + bonusVit < 99){
+			if(n_A_VIT + bonusVit + Math.floor(n_A_PassSkill3[14]/2) < 99)
+				bonusVit += Math.floor(n_A_PassSkill3[14]/2);
 			else
-				wSPC_VIT = (99 - n_A_VIT);
+				bonusVit = (99 - n_A_VIT);
 		}
 		if(n_A_INT + wSPC_INT < 99){
 			if(n_A_INT + wSPC_INT + Math.floor(n_A_PassSkill3[15]/2) < 99)
@@ -4708,10 +4708,10 @@ function StPlusCalc()
 				bonusAgi += Math.max((99 - n_A_AGI - w2[1]), 0);
 			}
 			if(n_A_VIT + w2[2] + Math.floor(n_A_PassSkill3[14]/2) < 99){
-				wSPC_VIT += Math.floor(n_A_PassSkill3[14]/2);
+				bonusVit += Math.floor(n_A_PassSkill3[14]/2);
 			}
 			else{
-				wSPC_VIT += Math.max((99 - n_A_VIT - w2[2]), 0);
+				bonusVit += Math.max((99 - n_A_VIT - w2[2]), 0);
 			}
 			if(n_A_INT + w2[3] + Math.floor(n_A_PassSkill3[15]/2) < 99){
 				wSPC_INT += Math.floor(n_A_PassSkill3[15]/2);
@@ -4752,10 +4752,10 @@ function StPlusCalc()
 			bonusAgi +=linkboni-(n_A_AGI+bonusAgi);
 		else if (n_A_AGI+bonusAgi < 51 && linkboni > 50)
 			bonusAgi += 50 - (n_A_AGI+bonusAgi);
-		if (n_A_VIT+wSPC_VIT < 51 && n_A_VIT+wSPC_VIT < linkboni && linkboni < 51)
-			wSPC_VIT +=linkboni-(n_A_VIT+wSPC_VIT);
-		else if (n_A_VIT+wSPC_VIT < 51 && linkboni > 50)
-			wSPC_VIT += 50 - (n_A_VIT+wSPC_VIT);
+		if (n_A_VIT+bonusVit < 51 && n_A_VIT+bonusVit < linkboni && linkboni < 51)
+			bonusVit +=linkboni-(n_A_VIT+bonusVit);
+		else if (n_A_VIT+bonusVit < 51 && linkboni > 50)
+			bonusVit += 50 - (n_A_VIT+bonusVit);
 		if (n_A_INT+wSPC_INT < 51 && n_A_INT+wSPC_INT < linkboni && linkboni < 51)
 			wSPC_INT +=linkboni-(n_A_INT+wSPC_INT);
 		else if (n_A_INT+wSPC_INT < 51 && linkboni > 50)
@@ -4779,11 +4779,11 @@ function StPlusCalc()
 			bonusAgi = 50;
 		else
 			bonusAgi += linkboni;
-		if(wSPC_VIT > 50);
-		else if((wSPC_VIT + linkboni) > 50)
-			wSPC_VIT = 50;
+		if(bonusVit > 50);
+		else if((bonusVit + linkboni) > 50)
+			bonusVit = 50;
 		else
-			wSPC_VIT += linkboni;
+			bonusVit += linkboni;
 		if(wSPC_INT > 50);
 		else if((wSPC_INT + linkboni) > 50)
 			wSPC_INT = 50;
@@ -4832,7 +4832,7 @@ function StPlusCalc()
 
 	n_A_STR += bonusStr;
 	n_A_AGI += bonusAgi;
-	n_A_VIT += wSPC_VIT;
+	n_A_VIT += bonusVit;
 	n_A_INT += wSPC_INT;
 	n_A_DEX += wSPC_DEX;
 	n_A_LUK += wSPC_LUK;
@@ -4845,10 +4845,10 @@ function StPlusCalc()
 		myInnerHtml("A_AGIp","+"+bonusAgi,0);
 	else
 		myInnerHtml("A_AGIp",bonusAgi,0);
-	if(wSPC_VIT >= 0)
-		myInnerHtml("A_VITp","+"+wSPC_VIT,0);
+	if(bonusVit >= 0)
+		myInnerHtml("A_VITp","+"+bonusVit,0);
 	else
-		myInnerHtml("A_VITp",wSPC_VIT,0);
+		myInnerHtml("A_VITp",bonusVit,0);
 	if(wSPC_INT >= 0)
 		myInnerHtml("A_INTp","+"+wSPC_INT,0);
 	else
