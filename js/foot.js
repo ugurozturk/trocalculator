@@ -4048,7 +4048,7 @@ function StPlusCalc()
 	var bonusStr = w2[0];
 	var bonusAgi = w2[1];
 	var bonusVit = w2[2];
-	var wSPC_INT = w2[3];
+	var bonusInt = w2[3];
 	var wSPC_DEX = w2[4];
 	var wSPC_LUK = w2[5];
 
@@ -4058,8 +4058,8 @@ function StPlusCalc()
 	bonusAgi += StPlusCalc2(2) + wSPCall;
 	bonusVit += StPlusCalc2(3) + wSPCall;
 	bonusVit += StPlusCalc2(213);
-	wSPC_INT += StPlusCalc2(4) + wSPCall;
-	wSPC_INT += StPlusCalc2(214);
+	bonusInt += StPlusCalc2(4) + wSPCall;
+	bonusInt += StPlusCalc2(214);
 	wSPC_DEX += StPlusCalc2(5) + wSPCall;
 	wSPC_LUK += StPlusCalc2(6) + wSPCall;
 
@@ -4068,9 +4068,9 @@ function StPlusCalc()
 		bonusStr += 4;
 	bonusStr += SkillSearch(146);
 	bonusStr += SkillSearch(404);
-	wSPC_INT += SkillSearch(404);
+	bonusInt += SkillSearch(404);
 	if(SkillSearch(234))
-		wSPC_INT += Math.round(SkillSearch(234) /2);
+		bonusInt += Math.round(SkillSearch(234) /2);
 	if(SkillSearch(286)){
 		if(SkillSearch(286)==5)bonusStr +=16;
 		if(SkillSearch(286)==4)bonusStr +=8;
@@ -4105,7 +4105,7 @@ function StPlusCalc()
 	if(n_A_JobSearch()==41 && EquipNumSearch(672))
 		bonusAgi += 1;
 	if(n_A_JobSearch()==41 && EquipNumSearch(673))
-		wSPC_INT += 1;
+		bonusInt += 1;
 	if(n_A_JobSearch()==41 && EquipNumSearch(675))
 		wSPC_LUK += 2;
 	if(n_A_JobSearch()==41 && EquipNumSearch(676))
@@ -4117,17 +4117,17 @@ function StPlusCalc()
 	if(n_A_HEAD_DEF_PLUS >= 5 && EquipNumSearch(1069))
 		wSPC_LUK += (n_A_HEAD_DEF_PLUS - 4);
 	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1168))
-		wSPC_INT += (n_A_Weapon_ATKplus - 5);
+		bonusInt += (n_A_Weapon_ATKplus - 5);
 	if(EquipNumSearch(1171) && SkillSearch(234) == 5)
-		wSPC_INT += 3;
+		bonusInt += 3;
 	if(EquipNumSearch(1172))
-		wSPC_INT += Math.floor(n_A_Weapon_ATKplus / 2);
+		bonusInt += Math.floor(n_A_Weapon_ATKplus / 2);
 
 	if(EquipNumSearch(649))
 		wSPC_DEX -= SU_DEX;
 
 	if(n_A_WeaponType==9)
-		wSPC_INT += CardNumSearch(466);
+		bonusInt += CardNumSearch(466);
 
 	wSPCall = StPlusCard(7);
 	//custom TalonRO pet Pinguicula + Poring Cake Hat combo
@@ -4136,7 +4136,7 @@ function StPlusCalc()
 
 	//[Custom TalonRO - 6/4/2018 - Pet Pandaring + Panda Hat combo] [Kato]
 	if(n_A_PassSkill8[0]==101 && EquipNumSearch(202))
-		wSPC_INT += 4;
+		bonusInt += 4;
 
 	//[Custom TalonRO - 6/4/2018 - Pet Galapago + Galapago Hat combo] [Kato]
 	if(n_A_PassSkill8[0]==93 && EquipNumSearch(502))
@@ -4160,7 +4160,7 @@ function StPlusCalc()
 
 	//custom TalonRo Improved Mage Hat: Every Refine level 7 or higher adds INT + 1 - [Loa] - 2018-06-07
 	if(EquipNumSearch(1645) && n_A_HEAD_DEF_PLUS > 6){
-		wSPC_INT += n_A_HEAD_DEF_PLUS - 6;
+		bonusInt += n_A_HEAD_DEF_PLUS - 6;
 	}
 
 	//custom TalonRo Improved Magician Hat: Every Refine level 7 or higher adds DEX + 1 - [Loa] - 2018-06-07
@@ -4188,7 +4188,7 @@ function StPlusCalc()
 
 	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar - Every Upgrade gives + 1 INT] [Amor]
 	if(EquipNumSearch(1090)){
-		wSPC_INT += n_A_Weapon2_ATKplus;
+		bonusInt += n_A_Weapon2_ATKplus;
 	}
 
 	//[TalonRO Custom - 2018-07-28 - Glorious Gladius - +5 DEX for Rogue/Stalker/Ninja/SL][Amor]
@@ -4197,20 +4197,20 @@ function StPlusCalc()
 	}
 	//[TalonRO Custom - 2018-07-29 - Glorious Rapier - +1 INT per Refine][Amor]
 	if(EquipNumSearch(1078)){
-			wSPC_INT += n_A_Weapon_ATKplus;
+			bonusInt += n_A_Weapon_ATKplus;
 	}
 
 
 	bonusStr += StPlusCard(1) + wSPCall;
 	bonusAgi += StPlusCard(2) + wSPCall;
 	bonusVit += StPlusCard(3) + wSPCall;
-	wSPC_INT += StPlusCard(4) + wSPCall;
+	bonusInt += StPlusCard(4) + wSPCall;
 	wSPC_DEX += StPlusCard(5) + wSPCall;
 	wSPC_LUK += StPlusCard(6) + wSPCall;
 
 	if(n_A_JobSearch()==3)
-		wSPC_INT += CardNumSearch(383);
-	if(CardNumSearch(173))wSPC_INT += n_A_LEFT_DEF_PLUS;
+		bonusInt += CardNumSearch(383);
+	if(CardNumSearch(173))bonusInt += n_A_LEFT_DEF_PLUS;
 	if(CardNumSearch(402))wSPC_LUK += n_A_SHOULDER_DEF_PLUS;
 	if(CardNumSearch(406))bonusAgi += n_A_SHOES_DEF_PLUS;
 	if(CardNumSearch(198))bonusVit += n_A_BODY_DEF_PLUS;
@@ -4219,7 +4219,7 @@ function StPlusCalc()
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1272)){bonusVit += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1273)){bonusVit += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){n_tok[91] += 3;n_tok[94] += 3;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1279)){wSPC_INT += 2;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1279)){bonusInt += 2;}
 	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1279)){n_tok[91] += 4;n_tok[94] += 4;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1280)){n_tok[64] += 5;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1281)){n_tok[64] += 5;}
@@ -4235,7 +4235,7 @@ function StPlusCalc()
 			bonusStr += 1;
 			bonusAgi += 1;
 			bonusVit += 1;
-			wSPC_INT += 1;
+			bonusInt += 1;
 			wSPC_DEX += 1;
 			wSPC_LUK += 1;
 		}
@@ -4253,7 +4253,7 @@ function StPlusCalc()
 	if(CardNumSearch(187))bonusStr += Math.floor(SU_INT /18);
 	if(CardNumSearch(189))wSPC_LUK += Math.floor(SU_AGI /18);
 	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
-	if(CardNumSearch(196))wSPC_INT += Math.floor(SU_STR /18);
+	if(CardNumSearch(196))bonusInt += Math.floor(SU_STR /18);
 	if(CardNumSearch(197))wSPC_DEX += Math.floor(SU_VIT /18);
 
 	//custom TalonRO Gryphon Card
@@ -4291,11 +4291,11 @@ function StPlusCalc()
 		if(n_A_JobSearch()==4)
 			wSPC_DEX += Math.floor(n_A_HEAD_DEF_PLUS /3);
 		else
-			wSPC_INT += Math.floor(n_A_HEAD_DEF_PLUS /3);
+			bonusInt += Math.floor(n_A_HEAD_DEF_PLUS /3);
 	//custom TalonRO Cendrawasih Card
 	if(CardNumSearch(517))
 		if(n_A_JobSearch()==5)
-			wSPC_INT += Math.floor(n_A_HEAD_DEF_PLUS /3);
+			bonusInt += Math.floor(n_A_HEAD_DEF_PLUS /3);
 	//custom TalonRO King Dramoh
 	if(CardNumSearch(527))
 		if(n_A_JobSearch()==1)
@@ -4320,17 +4320,17 @@ function StPlusCalc()
 	if(EquipNumSearch(1543) || EquipNumSearch(1013)){
 		n_tok[77] += Math.floor(n_A_LEFT_DEF_PLUS /3);
 	}
-	if(EquipNumSearch(1268))wSPC_INT += Math.floor(SU_INT/24);
+	if(EquipNumSearch(1268))bonusInt += Math.floor(SU_INT/24);
 
 	if(CardNumSearch(405)){
 		if(n_A_JobSearch()==1 || n_A_JobSearch()==2 || n_A_JobSearch()==6)
 			bonusStr += 2;
 		if(n_A_JobSearch()==3 || n_A_JobSearch()==4 || n_A_JobSearch()==5)
-			wSPC_INT += 2;
+			bonusInt += 2;
 	}
 
 	bonusStr += n_A_PassSkill2[0];
-	wSPC_INT += n_A_PassSkill2[0];
+	bonusInt += n_A_PassSkill2[0];
 	wSPC_DEX += n_A_PassSkill2[0];
 	//custom TalonRO Guarana Candy Agi Increase Level 10 (n_A_IJYOU[0]=Quagmire, n_A_IJYOU[1]=Agi Decrease)
 	//if(n_A_PassSkill2[1] > 0 && n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0)
@@ -4347,7 +4347,7 @@ function StPlusCalc()
 		bonusAgi += 5;
 		bonusVit += 5;
 		wSPC_DEX += 5;
-		wSPC_INT += 5;
+		bonusInt += 5;
 		wSPC_LUK += 5;
 	}
 
@@ -4357,7 +4357,7 @@ function StPlusCalc()
 	if(n_A_PassSkill3[40]){
 		bonusStr += 5;
 		wSPC_DEX += 5;
-		wSPC_INT += 5;
+		bonusInt += 5;
 	}
 	bonusStr += n_A_PassSkill3[41];
 	bonusVit += n_A_PassSkill3[42];
@@ -4369,7 +4369,7 @@ function StPlusCalc()
 		bonusAgi += 20;
 		bonusVit += 20;
 		wSPC_DEX += 20;
-		wSPC_INT += 20;
+		bonusInt += 20;
 		wSPC_LUK += 20;
 	}
 
@@ -4378,7 +4378,7 @@ function StPlusCalc()
 		bonusAgi += 3;
 		bonusVit += 3;
 		wSPC_DEX += 3;
-		wSPC_INT += 3;
+		bonusInt += 3;
 		wSPC_LUK += 3;
 	}
 	if(n_A_PassSkill6[2] == 2){
@@ -4386,7 +4386,7 @@ function StPlusCalc()
 		bonusAgi += 5;
 		bonusVit += 5;
 		wSPC_DEX += 5;
-		wSPC_INT += 5;
+		bonusInt += 5;
 		wSPC_LUK += 5;
 	}
 	if(n_A_PassSkill8[4]){
@@ -4394,7 +4394,7 @@ function StPlusCalc()
 		bonusAgi += 1;
 		bonusVit += 1;
 		wSPC_DEX += 1;
-		wSPC_INT += 1;
+		bonusInt += 1;
 		wSPC_LUK += 1;
 	}
 	if(SkillSearch(310)){
@@ -4402,7 +4402,7 @@ function StPlusCalc()
 		bonusAgi -= 1;
 		bonusVit -= 1;
 		wSPC_DEX -= 1;
-		wSPC_INT -= 1;
+		bonusInt -= 1;
 		wSPC_LUK -= 1;
 	}
 
@@ -4413,7 +4413,7 @@ function StPlusCalc()
 	if(n_A_PassSkill7[5])
 		bonusVit += n_A_PassSkill7[5];
 	if(n_A_PassSkill7[6])
-		wSPC_INT += n_A_PassSkill7[6];
+		bonusInt += n_A_PassSkill7[6];
 	if(n_A_PassSkill7[7])
 		wSPC_DEX += n_A_PassSkill7[7];
 	if(n_A_PassSkill7[8])
@@ -4431,7 +4431,7 @@ function StPlusCalc()
 		if(21 <= wHSE && wHSE <= 29)
 			bonusVit += w;
 		if(31 <= wHSE && wHSE <= 39)
-			wSPC_INT += w;
+			bonusInt += w;
 		if(41 <= wHSE && wHSE <= 49)
 			wSPC_DEX += w;
 		if(51 <= wHSE && wHSE <= 59)
@@ -4447,7 +4447,7 @@ function StPlusCalc()
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
 				case '3': bonusVit += val; break;
-				case '4': wSPC_INT += val; break;
+				case '4': bonusInt += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
 		}
@@ -4463,7 +4463,7 @@ function StPlusCalc()
 			if(41 <= wKE && wKE <= 49)
 				bonusVit += w;
 			if(51 <= wKE && wKE <= 59)
-				wSPC_INT += w;
+				bonusInt += w;
 			if(61 <= wKE && wKE <= 69)
 				wSPC_DEX += w;
 			if(71 <= wKE && wKE <= 79)
@@ -4483,7 +4483,7 @@ function StPlusCalc()
 
 		switch(op) {
 				case '3': bonusVit += val; break;
-				case '4': wSPC_INT += val; break;
+				case '4': bonusInt += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
 		}
@@ -4502,7 +4502,7 @@ function StPlusCalc()
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
 				case '3': bonusVit += val; break;
-				case '4': wSPC_INT += val; break;
+				case '4': bonusInt += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
 		}
@@ -4521,7 +4521,7 @@ function StPlusCalc()
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
 				case '3': bonusVit += val; break;
-				case '4': wSPC_INT += val; break;
+				case '4': bonusInt += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
 		}
@@ -4540,7 +4540,7 @@ function StPlusCalc()
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
 				case '3': bonusVit += val; break;
-				case '4': wSPC_INT += val; break;
+				case '4': bonusInt += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
 		}
@@ -4559,7 +4559,7 @@ function StPlusCalc()
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
 				case '3': bonusVit += val; break;
-				case '4': wSPC_INT += val; break;
+				case '4': bonusInt += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
 		}
@@ -4578,7 +4578,7 @@ function StPlusCalc()
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
 				case '3': bonusVit += val; break;
-				case '4': wSPC_INT += val; break;
+				case '4': bonusInt += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
 		}
@@ -4597,7 +4597,7 @@ function StPlusCalc()
 				case '1': bonusStr += val; break;
 				case '2': bonusAgi += val; break;
 				case '3': bonusVit += val; break;
-				case '4': wSPC_INT += val; break;
+				case '4': bonusInt += val; break;
 				case '5': wSPC_DEX += val; break;
 				case '6': wSPC_LUK += val; break;
 		}
@@ -4613,7 +4613,7 @@ function StPlusCalc()
 		if(21 <= wHSE2 && wHSE2 <= 29)
 			bonusVit += w;
 		if(31 <= wHSE2 && wHSE2 <= 39)
-			wSPC_INT += w;
+			bonusInt += w;
 		if(41 <= wHSE2 && wHSE2 <= 49)
 			wSPC_DEX += w;
 		if(51 <= wHSE2 && wHSE2 <= 59)
@@ -4631,7 +4631,7 @@ function StPlusCalc()
 		if(21 <= wHSE && wHSE <= 29)
 			bonusVit -= w1;
 		if(31 <= wHSE && wHSE <= 39)
-			wSPC_INT -= w1;
+			bonusInt -= w1;
 		if(41 <= wHSE && wHSE <= 49)
 			wSPC_DEX -= w1;
 		if(51 <= wHSE && wHSE <= 59)
@@ -4646,8 +4646,8 @@ function StPlusCalc()
 					bonusAgi = 50 - n_A_AGI;
 			if(n_A_VIT + bonusVit <= 50)
 					bonusVit = 50 - n_A_VIT;
-			if(n_A_INT + wSPC_INT <= 50)
-					wSPC_INT = 50 - n_A_INT;
+			if(n_A_INT + bonusInt <= 50)
+					bonusInt = 50 - n_A_INT;
 			if(n_A_DEX + wSPC_DEX <= 50)
 					wSPC_DEX = 50 - n_A_DEX;
 			if(n_A_LUK + wSPC_LUK <= 50)
@@ -4674,11 +4674,11 @@ function StPlusCalc()
 			else
 				bonusVit = (99 - n_A_VIT);
 		}
-		if(n_A_INT + wSPC_INT < 99){
-			if(n_A_INT + wSPC_INT + Math.floor(n_A_PassSkill3[15]/2) < 99)
-				wSPC_INT += Math.floor(n_A_PassSkill3[15]/2);
+		if(n_A_INT + bonusInt < 99){
+			if(n_A_INT + bonusInt + Math.floor(n_A_PassSkill3[15]/2) < 99)
+				bonusInt += Math.floor(n_A_PassSkill3[15]/2);
 			else
-				wSPC_INT = (99 - n_A_INT);
+				bonusInt = (99 - n_A_INT);
 		}
 		if(n_A_DEX + wSPC_DEX < 99){
 			if(n_A_DEX + wSPC_DEX + Math.floor(n_A_PassSkill3[16]/2) < 99)
@@ -4714,10 +4714,10 @@ function StPlusCalc()
 				bonusVit += Math.max((99 - n_A_VIT - w2[2]), 0);
 			}
 			if(n_A_INT + w2[3] + Math.floor(n_A_PassSkill3[15]/2) < 99){
-				wSPC_INT += Math.floor(n_A_PassSkill3[15]/2);
+				bonusInt += Math.floor(n_A_PassSkill3[15]/2);
 			}
 			else{
-				wSPC_INT += Math.max((99 - n_A_INT - w2[3]), 0);
+				bonusInt += Math.max((99 - n_A_INT - w2[3]), 0);
 			}
 			if(n_A_DEX + w2[4] + Math.floor(n_A_PassSkill3[16]/2) < 99){
 				wSPC_DEX += Math.floor(n_A_PassSkill3[16]/2);
@@ -4735,7 +4735,7 @@ function StPlusCalc()
 
 		//[Custom TalonRO - 2018-07-26 - Speedy Recovery Wand +3 INT to Acolyte/Priest/High Priest] [Amor]
 		if(EquipNumSearch(920) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23)){
-			wSPC_INT += 3;
+			bonusInt += 3;
 		}
 
 	//CUSTOM (1st Transcendent Spirit)
@@ -4756,10 +4756,10 @@ function StPlusCalc()
 			bonusVit +=linkboni-(n_A_VIT+bonusVit);
 		else if (n_A_VIT+bonusVit < 51 && linkboni > 50)
 			bonusVit += 50 - (n_A_VIT+bonusVit);
-		if (n_A_INT+wSPC_INT < 51 && n_A_INT+wSPC_INT < linkboni && linkboni < 51)
-			wSPC_INT +=linkboni-(n_A_INT+wSPC_INT);
-		else if (n_A_INT+wSPC_INT < 51 && linkboni > 50)
-			wSPC_INT += 50 - (n_A_INT+wSPC_INT);
+		if (n_A_INT+bonusInt < 51 && n_A_INT+bonusInt < linkboni && linkboni < 51)
+			bonusInt +=linkboni-(n_A_INT+bonusInt);
+		else if (n_A_INT+bonusInt < 51 && linkboni > 50)
+			bonusInt += 50 - (n_A_INT+bonusInt);
 		if (n_A_DEX+wSPC_DEX < 51 && n_A_DEX+wSPC_DEX < linkboni && linkboni < 51)
 			wSPC_DEX +=linkboni-(n_A_DEX+wSPC_DEX);
 		else if (n_A_DEX+wSPC_DEX < 51 && linkboni > 50)
@@ -4784,11 +4784,11 @@ function StPlusCalc()
 			bonusVit = 50;
 		else
 			bonusVit += linkboni;
-		if(wSPC_INT > 50);
-		else if((wSPC_INT + linkboni) > 50)
-			wSPC_INT = 50;
+		if(bonusInt > 50);
+		else if((bonusInt + linkboni) > 50)
+			bonusInt = 50;
 		else
-			wSPC_INT += linkboni;
+			bonusInt += linkboni;
 		if(wSPC_DEX > 50);
 		else if((wSPC_DEX + linkboni) > 50)
 			wSPC_DEX = 50;
@@ -4833,7 +4833,7 @@ function StPlusCalc()
 	n_A_STR += bonusStr;
 	n_A_AGI += bonusAgi;
 	n_A_VIT += bonusVit;
-	n_A_INT += wSPC_INT;
+	n_A_INT += bonusInt;
 	n_A_DEX += wSPC_DEX;
 	n_A_LUK += wSPC_LUK;
 
@@ -4849,10 +4849,10 @@ function StPlusCalc()
 		myInnerHtml("A_VITp","+"+bonusVit,0);
 	else
 		myInnerHtml("A_VITp",bonusVit,0);
-	if(wSPC_INT >= 0)
-		myInnerHtml("A_INTp","+"+wSPC_INT,0);
+	if(bonusInt >= 0)
+		myInnerHtml("A_INTp","+"+bonusInt,0);
 	else
-		myInnerHtml("A_INTp",wSPC_INT,0);
+		myInnerHtml("A_INTp",bonusInt,0);
 	if(wSPC_DEX >= 0)
 		myInnerHtml("A_DEXp","+"+wSPC_DEX,0);
 	else
