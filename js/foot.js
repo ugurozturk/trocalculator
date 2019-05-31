@@ -189,7 +189,7 @@ function StAllCalc()
 	baseAgi = n_A_AGI;
 	baseVit = n_A_VIT;
 	baseDex = n_A_DEX;
-	SU_INT = n_A_INT;
+	baseInt = n_A_INT;
 	SU_LUK = n_A_LUK;
 
 	n_A_WeaponType = eval(A_WeaponType.value);
@@ -1100,7 +1100,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1487))
 		w += 100 * n_A_HEAD_DEF_PLUS;
 	//custom TalonRO Geffenia Water Book, +800 HP if base INT is 99
-	if(EquipNumSearch(1520) && SU_INT == 99)
+	if(EquipNumSearch(1520) && baseInt == 99)
 		w += 800;
 	//custom TalonRO Kris enchant HP
 	var KEbonus = [A_KE11.value,A_KE12.value,A_KE21.value,A_KE22.value];
@@ -2589,9 +2589,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1293)){
 		w += 1;}
-	if(EquipNumSearch(1520) && SU_INT == 99)
+	if(EquipNumSearch(1520) && baseInt == 99)
 		w += 1;
-	if(n_A_Equip[0]==484 && SU_INT >= 70)
+	if(n_A_Equip[0]==484 && baseInt >= 70)
 		w += 5;
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){
 		w += 2;}
@@ -2880,7 +2880,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1468) && n_A_HEAD_DEF_PLUS >= 4)
 		w += n_A_HEAD_DEF_PLUS-3;
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_INT >= 80 && EquipNumSearch(1526))
+	if(baseInt >= 80 && EquipNumSearch(1526))
 		w += 3;
 	//custom TalonRO Kris enchant MATK%
 	var KEbonus = [document.calcForm.A_KE11.value,document.calcForm.A_KE12.value,document.calcForm.A_KE21.value,document.calcForm.A_KE22.value];
@@ -4250,7 +4250,7 @@ function StPlusCalc()
 		n_tok[192] +=5;
 
 	if(CardNumSearch(185))bonusVit += Math.floor(baseDex /18);
-	if(CardNumSearch(187))bonusStr += Math.floor(SU_INT /18);
+	if(CardNumSearch(187))bonusStr += Math.floor(baseInt /18);
 	if(CardNumSearch(189))bonusLuk += Math.floor(baseAgi /18);
 	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
 	if(CardNumSearch(196))bonusInt += Math.floor(baseStr /18);
@@ -4320,7 +4320,7 @@ function StPlusCalc()
 	if(EquipNumSearch(1543) || EquipNumSearch(1013)){
 		n_tok[77] += Math.floor(n_A_LEFT_DEF_PLUS /3);
 	}
-	if(EquipNumSearch(1268))bonusInt += Math.floor(SU_INT/24);
+	if(EquipNumSearch(1268))bonusInt += Math.floor(baseInt/24);
 
 	if(CardNumSearch(405)){
 		if(n_A_JobSearch()==1 || n_A_JobSearch()==2 || n_A_JobSearch()==6)
