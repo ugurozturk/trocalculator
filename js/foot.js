@@ -49,26 +49,26 @@ function StCalc(nSC)
 	//calculate stat points available based on trans class status
 	n_A_JobSet();
 	if(isTransClass)
-		wStPoint = 100;
+		statPointsAvailable = 100;
 	else
-		wStPoint = 48;
+		statPointsAvailable = 48;
 
 	if(nSC == 1 || BLVauto.checked == 0){
 		//set total stat points available based on base level
 		for(i=1;i<n_A_BaseLV;i++)
-			wStPoint += Math.floor((i) / 5) + 3;
+			statPointsAvailable += Math.floor((i) / 5) + 3;
 	}
 	else{
 		//calculate base level as i when auto adjust base level is checked
-		for(i=1;StPoint > wStPoint && i<99;i++)
-			wStPoint += Math.floor((i) / 5) + 3;
+		for(i=1;StPoint > statPointsAvailable && i<99;i++)
+			statPointsAvailable += Math.floor((i) / 5) + 3;
 	}
 	//cap max level at 99
 	if(i > 99)i=99;
 	//set base level to i from previous scaling
 	A_BaseLV.value = i;
 	//update html value for stat points available for use
-	myInnerHtml("A_STPOINT",wStPoint - StPoint,0);
+	myInnerHtml("A_STPOINT",statPointsAvailable - StPoint,0);
 }}
 
 //get stat point cost for base stat
