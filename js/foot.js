@@ -186,7 +186,7 @@ function StAllCalc()
 	n_A_INT = eval(A_INT.value);
 	n_A_LUK = eval(A_LUK.value);
 	baseStr = n_A_STR;
-	SU_AGI = n_A_AGI;
+	baseAgi = n_A_AGI;
 	SU_VIT = n_A_VIT;
 	SU_DEX = n_A_DEX;
 	SU_INT = n_A_INT;
@@ -768,7 +768,7 @@ if(EquipNumSearch(1085)){
 		w += 340;
 	if(baseStr >= 44 && EquipNumSearch(625))
 		w += 44;
-	if(SU_AGI >= 90 && EquipNumSearch(442))
+	if(baseAgi >= 90 && EquipNumSearch(442))
 		w += 10 * EquipNumSearch(442);
 	if(baseStr >= 95 && EquipNumSearch(1160))
 		w += 20;
@@ -1199,7 +1199,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			}
 	//custom TalonRO Lady Tanee Card: +1% HP per 8 base AGI
 	if(CardNumSearch(409))
-		w += Math.floor(SU_AGI / 8);
+		w += Math.floor(baseAgi / 8);
 	if(SU_VIT >= 80 && EquipNumSearch(1526))
 		w += 5;
 
@@ -1827,7 +1827,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	n_A_HIT += 2 * SkillSearch(425);
 
 	if(EquipNumSearch(654))
-		n_A_HIT += Math.floor(SU_AGI / 10);
+		n_A_HIT += Math.floor(baseAgi / 10);
 
 	/*
 		ZoneSoldier - 2018-06-06
@@ -2132,7 +2132,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	if(EquipNumSearch(689))
 		w += Math.floor(SU_LUK / 10);
-	if(SU_AGI >= 90 && EquipNumSearch(442))
+	if(baseAgi >= 90 && EquipNumSearch(442))
 		w += 10 * EquipNumSearch(442);
 
 	if(n_A_JobSearch()==41 && EquipNumSearch(675))
@@ -2403,7 +2403,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1654)){C_ATK += 10;}
 	if(EquipNumSearch(676)){C_ATK += n_A_HEAD_DEF_PLUS*2;}
 	if(EquipNumSearch(323) && EquipNumSearch(725)){C_ATK += 50;}
-	if(EquipNumSearch(442) && SU_AGI > 89){C_ATK += 10 * EquipNumSearch(442);}
+	if(EquipNumSearch(442) && baseAgi > 89){C_ATK += 10 * EquipNumSearch(442);}
 	if(EquipNumSearch(1165)){C_ATK += 10 * SkillSearch(311);}
 	if(EquipNumSearch(1164) && SU_LUK >=90){C_ATK += 20;}
 	if(EquipNumSearch(1160) && baseStr >=95){C_ATK += 20;}
@@ -3093,7 +3093,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		}
 	}
 	if(EquipNumSearch(654))
-		w += Math.floor(SU_AGI / 14);
+		w += Math.floor(baseAgi / 14);
 	if(n_A_Equip[0]==484 && baseStr >= 50)
 		w += 5;
 	if(EquipNumSearch(624))
@@ -3211,14 +3211,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += (n_A_Weapon_ATKplus/2);}
 
 	//custom TalonRO Imperial Feather
-	if(SU_AGI >= 90 && EquipNumSearch(1475))
+	if(baseAgi >= 90 && EquipNumSearch(1475))
 		w += 1;
 
 	//custom TalonRO Tasty Strawberry Hat
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1503)){
 		w += 4;}
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_AGI >= 80 && EquipNumSearch(1526))
+	if(baseAgi >= 80 && EquipNumSearch(1526))
 		w += 5;
 
 	//[TalonRO Custom - 2018-07-26 - Valorous Battle CrossBow - + 10% ASPD for Thief Class] [Amor]
@@ -3274,7 +3274,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		}
 	}
 
-	if(EquipNumSearch(1045) && SU_AGI >= 90){
+	if(EquipNumSearch(1045) && baseAgi >= 90){
 		w += 2;
 	}
 
@@ -3841,7 +3841,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_tok[159] += 2 * n_A_HEAD_DEF_PLUS;
 	}
 	if(CardNumSearch(176)){
-		if(SU_AGI >= 90){
+		if(baseAgi >= 90){
 			n_tok[151] += 30 * CardNumSearch(176);
 			n_tok[156] += 30 * CardNumSearch(176);
 		}
@@ -4251,7 +4251,7 @@ function StPlusCalc()
 
 	if(CardNumSearch(185))bonusVit += Math.floor(SU_DEX /18);
 	if(CardNumSearch(187))bonusStr += Math.floor(SU_INT /18);
-	if(CardNumSearch(189))bonusLuk += Math.floor(SU_AGI /18);
+	if(CardNumSearch(189))bonusLuk += Math.floor(baseAgi /18);
 	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
 	if(CardNumSearch(196))bonusInt += Math.floor(baseStr /18);
 	if(CardNumSearch(197))bonusDex += Math.floor(SU_VIT /18);
