@@ -4050,7 +4050,7 @@ function StPlusCalc()
 	var bonusVit = w2[2];
 	var bonusInt = w2[3];
 	var bonusDex = w2[4];
-	var wSPC_LUK = w2[5];
+	var bonusLuk = w2[5];
 
 
 	wSPCall = StPlusCalc2(7);
@@ -4061,7 +4061,7 @@ function StPlusCalc()
 	bonusInt += StPlusCalc2(4) + wSPCall;
 	bonusInt += StPlusCalc2(214);
 	bonusDex += StPlusCalc2(5) + wSPCall;
-	wSPC_LUK += StPlusCalc2(6) + wSPCall;
+	bonusLuk += StPlusCalc2(6) + wSPCall;
 
 	bonusDex += SkillSearch(38);
 	if(SkillSearch(68))
@@ -4107,15 +4107,15 @@ function StPlusCalc()
 	if(n_A_JobSearch()==41 && EquipNumSearch(673))
 		bonusInt += 1;
 	if(n_A_JobSearch()==41 && EquipNumSearch(675))
-		wSPC_LUK += 2;
+		bonusLuk += 2;
 	if(n_A_JobSearch()==41 && EquipNumSearch(676))
 		bonusDex += 2;
 	if(n_A_JobSearch()==41 && EquipNumSearch(678))
-		wSPC_LUK += 1;
+		bonusLuk += 1;
 	if(n_A_SHOES_DEF_PLUS >= 9 && EquipNumSearch(717))
 		bonusAgi += 2;
 	if(n_A_HEAD_DEF_PLUS >= 5 && EquipNumSearch(1069))
-		wSPC_LUK += (n_A_HEAD_DEF_PLUS - 4);
+		bonusLuk += (n_A_HEAD_DEF_PLUS - 4);
 	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1168))
 		bonusInt += (n_A_Weapon_ATKplus - 5);
 	if(EquipNumSearch(1171) && SkillSearch(234) == 5)
@@ -4140,7 +4140,7 @@ function StPlusCalc()
 
 	//[Custom TalonRO - 6/4/2018 - Pet Galapago + Galapago Hat combo] [Kato]
 	if(n_A_PassSkill8[0]==93 && EquipNumSearch(502))
-		wSPC_LUK += 4;
+		bonusLuk += 4;
 
 	//[Custom TalonRO - 6/4/2018 - Pet Jejeling + Baseball Cap combo] [Kato]
 	if(n_A_PassSkill8[0]==119 && EquipNumSearch(787))
@@ -4178,11 +4178,11 @@ function StPlusCalc()
 	if(EquipNumSearch(1655)){
 		if(n_A_HEAD_DEF_PLUS>4){
 			bonusAgi += 1;
-			wSPC_LUK += 1;
+			bonusLuk += 1;
 		}
 		if(n_A_HEAD_DEF_PLUS>5){
 			bonusAgi += 1;
-			wSPC_LUK += 1;
+			bonusLuk += 1;
 		}
 	}
 
@@ -4206,12 +4206,12 @@ function StPlusCalc()
 	bonusVit += StPlusCard(3) + wSPCall;
 	bonusInt += StPlusCard(4) + wSPCall;
 	bonusDex += StPlusCard(5) + wSPCall;
-	wSPC_LUK += StPlusCard(6) + wSPCall;
+	bonusLuk += StPlusCard(6) + wSPCall;
 
 	if(n_A_JobSearch()==3)
 		bonusInt += CardNumSearch(383);
 	if(CardNumSearch(173))bonusInt += n_A_LEFT_DEF_PLUS;
-	if(CardNumSearch(402))wSPC_LUK += n_A_SHOULDER_DEF_PLUS;
+	if(CardNumSearch(402))bonusLuk += n_A_SHOULDER_DEF_PLUS;
 	if(CardNumSearch(406))bonusAgi += n_A_SHOES_DEF_PLUS;
 	if(CardNumSearch(198))bonusVit += n_A_BODY_DEF_PLUS;
 	if(n_A_card[8] == 180)bonusStr += n_A_HEAD_DEF_PLUS;
@@ -4237,7 +4237,7 @@ function StPlusCalc()
 			bonusVit += 1;
 			bonusInt += 1;
 			bonusDex += 1;
-			wSPC_LUK += 1;
+			bonusLuk += 1;
 		}
 		var wHPVS = n_A_JobSearch();
 		if(wHPVS==4){
@@ -4251,13 +4251,13 @@ function StPlusCalc()
 
 	if(CardNumSearch(185))bonusVit += Math.floor(SU_DEX /18);
 	if(CardNumSearch(187))bonusStr += Math.floor(SU_INT /18);
-	if(CardNumSearch(189))wSPC_LUK += Math.floor(SU_AGI /18);
+	if(CardNumSearch(189))bonusLuk += Math.floor(SU_AGI /18);
 	if(CardNumSearch(191))bonusAgi += Math.floor(SU_LUK /18);
 	if(CardNumSearch(196))bonusInt += Math.floor(SU_STR /18);
 	if(CardNumSearch(197))bonusDex += Math.floor(SU_VIT /18);
 
 	//custom TalonRO Gryphon Card
-	if(CardNumSearch(277))wSPC_LUK += Math.floor(SU_STR /11)*2*CardNumSearch(277);
+	if(CardNumSearch(277))bonusLuk += Math.floor(SU_STR /11)*2*CardNumSearch(277);
 
 	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon Master] +15 LUK
 	if(EquipNumSearch(1383))
@@ -4265,7 +4265,7 @@ function StPlusCalc()
 			if(SQI_Bonus_Effect[i]==74) {
 				//alert(n_A_JOB+","+n_A_JobSearch());
 				if(n_A_JOB==42)
-					wSPC_LUK += 15;
+					bonusLuk += 15;
 				break;
 			}
 	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon Master] +10 DEX
@@ -4280,7 +4280,7 @@ function StPlusCalc()
 	//custom King Poring Hat
 	if(EquipNumSearch(1444)){
 		bonusDex += Math.floor(n_A_HEAD_DEF_PLUS/3);
-		wSPC_LUK += Math.floor(n_A_HEAD_DEF_PLUS/3);
+		bonusLuk += Math.floor(n_A_HEAD_DEF_PLUS/3);
 	}
 	//custom TalonRO Meginjard
 	if(EquipNumSearch(348))
@@ -4340,7 +4340,7 @@ function StPlusCalc()
 		else
 			bonusAgi += n_A_PassSkill2[1] +2;
 
-	wSPC_LUK += (n_A_PassSkill2[3] * 30);
+	bonusLuk += (n_A_PassSkill2[3] * 30);
 	if(n_A_JOB == 24 && SkillSearch(270))
 	{
 		bonusStr += 5;
@@ -4348,7 +4348,7 @@ function StPlusCalc()
 		bonusVit += 5;
 		bonusDex += 5;
 		bonusInt += 5;
-		wSPC_LUK += 5;
+		bonusLuk += 5;
 	}
 
 	if(SkillSearch(379) && n_A_WeaponType==0)
@@ -4370,7 +4370,7 @@ function StPlusCalc()
 		bonusVit += 20;
 		bonusDex += 20;
 		bonusInt += 20;
-		wSPC_LUK += 20;
+		bonusLuk += 20;
 	}
 
 	if(n_A_PassSkill6[2] == 1){
@@ -4379,7 +4379,7 @@ function StPlusCalc()
 		bonusVit += 3;
 		bonusDex += 3;
 		bonusInt += 3;
-		wSPC_LUK += 3;
+		bonusLuk += 3;
 	}
 	if(n_A_PassSkill6[2] == 2){
 		bonusStr += 5;
@@ -4387,7 +4387,7 @@ function StPlusCalc()
 		bonusVit += 5;
 		bonusDex += 5;
 		bonusInt += 5;
-		wSPC_LUK += 5;
+		bonusLuk += 5;
 	}
 	if(n_A_PassSkill8[4]){
 		bonusStr += 1;
@@ -4395,7 +4395,7 @@ function StPlusCalc()
 		bonusVit += 1;
 		bonusDex += 1;
 		bonusInt += 1;
-		wSPC_LUK += 1;
+		bonusLuk += 1;
 	}
 	if(SkillSearch(310)){
 		bonusStr -= 1;
@@ -4403,7 +4403,7 @@ function StPlusCalc()
 		bonusVit -= 1;
 		bonusDex -= 1;
 		bonusInt -= 1;
-		wSPC_LUK -= 1;
+		bonusLuk -= 1;
 	}
 
 	if(n_A_PassSkill7[3])
@@ -4417,7 +4417,7 @@ function StPlusCalc()
 	if(n_A_PassSkill7[7])
 		bonusDex += n_A_PassSkill7[7];
 	if(n_A_PassSkill7[8])
-		wSPC_LUK += n_A_PassSkill7[8];
+		bonusLuk += n_A_PassSkill7[8];
 
 	//Armor Hidden Slot Enchant STAT
 	/*
@@ -4435,7 +4435,7 @@ function StPlusCalc()
 		if(41 <= wHSE && wHSE <= 49)
 			bonusDex += w;
 		if(51 <= wHSE && wHSE <= 59)
-			wSPC_LUK += w;
+			bonusLuk += w;
 	}
 	*/
 	var wHSE = document.calcForm.A_HSE.value;
@@ -4449,7 +4449,7 @@ function StPlusCalc()
 				case '3': bonusVit += val; break;
 				case '4': bonusInt += val; break;
 				case '5': bonusDex += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '6': bonusLuk += val; break;
 		}
 	}
 
@@ -4467,7 +4467,7 @@ function StPlusCalc()
 			if(61 <= wKE && wKE <= 69)
 				bonusDex += w;
 			if(71 <= wKE && wKE <= 79)
-				wSPC_LUK += w;
+				bonusLuk += w;
 		}
 	}
 	*/
@@ -4485,7 +4485,7 @@ function StPlusCalc()
 				case '3': bonusVit += val; break;
 				case '4': bonusInt += val; break;
 				case '5': bonusDex += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '6': bonusLuk += val; break;
 		}
 	}
 
@@ -4504,7 +4504,7 @@ function StPlusCalc()
 				case '3': bonusVit += val; break;
 				case '4': bonusInt += val; break;
 				case '5': bonusDex += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '6': bonusLuk += val; break;
 		}
 	}
 
@@ -4523,7 +4523,7 @@ function StPlusCalc()
 				case '3': bonusVit += val; break;
 				case '4': bonusInt += val; break;
 				case '5': bonusDex += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '6': bonusLuk += val; break;
 		}
 	}
 
@@ -4542,7 +4542,7 @@ function StPlusCalc()
 				case '3': bonusVit += val; break;
 				case '4': bonusInt += val; break;
 				case '5': bonusDex += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '6': bonusLuk += val; break;
 		}
 	}
 
@@ -4561,7 +4561,7 @@ function StPlusCalc()
 				case '3': bonusVit += val; break;
 				case '4': bonusInt += val; break;
 				case '5': bonusDex += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '6': bonusLuk += val; break;
 		}
 	}
 
@@ -4580,7 +4580,7 @@ function StPlusCalc()
 				case '3': bonusVit += val; break;
 				case '4': bonusInt += val; break;
 				case '5': bonusDex += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '6': bonusLuk += val; break;
 		}
 	}
 
@@ -4599,7 +4599,7 @@ function StPlusCalc()
 				case '3': bonusVit += val; break;
 				case '4': bonusInt += val; break;
 				case '5': bonusDex += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '6': bonusLuk += val; break;
 		}
 	}
 
@@ -4617,7 +4617,7 @@ function StPlusCalc()
 		if(41 <= wHSE2 && wHSE2 <= 49)
 			bonusDex += w;
 		if(51 <= wHSE2 && wHSE2 <= 59)
-			wSPC_LUK += w;
+			bonusLuk += w;
 	}
 	if(Math.floor(wHSE / 10) == Math.floor(wHSE2 / 10)){
 		var w1 = wHSE % 10;
@@ -4635,7 +4635,7 @@ function StPlusCalc()
 		if(41 <= wHSE && wHSE <= 49)
 			bonusDex -= w1;
 		if(51 <= wHSE && wHSE <= 59)
-			wSPC_LUK -= w1;
+			bonusLuk -= w1;
 	}*/
 	//E lá se foi todo o headgear calc e etc...
 	if(n_A_PassSkill8[17]){
@@ -4650,8 +4650,8 @@ function StPlusCalc()
 					bonusInt = 50 - n_A_INT;
 			if(n_A_DEX + bonusDex <= 50)
 					bonusDex = 50 - n_A_DEX;
-			if(n_A_LUK + wSPC_LUK <= 50)
-					wSPC_LUK = 50 - n_A_LUK;
+			if(n_A_LUK + bonusLuk <= 50)
+					bonusLuk = 50 - n_A_LUK;
 		}
 	}
 
@@ -4686,11 +4686,11 @@ function StPlusCalc()
 			else
 				bonusDex = (99 - n_A_DEX);
 		}
-		if(n_A_LUK + wSPC_LUK < 99){
-			if(n_A_LUK + wSPC_LUK + Math.floor(n_A_PassSkill3[17]/2) < 99)
-				wSPC_LUK += Math.floor(n_A_PassSkill3[17]/2);
+		if(n_A_LUK + bonusLuk < 99){
+			if(n_A_LUK + bonusLuk + Math.floor(n_A_PassSkill3[17]/2) < 99)
+				bonusLuk += Math.floor(n_A_PassSkill3[17]/2);
 			else
-				wSPC_LUK = (99 - n_A_LUK);
+				bonusLuk = (99 - n_A_LUK);
 		}
 
 	//Marionette stat compensation rework - [Loa] - 2018-06-17
@@ -4726,10 +4726,10 @@ function StPlusCalc()
 				bonusDex += Math.max((99 - n_A_DEX - w2[4]), 0);
 			}
 			if(n_A_LUK + w2[5] + Math.floor(n_A_PassSkill3[17]/2) < 99){
-				wSPC_LUK += Math.floor(n_A_PassSkill3[17]/2);
+				bonusLuk += Math.floor(n_A_PassSkill3[17]/2);
 			}
 			else{
-				wSPC_LUK += Math.max((99 - n_A_LUK - w2[5]), 0);
+				bonusLuk += Math.max((99 - n_A_LUK - w2[5]), 0);
 			}
 	}
 
@@ -4764,10 +4764,10 @@ function StPlusCalc()
 			bonusDex +=linkboni-(n_A_DEX+bonusDex);
 		else if (n_A_DEX+bonusDex < 51 && linkboni > 50)
 			bonusDex += 50 - (n_A_DEX+bonusDex);
-		if (n_A_LUK+wSPC_LUK < 51 && n_A_LUK+wSPC_LUK < linkboni && linkboni < 51)
-			wSPC_LUK +=linkboni-(n_A_LUK+wSPC_LUK);
-		else if (n_A_LUK+wSPC_LUK < 51 && linkboni > 50)
-			wSPC_LUK += 50 - (n_A_LUK+wSPC_LUK);
+		if (n_A_LUK+bonusLuk < 51 && n_A_LUK+bonusLuk < linkboni && linkboni < 51)
+			bonusLuk +=linkboni-(n_A_LUK+bonusLuk);
+		else if (n_A_LUK+bonusLuk < 51 && linkboni > 50)
+			bonusLuk += 50 - (n_A_LUK+bonusLuk);
 		//old:
 		/*if(bonusStr > 50);
 		else if((bonusStr + linkboni) > 50)
@@ -4794,11 +4794,11 @@ function StPlusCalc()
 			bonusDex = 50;
 		else
 			bonusDex += linkboni;
-		if(wSPC_LUK > 50);
-		else if((wSPC_LUK + linkboni) > 50)
-			wSPC_LUK = 50;
+		if(bonusLuk > 50);
+		else if((bonusLuk + linkboni) > 50)
+			bonusLuk = 50;
 		else
-			wSPC_LUK += linkboni;*/
+			bonusLuk += linkboni;*/
 		//end fix
 	}
 	//END CUSTOM
@@ -4823,11 +4823,11 @@ function StPlusCalc()
 	if(n_A_IJYOU[1])
 		bonusAgi -= (n_A_IJYOU[1] + 2);
 	if(n_A_IJYOU[3])
-		wSPC_LUK = -1 * n_A_LUK;
+		bonusLuk = -1 * n_A_LUK;
 
 		//[Custom TalonRO - 2018-06-05 - Siorava gives LUK+3 * refine for Merchant and Above Classes] [Kato]
 		if(CardNumSearch(535) && n_A_HEAD_DEF_PLUS > 3 && (n_A_JobSearch() == 6 || n_A_JobSearch() == 12 || n_A_JobSearch() == 26 || n_A_JobSearch() == 19 || n_A_JobSearch() == 33)) {
-			wSPC_LUK += Math.floor(n_A_HEAD_DEF_PLUS/3) * 1;
+			bonusLuk += Math.floor(n_A_HEAD_DEF_PLUS/3) * 1;
 		}
 
 	n_A_STR += bonusStr;
@@ -4835,7 +4835,7 @@ function StPlusCalc()
 	n_A_VIT += bonusVit;
 	n_A_INT += bonusInt;
 	n_A_DEX += bonusDex;
-	n_A_LUK += wSPC_LUK;
+	n_A_LUK += bonusLuk;
 
 	if(bonusStr >= 0)
 		myInnerHtml("A_STRp","+"+bonusStr,0);
@@ -4857,10 +4857,10 @@ function StPlusCalc()
 		myInnerHtml("A_DEXp","+"+bonusDex,0);
 	else
 		myInnerHtml("A_DEXp",bonusDex,0);
-	if(wSPC_LUK >= 0)
-		myInnerHtml("A_LUKp","+"+wSPC_LUK,0);
+	if(bonusLuk >= 0)
+		myInnerHtml("A_LUKp","+"+bonusLuk,0);
 	else
-		myInnerHtml("A_LUKp",wSPC_LUK,0);
+		myInnerHtml("A_LUKp",bonusLuk,0);
 }
 
 function StPlusCalc2(nSTP2)
