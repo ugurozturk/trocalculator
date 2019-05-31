@@ -61,9 +61,9 @@ function StCalc(nSC)
 	myInnerHtml("A_STPOINT",wStPoint - StPoint,0);
 }}
 
-function getStatPointCost(nSC2)
+function getStatPointCost(statValue)
 {
-	return Math.floor((nSC2 - 2) /10) + 2;
+	return Math.floor((statValue - 2) /10) + 2;
 }
 
 function SuperNoviceFullWeapon(nSNFW)
