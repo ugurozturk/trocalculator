@@ -3012,26 +3012,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	}
 	//custom TalonRO ID_ARG + MATK
 	n_tok[98] += n_A_PassSkill9[42];
-	//custom TalonRO Stem Whip: +50 MATK
-	if(EquipNumSearch(1454)){
-		n_tok[98] += 50;
-	}
-	//custom TalonRO Red Ether Bag: +90 MATK
-	if(EquipNumSearch(1458)){
-		n_tok[98] += 90;
-	}
-	//custom TalonRO Imperial Spear: +40 MATK
-	if(EquipNumSearch(1460)){
-		n_tok[98] += 40;
-	}
-	//custom TalonRO Green Whistle: +50 MATK
-	if(EquipNumSearch(1462)){
-		n_tok[98] += 50;
-	}
-	//custom TalonRO Black Cat & Black Wing combo: +5 MATK
-	if(EquipNumSearch(1464)){
-		n_tok[98] += 5;
-	}
+	
 	/*
 		Custom =[Entweihen Hairband]+[Dark Thorn Staff] combo
 		[Refine Rate 5~10 Dark Thorn Staff]

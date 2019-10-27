@@ -1481,17 +1481,17 @@ ItemOBJ = [
 ,[1452,100,0,0,0,0,0,0,"Devil Whisper + Heart Hairpin set","",0,58,9,0]
 ,[1453,100,0,0,0,0,0,0,"Devil Whisper + Crescent Hairpin set","",0,56,9,0]
 //custom TalonRO [Update 2013-10-06]
-,[1454,15,131,170,3,1,80,90,"Stem Whip","","MATK +50<br>When using Scream, add a 3% chance of casting Level 2 Wide Sleep<br>For every refine above +6, decrease SP cost of all skills by 2%",12,5,0]
+,[1454,15,131,170,3,1,80,90,"Stem Whip","","When using Scream, add a 3% chance of casting Level 2 Wide Sleep<br>For every refine above +6, decrease SP cost of all skills by 2%",98,50,12,5,0]
 ,[1455,3,1051,280,3,0,340,90,"Alca Bringer","","Every 2 refines + 3% ASPD",0]
 ,[1456,3,1051,280,3,0,40,90,"Chrome Metal Two-Handed Sword","","A cold blue color sword crafted from the other world mineral Bradium.",0,2,3,15,-10,194,1,0]
 ,[1457,10,1054,90,3,1,170,90,"Mystic Bow","","When using Arrow Shower, add a 5% chance of casting Level 2 Dragon Fear<br>Reduces the SP cost of all skills by 10%",4,4,5041,30,0]
-,[1458,8,133,150,3,1,100,90,"Red Ether Bag","","MATK + 90",5248,25,0]
+,[1458,8,133,150,3,1,100,90,"Red Ether Bag","",0,98,90,5248,25,0]
 ,[1459,61,127,4,0,1,250,90,"Imperial Guard","","Each refine above +6 increases [Shield Chain] attack power by an additional 2%",19,5,5324,5,0]
-,[1460,4,127,180,3,1,180,90,"Imperial Spear","","MATK + 40<br>ATK + 2 for every Spear Mastery level<br>ATK + 2 for every 2 refines",0]
+,[1460,4,127,180,3,1,180,90,"Imperial Spear","","ATK + 2 for every Spear Mastery level<br>ATK + 2 for every 2 refines",98,40,0]
 ,[1461,100,0,0,0,0,0,0,"Imperial Guard & Imperial Spear combo",0,0,5162,20,0] //Imperial Guard & Imperial Spear combo
-,[1462,14,130,170,3,1,80,90,"Green Whistle","","MATK +50<br>When using Frost Joker, add a 3% chance of casting Level 2 Wide Curse<br>For every refine above +6, decrease SP cost of all skills by 2%",12,5,0]
+,[1462,14,130,170,3,1,80,90,"Green Whistle","","When using Frost Joker, add a 3% chance of casting Level 2 Wide Curse<br>For every refine above +6, decrease SP cost of all skills by 2%",98,50,12,5,0]
 ,[1463,1,128,142,3,1,60,90,"Black Wing","","Each refine increases skill damage of [Back Stab] by 2%<br>Each refine increases MATK by 3%",5169,30,0]
-,[1464,100,0,0,0,0,0,0,"Black Wing & Black Cat combo",0,"MATK +5<br>Reduces the SP cost of all skills by 5%",8,5,0] //Black Wing & Black Cat combo
+,[1464,100,0,0,0,0,0,0,"Black Wing & Black Cat combo",0,"Reduces the SP cost of all skills by 5%",98,5,8,5,0] //Black Wing & Black Cat combo
 ,[1465,60,1,2,0,1,50,0,"Tidung","",0,19,5,50,3,51,3,52,3,53,3,54,3,55,3,56,3,58,3,59,3,151,10,152,10,0]
 //custom TalonRO [Update 2013-10-07]
 ,[1466,51,0,0,0,0,10,0,"Mother Elven Ears","",0,19,4,0]
@@ -1716,7 +1716,6 @@ ItemOBJ = [
 ,[1671,100,0,0,0,0,0,0,"Assaulter Spear + Aegis Shield","",0,37,-30,0]
 ,[1672,100,0,0,0,0,0,0,"Brave Assassin Damascus + Aegis Shield","",0,37,-20,0]
 ,[1673,100,0,0,0,0,0,0,"Valorous Gladiator Blade + Aegis Shield","",0,37,-20,0]
-,[1674,50,0,2,1,1,20,1,"Ribbon Magician Hat","","A decorated magician hat.",4,3,89,5,14,50,0]
 ];
 
 
@@ -3425,7 +3424,6 @@ ItemID = [
 ,[1671,2,0]
 ,[1672,2,0]
 ,[1673,2,0]
-,[1674,1,18641]
 ];
 
 /*
