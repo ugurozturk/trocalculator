@@ -135,7 +135,7 @@ Effect list:
 	92: Healing received increased by + [value]%
 	93: Heal damage increase on undead by + [value]%
 	94: Sanctuary effectiveness increased by + [value]%
-	95: (unused)
+	95: MATK + [value] (flat)
 	96: Sanctuary damage effectiveness against Demon increased by + [value]%
 	97: Increases magical damage against bosstype monsters by [value]%
 	98: (unused)

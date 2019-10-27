@@ -1,3 +1,10 @@
+[2019-10-27]
+- Fixed Damage calculation with Wakwak card
+- Fixed Attack Modifier update with Bakonawa card
+- Updated Elemental armors wearable by Novice/Super Novice
+- Fixed Vanilla restrictions for Malaya MVP cards
+- Added Flat MATK bonus for the card having this effect
+
 [2019-10-06]
 - Added - Maylaya Cards [Hatfun] & [ZoneSoldier]
 - Fixed - Imperial Spear add's 2 + atk per level of spear mastery now.[ZoneSoldier]

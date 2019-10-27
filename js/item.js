@@ -3749,7 +3749,7 @@ function Item_Setumei(nC1,nC2)
 	if(88 == nC1)
 		CBIstr += "MATK"+ wIS + nC2 +"% (Staff Type)<BR>";
     //Increase MATK by %
-  if(89 == nC1)
+   if(89 == nC1)
 		CBIstr += "MATK"+ wIS + nC2 +"%<BR>";
 	if(91 == nC1)
 		CBIstr += "Heal amount increased by "+ wIS + nC2 +"%<BR>";
@@ -3761,8 +3761,10 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Sanctuary effectiveness increased by "+ wIS + nC2 +"%<BR>";
 	if(96 == nC1)
 		CBIstr += "Sanctuary damage effectiveness against Demon increased by "+ wIS + nC2 +"%<BR>";
-  if(97 == nC1)
-    CBIstr += "Increases magical damage against bosstype monsters by "+ nC2 +"%<BR>";
+   if(97 == nC1)
+      CBIstr += "Increases magical damage against bosstype monsters by "+ nC2 +"%<BR>";
+   if(98 == nC1)
+      CBIstr += "MATK" + wIS + nC2 + "<BR>";
     /*Increase Crital Rate on race by an amount.
       110 = Formless
       111 = Undead
