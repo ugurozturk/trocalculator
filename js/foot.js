@@ -2954,7 +2954,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	//[TalonRO Custom - 2018-07-28 - Glorious Holy Avenger - 5% MATK used with Aegis] [Amor]
 	if(EquipNumSearch(1079) && EquipNumSearch(1376)) {
-			w += 5;
+		w += 5;
 	}
 
 	// [Custom TalonRO 2018-06-16 - Malangdo Enchantment for MATK%] [Kato]
@@ -2966,18 +2966,19 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		}
 	}
 
-	n_A_MATK[0] = Math.floor(n_A_MATK[0] * w / 100);
-	n_A_MATK[2] = Math.floor(n_A_MATK[2] * w / 100);
-	//Gemini Crown - [Loa] - 2018-07-04
-	if(EquipNumSearch(1280) && n_A_HEAD_DEF_PLUS >= 7){
-		n_A_MATK[0] += 15;
-		n_A_MATK[2] += 15;
-	}
 	//Balloon Hat Matk Bonus
 	if(EquipNumSearch(849)){
-		n_A_MATK[0] += Math.floor(n_A_MATK[0]*(n_A_HEAD_DEF_PLUS/2)/100);
-		n_A_MATK[2] += Math.floor(n_A_MATK[2]*(n_A_HEAD_DEF_PLUS/2)/100);
+		w += (n_A_HEAD_DEF_PLUS / 2);
 	}
+
+	n_A_MATK[0] = Math.floor(n_A_MATK[0] * w / 100);
+	n_A_MATK[2] = Math.floor(n_A_MATK[2] * w / 100);
+
+	//Gemini Crown - [Loa] - 2018-07-04
+	if(EquipNumSearch(1280) && n_A_HEAD_DEF_PLUS >= 7){
+		n_tok[98] += 15;
+	}
+
 	//custom TalonRO SQI Bonus Angel of Blades: +50 MATK
 	if(EquipNumSearch(1379))
 		for(i=0;i<SQI_Bonus_Effect.length;i++)
@@ -2988,58 +2989,30 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			}
 	//custom TalonRO Magical Booster & Staff of Piercing Combo
 	if(EquipNumSearch(1430)& EquipNumSearch(645)){
-		n_A_MATK[0] += 3*n_A_Weapon_ATKplus;
-		n_A_MATK[2] += 3*n_A_Weapon_ATKplus;
+		n_tok[98] += 3 * n_A_Weapon_ATKplus;
 		if(n_A_Weapon_ATKplus==10){
-			n_A_MATK[0] += 25;
-			n_A_MATK[2] += 25;
+			n_tok[98] += 25;
 		}
 	}
 	//custom TalonRO Magical Booster & Hypnotist's Staff
 	if(EquipNumSearch(1430)& EquipNumSearch(473)){
-		n_A_MATK[0] += 4*n_A_Weapon_ATKplus;
-		n_A_MATK[2] += 4*n_A_Weapon_ATKplus;
-		if(n_A_Weapon_ATKplus==10){
-			n_A_MATK[0] += 25;
-			n_A_MATK[2] += 25;
+		n_tok[98] += 4 * n_A_Weapon_ATKplus;
+		if(n_A_Weapon_ATKplus == 10){
+			n_tok[98] += 25;
 		}
 	}
 	//custom TalonRO SQI Bonus Sherwood Bow: +50 MATK
-	if(EquipNumSearch(1388))
-		for(i=0;i<SQI_Bonus_Effect.length;i++)
-			if(SQI_Bonus_Effect[i]==131) {
-				n_A_MATK[0] += 50;
-				n_A_MATK[2] += 50;
+	if(EquipNumSearch(1388)) {
+		for(i = 0; i < SQI_Bonus_Effect.length; i++) {
+			if(SQI_Bonus_Effect[i] == 131) {
+				n_tok[98] += 50;
 				break;
 			}
+		}
+	}
 	//custom TalonRO ID_ARG + MATK
-	n_A_MATK[0] += n_A_PassSkill9[42];
-	n_A_MATK[2] += n_A_PassSkill9[42];
-	//custom TalonRO Stem Whip: +50 MATK
-	if(EquipNumSearch(1454)){
-		n_A_MATK[0] += 50;
-		n_A_MATK[2] += 50;
-	}
-	//custom TalonRO Red Ether Bag: +90 MATK
-	if(EquipNumSearch(1458)){
-		n_A_MATK[0] += 90;
-		n_A_MATK[2] += 90;
-	}
-	//custom TalonRO Imperial Spear: +40 MATK
-	if(EquipNumSearch(1460)){
-		n_A_MATK[0] += 40;
-		n_A_MATK[2] += 40;
-	}
-	//custom TalonRO Green Whistle: +50 MATK
-	if(EquipNumSearch(1462)){
-		n_A_MATK[0] += 50;
-		n_A_MATK[2] += 50;
-	}
-	//custom TalonRO Black Cat & Black Wing combo: +5 MATK
-	if(EquipNumSearch(1464)){
-		n_A_MATK[0] += 5;
-		n_A_MATK[2] += 5;
-	}
+	n_tok[98] += n_A_PassSkill9[42];
+	
 	/*
 		Custom =[Entweihen Hairband]+[Dark Thorn Staff] combo
 		[Refine Rate 5~10 Dark Thorn Staff]
@@ -3047,26 +3020,24 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		[ZoneSoldier] - 2018/05/06
 	*/
 	if(n_A_Weapon_ATKplus >= 5 && EquipNumSearch(1621)) {
-			n_A_MATK[0] += 10 * Math.floor((n_A_Weapon_ATKplus - 4)/2);
-			n_A_MATK[2] += 10 * Math.floor((n_A_Weapon_ATKplus - 4)/2);
+		n_tok[98] += 10 * Math.floor((n_A_Weapon_ATKplus - 4)/2);
 	}
 	if(n_A_PassSkill7[2]){
-		n_A_MATK[0] += 10;
-		n_A_MATK[2] += 10;
+		n_tok[98] += 10;
 	}
 	if(n_A_PassSkill7[10]){
-		n_A_MATK[0] += 20;
-		n_A_MATK[2] += 20;
+		n_tok[98] += 20;
 	}
 	if(n_A_PassSkill8[19]){
-		n_A_MATK[0] += 5;
-		n_A_MATK[2] += 5;
+		n_tok[98] += 5;
 	}
 	//MATK BGFOOD
 	if(n_A_PassSkill8[32]){
-		n_A_MATK[0] += 15;
-		n_A_MATK[2] += 15;
+		n_tok[98] += 15;
 	}
+
+	n_A_MATK[0] += n_tok[98];
+	n_A_MATK[2] += n_tok[98];
 
 	w = 100 + n_tok[88];
 

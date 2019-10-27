@@ -138,7 +138,7 @@ Effect list:
 	95: (unused)
 	96: Sanctuary damage effectiveness against Demon increased by + [value]%
 	97: Increases magical damage against bosstype monsters by [value]%
-	98: (unused)
+	98: MATK + [value] (flat)
 	99: (unused)
 	100-109: (unused)
 	110: Increases the critical rate on [Formless] race monsters by + [value]
