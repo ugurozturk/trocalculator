@@ -1717,6 +1717,12 @@ ItemOBJ = [
 ,[1672,100,0,0,0,0,0,0,"Brave Assassin Damascus + Aegis Shield","",0,37,-20,0]
 ,[1673,100,0,0,0,0,0,0,"Valorous Gladiator Blade + Aegis Shield","",0,37,-20,0]
 ,[1674,50,0,2,1,1,20,1,"Ribbon Magician Hat","","A decorated magician hat.",4,3,89,5,14,50,0]
+,[1675,9,125,100,4,1,100,70,"Staff of Geffen","","Whenever you receive Magical Damage there is small chance to reflect all offensive magic against you at 40% chance for 2 seconds",195,1,89,25,5,3,18,5,19,5,73,-10,0]
+,[1676,64,0,1,0,1,10,60,"Silversmith Bracelet","",0,19,3,220,58,0]
+,[1677,1,93,120,4,2,50,1,"Goldsmithing Dagger","","Spend 10% less zeny when using [Mammonite]",89,10,5065,20,0]
+,[1678,2,94,150,4,0,50,40,"Ceremonial Sword","",0,20,6,89,15,12,10,8,10,5161,25,0]
+,[1679,60,121,6,0,1,300,80,"Engraved Armor","",0,78,10,0]
+,[1680,3,121,330,4,1,250,70,"Heavy Sword","","5% chance to auto-cast level 1 [Critical Wounds] when using [Head Crush]<br><b>[Every Refine Level]</b><br>Decreases cast time of [Charge Attack] by 3%<br><b>[Refine Rate 9~10]</b><br>Increase [Critical Wounds] level to 2",5260,30,5308,20,0]
 ];
 
 
@@ -3426,6 +3432,12 @@ ItemID = [
 ,[1672,2,0]
 ,[1673,2,0]
 ,[1674,1,18641]
+,[1675,1,2022]
+,[1676,1,2949]
+,[1677,1,13086]
+,[1678,1,13440]
+,[1679,1,15066]
+,[1680,1,1195]
 ];
 
 /*
