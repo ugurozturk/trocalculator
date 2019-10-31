@@ -1,3 +1,6 @@
+[2019-10-30]
+- Added Old Glast Heim items
+
 [2019-10-27]
 - Fixed Damage calculation with Wakwak card
 - Fixed Attack Modifier update with Bakonawa card

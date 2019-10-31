@@ -759,6 +759,7 @@ if(EquipNumSearch(1085)){
 		}
 }
 
+
 /*
 Player Stats - n_tok[]
 n_tok[13] = Max HP
@@ -2754,7 +2755,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			if(n_tok[154] > 100) n_tok[154] = 100;
 	}
 
-
 	//Note 2018-07-12 [NattWara]
 	//Fix for Issue#252
 	/*
@@ -3416,6 +3416,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//custom TalonRO Halloween Midas Whisper
 	if(SU_DEX >= 80 && EquipNumSearch(1526))
 		w -= 5;
+	//[TalonRO Custom - 2019-10-30 - Heavy Sword - Decreases cast time of [Charge Attack] by 3% per refine
+	if(EquipNumSearch(1680) && n_A_ActiveSkill == 308) {
+		w -= (3 * n_A_Weapon_ATKplus);
+	}
 
 	if(w < 0){w = 0;}
 
