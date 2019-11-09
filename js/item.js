@@ -954,7 +954,7 @@ ItemOBJ = [
 ,[931,16,0,55,3,0,0,80,"Valorous Huuma Front Shuriken","","When attacking, there is a 3% chance to add ASPD + 15% after using [Throw Shuriken] for 10 seconds.",1,2,5,1,37,95,307,20,5396,20,5395,20,5394,20,194,1,0]
 ,[932,2,1001,150,4,3,150,75,"Naght Seiger Twin Blade(B)","","Adds a 5% chance for when dealing physical damage, all physical attacks will ignore the defense of normal monsters and players for 5 seconds",20,1,220,13,0]
 ,[933,2,1001,160,4,3,150,75,"Naght Seiger Twin Blade(R)","","Adds a 5% chance for when dealing physical damage, all physical attacks will ignore the defense of normal monsters and players for 5 seconds",20,3,220,14,0]
-,[934,3,1000,250,4,2,200,90,"Tegron","","<b>[Job Level >= 70]</b><br>When dealing physical damage chance of activate ATK + 50 for 10 seconds<br><b>[Refine Rate 9~10]</b><br>Reduces all skill's after-cast delay by 20%",11,10,0]
+,[934,3,1000,250,4,2,200,90,"Tegron","","<b>[Job Level >= 70]</b><br>When dealing physical damage chance of activate ATK + 50 for 10 seconds<br><b>[Refine Rate 9~10]</b><br>Reduces all skill's cast time and after-cast delay by 20%",11,10,0]
 ,[935,3,1000,275,4,2,220,80,"Violet Fear","","When dealing physical damage there is a 5% chance that for 5 seconds, you will completely bypass enemy defense",221,51,221,52,0]
 ,[936,9,1001,60,4,0,70,75,"Dark Thorn Staff","","Each refine adds magic defense bypassing to your magic attacks<br>Each refine reduces the aftercast delay of your skills",20,7,89,20,4,3,5,3,0]
 ,[937,1,128,120,3,3,70,70,"Trackers Dagger","","Adds a 10% chance of using [Bash]Lv 10 when [Back Stab] is casted",1,1,2,2,5,1,5169,20,0]
