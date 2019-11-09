@@ -616,6 +616,7 @@ function StAllCalc()
 		n_A_PassSkill9[50] = eval(ARG_RC35.value);
 		n_A_PassSkill9[51] = eval(ARG_RC36.value);
 		n_A_PassSkill9[52] = eval(ARG_RC37.value);
+		n_A_PassSkill9[53] = eval(ARG_RC38.value);
 	}
 
 	for(i=0;i<=22;i++)
@@ -3085,8 +3086,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	n_A_ASPD = 200 - wASPD + (Math.round(wASPD * n_A_AGI *4 /100) +Math.round(wASPD * n_A_DEX /100)) /10;
 	//alert("agi:"+n_A_AGI+"dex:"+n_A_DEX+"n_A_ASPD:"+n_A_ASPD);
-	if(n_A_Equip[0]==47)
-		n_A_ASPD += 2;
+	// Adding flat ASPD (Masamune, Manual edit)
+	n_A_ASPD += n_tok[99];
 
 	if(SkillSearch(78) && (n_A_ActiveSkill == 0 || n_A_ActiveSkill == 284))
 		n_A_ASPD -= (6 - SkillSearch(78)) *10;
@@ -5049,6 +5050,8 @@ function StPlusCard(nSTP2)
 		w += n_A_PassSkill9[45];
 	if(nSTP2 == 76)
 		w += n_A_PassSkill9[46];
+	if(nSTP2 == 99)
+		w += n_A_PassSkill9[53];
 	//end custom TalonRO Skill9 calcs
 	return w;
 }
@@ -9226,7 +9229,7 @@ n_A_PassSkill8[33] = 0;
 n_A_PassSkill8[34] = 0;
 
 n_A_PassSkill9 = new Array();
-for(i=0;i<=52;i++)
+for(i=0;i<=53;i++)
 	n_A_PassSkill9[i] = 0;
 //custom TalonRO SQI-Bonus calculation
 SQI_Bonus_Effect = new Array();

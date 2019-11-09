@@ -67,7 +67,7 @@ ItemOBJ = [
 ,[44,3,0,155,4,0,100,48,"Muramasa","","Curse his owner by a low chance",10,30,12,8,0]
 ,[45,3,0,175,4,0,200,48,"Katzbalger","",0,3,5,18,10,0]
 ,[46,3,0,200,4,"0 / 2",220,48,"Zweihander","",0,194,1,0]
-,[47,3,0,200,4,0,100,48,"Masamune","",0,1,-5,9,30,24,3,0]
+,[47,3,0,200,4,0,100,48,"Masamune","",0,99,2,1,-5,9,30,24,3,0]
 ,[48,4,0,28,1,"3 / 4",70,4,"Javelin","",0,0]
 ,[49,4,0,44,1,"3 / 4",85,4,"Spear","",0,0]
 ,[50,4,0,60,1,"3 / 4",100,4,"Pike","",0,0]
@@ -3779,6 +3779,8 @@ function Item_Setumei(nC1,nC2)
       CBIstr += "Increases magical damage against bosstype monsters by "+ nC2 +"%<BR>";
    if(98 == nC1)
       CBIstr += "MATK" + wIS + nC2 + "<BR>";
+   if(99 == nC1)
+      CBIstr += "ASPD" + wIS + nC2 + "<BR>";
     /*Increase Crital Rate on race by an amount.
       110 = Formless
       111 = Undead
