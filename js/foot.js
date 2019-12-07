@@ -2324,13 +2324,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			C_ATK += 6;
 	}
 	//vesper core 02 [rental] atk display
-	if(EquipNumSearch(1359)){
-		C_ATK += 5;
-	}
+	C_ATK += 10 * EquipNumSearch(1359);
+	
 	//bloodied shackle ball [rental] atk display
-	if(EquipNumSearch(1366)){
-		C_ATK += 30;
-	}
+	C_ATK += 30 * EquipNumSearch(1366);
+	
 	if(SU_STR >= 80 && EquipNumSearch(1526)){
 		C_ATK += 30;
 	}
