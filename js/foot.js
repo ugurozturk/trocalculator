@@ -2052,7 +2052,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	myInnerHtml("A_LUCKY",n_A_LUCKY,0);
 
-	n_A_CRI = 1 + n_A_LUK * 0.3;
+	n_A_CRI = 1 + n_A_LUK / 3.0;
 	w=0;
 	w += n_tok[10];
 
