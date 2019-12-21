@@ -1123,9 +1123,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	}
 
 	//Bungisngis Card - hp 1% after lvl 5 refine
-	if(CardNumSearch(554)){
+	if(CardNumSearch(554) && n_A_card[8] == 554) {
 		if(n_A_HEAD_DEF_PLUS > 5){
-			w += 1*(n_A_HEAD_DEF_PLUS-5);
+			w += n_A_HEAD_DEF_PLUS-5;
 		}
 	}
 
@@ -1349,12 +1349,12 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_SHOES_DEF_PLUS <= 4 && CardNumSearch(407))
 		w += 4;
 
-		//Bungisngis Card - sp 1% after lvl 5 refine
-		if(CardNumSearch(554)){
-			if(n_A_HEAD_DEF_PLUS > 5){
-				w += 1*(n_A_HEAD_DEF_PLUS-5);
-			}
+	//Bungisngis Card - sp 1% after lvl 5 refine
+	if(CardNumSearch(554) && n_A_card[8] == 554) {
+		if(n_A_HEAD_DEF_PLUS > 5){
+			w += 1*(n_A_HEAD_DEF_PLUS-5);
 		}
+	}
 
 	if(CardNumSearch(405)){
 		if(n_A_JobSearch()==3 || n_A_JobSearch()==4 || n_A_JobSearch()==5)
