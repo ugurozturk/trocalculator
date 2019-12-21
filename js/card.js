@@ -586,6 +586,11 @@ cardOBJ = [
 ,[559,7,"Tiyanak",0,117,7,112,7,115,7,0]
 ,[560,5,"Wakwak","For every 10 Base STR, ATK + 5.",0]
 ,[561,5,"Jejeling","For every 10 Base VIT, HP + 200",0]
+,[562,4,"Wood Goblin","[Every Refine Level]<br/>Increase physical damage against Water and Earth by 1%",41,5,42,5,0]
+//,[563,7,"Les",0,5,2,,0] MISSING n_tok FOR PIERCING MDEF OF [ELEMENT] MONSTER BY X%
+,[563,2,"Uzhas","[Refine Rate +7 or higher]<br/>Increases magic damage against Demon race by an additional 5%.<br/>[Refine Rate +9 or higher]<br/>Increases magic damage against Demon race by an additional 5%.",98,10,176,5,0]
+,[564,6,"Baba Yaga","[Every Refine Level]<br/>FLEE + 1",11,3,0]
+,[565,7,"Mavka","Gain 20 HP each time an enemy is killed by a Physical Melee Damage.<br/>Gain 3 SP each time an enemy is killed by a Physical Melee Damage.",1,1,4,1,8,5,0]
 ];
 /*
 ID, Location, description, 0 - seperator, stat, value added/subtracted
@@ -1182,6 +1187,19 @@ cardID = [
 ,[559,1,4587]
 ,[560,1,4588]
 ,[561,1,4589]
+,[562,1,27157]
+,[563,1,27158]
+,[564,1,27159]
+,[565,1,27160]
+,[566,1,27161]
+,[567,1,27162]
+,[568,1,27120]
+,[569,1,27121]
+,[570,1,27122]
+,[571,1,27123]
+,[572,1,27124]
+,[573,1,27125]
+,[574,1,27126]
 ];
 
 CardNum = cardOBJ.length -1;
