@@ -3847,10 +3847,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_tok[177] += n_A_Weapon_ATKplus
 	}
 
-	if(EquipNumSearch(1161))
+	if(EquipNumSearch(1161)) {
 		n_tok[91] += SkillSearch(23);
 		n_tok[94] += SkillSearch(23);
-
+	}
+	
 	if(EquipNumSearch(534)){
 		wSPVS = n_A_JobSearch();
 		if(wSPVS==1 || wSPVS==2 || wSPVS==6)
