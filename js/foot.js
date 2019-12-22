@@ -638,7 +638,7 @@ function StAllCalc()
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
-	for(i=290;i<=359;i++){
+	for(i=290;i<=369;i++){
 		n_tok[i] = 0;
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
@@ -3969,6 +3969,19 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_tok[307] = 100;
 	}
 
+	/*
+		Curupira Card (need to be here before the n_tok[340] logic is applied)
+		[Refine Rate +7 or higher]
+		Increases Water elemental magic damage by an additional 5%.
+		[Refine Rate +9 or higher]
+		Increases Water elemental magic damage by an additional 5%.
+	*/
+	if (CardNumSearch(570) && n_A_card[8] == 570) {
+		if(n_A_HEAD_DEF_PLUS >= 7) n_tok[341] += 5;
+		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[341] += 5;
+	}
+
+
 	/*[Custom TalonRO 2018-06-15 - Malangdo Enchantment for Spell Element] [Kato]
 		Well I couldn't find a n_tok for magical damage based on element.
 		Since we don't have it, I will separate the skills by element (skills.js) and apply the magical damage for all races [170-179]
@@ -4039,49 +4052,97 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		}
 	}
 
-//[TalonRO Custom 2018-07-17 - Add (4 * Refine/3) Magical Fire Damage Nightmare Ancient Mummy] [Kato]
-if(CardNumSearch(546)) {
-	if(TRO_MAGICALSKILL_ELEMENTS[3].indexOf(n_A_ActiveSkill) != -1){
-		for(j=0; j<10; j++) {
-			n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + 	4 * Math.floor(n_A_SHOULDER_DEF_PLUS/3)) / 100) - 100; // ***
-		}
-	}
-}
-
-/*
-Tikbalang Card
-Increases the damage of Wind property magical attacks on targets by 5%.
-[Refine Rate +7 or higher]
-Add another 5% damage with Wind Magic.
-[Refine Rate +9 or higher]
-Add another 5% damage with Wind Magic.
-*/
-if(CardNumSearch(558)) {
-	var iMDMG = 5 * CardNumSearch(558);
-	if(n_A_card[8] == 558) {
-		if(n_A_HEAD_DEF_PLUS >= 7) iMDMG = iMDMG + 5; // Refine >=7 +5%
-		if(n_A_HEAD_DEF_PLUS >= 9) iMDMG = iMDMG + 5; // Refine >=9 +5%
-	}
-		if(TRO_MAGICALSKILL_ELEMENTS[4].indexOf(n_A_ActiveSkill) != -1){
+	//[TalonRO Custom 2018-07-17 - Add (4 * Refine/3) Magical Fire Damage Nightmare Ancient Mummy] [Kato]
+	if(CardNumSearch(546)) {
+		if(TRO_MAGICALSKILL_ELEMENTS[3].indexOf(n_A_ActiveSkill) != -1){
 			for(j=0; j<10; j++) {
-				n_tok[170 + j] = ((n_tok[344 + j] + 100) * (100 + iMDMG) / 100) - 100;
-			}
-		}
-}
-
-//[TalonRO Custom 2018-07-17 - Add 3% Magical damage boost Nightmare Verit] [Kato]
-if(CardNumSearch(547)) {
-	var iMDMG = 3;
-	if(n_A_SHOES_DEF_PLUS >= 5) iMDMG++; // Refine >=5 +1%
-	if(n_A_SHOES_DEF_PLUS >= 7) iMDMG++;// Refine >=7 +1%
-	for(i=0;i<TRO_MAGICALSKILL_ELEMENTS.length;i++){
-		if(TRO_MAGICALSKILL_ELEMENTS[i].indexOf(n_A_ActiveSkill) != -1){
-			for(j=0; j<10; j++) {
-				n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + iMDMG) / 100) - 100;
+				n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + 	4 * Math.floor(n_A_SHOULDER_DEF_PLUS/3)) / 100) - 100; // ***
 			}
 		}
 	}
-}
+
+	/*
+	Tikbalang Card
+	Increases the damage of Wind property magical attacks on targets by 5%.
+	[Refine Rate +7 or higher]
+	Add another 5% damage with Wind Magic.
+	[Refine Rate +9 or higher]
+	Add another 5% damage with Wind Magic.
+	*/
+	if(CardNumSearch(558)) {
+		var iMDMG = 5 * CardNumSearch(558);
+		if(n_A_card[8] == 558) {
+			if(n_A_HEAD_DEF_PLUS >= 7) iMDMG = iMDMG + 5; // Refine >=7 +5%
+			if(n_A_HEAD_DEF_PLUS >= 9) iMDMG = iMDMG + 5; // Refine >=9 +5%
+		}
+			if(TRO_MAGICALSKILL_ELEMENTS[4].indexOf(n_A_ActiveSkill) != -1){
+				for(j=0; j<10; j++) {
+					n_tok[170 + j] = ((n_tok[344 + j] + 100) * (100 + iMDMG) / 100) - 100;
+				}
+			}
+	}
+
+	//[TalonRO Custom 2018-07-17 - Add 3% Magical damage boost Nightmare Verit] [Kato]
+	if(CardNumSearch(547)) {
+		var iMDMG = 3;
+		if(n_A_SHOES_DEF_PLUS >= 5) iMDMG++; // Refine >=5 +1%
+		if(n_A_SHOES_DEF_PLUS >= 7) iMDMG++;// Refine >=7 +1%
+		for(i=0;i<TRO_MAGICALSKILL_ELEMENTS.length;i++){
+			if(TRO_MAGICALSKILL_ELEMENTS[i].indexOf(n_A_ActiveSkill) != -1){
+				for(j=0; j<10; j++) {
+					n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + iMDMG) / 100) - 100;
+				}
+			}
+		}
+	}
+
+	/*
+		Uzhas Card
+		[Refine Rate +7 or higher]
+		Increases magic damage against Demon race by an additional 5%.
+		[Refine Rate +9 or higher]
+		Increases magic damage against Demon race by an additional 5%.
+	*/
+	if (CardNumSearch(564) && n_A_card[8] == 564) {
+		if(n_A_HEAD_DEF_PLUS >= 7) n_tok[176] += 5;
+		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[176] += 5;
+	}
+
+	/*
+		Piranha Card
+		[Refine Rate +7 or higher]
+		Increases magic damage against Fish race by an additional 5%.
+		[Refine Rate +9 or higher]
+		Increases magic damage against Fish race by an additional 5%.
+	*/
+	if (CardNumSearch(569) && n_A_card[8] == 569) {
+		if(n_A_HEAD_DEF_PLUS >= 7) n_tok[175] += 5;
+		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[175] += 5;
+	}
+
+	/*
+		Toucan Card
+		[Refine Rate +7 or higher]
+		Increases magic damage against Insect race by an additional 5%.
+		[Refine Rate +9 or higher]
+		Increases magic damage against Insect race by an additional 5%.
+	*/
+	if (CardNumSearch(571) && n_A_card[8] == 571) {
+		if(n_A_HEAD_DEF_PLUS >= 7) n_tok[174] += 5;
+		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[174] += 5;
+	}
+
+	/*
+		Jaguar Card
+		[Refine Rate +7 or higher]
+		Increases magic damage against Brute race by an additional 5%.
+		[Refine Rate +9 or higher]
+		Increases magic damage against Brute race by an additional 5%.
+	*/
+	if (CardNumSearch(572) && n_A_card[8] == 572) {
+		if(n_A_HEAD_DEF_PLUS >= 7) n_tok[172] += 5;
+		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[172] += 5;
+	}
 
 	ClickB_Enemy();
 	KakutyouKansuu();

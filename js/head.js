@@ -7058,6 +7058,8 @@ if(n_B_IJYOU[1]){
 	var w = 0;
 	w += n_tok[295];
 	w += n_tok[310+n_B[2]];
+	w += n_tok[360+Math.floor(n_B[3] / 10)];
+	
 	if(w){
 		if(w < 0)
 			w = 0;

@@ -293,6 +293,8 @@ Effect list:
 	220: When [value] == 55, Allows usage of the skill [Frost Nova]Lv 1
 	220: When [value] == 56, Allows usage of the skill [Earth Spike]Lv 3
 	220: When [value] == 57, Allows usage of the skill [Bash]Lv 1
+	220: When [value] == 58, Allows usage of the skill [Spell Breaker]Lv 1
+	220: When [value] == 59, Allows usage of the skill [Aqua Benedicta]Lv 1
 	221: When X, there's a Y chance to cast the skill Z (defined in AutoSpellSkill, see below)
 	     AutoSpellSkill array looks like this:
 	     [
@@ -445,6 +447,7 @@ Effect list:
 	221: When [value] == 138, When recieving ATK based damage, there's a 5% chance to cast the skill [Scream] Lv1
 	221: When [value] == 139, When performing a ATK based attack, there's a 1% chance to cast the skill [Bowling Bash] Lv5
 	221: When [value] == 140, When performing a ATK based attack, there's a 1% chance to cast the skill [Dangerous Soul Collect] Lv1
+	221: When [value] == 141, When performing a ATK based attack, there's a 5% chance to cast the skill [Dragon Fire Formation learned] Lv2
 	222-289: (unused)
 	290: On (all?) monsters, ignore [value]% DEF
 	291: On Normal monsters, ignore [value]% DEF
@@ -516,7 +519,17 @@ Effect list:
 	357: Increases magical damage against [Shadow] element monsters by [value]%
 	358: Increases magical damage against [Ghost] element monsters by [value]%
 	359: Increases magical damage against [Undead] element monsters by [value]%
-	360-999: (unused)
+	360: Pierce MDEF of [Neutral] element monsters by [value]%
+	361: Pierce MDEF of [Water] element monsters by [value]%
+	362: Pierce MDEF of [Earth] element monsters by [value]%
+	363: Pierce MDEF of [Fire] element monsters by [value]%
+	364: Pierce MDEF of [Wind] element monsters by [value]%
+	365: Pierce MDEF of [Poison] element monsters by [value]%
+	366: Pierce MDEF of [Holy] element monsters by [value]%
+	367: Pierce MDEF of [Shadow] element monsters by [value]%
+	368: Pierce MDEF of [Ghost] element monsters by [value]%
+	369: Pierce MDEF of [Undead] element monsters by [value]%
+	370-999: (unused)
 	1000-1999: + [value]% Physical damage inflicted against a specic monster (MonsterOBJ[ID - 1000])
 	2000-4999: (unused)
 	5000-6999: specific skill damage + [value]% (SkillOBJ[ID - 5000])
