@@ -3906,6 +3906,9 @@ function Item_Setumei(nC1,nC2)
    //Magical damage against element monster
    if(350 <= nC1 && nC1 <=359)
       CBIstr += "Increases magical damage against [" + ZokuseiOBJ[nC1-350] +"] element monsters by "+ nC2 +"%<BR>";
+   //Pierce MDEF of element monster
+   if(360 <= nC1 && nC1 <=369)
+      CBIstr += "Pierce MDEF of [" + ZokuseiOBJ[nC1-360] +"] element monsters by "+ nC2 +"%<BR>";
    //Physical damage against specific monster
    if(1000 <= nC1 && nC1 <=1999)
       CBIstr += wIS + nC2 + "% Physical damage inflicted against <b>" + MonsterOBJ[nC1-1000][1] + "</b><br>";

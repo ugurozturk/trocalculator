@@ -599,7 +599,8 @@ InsertSkill = [
 [55,1,130,1],
 [56,1,132,3],
 [57,1,6,1],
-[58,0,227,1]
+[58,0,227,1],
+[59,0,33,1]
 ];
 
 
@@ -748,7 +749,8 @@ AutoSpellSkill = [
 [137,1,130,1,1,6],
 [138,0,209,1,5,6],
 [139,1,76,5,1,1],
-[140,1,291,1,1,1] //[Custom TalonRO - 2018-07-26 - Valorous Battle Fist change of casting DSS 1% in normal attack]
+[140,1,291,1,1,1], //[Custom TalonRO - 2018-07-26 - Valorous Battle Fist change of casting DSS 1% in normal attack]
+[141,1,409,2,5,1]
 ];
 //ID - Gets called in second spot(221(effect),1(ID)), autocast id = 1 by default, skill Id,Skill Lvl, chance %, attacktype(1atkbased,2shortrange,3longrange,4magical,5attacking,6receivingATKbased,0 by default, 0=low chance, 1=medium chance, 2=high chance)
 

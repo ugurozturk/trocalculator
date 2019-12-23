@@ -586,6 +586,20 @@ cardOBJ = [
 ,[559,7,"Tiyanak",0,117,7,112,7,115,7,0]
 ,[560,5,"Wakwak","For every 10 Base STR, ATK + 5.",0]
 ,[561,5,"Jejeling","For every 10 Base VIT, HP + 200",0]
+,[562,4,"Wood Goblin","[Every Refine Level]<br/>Increase physical damage against Water and Earth by 1%",41,5,42,5,0]
+,[563,7,"Les",0,5,2,364,4,365,4,0]
+,[564,2,"Uzhas","[Refine Rate +7 or higher]<br/>Increases magic damage against Demon race by an additional 5%.<br/>[Refine Rate +9 or higher]<br/>Increases magic damage against Demon race by an additional 5%.",98,10,176,5,0]
+,[565,6,"Baba Yaga","[Every Refine Level]<br/>FLEE + 1",11,3,0]
+,[566,7,"Mavka","Gain 20 HP each time an enemy is killed by a Physical Melee Damage.<br/>Gain 3 SP each time an enemy is killed by a Physical Melee Damage.",1,1,4,1,8,5,0]
+,[567,1,"Gopinich","[Dragon Fire Formation learned]<br />Use the level learned instead",98,15,221,141,0]
+,[568,7,"Iara",0,220,59,0]
+,[569,2,"Piranha","[Refine Rate +7 or higher]<br/>Increases magic damage against Fish race by an additional 5%<br/>[Refine Rate +9 or higher]<br/>Increases magic damage against Fish race by an additional 5%",98,10,175,5,0]
+,[570,2,"Curupira","[Refine Rate +7 or higher]<br/>Increases Water elemental magic damage by an additional 5%<br/>[Refine Rate +9 or higher]<br/>Increases Water elemental magic damage by an additional 5%",98,10,341,5,0]
+,[571,2,"Toucan","[Refine Rate +7 or higher]<br/>Increases magic damage against Insect race by an additional 5%<br/>[Refine Rate +9 or higher]<br/>Increases magic damage against Insect race by an additional 5%<br/>",98,10,174,5,0]
+,[572,2,"Jaguar","[Refine Rate +7 or higher]<br/>Increases magic damage against Brute race by an additional 5%<br/>[Refine Rate +9 or higher]<br/>Increases magic damage against Brute race by an additional 5%",98,10,172,5,0]
+,[573,7,"Headless Mule",0,5,2,361,4,366,4,0]
+,[574,4,"Boitata",0,44,20,42,20,32,20,34,20,0]
+,[575,100,0,"Increase SP Consumption of skills by 10%",5,6,14,100,0]
 ];
 /*
 ID, Location, description, 0 - seperator, stat, value added/subtracted
@@ -1182,6 +1196,20 @@ cardID = [
 ,[559,1,4587]
 ,[560,1,4588]
 ,[561,1,4589]
+,[562,1,27157]
+,[563,1,27158]
+,[564,1,27159]
+,[565,1,27160]
+,[566,1,27161]
+,[567,1,27162]
+,[568,1,27120]
+,[569,1,27121]
+,[570,1,27122]
+,[571,1,27123]
+,[572,1,27124]
+,[573,1,27125]
+,[574,1,27126]
+,[575,2,0]
 ];
 
 CardNum = cardOBJ.length -1;
@@ -1382,7 +1410,8 @@ w_SC = [[429,235,306,"NULL"],
 [496,485,494,"NULL"],
 [548,542,543,"NULL"],
 [549,542,544,"NULL"],
-[550,545,546,"NULL"]
+[550,545,546,"NULL"],
+[575,568,148,"NULL"]
 ];
 SC_MAXnum = w_SC.length;
 
