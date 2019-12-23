@@ -616,6 +616,7 @@ function StAllCalc()
 		n_A_PassSkill9[50] = eval(ARG_RC35.value);
 		n_A_PassSkill9[51] = eval(ARG_RC36.value);
 		n_A_PassSkill9[52] = eval(ARG_RC37.value);
+		n_A_PassSkill9[53] = eval(ARG_RC38.value);
 	}
 
 	for(i=0;i<=22;i++)
@@ -1122,9 +1123,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	}
 
 	//Bungisngis Card - hp 1% after lvl 5 refine
-	if(CardNumSearch(554)){
+	if(CardNumSearch(554) && n_A_card[8] == 554) {
 		if(n_A_HEAD_DEF_PLUS > 5){
-			w += 1*(n_A_HEAD_DEF_PLUS-5);
+			w += n_A_HEAD_DEF_PLUS-5;
 		}
 	}
 
@@ -1348,12 +1349,12 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_SHOES_DEF_PLUS <= 4 && CardNumSearch(407))
 		w += 4;
 
-		//Bungisngis Card - sp 1% after lvl 5 refine
-		if(CardNumSearch(554)){
-			if(n_A_HEAD_DEF_PLUS > 5){
-				w += 1*(n_A_HEAD_DEF_PLUS-5);
-			}
+	//Bungisngis Card - sp 1% after lvl 5 refine
+	if(CardNumSearch(554) && n_A_card[8] == 554) {
+		if(n_A_HEAD_DEF_PLUS > 5){
+			w += 1*(n_A_HEAD_DEF_PLUS-5);
 		}
+	}
 
 	if(CardNumSearch(405)){
 		if(n_A_JobSearch()==3 || n_A_JobSearch()==4 || n_A_JobSearch()==5)
@@ -2051,7 +2052,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	myInnerHtml("A_LUCKY",n_A_LUCKY,0);
 
-	n_A_CRI = 1 + n_A_LUK * 0.3;
+	n_A_CRI = 1 + n_A_LUK / 3.0;
 	w=0;
 	w += n_tok[10];
 
@@ -2323,13 +2324,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			C_ATK += 6;
 	}
 	//vesper core 02 [rental] atk display
-	if(EquipNumSearch(1359)){
-		C_ATK += 5;
-	}
+	C_ATK += 10 * EquipNumSearch(1359);
+	
 	//bloodied shackle ball [rental] atk display
-	if(EquipNumSearch(1366)){
-		C_ATK += 30;
-	}
+	C_ATK += 30 * EquipNumSearch(1366);
+	
 	if(SU_STR >= 80 && EquipNumSearch(1526)){
 		C_ATK += 30;
 	}
@@ -2754,6 +2753,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			n_tok[154] += (10 * n_A_Weapon_ATKplus);
 			if(n_tok[154] > 100) n_tok[154] = 100;
 	}
+	// Tegron
+	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(934)) {
+		n_tok[73] -= 20;
+		n_tok[74] += 20;
+	}
 
 	//Note 2018-07-12 [NattWara]
 	//Fix for Issue#252
@@ -3080,8 +3084,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	n_A_ASPD = 200 - wASPD + (Math.round(wASPD * n_A_AGI *4 /100) +Math.round(wASPD * n_A_DEX /100)) /10;
 	//alert("agi:"+n_A_AGI+"dex:"+n_A_DEX+"n_A_ASPD:"+n_A_ASPD);
-	if(n_A_Equip[0]==47)
-		n_A_ASPD += 2;
+	// Adding flat ASPD (Masamune, Manual edit)
+	n_A_ASPD += n_tok[99];
 
 	if(SkillSearch(78) && (n_A_ActiveSkill == 0 || n_A_ActiveSkill == 284))
 		n_A_ASPD -= (6 - SkillSearch(78)) *10;
@@ -3443,8 +3447,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(SkillSearch(322))
 		n_A_CAST = n_A_CAST /2;
 
-	if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(934))
-		n_tok[74] += 20;
 	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
 		n_tok[74] += 5;
 	if(EquipNumSearch(936))
@@ -3845,10 +3847,11 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_tok[177] += n_A_Weapon_ATKplus
 	}
 
-	if(EquipNumSearch(1161))
+	if(EquipNumSearch(1161)) {
 		n_tok[91] += SkillSearch(23);
 		n_tok[94] += SkillSearch(23);
-
+	}
+	
 	if(EquipNumSearch(534)){
 		wSPVS = n_A_JobSearch();
 		if(wSPVS==1 || wSPVS==2 || wSPVS==6)
@@ -5046,6 +5049,8 @@ function StPlusCard(nSTP2)
 		w += n_A_PassSkill9[45];
 	if(nSTP2 == 76)
 		w += n_A_PassSkill9[46];
+	if(nSTP2 == 99)
+		w += n_A_PassSkill9[53];
 	//end custom TalonRO Skill9 calcs
 	return w;
 }
@@ -9223,7 +9228,7 @@ n_A_PassSkill8[33] = 0;
 n_A_PassSkill8[34] = 0;
 
 n_A_PassSkill9 = new Array();
-for(i=0;i<=52;i++)
+for(i=0;i<=53;i++)
 	n_A_PassSkill9[i] = 0;
 //custom TalonRO SQI-Bonus calculation
 SQI_Bonus_Effect = new Array();

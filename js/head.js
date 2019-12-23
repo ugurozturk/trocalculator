@@ -6169,8 +6169,8 @@ with(document.calcForm){
 		str += '<tr><TD Colspan="2" id="EN938"></TD><TD id="EN939"></TD><TD Colspan="2" id="EN940"></TD><TD id="EN941"></TD><TD Colspan="2" id="EN942"></TD><TD id="EN943"></TD>';
 		str += '<TD Colspan="2" id="EN944"></TD><TD id="EN945"></TD><td></td></tr>';
 		str += '<tr><TD Colspan="2" id="EN946"></TD><TD id="EN947"></TD><TD Colspan="2" id="EN948"></TD><TD id="EN949"></TD><TD Colspan="2" id="EN950"></TD><TD id="EN951"></TD><TD Colspan="2" id="EN952"></TD><TD id="EN953"></TD></tr>';
-		str += '<tr><TD Colspan="2" id="EN954"></TD><TD id="EN955"></TD><TD Colspan="2" id="EN956"></TD><TD id="EN957"></TD><TD Colspan="2" id="EN958"></TD><TD id="EN959"></TD><TD Colspan="2" id="EN960"></TD><TD id="EN961"></TD></tr>';
-		str += '<tr><TD Colspan="2" id="EN962"></TD><TD id="EN963"></TD></tr>';
+		str += '<tr><TD Colspan="2" id="EN954"></TD><TD id="EN955"></TD><TD Colspan="2" id="EN956"></TD><TD id="EN957"></TD><TD Colspan="2" id="EN958"></TD><TD id="EN959"></TD><TD Colspan="2" id="EN976"></TD><TD id="EN977"></TD></tr>';
+		str += '<tr><TD Colspan="2" id="EN960"></TD><TD id="EN961"></TD><TD Colspan="2" id="EN962"></TD><TD id="EN963"></TD></tr>';
 		str += '</table>';
 
 		myInnerHtml("ID_ARG",str,0);
@@ -6280,7 +6280,7 @@ with(document.calcForm){
 		myInnerHtml("EN955",'<input type="text" onChange="StAllCalc()" name="ARG_RC27" value="0" size=1>',0);
 		myInnerHtml("EN956",'+% MATK',0);
 		myInnerHtml("EN957",'<input type="text" onChange="StAllCalc()" name="ARG_RC28" value="0" size=1>',0);
-		myInnerHtml("EN958",'ASPD',0);
+		myInnerHtml("EN958",'ASPD%',0);
 		myInnerHtml("EN959",'<input type="text" onChange="StAllCalc()" name="ARG_RC29" value="0" size=1>',0);
 		myInnerHtml("EN960",'HP REGEN',0);
 		myInnerHtml("EN961",'<input type="text" onChange="StAllCalc()" name="ARG_RC30" value="0" size=1>',0);
@@ -6298,6 +6298,8 @@ with(document.calcForm){
 		myInnerHtml("EN973",'<input type="text" onChange="StAllCalc()" name="ARG_RC36" value="0" size=1>',0);
 		myInnerHtml("EN974",'LUK',0);
 		myInnerHtml("EN975",'<input type="text" onChange="StAllCalc()" name="ARG_RC37" value="0" size=1>',0);
+		myInnerHtml("EN976",'ASPD',0);
+		myInnerHtml("EN977",'<input type="text" onChange="StAllCalc()" name="ARG_RC38" value="0" size=1>',0);
 
 		A9_Skill0.value = n_A_PassSkill9[0];
 		ARG_RC0.value = n_A_PassSkill9[1];
@@ -6352,6 +6354,7 @@ with(document.calcForm){
 		ARG_RC35.value = n_A_PassSkill9[50];
 		ARG_RC36.value = n_A_PassSkill9[51];
 		ARG_RC37.value = n_A_PassSkill9[52];
+		ARG_RC38.value = n_A_PassSkill9[53];
 
 		//if(n_A_PassSkill9[0] == 0){n_A_zokusei[0] += n_A_PassSkill9[1];}
 		//if(n_A_PassSkill9[0] == 1){n_A_zokusei[1] += n_A_PassSkill9[1];}
