@@ -917,6 +917,14 @@ if(CardNumSearch(561)){
 	if(EquipNumSearch(1087) && n_A_ActiveSkill == 65){
 		w += n_A_ATK*.02;
 	}
+	//[TalonRO Custom - 2019-12-24 - Valorous Battle CrossBow - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
+	if (EquipNumSearch(913) && n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8) {
+		w += n_A_ATK*.10;
+	}
+	//[TalonRO Custom - 2019-12-24 - Glorious Hunter Bow - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
+	if (EquipNumSearch(1089) && n_A_ActiveSkill == 40) {
+		w += n_A_Weapon_ATKplus * (n_A_ATK*.02);
+	}
 
 	w = Math.round(w);
 
@@ -3275,13 +3283,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1079) && EquipNumSearch(1376)) {
 			w += 5 + (2 * n_A_Weapon_ATKplus);
 	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class] [Amor]
-	if(EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
-			w += 5 + (2 * n_A_Weapon_ATKplus);
-	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class] [Amor]
-	if(EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
-			w += 5 + (2 * n_A_Weapon_ATKplus);
+	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD (+2% per refine) for Rogue Class] [Amor]
+	if (EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
+		w += 5 + (2 * n_A_Weapon_ATKplus);
 	}
 	//[TalonRO Custom - 2018-07-28 - Glorious Two Handed Axe - 1% ASPD more if refine 6>] [Amor]
 	if(EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6){
@@ -3623,10 +3627,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1545)){
 		n_tok[25] -= (n_A_HEAD_DEF_PLUS - 5);
 	}
-	//[Custom TalonRO - 2018-07-28 - Glorious Hunter Bow - 2% DS damage (added here as ranged damage)] [Kato]
-	if(EquipNumSearch(1089)){
-		n_tok[25] += 2;
-	}
 
 	//[Custom TalonRO 2018-06-15 - Malandgo Enchantment for Expert Archer] [Kato]
 	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
@@ -3679,9 +3679,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(904) && n_A_JobSearch2() == 13){
 		n_tok[70] += 20;
 	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 2% Critical Damge for Hunter Class] [Amor]
-	if(EquipNumSearch(1089) && n_A_JobSearch2() == 10) {
-			w += (2 * n_A_Weapon_ATKplus);
+	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - For every refine, increases Critical damage by 2% for Archer Class] [Amor]
+	if (EquipNumSearch(1089) && n_A_JobSearch() == 4) {
+		w += (2 * n_A_Weapon_ATKplus);
 	}
 
 	if(CardNumSearch(452) && n_A_JobSearch()==3){
@@ -3968,6 +3968,15 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//[TalonRO Custom - Glorious Lance - 100% DEF Bypass if Crusader/Palladin] [Amor]
 	if(EquipNumSearch(1082)){
 		n_tok[307] = 100;
+	}
+
+	/*
+		Glorious Hunter Bow
+		[Refine Rate 8-10]
+		Increases physical attack against DemiHuman race by 10%.
+	*/
+	if (EquipNumSearch(1089) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[37] += 10;
 	}
 
 	/*
