@@ -3205,8 +3205,13 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += (n_A_Weapon_ATKplus);
 	if(EquipNumSearch(641))
 		w += n_A_Weapon_ATKplus;
+	/*
+		Assaulter Spear
+		[Crusader or Paladin]
+		Increases attack speed by 10%
+	*/
 	if(EquipNumSearch(903) && n_A_JobSearch2() == 13)
-		w += 20;
+		w += 10;
 	if(SU_STR >= 77 && EquipNumSearch(944))
 		w += 4;
 	if(n_A_JOB == 21 && EquipNumSearch(855))
@@ -3799,6 +3804,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	*/
 	if(EquipNumSearch(1091) && n_A_Weapon_ATKplus >= 6) {
 		n_tok[38] += 20;
+	}
+	/*
+		Assaulter Lance
+		[Crusader Class]
+		Reduce damage received from DemiHuman race monsters by 15% instead of 20%.
+	*/
+	if(EquipNumSearch(904) && n_A_JobSearch2() == 13) {
+		n_tok[57] -= 5;
 	}
 	//[TalonRO Custom - 2018-07-26 - Glorious Cleaver/Glorious Flamberge/Glorious Gladius - [+Aegis Shield] Reduces physical attack against Demi-human monster by 20%] [Amor]
 	if((EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1076)) && EquipNumSearch(1376)) {
@@ -4544,6 +4557,15 @@ function StPlusCalc()
 		n_tok[77] += Math.floor(n_A_LEFT_DEF_PLUS /3);
 	}
 	if(EquipNumSearch(1268))wSPC_INT += Math.floor(SU_INT/24);
+
+	/*
+		Assaulter Lance
+		[Crusader Class]
+		VIT + 5.
+	*/
+	if (EquipNumSearch(904) && n_A_JobSearch2() == 13) {
+		wSPC_VIT += 5;
+	}
 
 	if(CardNumSearch(405)){
 		if(n_A_JobSearch()==1 || n_A_JobSearch()==2 || n_A_JobSearch()==6)

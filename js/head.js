@@ -7996,6 +7996,14 @@ function BaiCI(wBaiCI)
 	if(n_A_ActiveSkill == 260)
 		if(EquipNumSearch(1516))
 			w1 += 3*Math.floor(n_A_Weapon_ATKplus/3);
+	/*
+		Assaulter Spear
+		[Refine level 8-10]
+		Increase damage of Spiral Pierce by 20%.
+	*/
+	if (EquipNumSearch(903) && n_A_Weapon_ATKplus >= 8 && n_A_ActiveSkill == 259) {
+		w1 += 20;
+	}
 
 	if(n_A_ActiveSkill == 428)
 		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1099))
