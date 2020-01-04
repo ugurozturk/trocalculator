@@ -1205,6 +1205,15 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		if(EquipNumSearch(1426))
 			w -= 1;
 
+	/*
+		Valorous Insane Battle Axe
+		[Refine level 7-10]
+		MaxHP +1% for each refine, up to a maximum of 10%.
+	*/
+	if (EquipNumSearch(905) && n_A_Weapon_ATKplus >= 7) {
+		w += n_A_Weapon_ATKplus;
+	}
+
 	n_A_MaxHP = n_A_MaxHP * (100 + w)/100;
 
 	if(n_A_PassSkill6[0] == 1 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==1){
@@ -3876,6 +3885,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	if(SkillSearch(421))
 		n_tok[78] += 20;
+
+	if(EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6) {
+		n_tok[78] += n_A_Weapon_ATKplus - 5;
+	}
 
 	//maiden hat +1% heal per refine > 6 - [Loa] - 2018-06-25
 	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
