@@ -943,6 +943,27 @@ if(CardNumSearch(561)){
 	if (EquipNumSearch(1089) && n_A_ActiveSkill == 40) {
 		w += n_A_Weapon_ATKplus * (n_A_ATK*.02);
 	}
+	/*
+		Brave Carnage Katar
+		[Refine level 7~10]
+		Increase damage of [Meteor Assault] by 15%.
+	*/
+	if(EquipNumSearch(909) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264) {
+		w += n_A_ATK*.15;
+	}
+	/*
+		Valorous Carnage Katar
+		[Refine Level 6~10]
+		Increases damage with [Sonic Blow] by 10%.
+		[Refine Level 9~10]
+		Increases damage with [Sonic Blow] by 20%.
+	*/
+	if(EquipNumSearch(910) && n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 83) {
+		w += n_A_ATK*.10;
+		if (n_A_Weapon_ATKplus >= 9) {
+			w += n_A_ATK*.20;
+		}
+	}
 
 	w = Math.round(w);
 
@@ -2754,10 +2775,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1095) || EquipNumSearch(1084)){
 		n_tok[73] -= n_A_Weapon_ATKplus;
 	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar - Gives -10% [Soul Breaker] Casting Time] [Amor]
-	if(EquipNumSearch(1090) && n_A_ActiveSkill == 263){
-		n_tok[73] -= 10;
-	}
 	//[TalonRO Custom - 2018-07-27 - Glorious Claymore - Gives -3% [Charge Attack] Casting Time] [Amor]
 	if(EquipNumSearch(1080) && n_A_ActiveSkill == 308){
 		n_tok[73] -= 3 * n_A_Weapon_ATKplus;
@@ -2942,6 +2959,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			w += parseInt(vMORA.substr(-1));
 		}
 	}
+
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Hat of the Sun God [1] - MATK part [Nattwara]
 	/*
@@ -3464,6 +3482,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1680) && n_A_ActiveSkill == 308) {
 		w -= (3 * n_A_Weapon_ATKplus);
 	}
+	/*
+		Brave Carnage Katar
+		[Refine level 7~10]
+		Reduce cast time of [Meteor Assault] by 15%.
+	*/
+	if(EquipNumSearch(909) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264) {
+		w -= 15;
+	}
 
 	if(w < 0){w = 0;}
 
@@ -3756,6 +3782,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	*/
 	if(EquipNumSearch(907) && n_A_JobSearch2() == 15) {
 		n_tok[37] -= 15;
+	}
+	/*
+		Glorious Jamadhar
+		[Refine Rate 6~10]
+		Increases physical attack against Angel monsters by 20%.
+	*/
+	if(EquipNumSearch(1091) && n_A_Weapon_ATKplus >= 6) {
+		n_tok[38] += 20;
 	}
 	//[TalonRO Custom - 2018-07-26 - Glorious Cleaver/Glorious Flamberge/Glorious Gladius - [+Aegis Shield] Reduces physical attack against Demi-human monster by 20%] [Amor]
 	if((EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1076)) && EquipNumSearch(1376)) {
