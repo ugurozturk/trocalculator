@@ -780,7 +780,14 @@ if(EquipNumSearch(907) && n_A_Weapon_ATKplus >= 8) {
 if(EquipNumSearch(908) && n_A_Weapon_ATKplus >= 8 && n_A_JobSearch2() == 19) {
 	n_tok[17] += 30;
 }
-
+/*
+	Glorious Revolver (damage)
+	[Refine level 8-10]
+	ATK + 25
+*/
+if(EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
+	n_tok[17] += 25;
+}
 
 /*
 Player Stats - n_tok[]
@@ -1128,6 +1135,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			if(vBE >= 131 && vBE <= 133) {
 					w += parseInt(vBE.substr(-1)) * 100;
 			}
+	}
+	/*
+		Glorious Holy Avenger
+		[Refine Rate 7~10]
+		MaxHP +1000
+	*/
+	if (EquipNumSearch(1079) && n_A_Weapon_ATKplus >= 7) {
+		w += 1000;
 	}
 
 	n_A_MaxHP += w;
@@ -1533,6 +1548,22 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			if(vBE >= 101 && vBE <= 102) {
 					n_A_DEF += parseInt(vBE.substr(-1));
 			}
+	}
+	/*
+		Soldier Shotgun
+		[Refine level 6-10]
+		DEF + 5
+	*/
+	if (EquipNumSearch(928) && n_A_Weapon_ATKplus >= 6) {
+		n_A_DEF += 5;
+	}
+	/*
+		Glorious Shotgun
+		[Refine level 8-10]
+		DEF + 5
+	*/
+	if (EquipNumSearch(1102) && n_A_Weapon_ATKplus >= 8) {
+		n_A_DEF += 5;
 	}
 
 	n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 7 / 10);
@@ -2526,6 +2557,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	*/
 	if(EquipNumSearch(908) && n_A_Weapon_ATKplus >= 8 && n_A_JobSearch2() == 19) {
 		C_ATK += 30;
+	}
+	/*
+		Glorious Revolver (display attack)
+		[Refine level 8-10]
+		ATK + 25
+	*/
+	if(EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
+		C_ATK += 25;
 	}
 
 	if(EquipNumSearch(1120) && n_A_JobSearch()==4)
@@ -3833,6 +3872,15 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(904) && n_A_JobSearch2() == 13) {
 		n_tok[57] -= 5;
 	}
+	/*
+		Glorious Gatiling Gun
+		[Refine Rate 6~10]
+		Increases physical attack against DemiHuman monsters by an additional 20%.
+	*/
+	if (EquipNumSearch(1101) && n_A_Weapon_ATKplus >= 6) {
+		n_tok[37] += 20;
+	}
+
 	//[TalonRO Custom - 2018-07-26 - Glorious Cleaver/Glorious Flamberge/Glorious Gladius - [+Aegis Shield] Reduces physical attack against Demi-human monster by 20%] [Amor]
 	if((EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1076)) && EquipNumSearch(1376)) {
 		n_tok[37] -= 20;
@@ -4105,6 +4153,22 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	*/
 	if (EquipNumSearch(1089) && n_A_Weapon_ATKplus >= 8) {
 		n_tok[37] += 10;
+	}
+	/*
+		Glorious Revolver
+		[Refine Rate 8-10]
+		Adds 5% additional defense bypassing on DemiHuman monsters.
+	*/
+	if (EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[307] += 5;
+	}
+	/*
+		Soldier Gatling Gun
+		[Refine level 7-10]
+		Increase damage inflicted on Medium size monsters by 2% per refine.
+	*/
+	if (EquipNumSearch(927) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[28] += 2 * n_A_Weapon_ATKplus;
 	}
 
 	/*

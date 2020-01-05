@@ -8020,6 +8020,40 @@ function BaiCI(wBaiCI)
 	if (EquipNumSearch(897) && n_A_JobSearch2() == 13 && n_A_ActiveSkill == 324) {
 		w1 += 5;
 	}
+	/*
+		Soldier Grenade Launcher
+		[Refine level 6-10]
+		Increase damage of [Ground Drift] by 25%.
+	*/
+	if (EquipNumSearch(929) && n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 437) {
+		w1 += 25;
+	}
+	/*
+		Brave Gladiator Blade
+		[Rogue and Crusader Classes]
+	*/
+	if (EquipNumSearch(900)
+			&& (n_A_JobSearch2() == 13 || n_A_JobSearch2() == 14)
+			&& n_A_ActiveSkill == 161) {
+		// Add 15% more damage with [Holy Cross] skill.
+		w1 += 15;
+		// [Refine level 7-10] Add an additional 5% more damage with [Holy Cross] skill.
+		if (n_A_Weapon_ATKplus >= 7) {
+			w1 += 5;
+		}
+		// For every refine +8 or higher, add 1% more damage with [Holy Cross] skill.
+		if (n_A_Weapon_ATKplus >= 8) {
+			w1 += n_A_Weapon_ATKplus - 7;
+		}
+	}
+	/*
+		Glorious Holy Avenger
+		[Refine Rate 7~10]
+		Increases damage with [Holy Cross] by 15%.
+	*/
+	if (EquipNumSearch(1079) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 161) {
+		w1 += 15;
+	}
 
 	if(n_A_ActiveSkill == 428)
 		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1099))
