@@ -2223,6 +2223,15 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1076) && n_A_JOB == 43) {
 		w += (10 * n_A_Weapon_ATKplus);
 	}
+	/*
+		Brave Battle Strategy Book
+		[Refine level 7-10]
+		Crit damage +1% per refine level, up to a total of +10% at +10.
+	*/
+	if(EquipNumSearch(911) && n_A_Weapon_ATKplus >= 7) {
+		w += (1 * n_A_Weapon_ATKplus);
+	}
+
 	//custom TalonRO Armor enchant CRIT
 	var wHSE = document.calcForm.A_HSE.value;
 	if(wHSE){
@@ -2776,9 +2785,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(912) && (n_A_JobSearch2() == 18) && (n_A_ActiveSkill == 56 || n_A_ActiveSkill == 51 || n_A_ActiveSkill == 54 )){
 		n_tok[73] -= 15;
 	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse- Sage/Professor, Decrease [Fire Bolt], [Cold Bolt], and [Lightning Bolt] cast times by 15%.] [Amor]
+	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse- Sage/Professor, Decrease [Fire Bolt], [Cold Bolt], and [Lightning Bolt] cast times by 20% plus 1% for every 2 refines.] [Amor]
 	if(EquipNumSearch(1095) && (n_A_JobSearch2() == 18) && (n_A_ActiveSkill == 56 || n_A_ActiveSkill == 51 || n_A_ActiveSkill == 54 )){
-		n_tok[73] -= 25;
+		n_tok[73] -= 20 + Math.floor(n_A_Weapon_ATKplus / 2);
 	}
 	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse/Glorious Arc Wand  - Every Refine Level gives -1% Casting Time] [Amor]
 	if(EquipNumSearch(1095) || EquipNumSearch(1084)){

@@ -8004,6 +8004,13 @@ function BaiCI(wBaiCI)
 	if (EquipNumSearch(903) && n_A_Weapon_ATKplus >= 8 && n_A_ActiveSkill == 259) {
 		w1 += 20;
 	}
+	/*
+		Glorious Tablet
+		Increase damage with [Flying Side Kick] by 10%.
+	*/
+	if (EquipNumSearch(1094) && (n_A_ActiveSkill == 339 || n_A_ActiveSkill == 305)) {
+		w1 += 10;
+	}
 
 	if(n_A_ActiveSkill == 428)
 		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1099))
