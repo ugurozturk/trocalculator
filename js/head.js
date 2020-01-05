@@ -7992,6 +7992,7 @@ function BaiCI(wBaiCI)
 			w1 += 10;
 		}
 	}
+
 	//custom TalonRO Cannon Spear: Head Crush damage +5% each 3rd refine
 	if(n_A_ActiveSkill == 260)
 		if(EquipNumSearch(1516))
@@ -8010,6 +8011,14 @@ function BaiCI(wBaiCI)
 	*/
 	if (EquipNumSearch(1094) && (n_A_ActiveSkill == 339 || n_A_ActiveSkill == 305)) {
 		w1 += 10;
+	}
+	/*
+		Brave Assassin Damascus
+		[Crusader Class]
+		Add 5% more damage with [Shield Chain]
+	*/
+	if (EquipNumSearch(897) && n_A_JobSearch2() == 13 && n_A_ActiveSkill == 324) {
+		w1 += 5;
 	}
 
 	if(n_A_ActiveSkill == 428)

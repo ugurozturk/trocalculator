@@ -917,8 +917,8 @@ ItemOBJ = [
 ,[894,50,1,1,0,0,10,20,"Ribbon Yellow","",0,3,2,6,2,78,10,0]
 ,[895,50,0,2,0,0,0,10,"Friend Hat","",0,0]
 ,[896,50,0,2,0,0,30,10,"Squatting Poring","",0,6,1,193,1,194,1,0]
-,[897,1,0,120,3,0,0,80,"Brave Assassin Damascus","","<b>[Rogue Class]</b><br>MATK + 15%<br>Add 10% more damage with [Backstab] and [Raid]<br><b>[Ninja Class]</b><br>MATK + 15%<br>CRIT + 20<br>10% more damage with Critical Hits<br><b>[Soul Linker]</b><br>CRIT + 50",1,2,2,2,37,75,307,20,194,1,0]
-,[898,1,0,120,3,0,0,80,"Valorous Assassin Damascus","","<b>[Ninja Class, Rogue or Stalker]</b><br>MATK + 15%<br/>When using magic, there is a 3% chance that you will add MATK + 10% and ASPD + 20% for 6 seconds.",1,2,2,3,12,5,8,15,37,75,73,-5,194,1,0]
+,[897,1,0,120,3,0,0,80,"Brave Assassin Damascus","","<b>[Rogue Class]</b><br>MATK + 15%. DEX + 2.<br>Add 10% more damage with [Backstab] and [Raid] skills.<br><b>[Ninja Class]</b><br>MATK + 15%, CRIT + 20. DEX + 2.<br>Increases Critical Attack damage by 10%.<br><b>[Soul Linker]</b><br>CRIT + 50. ASPD + 5%.<br><b>[Crusader Class]</b><br>Add 5% more damage with [Shield Chain].",2,5,17,10,37,75,307,20,194,1,0]
+,[898,1,0,120,3,0,0,80,"Valorous Assassin Damascus","","<b>[Ninja Class, Rogue or Stalker]</b><br>MATK + 15%. DEX + 1.<br>When using magic, there is a 3% chance that for 6 seconds you will receive MATK + 10% and ASPD + 20%.<br><b>[Refine level 6-10]</b><br>Additional DEX + 2.<br><b>[Refine level 9-10]</b><br>Additional DEX + 3.",1,1,2,3,12,5,8,15,37,75,73,-5,194,1,0]
 ,[899,2,0,115,3,0,0,80,"Valorous Gladiator Blade","",0,1,3,5,1,37,75,307,20,194,1,0]
 ,[900,2,0,140,3,0,0,80,"Brave Gladiator Blade","","[Rogue/Stalker or Crusader/Paladin] MATK + 5%.",1,1,5,3,37,75,89,15,194,1,0]
 ,[901,3,0,230,3,0,0,80,"Valorous Assaulter's Katzbalger","",0,10,25,37,80,70,20,194,1,0]
@@ -4053,7 +4053,6 @@ w_SE = [[737,436,475,"NULL"]
 ,[1639,1633,1630,1632,1631,1629,"NULL"] //Custom TalonRO - 2018-06-06 - Advanced Angelic Protection, Advanced Angel's Reincarnation, Advanced Angelic Guard, Advanced Angelic Cardigan & Advanced Angel's Kiss [ZoneSoldier]
 ,[1669,1667,644,"NULL"] //Custom TalonRO - 2018-07-13 - Love Guard + Staff of Recovery [NattWara]
 ,[1670,1667,863,"NULL"] //Custom TalonRO - 2018-07-13 - Love Guard + Holy Stick [NattWara]
-,[1672,897,1376,"NULL"]
 ,[1673,899,1376,"NULL"] //Custom TalonRO - 2018-07-26 - Valorous Gladiator Blade + Aegis Shield [Amor]
 ];
 SE_MAXnum = w_SE.length -1;

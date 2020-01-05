@@ -719,17 +719,20 @@ function StAllCalc()
 	}
 	//brave assassin damacus [Loa] 2018-07-24
 	if(EquipNumSearch(897)){
+		// [Rogue Class]
 		if(n_A_JobSearch2() == 14){
-			n_tok[89] += 15;
+			n_tok[89] += 15; // MATK + 15%
 			//skill damage in head.js
 		}
+		// [Ninja Class]
 		else if(n_A_JOB == 44){
-			n_tok[89] += 15;
-			n_tok[10] += 20;
-			n_tok[70] += 10;
+			n_tok[89] += 15; // MATK + 15%
+			n_tok[10] += 20; // CRIT + 20
+			n_tok[70] += 10; // Critical Attack damage + 10%
 		}
+		// [Soul Linker]
 		else if(n_A_JOB == 43){
-			n_tok[10] += 50;
+			n_tok[10] += 50; // CRIT + 50
 		}
 	}
 	//angra mantis [Loa] 2018-08-05
@@ -3368,6 +3371,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6){
 			w += (n_A_Weapon_ATKplus - 5);
 	}
+	/*
+		Brave Assassin Damascus
+		[Soul Linker]
+		ASPD + 5%
+	*/
+	if (EquipNumSearch(897) && n_A_JOB == 43) {
+		w += 5;
+	}
 
 	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for ASPD] [Kato]
 	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
@@ -4582,6 +4593,30 @@ function StPlusCalc()
 	*/
 	if (EquipNumSearch(904) && n_A_JobSearch2() == 13) {
 		wSPC_VIT += 5;
+	}
+	// Brave Assassin Damascus
+	if (EquipNumSearch(897)) {
+		// [Rogue Class]
+		if (n_A_JobSearch2() == 14) {
+			wSPC_DEX += 2; // DEX + 2
+		}
+		// [Ninja Class]
+		else if (n_A_JOB == 44) {
+			wSPC_DEX += 2; // DEX + 2
+		}
+	}
+	/*
+		Valorous Assassin Damascus
+		[Ninja Class, Rogue or Stalker]
+	*/
+	if (EquipNumSearch(898) && (n_A_JobSearch2() == 14 || n_A_JOB == 44)) {
+		wSPC_DEX += 1; // DEX + 1
+		if (n_A_Weapon_ATKplus >= 6) {
+			wSPC_DEX += 2; // DEX + 2
+		}
+		if (n_A_Weapon_ATKplus >= 9) {
+			wSPC_DEX += 3; // DEX + 3
+		}
 	}
 
 	if(CardNumSearch(405)){
