@@ -3911,6 +3911,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6) {
 		n_tok[78] += n_A_Weapon_ATKplus - 5;
 	}
+	/*
+		Speedy Recovery Wand
+		[Refine level 8-10]
+		Reduce ranged damage by 1% per refine
+	*/
+	if(EquipNumSearch(920) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[78] += n_A_Weapon_ATKplus;
+	}
 
 	//maiden hat +1% heal per refine > 6 - [Loa] - 2018-06-25
 	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
