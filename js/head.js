@@ -7992,10 +7992,68 @@ function BaiCI(wBaiCI)
 			w1 += 10;
 		}
 	}
+
 	//custom TalonRO Cannon Spear: Head Crush damage +5% each 3rd refine
 	if(n_A_ActiveSkill == 260)
 		if(EquipNumSearch(1516))
 			w1 += 3*Math.floor(n_A_Weapon_ATKplus/3);
+	/*
+		Assaulter Spear
+		[Refine level 8-10]
+		Increase damage of Spiral Pierce by 20%.
+	*/
+	if (EquipNumSearch(903) && n_A_Weapon_ATKplus >= 8 && n_A_ActiveSkill == 259) {
+		w1 += 20;
+	}
+	/*
+		Glorious Tablet
+		Increase damage with [Flying Side Kick] by 10%.
+	*/
+	if (EquipNumSearch(1094) && (n_A_ActiveSkill == 339 || n_A_ActiveSkill == 305)) {
+		w1 += 10;
+	}
+	/*
+		Brave Assassin Damascus
+		[Crusader Class]
+		Add 5% more damage with [Shield Chain]
+	*/
+	if (EquipNumSearch(897) && n_A_JobSearch2() == 13 && n_A_ActiveSkill == 324) {
+		w1 += 5;
+	}
+	/*
+		Soldier Grenade Launcher
+		[Refine level 6-10]
+		Increase damage of [Ground Drift] by 25%.
+	*/
+	if (EquipNumSearch(929) && n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 437) {
+		w1 += 25;
+	}
+	/*
+		Brave Gladiator Blade
+		[Rogue and Crusader Classes]
+	*/
+	if (EquipNumSearch(900)
+			&& (n_A_JobSearch2() == 13 || n_A_JobSearch2() == 14)
+			&& n_A_ActiveSkill == 161) {
+		// Add 15% more damage with [Holy Cross] skill.
+		w1 += 15;
+		// [Refine level 7-10] Add an additional 5% more damage with [Holy Cross] skill.
+		if (n_A_Weapon_ATKplus >= 7) {
+			w1 += 5;
+		}
+		// For every refine +8 or higher, add 1% more damage with [Holy Cross] skill.
+		if (n_A_Weapon_ATKplus >= 8) {
+			w1 += n_A_Weapon_ATKplus - 7;
+		}
+	}
+	/*
+		Glorious Holy Avenger
+		[Refine Rate 7~10]
+		Increases damage with [Holy Cross] by 15%.
+	*/
+	if (EquipNumSearch(1079) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 161) {
+		w1 += 15;
+	}
 
 	if(n_A_ActiveSkill == 428)
 		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1099))

@@ -719,17 +719,20 @@ function StAllCalc()
 	}
 	//brave assassin damacus [Loa] 2018-07-24
 	if(EquipNumSearch(897)){
+		// [Rogue Class]
 		if(n_A_JobSearch2() == 14){
-			n_tok[89] += 15;
+			n_tok[89] += 15; // MATK + 15%
 			//skill damage in head.js
 		}
+		// [Ninja Class]
 		else if(n_A_JOB == 44){
-			n_tok[89] += 15;
-			n_tok[10] += 20;
-			n_tok[70] += 10;
+			n_tok[89] += 15; // MATK + 15%
+			n_tok[10] += 20; // CRIT + 20
+			n_tok[70] += 10; // Critical Attack damage + 10%
 		}
+		// [Soul Linker]
 		else if(n_A_JOB == 43){
-			n_tok[10] += 50;
+			n_tok[10] += 50; // CRIT + 50
 		}
 	}
 	//angra mantis [Loa] 2018-08-05
@@ -760,6 +763,31 @@ if(EquipNumSearch(1085)){
 		}
 }
 
+/*
+	Valorous Battlefield Morning Star (damage)
+	[Refine level 8-10]
+	ATK + 20
+*/
+if(EquipNumSearch(907) && n_A_Weapon_ATKplus >= 8) {
+	n_tok[17] += 20;
+}
+/*
+	Brave Battlefield Morning Star (damage)
+	[Refine level 8-10]
+	[Alchemist Class]
+	ATK + 30
+*/
+if(EquipNumSearch(908) && n_A_Weapon_ATKplus >= 8 && n_A_JobSearch2() == 19) {
+	n_tok[17] += 30;
+}
+/*
+	Glorious Revolver (damage)
+	[Refine level 8-10]
+	ATK + 25
+*/
+if(EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
+	n_tok[17] += 25;
+}
 
 /*
 Player Stats - n_tok[]
@@ -916,6 +944,35 @@ if(CardNumSearch(561)){
 	//[TalonRO Custom - 2018-07-29 - Glorious Two Handed Axe - +2% more damage with [Mammonite]] [Amor]
 	if(EquipNumSearch(1087) && n_A_ActiveSkill == 65){
 		w += n_A_ATK*.02;
+	}
+	//[TalonRO Custom - 2019-12-24 - Valorous Battle CrossBow - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
+	if (EquipNumSearch(913) && n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8) {
+		w += n_A_ATK*.10;
+	}
+	//[TalonRO Custom - 2019-12-24 - Glorious Hunter Bow - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
+	if (EquipNumSearch(1089) && n_A_ActiveSkill == 40) {
+		w += n_A_Weapon_ATKplus * (n_A_ATK*.02);
+	}
+	/*
+		Brave Carnage Katar
+		[Refine level 7~10]
+		Increase damage of [Meteor Assault] by 15%.
+	*/
+	if(EquipNumSearch(909) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264) {
+		w += n_A_ATK*.15;
+	}
+	/*
+		Valorous Carnage Katar
+		[Refine Level 6~10]
+		Increases damage with [Sonic Blow] by 10%.
+		[Refine Level 9~10]
+		Increases damage with [Sonic Blow] by 20%.
+	*/
+	if(EquipNumSearch(910) && n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 83) {
+		w += n_A_ATK*.10;
+		if (n_A_Weapon_ATKplus >= 9) {
+			w += n_A_ATK*.20;
+		}
 	}
 
 	w = Math.round(w);
@@ -1079,6 +1136,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 					w += parseInt(vBE.substr(-1)) * 100;
 			}
 	}
+	/*
+		Glorious Holy Avenger
+		[Refine Rate 7~10]
+		MaxHP +1000
+	*/
+	if (EquipNumSearch(1079) && n_A_Weapon_ATKplus >= 7) {
+		w += 1000;
+	}
 
 	n_A_MaxHP += w;
 
@@ -1157,6 +1222,15 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		//[Custom TalonRO - Deviruchi Headphones (1426) -1% MHP] [Kato]
 		if(EquipNumSearch(1426))
 			w -= 1;
+
+	/*
+		Valorous Insane Battle Axe
+		[Refine level 7-10]
+		MaxHP +1% for each refine, up to a maximum of 10%.
+	*/
+	if (EquipNumSearch(905) && n_A_Weapon_ATKplus >= 7) {
+		w += n_A_Weapon_ATKplus;
+	}
 
 	n_A_MaxHP = n_A_MaxHP * (100 + w)/100;
 
@@ -1474,6 +1548,22 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			if(vBE >= 101 && vBE <= 102) {
 					n_A_DEF += parseInt(vBE.substr(-1));
 			}
+	}
+	/*
+		Soldier Shotgun
+		[Refine level 6-10]
+		DEF + 5
+	*/
+	if (EquipNumSearch(928) && n_A_Weapon_ATKplus >= 6) {
+		n_A_DEF += 5;
+	}
+	/*
+		Glorious Shotgun
+		[Refine level 8-10]
+		DEF + 5
+	*/
+	if (EquipNumSearch(1102) && n_A_Weapon_ATKplus >= 8) {
+		n_A_DEF += 5;
 	}
 
 	n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 7 / 10);
@@ -2167,6 +2257,15 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1076) && n_A_JOB == 43) {
 		w += (10 * n_A_Weapon_ATKplus);
 	}
+	/*
+		Brave Battle Strategy Book
+		[Refine level 7-10]
+		Crit damage +1% per refine level, up to a total of +10% at +10.
+	*/
+	if(EquipNumSearch(911) && n_A_Weapon_ATKplus >= 7) {
+		w += (1 * n_A_Weapon_ATKplus);
+	}
+
 	//custom TalonRO Armor enchant CRIT
 	var wHSE = document.calcForm.A_HSE.value;
 	if(wHSE){
@@ -2442,6 +2541,32 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			C_ATK += 6;
 	}
 
+	/*
+		Valorous Battlefield Morning Star (display attack)
+		[Refine level 8-10]
+		ATK + 20
+	*/
+	if(EquipNumSearch(907) && n_A_Weapon_ATKplus >= 8) {
+		C_ATK += 20;
+	}
+	/*
+		Brave Battlefield Morning Star (display attack)
+		[Refine level 8-10]
+		[Alchemist Class]
+		ATK + 30
+	*/
+	if(EquipNumSearch(908) && n_A_Weapon_ATKplus >= 8 && n_A_JobSearch2() == 19) {
+		C_ATK += 30;
+	}
+	/*
+		Glorious Revolver (display attack)
+		[Refine level 8-10]
+		ATK + 25
+	*/
+	if(EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
+		C_ATK += 25;
+	}
+
 	if(EquipNumSearch(1120) && n_A_JobSearch()==4)
 		C_ATK += 10;
 	if(EquipNumSearch(1165))
@@ -2702,17 +2827,13 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(912) && (n_A_JobSearch2() == 18) && (n_A_ActiveSkill == 56 || n_A_ActiveSkill == 51 || n_A_ActiveSkill == 54 )){
 		n_tok[73] -= 15;
 	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse- Sage/Professor, Decrease [Fire Bolt], [Cold Bolt], and [Lightning Bolt] cast times by 15%.] [Amor]
+	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse- Sage/Professor, Decrease [Fire Bolt], [Cold Bolt], and [Lightning Bolt] cast times by 20% plus 1% for every 2 refines.] [Amor]
 	if(EquipNumSearch(1095) && (n_A_JobSearch2() == 18) && (n_A_ActiveSkill == 56 || n_A_ActiveSkill == 51 || n_A_ActiveSkill == 54 )){
-		n_tok[73] -= 25;
+		n_tok[73] -= 20 + Math.floor(n_A_Weapon_ATKplus / 2);
 	}
 	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse/Glorious Arc Wand  - Every Refine Level gives -1% Casting Time] [Amor]
 	if(EquipNumSearch(1095) || EquipNumSearch(1084)){
 		n_tok[73] -= n_A_Weapon_ATKplus;
-	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar - Gives -10% [Soul Breaker] Casting Time] [Amor]
-	if(EquipNumSearch(1090) && n_A_ActiveSkill == 263){
-		n_tok[73] -= 10;
 	}
 	//[TalonRO Custom - 2018-07-27 - Glorious Claymore - Gives -3% [Charge Attack] Casting Time] [Amor]
 	if(EquipNumSearch(1080) && n_A_ActiveSkill == 308){
@@ -2898,6 +3019,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			w += parseInt(vMORA.substr(-1));
 		}
 	}
+
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Hat of the Sun God [1] - MATK part [Nattwara]
 	/*
@@ -3134,8 +3256,13 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += (n_A_Weapon_ATKplus);
 	if(EquipNumSearch(641))
 		w += n_A_Weapon_ATKplus;
+	/*
+		Assaulter Spear
+		[Crusader or Paladin]
+		Increases attack speed by 10%
+	*/
 	if(EquipNumSearch(903) && n_A_JobSearch2() == 13)
-		w += 20;
+		w += 10;
 	if(SU_STR >= 77 && EquipNumSearch(944))
 		w += 4;
 	if(n_A_JOB == 21 && EquipNumSearch(855))
@@ -3275,17 +3402,21 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1079) && EquipNumSearch(1376)) {
 			w += 5 + (2 * n_A_Weapon_ATKplus);
 	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class] [Amor]
-	if(EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
-			w += 5 + (2 * n_A_Weapon_ATKplus);
-	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD for Rogue Class] [Amor]
-	if(EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
-			w += 5 + (2 * n_A_Weapon_ATKplus);
+	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD (+2% per refine) for Rogue Class] [Amor]
+	if (EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
+		w += 5 + (2 * n_A_Weapon_ATKplus);
 	}
 	//[TalonRO Custom - 2018-07-28 - Glorious Two Handed Axe - 1% ASPD more if refine 6>] [Amor]
 	if(EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6){
 			w += (n_A_Weapon_ATKplus - 5);
+	}
+	/*
+		Brave Assassin Damascus
+		[Soul Linker]
+		ASPD + 5%
+	*/
+	if (EquipNumSearch(897) && n_A_JOB == 43) {
+		w += 5;
 	}
 
 	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for ASPD] [Kato]
@@ -3423,6 +3554,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//[TalonRO Custom - 2019-10-30 - Heavy Sword - Decreases cast time of [Charge Attack] by 3% per refine
 	if(EquipNumSearch(1680) && n_A_ActiveSkill == 308) {
 		w -= (3 * n_A_Weapon_ATKplus);
+	}
+	/*
+		Brave Carnage Katar
+		[Refine level 7~10]
+		Reduce cast time of [Meteor Assault] by 15%.
+	*/
+	if(EquipNumSearch(909) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264) {
+		w -= 15;
 	}
 
 	if(w < 0){w = 0;}
@@ -3623,10 +3762,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1545)){
 		n_tok[25] -= (n_A_HEAD_DEF_PLUS - 5);
 	}
-	//[Custom TalonRO - 2018-07-28 - Glorious Hunter Bow - 2% DS damage (added here as ranged damage)] [Kato]
-	if(EquipNumSearch(1089)){
-		n_tok[25] += 2;
-	}
 
 	//[Custom TalonRO 2018-06-15 - Malandgo Enchantment for Expert Archer] [Kato]
 	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
@@ -3679,9 +3814,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(904) && n_A_JobSearch2() == 13){
 		n_tok[70] += 20;
 	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 2% Critical Damge for Hunter Class] [Amor]
-	if(EquipNumSearch(1089) && n_A_JobSearch2() == 10) {
-			w += (2 * n_A_Weapon_ATKplus);
+	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - For every refine, increases Critical damage by 2% for Archer Class] [Amor]
+	if (EquipNumSearch(1089) && n_A_JobSearch() == 4) {
+		w += (2 * n_A_Weapon_ATKplus);
 	}
 
 	if(CardNumSearch(452) && n_A_JobSearch()==3){
@@ -3713,10 +3848,39 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_tok[57] += (n_A_HEAD_DEF_PLUS - 5) * 2;
 	}
 
-	//[TalonRO Custom - 2018-07-26 - Valorous Battlefield Morning Star/Glorious Morning Star - [+Aegis Shield or Monk/Champion] Reduces physical attack against Demi-human monster by 20%] [Amor]
-	if((EquipNumSearch(907) || EquipNumSearch(1086)) && ((EquipNumSearch(1376) || n_A_JobSearch2() == 15))) {
-		n_tok[37] -= 20;
+	/*
+		Valorous Battlefield Morning Star
+		[+ Monk Class]
+		Decreases physical attack against DemiHuman monster by 15%.
+	*/
+	if(EquipNumSearch(907) && n_A_JobSearch2() == 15) {
+		n_tok[37] -= 15;
 	}
+	/*
+		Glorious Jamadhar
+		[Refine Rate 6~10]
+		Increases physical attack against Angel monsters by 20%.
+	*/
+	if(EquipNumSearch(1091) && n_A_Weapon_ATKplus >= 6) {
+		n_tok[38] += 20;
+	}
+	/*
+		Assaulter Lance
+		[Crusader Class]
+		Reduce damage received from DemiHuman race monsters by 15% instead of 20%.
+	*/
+	if(EquipNumSearch(904) && n_A_JobSearch2() == 13) {
+		n_tok[57] -= 5;
+	}
+	/*
+		Glorious Gatiling Gun
+		[Refine Rate 6~10]
+		Increases physical attack against DemiHuman monsters by an additional 20%.
+	*/
+	if (EquipNumSearch(1101) && n_A_Weapon_ATKplus >= 6) {
+		n_tok[37] += 20;
+	}
+
 	//[TalonRO Custom - 2018-07-26 - Glorious Cleaver/Glorious Flamberge/Glorious Gladius - [+Aegis Shield] Reduces physical attack against Demi-human monster by 20%] [Amor]
 	if((EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1076)) && EquipNumSearch(1376)) {
 		n_tok[37] -= 20;
@@ -3802,6 +3966,18 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	if(SkillSearch(421))
 		n_tok[78] += 20;
+
+	if(EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6) {
+		n_tok[78] += n_A_Weapon_ATKplus - 5;
+	}
+	/*
+		Speedy Recovery Wand
+		[Refine level 8-10]
+		Reduce ranged damage by 1% per refine
+	*/
+	if(EquipNumSearch(920) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[78] += n_A_Weapon_ATKplus;
+	}
 
 	//maiden hat +1% heal per refine > 6 - [Loa] - 2018-06-25
 	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
@@ -3968,6 +4144,31 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//[TalonRO Custom - Glorious Lance - 100% DEF Bypass if Crusader/Palladin] [Amor]
 	if(EquipNumSearch(1082)){
 		n_tok[307] = 100;
+	}
+
+	/*
+		Glorious Hunter Bow
+		[Refine Rate 8-10]
+		Increases physical attack against DemiHuman race by 10%.
+	*/
+	if (EquipNumSearch(1089) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[37] += 10;
+	}
+	/*
+		Glorious Revolver
+		[Refine Rate 8-10]
+		Adds 5% additional defense bypassing on DemiHuman monsters.
+	*/
+	if (EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[307] += 5;
+	}
+	/*
+		Soldier Gatling Gun
+		[Refine level 7-10]
+		Increase damage inflicted on Medium size monsters by 2% per refine.
+	*/
+	if (EquipNumSearch(927) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[28] += 2 * n_A_Weapon_ATKplus;
 	}
 
 	/*
@@ -4448,6 +4649,39 @@ function StPlusCalc()
 		n_tok[77] += Math.floor(n_A_LEFT_DEF_PLUS /3);
 	}
 	if(EquipNumSearch(1268))wSPC_INT += Math.floor(SU_INT/24);
+
+	/*
+		Assaulter Lance
+		[Crusader Class]
+		VIT + 5.
+	*/
+	if (EquipNumSearch(904) && n_A_JobSearch2() == 13) {
+		wSPC_VIT += 5;
+	}
+	// Brave Assassin Damascus
+	if (EquipNumSearch(897)) {
+		// [Rogue Class]
+		if (n_A_JobSearch2() == 14) {
+			wSPC_DEX += 2; // DEX + 2
+		}
+		// [Ninja Class]
+		else if (n_A_JOB == 44) {
+			wSPC_DEX += 2; // DEX + 2
+		}
+	}
+	/*
+		Valorous Assassin Damascus
+		[Ninja Class, Rogue or Stalker]
+	*/
+	if (EquipNumSearch(898) && (n_A_JobSearch2() == 14 || n_A_JOB == 44)) {
+		wSPC_DEX += 1; // DEX + 1
+		if (n_A_Weapon_ATKplus >= 6) {
+			wSPC_DEX += 2; // DEX + 2
+		}
+		if (n_A_Weapon_ATKplus >= 9) {
+			wSPC_DEX += 3; // DEX + 3
+		}
+	}
 
 	if(CardNumSearch(405)){
 		if(n_A_JobSearch()==1 || n_A_JobSearch()==2 || n_A_JobSearch()==6)
