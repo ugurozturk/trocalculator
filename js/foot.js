@@ -4279,7 +4279,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		}
 			if(TRO_MAGICALSKILL_ELEMENTS[4].indexOf(n_A_ActiveSkill) != -1){
 				for(j=0; j<10; j++) {
-					n_tok[170 + j] = ((n_tok[344 + j] + 100) * (100 + iMDMG) / 100) - 100;
+					n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + iMDMG) / 100) - 100;
 				}
 			}
 	}
