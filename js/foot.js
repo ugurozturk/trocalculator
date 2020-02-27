@@ -3097,9 +3097,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		w += (n_A_HEAD_DEF_PLUS / 2);
 	}
 
-	n_A_MATK[0] = Math.floor(n_A_MATK[0] * w / 100);
-	n_A_MATK[2] = Math.floor(n_A_MATK[2] * w / 100);
-
 	//Gemini Crown - [Loa] - 2018-07-04
 	if(EquipNumSearch(1280) && n_A_HEAD_DEF_PLUS >= 7){
 		n_tok[98] += 15;
@@ -3164,8 +3161,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	n_A_MATK[0] += n_tok[98];
 	n_A_MATK[2] += n_tok[98];
-
-	w = 100 + n_tok[88];
 
 	n_A_MATK[0] = Math.floor(n_A_MATK[0] * w / 100);
 	n_A_MATK[2] = Math.floor(n_A_MATK[2] * w / 100);
