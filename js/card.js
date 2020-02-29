@@ -571,7 +571,7 @@ cardOBJ = [
 ,[544,1,"Nightmare Minorous",0,32,10,31,10,0]
 ,[545,6,"Nightmare Mummy","When receiving physical attacks, add a 3% chance to cause Sleep to your target.",155,20,0]
 ,[546,5,"Nightmare Ancient Mummy","Every 3 refines of garment increase magical Fire damage by 4%.",60,15,0]
-,[547,6,"Nightmare Verit","Increases magical damage by 3%<br>When using magic attacks, there is a 2% chance to recover 40 HP and 20 SP every 2 seconds for a total of 8 seconds<br><b>[For Every 2 Refines]</b><br> Increases the HP/SP recovery activation chance by an additional 1%<br><b>[Refine Rate >= 5]</b><br>Increases magical damage by an additional 1%<br><b>[Refine Rate >= 7]</b><br>Increases magical damage by an additional 1%",15,4,16,4,296,3,297,3,0]
+,[547,6,"Nightmare Verit","Increases magical damage by 3%<br>When using magic attacks, there is a 2% chance to recover 40 HP and 20 SP every 2 seconds for a total of 8 seconds<br><b>[For Every 2 Refines]</b><br> Increases the HP/SP recovery activation chance by an additional 1%<br><b>[Refine Rate >= 5]</b><br>Increases magical damage by an additional 1%<br><b>[Refine Rate >= 7]</b><br>Increases magical damage by an additional 1%",15,4,16,4,96,3,97,3,296,3,297,3,0]
 ,[548,100,0,0,52,5,51,5,312,20,311,20,0]
 ,[549,100,0,0,52,5,51,5,302,30,301,30,0]
 ,[550,100,0,"Increase the probability of causing Sleep by an additional 2%.",155,10,60,5,0]
