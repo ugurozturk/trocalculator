@@ -3690,11 +3690,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1429) && SU_LUK > 55)
 		w += 10;
 
-	// //[Custom TalonRO - 2018-07-17 - Nightmare Verit - For every 2 refines, increases the SP recovery chance by an additional 1%] [Kato]
-	// if(CardNumSearch(547)) {
-	// 		w += 1 * Math.floor(n_A_SHOES_DEF_PLUS / 2);
-	// }
-
 	n_A_SPR = Math.floor(n_A_SPR * w /100);
 
 	if(n_A_INT>=120)
@@ -4240,6 +4235,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			}
 		}
 	}
+	
+	/*
 	//increase damage of skills based on element for n_tok[340-349] - [Loa]
 	for(i=0;i<TRO_MAGICALSKILL_ELEMENTS.length;i++){
 		if(TRO_MAGICALSKILL_ELEMENTS[i].indexOf(n_A_ActiveSkill) != -1){
@@ -4248,14 +4245,20 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			}
 		}
 	}
+	*/
 
 	//[TalonRO Custom 2018-07-17 - Add (4 * Refine/3) Magical Fire Damage Nightmare Ancient Mummy] [Kato]
+	/*
 	if(CardNumSearch(546)) {
 		if(TRO_MAGICALSKILL_ELEMENTS[3].indexOf(n_A_ActiveSkill) != -1){
 			for(j=0; j<10; j++) {
 				n_tok[170 + j] = ((n_tok[170 + j] + 100) * (100 + 	4 * Math.floor(n_A_SHOULDER_DEF_PLUS/3)) / 100) - 100; // ***
 			}
 		}
+	}
+	*/
+	if (n_A_card[12] == 546) {
+		n_tok[343] += 4 * Math.floor(n_A_SHOULDER_DEF_PLUS/3)
 	}
 
 	/*
@@ -4266,6 +4269,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	[Refine Rate +9 or higher]
 	Add another 5% damage with Wind Magic.
 	*/
+	/*
 	if(CardNumSearch(558)) {
 		var iMDMG = 5 * CardNumSearch(558);
 		if(n_A_card[8] == 558) {
@@ -4278,8 +4282,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 				}
 			}
 	}
+	*/
+	if (n_A_card[8] == 558) {
+		if(n_A_HEAD_DEF_PLUS >= 7) n_tok[344] += 5;
+		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[344] += 5;
+	}
 
 	//[TalonRO Custom 2018-07-17 - Add 3% Magical damage boost Nightmare Verit] [Kato]
+	/*
 	if(CardNumSearch(547)) {
 		var iMDMG = 3;
 		if(n_A_SHOES_DEF_PLUS >= 5) iMDMG++; // Refine >=5 +1%
@@ -4291,6 +4301,16 @@ n_A_MaxHP += SkillSearch(156) * 200;
 				}
 			}
 		}
+	}
+	*/
+	if (n_A_card[13] == 547) {
+		var iMDmgAdd = 0
+		
+		if(n_A_SHOES_DEF_PLUS >= 5) iMDmgAdd += 1;
+		if(n_A_SHOES_DEF_PLUS >= 7) iMDmgAdd += 1;
+		
+		n_tok[96] += iMDmgAdd
+		n_tok[97] += iMDmgAdd
 	}
 
 	/*

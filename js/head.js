@@ -2120,7 +2120,7 @@ function BattleCalc999()
 		var wX = n_tok[170+n_B[2]];
 		w_DMG[2] = Math.floor(w_DMG[2] * (100 + wX) /100);
 
-		w_HEAL_BAI = 100 + n_tok[96];
+		w_HEAL_BAI = 100 + n_tok[95];
 		w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_BAI / 100);
 
 		w_DMG[2] = tPlusDamCut(w_DMG[2]);
@@ -3172,24 +3172,56 @@ function BattleMagicCalc(wBMC)
 		debug_atk+="\n --- Element-Modifier ---";
 		debug_atk+="\nb_wBMC2:"+wBMC2;
 	}
-	wBMC2 = Math.floor(wBMC2 * zokusei[n_B[3]][n_A_Weapon_zokusei]);
+	wBMC2 = Math.floor(wBMC2 * zokusei[n_B[3]][n_A_Weapon_zokusei]); // Apply elemental weakness
 	if (debug_dmg_avg)
 		debug_atk+="\na_wBMC2:"+wBMC2;
-	if(90 <= n_B[3] && n_A_ActiveSkill==47)
+	if(90 <= n_B[3] && n_A_ActiveSkill==47) // Soul Strike on non-undead monsters
 		wBMC2 = Math.floor(wBMC2 * (1 + 0.05 * n_A_ActiveSkillLV));
 
-	var wX = n_tok[170+n_B[2]];
+	// >> bMagicAddEle
+	// Damage multiplier on magic element
+	var wMEleX = n_tok[340 + n_A_Weapon_zokusei]
+	
+	// Damage multiplier for monster element
+	wMEleX += n_tok[350+Math.floor(n_B[3]/10)];
+	
+	wBMC2 = wBMC2 * (100 + wMEleX) /100;
+	// << bMagicAddEle
+	
+	// >> bMagicAddRace
+	// Damage multiplier for race - bMagicAddRace
+	var wMRaceX = n_tok[170 + n_B[2]];
+	
+	wBMC2 = wBMC2 * (100 + wMRaceX) /100;
+	// << bMagicAddRace
 
-	// Increases magical damage against bosstype monsters
-	if (n_B[19] == 1) {
-		wX += n_tok[97];
+	// >> bMagicAddClass
+	var wMClassX = 0
+	if (n_B[19] == 1) { // Increases magical damage against bosstype monsters - bMagicAddClass,Class_Boss
+		wMClassX = n_tok[97];
+	} else {
+		wMClassX = n_tok[96]
 	}
-
-	wX += n_tok[350+Math.floor(n_B[3]/10)];
+	
+	wBMC2 = wBMC2 * (100 + wMClassX) /100;
+	// << bMagicAddClass
+	
+	// Dragonology - Increases Attack Power, MATK and DEF against Dragon type monsters by 4% per SkillLV
+	// FIXME : Dragonology should increases MATK% instead ?
+	var wX = 0
 	if(n_B[2]==9  && SkillSearch(234))
 		wX += SkillSearch(234) *2;
 	wBMC2 = wBMC2 * (100 + wX) /100;
-
+	
+	// >> bMagicAddSize
+	// << bMagicAddSize
+	
+	// >> bAddMagicDamageClass
+	// << bAddMagicDamageClass
+	
+	// >> bMagicAddRace2
+	// << bMagicAddRace2
+	
 	wBMC2 = tPlusDamCut(wBMC2);
 
 	var wX = StPlusCalc2(5000+n_A_ActiveSkill) + StPlusCard(5000+n_A_ActiveSkill);
