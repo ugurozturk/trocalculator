@@ -580,7 +580,7 @@ cardOBJ = [
 ,[553,3,"Buwaya",0,77,20,79,-35,97,7,0]
 ,[554,2,"Bungisngis","For every refine after +5, MaxHP + 1%, MaxSP + 1%.",15,5,16,5,0]
 ,[555,2,"Engkanto","Ignore 25% of Plant monster defense.",45,25,0]
-,[556,1,"Manananggal",0,93,20,92,3,94,3,0]
+,[556,1,"Manananggal",0,93,20,92,3,0]
 ,[557,4,"Mangkukulam",0,16,10,0]
 ,[558,2,"Tikbalang","[Refine Rate +7 or higher]<br/>Add another 5% damage with Wind Magic.<br/>[Refine Rate +9 or higher]<br/>Add another 5% damage with Wind Magic.",98,10,344,5,0]
 ,[559,7,"Tiyanak",0,117,7,112,7,115,7,0]
