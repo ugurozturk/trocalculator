@@ -6,7 +6,7 @@
 /*
   ZoneSoldier - 6/2/2018
    id, display location, job that can use,(atk; def),lvl equip, slots, weight, lvl required to use, "name of item",  ?, "description", effect1, effect2, ..., 0 =?]
-   Example : [1535 = ID,62 = Location,0 = all jobs,0 = def(atk if its a weapon),0-default = equipment level,1 = slots, 0 = weight, 60 = Level required to use item,0 = ,"Beach Manteau" = Name of object,"" = ?,0 = description(No info added so left at 0),1 = STR,1 = 1 next to str value,4 = Int,1 = Int value 1 on site,63 = Fire resistance,10 = 10% resistance,0= end]
+   Example : [1535 = ID,62 = Location,0 = all jobs (more details in head.js),0 = def(atk if its a weapon),0-default = equipment level,1 = slots, 0 = weight, 60 = Level required to use item,0 = ,"Beach Manteau" = Name of object,"" = ?,0 = description(No info added so left at 0),1 = STR,1 = 1 next to str value,4 = Int,1 = Int value 1 on site,63 = Fire resistance,10 = 10% resistance,0= end]
    Location values:
    Weapons: 1 = Dagger, 2 = One-handed Sword, 3 = Two-handed Sword, 4 = One-handed Spear, 5 = Two-handed Spear, 6 = One-handed Axe, 7 = Two-handed Axe, 8 = Mace, 9 = Staff/Rod, 10 = Bow/CrossBow, 11 = 	Katar, 12 = Book, 13 = Knuckles, 	Instrument = 14, 15 = Whip, 16 = Shuriken, 17 = Revolver, 18 = Rifle, 19 = Shotgun, 20 = Gatling Gun, 21 = Gernade Launcher.
    Headgear: 50 = Upper Headgear, 51 = Middle Headgear, 52 = Lower Headgear
@@ -1723,8 +1723,14 @@ ItemOBJ = [
 ,[1678,2,94,150,4,0,50,40,"Ceremonial Sword","",0,20,6,89,15,12,10,8,10,5161,25,0]
 ,[1679,60,121,6,0,1,300,80,"Engraved Armor","",0,78,10,0]
 ,[1680,3,121,330,4,1,250,70,"Heavy Sword","","5% chance to auto-cast level 1 [Critical Wounds] when using [Head Crush]<br><b>[Every Refine Level]</b><br>Decreases cast time of [Charge Attack] by 3%<br><b>[Refine Rate 9~10]</b><br>Increase [Critical Wounds] level to 2",5260,30,5308,20,0]
+// Akkoro Instance
+,[1681,5,51,190,4,1,200,48,"Undine Spear","","<b>[Every Refine Level]</b><br>MaxHP + 1%",20,1,89,15,0]
+,[1682,60,0,1,0,1,10,40,"Surfer Swimsuit","","<b>[Every Refine Level]</b><br>SP + 2",14,30,15,5,152,30,0]
+,[1683,62,0,1,0,1,50,40,"Oxygen Bottle","","<b>[Every Refine Level]</b><br>HIT + 1, FLEE + 1",12,2,0]
+,[1684,100,0,0,0,0,0,0,"Oxygen Bottle + Scuba Mask","",0,12,3,0]
+,[1685,100,0,0,0,0,0,0,"Surfer Swimsuit + Scuba Mask","",0,11,5,0]
+,[1686,100,0,0,0,0,0,0,"Oxygen Bottle + Scuba Mask + Surfer Swimsuit","","Casting can't be interrupted",120,10,125,10,41,5,43,5,351,5,353,5,0]
 ];
-
 
 //Test code for finding the values in Skill.js AutoSpellSkill
 //,[1620,64,0,1,0,1,10,93,"AAt","","This shit is a test for developing comments for skills.js",221,17,0]
@@ -3438,6 +3444,12 @@ ItemID = [
 ,[1678,1,13440]
 ,[1679,1,15066]
 ,[1680,1,1195]
+,[1681,1,1494]
+,[1682,1,21113]
+,[1683,1,21114]
+,[1684,2,5397,21114]
+,[1685,2,5397,21113]
+,[1686,2,5397,21113,21114]
 ];
 
 /*
@@ -4054,6 +4066,9 @@ w_SE = [[737,436,475,"NULL"]
 ,[1669,1667,644,"NULL"] //Custom TalonRO - 2018-07-13 - Love Guard + Staff of Recovery [NattWara]
 ,[1670,1667,863,"NULL"] //Custom TalonRO - 2018-07-13 - Love Guard + Holy Stick [NattWara]
 ,[1673,899,1376,"NULL"] //Custom TalonRO - 2018-07-26 - Valorous Gladiator Blade + Aegis Shield [Amor]
+,[1684,1213,1683,"NULL"] //Custom TalonRO - Oxygen Bottle + Scuba Mask
+,[1685,1213,1682,"NULL"] //Custom TalonRO - Surfer Swimsuit + Scuba Mask
+,[1686,1213,1682,1683,"NULL"] //Custom TalonRO - Oxygen Bottle + Surfer Swimsuit + Scuba Mask
 ];
 SE_MAXnum = w_SE.length -1;
 for(var i=0;i<=SE_MAXnum;i++){

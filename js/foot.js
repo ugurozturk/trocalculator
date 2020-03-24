@@ -717,6 +717,19 @@ function StAllCalc()
 			n_tok[15] += 2;
 		}
 	}
+	// Undine Spear#1681 [Every Refine Level]  MaxHP + 1%
+	if (EquipNumSearch(1681)) {
+		n_tok[15] += n_A_Weapon_ATKplus
+	}
+	// Surfer Swimsuit#1682 [Every Refine Level] SP + 2
+	if (EquipNumSearch(1682)) {
+		n_tok[14] += n_A_BODY_DEF_PLUS * 2
+	}
+	// Oxygen Bottle#1683 [Every Refine Level] HIT + 1, FLEE + 1
+	if (EquipNumSearch(1683)) {
+		n_tok[8] += n_A_SHOULDER_DEF_PLUS
+		n_tok[9] += n_A_SHOULDER_DEF_PLUS
+	}
 	//brave assassin damacus [Loa] 2018-07-24
 	if(EquipNumSearch(897)){
 		// [Rogue Class]
