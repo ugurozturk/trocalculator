@@ -730,6 +730,20 @@ function StAllCalc()
 		n_tok[8] += n_A_SHOULDER_DEF_PLUS
 		n_tok[9] += n_A_SHOULDER_DEF_PLUS
 	}
+	// Prison Uniform#1690 Every Refine Level] HIT + 1
+	if (EquipNumSearch(1690)) {
+		n_tok[8] += n_A_BODY_DEF_PLUS
+		
+		// Set with Thief Handcuff#1691 [Every Refine Level] ATK + 1
+		if (EquipNumSearch(1691)) {
+			n_tok[17] += n_A_BODY_DEF_PLUS
+		}
+	}
+	// Set Thief Handcuff#1691 + Shackles#323 [Every Refine Level] MaxSP + 1%
+	if (EquipNumSearch(1691) && EquipNumSearch(323)) {
+		n_tok[16] += n_A_SHOES_DEF_PLUS
+	}
+	
 	//brave assassin damacus [Loa] 2018-07-24
 	if(EquipNumSearch(897)){
 		// [Rogue Class]

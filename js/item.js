@@ -1724,12 +1724,23 @@ ItemOBJ = [
 ,[1679,60,121,6,0,1,300,80,"Engraved Armor","",0,78,10,0]
 ,[1680,3,121,330,4,1,250,70,"Heavy Sword","","5% chance to auto-cast level 1 [Critical Wounds] when using [Head Crush]<br><b>[Every Refine Level]</b><br>Decreases cast time of [Charge Attack] by 3%<br><b>[Refine Rate 9~10]</b><br>Increase [Critical Wounds] level to 2",5260,30,5308,20,0]
 // Akkoro Instance
-,[1681,5,51,190,4,1,200,48,"Undine Spear","","<b>[Every Refine Level]</b><br>MaxHP + 1%",20,1,89,15,0]
-,[1682,60,0,1,0,1,10,40,"Surfer Swimsuit","","<b>[Every Refine Level]</b><br>SP + 2",14,30,15,5,152,30,0]
+,[1681,5,51,190,4,1,200,48,"Undine Spear","","<b>[Every Refine Level]</b><br>MHP + 1%",20,1,89,15,0]
+,[1682,60,0,1,0,1,10,40,"Surfer Swimsuit","","<b>[Every Refine Level]</b><br>MSP + 2",14,30,15,5,152,30,0]
 ,[1683,62,0,1,0,1,50,40,"Oxygen Bottle","","<b>[Every Refine Level]</b><br>HIT + 1, FLEE + 1",12,2,0]
 ,[1684,100,0,0,0,0,0,0,"Oxygen Bottle + Scuba Mask","",0,12,3,0]
 ,[1685,100,0,0,0,0,0,0,"Surfer Swimsuit + Scuba Mask","",0,11,5,0]
 ,[1686,100,0,0,0,0,0,0,"Oxygen Bottle + Scuba Mask + Surfer Swimsuit","","Casting can't be interrupted",120,10,125,10,41,5,43,5,351,5,353,5,0]
+// ---
+,[1687,50,0,2,0,0,10,1,"Saiyan Hair","","People wearing this hairstyle will suddenly get immense power and speed!",1,3,12,7,0]
+,[1688,50,0,3,0,1,20,10,"Helm of Dragon General","","Once in control of a dragon, this helm will give you protection.<br>Gives you the power to reach for a dragon's heart.",19,3,39,5,59,5,0]
+// Halloween Equipment
+,[1689,60,0,5,0,1,50,40,"Prison Uniform","","Every prisoner wears this stripe uniform.<br><b>[Every Refine Level]</b><br>HIT + 1",9,5,15,5,159,20,0]
+,[1690,64,0,0,0,1,100,40,"Thief Handcuff","","These are handcuffs used only on special occasions to hold the strongest troublemakers when held or transferred from one location to another.",17,5,0]
+,[1691,100,0,0,0,0,0,0,"Prison Uniform + Thief Handcuff","", "<b>[Every Refine Level]</b> ATK + 1",0]
+,[1692,100,0,0,0,0,0,0,"Thief Handcuff + Bloodied Shackle Ball","",0,1,5,0]
+,[1693,100,0,0,0,0,0,0,"Thief Handcuff + Shackles","", "<b>[Every Refine Level]</b> MSP + 1%",0]
+,[1694,100,0,0,0,0,0,0,"Prison Uniform + Thief Handcuff + Shackles + Bloodied Shackle Ball","", "Casting can't be interrupted",5,5,9,5,15,5,67,10,68,10,69,10,121,10,126,10,0]
+// ---
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3450,6 +3461,14 @@ ItemID = [
 ,[1684,2,5397,21114]
 ,[1685,2,5397,21113]
 ,[1686,2,5397,21113,21114]
+,[1687,1,18740]
+,[1688,1,18555]
+,[1689,1,21136]
+,[1690,1,21137]
+,[1691,2,21136,21137]
+,[1692,2,21137,2655]
+,[1693,2,21137,2408]
+,[1694,2,21136,21137,2655,2408]
 ];
 
 /*
@@ -4069,6 +4088,10 @@ w_SE = [[737,436,475,"NULL"]
 ,[1684,1213,1683,"NULL"] //Custom TalonRO - Oxygen Bottle + Scuba Mask
 ,[1685,1213,1682,"NULL"] //Custom TalonRO - Surfer Swimsuit + Scuba Mask
 ,[1686,1213,1682,1683,"NULL"] //Custom TalonRO - Oxygen Bottle + Surfer Swimsuit + Scuba Mask
+,[1691,1689,1690,"NULL"] //Custom TalonRO - Prison Uniform + Thief Handcuff
+,[1692,1690,725,"NULL"] //Custom TalonRO - Thief Handcuff + Bloodied Shackle Ball
+,[1693,1690,323,"NULL"] //Custom TalonRO - Thief Handcuff + Shackles
+,[1694,1689,1690,725,323,"NULL"] //Custom TalonRO - Prison Uniform + Thief Handcuff + Bloodied Shackle Ball + Shackles
 ];
 SE_MAXnum = w_SE.length -1;
 for(var i=0;i<=SE_MAXnum;i++){
