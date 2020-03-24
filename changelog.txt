@@ -1,3 +1,11 @@
+[2020-03-24]
+- Added Akkorokamui instance's equipment
+- Removed MDEF penetration from Nightmare Verit card
+
+[2020-02-29]
+- Fixed flat MATK bonus for MATK computation
+- Fixed magical elemental damage computation
+
 [2020-01-05]
 - Updated BG items
 
