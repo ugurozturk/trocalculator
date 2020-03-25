@@ -1487,7 +1487,7 @@ ItemOBJ = [
 ,[1457,10,1054,90,3,1,170,90,"Mystic Bow","","When using Arrow Shower, add a 5% chance of casting Level 2 Dragon Fear<br>Reduces the SP cost of all skills by 10%",4,4,5041,30,0]
 ,[1458,8,133,150,3,1,100,90,"Red Ether Bag","",0,98,90,5248,25,0]
 ,[1459,61,127,4,0,1,250,90,"Imperial Guard","","Each refine above +6 increases [Shield Chain] attack power by an additional 2%",19,5,5324,5,0]
-,[1460,4,127,180,3,1,180,90,"Imperial Spear","","ATK + 2 for every Spear Mastery level<br>ATK + 2 for every 2 refines",98,40,0]
+,[1460,4,127,180,3,1,180,90,"Imperial Spear","","<b>[Every [Spear Mastery] Level]</b><br>ATK + 2<br><b>[Every 2 Refine Levels]</b><br>ATK + 2",98,40,0]
 ,[1461,100,0,0,0,0,0,0,"Imperial Guard & Imperial Spear combo",0,0,5162,20,0] //Imperial Guard & Imperial Spear combo
 ,[1462,14,130,170,3,1,80,90,"Green Whistle","","When using Frost Joker, add a 3% chance of casting Level 2 Wide Curse<br>For every refine above +6, decrease SP cost of all skills by 2%",98,50,12,5,0]
 ,[1463,1,128,142,3,1,60,90,"Black Wing","","Each refine increases skill damage of [Back Stab] by 2%<br>Each refine increases MATK by 3%",5169,30,0]
@@ -1741,6 +1741,7 @@ ItemOBJ = [
 ,[1693,100,0,0,0,0,0,0,"Thief Handcuff + Shackles","", "<b>[Every Refine Level]</b> MSP + 1%",0]
 ,[1694,100,0,0,0,0,0,0,"Prison Uniform + Thief Handcuff + Shackles + Bloodied Shackle Ball","", "Casting can't be interrupted",5,5,9,5,15,5,67,10,68,10,69,10,121,10,126,10,0]
 // ---
+,[1695,50,0,0,0,0,100,10,"Star Dust Hairband","","<br>A hairband with a romantic glowing large star",50,-10,120,5,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3469,6 +3470,7 @@ ItemID = [
 ,[1692,2,21137,2655]
 ,[1693,2,21137,2408]
 ,[1694,2,21136,21137,2655,2408]
+,[1695,1,18685]
 ];
 
 /*
