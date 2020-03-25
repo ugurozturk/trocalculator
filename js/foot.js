@@ -849,8 +849,14 @@ if(CardNumSearch(561)){
 	if(CardNumSearch(492))
 		w += Math.floor(n_A_JobLV /5) * CardNumSearch(492); //custom TalonRO Ifrit Card +1atk every 5 Joblv
 	if(CardNumSearch(528)) // Gold Scaraba - ATK + JobLV/5
-		w += Math.floor(n_A_JobLV /5) * CardNumSearch(528); 
-	
+		w += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
+	// Imperial Spear#1460 [Every 2 Refine Levels] ATK + 2
+	if(EquipNumSearch(1460)) {
+		w += 2 * Math.floor(n_A_Weapon_ATKplus / 2)
+		
+		if(SkillSearch(69)) // [Every [Spear Mastery] Level] ATK + 2
+			w += 2 * SkillSearch(69);
+	}
 	//[Custom TalonRO 2018-06-25 - Malangdo Enchantment for Fighting Spirit - ATK] [NattWara]
 	// Actual damage part.
 		for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
