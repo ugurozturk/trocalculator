@@ -848,8 +848,9 @@ if(CardNumSearch(561)){
 		w += 20;
 	if(CardNumSearch(492))
 		w += Math.floor(n_A_JobLV /5) * CardNumSearch(492); //custom TalonRO Ifrit Card +1atk every 5 Joblv
-		//w += Math.floor(n_A_JobLV /10) * CardNumSearch(492); //original Ifrit Card +1atk every 10 Joblv
-
+	if(CardNumSearch(528)) // Gold Scaraba - ATK + JobLV/5
+		w += Math.floor(n_A_JobLV /5) * CardNumSearch(528); 
+	
 	//[Custom TalonRO 2018-06-25 - Malangdo Enchantment for Fighting Spirit - ATK] [NattWara]
 	// Actual damage part.
 		for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
