@@ -787,7 +787,7 @@ MonsterOBJ = [
 ,[676,"Buwaya [Fake Form]",3,14,0,105,45000,30,218,92,255,57,2176,4304,50,40,0,0,,1,0,2332]
 ,[677,"Buwaya's Slave",3,21,0,102,27145,30,110,92,113,61,4102,7571,20,38,0,0,,0,0,2330]
 // [Custom TalonRO - 2018-06-22 - GMC Bloody Knight] [NattWara]
-,[678,"Bloody Knight",8,81,2,82,800000,100,121,100,125,55,10000,30000,60,60,0,0,,0,0,1795]
+,[678,"Bloody Knight",8,81,2,82,800000,100,121,100,125,55,10000,30000,60,60,0,0,,1,0,1795]
 ];
 
 //,[id, "name",race,element,size,lvl,hp,vit,agi,int,dex,luk,minatk,maxatk,def,mdef,baseexp@1x_rate,jobexp@1x_rate,,1 boss/0 non-boss,1 range/0 melee, monster ID]
