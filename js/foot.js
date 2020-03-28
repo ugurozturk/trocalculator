@@ -3734,7 +3734,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	myInnerHtml("A_SPR",n_A_SPR,0);
 
-	if(ArrowOBJ[n_A_Arrow][2]=="Holy Arrow")
+	// Bonus not applied on melee skills, can be reduced to the usage of Bowling Bash#76 skill
+	if(ArrowOBJ[n_A_Arrow][2]=="Holy Arrow" && n_A_ActiveSkill != 76)
 		n_tok[36] += 5;
 	if(SkillSearch(234))
 		n_tok[39] += SkillSearch(234) *4;

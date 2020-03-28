@@ -7454,8 +7454,8 @@ function calc()
 		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK-1 + wImp)* wCSize);
 
 	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
-	//if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
-	if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
+	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
+	if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 		n_A_DMG[2] += Math.floor((ArrowOBJ[n_A_Arrow][0]-1) * wCSize);
 
 	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
