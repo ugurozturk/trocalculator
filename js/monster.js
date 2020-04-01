@@ -788,13 +788,39 @@ MonsterOBJ = [
 ,[677,"Buwaya's Slave",3,21,0,102,27145,30,110,92,113,61,4102,7571,20,38,0,0,,0,0,2330]
 // [Custom TalonRO - 2018-06-22 - GMC Bloody Knight] [NattWara]
 ,[678,"Bloody Knight",8,81,2,82,800000,100,121,100,125,55,10000,30000,60,60,0,0,,1,0,1795]
+// [Custom TalonRO - 2020-03-27 Old Glast Heim]
+,[679,"Corrupted Stewart",1,91,1,93,54240,77,22,25,88,22,2065,3011,6,20,0,0,,0,0,2464]
+,[680,"Corrupted Monk",1,94,2,95,40067,30,26,115,79,5,948,1348,15,60,0,0,,0,0,2465]
+,[681,"Grand Chamberlain in Pain",1,92,1,94,83240,88,44,21,95,44,2592,3778,3,11,0,0,,0,0,2466]
+,[682,"Maggot",4,32,0,93,22324,45,103,35,172,15,1189,1689,21,24,0,0,,0,0,2467]
+,[683,"Corrupted Palace Guard",1,72,1,95,73632,66,87,33,106,27,2827,4095,16,12,0,0,,0,0,2468]
+,[684,"Wandering Archer",1,72,1,96,57748,40,24,15,156,30,3301,4859,12,26,0,0,,0,0,2469]
+,[685,"Corrupted Abysmal Knight",1,74,2,102,90315,99,55,70,126,37,2823,4103,18,30,0,0,,0,0,2470]
+,[686,"Suffering Khalitzburg",1,91,2,103,94740,55,142,81,105,32,2504,3624,21,8,0,0,,0,0,2471]
+,[687,"Bloody Knight",1,74,2,103,98700,89,55,151,137,45,1779,2533,21,67,0,0,,0,0,2472]
+,[688,"1st Commander of Destruction",1,92,1,105,550000,110,82,122,154,52,2966,4296,15,54,0,0,,1,0,2473]
+,[689,"2nd Commander of Destruction",1,92,1,105,550000,110,88,135,154,59,2772,4008,15,54,0,0,,1,0,2474]
+,[690,"Corrupted Soul",6,33,2,110,1320000,90,20,201,201,20,3460,5016,41,69,0,0,,1,1,2475]
+,[691,"Amdarias",1,94,2,110,3111428,90,39,169,166,20,4637,6753,40,30,0,0,,1,0,2476]
+// [Custom TalonRO - 2020-04-01 Eclage]
+,[692,"Menblatt",4,42,1,93,36600,40,68,55,108,30,1298,1788,15,30,112040,92352,,0,0,2363]
+,[693,"Petal",2,41,1,91,36015,55,82,45,108,25,747,1017,14,22,109560,90728,,0,0,2364]
+,[694,"Cenere",3,41,0,96,53815,30,39,35,95,45,1654,2375,16,40,192144,154224,,0,0,2365]
+,[695,"Antique Book",0,3,0,98,54556,32,53,44,125,5,1703,2448,14,27,195056,158480,,0,0,2366]
+,[696,"Blue Lichtern",0,14,0,99,42454,60,74,55,92,50,1483,2088,14,26,194040,153912,,0,0,2367]
+,[697,"Yellow Lichtern",0,84,0,97,42567,75,94,91,144,50,1420,1988,16,30,190904,156864,,0,0,2368]
+,[698,"Red Lichtern",0,34,0,99,44144,66,77,65,133,50,1613,2272,20,31,194408,162336,,0,0,2369]
+,[699,"Green Lichtern",0,24,0,101,43293,58,60,62,102,50,1509,2128,21,33,194768,154160,,0,0,2370]
+,[700,"Faithful Manager",0,4,2,105,77322,40,28,25,88,45,1907,2744,30,53,483584,368600,,0,0,2371]
+// [Custom TalonRO - 2020-04-01 Malangdo Culvert]
+// [Custom TalonRO - 2020-04-01 Elysian Garden]
 ];
 
 //,[id, "name",race,element,size,lvl,hp,vit,agi,int,dex,luk,minatk,maxatk,def,mdef,baseexp@1x_rate,jobexp@1x_rate,,1 boss/0 non-boss,1 range/0 melee, monster ID]
 //id,name,race,element,size,level,hp,vit,agi,int,dex,luk,minatk,maxatk,def,mdef,bexp,jexp,,boss,archer,mobid
 
 /*[["None","Neutral 1","Neutral 2","Neutral 3","Neutral 4","Water 1","Water 2","Water 3","Water 4","Earth 1","Earth 2","Earth 3","Earth 4","Fire 1","Fire 2","Fire 3","Fire 4","Wind 1","Wind 2","Wind 3","Wind 4","Poison 1","Poison 2","Poison 3","Poison 4","Holy 1","Holy 2","Holy 3","Holy 4","Shadow 1","Shadow 2","Shadow 3","Shadow 4","Ghost 1","Ghost 2","Ghost 3","Ghost 4","Undead 1","Undead 2","Undead 3","Undead 4"],
-	[0,1,2,3,4,11,12,13,14,21,22,23,24,31,32,33,34,41,42,43,44,51,52,53,54,61,62,63,64,71,72,73,74,81,82,83,84,91,92,93,94]];
+	[0,(Neutral)1,2,3,4,(Water)11,12,13,14,(Earth)21,22,23,24,(Fire)31,32,33,34,(Wind)41,42,43,44,(Poison)51,52,53,54,(Holy)61,62,63,64,(Shadow)71,72,73,74,(Ghost)81,82,83,84,(Undead)91,92,93,94]];
 	SyuzokuOBJ = ["Formless","Undead","Brute","Plant","Insect","Fish","Demon","Demi-Human","Angel","Dragon"];
 */
 
@@ -820,7 +846,7 @@ var tiiki = ["All Regions","Seals","GMC","Abyss Lake Dungeon","Amatsu","Ant Hell
 "Louyang","Lutie & Toy Factory","Magma Dungeon","Malangdo","Manuk","Morroc Fields","Moscovia","Mt. Mjolnir","Nameless Island","Nidhoggr's Nest",
 "Niflheim","Odins Shrine","Orc Dungeon","Payon Dungeon","Payon Fields","Poring Island","Port Malaya Instance","Prontera Fields","Pyramid","Pyramid [Nightmare]","Rachel Fields",
 "Rachel Sanctuary","Scaraba Hole","Sphinx","Splendide","Sunken Ship","Thanatos Tower","Thors Volcano","Turtle Island","Umbala Dungeon",
-"Umbala Fields","Veins Fields","War of Emperium","Yuno Fields"];
+"Umbala Fields","Veins Fields","War of Emperium","Yuno Fields","Old Glast Heim","Eclage"];
 
 
 if(Taijin==0){
@@ -904,4 +930,6 @@ MonMap = [
 [59,122,127,131,162,188,214,240,301,317,445,446,447,448,449,450,464,"N"],//Veins Fields
 [63,64,65,503,504,44,547,548,"N"],//War of Emperium
 [0,41,87,91,92,98,105,121,122,130,134,136,151,162,177,187,193,211,214,219,232,235,252,271,272,273,278,279,293,323,340,400,401,402,"N"],//Yuno Fields
+[679,680,681,682,683,684,685,686,687,688,689,690,691,"N"], // Old Glast Heim
+[692,693,694,695,696,697,698,699,700,"N"], // Eclage
 ];
