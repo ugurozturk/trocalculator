@@ -744,6 +744,10 @@ function StAllCalc()
 		n_tok[16] += n_A_SHOES_DEF_PLUS
 	}
 	
+	// 	Hardrock Mammoth Card#581 [Every Refine Level] MaxHP + 2%
+	if (CardNumSearch(581))
+		n_tok[15] += n_A_BODY_DEF_PLUS * 2;
+	
 	//brave assassin damacus [Loa] 2018-07-24
 	if(EquipNumSearch(897)){
 		// [Rogue Class]
@@ -2125,6 +2129,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	myInnerHtml("A_FLEE",n_A_FLEE + "<br><b>WOE: </b>" + Math.floor(n_A_FLEE*.8),0);
 
+	// Duneyrr Card#511 [Lord Knight] When activated during Frenzy, add another Perfect Dodge + 10.
+	if (CardNumSearch(511) && SkillSearch(258) && TimeItemNumSearch(51))
+		n_tok[11] += 10;
+
 	n_A_LUCKY = 1 + n_A_LUK * 0.1;
 	n_A_LUCKY += n_tok[11];
 
@@ -2913,6 +2921,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_tok[73] -= 20;
 		n_tok[74] += 20;
 	}
+
+	// Zakudam#595 + Archdam#190 [Vanilla Mode] Cast Time - 30%
+	if (document.calcForm.vanilla.checked && CardNumSearch(595) && CardNumSearch(190))
+		n_tok[73] += 30;
 
 	//Note 2018-07-12 [NattWara]
 	//Fix for Issue#252
@@ -3752,6 +3764,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(1650) && n_A_HEAD_DEF_PLUS > 6){
 		n_tok[36] += 10;
 	}
+	
+	// Zakudam Card#595 [Monk Class] Reduce DemiHuman monster damage to 10%
+	if(CardNumSearch(595) && n_A_JobSearch2() == 15)
+		n_tok[36] += 10;
 
 	if(EquipNumSearch(628) && n_A_Arrow == 4)
 		n_tok[25] += 25;
@@ -4003,6 +4019,25 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(EquipNumSearch(920) && n_A_Weapon_ATKplus >= 8) {
 		n_tok[78] += n_A_Weapon_ATKplus;
 	}
+	
+	/*
+		Aunoe Card#583 + Isilla Card#472 Combo
+		[If Vanberk Card#471 is not equipped][Vanilla Mode] Long Range Resist + 10%
+		Fanat Card#585 + Vanberk Card#471 Combo
+		[If Isilla Card#472 is not equipped][Vanilla Mode] Long Range Resist + 10%
+	*/
+	if (document.calcForm.vanilla.checked && (CardNumSearch(583) && CardNumSearch(472) && !CardNumSearch(471))
+		|| (CardNumSearch(585) && CardNumSearch(471) && !CardNumSearch(472)))
+		n_tok[78] += 10;
+	
+	/*
+		Cobalt Mineral#597 + Mineral#184 Combo
+		[Knight, Blacksmith, Assassin][If Horn Card#62 is not equipped][Vanilla Mode] Long Range Resist + 20%
+	*/
+	if (document.calcForm.vanilla.checked
+		&& (n_A_JobSearch2() == 7 || n_A_JobSearch2() == 8 || n_A_JobSearch2() == 12)
+		&& CardNumSearch(597) && CardNumSearch(184) && !CardNumSearch(62))
+		n_tok[78] += 20;
 
 	//maiden hat +1% heal per refine > 6 - [Loa] - 2018-06-25
 	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
@@ -4148,6 +4183,13 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(CardNumSearch(532) && EquipNumSearch(1557)) {
 			n_tok[152] = 100;
 	}
+	
+	/*
+		Hell Apocalypse#599 + Apocalypse#225 Combo
+		[If Apocalypse Card Equipped on Meteor Plate] Gain protection from the Freeze.
+	*/
+	if(CardNumSearch(599) && CardNumSearch(225) && EquipNumSearch(686))
+			n_tok[152] = 100;
 
 	//[Custom TalonRO = 2018-06-05 - Parus Card adds 2% for Acolyte-based jobs] [Kato]
 	if(CardNumSearch(536) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23 || n_A_JOB == 15 || n_A_JOB == 33)) {
@@ -4396,6 +4438,22 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[172] += 5;
 	}
 
+	// Naght Sieger Card#579 [Soul Linker] Ghost property magical attack is 15% instead of 30%.	
+	if (CardNumSearch(579) && n_A_JOB == 43)
+		n_tok[348] -= 15;
+	
+	/*
+		Rata Card#509
+		[Refine Rate +7 or higher]
+		Increases magic damage against Boss monsters by an additional 5%.
+		[Refine Rate +9 or higher]
+		Increases magic damage against Boss monsters by an additional 5%.
+	*/
+	if (CardNumSearch(509) && n_A_card[8] == 509) {
+		if(n_A_HEAD_DEF_PLUS >= 7) n_tok[97] += 5;
+		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[97] += 5;
+	}
+	
 	ClickB_Enemy();
 	KakutyouKansuu();
 }}
