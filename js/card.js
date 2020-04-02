@@ -463,9 +463,9 @@ cardOBJ = [
 ,[441,100,0,0,7,1,0]
 ,[442,100,0,0,9,18,0]
 ,[443,100,0,"TalonRO: nothing",0] //custom TalonRO Toad+Roda Frog have no combo
-,[444,999,0]
-,[445,999,0]
-,[446,999,0]
+,[444,3,"Khalitzburg Knight",0,78,5,191,15,192,15,0]
+,[445,4,"White Knight",0,17,5,28,15,29,15,0]
+,[446,100,"Khalitzburg Knight + White Knight",0,17,10,78,10,28,5,29,5,0]
 ,[447,999,0]
 ,[448,100,0,0,13,300,14,60,0]
 ,[449,100,0,0,221,86,0]
@@ -608,9 +608,9 @@ cardOBJ = [
 ,[581,4,"Hardrock Mammoth","[Every Refine Level]<br/>MaxHP + 2%",15,10,18,5,19,5,0]
 ,[582,1,"Tendrillion",0,8,35,17,45,0]
 ,[583,1,"Aunoe",0,4,1,89,1,0]
-,[584,100,"Aunoe + Isilla","Double the Duration of Isilla's Cast Reduction and Flee Boost.<br/>Vanberk not equipped & Vanilla Mode: Long Range Resist + 10%.",12,10,0] //FIXME
+,[584,100,"Aunoe + Isilla","Double the Duration of Isilla's Cast Reduction and Flee Boost.<br/>Vanberk not equipped & Vanilla Mode: Long Range Resist + 10%.",12,10,0]
 ,[585,1,"Fanat",0,17,30,0]
-,[586,100,"Fanat + Vanberk","Triple the Duration and Double the Chance of Vanberk's CRIT Boost.<br/>Isilla not equipped & Vanilla Mode: Long Range Resist + 10%.",12,10,0] //FIXME
+,[586,100,"Fanat + Vanberk","Triple the Duration and Double the Chance of Vanberk's CRIT Boost.<br/>Isilla not equipped & Vanilla Mode: Long Range Resist + 10%.",12,10,0]
 ,[587,1,"Beholder Master",0,25,10,0]
 ,[588,100,"Beholder Master + Beholder",0,12,10,5,3,0]
 ,[589,100,"Beholder Master + Seeker",0,57,15,0]
@@ -1103,9 +1103,9 @@ cardID = [
 ,[441,2,0]
 ,[442,2,0]
 ,[443,2,0]
-,[444,3,0]
-,[445,3,0]
-,[446,3,0]
+,[444,1,4609]
+,[445,1,4608]
+,[446,2,0]
 ,[447,3,0]
 ,[448,2,0]
 ,[449,2,0]
@@ -1439,6 +1439,7 @@ w_SC = [[429,235,306,"NULL"],
 [442,372,64,"NULL"],
 [442,369,68,"NULL"],
 [443,338,72,"NULL"],
+[446,444,445,"NULL"],
 [448,218,212,"NULL"],
 [449,248,247,"NULL"],
 [450,223,317,347,354,362,"NULL"],
