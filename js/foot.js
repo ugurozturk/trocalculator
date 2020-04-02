@@ -748,6 +748,60 @@ function StAllCalc()
 	if (CardNumSearch(581))
 		n_tok[15] += n_A_BODY_DEF_PLUS * 2;
 	
+	// Eclase Stat Gloves
+	/*
+		STR Glove#1704
+		[Every 10 points of STR] ATK + 1
+		[Base STR >= 80] ATK + 1%
+	*/
+	n_tok[17] += Math.floor(SU_STR / 10) * EquipNumSearch(1704);
+	n_tok[87] += (SU_STR >= 80 ? 1 : 0) * EquipNumSearch(1704);
+
+	/*
+		AGI Glove#1705
+		[Every 10 points of AGI] FLEE + 1
+		[Base AGI >= 80] Perfect Dodge + 1
+	*/
+	
+	n_tok[9] += Math.floor(SU_AGI / 10) * EquipNumSearch(1705);
+	n_tok[11] += (SU_AGI >= 80 ? 1 : 0) * EquipNumSearch(1705);
+	
+	/*
+		VIT Glove#1706
+		[Every 10 points of VIT] MaxHP + 50
+		[Base VIT >= 80] DEF + 1
+	*/
+	
+	n_tok[13] += 50 * Math.floor(SU_VIT / 10) * EquipNumSearch(1706);
+	n_tok[18] += (SU_VIT >= 80 ? 1 : 0) * EquipNumSearch(1706);
+	
+	/*
+		INT Glove#1707
+		[Every 6 points of INT] MATK + 1
+		[Base INT >= 80] MATK + 1%
+	*/
+	
+	n_tok[98] += Math.floor(SU_INT / 6) * EquipNumSearch(1707);
+	n_tok[89] += (SU_INT >= 80 ? 1 : 0) * EquipNumSearch(1707);
+	
+	/*
+		DEX Glove#1708
+		[Every 4 points of DEX] HIT + 1
+		[Base DEX >= 80] Ranged Attack + 2%
+	*/
+	
+	n_tok[8] += Math.floor(SU_DEX / 4) * EquipNumSearch(1708);
+	n_tok[25] += 2 * (SU_DEX >= 80 ? 1 : 0) * EquipNumSearch(1708);
+	
+	/*
+		LUK Glove#1709
+		[Every 10 points of LUK] CRIT + 1
+		[Base LUK >= 60] Critical Attack + 3%
+	*/
+	
+	n_tok[10] += Math.floor(SU_LUK / 10) * EquipNumSearch(1709);
+	n_tok[70] += 3 * (SU_LUK >= 80 ? 1 : 0) * EquipNumSearch(1709);
+	
 	//brave assassin damacus [Loa] 2018-07-24
 	if(EquipNumSearch(897)){
 		// [Rogue Class]
@@ -1738,6 +1792,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] * (1 - defReduc));
 	}}
 
+	// Menblatt Wing Manteau#1696 [Every 2 Refine Level] MDEF + 1
+	if (EquipNumSearch(1696))
+		n_tok[19] += Math.floor(n_A_SHOULDER_DEF_PLUS / 2);
+
 	n_A_MDEF = n_tok[19];
 
 	if(EquipNumSearch(986) && (n_A_JobSearch()==3 || n_A_JobSearch()==4 || n_A_JobSearch()==5))
@@ -1857,6 +1915,14 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_A_INTMDEF -= Math.floor(n_A_INTMDEF * 20 / 100);
 
 	n_A_HIT = n_A_BaseLV + n_A_DEX;
+	
+	// Enforcer Cape#1699 [Every Refine Level] HIT + 1
+	// Enforcer Shoes#1700 [Every Refine Level] HIT + 1
+	n_tok[8] += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699) + n_A_SHOES_DEF_PLUS * EquipNumSearch(1700);
+	
+	// Enforcer Cape#1699 [Every Refine Level] Increase [Meteor Assault] damage by 1%
+	// FIXME : Not working
+	n_tok[5264] += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
 
 	n_A_HIT += n_tok[8];
 
@@ -2925,6 +2991,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	// Zakudam#595 + Archdam#190 [Vanilla Mode] Cast Time - 30%
 	if (document.calcForm.vanilla.checked && CardNumSearch(595) && CardNumSearch(190))
 		n_tok[73] += 30;
+	
+	// Enforcer Cape#1699 + Enforcer Shoes#1700 Set#1701 10% Aftercast Reduction with [Meteor Assault]
+	// FIXME : Review after cast delay for [Meteor Assault]
+	n_tok[74] += 10 * EquipNumSearch(1701);
 
 	//Note 2018-07-12 [NattWara]
 	//Fix for Issue#252
@@ -3710,6 +3780,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	w += SkillSearch(269) *3;
 
+	// Menblatt Wing Manteau#1696 [Every Refine Level] SP Recovery + 3%
+	if (EquipNumSearch(1696))
+		n_tok[76] += n_A_SHOULDER_DEF_PLUS;
+	
 	w += n_tok[76];
 
 	if(SU_LUK >= 77)
@@ -4596,6 +4670,10 @@ function StPlusCalc()
 	if(EquipNumSearch(1646) && n_A_HEAD_DEF_PLUS > 6){
 		wSPC_DEX += n_A_HEAD_DEF_PLUS - 6;
 	}
+		
+	// Rose of Eden#1697 + Angelic Ring#1000 Set#1698 [Vanilla Mode] DEX + 2 instead of DEX + 3
+	if (document.calcForm.vanilla.checked && EquipNumSearch(1698))
+		wSPC_DEX -= 1;
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Helm of Angel [1] - AGI & LUK Part [Nattwara]
 	/*

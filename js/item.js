@@ -1742,6 +1742,21 @@ ItemOBJ = [
 ,[1694,100,0,0,0,0,0,0,"Prison Uniform + Thief Handcuff + Shackles + Bloodied Shackle Ball","", "Casting can't be interrupted",5,5,9,5,15,5,67,10,68,10,69,10,121,10,126,10,0]
 // ---
 ,[1695,50,0,0,0,0,100,10,"Star Dust Hairband","","<br>A hairband with a romantic glowing large star",50,-10,120,5,0]
+// Eclase
+,[1696,62,1,2,0,1,40,60,"Menblatt Wing Manteau","","A short coat that immitates Menblatt's feathers.<br>[Every Refine Level]<br>SP Recovery + 3%<br>[Every 2 Refine Levels]<br>MDEF + 1",25,2,76,10,0]
+,[1697,61,1001,3,0,1,100,70,"Rose of Eden","","A shield made with Heaven's Roses.",0]
+,[1698,100,0,0,0,0,0,0,"Rose of Eden + Angelic Ring","","[Vanilla Mode] DEX + 2 instead.",5,3,0]
+,[1699,62,108,2,0,1,60,60,"Enforcer Cape","","<br>[Every Refine Level]<br>HIT + 1<br>Increase [Meteor Assault] damage by 1%.",9,10,16,10,5084,10,5264,10,0]
+,[1700,63,108,2,0,1,40,60,"Enforcer Shoes","","Reduce SP Cost of [Grimtooth] by 1.<br>Reduce SP Cost of [Meteor Assault] by 8.<br>[Every Refine Level]<br>HIT + 1",15,10,0]
+,[1701,100,0,0,0,0,0,0,"Enforcer Cape + Enforcer Shoes","", "[Meteor Assault] 10% Aftercast Reduction ",7264,30,0]
+,[1702,64,1001,0,0,1,10,70,"Sprint Glove","","",73,-1,74,1,0]
+,[1703,100,0,0,0,0,0,0,"Sprint Glove + Sprint Ring + Sprint Mail + Sprint Shoes","","Fast movement all the time.",15,8,16,8,73,-9,0]
+,[1704,64,1001,0,0,"0 / 1",10,1,"STR Glove","","<br>[Every 10 points of STR]<br>ATK + 1<br>[Base STR >= 80]<br>ATK + 1%",13,100,14,20,0]
+,[1705,64,1001,0,0,"0 / 1",10,1,"AGI Glove","","<br>[Every 10 points of AGI]<br>FLEE + 1<br>[Base AGI >= 80]<br>Perfect Dodge + 1",13,100,14,20,0]
+,[1706,64,1001,0,0,"0 / 1",10,1,"VIT Glove","","<br>[Every 10 points of VIT]<br>MaxHP + 50<br>[Base VIT >= 80]<br>DEF + 1",13,100,14,20,0]
+,[1707,64,1001,0,0,"0 / 1",10,1,"INT Glove","","<br>[Every 6 points of INT]<br>MATK + 1<br>[Base INT >= 80]<br>MATK + 1%",13,100,14,20,0]
+,[1708,64,1001,0,0,"0 / 1",10,1,"DEX Glove","","<br>[Every 4 points of DEX]<br>HIT + 1<br>[Base DEX >= 80]<br>Ranged Attack + 2%",13,100,14,20,0]
+,[1709,64,1001,0,0,"0 / 1",10,1,"LUK Glove","","<br>[Every 10 points of LUK]<br>CRIT + 1<br>[Base LUK >= 60]<br>Critical Attack + 3%",13,100,14,20,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3471,6 +3486,20 @@ ItemID = [
 ,[1693,2,21137,2408]
 ,[1694,2,21136,21137,2655,2408]
 ,[1695,1,18685]
+,[1696,1,21396]
+,[1697,1,2192]
+,[1698,2,21396,2192]
+,[1699,1,21397]
+,[1700,1,21398]
+,[1701,2,21397,21398]
+,[1702,1,2935]
+,[1703,2,1702,2744,2387,2440]
+,[1704,1,2917]
+,[1705,1,2918]
+,[1706,1,2919]
+,[1707,1,2920]
+,[1708,1,2921]
+,[1709,1,2922]
 ];
 
 /*
@@ -4094,6 +4123,9 @@ w_SE = [[737,436,475,"NULL"]
 ,[1692,1690,725,"NULL"] //Custom TalonRO - Thief Handcuff + Bloodied Shackle Ball
 ,[1693,1690,323,"NULL"] //Custom TalonRO - Thief Handcuff + Shackles
 ,[1694,1689,1690,725,323,"NULL"] //Custom TalonRO - Prison Uniform + Thief Handcuff + Bloodied Shackle Ball + Shackles
+,[1698,1697,1000,"NULL"] //Custom TalonRO - Rose of Eden + Angelic Ring
+,[1701,1699,1700,"NULL"] //Custom TalonRO - Enforcer Cape + Enforcer Shoes
+,[1703,1702,1001,987,998,"NULL"] //Custom TalonRO - Sprint Glove + Sprint Ring + Sprint Mail + Sprint Shoes
 ];
 SE_MAXnum = w_SE.length -1;
 for(var i=0;i<=SE_MAXnum;i++){
