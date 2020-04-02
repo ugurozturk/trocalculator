@@ -1,6 +1,11 @@
+[2020-04-02]
+- Added Old Glast Heim cards 
+- Added new Eclase's equipment
+- Added Elysian Garden and Malangdo Culvert monsters
+
 [2020-04-01]
-- Added Eclase and Old Glast Heim monsters
 - Added April patch cards 
+- Added Eclase and Old Glast Heim monsters
 
 [2020-03-25]
 - Fixed Gold Scaraba card ATK bonus for damage computation
