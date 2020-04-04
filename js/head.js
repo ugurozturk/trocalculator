@@ -8104,6 +8104,10 @@ function BaiCI(wBaiCI)
 
 	if((n_A_ActiveSkill==83 || n_A_ActiveSkill==388) && SkillSearch(381) && wBCEDPch==0)
 		w1 += 10;
+	
+	// Enforcer Cape#1699 [Every Refine Level] Increase [Meteor Assault] damage by 1%
+	if (n_A_ActiveSkill == 264)
+		w1 += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
 
 	wBaiCI = wBaiCI * (100+StPlusCalc2(5000+n_A_ActiveSkill)+StPlusCard(5000+n_A_ActiveSkill) + w1) /100;
 

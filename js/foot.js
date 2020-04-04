@@ -1919,10 +1919,6 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	// Enforcer Cape#1699 [Every Refine Level] HIT + 1
 	// Enforcer Shoes#1700 [Every Refine Level] HIT + 1
 	n_tok[8] += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699) + n_A_SHOES_DEF_PLUS * EquipNumSearch(1700);
-	
-	// Enforcer Cape#1699 [Every Refine Level] Increase [Meteor Assault] damage by 1%
-	// FIXME : Not working
-	n_tok[5264] += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
 
 	n_A_HIT += n_tok[8];
 
