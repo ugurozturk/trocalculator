@@ -2716,6 +2716,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	C_ATK += 45 * CardNumSearch(582);
 	// custom TalonRO Fanat card
 	C_ATK += 30 * CardNumSearch(585);
+	// Eclage STR Glove#1704 - [Every 10 points of STR] ATK + 1
+	C_ATK += Math.floor(SU_STR / 10) * EquipNumSearch(1704);
 	//custom TalonRO Halloween Midas Whisper
 	if(SU_STR >= 80 && EquipNumSearch(1526)){
 		C_ATK += 30;
