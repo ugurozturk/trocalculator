@@ -295,6 +295,7 @@ Effect list:
 	220: When [value] == 57, Allows usage of the skill [Bash]Lv 1
 	220: When [value] == 58, Allows usage of the skill [Spell Breaker]Lv 1
 	220: When [value] == 59, Allows usage of the skill [Aqua Benedicta]Lv 1
+	220: When [value] == 60, Allows usage of the skill [Fire Wall]Lv 4
 	221: When X, there's a Y chance to cast the skill Z (defined in AutoSpellSkill, see below)
 	     AutoSpellSkill array looks like this:
 	     [
@@ -448,6 +449,8 @@ Effect list:
 	221: When [value] == 139, When performing a ATK based attack, there's a 1% chance to cast the skill [Bowling Bash] Lv5
 	221: When [value] == 140, When performing a ATK based attack, there's a 1% chance to cast the skill [Dangerous Soul Collect] Lv1
 	221: When [value] == 141, When performing a ATK based attack, there's a 5% chance to cast the skill [Dragon Fire Formation learned] Lv2
+	221: When [value] == 142, When performing a ATK based attack, there's a 2% chance to cast the skill [Water Ball] Lv2
+	221: When [value] == 143, When performing a ATK based attack, there's a 0.2 * staff refine level)% chance to cast the skill [Sightrasher] Lv2
 	222-289: (unused)
 	290: On (all?) monsters, ignore [value]% DEF
 	291: On Normal monsters, ignore [value]% DEF

@@ -4233,6 +4233,16 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		n_tok[295] += n_tok[296];
 	if(n_B[19] == 1)
 		n_tok[295] += n_tok[297];
+	
+	/*
+		Shadow Staff#1710 - [Every Refine Level]
+		1% MDEF pierce against Demon Race.
+		Add a 0.2% chance of auto-casting [Sight Blaster] on yourself when using magic attacks.
+	*/
+	if (EquipNumSearch(1710)) {
+		n_tok[316] += n_A_Weapon_ATKplus;
+		AutoSpellSkill[143][4] = n_A_Weapon_ATKplus * 0.2;
+	}
 
 	// //Maiden Hat - ZoneSoldier - 6/6/2018
 	// //Additional Heal effectiveness + 1% per upgrade past 7.
@@ -5990,7 +6000,7 @@ function ActiveSkillSetPlus()
 		j=0;
 		for(i=k;w_ASSP0[j] != 999;i++,j++){
 			if(w_ASSP9[j] >= 3000)
-				document.calcForm.A_ActiveSkill.options[i] = new Option(SkillOBJ[w_ASSP0[j]][2]+"[Aquired Skill]",w_ASSP9[j]);
+				document.calcForm.A_ActiveSkill.options[i] = new Option(SkillOBJ[w_ASSP0[j]][2]+"[Acquired Skill]",w_ASSP9[j]);
 			else
 				document.calcForm.A_ActiveSkill.options[i] = new Option(SkillOBJ[w_ASSP0[j]][2]+"[Auto-Casted Skill]",w_ASSP9[j]);
 		}

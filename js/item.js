@@ -1757,6 +1757,8 @@ ItemOBJ = [
 ,[1707,64,1001,0,0,"0 / 1",10,1,"INT Glove","","<br>[Every 6 points of INT]<br>MATK + 1<br>[Base INT >= 80]<br>MATK + 1%",13,100,14,20,0]
 ,[1708,64,1001,0,0,"0 / 1",10,1,"DEX Glove","","<br>[Every 4 points of DEX]<br>HIT + 1<br>[Base DEX >= 80]<br>Ranged Attack + 2%",13,100,14,20,0]
 ,[1709,64,1001,0,0,"0 / 1",10,1,"LUK Glove","","<br>[Every 10 points of LUK]<br>CRIT + 1<br>[Base LUK >= 60]<br>Critical Attack + 3%",13,100,14,20,0]
+// ---
+,[1710,9,77,70,4,2,60,60,"Shadow Staff","","<br><b>[Every Refine Level]</b><br> Add a 0.2% chance of auto-casting [Sight Blaster] on yourself when using magic attacks.<br>1% MDEF pierce against Demon Race.",89,20,220,60,343,5,357,5,221,143,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3500,6 +3502,7 @@ ItemID = [
 ,[1707,1,2920]
 ,[1708,1,2921]
 ,[1709,1,2922]
+,[1710,1,1639]
 ];
 
 /*
