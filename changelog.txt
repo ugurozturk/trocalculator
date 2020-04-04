@@ -1,3 +1,6 @@
+[2020-04-04]
+- Fixed Heal damage computation
+
 [2020-04-02]
 - Added Old Glast Heim cards 
 - Added new Eclase's equipment
