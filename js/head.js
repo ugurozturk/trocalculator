@@ -327,7 +327,7 @@ JobEquipItemOBJ = [
 	To add new jobids, simply add the new value to the subarrays in JobEquipItemOBJ for the classes that should be able to equip the item
 */
 
-SyuzokuOBJ = ["Formless","Undead","Brute","Plant","Insect","Fish","Demon","Demi-Human","Angel","Dragon"];
+SyuzokuOBJ = ["Formless","Undead","Brute","Plant","Insect","Fish","Demon","Demi-Human","Angel","Dragon","Unknown"];
 ZokuseiOBJ = ["<b><font color='#A8A682'>Neutral</font></b>","<b><font color='blue'>Water</font></b>","<b><font color='brown'>Earth</font></b>","<b><font color='red'>Fire</font></b>","<b><font color='green'>Wind</font></b>","<b><font color='#7B2488'>Poison</font></b>","<b><font color='#CDCD40'>Holy</font></b>","<b><font color='black'>Shadow</font></b>","<b><font color='#9F9E9B'>Ghost</font></b>","<b><font color='#252520'>Undead</font></b>"];
 ZokuseiOBJ2 =["Neutral","Water","Earth","Fire","Wind","Poison","Holy","Shadow","Ghost","Undead"];
 SizeOBJ = ["Small","Medium","Large"];
