@@ -2712,6 +2712,10 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//custom TalonRO Gold Scaraba Card
 	if(CardNumSearch(528))
 		C_ATK += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
+	// custom TalonRO Tendrillion card
+	C_ATK += 45 * CardNumSearch(582);
+	// custom TalonRO Fanat card
+	C_ATK += 30 * CardNumSearch(585);
 	//custom TalonRO Halloween Midas Whisper
 	if(SU_STR >= 80 && EquipNumSearch(1526)){
 		C_ATK += 30;
