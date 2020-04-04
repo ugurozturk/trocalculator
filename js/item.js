@@ -1224,7 +1224,7 @@ ItemOBJ = [
 ,[1201,64,0,0,0,0,10,80,"Light of El Dicastes","","<font color=red><b>Bound to Game Account</b></font><br><b>Can be enchanted in El Dicastes</b>",0]
 ,[1202,100,0,0,0,0,0,0,"Blush + Necktie","",0,12,3,73,3,0]
 ,[1203,100,0,0,0,0,0,0,"Dragon Vest + Manteau","",0,2,5,9,15,0]
-,[1204,50,0,2,0,1,50,0,"Necromancer Hood","",0,221,112,0]
+,[1204,50,0,2,0,1,50,0,"Necromancer's Hood","",0,221,112,0]
 ,[1205,50,1,5,0,0,60,50,"Wandering Wolf Hat","",0,3,5,9,10,193,1,0]
 ,[1206,50,1,2,0,1,50,30,"Frog King Hat","",0,2,1,193,1,0]
 ,[1207,50,0,1,0,0,20,10,"Cashmere Hat","",0,41,10,61,10,0]
