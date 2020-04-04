@@ -2075,10 +2075,8 @@ function BattleCalc999()
 		var wX = n_tok[170+n_B[2]];
 		w_DMG[2] = Math.floor(w_DMG[2] * (100 + wX) /100);
 
-		wHealBAI = 100 + n_tok[93];
-		w_DMG[2] = Math.floor(w_DMG[2] * wHealBAI /100);
-
 		w_DMG[2] = tPlusDamCut(w_DMG[2]);
+		w_DMG[2] = Math.floor(w_DMG[2] * (1 + (StPlusCalc2(5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill)) / 100));
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
 			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
@@ -2103,15 +2101,8 @@ function BattleCalc999()
 		else
 		w_DMG[2] = 777;
 
-		//Mangkukulam Card -
-		//Retain the heal bonus 3%, and no incease dmg.
-		if(CardNumSearch(556)){
-			w_HEAL_BAI = 100 + n_tok[94];
-		}
-		else{
-			w_HEAL_BAI = 100 + n_tok[94];
-			w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_BAI / 100);
-		}
+		w_HEAL_BAI = 100 + n_tok[94];
+		w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_BAI / 100);
 
 		w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * zokusei[n_B[3]][6]);
 		if(n_B[3] < 90 && n_B[2] != 6)
@@ -2120,10 +2111,9 @@ function BattleCalc999()
 		var wX = n_tok[170+n_B[2]];
 		w_DMG[2] = Math.floor(w_DMG[2] * (100 + wX) /100);
 
-		w_HEAL_BAI = 100 + n_tok[95];
-		w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_BAI / 100);
-
 		w_DMG[2] = tPlusDamCut(w_DMG[2]);
+		
+		w_DMG[2] = Math.floor(w_DMG[2] * (1 + (StPlusCalc2(5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill)) / 100));
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
 			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)

@@ -351,7 +351,7 @@ cardOBJ = [
 ,[329,1,"Diabolic","Regain 5 SP when killing a Demon race monster with a ATK based attack<BR>Drains 5 SP when the weapon is unequipped",0]
 ,[330,4,"Demon Pungus","6% chance of inflicting [Sleep] status when receiving ATK based damage",0]
 ,[331,4,"Wraith Dead","6% chance of inflicting [Curse] status when receiving ATK based damage",0]
-,[332,2,"Bacsojin","Potion Pitcher effectiveness increased by + 20%<BR>Increase SP consumption by 15%",57,-10,91,20,94,20,0] //custom TalonRO heal-stuff +20% instead of +30; +10% dmg from demi-human
+,[332,2,"Bacsojin","Increase SP consumption by 15%",57,-10,91,20,93,20,94,20,0] //custom TalonRO heal-stuff +20% instead of +30; +10% dmg from demi-human
 ,[333,4,"Sky Deleter","Regain 100 HP each time a monster is killed with a ATK based attack",75,-100,0]
 ,[334,4,"Earth Deleter","Regain 10 SP each time a monster is killed with a ATK based attack<BR>Drains 100 SP when the armor is unequipped",76,-100,0]
 ,[335,7,"Greatest General","0.2% chance of casting level 5 Summon Spirit Sphere when doing a ATK based attack<BR>If equipped by an Acolyte job type: 2% chance instead",0]
@@ -580,7 +580,7 @@ cardOBJ = [
 ,[553,3,"Buwaya",0,77,20,79,-35,97,7,0]
 ,[554,2,"Bungisngis","For every refine after +5, MaxHP + 1%, MaxSP + 1%.",15,5,16,5,0]
 ,[555,2,"Engkanto","Ignore 25% of Plant monster defense.",45,25,0]
-,[556,1,"Manananggal",0,93,20,92,3,0]
+,[556,1,"Manananggal",0,5025,20,92,3,95,3,0]
 ,[557,4,"Mangkukulam",0,16,10,0]
 ,[558,2,"Tikbalang","[Refine Rate +7 or higher]<br/>Add another 5% damage with Wind Magic.<br/>[Refine Rate +9 or higher]<br/>Add another 5% damage with Wind Magic.",98,10,344,5,0]
 ,[559,7,"Tiyanak",0,117,7,112,7,115,7,0]

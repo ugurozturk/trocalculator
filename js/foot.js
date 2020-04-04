@@ -4130,6 +4130,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//[Custom TalonRO - 2018-07-13 Love Guard - If refine 7+ Inrease Effectiveness of Heal, Potion Pitcher, and Sanctuary by 2%] [NattWara]
 	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1667)){
 		n_tok[91] += 2;
+		n_tok[93] += 2;
 		n_tok[94] += 2;
 	}
 
@@ -4140,6 +4141,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//[Custom TalonRO - 2018-07-29 Glorious Staff of Recovery - Effectiviness of Potion Pitcher/Heal 1% per refine] [Amor]
 	if(EquipNumSearch(1085)){
 		n_tok[91] += n_A_Weapon_ATKplus;
+		n_tok[93] += n_A_Weapon_ATKplus;
 		n_tok[94] += n_A_Weapon_ATKplus;
 	}
 
@@ -6486,33 +6488,7 @@ function KakutyouKansuu(){
 			prate3 = Potion_Type_3[pot2][1];
 			prate4 = Potion_Type_3[pot2][2];}
 
-		//inserir aqui gears de boost de potion power
-		//insert here gears of potion power boost
-		if(EquipNumSearch(1610)){H_Bonus2 += 0.05;}//Xmas Rudolph Santa Hat - ZoneSoldier
-		if(EquipNumSearch(712)){H_Bonus2 += 0.2;}//Fricco's Shoes
-		if(EquipNumSearch(1194)){H_Bonus3 += 0.05;}//life tree wooden shoes
-		//inserir aqui gears de heal bonus
-		for(var i=8;i<12;i++){
-			if(n_A_PassSkill8[i] == 10 && EquipNumSearch(1000)){H_Bonus += 0.2;}//Angelic ring effect+item on[20%]
-		}
-		for(var i=8;i<=9;i++){
-			if(n_A_card[i] == 332){H_Bonus += 0.3;}//Bacsojin Card[30%]
-			if(n_A_card[i] == 513){H_Bonus += 0.03;}//Rhyncho Card[30%]
-		}
-		if(EquipNumSearch(1162)){H_Bonus += 0.1;}//Erde
-		if(n_A_Equip[9] == 844){H_Bonus += 0.05;}//1º Diabolus Ring
-		if(n_A_Equip[10] == 844){H_Bonus += 0.05;}//2º Diabolus Ring
-		if(n_A_Equip[9] == 1111){H_Bonus += 0.05;}//1º Glorious Ring
-		if(n_A_Equip[10] == 1111){H_Bonus += 0.05;}//2º Glorious Ring
-		if(EquipNumSearch(1258)){H_Bonus += 0.1;}//anubis hat
-		if(EquipNumSearch(1194)){H_Bonus += 0.05;}//life tree wooden shoes
-		if(n_A_Equip[9] == 1111 && n_A_Equip[10] == 983){H_Bonus += 0.05;}//Glorious Ring Set[5% ]
-		if(EquipNumSearch(1104) && EquipNumSearch(1107) && EquipNumSearch(1110)){H_Bonus += 0.03;}//kvm set[3%]
-		if(EquipNumSearch(959) && EquipNumSearch(965) && EquipNumSearch(968)){H_Bonus += 0.1;}//merc bg set gear[10%]
-		if(EquipNumSearch(1484)){H_Bonus += 0.03;}
-		/*if(EquipNumSearch(958) && EquipNumSearch(965) && EquipNumSearch(968)){H_Bonus += 0.1;}//sword bg set gear[10%][Impossivel usar lawl] mas devia adicionar uma key de on/off disto*/
-		//slims não são afectadas por rank bonus em pitch nem heal stuff como bacso card
-
+		H_Bonus += n_tok[93] / 100;
 		H_HEALS = 1+irp*.1;//Increase Recuperative Power (10%xlv da skill que se tem, max 10)
 		S_HEALS = 1+isp*.1;//Increase Spiritual Power(2%xlv da skill que se tem, max 10)
 

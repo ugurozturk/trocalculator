@@ -131,11 +131,11 @@ Effect list:
 				cardOBJ[w_SC[i][k]][j+2]=0;
 			}
 		}
-	91: Heal amount increased by + [value]%
-	92: Healing received increased by + [value]%
-	93: Heal damage increase on undead by + [value]%
+	91: Heal effectiveness increased by + [value]%
+	92: Received heal effectiveness from [Heal] increased by + [value]%
+	93: Potion Pitcher effectiveness increased by + [value]%
 	94: Sanctuary effectiveness increased by + [value]%
-	95: Sanctuary damage effectiveness against Demon increased by + [value]%
+	95: Received heal effectiveness from [Sanctuary] increased by + [value]%
 	96: Increases magical damage against normal monsters by [value]%
 	97: Increases magical damage against bosstype monsters by [value]%
 	98: MATK + [value] (flat)
