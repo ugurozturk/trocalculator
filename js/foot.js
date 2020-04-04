@@ -4102,8 +4102,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 		Fanat Card#585 + Vanberk Card#471 Combo
 		[If Isilla Card#472 is not equipped][Vanilla Mode] Long Range Resist + 10%
 	*/
-	if (document.calcForm.vanilla.checked && (CardNumSearch(583) && CardNumSearch(472) && !CardNumSearch(471))
-		|| (CardNumSearch(585) && CardNumSearch(471) && !CardNumSearch(472)))
+	if (document.calcForm.vanilla.checked && ((CardNumSearch(583) && CardNumSearch(472) && !CardNumSearch(471))
+		|| (CardNumSearch(585) && CardNumSearch(471) && !CardNumSearch(472))))
 		n_tok[78] += 10;
 	
 	/*
