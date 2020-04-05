@@ -8105,9 +8105,91 @@ function BaiCI(wBaiCI)
 	if((n_A_ActiveSkill==83 || n_A_ActiveSkill==388) && SkillSearch(381) && wBCEDPch==0)
 		w1 += 10;
 	
-	// Enforcer Cape#1699 [Every Refine Level] Increase [Meteor Assault] damage by 1%
-	if (n_A_ActiveSkill == 264)
+	if (n_A_ActiveSkill == 264) {
+		// Enforcer Cape#1699 - [Every Refine Level] Increase [Meteor Assault] damage by 1%
 		w1 += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
+		
+		// Brave Carnage Katar#909 - [Refine level 7~10] Increase [Meteor Assault] damage by 15%
+		if(n_A_Weapon_ATKplus >= 7)
+			w1 += 15 * EquipNumSearch(909);
+	}
+	
+	// Glorious Claw#1096
+	if (EquipNumSearch(1096)) {
+		// [Every Refine Level] Increase [Triple Attack], [Chain Combo] and [Combo Finish] damage by 5%
+		if (n_A_ActiveSkill >= 187 || n_A_ActiveSkill <= 189)
+			w1 += 5 * n_A_Weapon_ATKplus;
+		// [Every Refine Level Above +5]  Increase [Tiger Knuckle Fist] and [Chain Crush Combo] damage by 5%
+		if (n_A_ActiveSkill == 289 || n_A_ActiveSkill == 290)
+			w1 += 5 * Math.max(0, n_A_Weapon_ATKplus - 5);
+	}
+
+	// Glorious Claymore#1080 - [Every Refine Level] Increase [Bowling Bash] and [Charge Attack] damage by 1% [Amor]
+	if (n_A_ActiveSkill == 76 || n_A_ActiveSkill == 308)
+		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1080);
+
+	if (n_A_ActiveSkill == 65) {
+		// Glorious Two Handed Axe#1087 - [Every Refine Level] Increase [Mammonite] damage by 2% [Amor]
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1087);
+		
+		// Glorious Cleaver#1088 - [Every Refine Level] Increase [Mammonite] damage by 1% [Amor]
+		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1088);
+	}
+
+	// Glorious Flamberge#1077 - [Every Refine Level] Increase [Bash], [Mammonite] and [Back Stab] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 65 || n_A_ActiveSkill == 6 || n_A_ActiveSkill == 169)
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1077);
+
+	// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Ground Drift] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 437)
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1103);
+
+	if (n_A_ActiveSkill == 418) {
+		// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Triple Action] damage by 1% [Amor]
+		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1103);
+		
+		// Glorious Grenade Launcher#1103, Glorious Rifle#1100, Glorious Shotgun#1102 - [If Scouter Is Not Equipped] Increase [Triple Action] damage by 30%
+		if (!EquipNumSearch(1387))
+			w1 += 30 * (EquipNumSearch(1103) + EquipNumSearch(1100) + EquipNumSearch(1102));
+	}
+
+	// Glorious Huuma Shuriken#1098 - [Every Refine Level] Increase [Throw Huuma Shuriken] damage by 3% [Amor]
+	if (n_A_ActiveSkill == 396)
+		w1 += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1098);
+
+	// Glorious Revolver#1099 - [Every Refine Level] Increase [Rapid Shower] damage by 1% [Amor]
+	if (n_A_ActiveSkill == 428)
+		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1099);
+
+	// Glorious Rifle#1100 - [Every Refine Level] Increase [Tracking] and [Piercing Shot] damage by 3% [Amor]
+	if (n_A_ActiveSkill == 430 || n_A_ActiveSkill == 432)
+		w1 += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1100);
+
+	// Glorious Shotgun#1102 - [Every Refine Level] Increase [Spread Attack] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 436)
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1102);
+
+	// Valorous Battle CrossBow#913 - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
+	if (n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8)
+		w1 += 10 * EquipNumSearch(913);
+
+	// Glorious Hunter Bow#1089 - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
+	if (n_A_ActiveSkill == 40)
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1089);
+
+	/*
+		Valorous Carnage Katar#910
+		[Refine Level 6~10]
+		Increases damage with [Sonic Blow] by 10%.
+		[Refine Level 9~10]
+		Increases damage with [Sonic Blow] by 20%.
+	*/
+	if(n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 83 && EquipNumSearch(910)) {
+		w1 += 10;
+		
+		if (n_A_Weapon_ATKplus >= 9)
+			w1 += 20;
+	}
 
 	wBaiCI = wBaiCI * (100+StPlusCalc2(5000+n_A_ActiveSkill)+StPlusCard(5000+n_A_ActiveSkill) + w1) /100;
 

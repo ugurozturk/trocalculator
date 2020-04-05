@@ -829,111 +829,101 @@ function StAllCalc()
 		n_tok[94] += 10;
 	}
 
-//[TalonRO Custom 2018-07-25 - Brave Gladiator Blade + 5% MATK for Rogue/Stalker or Crusader/Paladin] [Amor]
-if(EquipNumSearch(900)){
-		if(n_A_JobSearch2() == 14 || n_A_JobSearch2() == 13) {
-			n_tok[89] += 5;
-		}
-}
-//[TalonRO Custom 2018-07-26 - Valorous Assassin Damascus + 15% MATK for Rogue/Stalker or Ninja] [Amor]
-if(EquipNumSearch(898)){
-		if(n_A_JobSearch2() == 14 || n_A_JOB == 44) {
-			n_tok[89] += 15;
-		}
-}
-//[TalonRO Custom 2018-07-29 - Glorious Staff of Recovery + 15% MATK for Priest/HP] [Amor]
-if(EquipNumSearch(1085)){
-		if(n_A_JobSearch2() == 9) {
-			n_tok[89] += 15;
-		}
-}
+	//[TalonRO Custom 2018-07-25 - Brave Gladiator Blade + 5% MATK for Rogue/Stalker or Crusader/Paladin] [Amor]
+	if(EquipNumSearch(900)){
+			if(n_A_JobSearch2() == 14 || n_A_JobSearch2() == 13) {
+				n_tok[89] += 5;
+			}
+	}
+	//[TalonRO Custom 2018-07-26 - Valorous Assassin Damascus + 15% MATK for Rogue/Stalker or Ninja] [Amor]
+	if(EquipNumSearch(898)){
+			if(n_A_JobSearch2() == 14 || n_A_JOB == 44) {
+				n_tok[89] += 15;
+			}
+	}
+	//[TalonRO Custom 2018-07-29 - Glorious Staff of Recovery + 15% MATK for Priest/HP] [Amor]
+	if(EquipNumSearch(1085)){
+			if(n_A_JobSearch2() == 9) {
+				n_tok[89] += 15;
+			}
+	}
 
-/*
-	Valorous Battlefield Morning Star (damage)
-	[Refine level 8-10]
-	ATK + 20
-*/
-if(EquipNumSearch(907) && n_A_Weapon_ATKplus >= 8) {
-	n_tok[17] += 20;
-}
-/*
-	Brave Battlefield Morning Star (damage)
-	[Refine level 8-10]
-	[Alchemist Class]
-	ATK + 30
-*/
-if(EquipNumSearch(908) && n_A_Weapon_ATKplus >= 8 && n_A_JobSearch2() == 19) {
-	n_tok[17] += 30;
-}
-/*
-	Glorious Revolver (damage)
-	[Refine level 8-10]
-	ATK + 25
-*/
-if(EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
-	n_tok[17] += 25;
-}
-
-/*
-Player Stats - n_tok[]
-n_tok[13] = Max HP
-n_tok[14] = Max SP
-n_tok[15] = Max %HP
-n_tok[16] = Max %SP
-n_tok[17] = ATK
-n_tok[18] = DEF
-n_tok[19] = MDEF
-*/
-//Jejeling CARD
-//For every 10 Base Vit, HP + 200
-if(CardNumSearch(561)){
-	n_tok[13] += 200*Math.floor(SU_VIT/10);
-}
+	/*
+		Valorous Battlefield Morning Star (damage)
+		[Refine level 8-10]
+		ATK + 20
+	*/
+	if(EquipNumSearch(907) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[17] += 20;
+	}
+	/*
+		Brave Battlefield Morning Star (damage)
+		[Refine level 8-10]
+		[Alchemist Class]
+		ATK + 30
+	*/
+	if(EquipNumSearch(908) && n_A_Weapon_ATKplus >= 8 && n_A_JobSearch2() == 19) {
+		n_tok[17] += 30;
+	}
+	/*
+		Glorious Revolver (damage)
+		[Refine level 8-10]
+		ATK + 25
+	*/
+	if(EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
+		n_tok[17] += 25;
+	}
 
 	w=n_tok[17];
 
-	if(SU_STR >= 80 && CardNumSearch(267))
-		w += 20;
-	if(SU_STR >= 95 && EquipNumSearch(621))
-		w += 340;
-	if(SU_STR >= 44 && EquipNumSearch(625))
-		w += 44;
-	if(SU_AGI >= 90 && EquipNumSearch(442))
-		w += 10 * EquipNumSearch(442);
-	if(SU_STR >= 95 && EquipNumSearch(1160))
-		w += 20;
-	if(SU_LUK >= 90 && EquipNumSearch(1164))
-		w += 20;
-	if(CardNumSearch(492))
-		w += Math.floor(n_A_JobLV /5) * CardNumSearch(492); //custom TalonRO Ifrit Card +1atk every 5 Joblv
-	if(CardNumSearch(528)) // Gold Scaraba - ATK + JobLV/5
-		w += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
-	// Imperial Spear#1460 [Every 2 Refine Levels] ATK + 2
+	// Doom Slayer#621 - [If Base STR >= 95] ATK + 340
+	if(SU_STR >= 95)
+		n_tok[17] += 340 * EquipNumSearch(621);
+	// Holgren's Refining Hammer#625 - [If Base STR >= 44] ATK + 44
+	if(SU_STR >= 44)
+		n_tok[17] += 44 * EquipNumSearch(625);
+	// Thief Ring#442 - [If Base AGI >= 90] ATK + 10
+	if(SU_AGI >= 90)
+		n_tok[17] += 10 * EquipNumSearch(442);
+	// Krasnaya#1160 - [If Base STR >= 95] ATK + 20
+	if(SU_STR >= 95)
+		n_tok[17] += 20 * EquipNumSearch(1160);
+	// Berchel Axe#1165 - [If Base LUK >= 90] ATK + 20
+	if(SU_LUK >= 90)
+		n_tok[17] += 20 * EquipNumSearch(1164);
+	// Imperial Spear#1460 - [Every 2 Refine Levels] ATK + 2
 	if(EquipNumSearch(1460)) {
-		w += 2 * Math.floor(n_A_Weapon_ATKplus / 2)
+		n_tok[17] += 2 * Math.floor(n_A_Weapon_ATKplus / 2)
 		
-		if(SkillSearch(69)) // [Every [Spear Mastery] Level] ATK + 2
-			w += 2 * SkillSearch(69);
+		// [Every [Spear Mastery] Level] ATK + 2
+		n_tok[17] += 2 * SkillSearch(69);
 	}
+	
+	// Giant Whisper card#267 - [If Base STR >= 80] ATK + 20
+	if(SU_STR >= 80)
+		n_tok[17] += 20 * CardNumSearch(267);
+	// Ifrit card#492 - ATK + JobLV / 5
+	n_tok[17] += Math.floor(n_A_JobLV /5) * CardNumSearch(492);
+	// Gold Scaraba card#528 - ATK + JobLV / 5
+	n_tok[17] += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
+	
 	//[Custom TalonRO 2018-06-25 - Malangdo Enchantment for Fighting Spirit - ATK] [NattWara]
-	// Actual damage part.
-		for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
-			var vME = tRO_MalangdoEnchantment[i];
-			if(vME >= 1781 && vME <= 1788) {
-				w += (4 + (2 * (parseInt(vME.substr(-1)) - 1)));
-			}
-		}
+	// Fighting Spirit n - ATK + n * 2 + 2 with n within [4..8]
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+		if(vME >= 1781 && vME <= 1788)
+			n_tok[17] += parseInt(vME.substr(-1)) * 2 + 2;
+	}
 
 	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for Fighting Spirit - ATK] [NattWara]
-	// Actual damage part.
-		for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
-			var vBE = tRO_BiolabWeaponEnchantment[i];
-			if(vBE >= 1781 && vBE <= 1788) {
-				w += (4 + (2 * (parseInt(vBE.substr(-1)) - 1)));
-			}
-		}
+	// Fighting Spirit n - ATK + n * 2 + 2 with n within [1..3]
+	for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+		var vBE = tRO_BiolabWeaponEnchantment[i];
+		if(vBE >= 1781 && vBE <= 1788)
+			n_tok[17] += parseInt(vBE.substr(-1)) * 2 + 2;
+	}
 
-	n_A_ATK += w;
+	n_A_ATK += n_tok[17];
 
 	//Note - Issue#252
 	//Need checking on all of these items.
@@ -982,88 +972,6 @@ if(CardNumSearch(561)){
 		}
 		if(n_A_HEAD_DEF_PLUS == 10){
 			w += n_A_ATK*.02;
-		}
-	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Claw - +5% per refine more, damage when usng Triple Attack, Chain Combo, and Combo Finish] [Amor]
-	if(EquipNumSearch(1096) && (n_A_ActiveSkill >= 187 || n_A_ActiveSkill <= 189)){
-		w += n_A_Weapon_ATKplus * (n_A_ATK*.05);
-	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Claw - +5% per 6+ refine, more damage when usng Tiger Knuckle Fist and Chain Crush Combo] [Amor]
-	if(EquipNumSearch(1096) && (n_A_ActiveSkill == 289 || n_A_ActiveSkill == 290)){
-		if(n_A_Weapon_ATKplus >= 6)
-			w += (n_A_Weapon_ATKplus - 5) * (n_A_ATK*.05);
-	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Claymore - +1% more damage when [Bowling Bash] and [Charge Attack]] [Amor]
-	if(EquipNumSearch(1080) && (n_A_ActiveSkill == 76 || n_A_ActiveSkill == 308)){
-		w += n_A_Weapon_ATKplus * (n_A_ATK*.01);
-	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Cleaver - +1% more damage when [Mammonite]] [Amor]
-	if(EquipNumSearch(1088) && (n_A_ActiveSkill == 65)){
-		w += n_A_Weapon_ATKplus * (n_A_ATK*.01);
-	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Flamberge - +2% more damage when [Bash] , [Mammonite], [Back Stab]] [Amor]
-	if(EquipNumSearch(1077) && (n_A_ActiveSkill == 65 || n_A_ActiveSkill == 6 || n_A_ActiveSkill == 169)){
-		w += n_A_Weapon_ATKplus * (n_A_ATK*.02);
-	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Grenade Launcher - +2% more damage with [Ground Drift]] [Amor]
-	if(EquipNumSearch(1103) && n_A_ActiveSkill == 437){
-		w += n_A_ATK*.02;
-	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Grenade Launcher - +1% more damage with [Triple Action]] [Amor]
-	if(EquipNumSearch(1103) && n_A_ActiveSkill == 418){
-		w += n_A_ATK*.01;
-	}
-	//[TalonRO Custom - 2018-07-28 - Glorious Huuma Shuriken - +3% more damage with [Throw Huuma Shuriken]] [Amor]
-	if(EquipNumSearch(1098) && n_A_ActiveSkill == 396){
-		w += n_A_ATK*.03;
-	}
-	//[TalonRO Custom - 2018-07-29 - Glorious Revolver - +1% more damage with [Rapid Shower]] [Amor]
-	if(EquipNumSearch(1099) && n_A_ActiveSkill == 428){
-		w += n_A_ATK*.01;
-	}
-	//[TalonRO Custom - 2018-07-29 - Glorious Rifle - +3% more damage with [Tracking] and [Piercing Shot]] [Amor]
-	if(EquipNumSearch(1100) && (n_A_ActiveSkill == 430 || n_A_ActiveSkill == 432)){
-		w += n_A_ATK*.03;
-	}
-	//[TalonRO Custom - 2018-07-29 - Glorious Grenade Launcher/Glorious Rifle/Glorious Shotgun - +30% more damage with [Triple Action] if not wearing Scouter] [Amor]
-	if(!EquipNumSearch(1387) && (EquipNumSearch(1103) || EquipNumSearch(1100) || EquipNumSearch(1102)) && n_A_ActiveSkill == 418){
-		w += n_A_ATK*.30;
-	}
-	//[TalonRO Custom - 2018-07-29 - Glorious Shotgun - +2% more damage with [Spread Attack]] [Amor]
-	if(EquipNumSearch(1102) && n_A_ActiveSkill == 436){
-		w += n_A_ATK*.02;
-	}
-	//[TalonRO Custom - 2018-07-29 - Glorious Two Handed Axe - +2% more damage with [Mammonite]] [Amor]
-	if(EquipNumSearch(1087) && n_A_ActiveSkill == 65){
-		w += n_A_ATK*.02;
-	}
-	//[TalonRO Custom - 2019-12-24 - Valorous Battle CrossBow - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
-	if (EquipNumSearch(913) && n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8) {
-		w += n_A_ATK*.10;
-	}
-	//[TalonRO Custom - 2019-12-24 - Glorious Hunter Bow - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
-	if (EquipNumSearch(1089) && n_A_ActiveSkill == 40) {
-		w += n_A_Weapon_ATKplus * (n_A_ATK*.02);
-	}
-	/*
-		Brave Carnage Katar
-		[Refine level 7~10]
-		Increase damage of [Meteor Assault] by 15%.
-	*/
-	if(EquipNumSearch(909) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264) {
-		w += n_A_ATK*.15;
-	}
-	/*
-		Valorous Carnage Katar
-		[Refine Level 6~10]
-		Increases damage with [Sonic Blow] by 10%.
-		[Refine Level 9~10]
-		Increases damage with [Sonic Blow] by 20%.
-	*/
-	if(EquipNumSearch(910) && n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 83) {
-		w += n_A_ATK*.10;
-		if (n_A_Weapon_ATKplus >= 9) {
-			w += n_A_ATK*.20;
 		}
 	}
 
@@ -1149,14 +1057,17 @@ if(CardNumSearch(561)){
 			n_A_MaxHP = Math.floor(wKenseiHP[n_A_BaseLV-90] * (100 + n_A_VIT) / 100);
 	}
 
-//[Custom TalonRO 2018-06-02 - Advanced Fin Helm Gives Maximum HP + 6 * Base Level] [Kato]
-if(EquipNumSearch(1561)) {
-	n_A_MaxHP += 6 * n_A_BaseLV;
-}
+	//[Custom TalonRO 2018-06-02 - Advanced Fin Helm Gives Maximum HP + 6 * Base Level] [Kato]
+	if(EquipNumSearch(1561)) {
+		n_A_MaxHP += 6 * n_A_BaseLV;
+	}
 
-n_A_MaxHP += SkillSearch(156) * 200;
+	n_A_MaxHP += SkillSearch(156) * 200;
 
 	w=0;
+	
+	// Jejeling card#561 - MaxHP + 200 * Base VIT / 10 
+	n_tok[13] += 200 * Math.floor(SU_VIT/10) * CardNumSearch(561);
 
 	w += n_tok[13];
 	w += StPlusCalc2(3);
@@ -2491,16 +2402,13 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	//não são cartas de armas
 	if(CardNumSearch(235) && CardNumSearch(306)){C_ATK += 20;}
 	if(SU_STR >= 80 && CardNumSearch(267)){C_ATK += 20;}
-	if(CardNumSearch(184)){C_ATK += -25;}
+	if(CardNumSearch(184) && !CardNumSearch(597)){C_ATK += -25;}
 	if(CardNumSearch(183)){C_ATK += 25;}
 	if(CardNumSearch(492)){
 		C_ATK += Math.floor(n_A_JobLV /5) * CardNumSearch(492);		//custom TalonRO Ifrit Card +1atk every 5 Joblv			works with x cards also
 		//C_ATK += (n_A_JobLV/10);									//original Ifrit Card +1atk every 10 Joblv				works with 1 ifrit card only
 	}
 	if(CardNumSearch(477)){C_ATK += 15;}
-	for(var i=8;i<=9;i++){
-		if(n_A_card[i] == 510 || n_A_card[i] == 511){C_ATK += 10;}
-	}
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Hat of the Sun God [1] - ATK part [Nattwara]
 	/*
@@ -2710,12 +2618,21 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	if(SkillSearch(69) && EquipNumSearch(1460))
 		C_ATK += 2*SkillSearch(69);
 	//custom TalonRO Gold Scaraba Card
-	if(CardNumSearch(528))
-		C_ATK += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
+	C_ATK += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
 	// custom TalonRO Tendrillion card
 	C_ATK += 45 * CardNumSearch(582);
 	// custom TalonRO Fanat card
 	C_ATK += 30 * CardNumSearch(585);
+	// custom TalonRO White Knight and Khalitzburg Knight card
+	if (CardNumSearch(445)) {
+		C_ATK += 5;
+		
+		if (CardNumSearch(444))
+			C_ATK += 10;
+	}
+	
+	// Custom TalonRO Cobalt Mineral
+	C_ATK += 15 * CardNumSearch(597);
 	// Eclage STR Glove#1704 - [Every 10 points of STR] ATK + 1
 	C_ATK += Math.floor(SU_STR / 10) * EquipNumSearch(1704);
 	//custom TalonRO Halloween Midas Whisper
@@ -2992,10 +2909,9 @@ n_A_MaxHP += SkillSearch(156) * 200;
 
 	// Zakudam#595 + Archdam#190 [Vanilla Mode] Cast Time - 30%
 	if (document.calcForm.vanilla.checked && CardNumSearch(595) && CardNumSearch(190))
-		n_tok[73] += 30;
+		n_tok[73] -= 30;
 	
 	// Enforcer Cape#1699 + Enforcer Shoes#1700 Set#1701 10% Aftercast Reduction with [Meteor Assault]
-	// FIXME : Review after cast delay for [Meteor Assault]
 	n_tok[74] += 10 * EquipNumSearch(1701);
 
 	//Note 2018-07-12 [NattWara]
@@ -3164,6 +3080,7 @@ n_A_MaxHP += SkillSearch(156) * 200;
 			w += 2;
 	}
 
+	// FIXME : Pagdayaw#1173 - no MATK bonus
 	if(EquipNumSearch(1173))
 		w += Math.floor(n_A_Weapon_ATKplus);
 	if(n_A_JOB==14 || n_A_JOB==28){
@@ -4527,8 +4444,8 @@ n_A_MaxHP += SkillSearch(156) * 200;
 	}
 
 	// Naght Sieger Card#579 [Soul Linker] Ghost property magical attack is 15% instead of 30%.	
-	if (CardNumSearch(579) && n_A_JOB == 43)
-		n_tok[348] -= 15;
+	if (n_A_JOB == 43)
+		n_tok[348] -= 15 * CardNumSearch(579);
 	
 	/*
 		Rata Card#509

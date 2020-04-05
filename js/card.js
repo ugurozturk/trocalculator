@@ -615,7 +615,7 @@ cardOBJ = [
 ,[588,100,"Beholder Master + Beholder",0,12,10,5,3,0]
 ,[589,100,"Beholder Master + Seeker",0,57,15,0]
 ,[590,6,"Heavy Metaling",0,1,2,5066,50,0]
-,[591,1,"Naga Card","Causes Stun effect to enemies when using [Mist Slash] at a 12% chance.",5400,35,0]
+,[591,1,"Naga","Causes Stun effect to enemies when using [Mist Slash] at a 12% chance.",5400,35,0]
 ,[592,1,"Draco Egg","[Crimson Fire Formation] shoves the enemy 2 cells back <b>does not stack</b>.",5053,25,5408,25,0]
 ,[593,1,"Bradium Golem","Increase Kick Skill rate by 5%.",8,15,5331,15,5333,15,5335,15,5337,15,0]
 ,[594,1,"Ancient Tree",0,75,15,16,15,5375,5,0]
