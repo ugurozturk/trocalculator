@@ -652,6 +652,14 @@ function StAllCalc()
 		n_A_ATK_w = Math.round(Math.floor(n_A_DEX/10) * Math.floor(n_A_DEX/10));
 		n_A_ATK   = n_A_DEX + n_A_ATK_w + Math.floor(n_A_STR / 5) + Math.floor(n_A_LUK / 5);
 	}
+	
+	// Manage advanced Special Effect bonus
+	for (var i = 8; i < 12; ++i) {
+		// Glorious Tablet#1094 - [Every Refine Level] ATK + 20 
+		if (n_A_PassSkill8[i] == 13 && EquipNumSearch(1094)) // FIXME : Only applies to PvP
+			n_tok[17] += 20 * n_A_Weapon_ATKplus;
+	}
+	
 	//Galaxy Circlet - [Loa] - 2018-07-03
 	if(EquipNumSearch(1163)){
 		n_tok[13] += n_A_HEAD_DEF_PLUS * 10;
@@ -755,7 +763,7 @@ function StAllCalc()
 		[Base STR >= 80] ATK + 1%
 	*/
 	n_tok[17] += Math.floor(SU_STR / 10) * EquipNumSearch(1704);
-	n_tok[87] += (SU_STR >= 80 ? 1 : 0) * EquipNumSearch(1704);
+	n_tok[80] += (SU_STR >= 80 ? 1 : 0) * EquipNumSearch(1704);
 
 	/*
 		AGI Glove#1705
@@ -874,7 +882,26 @@ function StAllCalc()
 		n_tok[17] += 25;
 	}
 
-	w=n_tok[17];
+	// Glorious Two-handed Axe#1087 - [Merchant Class] ATK + 100
+	if (n_A_JobSearch() == 6)
+			n_tok[17] += 100 * EquipNumSearch(1087); // FIXME : Only applies to WoE
+
+	/*
+		Enhanced Hat of the Sun God#1654 - ATK part [Nattwara]
+		[Refine Rate >= 5] ATK + 4, MATK + 1%
+		[Refine Rate >= 7] ATK + 6, MATK + 1%
+		[Refine Rate >= 8] ATK + 6, MATK + 2%
+	*/
+	if (EquipNumSearch(1654)) {
+		if (n_A_HEAD_DEF_PLUS > 4)
+			n_tok[17] += 4;
+
+		if (n_A_HEAD_DEF_PLUS > 6)
+			n_tok[17] += 6;
+
+		if (n_A_HEAD_DEF_PLUS > 7)
+			n_tok[17] += 6;
+	}
 
 	// Doom Slayer#621 - [If Base STR >= 95] ATK + 340
 	if(SU_STR >= 95)
@@ -888,7 +915,7 @@ function StAllCalc()
 	// Krasnaya#1160 - [If Base STR >= 95] ATK + 20
 	if(SU_STR >= 95)
 		n_tok[17] += 20 * EquipNumSearch(1160);
-	// Berchel Axe#1165 - [If Base LUK >= 90] ATK + 20
+	// Berchel Axe#1164 - [If Base LUK >= 90] ATK + 20
 	if(SU_LUK >= 90)
 		n_tok[17] += 20 * EquipNumSearch(1164);
 	// Imperial Spear#1460 - [Every 2 Refine Levels] ATK + 2
@@ -898,15 +925,52 @@ function StAllCalc()
 		// [Every [Spear Mastery] Level] ATK + 2
 		n_tok[17] += 2 * SkillSearch(69);
 	}
-	
+	// Halloween Midas Whisper#1526 - [If Base STR >= 80] ATK + 30
+	if (SU_STR >= 80)
+		n_tok[17] += 30 * EquipNumSearch(1526);
+	// Archer Figure#1120 - [Archer Class] ATK + 10
+	if (n_A_JobSearch() == 4)
+		n_tok[17] += 10 * EquipNumSearch(1120);
+	// Baphomet Horns#953 - ATK + JobLv * 2 / 7
+	n_tok[17] += Math.floor(n_A_JobLV * 2 / 7) * EquipNumSearch(953);
+	// Veteran Axe#1165 -  ATK + 10 * n (with n number of smithing skills mastered)
+	n_tok[17] += 10 * SkillSearch(311) * EquipNumSearch(1165);
+	// Glorious Two-handed Axe#1087 - [Merchant Class] ATK + 100
+	if (n_A_JobSearch() == 6)
+		n_tok[17] += 100 * EquipNumSearch(1087); // FIXME : Only applies to PvP
+	// Mythical Lion Mask#676 - [Taekwon Class] [Every Refine Level] ATK + 2
+	if (n_A_JobSearch() == 41)
+		n_tok[17] += n_A_HEAD_DEF_PLUS * 2 * EquipNumSearch(676);
+	// Aquarius Crown#1274, Aquarius Diadem#1275, Cancer Crown#1276 - [If Refine Level >= 7] ATK + 15
+	if (n_A_HEAD_DEF_PLUS >= 7)
+		n_tok[17] += 15 * (EquipNumSearch(1274) + EquipNumSearch(1275) + EquipNumSearch(1276));
+	// Scorpio Crown#1290 - [If Refine Level == 10] ATK + 5
+	if (n_A_HEAD_DEF_PLUS == 10)
+		n_tok[17] += 5 * EquipNumSearch(1290);
+	// Scorpio Diadem#1291 - [If Refine Level >= 7] ATK + 5
+	if (n_A_HEAD_DEF_PLUS >= 7)
+		n_tok[17] += 5 * EquipNumSearch(1291);
+
 	// Giant Whisper card#267 - [If Base STR >= 80] ATK + 20
-	if(SU_STR >= 80)
+	if (SU_STR >= 80)
 		n_tok[17] += 20 * CardNumSearch(267);
 	// Ifrit card#492 - ATK + JobLV / 5
 	n_tok[17] += Math.floor(n_A_JobLV /5) * CardNumSearch(492);
 	// Gold Scaraba card#528 - ATK + JobLV / 5
 	n_tok[17] += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
 	
+	// Hilt Binding Skill#146 - ATK + 4
+	n_tok[17] += 4 * SkillSearch(146);
+	// Volcano - ATK bonus on Fire Armor - ATK + 10 * SkillLV
+	if (n_A_PassSkill6[0] == 0 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==3)
+		n_tok[17] += n_A_PassSkill6[1] * 10;
+	// Gatling Fever Skill#433 - ATK + 20 + 10 * SkillLV.
+	if (n_A_WeaponType==20 && SkillSearch(433))
+		n_tok[17] += 20 + 10 * SkillSearch(433);
+	// Madness Canceller#420 - ATK + 100
+	if(SkillSearch(420))
+		n_tok[17] += 100;
+
 	//[Custom TalonRO 2018-06-25 - Malangdo Enchantment for Fighting Spirit - ATK] [NattWara]
 	// Fighting Spirit n - ATK + n * 2 + 2 with n within [4..8]
 	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
@@ -922,6 +986,16 @@ function StAllCalc()
 		if(vBE >= 1781 && vBE <= 1788)
 			n_tok[17] += parseInt(vBE.substr(-1)) * 2 + 2;
 	}
+	
+	// Rainbow Cake - ATK + 10
+	if(n_A_PassSkill7[2])
+		n_tok[17] += 10;
+	// Box of Resentment - ATK + 20
+	if(n_A_PassSkill7[9])
+		n_tok[17] += 20;
+	// Rune Strawberry Cake - ATK + 5
+	if(n_A_PassSkill8[19])
+		n_tok[17] += 5;
 
 	n_A_ATK += n_tok[17];
 
@@ -979,8 +1053,11 @@ function StAllCalc()
 
 	n_A_ATK += w;
 
+	// Dedicated ATK bonus variable as it is impacted by the Size multiplier
+	// Impositio Manus - ATK + 5 * SkillLV
 	wImp = n_A_PassSkill2[2] *5;
 
+	// A Drum on the Battlefield - ATK + 25 + 25 * SkillLV
 	if(n_A_PassSkill3[9])
 		wImp += 25 + 25 * n_A_PassSkill3[9];
 
@@ -2388,44 +2465,48 @@ function StAllCalc()
 	//cartas de armas que dão atk
 	//For que verifica cartas de n_A_card[0 a 7] aka cartas nas armas
 	for(var i=0;i<=7;i++){
-		if(n_A_card[i] == 6){C_ATK += 3;}
+		if(n_A_card[i] == 6){C_ATK += 3;} // Hornet card covered by n_tok[17]
+		// Aster, Breeze, Crab, Desert Wolf, Familiar, Golem, Magmaring, Plankton, Snake, Mairna, Mettaler, Magnolia, Skeleton Working, Minorous, Rocker, Shell Fish, Thanatos Maero, Waste Stove card covered by n_tok[17]
 		if(n_A_card[i] == 356 || n_A_card[i] == 163 || n_A_card[i] == 259 || n_A_card[i] == 28 || n_A_card[i] == 110 || n_A_card[i] == 39 || n_A_card[i] == 483 || n_A_card[i] == 37 || n_A_card[i] == 35 || n_A_card[i] == 36 || n_A_card[i] == 30 || n_A_card[i] == 33 || n_A_card[i] == 68 || n_A_card[i] == 254 || n_A_card[i] == 29 || n_A_card[i] == 34 || n_A_card[i] ==165 || n_A_card[i] == 181){C_ATK += 5;}
-		if(n_A_card[i] == 190 || n_A_card[i] ==65 || n_A_card[i] == 9 || n_A_card[i] == 366 || n_A_card[i] == 38){C_ATK += 10;}
-		if(n_A_card[i] == 477 || n_A_card[i] == 380 || n_A_card[i] == 10){C_ATK += 15;}
-		if(n_A_card[i] == 11){C_ATK += 20;}
-		if(n_A_card[i] == 463){C_ATK += 25;}
-		if(n_A_card[i] == 326){C_ATK += 30;}
-		if(n_A_card[i] == 498){C_ATK += 25;}
+		// Archdam, Picky, Skeleton, Stone Shooter, Zenorc card covered by n_tok[17]
+		if(n_A_card[i] == 190 || n_A_card[i] ==65 || n_A_card[i] == 9 || n_A_card[i] == 366 || n_A_card[i] == 38){C_ATK += 10;} 
+		if(n_A_card[i] == 477 || n_A_card[i] == 380 || n_A_card[i] == 10){C_ATK += 15;} // Echio, Wolf, Mutant Dragonoid card covered by n_tok[17]
+		if(n_A_card[i] == 11){C_ATK += 20;} // Andre card covered by n_tok[17]
+		if(n_A_card[i] == 463){C_ATK += 25;} // Atros card covered by n_tok[17]
+		if(n_A_card[i] == 326){C_ATK += 30;} // Zipper Bear card covered by n_tok[17]
+		if(n_A_card[i] == 498){C_ATK += 25;} // Hillsrion card covered by n_tok[17]
 
 	}
 
 	//não são cartas de armas
+	// Injustice + Zherlthsh covered by n_tok[17]
 	if(CardNumSearch(235) && CardNumSearch(306)){C_ATK += 20;}
+	// Giant Whisper card covered by n_tok[17]
 	if(SU_STR >= 80 && CardNumSearch(267)){C_ATK += 20;}
+	// Mineral + Cobalt Mineral card covered by n_tok[17]
 	if(CardNumSearch(184) && !CardNumSearch(597)){C_ATK += -25;}
+	// Porcellio card covered by n_tok[17]
 	if(CardNumSearch(183)){C_ATK += 25;}
+	
+	// Ifrit card covered by n_tok[17]
 	if(CardNumSearch(492)){
 		C_ATK += Math.floor(n_A_JobLV /5) * CardNumSearch(492);		//custom TalonRO Ifrit Card +1atk every 5 Joblv			works with x cards also
 		//C_ATK += (n_A_JobLV/10);									//original Ifrit Card +1atk every 10 Joblv				works with 1 ifrit card only
 	}
+	// Echio card covered by n_tok[17]
 	if(CardNumSearch(477)){C_ATK += 15;}
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Hat of the Sun God [1] - ATK part [Nattwara]
 	/*
-	[Refine Rate 5+]
+	[Refine Rate >= 5]
 	ATK + 4, MATK + 1%
-	[Refine Rate 6+]
-	ATK + 4, MATK + 1%
-	[Refine Rate 7+]
+	[Refine Rate >= 7]
 	ATK + 6, MATK + 1%
-	[Refine Rate 8+]
+	[Refine Rate >= 8]
 	ATK + 6, MATK + 2%
 	*/
 	if(EquipNumSearch(1654)){
 		if(n_A_HEAD_DEF_PLUS>4)
-			C_ATK += 4;
-
-		if(n_A_HEAD_DEF_PLUS>5)
 			C_ATK += 4;
 
 		if(n_A_HEAD_DEF_PLUS>6)
@@ -2435,21 +2516,30 @@ function StAllCalc()
 			C_ATK += 6;
 	}
 	//vesper core 02 [rental] atk display
+	// Vesper Core 02 Rental covered by n_tok[17]
 	C_ATK += 10 * EquipNumSearch(1359);
 	
 	//bloodied shackle ball [rental] atk display
+	// BSB Rental covered by n_tok[17]
 	C_ATK += 30 * EquipNumSearch(1366);
 	
-	if(SU_STR >= 80 && EquipNumSearch(1526)){
-		C_ATK += 30;
-	}
+	
+	if(SU_STR >= 80 && EquipNumSearch(1526))
+		C_ATK += 30; // covered by n_tok[17]
+
 	if(EquipNumSearch(1120) && n_A_JobSearch()==4)
-		C_ATK += 10;
+		C_ATK += 10; // covered by n_tok[17]
+	
 	//custom TalonRO Incanation Samurai Card
+	// IS card covered by n_tok[17]
 	if(CardNumSearch(255)){C_ATK += CardNumSearch(255)*65;}
+	
 	//custom TalonRO Bloody Knight Card
+	// BK card covered by n_tok[17]
 	if(CardNumSearch(361)){C_ATK += CardNumSearch(361)*30;}
+	
 	//custom TalonRO SQI Sherwood Bow Bonus
+	// covered by n_tok[17]
 	if(EquipNumSearch(1388))
 		for(i=0;i<SQI_Bonus_Effect.length;i++)
 			if(SQI_Bonus_Effect[i]==130) {
@@ -2457,100 +2547,86 @@ function StAllCalc()
 				break;
 			}
 	//custom TalonRO Mysteltainn Card
+	// Mysteltainn card covered by n_tok[17]
 	if(CardNumSearch(375)){C_ATK += 30;}
+	
 	//custom TalonRO Pirate Dagger
+	// covered by n_tok[17]
 	if(EquipNumSearch(1250))
 		C_ATK += 5;
 
 	//[Custom TalonRO 2018-06-23 - Krishina and Assassin's Glove combo not working, added here] [Kato]
+	// covered by n_tok[17]
 	if(EquipNumSearch(1518)){
 		C_ATK += 25;
 	}
 
-	C_ATK += n_A_PassSkill9[40];
+	// Manual Edit : Flat ATK Bonus
+	C_ATK += n_A_PassSkill9[40]; // covered by n_tok[17]
 
 	//armas+gears que estão nos effects especiais
+	// Doom Slayer covered by n_tok[17]
 	if(SU_STR >= 95 && EquipNumSearch(621)){C_ATK += 340;}
 
 	for(var i=8;i<12;i++){
-		if(n_A_PassSkill8[i] == 30 && EquipNumSearch(819)){C_ATK += 50;}
-		//if(n_A_PassSkill8[i] == 13 && EquipNumSearch(1094)){C_ATK += 200;}
-		if(n_A_PassSkill8[i] == 40 && EquipNumSearch(820)){	C_ATK += 50;}
-		if(n_A_PassSkill8[i] == 22 && EquipNumSearch(927)){C_ATK += 80;}
-		if(n_A_PassSkill8[i] == 36 && EquipNumSearch(928)){C_ATK += 80;}
-		if(n_A_PassSkill8[i] == 23 && EquipNumSearch(929)){C_ATK += 300;}
-		if(n_A_PassSkill8[i] == 25 && EquipNumSearch(934)){C_ATK += 50;}
-		if(n_A_PassSkill8[i] == 41 && EquipNumSearch(892)){C_ATK += 50;}
-		if(n_A_PassSkill8[i] == 27 && EquipNumSearch(989)){C_ATK += 20;}
+		if(n_A_PassSkill8[i] == 30 && EquipNumSearch(819)){C_ATK += 50;} // covered by n_tok[17]
+		if(n_A_PassSkill8[i] == 13 && EquipNumSearch(1094)){C_ATK += 20 * n_A_Weapon_ATKplus;} // covered by n_tok[17]
+		if(n_A_PassSkill8[i] == 40 && EquipNumSearch(820)){C_ATK += 50;} // covered by n_tok[17]
+		if(n_A_PassSkill8[i] == 22 && EquipNumSearch(927)){C_ATK += 80;} // covered by n_tok[17]
+		if(n_A_PassSkill8[i] == 36 && EquipNumSearch(928)){C_ATK += 80;} // covered by n_tok[17]
+		if(n_A_PassSkill8[i] == 23 && EquipNumSearch(929)){C_ATK += 300;} // covered by n_tok[17]
+		if(n_A_PassSkill8[i] == 25 && EquipNumSearch(934)){C_ATK += 50;} // covered by n_tok[17]
+		if(n_A_PassSkill8[i] == 41 && EquipNumSearch(892)){C_ATK += 50;} // covered by n_tok[17]
+		if(n_A_PassSkill8[i] == 27 && EquipNumSearch(989)){C_ATK += 20;} // covered by n_tok[17]
 		//custom TalonRO Ancient Horns +100 ATK (ATK field)
-		if(n_A_PassSkill8[i] == 50 && EquipNumSearch(1538)){C_ATK += 100;}
+		if(n_A_PassSkill8[i] == 50 && EquipNumSearch(1538)){C_ATK += 100;} // covered by n_tok[17]
 	}
 
 	//ATK bonus display portion
-	if(EquipNumSearch(953)){C_ATK += ((n_A_JobLV*2)/7);}
+	if(EquipNumSearch(953)){C_ATK += Math.floor(n_A_JobLV * 2 / 7);} // covered by n_tok[17]
+	// Morrigane's Set covered by n_tok[17]
 	if(EquipNumSearch(666) && EquipNumSearch(721) && EquipNumSearch(701) && EquipNumSearch(722)){C_ATK += 18;}
-	if(EquipNumSearch(666)){C_ATK += 3;}
-	if(EquipNumSearch(721)){C_ATK += 5 * EquipNumSearch(721);}
-	if(EquipNumSearch(806)){C_ATK += 5;}
-	if(EquipNumSearch(1651)){C_ATK += 5;}
-	if(EquipNumSearch(1654)){C_ATK += 10;}
-	if(EquipNumSearch(676)){C_ATK += n_A_HEAD_DEF_PLUS*2;}
-	if(EquipNumSearch(323) && EquipNumSearch(725)){C_ATK += 50;}
-	if(EquipNumSearch(442) && SU_AGI > 89){C_ATK += 10 * EquipNumSearch(442);}
-	if(EquipNumSearch(1165)){C_ATK += 10 * SkillSearch(311);}
-	if(EquipNumSearch(1164) && SU_LUK >=90){C_ATK += 20;}
-	if(EquipNumSearch(1160) && SU_STR >=95){C_ATK += 20;}
-	if(EquipNumSearch(1496)){C_ATK += 10};
-	if(A_acces1.value == 728){C_ATK += 15;}
-	if(A_acces2.value == 728){C_ATK += 15;}
-	if(A_acces1.value == 525){C_ATK += 10;}
-	if(A_acces2.value == 525){C_ATK += 10;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1274)){C_ATK += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1275)){C_ATK += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){C_ATK += 15;}
-	if(EquipNumSearch(1282)){C_ATK += 15;}
-	if(EquipNumSearch(1283)){C_ATK += 5;}
-	if(EquipNumSearch(1285)){C_ATK += 7;}
-	if(n_A_HEAD_DEF_PLUS == 10 && EquipNumSearch(1290)){C_ATK += 5;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1291)){C_ATK += 5;}
-	if(EquipNumSearch(1150)){C_ATK += 15};
-	if(EquipNumSearch(1218)){C_ATK += 5};
+	if(EquipNumSearch(666)){C_ATK += 3;} // covered by n_tok[17]
+	if(EquipNumSearch(721)){C_ATK += 5 * EquipNumSearch(721);} // covered by n_tok[17]
+	if(EquipNumSearch(806)){C_ATK += 5;} // covered by n_tok[17]
+	if(EquipNumSearch(1651)){C_ATK += 5;} // covered by n_tok[17]
+	if(EquipNumSearch(1654)){C_ATK += 10;} // covered by n_tok[17]
+	if(n_A_JobSearch()==41 && EquipNumSearch(676)){C_ATK += n_A_HEAD_DEF_PLUS*2;} // covered by n_tok[17]
+	if(EquipNumSearch(323) && EquipNumSearch(725)){C_ATK += 50;} // covered by n_tok[17]
+	if(EquipNumSearch(442) && SU_AGI > 89){C_ATK += 10 * EquipNumSearch(442);} // covered by n_tok[17]
+	if(EquipNumSearch(1165)){C_ATK += 10 * SkillSearch(311);} // covered by n_tok[17]
+	if(EquipNumSearch(1164) && SU_LUK >=90){C_ATK += 20;} // covered by n_tok[17]
+	if(EquipNumSearch(1160) && SU_STR >=95){C_ATK += 20;} // covered by n_tok[17]
+	if(EquipNumSearch(1496)){C_ATK += 10}; // covered by n_tok[17]
+	
+	if(A_acces1.value == 728){C_ATK += 15;} // covered by n_tok[17]
+	if(A_acces2.value == 728){C_ATK += 15;} // covered by n_tok[17]
+	if(A_acces1.value == 525){C_ATK += 10;} // Vesper Core 02 covered by n_tok[17]
+	if(A_acces2.value == 525){C_ATK += 10;} // Vesper Core 02 covered by n_tok[17]
+	
+	
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1274)){C_ATK += 15;} // covered by n_tok[17]
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1275)){C_ATK += 15;} // covered by n_tok[17]
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){C_ATK += 15;} // covered by n_tok[17]
+	if(EquipNumSearch(1282)){C_ATK += 15;} // covered by n_tok[17]
+	if(EquipNumSearch(1283)){C_ATK += 5;} // covered by n_tok[17]
+	if(EquipNumSearch(1285)){C_ATK += 7;} // covered by n_tok[17]
+	if(n_A_HEAD_DEF_PLUS == 10 && EquipNumSearch(1290)){C_ATK += 5;} // covered by n_tok[17]
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1291)){C_ATK += 5;} // covered by n_tok[17]
+	if(EquipNumSearch(1150)){C_ATK += 15};  // covered by n_tok[17]
+	if(EquipNumSearch(1218)){C_ATK += 5}; // covered by n_tok[17]
 	//Jade Rabbit Hat -[Loa] - 2017-07-03
-	if(EquipNumSearch(1218) && n_A_HEAD_DEF_PLUS > 4){C_ATK += n_A_HEAD_DEF_PLUS - 4;}
+	if(EquipNumSearch(1218) && n_A_HEAD_DEF_PLUS > 4){C_ATK += n_A_HEAD_DEF_PLUS - 4;} // covered by n_tok[17]
 
 	//skils que dão atk[parte 1]
-	if (SkillSearch(146)){C_ATK +=3;}
-	if(n_A_PassSkill3[9]){C_ATK += 50+(25*(n_A_PassSkill3[9]-1));}
-	if(n_A_PassSkill6[0] == 0 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==3){C_ATK += n_A_PassSkill6[1] *10;}
+	if (SkillSearch(146)){C_ATK +=4;} // covered by n_tok[17]
+	// n_A_PassSkill3[9] - A Drum of the Battlefield
+	if(n_A_PassSkill3[9]){C_ATK += 50+(25*(n_A_PassSkill3[9]-1));} // covered by wImp
+	if(n_A_PassSkill6[0] == 0 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==3){C_ATK += n_A_PassSkill6[1] *10;} // Volcano bonus, covered by n_tok[17]
 
 	//Wakwak Card - For every 10 Base STR, ATK + 5
 	if(CardNumSearch(560)){
-		C_ATK += 5 * Math.floor(SU_STR / 10);
-	}
-
-	//Custom TalonRO - 2018-06-07 - Enhanced Hat of the Sun God [1] - ATK part [Nattwara]
-	/*
-	[Refine Rate 5+]
-	ATK + 4, MATK + 1%
-	[Refine Rate 6+]
-	ATK + 4, MATK + 1%
-	[Refine Rate 7+]
-	ATK + 6, MATK + 1%
-	[Refine Rate 8+]
-	ATK + 6, MATK + 2%
-	*/
-	if(EquipNumSearch(1654)){
-		if(n_A_HEAD_DEF_PLUS>4)
-			C_ATK += 4;
-
-		if(n_A_HEAD_DEF_PLUS>5)
-			C_ATK += 4;
-
-		if(n_A_HEAD_DEF_PLUS>6)
-			C_ATK += 6;
-
-		if(n_A_HEAD_DEF_PLUS>7)
-			C_ATK += 6;
+		C_ATK += 5 * Math.floor(SU_STR / 10); // covered by n_tok[17]
 	}
 
 	/*
@@ -2559,7 +2635,7 @@ function StAllCalc()
 		ATK + 20
 	*/
 	if(EquipNumSearch(907) && n_A_Weapon_ATKplus >= 8) {
-		C_ATK += 20;
+		C_ATK += 20; // covered by n_tok[17]
 	}
 	/*
 		Brave Battlefield Morning Star (display attack)
@@ -2568,7 +2644,7 @@ function StAllCalc()
 		ATK + 30
 	*/
 	if(EquipNumSearch(908) && n_A_Weapon_ATKplus >= 8 && n_A_JobSearch2() == 19) {
-		C_ATK += 30;
+		C_ATK += 30; // covered by n_tok[17]
 	}
 	/*
 		Glorious Revolver (display attack)
@@ -2576,82 +2652,69 @@ function StAllCalc()
 		ATK + 25
 	*/
 	if(EquipNumSearch(1099) && n_A_Weapon_ATKplus >= 8) {
-		C_ATK += 25;
+		C_ATK += 25; // covered by n_tok[17]
 	}
 
-	if(EquipNumSearch(1120) && n_A_JobSearch()==4)
-		C_ATK += 10;
-	if(EquipNumSearch(1165))
-		C_ATK += 10 * SkillSearch(311);
-	if(n_A_PassSkill6[0] == 0 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==3)
-		C_ATK += n_A_PassSkill6[1] * 10;
+	
 
-	if(n_A_PassSkill7[2])
+	// Rainbow Cake - ATK + 10
+	if(n_A_PassSkill7[2]) // covered by n_tok[17]
 		C_ATK += 10;
-	if(n_A_PassSkill7[9])
+	// Box of Resentment - ATK + 20
+	if(n_A_PassSkill7[9]) // covered by n_tok[17]
 		C_ATK += 20;
-	if(n_A_PassSkill8[19])
+	// Rune Strawberry Cake - ATK + 5
+	if(n_A_PassSkill8[19]) // covered by n_tok[17]
 		C_ATK += 5;
 
-	if(SkillSearch(420))
+	// Madness Canceller#420 - ATK + 100
+	if(SkillSearch(420)) // covered by n_tok[17]
 		C_ATK += 100;
+		
+	// Gatling Fever Skill#433 - ATK + 20 + 10 * SkillLV.
 	if(SkillSearch(433)){
 		if(n_A_WeaponType==20 || n_A_WeaponType==0)
-			C_ATK += 20 + 10 * SkillSearch(433);
+			C_ATK += 20 + 10 * SkillSearch(433); // covered by n_tok[17]
 	}
-
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1274)){
-		C_ATK += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1275)){
-		C_ATK += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){
-		C_ATK += 15;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1291)){
-		C_ATK += 5;}
-	if(n_A_HEAD_DEF_PLUS == 10 && EquipNumSearch(1290)){
-		C_ATK += 5;}
 
 	//custom TalonRO Imperial Spear: ATK +2 each 2 refine levels
 	if(EquipNumSearch(1460))
-		C_ATK += 2*Math.floor(n_A_Weapon_ATKplus/2)
+		C_ATK += 2*Math.floor(n_A_Weapon_ATKplus/2) // covered by n_tok[17]
 	//custom TalonRO Imperial Spear: ATK +2 each Spear Mastery level
 	if(SkillSearch(69) && EquipNumSearch(1460))
-		C_ATK += 2*SkillSearch(69);
+		C_ATK += 2*SkillSearch(69); // covered by n_tok[17]
 	//custom TalonRO Gold Scaraba Card
-	C_ATK += Math.floor(n_A_JobLV /5) * CardNumSearch(528);
+	C_ATK += Math.floor(n_A_JobLV /5) * CardNumSearch(528); // covered by n_tok[17]
 	// custom TalonRO Tendrillion card
-	C_ATK += 45 * CardNumSearch(582);
+	C_ATK += 45 * CardNumSearch(582); // covered by n_tok[17]
 	// custom TalonRO Fanat card
-	C_ATK += 30 * CardNumSearch(585);
+	C_ATK += 30 * CardNumSearch(585); // covered by n_tok[17]
 	// custom TalonRO White Knight and Khalitzburg Knight card
 	if (CardNumSearch(445)) {
-		C_ATK += 5;
+		C_ATK += 5; // covered by n_tok[17]
 		
 		if (CardNumSearch(444))
-			C_ATK += 10;
+			C_ATK += 10; // covered by n_tok[17]
 	}
 	
 	// Custom TalonRO Cobalt Mineral
-	C_ATK += 15 * CardNumSearch(597);
+	C_ATK += 15 * CardNumSearch(597); // covered by n_tok[17]
 	// Eclage STR Glove#1704 - [Every 10 points of STR] ATK + 1
-	C_ATK += Math.floor(SU_STR / 10) * EquipNumSearch(1704);
-	//custom TalonRO Halloween Midas Whisper
-	if(SU_STR >= 80 && EquipNumSearch(1526)){
-		C_ATK += 30;
-	}
+	C_ATK += Math.floor(SU_STR / 10) * EquipNumSearch(1704); // covered by n_tok[17]
 
 	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for Fighting Spirit - ATK] [Kato]
 	// ATK status part.
-		for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
-			var vME = tRO_MalangdoEnchantment[i];
-			if(vME >= 1781 && vME <= 1788) {
-					C_ATK += (4 + (2 * (parseInt(vME.substr(-1)) - 1)));
-			}
+	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+		var vME = tRO_MalangdoEnchantment[i];
+		if(vME >= 1781 && vME <= 1788) {
+				C_ATK += (4 + (2 * (parseInt(vME.substr(-1)) - 1))); // covered by n_tok[17]
 		}
-		//[Custom TalonRO 2018-07-30 - Glorious Two-handed Axe - 100+ ATK for merchant class] [Amor...]
-		if(EquipNumSearch(1087) && n_A_JobSearch() == 6) {
-				C_ATK += 100;
-		}
+	}
+
+	//[Custom TalonRO 2018-07-30 - Glorious Two-handed Axe - 100+ ATK for merchant class] [Amor...]
+	if(EquipNumSearch(1087) && n_A_JobSearch() == 6) {
+			C_ATK += 100; // covered by n_tok[17]
+	}
 
 	//refines das armas
 	if(n_A_WeaponLV == 1){W_REF = n_A_Weapon_ATKplus * 2;}
@@ -2696,7 +2759,6 @@ function StAllCalc()
 		P_ATK = P_ATK2;}
 
 	//items que dão atk
-	if(n_A_PassSkill7[9]){P_ATK += 20;}
 	if(n_A_PassSkill8[31]){P_ATK += 15;}//BGFOOD DE ATK
 	if(n_A_PassSkill6[5]){P_ATK += Math.floor((.02+(.03*n_A_PassSkill6[5]))*P_ATK);}
 	if(n_A_PassSkill6[5] && n_A_PassSkill2[12]){P_ATK += 0;}
@@ -2739,6 +2801,7 @@ function StAllCalc()
 
 	H_ATK = P_ATK;
 
+	// FIXME: Review H_ATK, linked to Glorious FIXME flag
 	if(n_A_Equip[9] == 978 || n_A_Equip[9] == 979 || n_A_Equip[9] == 980 || n_A_Equip[9] == 981 || n_A_Equip[9] == 982 || n_A_Equip[9] == 983 || n_A_Equip[9] == 984){
 		H_ATK += H_ATK*.05;}
 	if(n_A_Equip[10] == 978 || n_A_Equip[10] == 979 || n_A_Equip[10] == 980 || n_A_Equip[10] == 981 || n_A_Equip[10] == 982 || n_A_Equip[10] == 983 || n_A_Equip[10] == 984){
@@ -2746,6 +2809,7 @@ function StAllCalc()
 	if(EquipNumSearch(1312)){
 		H_ATK += H_ATK*.05;}
 
+	// Fighting Chant Skill#342
 	if(SkillSearch(342)){
 		if (SkillSearch(380) <= 1){H_ATK += 0;}
 		else {H_ATK += Math.floor(H_ATK*((2 * SkillSearch(342) * SkillSearch(380))/100));}
