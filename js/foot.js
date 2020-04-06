@@ -1017,7 +1017,7 @@ function StAllCalc()
 			n_tok[87] += 2;
 	}
 
-	n_A_ATK += Math.floor(n_A_ATK * (1 + n_tok[87] / 100));
+	n_A_ATK = Math.floor(n_A_ATK * (1 + n_tok[87] / 100));
 
 	// Dedicated ATK bonus variable as it is impacted by the Size multiplier
 	// Impositio Manus - ATK + 5 * SkillLV
