@@ -2600,6 +2600,7 @@ function ATKbai02(wATKbai,ch_A02)
 		if(SkillSearch(154)==0 && n_A_PassSkill2[8])
 			wA02 += n_A_PassSkill2[8] * 5 / 5;
 	}
+	// Fighting Chant Skill#342 - FIXME : Check with IG damages
 	if(SkillSearch(342)){
 		if (SkillSearch(380) <= 1){wA02 += 0;}
 		else {wA02 += 2 * SkillSearch(342) * SkillSearch(380);}

@@ -988,75 +988,43 @@ function StAllCalc()
 	}
 	
 	// Rainbow Cake - ATK + 10
-	if(n_A_PassSkill7[2])
+	if (n_A_PassSkill7[2])
 		n_tok[17] += 10;
 	// Box of Resentment - ATK + 20
-	if(n_A_PassSkill7[9])
+	if (n_A_PassSkill7[9])
 		n_tok[17] += 20;
 	// Rune Strawberry Cake - ATK + 5
-	if(n_A_PassSkill8[19])
+	if (n_A_PassSkill8[19])
 		n_tok[17] += 5;
+	// Tasty Pink Ration - ATK + 15
+	if (n_A_PassSkill8[31])
+		n_tok[17] += 15;
 
 	n_A_ATK += n_tok[17];
 
-	//Note - Issue#252
-	//Need checking on all of these items.
-	//ATK% stuff
-	w= 0;
+	// Maiden Hat#1628 - [Every Refine Level Above 6] ATK + 1% (bAddClass bonus)
+	n_tok[80] += Math.max(0, n_A_HEAD_DEF_PLUS - 6) * EquipNumSearch(1628);
 
-	//BG Medallions
-	//Moved to "Fix for Issue#252"
-	/*
-	if(n_A_Equip[9] == 978 || n_A_Equip[9] == 979 || n_A_Equip[9] == 980 || n_A_Equip[9] == 981 || n_A_Equip[9] == 982 || n_A_Equip[9] == 983 || n_A_Equip[9] == 984)
-	{
-		w += n_A_ATK*.05;
-	}
-	if(n_A_Equip[10] == 978 || n_A_Equip[10] == 979 || n_A_Equip[10] == 980 || n_A_Equip[10] == 981 || n_A_Equip[10] == 982 || n_A_Equip[10] == 983 || n_A_Equip[10] == 984)
-	{
-		w += n_A_ATK*.05;
-	}
-	*/
+	// Issue#252 - ATK% in most cases is implementing by bAddClass, All_Class, n insteand of bAtkRate, n
 
-	//Wrong Effect - Little Red Riding Hood Scarf
-	/*
-	if(EquipNumSearch(1312)){
-		w += n_A_ATK*.05;}
-	*/
-
-	//Moved to "Fix for Issue#252"
-	/*
-	//custom TalonRO Chewing Bubblegum +1% atk
-	if(EquipNumSearch(1395))
-		w += n_A_ATK*.01;
-	//custom TalonRO Choco Stick In Mouth -1% atk
-	if(EquipNumSearch(1438))
-		w -= n_A_ATK*.01;
-	//custom TalonRO Rainbow Poring Hat +1% atk
-	if(EquipNumSearch(1447))
-		if(n_A_HEAD_DEF_PLUS>=7)
-			w += n_A_ATK*.01;
-	//custom TalonRO Angeling Fur Hat +1% atk
-	if(EquipNumSearch(1469))
-		w += n_A_ATK*.01;
-	*/
-	//Yellow/Green/Pink Sheila Hairnet [Refine Rate 9+] Increase ATK by 2% [Refine Rate 10] Increase ATK by 2% - [Loa] - 2016-06-29
-	if(EquipNumSearch(1022) || EquipNumSearch(1026) || EquipNumSearch(1073)){
-		if(n_A_HEAD_DEF_PLUS >= 9){
-			w += n_A_ATK*.02;
-		}
-		if(n_A_HEAD_DEF_PLUS == 10){
-			w += n_A_ATK*.02;
-		}
+	// Yellow/Green/Pink Sheila Hairnet  - [Loa] - 2016-06-29
+	if (EquipNumSearch(1022) || EquipNumSearch(1026) || EquipNumSearch(1073)){
+		// [Refine Rate 9+] ATK + 2% 
+		if (n_A_HEAD_DEF_PLUS >= 9)
+			n_tok[87] += 2;
+		// [Refine Rate 10] ATK + 2%
+		if (n_A_HEAD_DEF_PLUS == 10)
+			n_tok[87] += 2;
 	}
 
-	w = Math.round(w);
-
-	n_A_ATK += w;
+	n_A_ATK += Math.floor(n_A_ATK * (1 + n_tok[87] / 100));
 
 	// Dedicated ATK bonus variable as it is impacted by the Size multiplier
 	// Impositio Manus - ATK + 5 * SkillLV
 	wImp = n_A_PassSkill2[2] *5;
 
+	// FIXME : Validate that DotB is impacted or not by the Size multiplier, if that is not the case
+	// then the ATK bonus should be added to n_tok[17]
 	// A Drum on the Battlefield - ATK + 25 + 25 * SkillLV
 	if(n_A_PassSkill3[9])
 		wImp += 25 + 25 * n_A_PassSkill3[9];
@@ -2715,8 +2683,10 @@ function StAllCalc()
 	if(EquipNumSearch(1087) && n_A_JobSearch() == 6) {
 			C_ATK += 100; // covered by n_tok[17]
 	}
+	
+	if(n_A_PassSkill8[31]){C_ATK += 15;} // Tasty Pink Ration - ATK + 15 covered by n_tok[17]
 
-	//refines das armas
+	// Weapon refine ATK bonus
 	if(n_A_WeaponLV == 1){W_REF = n_A_Weapon_ATKplus * 2;}
 	else if(n_A_WeaponLV == 2){W_REF = n_A_Weapon_ATKplus * 3;}
 	else if(n_A_WeaponLV == 3){W_REF = n_A_Weapon_ATKplus * 5;}
@@ -2749,86 +2719,41 @@ function StAllCalc()
 		P_ATK = Math.floor(I_ATK + C_ATK + W_ATKD + S2_A_ATK);
 	}
 
-	//skills de atk[parte 2]
+	// ATK display modification for skills
 
+	// Concentration Skill#256 - ATK + 5 * SkillLV
 	if(SkillSearch(256)){
 		P_ATK2 = P_ATK+(P_ATK*(0.05*SkillSearch(256)));
 		P_ATK = P_ATK2;}
+	// Auto Berserk Skill#12 - ATK + 32%
 	if(SkillSearch(12)){
 		P_ATK2 = P_ATK+(P_ATK*0.32);
 		P_ATK = P_ATK2;}
-
-	//items que dão atk
-	if(n_A_PassSkill8[31]){P_ATK += 15;}//BGFOOD DE ATK
-	if(n_A_PassSkill6[5]){P_ATK += Math.floor((.02+(.03*n_A_PassSkill6[5]))*P_ATK);}
-	if(n_A_PassSkill6[5] && n_A_PassSkill2[12]){P_ATK += 0;}
-		else{
-			if(n_A_PassSkill2[12]){P_ATK += Math.floor(P_ATK*0.05);}
-		}
-		//Maiden Hat - ZoneSoldier - 6/6/2018
-		//Increase ATK + 1% per upgrade past 6.
-	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
-		P_ATK += 1 * (n_A_HEAD_DEF_PLUS - 6);
-	}
-
-	/*
-	//Note - Issue#252
-	//Moved to "Fix for Issue#252"
-	//custom TalonRO Chewing Bubblegum +1% atk
-	if(EquipNumSearch(1395))
-		P_ATK += P_ATK*.01;
-	//custom TalonRO Choco Stick In Mouth -1% atk
-	if(EquipNumSearch(1438))
-		P_ATK -= P_ATK*.01;
-	//custom TalonRO Rainbow Poring Hat +1% atk
-	if(EquipNumSearch(1447))
-		if(n_A_HEAD_DEF_PLUS>=7)
-			P_ATK += P_ATK*.01;
-	*/
-
-	//Note - Issue#252
-	//Moved to "Fix for Issue#252"
-	//[Custom TalonRO 2018-06-16 - Malangdo Enchantment for ATK%] [Kato]
-	/*
-	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
-		var vME = tRO_MalangdoEnchantment[i];
-
-		if(vME == 171) P_ATK += P_ATK * parseInt(vME.substr(-1))/100;
-	}
-	*/
+	
+	// Provoke - ATK + 2 + 3 * SkillLV FIXME : Should be covered by n_tok[87] ?
+	if(n_A_PassSkill6[5])
+		P_ATK += Math.floor((.02+(.03*n_A_PassSkill6[5]))*P_ATK);
+	// Aloevera - Provoke Lv 1 effect, does not stack with self Provoke
+	if(!n_A_PassSkill6[5] && n_A_PassSkill2[12])
+		P_ATK += Math.floor(P_ATK*0.05);
 
 	if (P_ATK < 0){P_ATK = 0;}
 
+	// Gospel - ATK + 100%
+	if(n_A_PassSkill5[3] == 1)
+		P_ATK = 2*P_ATK;
+
 	H_ATK = P_ATK;
-
-	// FIXME: Review H_ATK, linked to Glorious FIXME flag
-	if(n_A_Equip[9] == 978 || n_A_Equip[9] == 979 || n_A_Equip[9] == 980 || n_A_Equip[9] == 981 || n_A_Equip[9] == 982 || n_A_Equip[9] == 983 || n_A_Equip[9] == 984){
-		H_ATK += H_ATK*.05;}
-	if(n_A_Equip[10] == 978 || n_A_Equip[10] == 979 || n_A_Equip[10] == 980 || n_A_Equip[10] == 981 || n_A_Equip[10] == 982 || n_A_Equip[10] == 983 || n_A_Equip[10] == 984){
-		H_ATK += H_ATK*.05;}
-	if(EquipNumSearch(1312)){
-		H_ATK += H_ATK*.05;}
-
-	// Fighting Chant Skill#342
-	if(SkillSearch(342)){
-		if (SkillSearch(380) <= 1){H_ATK += 0;}
-		else {H_ATK += Math.floor(H_ATK*((2 * SkillSearch(342) * SkillSearch(380))/100));}
-	}
-	/*if(CardNumSearch(479) && (n_A_JOB==14 || n_A_JOB==28)){
-		H_ATK += H_ATK*.1;}*/
-
-	//gospel effect
-	if(n_A_PassSkill5[3] == 1){
-		H_ATK = 2*H_ATK;
-		P_ATK = 2*P_ATK;}
-
+	
+	// H_ATK dedicated for WoE ATK bonus
+	// FIXME : Add Glorious Weapon ATK bonus
+	
 	myInnerHtml("A_ATK2", Math.round(P_ATK) +"+"+ (W_REF+W_REF2) + "<br><b>WOE: </b>" + Math.round(H_ATK) +"+" + (W_REF+W_REF2),0);
 
 	n_A_MATK = [0,0,0];
 
 	var w = Math.floor(n_A_INT / 7);
 	n_A_MATK[0] = n_A_INT + w * w;
-
 
 	w = Math.floor(n_A_INT / 5);
 	n_A_MATK[2] = n_A_INT + w * w;
@@ -2882,8 +2807,8 @@ function StAllCalc()
 	{
 		w += 1 * (n_A_HEAD_DEF_PLUS - 4);
 	}
-	//Maiden Hat - ZoneSoldier - 6/6/2018
-	//Increase MATK + 1% per upgrade past 6.
+
+	// Maiden Hat#1628 - [Every Refine Level Above 6] MATK + 1%. - ZoneSoldier - 6/6/2018
 	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
 		w += 1 * (n_A_HEAD_DEF_PLUS - 6);
 	}
@@ -2989,32 +2914,11 @@ function StAllCalc()
 		so I'm using n_tok[80] for +ATK% as I'm sticking to the script.
 	*/
 
-	if(n_A_Equip[9] == 978 || n_A_Equip[9] == 979 || n_A_Equip[9] == 980 || n_A_Equip[9] == 981 || n_A_Equip[9] == 982 || n_A_Equip[9] == 983 || n_A_Equip[9] == 984)
-	{
-		n_tok[80] += 5;
-	}
-	if(n_A_Equip[10] == 978 || n_A_Equip[10] == 979 || n_A_Equip[10] == 980 || n_A_Equip[10] == 981 || n_A_Equip[10] == 982 || n_A_Equip[10] == 983 || n_A_Equip[10] == 984)
-	{
-		n_tok[80] += 5;
-	}
-
-	//custom TalonRO Chewing Bubblegum +1% atk
-	if(EquipNumSearch(1395)){
-		n_tok[80] += 1;
-	}
-	//custom TalonRO Choco Stick In Mouth -1% atk
-	if(EquipNumSearch(1438)){
-		n_tok[80] -= 1;
-	}
 	//custom TalonRO Rainbow Poring Hat +1% atk
 	if(EquipNumSearch(1447)){
 		if(n_A_HEAD_DEF_PLUS>=7){
 			n_tok[80] += 1;
 		}
-	}
-	//custom TalonRO Angeling Fur Hat +1% atk
-	if(EquipNumSearch(1469)){
-		n_tok[80] += 1;
 	}
 
 	//custom TalonRO Evil Marching Hat: if refine rate >=9 +5% ATK
@@ -4096,9 +4000,10 @@ function StAllCalc()
 		&& CardNumSearch(597) && CardNumSearch(184) && !CardNumSearch(62))
 		n_tok[78] += 20;
 
-	//maiden hat +1% heal per refine > 6 - [Loa] - 2018-06-25
+	// Maiden Hat#1628 - [Every Refine Level Above 6] Heal effectiveness incresed by 1% [Loa] - 2018-06-25
 	if(n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1628)){
 		n_tok[91] += n_A_HEAD_DEF_PLUS - 6;
+		n_tok[93] += n_A_HEAD_DEF_PLUS - 6;
 		n_tok[94] += n_A_HEAD_DEF_PLUS - 6;
 	}
 
@@ -4230,13 +4135,6 @@ function StAllCalc()
 		n_tok[316] += n_A_Weapon_ATKplus;
 		AutoSpellSkill[143][4] = n_A_Weapon_ATKplus * 0.2;
 	}
-
-	// //Maiden Hat - ZoneSoldier - 6/6/2018
-	// //Additional Heal effectiveness + 1% per upgrade past 7.
-	// if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1628)){
-	// 	n_tok[317] =+ 1 * (n_A_HEAD_DEF_PLUS - 7);
-	// }
-
 
 	n_tok[70] += n_tok[320+n_B[2]];
 
