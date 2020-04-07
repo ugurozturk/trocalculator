@@ -1208,14 +1208,14 @@ ItemOBJ = [
 ,[1185,50,0,3,0,0,50,70,"Frog Hat","",0,19,1,34,12,174,12,0]
 ,[1186,50,0,2,0,1,50,0,"Jolly Roger Hat","","<b>[Refine Rate > 7]</b><br>Physical damage against <b><font color='blue'>Water</font></b> element monsters + 3%<br><b>[Refine Rate > 8]</b><br>Resistance against <b><font color='blue'>Water</font></b> element attacks + 3%",3,1,41,2,61,2,0]
 ,[1187,50,0,1,0,0,30,0,"Rain Cloud","",0,61,5,13,80,19,2,0]
-,[1188,64,1,1,0,0,10,20,"Ring of Water","",0,61,5,0]
+,[1188,64,1,1,0,0,10,20,"Ring of Water","","A mysterious ring that is blessed by the Spirit of Water.",61,5,0]
 ,[1189,60,1001,3,0,1,50,0,"Dragon Vest","",0,19,3,0]
 ,[1190,60,1072,7,0,1,100,85,"Bone Plate","","Adds a 1% chance to cause External Bleeding status ailment all enemies in a 5x5 area around you when taking ATK based damage",1,1,19,3,307,10,302,10,0]
 ,[1191,61,1079,5,0,1,180,65,"Bradium Shield","",0,13,500,5159,60,5384,60,2,-1,0]
 ,[1192,62,1001,5,0,1,100,0,"Dragon Manteau","",0,2,1,19,5,0]
 ,[1193,62,1001,5,0,1,40,90,"Proxy Skin Fragment","","Increases SP by Level/3 + [Refine Rate * 10]<br>When dealing physical damage there's a 1% chance that you'll recover 1% of your damage as SP",19,3,61,3,62,3,63,3,64,3,65,3,66,3,67,3,68,3,69,3,0]
 ,[1194,63,1001,4,0,0,50,60,"Life Tree Wooden Shoes","","Recover 30 HP every 10 seconds",15,10,3,2,19,3,92,5,93,5,95,5,0]
-,[1195,64,0,0,0,0,10,0,"Ring Of Wisdom","",0,13,50,14,20,0]
+,[1195,64,0,0,0,0,10,0,"Ring of Wisdom","",0,13,50,14,20,0]
 ,[1196,64,0,0,0,1,10,70,"Eye Ring","",0,10,2,14,25,0]
 ,[1197,64,1001,0,0,1,20,75,"Waterdrop Brooch","",0,61,5,13,80,19,2,0]
 ,[1198,64,1001,0,0,1,20,60,"Bradium Earring","",0,4,1,5,1,89,2,0]
@@ -1757,8 +1757,11 @@ ItemOBJ = [
 ,[1707,64,1001,0,0,"0 / 1",10,1,"INT Glove","","<br>[Every 6 points of INT]<br>MATK + 1<br>[Base INT >= 80]<br>MATK + 1%",13,100,14,20,0]
 ,[1708,64,1001,0,0,"0 / 1",10,1,"DEX Glove","","<br>[Every 4 points of DEX]<br>HIT + 1<br>[Base DEX >= 80]<br>Ranged Attack + 2%",13,100,14,20,0]
 ,[1709,64,1001,0,0,"0 / 1",10,1,"LUK Glove","","<br>[Every 10 points of LUK]<br>CRIT + 1<br>[Base LUK >= 60]<br>Critical Attack + 3%",13,100,14,20,0]
+,[1710,64,1,1,0,0,10,20,"Ring of Fire","","A mysterious ring that is blessed by the Spirit of Fire.",63,5,0]
+,[1711,64,1,1,0,0,10,20,"Ring of Wind","","A mysterious ring that is blessed by the Spirit of Wind.",64,5,0]
+,[1712,64,1,1,0,0,10,20,"Ring of Earth","","A mysterious ring that is blessed by the Spirit of Earth.",62,5,0]
 // ---
-,[1710,9,77,70,4,2,60,60,"Shadow Staff","","<br><b>[Every Refine Level]</b><br> Add a 0.2% chance of auto-casting [Sight Blaster] on yourself when using magic attacks.<br>1% MDEF pierce against Demon Race.",89,20,220,60,343,5,357,5,221,143,0]
+,[1713,9,77,70,4,2,60,60,"Shadow Staff","","<br><b>[Every Refine Level]</b><br> Add a 0.2% chance of auto-casting [Sight Blaster] on yourself when using magic attacks.<br>1% MDEF pierce against Demon Race.",89,20,220,60,343,5,357,5,221,143,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3502,7 +3505,10 @@ ItemID = [
 ,[1707,1,2920]
 ,[1708,1,2921]
 ,[1709,1,2922]
-,[1710,1,1639]
+,[1710,1,2683]
+,[1711,1,2684]
+,[1712,1,2685]
+,[1713,1,1639]
 ];
 
 /*

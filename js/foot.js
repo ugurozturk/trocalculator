@@ -3870,11 +3870,11 @@ function StAllCalc()
 		n_tok[295] += n_tok[297];
 	
 	/*
-		Shadow Staff#1710 - [Every Refine Level]
+		Shadow Staff#1713 - [Every Refine Level]
 		1% MDEF pierce against Demon Race.
 		Add a 0.2% chance of auto-casting [Sight Blaster] on yourself when using magic attacks.
 	*/
-	if (EquipNumSearch(1710)) {
+	if (EquipNumSearch(1713)) {
 		n_tok[316] += n_A_Weapon_ATKplus;
 		AutoSpellSkill[143][4] = n_A_Weapon_ATKplus * 0.2;
 	}
