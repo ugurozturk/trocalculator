@@ -886,13 +886,13 @@ MonsterABC.push("N")
 
 var tiiki = ["All Regions","Seals","GMC","Abyss Lake Dungeon","Amatsu","Ant Hell","Ayothaya","Battlegrounds","Bibilan",
 "Bio Labs","Bitfrost","Brasilis","Clock Tower","Coal Mine","Comodo Caves","Comodo Fields","Culverts","Dewata","Dimensional Crack","Eclage","Einbroch Dungeon",
-"Einbroch Fields","Elysian Garden","El Dicastes","Endless Tower Finale","Geffenia","Geffen Dungeon","Geffen Fields","Glast Heim","Glast Heim Dungeons","Gonryun",
+"Einbroch Fields","El Dicastes","Endless Tower Finale","Geffenia","Geffen Dungeon","Geffen Fields","Glast Heim","Glast Heim Dungeons","Gonryun",
 "Guild Dungeon [Aldebaran]","Guild Dungeon [Arunafeltz]","Guild Dungeon [Geffen]","Guild Dungeon [Payon]","Guild Dungeon [Prontera]",
 "Guild Dungeon [Schwartzvald]","Hidden Temple","Hugel Fields","Ice Cave","Juperos Dungeon","Kiel Dungeon","Lighthalzen Fields",
 "Louyang","Lutie & Toy Factory","Magma Dungeon","Malangdo","Malangdo Culvert","Manuk","Morroc Fields","Moscovia","Mt. Mjolnir","Nameless Island","Nidhoggr's Nest",
 "Niflheim","Odins Shrine","Old Glast Heim","Orc Dungeon","Payon Dungeon","Payon Fields","Poring Island","Port Malaya Instance","Prontera Fields","Pyramid","Pyramid [Nightmare]","Rachel Fields",
 "Rachel Sanctuary","Scaraba Hole","Sphinx","Splendide","Sunken Ship","Thanatos Tower","Thors Volcano","Turtle Island","Umbala Dungeon",
-"Umbala Fields","Veins Fields","War of Emperium","Yuno Fields"];
+"Umbala Fields","Valkyries' Realm","Veins Fields","War of Emperium","Yuno Fields"];
 
 if(Taijin==0){
 	for(var i=0;i < tiiki.length;i++)
@@ -922,7 +922,6 @@ MonMap = [
 [692,693,694,695,696,697,698,699,700,"N"], // Eclage
 [347,348,349,350,351,352,353,354,355,356,"N"],//Einbroch Dungeon
 [67,82,92,105,136,179,187,199,202,211,214,219,231,252,261,271,272,273,307,323,346,347,351,352,354,376,377,"N"],//Einbroch Fields
-[717,718,719,720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735,736,737,738,739,740,741,742,743,744,745,746,"N"], // Elysian Garden
 [528,530,531,555,541,"N"],//El Dicastes
 [505,506,507,508,509,510,"N"],//Endless Tower Finale
 [23,25,35,48,66,123,144,193,247,253,291,296,"N"],//Geffenia
@@ -976,6 +975,7 @@ MonMap = [
 [6,129,159,168,176,178,208,220,234,255,264,"N"],//Turtle Island
 [29,30,32,210,211,260,"N"],//Umbala Dungeon
 [12,29,30,96,103,155,177,183,208,210,219,235,246,261,273,307,"N"],//Umabala Fields
+[717,718,719,720,721,722,723,724,725,726,727,728,729,730,731,732,733,734,735,736,737,738,739,740,741,742,743,744,745,746,"N"], // Valkyries' Realm
 [59,122,127,131,162,188,214,240,301,317,445,446,447,448,449,450,464,"N"],//Veins Fields
 [63,64,65,503,504,44,547,548,"N"],//War of Emperium
 [0,41,87,91,92,98,105,121,122,130,134,136,151,162,177,187,193,211,214,219,232,235,252,271,272,273,278,279,293,323,340,400,401,402,"N"]//Yuno Fields
