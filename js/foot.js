@@ -902,6 +902,32 @@ function StAllCalc()
 		if (n_A_HEAD_DEF_PLUS > 7)
 			n_tok[17] += 6;
 	}
+	
+	/* 
+	Eclage Foods 4-4-2020 Velaryon#8787
+	Try catch is needed to prevent undefined error for eclage_food_list
+	This is because the value is not defined until addtional effects is checked
+	*/
+	try{ 
+		//Peony Mommy [Fire]
+		if(eclage_food_list.value == 1){ 
+			n_tok[10] += 10;
+		}
+		//Snow Flip [Water]
+		if(eclage_food_list.value == 2){
+			n_tok[10] += 20;
+		}
+		//Slapping Herb [Earth]
+		if(eclage_food_list.value == 3){
+			n_tok[10] += 30;
+		}
+		//Yggdrasil Dust [Wind]
+		if(eclage_food_list.value == 4){
+			n_tok[10] += 40;
+		}
+	} catch(err){
+		//console.log("error msg = " + err);
+	}
 
 	// Doom Slayer#621 - [If Base STR >= 95] ATK + 340
 	if(SU_STR >= 95)
