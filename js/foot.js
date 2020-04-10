@@ -553,6 +553,7 @@ function StAllCalc()
 		n_A_IJYOU[1] = eval(A_IJYOU1.value);
 		n_A_IJYOU[2] = eval(A_IJYOU2.checked);
 		n_A_IJYOU[3] = eval(A_IJYOU3.checked);
+		eclage_food = eval(eclage_food_list.value);
 	}
 	//custom TalonRO SQI
 	if(n_SQI_Bonus_SW){
@@ -638,7 +639,7 @@ function StAllCalc()
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
-	for(i=290;i<=369;i++){
+	for(i=290;i<=379;i++){
 		n_tok[i] = 0;
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
@@ -901,32 +902,6 @@ function StAllCalc()
 
 		if (n_A_HEAD_DEF_PLUS > 7)
 			n_tok[17] += 6;
-	}
-	
-	/* 
-	Eclage Foods 4-4-2020 Velaryon#8787
-	Try catch is needed to prevent undefined error for eclage_food_list
-	This is because the value is not defined until addtional effects is checked
-	*/
-	try{ 
-		//Peony Mommy [Fire]
-		if(eclage_food_list.value == 1){ 
-			n_tok[10] += 10;
-		}
-		//Snow Flip [Water]
-		if(eclage_food_list.value == 2){
-			n_tok[10] += 20;
-		}
-		//Slapping Herb [Earth]
-		if(eclage_food_list.value == 3){
-			n_tok[10] += 30;
-		}
-		//Yggdrasil Dust [Wind]
-		if(eclage_food_list.value == 4){
-			n_tok[10] += 40;
-		}
-	} catch(err){
-		//console.log("error msg = " + err);
 	}
 
 	// Doom Slayer#621 - [If Base STR >= 95] ATK + 340
@@ -4190,6 +4165,24 @@ function StAllCalc()
 		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[97] += 5;
 	}
 	
+	/* 
+		Eclage Foods 4-4-2020 Velaryon#8787
+		Increase all damage against [C] property monsters by 5%
+		Increase experience received from [C] property monsters by 5%
+		Increase damage received from [X,Y,Z] property monsters by 10% (not implemented)
+		
+		#1 Snow Flip [Water]
+		#2 Slapping Herb [Earth]
+		#3 Peony Mommy [Fire]
+		#4 Yggdrasil Dust [Wind]
+	*/
+	
+	if (eclage_food) {
+			n_tok[40 + eclage_food] += 5;
+			n_tok[350 + eclage_food] += 5;
+			n_tok[370 + eclage_food] += 5;
+	}
+
 	ClickB_Enemy();
 	KakutyouKansuu();
 }}
@@ -9343,6 +9336,8 @@ n_A_PassSkill8[7] = 7; //[Custom TalonRO - 6/4/2018 - Fixed the default value fo
 //updated def reduction when mobbed [Loa] 2018-07-24
 n_A_PassSkill8[33] = 0;
 n_A_PassSkill8[34] = 0;
+
+eclage_food = 0;
 
 n_A_PassSkill9 = new Array();
 for(i=0;i<=53;i++)

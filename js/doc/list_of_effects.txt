@@ -532,7 +532,17 @@ Effect list:
 	367: Pierce MDEF of [Shadow] element monsters by [value]%
 	368: Pierce MDEF of [Ghost] element monsters by [value]%
 	369: Pierce MDEF of [Undead] element monsters by [value]%
-	370-999: (unused)
+	370: Experience gained from [Neutral] elements monsters + [value]%
+	371: Experience gained from [Water] elements monsters + [value]%
+	372: Experience gained from [Earth] elements monsters + [value]%
+	373: Experience gained from [Fire] elements monsters + [value]%
+	374: Experience gained from [Wind] elements monsters + [value]%
+	375: Experience gained from [Poison] elements monsters + [value]%
+	376: Experience gained from [Holy] elements monsters + [value]%
+	377: Experience gained from [Shadow] elements monsters + [value]%
+	378: Experience gained from [Ghost] elements monsters + [value]%
+	379: Experience gained from [Undead] elements monsters + [value]%
+	380-999: (unused)
 	1000-1999: + [value]% Physical damage inflicted against a specic monster (MonsterOBJ[ID - 1000])
 	2000-4999: (unused)
 	5000-6999: specific skill damage + [value]% (SkillOBJ[ID - 5000])

@@ -4575,9 +4575,9 @@ with(document.calcForm){
 		*/
 		myInnerHtml("EN842",'<select name="eclage_food_list" onChange="Click_A8(1)"></select>',0);
 		eclage_food_list.options[0] = new Option("-",0,true,true);
-		eclage_food_list.options[1] = new Option("Peony Mommy",1);
-		eclage_food_list.options[2] = new Option("Snow Flip",2);
-		eclage_food_list.options[3] = new Option("Slapping Herb",3);
+		eclage_food_list.options[1] = new Option("Snow Flip",1);
+		eclage_food_list.options[2] = new Option("Slapping Herb",2);
+		eclage_food_list.options[3] = new Option("Peony Mommy",3);
 		eclage_food_list.options[4] = new Option("Yggdrasil Dust",4);
 
 		var PET_OBJ_copy= new Array();
@@ -4743,6 +4743,7 @@ with(document.calcForm){
 		A_IJYOU1.value = n_A_IJYOU[1];
 		A_IJYOU2.checked = n_A_IJYOU[2];
 		A_IJYOU3.checked = n_A_IJYOU[3];
+		eclage_food_list.value = eclage_food;
 
 	}else{
 		var str;
@@ -7168,14 +7169,12 @@ if(n_B_IJYOU[1]){
 			n_B[27] = -19;
 	}
 
-
-
-
 /* [END] */
 	if(Taijin==0){
 		var w1_Exp = 100;
-		w1_Exp += StPlusCard(120+n_B[2]);
-		w1_Exp += StPlusCalc2(120+n_B[2]);
+
+		w1_Exp += n_tok[120+n_B[2]] + n_tok[370 + Math.floor(n_B[3] / 10)];
+
 		var w2_Exp = 0;
 		if(EquipNumSearch(1030))
 			w1_Exp += 5 * EquipNumSearch(1030);
