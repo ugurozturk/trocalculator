@@ -7176,8 +7176,7 @@ if(n_B_IJYOU[1]){
 		w1_Exp += n_tok[120+n_B[2]] + n_tok[370 + Math.floor(n_B[3] / 10)];
 
 		var w2_Exp = 0;
-		if(EquipNumSearch(1030))
-			w1_Exp += 5 * EquipNumSearch(1030);
+
 		if(n_A_JobSearch()==3 && CardNumSearch(452) && (n_B[2]==1 || n_B[2]==6))
 			w1_Exp += 5;
 		if(n_B[2] == 2 && n_A_JobSearch()==4 && CardNumSearch(453))
