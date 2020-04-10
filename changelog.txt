@@ -1,3 +1,6 @@
+[2020-04-11]
+- Added Eclage food
+
 [2020-04-04]
 - Fixed Heal damage computation
 
