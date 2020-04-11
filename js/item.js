@@ -1555,8 +1555,8 @@ ItemOBJ = [
 ,[1522,18,0,170,3,0,0,0,"Lever Action Rifle [Rental]","",0,8,20,10,50,12,-5,80,30,193,1,0]
 //custom TalonRO [Update 2014-09-02]
 ,[1523,51,0,3,0,0,100,10,"Evil Mask","","Drain 1 SP from user every 2 seconds<br><b>Middle and Lower Headgear</b>",12,1,0]
-,[1524,100,0,0,0,0,0,0,"Evil Mask & Succubus Horn",0,"ASPD +1<br>Drain 3 SP from user every 2 seconds",12,9,0] //Evil Mask & Succubus Horn
-,[1525,100,0,0,0,0,0,0,"Evil Mask & Incubus Horn",0,"ASPD +1<br>Drain 3 SP from user every 2 seconds",12,9,0] //Evil Mask & Incubus Horn
+,[1524,100,0,0,0,0,0,0,"Evil Mask & Succubus Horn",0,"Drain 3 SP from user every 2 seconds",12,9,99,1,0] //Evil Mask & Succubus Horn
+,[1525,100,0,0,0,0,0,0,"Evil Mask & Incubus Horn",0,"Drain 3 SP from user every 2 seconds",12,9,99,1,0] //Evil Mask & Incubus Horn
 ,[1526,50,0,3,0,0,50,10,"Halloween Midas Whisper","","<b>[Base STR >= 80]</b><br>ATK + 30<br><b>[Base VIT >= 80]</b><br>MaxHP + 5%<br><b>[Base LUK >= 80]</b><br>CRIT + 5<br><b>[Base AGI >= 80]</b><br>ASPD + 5%<br><b>[Base INT >= 80]</b><br>MATK + 3%<br><b>[Base DEX >= 80]</b><br>Cast Time - 5%<br>Gain a candy item when killing monsters of DemiHuman type by low chance",7,1,56,5,0]
 //custom TalonRO [Update 2014-09-11]
 ,[1527,51,0,2,0,0,10,0,"Gossip Raven","","Has a 2% chance of activating Level 1 Ruwach when receiving a physical attack",7,1,0]

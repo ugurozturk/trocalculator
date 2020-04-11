@@ -2937,289 +2937,262 @@ function StAllCalc()
 		n_A_MATK[2] -= 1;
 
 	n_A_MATK[1] = (n_A_MATK[2] + n_A_MATK[0]) / 2;
+	
+	// Manage flat aspd bonus
+	// Enhanced Helm of Angel#1655 - [If Refine Above 6] ASPD +1
+	if (n_A_HEAD_DEF_PLUS > 6 && EquipNumSearch(1655))
+		n_tok[99] += 1;
+	
+	// ASPD formula from rAthena
+	aspd_rate = 1000;
+	attack_motion = Math.floor(n_Nitou ? (JobASPD2[n_A_JOB][n_A_WeaponType] + JobASPD2[n_A_JOB][n_A_Weapon2Type]) * 7 / 10 : JobASPD2[n_A_JOB][n_A_WeaponType]);
+	attack_motion = attack_motion - Math.floor(attack_motion * (4 * n_A_AGI + n_A_DEX) / 1000);
+	attack_motion = attack_motion - n_tok[99] * 10;
 
-	if(n_Nitou == 1)
-		wASPD = (200 - (JobASPD[n_A_JOB][n_A_WeaponType] + JobASPD[n_A_JOB][n_A_Weapon2Type]) /2) *1.4;
-	else
-		wASPD = 200 - JobASPD[n_A_JOB][n_A_WeaponType];
+	// Cavalry Mastery#78
+	if (SkillSearch(78))
+		n_tok[12] -= (6 - SkillSearch(78)) * 10;
 
-	if(n_Nitou == 1 && n_A_WeaponType == 0 && n_A_Weapon2Type != 0)
-		wASPD = 200 - JobASPD[n_A_JOB][n_A_Weapon2Type];
+	// Single Action#425
+	n_tok[12] += Math.ceil(SkillSearch(425) / 2);
+	
+	// Advanced Book#224
+	if (n_A_WeaponType == 12)
+		n_tok[12] += SkillSearch(224) / 2;
 
-	n_A_ASPD = 200 - wASPD + (Math.round(wASPD * n_A_AGI *4 /100) +Math.round(wASPD * n_A_DEX /100)) /10;
-	//alert("agi:"+n_A_AGI+"dex:"+n_A_DEX+"n_A_ASPD:"+n_A_ASPD);
-	// Adding flat ASPD (Masamune, Manual edit)
-	n_A_ASPD += n_tok[99];
-
-	if(SkillSearch(78) && (n_A_ActiveSkill == 0 || n_A_ActiveSkill == 284))
-		n_A_ASPD -= (6 - SkillSearch(78)) *10;
-
-	n_A_ASPD += Math.round(SkillSearch(425) /2);
-	if(n_A_WeaponType == 12 && SkillSearch(224)){
-
-		n_A_ASPD += (200 - n_A_ASPD) * (SkillSearch(224) /2 / 100);
-		n_A_ASPD = Math.floor(n_A_ASPD * 10) / 10;
-	}
-
-	w=0;
 	ASPDch = 0;
-	if(n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0){
-		if(n_A_WeaponType == 3 && SkillSearch(74)){
-			w += 30;
+	if (n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0){
+		if (n_A_WeaponType == 3 && SkillSearch(74)){
+			n_tok[12] += 30;
 			ASPDch = 1;
 		}
-		if(n_A_WeaponType == 2 && SkillSearch(386)){
-			w += 30;
+		if (n_A_WeaponType == 2 && SkillSearch(386)){
+			n_tok[12] += 30;
 			ASPDch = 1;
 		}
-		if(6 <= n_A_WeaponType && n_A_WeaponType<=8 && SkillSearch(152)){
-			w += 30;
+		if (6 <= n_A_WeaponType && n_A_WeaponType<=8 && SkillSearch(152)){
+			n_tok[12] += 30;
 			ASPDch = 1;
 		}
-		if(ASPDch == 0 && SkillSearch(389)){
-			w += 30;
+		if (ASPDch == 0 && SkillSearch(389)){
+			n_tok[12] += 30;
 			ASPDch = 1;
 		}
-		if(ASPDch == 0 && (TimeItemNumSearch(5) || TimeItemNumSearch(28))){//rush de alch set e noble hat
-			if(n_A_WeaponType > 5 && n_A_WeaponType < 9){
-				w += 30;
-				ASPDch = 1;}
-		}
-		if(n_A_WeaponType==5 && SkillSearch(166)){
-			w += SkillSearch(166) + 20;
-			ASPDch = 1;
-		}
-	}
-	if(EquipNumSearch(654))
-		w += Math.floor(SU_AGI / 14);
-	if(n_A_Equip[0]==484 && SU_STR >= 50)
-		w += 5;
-	if(EquipNumSearch(624))
-		w += (n_A_Weapon_ATKplus);
-	if(EquipNumSearch(641))
-		w += n_A_Weapon_ATKplus;
-	/*
-		Assaulter Spear
-		[Crusader or Paladin]
-		Increases attack speed by 10%
-	*/
-	if(EquipNumSearch(903) && n_A_JobSearch2() == 13)
-		w += 10;
-	if(SU_STR >= 77 && EquipNumSearch(944))
-		w += 4;
-	if(n_A_JOB == 21 && EquipNumSearch(855))
-		w -= 5;
-	if(EquipNumSearch(1121) && n_A_JobSearch()==2)
-		w += 3;
-	if(SU_STR >= 95 && EquipNumSearch(1167))
-		w += 3;
-
-	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon] +30% ASPD
-	if(EquipNumSearch(1383))
-		for(i=0;i<SQI_Bonus_Effect.length;i++)
-			if(SQI_Bonus_Effect[i]==75) {
-				//alert(n_A_JOB+","+n_A_JobSearch());
-				if(n_A_JOB==41)
-					w += 30;
-				break;
-			}
-	//custom TalonRO Alca Bringer: +3% ASPD every 2 refines
-	if(EquipNumSearch(1455))
-		w += 3*Math.floor(n_A_Weapon_ATKplus/2);
-
-	//custom TalonRO Gigantic Lance: For every refine above +4, increase ASPD by 1% - [Loa] - 2016-06-07
-	if(EquipNumSearch(1315) && n_A_Weapon_ATKplus>4){
-			w += n_A_Weapon_ATKplus - 4;
-	}
-
-	if(SkillSearch(258))
-		w += 30;
-	if(SkillSearch(420))
-		w += 20;
-	if(SkillSearch(433)){
-		if(n_A_WeaponType==20 || n_A_WeaponType==0)
-			w += 2 * SkillSearch(433);
-	}
-
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1288)){
-		w += 2;}
-	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1290)){
-		w += 2;}
-	if(n_A_HEAD_DEF_PLUS == 10 && EquipNumSearch(1290)){
-		w += 2;}
-
-	if(SkillSearch(357)){
-		ASPDch = 1;
-		w += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10);
-	}
-
-	if(SkillSearch(361) && n_A_JobLV >= 50){
-		ASPDch = 1;
-		w += 3 * SkillSearch(361);
-	}
-	if(n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0){
-		if(ASPDch == 0 && n_A_PassSkill2[6] == 2){
-			if(n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21)){
-				w += 25;
+		if (ASPDch == 0 && (TimeItemNumSearch(5) || TimeItemNumSearch(28))){//rush de alch set e noble hat
+			if (n_A_WeaponType > 5 && n_A_WeaponType < 9){
+				n_tok[12] += 30;
 				ASPDch = 1;
 			}
 		}
-		else if(ASPDch == 0 && 6 <= n_A_WeaponType && n_A_WeaponType<=8 && n_A_PassSkill2[6] == 1){
-			w += 25;
-			ASPDch = 1;
-		}else if(ASPDch == 0 && 6 <= n_A_WeaponType && n_A_WeaponType<=8 && n_A_PassSkill2[6] == 3){
-			w += 30;
+		if (n_A_WeaponType==5 && SkillSearch(166)){
+			n_tok[12] += SkillSearch(166) + 20;
 			ASPDch = 1;
 		}
 	}
-	if(n_A_PassSkill3[1] && ASPDch == 0){
-		if(n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21))
-			//custom TalonRO Assassin Cross of Sunset bugfix, higher ASPD boost than before
-			//before
-			//w += 5 + n_A_PassSkill3[1] + Math.floor(n_A_PassSkill3[31] /2) + Math.floor(n_A_PassSkill3[21] /20);
-			//after
-			w += 10 + n_A_PassSkill3[1] + Math.floor(n_A_PassSkill3[31] /2) + Math.floor(n_A_PassSkill3[21] /10);
+
+	if (EquipNumSearch(654))
+		n_tok[12] += Math.floor(SU_AGI / 14);
+
+	if (n_A_Equip[0]==484 && SU_STR >= 50)
+		n_tok[12] += 5;
+
+	if (EquipNumSearch(624))
+		n_tok[12] += n_A_Weapon_ATKplus;
+
+	if (EquipNumSearch(641))
+		n_tok[12] += n_A_Weapon_ATKplus;
+
+	// Assaulter Spear#903 - [Crusader or Paladin] ASPD + 10%
+	if (EquipNumSearch(903) && n_A_JobSearch2() == 13)
+		n_tok[12] += 10;
+
+	if (SU_STR >= 77 && EquipNumSearch(944))
+		n_tok[12] += 4;
+
+	if (n_A_JOB == 21 && EquipNumSearch(855))
+		n_tok[12] -= 5;
+
+	if (EquipNumSearch(1121) && n_A_JobSearch()==2)
+		n_tok[12] += 3;
+
+	if (SU_STR >= 95 && EquipNumSearch(1167))
+		n_tok[12] += 3;
+
+
+	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon] +30% ASPD
+	if (EquipNumSearch(1383))
+		for (i=0;i<SQI_Bonus_Effect.length;i++)
+			if (SQI_Bonus_Effect[i]==75) {
+				//alert(n_A_JOB+","+n_A_JobSearch());
+				if (n_A_JOB==41)
+					n_tok[12] += 30;
+				break;
+			}
+
+	//custom TalonRO Alca Bringer: +3% ASPD every 2 refines
+	if (EquipNumSearch(1455))
+		n_tok[12] += 3 * Math.floor(n_A_Weapon_ATKplus / 2);
+
+	//custom TalonRO Gigantic Lance: For every refine above +4, increase ASPD by 1% - [Loa] - 2016-06-07
+	if (EquipNumSearch(1315) && n_A_Weapon_ATKplus>4)
+		n_tok[12] += n_A_Weapon_ATKplus - 4;
+
+	// Berserk#258
+	if (SkillSearch(258))
+		n_tok[12] += 30;
+
+	// Madness Canceller#420
+	if (SkillSearch(420))
+		n_tok[12] += 30;
+
+	// Gatling Fever#433
+	if (n_A_WeaponType == 20 && SkillSearch(433))
+			n_tok[12] += 2 * SkillSearch(433);
+
+	// Sagittarius Crown#1288 - [Refine Rate 7~10] ASPD + 2%
+	if (n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1288))
+		n_tok[12] += 2;
+	// Scorpio Crown#1290 - [Refine Rate 8~10] ASPD + 2%
+	if (n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1290))
+		n_tok[12] += 2
+	// Scorpio Crown#1290 - [Refine Rate 10] ASPD + 2%
+	if (n_A_HEAD_DEF_PLUS == 10 && EquipNumSearch(1290))
+		n_tok[12] += 2;
+
+	// Comfort of the Stars#357
+	if (SkillSearch(357)){
+		ASPDch = 1;
+		n_tok[12] += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10);
 	}
 
-	w += n_tok[12];
+	if (SkillSearch(361) && n_A_JobLV >= 50){
+		ASPDch = 1;
+		n_tok[12] += 3 * SkillSearch(361);
+	}
+	if (n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0){
+		if (ASPDch == 0 && n_A_PassSkill2[6] == 2){
+			if (n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21)){
+				n_tok[12] += 25;
+				ASPDch = 1;
+			}
+		}
+		else if (ASPDch == 0 && 6 <= n_A_WeaponType && n_A_WeaponType<=8 && n_A_PassSkill2[6] == 1){
+			n_tok[12] += 25;
+			ASPDch = 1;
+		}else if (ASPDch == 0 && 6 <= n_A_WeaponType && n_A_WeaponType<=8 && n_A_PassSkill2[6] == 3){
+			n_tok[12] += 30;
+			ASPDch = 1;
+		}
+	}
+	if (n_A_PassSkill3[1] && ASPDch == 0){
+		if (n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21))
+			// Custom TalonRO Assassin Cross of Sunset bugfix, higher ASPD boost than before
+			// Before
+			//	n_tok[12] += 5 + n_A_PassSkill3[1] + Math.floor(n_A_PassSkill3[31] /2) + Math.floor(n_A_PassSkill3[21] /20);
+			// After
+			n_tok[12] += 10 + n_A_PassSkill3[1] + Math.floor(n_A_PassSkill3[31] /2) + Math.floor(n_A_PassSkill3[21] /10);
+	}
 
-	if(SkillSearch(196))
-		w -= 25;
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1283)){
-		w += 3;}
+	// Steel Body#196
+	if (SkillSearch(196))
+		n_tok[12] -= 25;
 
-	//custom TalonRO deactivate Guarana Candy ASPD boost
-	//if(n_A_SpeedPOT){
-		if(n_A_SpeedPOT == 1)
-			w += 10;
-		else if(n_A_SpeedPOT == 2)
-			w += 15;
-		else if(n_A_SpeedPOT == 3)
-			w += 20;
+	if (n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1283))
+		n_tok[12] += 3;
 
-	//}else{
-	//	if(n_A_PassSkill8[28])
-	//		w += 10;
-	//}
+	if (n_A_SpeedPOT)
+		n_tok[12] += 5 + 5 * n_A_SpeedPOT;
 
 	//custom TalonRO Armor enchant ASPD
 	var wHSE = document.calcForm.A_HSE.value;
-	if(wHSE){
-		if(121 <= wHSE && wHSE <= 129)
-			w += parseInt(wHSE.substr(-1));
+	if (wHSE){
+		if (121 <= wHSE && wHSE <= 129)
+			n_tok[12] += parseInt(wHSE.substr(-1));
 	}
 
 	//Thief Ring & Cold Heart aspd boost fix
-	if(EquipNumSearch(1003)& EquipNumSearch(442)){
-		w += (n_A_Weapon_ATKplus/2);}
+	if (EquipNumSearch(1003)& EquipNumSearch(442))
+		n_tok[12] += (n_A_Weapon_ATKplus / 2);
 
 	//custom TalonRO Imperial Feather
-	if(SU_AGI >= 90 && EquipNumSearch(1475))
-		w += 1;
+	if (SU_AGI >= 90 && EquipNumSearch(1475))
+		n_tok[12] += 1;
+
 
 	//custom TalonRO Tasty Strawberry Hat
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1503)){
-		w += 4;}
+	if (n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1503))
+		n_tok[12] += 4;
+
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_AGI >= 80 && EquipNumSearch(1526))
-		w += 5;
+	if (SU_AGI >= 80 && EquipNumSearch(1526))
+		n_tok[12] += 5;
+
 
 	//[TalonRO Custom - 2018-07-26 - Valorous Battle CrossBow - + 10% ASPD for Thief Class] [Amor]
-	if(EquipNumSearch(913) && n_A_JobSearch() == 2) {
-		w += 10;
-	}
+	if (EquipNumSearch(913) && n_A_JobSearch() == 2)
+		n_tok[12] += 10;
+
 	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse 1095/Glorious Cleaver 1088/Glorious Flamberge 1077/Glorious Guitar 1092/Glorious Jamadhar 1091/Glorious Lariat 1093/Glorious Morning Star 1086/Glorious Spear 1081/Glorious Two Handed Axe 1087 - Every Refine Level gives APSD + 1%][Amor]
-	if(EquipNumSearch(1095) || EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1092) || EquipNumSearch(1091) || EquipNumSearch(1093) || EquipNumSearch(1086) || EquipNumSearch(1081) || EquipNumSearch(1087)){
-			w += n_A_Weapon_ATKplus;
-	}
+	if (EquipNumSearch(1095) || EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1092) || EquipNumSearch(1091) || EquipNumSearch(1093) || EquipNumSearch(1086) || EquipNumSearch(1081) || EquipNumSearch(1087))
+		n_tok[12] += n_A_Weapon_ATKplus;
+
 	//[TalonRO Custom - 2018-07-28 - Glorious Gladius - 5% ASPD for Rogue/Stalker/Ninja/SL][Amor]
-	if(EquipNumSearch(1076) && (n_A_JobSearch2() == 14 || n_A_JOB== 43 || n_A_JOB == 44)){
-			w += 5;
-	}
+	if (EquipNumSearch(1076) && (n_A_JobSearch2() == 14 || n_A_JOB== 43 || n_A_JOB == 44))
+		n_tok[12] += 5;
+
 	//[TalonRO Custom - 2018-07-28 - Glorious Gladius  +1% ASPD per refine to [SL/Ninja]] [Amor]
-	if(EquipNumSearch(1076) && (n_A_JOB== 43 || n_A_JOB == 44)) {
-			w += n_A_Weapon_ATKplus;
-	}
+	if (EquipNumSearch(1076) && (n_A_JOB== 43 || n_A_JOB == 44))
+		n_tok[12] += n_A_Weapon_ATKplus;
+
 	//[TalonRO Custom - 2018-07-28 - Glorious Holy Avenger - 5% ASPD + 2% ASPD per refine used with Aegis] [Amor]
-	if(EquipNumSearch(1079) && EquipNumSearch(1376)) {
-			w += 5 + (2 * n_A_Weapon_ATKplus);
-	}
+	if (EquipNumSearch(1079) && EquipNumSearch(1376))
+		n_tok[12] += 5 + 2 * n_A_Weapon_ATKplus;
+
 	//[TalonRO Custom - 2018-07-28 - Glorious Hunter Bow - 5% ASPD (+2% per refine) for Rogue Class] [Amor]
-	if (EquipNumSearch(1089) && n_A_JobSearch2() == 14) {
-		w += 5 + (2 * n_A_Weapon_ATKplus);
-	}
+	if (EquipNumSearch(1089) && n_A_JobSearch2() == 14)
+		n_tok[12] += 5 + 2 * n_A_Weapon_ATKplus;
+
 	//[TalonRO Custom - 2018-07-28 - Glorious Two Handed Axe - 1% ASPD more if refine 6>] [Amor]
-	if(EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6){
-			w += (n_A_Weapon_ATKplus - 5);
-	}
-	/*
-		Brave Assassin Damascus
-		[Soul Linker]
-		ASPD + 5%
-	*/
-	if (EquipNumSearch(897) && n_A_JOB == 43) {
-		w += 5;
-	}
+	if (EquipNumSearch(1087) && n_A_Weapon_ATKplus >= 6)
+			n_tok[12] += n_A_Weapon_ATKplus - 5;
+	
+	// Brave Assassin Damascus - [Soul Linker] ASPD + 5%
+	if (EquipNumSearch(897) && n_A_JOB == 43)
+		n_tok[12] += 5;
 
 	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for ASPD] [Kato]
-	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+	for (i=0; i < tRO_MalangdoEnchantment.length; i++) {
 		var vME = tRO_MalangdoEnchantment[i];
 
-		if(vME){
-			if(121 <= vME && vME <= 129)
-				w += parseInt(vME.substr(-1));
+		if (vME){
+			if (121 <= vME && vME <= 129)
+				n_tok[12] += parseInt(vME.substr(-1));
 		}
 	}
 
 	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for ASPD] [NattWara]
-	for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+	for (i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
 		var vBE = tRO_BiolabWeaponEnchantment[i];
 
-		if(vBE){
-			if(121 <= vBE && vBE <= 129)
-				w += parseInt(vBE.substr(-1));
+		if (vBE){
+			if (121 <= vBE && vBE <= 129)
+				n_tok[12] += parseInt(vBE.substr(-1));
 		}
 	}
 
-	if(EquipNumSearch(1045) && SU_AGI >= 90){
-		w += 2;
-	}
+	if (EquipNumSearch(1045) && SU_AGI >= 90)
+		n_tok[12] += 5;
 
-	n_A_ASPD += (200 - n_A_ASPD) * (w / 100);
+	// Defender#165
+	if (SkillSearch(165))
+		n_tok[12] -= 25 - SkillSearch(165) * 5;
 
-	if(SkillSearch(165))
-		n_A_ASPD -= (25 -SkillSearch(165) *5);
+	aspd_rate -= n_tok[12] * 10;
+	attack_motion = Math.floor(attack_motion * aspd_rate / 1000);
+	raw_aspd = (2000 - attack_motion) / 10;
+	n_A_ASPD = Math.min(Math.floor(raw_aspd), 190);
 
-	if (EquipNumSearch(1524))
-		n_A_ASPD += 1;
-	if (EquipNumSearch(1525))
-		n_A_ASPD += 1;
-
-	//Custom TalonRO - 2018-06-07 - Enhanced Helm of Angel [1] - If refine 7+, ASPD + 1 [Nattwara]
-	if (EquipNumSearch(1655) && (n_A_HEAD_DEF_PLUS > 6))
-		n_A_ASPD += 1;
-
-	//alert("agi:"+n_A_AGI+"dex:"+n_A_DEX+"n_A_ASPD:"+n_A_ASPD);
-
-	if(n_A_ASPD > 190)
-		n_A_ASPD = 190;
-
-	//custom TalonRO Dual Wielding ASPD fix, if aspd decimal > .91 then round up, ie 189.91 => 190
-	//not always correct, but probably better than before...
-	if(n_Nitou==1){
-		n_A_ASPD_dec=(n_A_ASPD * 100).toString();
-		//alert("n_A_ASPD:"+n_A_ASPD+",n_A_ASPD_dec:"+n_A_ASPD_dec+",n_A_ASPD_dec.substring(3,n_A_ASPD_dec.length):"+n_A_ASPD_dec.substring(3,n_A_ASPD_dec.length));
-		if (n_A_ASPD_dec.substring(3,n_A_ASPD_dec.length)>=91){
-			n_A_ASPD=Math.ceil(n_A_ASPD);
-		}
-	}
-	//Duel Wielding ASPD fix -end-
-
-	n_A_ASPD = Math.floor(n_A_ASPD * 10) / 10;
-
-	myInnerHtml("A_ASPD",n_A_ASPD,0);
-
-	n_A_ASPD = Math.floor(n_A_ASPD);
+	myInnerHtml("A_ASPD", n_A_ASPD + " (" + raw_aspd + ")", 0);
 
 	n_A_ASPD = (200 - n_A_ASPD) / 50;
 
