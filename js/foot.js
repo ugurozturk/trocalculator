@@ -2431,8 +2431,8 @@ function StAllCalc()
 	C_ATK = 0;
 	H_ATK = 0;
 	
-	// FIXME : Assumption that n_tok[87] should be applied here, only one item in TalonRO seems to use bAtkRate bonus
-	C_ATK = n_tok[17] * (1 + n_tok[87] / 100);
+	// n_tok[87] is not applied for ATK display
+	C_ATK = n_tok[17];
 
 	// Weapon refine ATK bonus
 	if(n_A_WeaponLV == 1){W_REF = n_A_Weapon_ATKplus * 2;}
