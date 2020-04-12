@@ -4575,10 +4575,10 @@ with(document.calcForm){
 		*/
 		myInnerHtml("EN842",'<select name="eclage_food_list" onChange="Click_A8(1)"></select>',0);
 		eclage_food_list.options[0] = new Option("-",0,true,true);
-		eclage_food_list.options[1] = new Option("Snow Flip",1);
-		eclage_food_list.options[2] = new Option("Slapping Herb",2);
-		eclage_food_list.options[3] = new Option("Peony Mommy",3);
-		eclage_food_list.options[4] = new Option("Yggdrasil Dust",4);
+		eclage_food_list.options[1] = new Option("Snow Flip [Increase all damage against and experience from [Water] property monsters by 5%]",1);
+		eclage_food_list.options[2] = new Option("Slapping Herb [Increase all damage against and experience from [Earth] property monsters by 5%]",2);
+		eclage_food_list.options[3] = new Option("Peony Mommy [Increase all damage against and experience from [Fire] property monsters by 5%]",3);
+		eclage_food_list.options[4] = new Option("Yggdrasil Dust [Increase all damage against and experience from [Wind] property monsters by 5%]",4);
 
 		var PET_OBJ_copy= new Array();
 		PET_OBJ_copy = PET_OBJ_copy.concat(PET_OBJ);
