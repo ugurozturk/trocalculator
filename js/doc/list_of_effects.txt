@@ -131,12 +131,12 @@ Effect list:
 				cardOBJ[w_SC[i][k]][j+2]=0;
 			}
 		}
-	91: Heal amount increased by + [value]%
-	92: Healing received increased by + [value]%
-	93: Heal damage increase on undead by + [value]%
+	91: Heal effectiveness increased by + [value]%
+	92: Received heal effectiveness from [Heal] increased by + [value]%
+	93: Potion Pitcher effectiveness increased by + [value]%
 	94: Sanctuary effectiveness increased by + [value]%
-	95: (unused)
-	96: Sanctuary damage effectiveness against Demon increased by + [value]%
+	95: Received heal effectiveness from [Sanctuary] increased by + [value]%
+	96: Increases magical damage against normal monsters by [value]%
 	97: Increases magical damage against bosstype monsters by [value]%
 	98: MATK + [value] (flat)
 	99: ASPD + [value] (flat)
@@ -295,6 +295,7 @@ Effect list:
 	220: When [value] == 57, Allows usage of the skill [Bash]Lv 1
 	220: When [value] == 58, Allows usage of the skill [Spell Breaker]Lv 1
 	220: When [value] == 59, Allows usage of the skill [Aqua Benedicta]Lv 1
+	220: When [value] == 60, Allows usage of the skill [Fire Wall]Lv 4
 	221: When X, there's a Y chance to cast the skill Z (defined in AutoSpellSkill, see below)
 	     AutoSpellSkill array looks like this:
 	     [
@@ -448,6 +449,8 @@ Effect list:
 	221: When [value] == 139, When performing a ATK based attack, there's a 1% chance to cast the skill [Bowling Bash] Lv5
 	221: When [value] == 140, When performing a ATK based attack, there's a 1% chance to cast the skill [Dangerous Soul Collect] Lv1
 	221: When [value] == 141, When performing a ATK based attack, there's a 5% chance to cast the skill [Dragon Fire Formation learned] Lv2
+	221: When [value] == 142, When performing a ATK based attack, there's a 2% chance to cast the skill [Water Ball] Lv2
+	221: When [value] == 143, When performing a ATK based attack, there's a 0.2 * staff refine level)% chance to cast the skill [Sightrasher] Lv2
 	222-289: (unused)
 	290: On (all?) monsters, ignore [value]% DEF
 	291: On Normal monsters, ignore [value]% DEF
@@ -529,10 +532,19 @@ Effect list:
 	367: Pierce MDEF of [Shadow] element monsters by [value]%
 	368: Pierce MDEF of [Ghost] element monsters by [value]%
 	369: Pierce MDEF of [Undead] element monsters by [value]%
-	370-999: (unused)
+	370: Experience gained from [Neutral] elements monsters + [value]%
+	371: Experience gained from [Water] elements monsters + [value]%
+	372: Experience gained from [Earth] elements monsters + [value]%
+	373: Experience gained from [Fire] elements monsters + [value]%
+	374: Experience gained from [Wind] elements monsters + [value]%
+	375: Experience gained from [Poison] elements monsters + [value]%
+	376: Experience gained from [Holy] elements monsters + [value]%
+	377: Experience gained from [Shadow] elements monsters + [value]%
+	378: Experience gained from [Ghost] elements monsters + [value]%
+	379: Experience gained from [Undead] elements monsters + [value]%
+	380-999: (unused)
 	1000-1999: + [value]% Physical damage inflicted against a specic monster (MonsterOBJ[ID - 1000])
 	2000-4999: (unused)
 	5000-6999: specific skill damage + [value]% (SkillOBJ[ID - 5000])
 	7000-8999: When [value] > 0, specific skill Cast Time -[value]% (SkillOBJ[ID - 7000])
-	7000-8999: When [value] < 0, specific skill Cast Time -[value]% (SkillOBJ[ID - 7000])
-	           I'm guessing there's a display bug here, and it should be +[value]%
+	7000-8999: When [value] < 0, specific skill Cast Time +[value]% (SkillOBJ[ID - 7000])

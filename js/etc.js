@@ -152,6 +152,54 @@ JobASPD = [
 	[150,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,130,125,50,130,50],
 ];
 
+JobASPD2 = [
+	[500,650,700,2000,2000,2000,800,2000,700,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,550,600,650,700,700,750,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,650,2000,2000,2000,800,2000,2000,2000,800,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,2000,2000,2000,2000,2000,2000,2000,600,600,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,600,2000,2000,2000,2000,2000,2000,2000,2000,700,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[500,600,2000,2000,2000,2000,2000,2000,2000,700,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,600,700,2000,2000,2000,700,750,700,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,500,550,600,600,700,700,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,650,2000,2000,2000,800,2000,2000,2000,2000,150,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,2000,2000,2000,2000,2000,2000,2000,600,600,2000,2000,600,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,600,2000,2000,2000,2000,2000,2000,2000,2000,600,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[500,575,2000,2000,2000,2000,2000,2000,2000,625,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,600,650,2000,2000,2000,650,650,675,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,500,550,600,600,700,700,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,550,2000,2000,2000,2000.1,2000,2000,2000,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,2000,2000,2000,2000,2000,2000,2000,575,575,2000,2000,2000,475,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,550,2000,2000,2000,2000,2000,2000,2000,2000,650,2000,2000,2000,575,2000,2000,2000,2000,2000,2000,2000],
+	[400,550,2000,2000,2000,2000,2000,2000,2000,2000,650,2000,2000,2000,2000,575,2000,2000,2000,2000,2000,2000],
+	[450,525,2000,2000,2000,2000,2000,2000,2000,625,2000,2000,550,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,550,575,2000,2000,2000,675,700,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[500,650,700,2000,2000,2000,800,2000,700,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,500,550,600,600,700,700,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,650,2000,2000,2000,800,2000,2000,2000,2000,500,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,2000,2000,2000,2000,2000,2000,2000,600,600,2000,2000,600,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,600,2000,2000,2000,2000,2000,2000,2000,2000,600,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[500,575,2000,2000,2000,2000,2000,2000,2000,625,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,600,650,2000,2000,2000,650,650,675,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,500,550,600,600,700,700,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,550,2000,2000,2000,2000,2000,2000,2000,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,2000,2000,2000,2000,2000,2000,2000,575,575,2000,2000,2000,475,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,550,2000,2000,2000,2000,2000,2000,2000,2000,650,2000,2000,2000,575,2000,2000,2000,2000,2000,2000,2000],
+	[400,550,2000,2000,2000,2000,2000,2000,2000,2000,650,2000,2000,2000,2000,575,2000,2000,2000,2000,2000,2000],
+	[450,525,2000,2000,2000,2000,2000,2000,2000,625,2000,2000,550,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,550,575,2000,2000,2000,675,700,650,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[2000],
+	[2000],
+	[2000],
+	[2000],
+	[2000],
+	[2000],
+	[2000],
+	[400,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,500,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[500,575,2000,2000,2000,2000,2000,2000,2000,625,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000],
+	[400,500,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,750,2000,2000,2000,2000,2000],
+	[500,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,2000,700,750,1500,700,1500],
+];
 
 weaponsize = [
 	[1   ,1   ,1   ],
@@ -267,7 +315,7 @@ PET_OBJ = [[0,"No Pet",0,0]
 ,[62,"Xmas Lunatic [AGI +2]",0,2,2,0]
 ,[63,"Zipper Bear [ATK +10]",0,17,10,0]
 ,[64,"Zhu Po Long [Increase damage against Plant and Formless by 3%]",0,30,3,33,3,0]
-,[65,"Woodie  [VIT +3, Increases effectiveness of your Heal, Sanctuary and Potion Pitcher by 5%]",0,3,3,91,5,94,5,0]
+,[65,"Woodie  [VIT +3, Increases effectiveness of your Heal, Sanctuary and Potion Pitcher by 5%]",0,3,3,91,5,93,5,94,5,0]
 //[Custom TalonRO - 2018-06-04 - Evolved Pets] [Kato]
 ,[66,"Alicel [DEF +1, Demi-Human Resistance +1%]",0,18,1,57,1,0]
 ,[67,"Am Mut [MATK +2%]",0,89,2,0]
@@ -318,11 +366,11 @@ PET_OBJ = [[0,"No Pet",0,0]
 ,[111,"Tiny Ventus [Physical/Magical Damage against Wind Monsters +2%]",0,44,2,444,2,0]
 ,[112,"Agni [Physical/Magical Damage against Fire Monsters +2%, Fire Resistance +2%]",0,43,2,443,2,63,2,0]
 ,[113,"Ventus [Physical/Magical Damage against Wind Monsters +2%, Wind Resistance +2%]",0,44,2,444,2,64,2,0]
-,[114,"Eira [Increases effectiveness of your Heal, Sanctuary and Potion Pitcher by 5%, 2% Chance of gaining 5% of the damage inflicted on an enemy as HP]",0,25,5,94,5,245,5,0]
+,[114,"Eira [Increases effectiveness of your Heal, Sanctuary and Potion Pitcher by 5%, 2% Chance of gaining 5% of the damage inflicted on an enemy as HP]",0,91,5,93,5,94,5,0]
 ,[115,"Aqua [Physical/Magical Damage against Water Monsters +2%, Water Resistance +2%]",0,41,2,441,2,61,2,0]
-,[116,"Angry Penguin [Increase effectiveness of your Heal, Sanctuary and Potion Pitcher by 3%]",0,25,3,94,3,245,3,0]
+,[116,"Angry Penguin [Increase effectiveness of your Heal, Sanctuary and Potion Pitcher by 3%]",0,91,3,93,3,94,3,0]
 ,[117,"Baby Skoll [[Swordman, Thief, Merchant class] SP Rege. +20%, [Archer, Acolyte, Magician class] HP Rege. +20%, [Extended Class]HP/SP Rege. +10%, Perfect Dodge +3] (not calced)",0,0] //todo
-,[118,"Ballooling [Increases effectiveness of Heal, Sanctuary and Potion Pitcher on yourself by 2%]",0,25,2,94,2,245,2,0] //self?
+,[118,"Ballooling [Increases effectiveness of Heal, Sanctuary and Potion Pitcher on yourself by 2%]",0,92,2,95,2,0] // Received SPP % increased not implemented
 ,[119,"Jejeling [VIT +2, DEX +4 if equipped with Baseball Cap]",0,3,2,0]
 ,[120,"Elephant [Perfect Dodge +2, VIT +3]",0,11,2,3,2,0]
 ,[121,"Gorilla [STR +3, VIT +3]",0,1,3,3,2,0]
@@ -330,12 +378,30 @@ PET_OBJ = [[0,"No Pet",0,0]
 ,[123,"Rhino [ATK +5, VIT +3]",0,17,5,3,3,0]
 ,[124,"Little Fatum [ASPD +1%, DEX +1]",0,12,1,5,1,0]
 ,[125,"Lucky Case [[Mage, Archer, Acolyte Class] MHP +175, Perfect Dodge +1, [Swordman, Merchant, Thief Class] MSP +50, VIT +2] (not calced)",0,0] //todo
-,[126,"Miming [INT +1, VIT +1, Increases effectiveness of your Heal, Sanctuary and Potion Pitcher by 5%]",0,4,1,3,1,25,5,94,5,245,5,0]
+,[126,"Miming [INT +1, VIT +1, Increases effectiveness of your Heal, Sanctuary and Potion Pitcher by 5%]",0,4,1,3,1,91,5,93,5,94,5,0]
 ,[127,"Skelion [MHP +250, MDEF +1, ASPD +2%, Ghost Resistance +2%]",0,13,50,19,1,12,2,68,2,0]
 ,[128,"Tikbalang [Increase damage to Bakonawa, Bangungot and Buwaya by 10%] (not calced)",0,0]
 ,[129,"Toucan [DEX +1, FLEE +5]",0,5,1,9,5,0]
 ,[130,"White Goat [+1.5% chance to cast Level 2 Bash when doing a physical attack, Increases the healing value of Carrots by 100%] (not calced)",0,0]
 ,[131,"Wild Rider [AGI +2, DEX +3, if equipped with Drooping Cat]",0,2,2,0]
+,[132,"Sprouting Egg [Add a 2% chance of gaining 5% of the damage inflicted, HP/SP regeneration +10%, MHP +300",0,13,300,75,10,76,10,0]
+,[133,"Bandit [MSP +25, Add a 2.5% chance of casting Lv1 Steal when doing a physical attack. Increase resistance to Shadow Property attacks by 1%.",0,14,25,67,1,0]
+,[134,"Moonlight Flower [ASPD +2%, INT +1, MHP +2%]",0,4,1,12,2,15,2,0]
+,[135,"Scatleton [VIT +1, Shadow Resistance +1%, Ghost Resistance +2%",0,3,1,67,1,68,2,0]
+,[136,"Lora [MDEF +1, increases effectiveness of received heal from Heal, Sanctuary and Potion Pitcher by 2%]",0,19,1,92,2,95,2,0] // Received SPP % increased not implemented
+,[137,"Angeling [MDEF +2, Angel Resistance +2%]",0,19,2,58,2,0]
+,[138,"Eggring [Increases duration of stat foods by 50%]",0,0]
+,[139,"Elvira [Reduces after-cast delay by 3%]",0,74,3,0]
+,[140,"Eremes Guile [Demi-Human resistance +2%]",0,57,2,0]
+,[141,"Rainbow [Increases Holy Light and Magnus Exorcismus damage by 7%]",0,5037,7,5104,7,0]
+,[142,"Shroud [Adds a 0.25% chance of inflicting Curse status on opponent when attacking]",0,0]
+,[143,"Casual Pope [MDEF +1, INT +1, VIT +1, Holy Resistance +1%]",0,3,1,4,1,19,1,66,1,0]
+,[144,"Rudo [MHP +2%, increases natural SP Recovery by 10%, Demi-Human resistance +1%]",0,15,2,57,1,76,10,0]
+,[145,"Soheon [ASPD +2%, Critical damage +3%]",0,12,2,70,3,0]
+,[146,"Celine Kimi [HIT +5, DEF +1, ATK +7, adds a low chance of dropping Izidor when defeating a Boss type monster]",0,8,5,17,7,18,1,0]
+,[147,"Saga [Physical damage against Plant and Insect +3%, Physical damage against Water Property +2%]",0,33,3,34,3,41,2,0]
+,[148,"Geiravor Disciple [FLEE +7, ASPD +2%]",0,9,7,12,2,0]
+,[149,"Geiravor Partisan [Adds a 2% chance of casting Lv 5 Dark Strike when casting magic attacks]",0,221,112,0]
 ];
 
 ITEM_SP_TIME_OBJ =[
@@ -349,10 +415,10 @@ ITEM_SP_TIME_OBJ =[
 ,[7,"Ixion Wings","ASPD + 7%",1,821,12,7,0]
 ,[8,"Vanberk Card","CRIT + 100",2,471,10,100,0]
 ,[9,"Wolfheiden","Receive -20% Physical Damage, +20% Magical Damage[Stone Skin Lv6]",1,708,0]
-,[10,"Angelic Ring","Heal/Sanctuary/Potion Pitcher Effectiveness + 20%",1,1000,91,20,94,20,0]
+,[10,"Angelic Ring","Effectiveness of Heal, Sanctuary and Potion Pitcher increased by 20%",1,1000,91,20,93,20,94,20,0]
 ,[11,"Glorious Grenade Launcher","ASPD + 20%",1,1103,12,20,0]
-,[12,"Glorious Jamadhar[+9]","ASPD + 100%",0,0,0] //1,1091,12,100,0
-,[13,"Glorious Tablet","ATK + 20",1,1094,17,20,0] //1,1094,17,200,0
+,[12,"Glorious Jamadhar [Refine Rate 6~10]","190 ASPD",1,1091,99,190,0]
+,[13,"Glorious Tablet","[Every Refine Level] ATK + 20",1,1094,0]
 ,[14,"Glorious Shuriken","Throw Fuuma Shuriken/Final Strike Damage + 100%",0,0,0] //,1,1098,5396,100,5405,100,5438,100,0
 ,[15,"Glorious Bloody Roar[+9]","ASPD + 100%",1,1090,12,100,0]
 ,[16,"Naght Sieger Twin-Blade [Red]","Ignore [Non-Boss] Monster Defense",1,933,22,1,0]
@@ -389,7 +455,9 @@ ITEM_SP_TIME_OBJ =[
 ,[47,"Jaguar Hat","Loud Exclamation",1,1317,1,4,0] //custom TalonRO, really?
 ,[48,"Djinn","40% damage reflection",1,1380,71,40,0] //custom TalonRO
 ,[49,"Chicken Hat","Loud Exclamation",1,1422,1,4,0] //custom TalonRO
-,[50,"Ancient Horns","ATK + 100",1,1538,17,100,0] //custom TalonRO
+,[50,"Ancient Horns","ATK + 100",1,1538,17,100,0] //custom TalonRO,
+,[51,"Duneyrr Card","Perfect Dodge + 10, [Lord Knight] Additional + 10 under Berserk",2,511,11,10,0]
+,[52,"Rhyncho Card","Increase Resistance to Fire property by 10%",2,513,63,10,0]
 ];
 //ITEM_SP_TIME_OBJ_SORT = [0,5,10,4,27,3,44,37,30,31,26,39,49,45,46,18,48,15,11,12,14,13,17,32,1,7,47,35,33,21,16,40,28,34,38,42,19,22,23,24,36,41,25,6,20,8,29,43];
 

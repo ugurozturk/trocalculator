@@ -327,7 +327,7 @@ JobEquipItemOBJ = [
 	To add new jobids, simply add the new value to the subarrays in JobEquipItemOBJ for the classes that should be able to equip the item
 */
 
-SyuzokuOBJ = ["Formless","Undead","Brute","Plant","Insect","Fish","Demon","Demi-Human","Angel","Dragon"];
+SyuzokuOBJ = ["Formless","Undead","Brute","Plant","Insect","Fish","Demon","Demi-Human","Angel","Dragon","Unknown"];
 ZokuseiOBJ = ["<b><font color='#A8A682'>Neutral</font></b>","<b><font color='blue'>Water</font></b>","<b><font color='brown'>Earth</font></b>","<b><font color='red'>Fire</font></b>","<b><font color='green'>Wind</font></b>","<b><font color='#7B2488'>Poison</font></b>","<b><font color='#CDCD40'>Holy</font></b>","<b><font color='black'>Shadow</font></b>","<b><font color='#9F9E9B'>Ghost</font></b>","<b><font color='#252520'>Undead</font></b>"];
 ZokuseiOBJ2 =["Neutral","Water","Earth","Fire","Wind","Poison","Holy","Shadow","Ghost","Undead"];
 SizeOBJ = ["Small","Medium","Large"];
@@ -2075,10 +2075,8 @@ function BattleCalc999()
 		var wX = n_tok[170+n_B[2]];
 		w_DMG[2] = Math.floor(w_DMG[2] * (100 + wX) /100);
 
-		wHealBAI = 100 + n_tok[93];
-		w_DMG[2] = Math.floor(w_DMG[2] * wHealBAI /100);
-
 		w_DMG[2] = tPlusDamCut(w_DMG[2]);
+		w_DMG[2] = Math.floor(w_DMG[2] * (1 + (StPlusCalc2(5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill)) / 100));
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
 			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
@@ -2103,15 +2101,8 @@ function BattleCalc999()
 		else
 		w_DMG[2] = 777;
 
-		//Mangkukulam Card -
-		//Retain the heal bonus 3%, and no incease dmg.
-		if(CardNumSearch(556)){
-			w_HEAL_BAI = 100 + n_tok[94];
-		}
-		else{
-			w_HEAL_BAI = 100 + n_tok[94];
-			w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_BAI / 100);
-		}
+		w_HEAL_BAI = 100 + n_tok[94];
+		w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_BAI / 100);
 
 		w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * zokusei[n_B[3]][6]);
 		if(n_B[3] < 90 && n_B[2] != 6)
@@ -2120,10 +2111,9 @@ function BattleCalc999()
 		var wX = n_tok[170+n_B[2]];
 		w_DMG[2] = Math.floor(w_DMG[2] * (100 + wX) /100);
 
-		w_HEAL_BAI = 100 + n_tok[96];
-		w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_BAI / 100);
-
 		w_DMG[2] = tPlusDamCut(w_DMG[2]);
+		
+		w_DMG[2] = Math.floor(w_DMG[2] * (1 + (StPlusCalc2(5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill)) / 100));
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
 			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
@@ -2610,6 +2600,7 @@ function ATKbai02(wATKbai,ch_A02)
 		if(SkillSearch(154)==0 && n_A_PassSkill2[8])
 			wA02 += n_A_PassSkill2[8] * 5 / 5;
 	}
+	// Fighting Chant Skill#342 - FIXME : Check with IG damages
 	if(SkillSearch(342)){
 		if (SkillSearch(380) <= 1){wA02 += 0;}
 		else {wA02 += 2 * SkillSearch(342) * SkillSearch(380);}
@@ -3172,24 +3163,56 @@ function BattleMagicCalc(wBMC)
 		debug_atk+="\n --- Element-Modifier ---";
 		debug_atk+="\nb_wBMC2:"+wBMC2;
 	}
-	wBMC2 = Math.floor(wBMC2 * zokusei[n_B[3]][n_A_Weapon_zokusei]);
+	wBMC2 = Math.floor(wBMC2 * zokusei[n_B[3]][n_A_Weapon_zokusei]); // Apply elemental weakness
 	if (debug_dmg_avg)
 		debug_atk+="\na_wBMC2:"+wBMC2;
-	if(90 <= n_B[3] && n_A_ActiveSkill==47)
+	if(90 <= n_B[3] && n_A_ActiveSkill==47) // Soul Strike on non-undead monsters
 		wBMC2 = Math.floor(wBMC2 * (1 + 0.05 * n_A_ActiveSkillLV));
 
-	var wX = n_tok[170+n_B[2]];
+	// >> bMagicAddEle
+	// Damage multiplier on magic element
+	var wMEleX = n_tok[340 + n_A_Weapon_zokusei]
+	
+	// Damage multiplier for monster element
+	wMEleX += n_tok[350+Math.floor(n_B[3]/10)];
+	
+	wBMC2 = wBMC2 * (100 + wMEleX) /100;
+	// << bMagicAddEle
+	
+	// >> bMagicAddRace
+	// Damage multiplier for race - bMagicAddRace
+	var wMRaceX = n_tok[170 + n_B[2]];
+	
+	wBMC2 = wBMC2 * (100 + wMRaceX) /100;
+	// << bMagicAddRace
 
-	// Increases magical damage against bosstype monsters
-	if (n_B[19] == 1) {
-		wX += n_tok[97];
+	// >> bMagicAddClass
+	var wMClassX = 0
+	if (n_B[19] == 1) { // Increases magical damage against bosstype monsters - bMagicAddClass,Class_Boss
+		wMClassX = n_tok[97];
+	} else {
+		wMClassX = n_tok[96]
 	}
-
-	wX += n_tok[350+Math.floor(n_B[3]/10)];
+	
+	wBMC2 = wBMC2 * (100 + wMClassX) /100;
+	// << bMagicAddClass
+	
+	// Dragonology - Increases Attack Power, MATK and DEF against Dragon type monsters by 4% per SkillLV
+	// FIXME : Dragonology should increases MATK% instead ?
+	var wX = 0
 	if(n_B[2]==9  && SkillSearch(234))
 		wX += SkillSearch(234) *2;
 	wBMC2 = wBMC2 * (100 + wX) /100;
-
+	
+	// >> bMagicAddSize
+	// << bMagicAddSize
+	
+	// >> bAddMagicDamageClass
+	// << bAddMagicDamageClass
+	
+	// >> bMagicAddRace2
+	// << bMagicAddRace2
+	
 	wBMC2 = tPlusDamCut(wBMC2);
 
 	var wX = StPlusCalc2(5000+n_A_ActiveSkill) + StPlusCard(5000+n_A_ActiveSkill);
@@ -4532,18 +4555,30 @@ with(document.calcForm){
 		str += '<TR><TD id="EN820"></TD></TR><TR><TD id="EN821"></TD></TR>';
 		str += '<TR><TD id="EN822"></TD></TR><TR><TD id="EN823"></TD></TR>';
 		str += '<TR><TD id="EN824"></TD></TR><TR><TD id="EN825"></TD></TR>';
-		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Food:</B></Font></TD></TR>';
-		str += '<TR><TD id="EN816"></TD></TR>';
-		str += '<TR><TD id="EN826"></TD><TD id="EN827"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>BG Food</B></Font></TD></TR>';
 		str += '<TR><TD id="EN834"></TD><TD id="EN835"></TD></TR>';
 		str += '<TR><TD id="EN836"></TD><TD id="EN837"></TD></TR>';
+		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Eclage Food</B></Font></TD></TR>';
+		str += '<TR><TD colspan="2" id="EN842"></TD></TR>';
+		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Food:</B></Font></TD></TR>';
+		str += '<TR><TD id="EN816"></TD></TR>';
+		str += '<TR><TD id="EN826"></TD><TD id="EN827"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Debuffs</B></Font></TD></TR>';
 		str += '<TR><TD id="EN830"></TD><TD id="EN831"></TD></TR>';
 		str += '<TR><TD id="EN832"></TD><TD id="EN833"></TD></TR></table>';
 		myInnerHtml("ID_ETC",str,0);
 		A8_SKILLSW.checked = 1;
 		myInnerHtml("EN800",'<select name="A8_Skill0" onChange="Click_A8(1)"></select>',0);
+
+		/*
+			Added Eclage Food with a drop down list for selection. Velaryon#8787 4-4-2020
+		*/
+		myInnerHtml("EN842",'<select name="eclage_food_list" onChange="Click_A8(1)"></select>',0);
+		eclage_food_list.options[0] = new Option("-",0,true,true);
+		eclage_food_list.options[1] = new Option("Snow Flip [Increases all damage against and experience from [Water] property monsters by 5%]",1);
+		eclage_food_list.options[2] = new Option("Slapping Herb [Increases all damage against and experience from [Earth] property monsters by 5%]",2);
+		eclage_food_list.options[3] = new Option("Peony Mommy [Increases all damage against and experience from [Fire] property monsters by 5%]",3);
+		eclage_food_list.options[4] = new Option("Yggdrasil Dust [Increases all damage against and experience from [Wind] property monsters by 5%]",4);
 
 		var PET_OBJ_copy= new Array();
 		PET_OBJ_copy = PET_OBJ_copy.concat(PET_OBJ);
@@ -4708,6 +4743,7 @@ with(document.calcForm){
 		A_IJYOU1.value = n_A_IJYOU[1];
 		A_IJYOU2.checked = n_A_IJYOU[2];
 		A_IJYOU3.checked = n_A_IJYOU[3];
+		eclage_food_list.value = eclage_food;
 
 	}else{
 		var str;
@@ -7133,17 +7169,14 @@ if(n_B_IJYOU[1]){
 			n_B[27] = -19;
 	}
 
-
-
-
 /* [END] */
 	if(Taijin==0){
 		var w1_Exp = 100;
-		w1_Exp += StPlusCard(120+n_B[2]);
-		w1_Exp += StPlusCalc2(120+n_B[2]);
+
+		w1_Exp += n_tok[120+n_B[2]] + n_tok[370 + Math.floor(n_B[3] / 10)];
+
 		var w2_Exp = 0;
-		if(EquipNumSearch(1030))
-			w1_Exp += 5 * EquipNumSearch(1030);
+
 		if(n_A_JobSearch()==3 && CardNumSearch(452) && (n_B[2]==1 || n_B[2]==6))
 			w1_Exp += 5;
 		if(n_B[2] == 2 && n_A_JobSearch()==4 && CardNumSearch(453))
@@ -7422,8 +7455,8 @@ function calc()
 		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK-1 + wImp)* wCSize);
 
 	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
-	//if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
-	if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
+	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
+	if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 		n_A_DMG[2] += Math.floor((ArrowOBJ[n_A_Arrow][0]-1) * wCSize);
 
 	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
@@ -8082,6 +8115,92 @@ function BaiCI(wBaiCI)
 
 	if((n_A_ActiveSkill==83 || n_A_ActiveSkill==388) && SkillSearch(381) && wBCEDPch==0)
 		w1 += 10;
+	
+	if (n_A_ActiveSkill == 264) {
+		// Enforcer Cape#1699 - [Every Refine Level] Increase [Meteor Assault] damage by 1%
+		w1 += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
+		
+		// Brave Carnage Katar#909 - [Refine level 7~10] Increase [Meteor Assault] damage by 15%
+		if(n_A_Weapon_ATKplus >= 7)
+			w1 += 15 * EquipNumSearch(909);
+	}
+	
+	// Glorious Claw#1096
+	if (EquipNumSearch(1096)) {
+		// [Every Refine Level] Increase [Triple Attack], [Chain Combo] and [Combo Finish] damage by 5%
+		if (n_A_ActiveSkill >= 187 || n_A_ActiveSkill <= 189)
+			w1 += 5 * n_A_Weapon_ATKplus;
+		// [Every Refine Level Above +5]  Increase [Tiger Knuckle Fist] and [Chain Crush Combo] damage by 5%
+		if (n_A_ActiveSkill == 289 || n_A_ActiveSkill == 290)
+			w1 += 5 * Math.max(0, n_A_Weapon_ATKplus - 5);
+	}
+
+	// Glorious Claymore#1080 - [Every Refine Level] Increase [Bowling Bash] and [Charge Attack] damage by 1% [Amor]
+	if (n_A_ActiveSkill == 76 || n_A_ActiveSkill == 308)
+		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1080);
+
+	if (n_A_ActiveSkill == 65) {
+		// Glorious Two Handed Axe#1087 - [Every Refine Level] Increase [Mammonite] damage by 2% [Amor]
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1087);
+		
+		// Glorious Cleaver#1088 - [Every Refine Level] Increase [Mammonite] damage by 1% [Amor]
+		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1088);
+	}
+
+	// Glorious Flamberge#1077 - [Every Refine Level] Increase [Bash], [Mammonite] and [Back Stab] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 65 || n_A_ActiveSkill == 6 || n_A_ActiveSkill == 169)
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1077);
+
+	// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Ground Drift] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 437)
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1103);
+
+	if (n_A_ActiveSkill == 418) {
+		// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Triple Action] damage by 1% [Amor]
+		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1103);
+		
+		// Glorious Grenade Launcher#1103, Glorious Rifle#1100, Glorious Shotgun#1102 - [If Scouter Is Not Equipped] Increase [Triple Action] damage by 30%
+		if (!EquipNumSearch(1387))
+			w1 += 30 * (EquipNumSearch(1103) + EquipNumSearch(1100) + EquipNumSearch(1102));
+	}
+
+	// Glorious Huuma Shuriken#1098 - [Every Refine Level] Increase [Throw Huuma Shuriken] damage by 3% [Amor]
+	if (n_A_ActiveSkill == 396)
+		w1 += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1098);
+
+	// Glorious Revolver#1099 - [Every Refine Level] Increase [Rapid Shower] damage by 1% [Amor]
+	if (n_A_ActiveSkill == 428)
+		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1099);
+
+	// Glorious Rifle#1100 - [Every Refine Level] Increase [Tracking] and [Piercing Shot] damage by 3% [Amor]
+	if (n_A_ActiveSkill == 430 || n_A_ActiveSkill == 432)
+		w1 += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1100);
+
+	// Glorious Shotgun#1102 - [Every Refine Level] Increase [Spread Attack] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 436)
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1102);
+
+	// Valorous Battle CrossBow#913 - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
+	if (n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8)
+		w1 += 10 * EquipNumSearch(913);
+
+	// Glorious Hunter Bow#1089 - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
+	if (n_A_ActiveSkill == 40)
+		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1089);
+
+	/*
+		Valorous Carnage Katar#910
+		[Refine Level 6~10]
+		Increases damage with [Sonic Blow] by 10%.
+		[Refine Level 9~10]
+		Increases damage with [Sonic Blow] by 20%.
+	*/
+	if(n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 83 && EquipNumSearch(910)) {
+		w1 += 10;
+		
+		if (n_A_Weapon_ATKplus >= 9)
+			w1 += 20;
+	}
 
 	wBaiCI = wBaiCI * (100+StPlusCalc2(5000+n_A_ActiveSkill)+StPlusCard(5000+n_A_ActiveSkill) + w1) /100;
 

@@ -6,7 +6,7 @@
 /*
   ZoneSoldier - 6/2/2018
    id, display location, job that can use,(atk; def),lvl equip, slots, weight, lvl required to use, "name of item",  ?, "description", effect1, effect2, ..., 0 =?]
-   Example : [1535 = ID,62 = Location,0 = all jobs,0 = def(atk if its a weapon),0-default = equipment level,1 = slots, 0 = weight, 60 = Level required to use item,0 = ,"Beach Manteau" = Name of object,"" = ?,0 = description(No info added so left at 0),1 = STR,1 = 1 next to str value,4 = Int,1 = Int value 1 on site,63 = Fire resistance,10 = 10% resistance,0= end]
+   Example : [1535 = ID,62 = Location,0 = all jobs (more details in head.js),0 = def(atk if its a weapon),0-default = equipment level,1 = slots, 0 = weight, 60 = Level required to use item,0 = ,"Beach Manteau" = Name of object,"" = ?,0 = description(No info added so left at 0),1 = STR,1 = 1 next to str value,4 = Int,1 = Int value 1 on site,63 = Fire resistance,10 = 10% resistance,0= end]
    Location values:
    Weapons: 1 = Dagger, 2 = One-handed Sword, 3 = Two-handed Sword, 4 = One-handed Spear, 5 = Two-handed Spear, 6 = One-handed Axe, 7 = Two-handed Axe, 8 = Mace, 9 = Staff/Rod, 10 = Bow/CrossBow, 11 = 	Katar, 12 = Book, 13 = Knuckles, 	Instrument = 14, 15 = Whip, 16 = Shuriken, 17 = Revolver, 18 = Rifle, 19 = Shotgun, 20 = Gatling Gun, 21 = Gernade Launcher.
    Headgear: 50 = Upper Headgear, 51 = Middle Headgear, 52 = Lower Headgear
@@ -732,7 +732,7 @@ ItemOBJ = [
 ,[709,62,1089,3,0,1,40,70,"Mithril Magic Manteau","","Whenever you receive Magical Damage, 20% chance to increase your MDEF by 20% for 2 seconds, but also reduce your DEF by 20% during that 2 seconds",19,3,0]
 ,[710,63,50,2,0,1,30,25,"Angel's Reincarnation","",0,13,100,0]
 ,[711,63,1,4,0,0,70,54,"Goibne's Greaves","",0,19,3,15,5,16,5,0]
-,[712,63,1,3,0,0,50,65,"Fricco's Shoes","","Increase the heal power of Red, Orange, Yellow and White Potion by 20%",2,2,0]
+,[712,63,1,3,0,0,50,65,"Fricco's Shoes","","Increase the heal power of Red, Orange, Yellow and White Potion by 20%.<br>[Potion Pitcher] bonus only works if equipped on the caster.",2,2,93,20,0]
 ,[713,63,1,4,0,0,65,65,"Vidar's Boots","",0,15,9,16,9,0]
 ,[714,63,77,2,0,1,20,40,"High Quality Sandals","",0,19,10,0]
 ,[715,63,1001,3,0,0,50,85,"Variant Shoes","","Maximum HP / Maximum SP reduced by 1% per refine rate<br>Added +1 DEF for every 2 refinement",15,20,16,20,0]
@@ -771,7 +771,7 @@ ItemOBJ = [
 ,[748,100,0,0,0,0,0,0,"Novice Angelic set",0,"Add a 3% chance of auto casting Level 1 Assumptio on the user when the user receives Physical Damage",13,900,14,100,0]
 ,[749,100,0,0,0,0,0,0,"Valkyrie set",0,0,7,1,0]
 ,[750,100,0,0,0,0,0,0,"Soul Staff/Wizardry Staff set",0,"Reduce Casting Time by [Wizardry Staff] or [Soul Staff] Refine Rate",89,6,215,2,0]
-,[751,100,0,0,0,0,0,0,"Clip/Rosary set",0,0,76,9,5104,30,93,50,0]
+,[751,100,0,0,0,0,0,0,"Clip/Rosary set",0,0,76,9,5104,30,5025,50,0]
 ,[752,100,0,0,0,0,0,0,"Orlean's set",0,0,73,-10,0]
 ,[753,100,0,0,0,0,0,0,"Horn of the Buffalo set",0,0,12,10,71,5,0]
 ,[754,100,0,0,0,0,0,0,"Tidal Shoes set",0,0,15,10,75,5,0]
@@ -864,7 +864,7 @@ ItemOBJ = [
 ,[841,64,124,0,0,0,10,70,"Feather of Icarus","",0,5,3,14,50,0]
 ,[842,64,124,0,0,0,20,70,"Renown Archer's Scarf","",0,5,3,14,50,0]
 ,[843,64,1,0,0,1,5,80,"Cursed Hand","","When attacking there is a 3% chance to autocast Level 1 Critical Wounds",8,10,75,20,0]
-,[844,64,1079,0,0,1,5,0,"Diablos Ring","",0,13,100,14,100,91,5,94,5,1495,10,1496,10,0]
+,[844,64,1079,0,0,1,5,0,"Diablos Ring","",0,13,100,14,100,91,5,93,5,94,5,1495,10,1496,10,0]
 ,[845,64,1,0,0,1,5,80,"Continental Guard Seal","",0,12,3,13,50,0]
 ,[846,64,1,0,0,1,5,80,"Rune Charm Stone","",0,73,-1,14,50,0]
 ,[847,64,1,0,0,1,5,80,"Death Medalion","",0,10,5,0]
@@ -967,7 +967,7 @@ ItemOBJ = [
 ,[944,8,1053,110,3,3,70,50,"Luna Kaleet","","If user's base Str is 77 or higher: ASPD +4% and Causes Stun effect to enemies by 15% chance.<BR>When a Brute is killed, 5% chance to drop +3 STR Food<BR>When a Plant is killed,0.5% chance to drop +5 DEX Food<BR>When a Fish is killed, 5% chance to drop +4 LUK Food",0]
 ,[945,10,124,105,4,2,100,60,"Nepentis Bow","","While using Double Strafing, 2% chance to Arrow Repel at the same time",0]
 ,[946,10,1054,125,4,1,125,80,"Cursed Lyre","","Curse on an enemy with Long Range Physical attack (Success Chance 4%)",6,-2,0]
-,[947,13,129,95,3,3,60,60,"Horn of Hillslion","","Adds a 10% chance of using [Critical Wounds]Lv 1 on the target when doing a physical attack<br>Adds a 10% chance of using [Summon Spirit Sphere]Lv 5 when doing a physical attack<br>10% chance of using [Investigate]Lv 1 when [Palm Push Strike] is casted",0]
+,[947,13,129,95,3,3,60,60,"Horn of Hillslion","","Adds a 10% chance of using [Critical Wounds]Lv 1 on the target when doing a physical attack<br>Adds a 10% chance of using [Summon Spirit Sphere]Lv 1 when doing a physical attack<br>10% chance of using [Investigate]Lv 1 when [Palm Push Strike] is casted",0]
 ,[948,9,1001,80,4,0,50,70,"Eraser","","There is a small chance while magically attacking, on a radius 11 * 11 of your cell and drain every enemies SP by 20%<br><b>[Refine Rate 10]</b><br>The area becomes 19 * 19 and you drain every enemies SP by 60%",89,20,4,3,5,2,76,8,0]
 ,[949,14,130,110,3,3,70,70,"Chello","","The Musical Strike skill shoves the enemy 2 cells back<br>The Arrow Vulcan skill shoves the enemy 3 cells back",2,2,5,3,0]
 ,[950,14,130,120,4,2,100,60,"Harp Of Nepentis","","Add small chance to Stun on the enemy when using Musical Strike.<br>The probability of inflicting stun effect increases if the Refining Level is over 9.",4,2,0]
@@ -992,7 +992,7 @@ ItemOBJ = [
 ,[969,63,89,3,0,1,0,80,"Combat Boots","",0,13,100,19,1,57,1,0]
 ,[970,63,145,3,0,1,0,80,"Battle Boots","",0,13,100,19,1,57,1,0]
 ,[971,100,0,0,0,0,0,0,"[Assaulter Plate & Battle Greaves & Captain's Manteau Equip Set]",0,"Increases Healing received from skills and items by 10%.<br>When attacking physically, there is a chance to recover 6000HP over 10 seconds.",3,3,15,12,50,-300,51,-300,52,-300,53,-300,54,-300,55,-300,56,-300,58,-300,59,-300,0]
-,[972,100,0,0,0,0,0,0,"[Elite Engineer Armor & Battle Greaves & Captain's Manteau Equip Set]",0,"Increases effectiveness of your [Potion Pitcher] by 10%.<br>Increases the effectiveness of [Heal] and [Potion Pitcher] used on you by 10%.",1,3,15,12,5065,20,50,-300,51,-300,52,-300,53,-300,54,-300,55,-300,56,-300,58,-300,59,-300,194,1,0]
+,[972,100,0,0,0,0,0,0,"[Elite Engineer Armor & Battle Greaves & Captain's Manteau Equip Set]",0,"Increases the effectiveness of heal received from [Heal] and [Potion Pitcher] by 10%.",1,3,15,12,93,10,5065,20,50,-300,51,-300,52,-300,53,-300,54,-300,55,-300,56,-300,58,-300,59,-300,194,1,0]
 ,[973,100,0,0,0,0,0,0,"[Assassin Robe & Battle Greaves & Captain's Manteau Equip Set]",0,"When attacking physically, small chance to recover 3000HP over per 10 seconds",2,3,15,12,12,5,10,5,50,-300,51,-300,52,-300,53,-300,54,-300,55,-300,56,-300,58,-300,59,-300,0]
 ,[974,100,0,0,0,0,0,0,"[Warlock's Battle Robe & Combat Boots & Commander's Manteau Equip Set]",0,"When receiving physical damage, there is a chance that for 10 seconds, your armor will become ghost property.",4,3,15,12,151,20,50,-300,51,-300,52,-300,53,-300,54,-300,55,-300,56,-300,58,-300,59,-300,0]
 ,[975,100,0,0,0,0,0,0,"[Medic's Robe & Combat Boots & Commander's Manteau Equip Set]",0,"When receiving physical damage, there is a chance that for 10 seconds, your armor will become ghost property.",4,3,15,12,7037,50,91,10,94,10,50,-300,51,-300,52,-300,53,-300,54,-300,55,-300,56,-300,58,-300,59,-300,0]
@@ -1020,7 +1020,7 @@ ItemOBJ = [
 ,[997,62,1063,2,0,1,50,70,"Mushika","","Add a chance of auto casting Level 1 Heal on yourself when the user receiving physical damage<br>If you know a higher level of heal, you will cast that level instead",19,3,0]
 ,[998,63,1079,2,0,1,30,70,"Sprint Shoes","",0,2,1,76,5,0]
 ,[999,100,0,0,0,0,0,0,"Sprint Set",0,0,15,7,16,7,73,-3,74,15,0]
-,[1000,64,1079,0,0,0,10,70,"Angelic Ring","","When using Heal, Aid Potion, Sanctuary, there is a chance for 3 seconds that gives you the ability + 20% Heal more",4,2,5,1,19,2,0]
+,[1000,64,1079,0,0,0,10,70,"Angelic Ring","","When using Heal, Sanctuary or Potion Pitcher there is a chance for 3 seconds that gives you the ability + 20% Heal more",4,2,5,1,19,2,0]
 ,[1001,64,1079,0,0,0,10,70,"Sprint Ring","",0,73,-10,74,-5,0]
 ,[1002,64,1079,0,0,1,20,70,"Pinguicura's Corsage","",0,19,2,14,25,0]
 ,[1003,64,122,1,0,0,10,80,"Cold Heart","",0,2,3,0]
@@ -1131,11 +1131,11 @@ ItemOBJ = [
 ,[1108,63,999,0,0,0,0,61,"Glorious Popularized Shoes","",0,15,5,16,5,0]
 ,[1109,63,999,0,0,0,0,0,"Glorious Mass-Production Shoes","",0,15,5,0]
 ,[1110,62,0,0,0,0,0,81,"Glorious Muffler","","",15,5,57,5,0]
-,[1111,64,0,0,0,0,0,81,"Glorious Ring","","Increases [Potion Pitcher] effectiveness by 5%.",61,5,62,5,63,5,64,5,13,300,12,5,73,-3,91,5,94,5,0]
+,[1111,64,0,0,0,0,0,81,"Glorious Ring","",0,61,5,62,5,63,5,64,5,13,300,12,5,73,-3,91,5,93,5,94,5,0]
 ,[1112,64,999,0,0,0,0,61,"Glorious Popularized Ring","",0,7,2,0]
 ,[1113,64,999,0,0,0,0,0,"Glorious Mass-Production Ring","",0,7,1,0]
-,[1114,100,0,0,0,0,0,0,"[Glorious Shoes & Glorious Muffler Equip Set]",0,"Increases [Potion Pitcher] effectiveness by 3%.",80,5,89,5,91,3,94,3,152,100,0]
-,[1115,100,0,0,0,0,0,0,"[Battlegrounds Accesories Equip Set]",0,"Increases [Potion Pitcher] effectiveness by 3%.",80,5,89,3,91,3,94,3,0]
+,[1114,100,0,0,0,0,0,0,"[Glorious Shoes & Glorious Muffler Equip Set]","",0,80,5,89,5,91,3,93,3,94,3,152,100,0]
+,[1115,100,0,0,0,0,0,0,"[Battlegrounds Accesories Equip Set]","",0,80,5,89,3,91,5,93,5,94,5,0]
 ,[1116,64,0,0,0,0,10,0,"Novice Figure","","<b>[Novice Class]</b><br>MHP + 60",13,140,0]
 ,[1117,64,0,0,0,0,0,0,"Swordsman Figure","","<b>[Crusader Class]</b><br>DEF + 2",3,4,0]
 ,[1118,64,0,0,0,0,0,0,"Acolyte Figure","","<b>[Acolyte Class]</b><br>MSP + 50",4,4,0]
@@ -1165,7 +1165,7 @@ ItemOBJ = [
 ,[1142,50,0,5,0,1,90,0,"Orc Hero Headdress","","Add a 1% chance of auto casting Level 3 Weapon Perfection on the user when receives Physical Damage<br><b>[For Every 4 Refines]</b><br>STR + 1<br><b>[For Every Refine > 5]</b><br>Physical Damage against Demi-Human monsters + 1%<br>Damage from Demi-Human monsters - 2%<br><b>Upper and Middle Headgear</b>",0]
 ,[1143,50,0,1,0,0,50,50,"Aladdin Prince Hat","",0,71,1,0]
 ,[1144,51,0,3,0,0,100,60,"Tiger Face","","<b>Middle and Lower Headgear</b>",52,5,32,5,172,5,0]
-,[1145,50,0,1,0,1,100,0,"Hermose Cap","",0,12,10,87,-10,89,-20,0]
+,[1145,50,0,1,0,1,100,0,"Hermose Cap","",0,12,10,80,-10,89,-20,0]
 ,[1146,50,0,1,0,1,20,0,"RJC Katyusha Flower","","Increases damage with Heaven's Drive and Earth Spike by 1% per refine on weapon",5132,15,5133,15,0]
 ,[1147,51,1,0,0,0,0,70,"Ifrit Ear","",0,19,3,1,1,63,5,61,-5,5051,2,5125,2,5122,2,5006,2,5070,2,5007,2,0]
 ,[1148,50,0,3,0,1,10,0,"Desert Prince","",0,194,1,0]
@@ -1182,7 +1182,7 @@ ItemOBJ = [
 ,[1159,3,51,180,4,1,200,80,"Veteran Sword","","If the user has mastered [Bash], increases the damage with it by 50%<br>If the user has mastered [Bowling Bash], increases the damage with it by 50%",1,1,5,1,0]
 ,[1160,3,1051,200,2,3,380,50,"Krasnaya","","If user's base Str is 95 or higher: ATK + 20",0]
 ,[1161,8,53,160,3,2,180,80,"Veteran Hammer","","For each level of [Divine Protection] the user has learned, the power of the user's [Heal] is increased by 1%<br>For each level of [Mace Mastery] the user has learned, Crit +2",4,1,6,1,0]
-,[1162,8,1001,130,3,2,50,50,"Erde Mace","",0,14,50,5244,20,5248,20,91,10,94,10,0]
+,[1162,8,1001,130,3,2,50,50,"Erde Mace","",0,14,50,5244,20,5248,20,91,10,93,10,94,10,0]
 ,[1163,50,0,3,0,1,100,50,"Galaxy Circlet","","<b>[For Every Refine]</b><br>MHP + 10<br>MSP + 10<br><b>[For Every 2 Refines]</b><br>Increase resistance to <b><font color='brown'>Earth</font></b>, <b><font color='red'>Fire</font></b> and <b><font color='blue'>Water</font></b> attacks by 1%",19,5,0]
 ,[1164,6,1070,140,3,2,150,50,"Berchel Axe","","If the user's base Luk is 90 or higher, Atk +20<br>If the user's base Dex is 90 or higher, Crit +5<br>If the user's base Dex and Luk are 90 or higher, increases the damage inflicted with [Mammonite] by 15%",0]
 ,[1165,7,70,250,3,2,300,80,"Veteran Axe","","If the player has mastered Smith Dagger, ATK + 10<br>If the player has mastered Smith Sword, ATK + 10<br>If the player has mastered Smith Two-hand Sword, ATK + 10<br>If the player has mastered Smith Knuckle, ATK + 10<br>If the player has mastered Smith Spear, ATK + 10<br>If the player has mastered Smith Axe, ATK + 10<br>If the player has mastered Smith Mace, ATK + 10",3,2,0]
@@ -1208,14 +1208,14 @@ ItemOBJ = [
 ,[1185,50,0,3,0,0,50,70,"Frog Hat","",0,19,1,34,12,174,12,0]
 ,[1186,50,0,2,0,1,50,0,"Jolly Roger Hat","","<b>[Refine Rate > 7]</b><br>Physical damage against <b><font color='blue'>Water</font></b> element monsters + 3%<br><b>[Refine Rate > 8]</b><br>Resistance against <b><font color='blue'>Water</font></b> element attacks + 3%",3,1,41,2,61,2,0]
 ,[1187,50,0,1,0,0,30,0,"Rain Cloud","",0,61,5,13,80,19,2,0]
-,[1188,64,1,1,0,0,10,20,"Ring of Water","",0,61,5,0]
+,[1188,64,1,1,0,0,10,20,"Ring of Water","","A mysterious ring that is blessed by the Spirit of Water.",61,5,0]
 ,[1189,60,1001,3,0,1,50,0,"Dragon Vest","",0,19,3,0]
 ,[1190,60,1072,7,0,1,100,85,"Bone Plate","","Adds a 1% chance to cause External Bleeding status ailment all enemies in a 5x5 area around you when taking ATK based damage",1,1,19,3,307,10,302,10,0]
 ,[1191,61,1079,5,0,1,180,65,"Bradium Shield","",0,13,500,5159,60,5384,60,2,-1,0]
 ,[1192,62,1001,5,0,1,100,0,"Dragon Manteau","",0,2,1,19,5,0]
 ,[1193,62,1001,5,0,1,40,90,"Proxy Skin Fragment","","Increases SP by Level/3 + [Refine Rate * 10]<br>When dealing physical damage there's a 1% chance that you'll recover 1% of your damage as SP",19,3,61,3,62,3,63,3,64,3,65,3,66,3,67,3,68,3,69,3,0]
-,[1194,63,1001,4,0,0,50,60,"Life Tree Wooden Shoes","","Recover 30 HP every 10 seconds",15,10,3,2,19,3,92,5,0]
-,[1195,64,0,0,0,0,10,0,"Ring Of Wisdom","",0,13,50,14,20,0]
+,[1194,63,1001,4,0,0,50,60,"Life Tree Wooden Shoes","","Recover 30 HP every 10 seconds",15,10,3,2,19,3,92,5,93,5,95,5,0]
+,[1195,64,0,0,0,0,10,0,"Ring of Wisdom","",0,13,50,14,20,0]
 ,[1196,64,0,0,0,1,10,70,"Eye Ring","",0,10,2,14,25,0]
 ,[1197,64,1001,0,0,1,20,75,"Waterdrop Brooch","",0,61,5,13,80,19,2,0]
 ,[1198,64,1001,0,0,1,20,60,"Bradium Earring","",0,4,1,5,1,89,2,0]
@@ -1224,7 +1224,7 @@ ItemOBJ = [
 ,[1201,64,0,0,0,0,10,80,"Light of El Dicastes","","<font color=red><b>Bound to Game Account</b></font><br><b>Can be enchanted in El Dicastes</b>",0]
 ,[1202,100,0,0,0,0,0,0,"Blush + Necktie","",0,12,3,73,3,0]
 ,[1203,100,0,0,0,0,0,0,"Dragon Vest + Manteau","",0,2,5,9,15,0]
-,[1204,50,0,2,0,1,50,0,"Necromancer Hood","",0,221,112,0]
+,[1204,50,0,2,0,1,50,0,"Necromancer's Hood","",0,221,112,0]
 ,[1205,50,1,5,0,0,60,50,"Wandering Wolf Hat","",0,3,5,9,10,193,1,0]
 ,[1206,50,1,2,0,1,50,30,"Frog King Hat","",0,2,1,193,1,0]
 ,[1207,50,0,1,0,0,20,10,"Cashmere Hat","",0,41,10,61,10,0]
@@ -1278,7 +1278,7 @@ ItemOBJ = [
 ,[1255,50,0,2,0,1,50,30,"White Feather","","<b>[Refine Rate >= 5]</b><br>Hit - 10<br>MHP + 10%<br><b>[Refine Rate >= 7]</b><br>Hit - 3<br>MHP + 3%<br><b>[Refine Rate >= 9]</b><br>Hit - 3<br>MHP + 3%",8,20,15,-10,0]
 ,[1256,52,0,1,0,0,10,0,"4 Leaf Clover In Mouth","",0,89,1,0] //custom TalonRO
 ,[1257,100,0,0,0,0,0,0,"White Feather + Pipe","","<b>[Refine Rate >= 7]</b><br>Hit + 1<br>MHP + 2%<br><b>[Refine Rate >= 9]</b><br>Hit + 1<br>MHP + 2%",0]
-,[1258,50,0,3,0,0,0,70,"Anubis Hat",0,0,77,3,92,3,0]
+,[1258,50,0,3,0,0,0,70,"Anubis Hat",0,"[Potion Pitcher] bonus only works if equipped on the caster.",77,3,92,3,95,3,93,3,0]
 ,[1259,64,0,0,0,1,10,0,"Skull Ring [1]","",0,51,1,0]
 ,[1260,50,1,3,0,1,50,20,"Wild Rose Hat",0,0,2,3,0]
 ,[1261,50,55,1,0,0,30,0,"White Mage Hat","","<font color=red><b>Bound to Game Account</b></font>",4,2,14,150,0]
@@ -1289,7 +1289,7 @@ ItemOBJ = [
 ,[1266,50,0,3,0,0,40,0,"White Musang Hat","",0,1,2,3,2,6,1,0]
 ,[1267,50,0,2,0,0,50,0,"White Snake Hat","",0,5,2,0]
 ,[1268,50,0,0,0,0,10,0,"Angel Blessing","","",66,5,6,1,0,]
-,[1269,51,0,0,0,0,20,30,"Angel of Ghost","",0,87,2,89,2,0]
+,[1269,51,0,0,0,0,20,30,"Angel of Ghost","",0,80,2,89,2,0]
 ,[1270,50,0,3,0,0,10,0,"White School Hat","","When receiving a physical attack, add 2% chance to trigger Level 1 Weapon Perfection<b>[Refine Rate >= 5]<b><br>Increases the trigger rate of Level 1 Weapon Perfection by 1%",0]
 ,[1271,50,0,3,0,0,10,0,"Indonesia Beret","",0,19,3,0]
 ,[1272,50,0,3,0,0,40,70,"Aries Crown",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>VIT + 1",63,5,3,2,0]
@@ -1421,7 +1421,7 @@ ItemOBJ = [
 //custom TalonRO etc (low/mid-headgears)
 ,[1393,52,0,5,0,0,10,0,"Pussy Cat Bell","",0,0]
 ,[1394,52,1,0,0,0,20,20,"Rock Replica","",0,1,1,0]
-,[1395,52,0,1,0,0,10,0,"Chewing Bubblegum","","ATK + 1%",0]
+,[1395,52,0,1,0,0,10,0,"Chewing Bubblegum","",0,80,1,0]
 ,[1396,52,0,1,0,0,0,0,"Nut Donut In Mouth","",0,17,5,0]
 ,[1397,52,1,0,0,0,20,20,"Scissors Replica","",0,2,1,0]
 ,[1398,52,1,0,0,0,20,20,"Paper Replica","",0,6,1,0]
@@ -1441,7 +1441,7 @@ ItemOBJ = [
 ,[1412,52,0,0,0,0,10,0,"Puppy Grass","",0,73,-1,0]
 ,[1413,52,0,1,0,0,10,90,"Rainbow Scarf","",0,4,1,0]
 ,[1414,52,0,0,0,0,10,50,"Rose Of Crimson","",0,6,1,0]
-,[1415,52,0,1,0,0,30,0,"Samurai Mask","",0,87,1,0]
+,[1415,52,0,1,0,0,30,0,"Samurai Mask","",0,80,1,0]
 ,[1416,52,0,1,0,0,20,0,"Special Carrot In Mouth","",0,53,1,0]
 ,[1417,50,0,2,0,0,20,0,"Sheila Hairnet","","Your sexyness increases to 100%",2,2,19,3,0]
 ,[1418,100,0,0,0,0,0,0,"Special Carrot In Mouth set",0,"When receiving physical attack there's a 1% chance to autocast [High Jump] Level 1",0]
@@ -1464,7 +1464,7 @@ ItemOBJ = [
 ,[1435,51,0,1,0,0,10,10,"Ice Ear Wing","",0,6,1,0]
 ,[1436,51,0,0,0,0,10,0,"Ifrit Eyes","",0,5,1,153,25,0]
 ,[1437,52,0,0,0,0,5,10,"Poker Card In Mouth","",0,37,1,57,-1,0]
-,[1438,52,0,0,0,0,0,0,"Choco Stick In Mouth","","ATK - 1%",14,10,0]
+,[1438,52,0,0,0,0,0,0,"Choco Stick In Mouth","",0,80,-1,14,10,0]
 ,[1439,52,0,0,0,0,10,10,"Cold Breath","",0,3,-1,4,1,0]
 ,[1440,50,0,3,0,0,10,10,"Poring Clip (Colored)","",0,0]
 ,[1441,64,0,0,0,0,0,0,"Satanic Ring [Rental]","",0,128,15,0]
@@ -1487,7 +1487,7 @@ ItemOBJ = [
 ,[1457,10,1054,90,3,1,170,90,"Mystic Bow","","When using Arrow Shower, add a 5% chance of casting Level 2 Dragon Fear<br>Reduces the SP cost of all skills by 10%",4,4,5041,30,0]
 ,[1458,8,133,150,3,1,100,90,"Red Ether Bag","",0,98,90,5248,25,0]
 ,[1459,61,127,4,0,1,250,90,"Imperial Guard","","Each refine above +6 increases [Shield Chain] attack power by an additional 2%",19,5,5324,5,0]
-,[1460,4,127,180,3,1,180,90,"Imperial Spear","","ATK + 2 for every Spear Mastery level<br>ATK + 2 for every 2 refines",98,40,0]
+,[1460,4,127,180,3,1,180,90,"Imperial Spear","","<b>[Every [Spear Mastery] Level]</b><br>ATK + 2<br><b>[Every 2 Refine Levels]</b><br>ATK + 2",98,40,0]
 ,[1461,100,0,0,0,0,0,0,"Imperial Guard & Imperial Spear combo",0,0,5162,20,0] //Imperial Guard & Imperial Spear combo
 ,[1462,14,130,170,3,1,80,90,"Green Whistle","","When using Frost Joker, add a 3% chance of casting Level 2 Wide Curse<br>For every refine above +6, decrease SP cost of all skills by 2%",98,50,12,5,0]
 ,[1463,1,128,142,3,1,60,90,"Black Wing","","Each refine increases skill damage of [Back Stab] by 2%<br>Each refine increases MATK by 3%",5169,30,0]
@@ -1497,7 +1497,7 @@ ItemOBJ = [
 ,[1466,51,0,0,0,0,10,0,"Mother Elven Ears","",0,19,4,0]
 ,[1467,50,0,5,0,0,10,0,"Elder Crown","",0,4,2,19,5,0]
 ,[1468,50,0,2,0,1,30,0,"RWC Commemorative Pin","","<b>[Refine Rate 4-10]</b><br>Additional +1% to ATK and MATK for each refine level",27,1,28,1,29,1,89,1,0]
-,[1469,50,0,0,0,1,30,0,"Angeling Fur Hat","","ATK + 1%",7,1,89,1,0]
+,[1469,50,0,0,0,1,30,0,"Angeling Fur Hat","",0,7,1,80,1,89,1,0]
 ,[1470,50,0,5,0,0,50,20,"Wunderkammer","","When doing short range physical attacks, add a chance of auto casting various skills:<br>Monster Property/Sense<br>Identify<br>Pick Stone<br>Greed<br>Running<br>High Jump<br>First Aid<br>Back Sliding",19,10,193,1,0]
 ,[1471,100,0,0,0,0,0,0,"Wunderkammer & Lesser Elemental Ring combo",0,"Add a chance of auto casting Level 2 Weapon Perfection on the enemy when attacking",0] //Wunderkammer & Lesser Elemental Ring combo
 ,[1472,1,0,107,3,1,70,30,"Kris","","Enable a 5% chance of gaining 10% of the damage inflicted on an enemy as HP with each attack",89,10,0]
@@ -1512,7 +1512,7 @@ ItemOBJ = [
 ,[1481,8,1001,175,3,2,150,90,"Carga Mace","","Its name means 'Great Echo' in the Manuk tribe language, a rugged heavy mace with a sharp edge on one side.",0,0]
 ,[1482,11,122,180,3,1,120,90,"Durga","",0,0]
 ,[1483,60,1051,11,0,1,450,90,"Ebone Armor","",0,0]
-,[1484,60,1000,5,0,1,40,22,"Puente Robe","","Potion Pitcher effectiveness increased by + 3%",73,-1,91,3,0]
+,[1484,60,1000,5,0,1,40,22,"Puente Robe","",0,73,-1,91,3,93,3,94,3,0]
 ,[1485,60,1001,7,0,1,280,22,"Claire Suits","",0,0]
 ,[1486,9,1077,30,3,0,50,90,"Laphine Staff","","Each refine reduces your casting time by 1%",89,20,0]
 ,[1487,50,0,5,0,1,100,20,"Fancy Phantom Mask","","+100 MaxHP for each refine<br><b>Upper and Middle Headgear</b>",1,1,80,5,74,1,5065,20,0]
@@ -1555,8 +1555,8 @@ ItemOBJ = [
 ,[1522,18,0,170,3,0,0,0,"Lever Action Rifle [Rental]","",0,8,20,10,50,12,-5,80,30,193,1,0]
 //custom TalonRO [Update 2014-09-02]
 ,[1523,51,0,3,0,0,100,10,"Evil Mask","","Drain 1 SP from user every 2 seconds<br><b>Middle and Lower Headgear</b>",12,1,0]
-,[1524,100,0,0,0,0,0,0,"Evil Mask & Succubus Horn",0,"ASPD +1<br>Drain 3 SP from user every 2 seconds",12,9,0] //Evil Mask & Succubus Horn
-,[1525,100,0,0,0,0,0,0,"Evil Mask & Incubus Horn",0,"ASPD +1<br>Drain 3 SP from user every 2 seconds",12,9,0] //Evil Mask & Incubus Horn
+,[1524,100,0,0,0,0,0,0,"Evil Mask & Succubus Horn",0,"Drain 3 SP from user every 2 seconds",12,9,99,1,0] //Evil Mask & Succubus Horn
+,[1525,100,0,0,0,0,0,0,"Evil Mask & Incubus Horn",0,"Drain 3 SP from user every 2 seconds",12,9,99,1,0] //Evil Mask & Incubus Horn
 ,[1526,50,0,3,0,0,50,10,"Halloween Midas Whisper","","<b>[Base STR >= 80]</b><br>ATK + 30<br><b>[Base VIT >= 80]</b><br>MaxHP + 5%<br><b>[Base LUK >= 80]</b><br>CRIT + 5<br><b>[Base AGI >= 80]</b><br>ASPD + 5%<br><b>[Base INT >= 80]</b><br>MATK + 3%<br><b>[Base DEX >= 80]</b><br>Cast Time - 5%<br>Gain a candy item when killing monsters of DemiHuman type by low chance",7,1,56,5,0]
 //custom TalonRO [Update 2014-09-11]
 ,[1527,51,0,2,0,0,10,0,"Gossip Raven","","Has a 2% chance of activating Level 1 Ruwach when receiving a physical attack",7,1,0]
@@ -1601,8 +1601,8 @@ ItemOBJ = [
 ,[1559,8,1,130,3,2,50,50,"Red Square Bag","","If user's base Str is 95 or higher: Causes Stun effect to enemies by 5% chance.<BR>Every time you kill a monster, low chance to drop random Potion.",13,200,5244,20,5248,20,0]
 ,[1560,50,0,2,0,0,0,0,"Reforged Lord Kaho's Horns","","<br />Reforged Horns Of Lord Kaho. You feel a strange power emitting from them but they are not quite complete yet.",1,5,4,5,5,5,19,5,193,1,0]
 ,[1561,51,51,2,0,0,30,65,"Advanced Fin Helm","","Additional Maximum HP + 6 * Base Level.",13,300,0]
-,[1562,50,0,2,0,1,10,0,"Blue Pajamas Hat","","A cute blue pajama hat, very cuddly. Ensures a good night's rest, giving energy to chase your dreams.",87,5,89,5,0]
-,[1563,50,0,2,0,1,10,0,"Pink Pajamas Hat","","A cute pink pajama hat, very cuddly. Ensures a good night's rest, giving energy to chase your dreams.",87,5,89,5,0]
+,[1562,50,0,2,0,1,10,0,"Blue Pajamas Hat","","A cute blue pajama hat, very cuddly. Ensures a good night's rest, giving energy to chase your dreams.",80,5,89,5,0]
+,[1563,50,0,2,0,1,10,0,"Pink Pajamas Hat","","A cute pink pajama hat, very cuddly. Ensures a good night's rest, giving energy to chase your dreams.",80,5,89,5,0]
 //Eden Gear
 ,[1564,63,0,3,0,0,0,12,"Eden Group Boots I","","Boots that are provided only for members of the Eden Group. These are designed to fit comfortably throughout long-walks.",75,10,76,2,193,1,0]
 ,[1565,63,0,3,0,0,0,26,"Eden Group Boots II","","Boots that are provided only for members of the Eden Group. These are designed to fit comfortably throughout long-walks.",75,12,76,4,193,1,0]
@@ -1648,11 +1648,11 @@ ItemOBJ = [
 //End of Eden Gear
 ,[1605,62,0,2,0,0,40,95,"Loki's Muffler","","A red scarf worn out from long use.",2,1,5083,5,5388,5,193,1,0]
 ,[1606,50,0,4,0,1,40,0,"Legionnaire Hat","","It's feel like you're on the marching band just by wearing this hat.",1,1,80,3,0]
-,[1607,51,0,2,0,1,50,50,"Lude Mask","","Has a chance of obtaining Pumpkin Pie when killing a monster<br><b>Middle and Lower Headgear</b>",87,1,89,2,57,1,0]
+,[1607,51,0,2,0,1,50,50,"Lude Mask","","Has a chance of obtaining Pumpkin Pie when killing a monster<br><b>Middle and Lower Headgear</b>",80,1,89,2,57,1,0]
 ,[1608,50,0,4,0,0,20,30,"Xmas Rudolph Hairband","","A Christmas hairband. Rudolf's excited mind for christmas is dwelled on it<br/>Movement speed +25% (non-stacking)",1,3,5,2,6,3,2,3,12,5,0]
 ,[1609,50,0,4,0,0,20,30,"Xmas Snowman Hat","","A Christmas Snowman Hat. Wearing this always makes you look forward to a White Christmas.<br/>Add a 3% chance of freezing an enemy when receiving Physical Damage.",4,3,5,2,3,3,2,3,73,-10,0]
-,[1610,50,0,2,0,0,20,40,"Xmas Rudolph Santa Hat","","Increase effectiveness of healing items by 5%<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance",7,1,73,-5,80,5,0]
-,[1611,64,0,0,0,0,10,0,"Bakonawa Agimat Tattoo","","Agimat Tattoo with a dragon swallowing the moon pattern. It is told that the one who owns this tattoo will possess extreme power.",87,5,12,5,0]
+,[1610,50,0,2,0,0,20,40,"Xmas Rudolph Santa Hat","","Increase effectiveness of healing items by 5%.<br>[Potion Pitcher] bonus only works if equipped on the caster.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance",7,1,73,-5,80,5,93,5,0]
+,[1611,64,0,0,0,0,10,0,"Bakonawa Agimat Tattoo","","Agimat Tattoo with a dragon swallowing the moon pattern. It is told that the one who owns this tattoo will possess extreme power.",80,5,12,5,0]
 ,[1612,64,0,0,0,0,10,0,"Bangungot Agimat Tattoo","","Agimat Tattoo with a plump lady pattern. It is told that the one who owns this tattoo will possess extreme power.",92,7,91,4,94,4,0]
 ,[1613,64,0,0,0,1,10,0,"Cat Hand Glove","","A souvenir from Malangdo, just by equpping it will give you a happy mood.",3,1,2,1,6,1,0]
 ,[1614,64,0,0,0,0,10,0,"Buwaya Agimat Tattoo","","Agimat Tattoo with a huge Alligator pattern. It is told that the one who owns this tattoo will possess extreme power.",89,7,73,-8,0]
@@ -1669,7 +1669,7 @@ ItemOBJ = [
 ,[1625,1,1072,160,4,0,50,92,"Aztoe Nail","","A dagger that shines blue and enchanted with binding magic.<Br>Has a chance of activating Freeze status while physically attacking and increases the chance with each refine level.",20,4,89,5,0]
 ,[1626,63,1001,3,0,1,50,85,"Enhanced Variant Shoes","","Shoes that seem to be wrong somewhere. The intention of the maker to perfect the shoes can be seen but it seems to be a failure.",15,12,16,12,0]
 ,[1627,11,122,170,3,1,120,90,"Agent Katar","","Add 1 HIT for every 2 LUK.",0]
-,[1628,50,0,2,0,1,20,20,"Maiden Hat","","An adorable hat which is always worn on the side of head.<br>If the wearer carries an umbrella with this hat on, the wearer will look as if one is going for a picnic.<br><b>[Refine Rate 7~10]</b><br>Additional ATK + 1%<br>Additional MATK +1%<br>Additional Heal effectiveness + 1%",1,1,4,1,19,7,87,2,89,2,91,5,94,5,0]
+,[1628,50,0,2,0,1,20,20,"Maiden Hat","","An adorable hat which is always worn on the side of head.<br>If the wearer carries an umbrella with this hat on, the wearer will look as if one is going for a picnic.<br><b>[Refine Rate 7~10]</b><br>Additional ATK + 1%<br>Additional MATK +1%<br>Additional Heal effectiveness + 1%",1,1,4,1,19,7,80,2,89,2,91,5,93,5,94,5,0]
 //Advanced Angel Gear - Set
 ,[1629,50,50,6,0,1,30,99,"Advanced Angel's Kiss","","A hair ornament that was kissed by the Super Novice's Guardian Angel.",76,30,0]
 ,[1630,63,50,2,0,1,30,99,"Advanced Angel's Reincarnation","","Heavenly sandals worn by the Guardian Angel of Super Novices.",14,500,16,100,0]
@@ -1723,8 +1723,46 @@ ItemOBJ = [
 ,[1678,2,94,150,4,0,50,40,"Ceremonial Sword","",0,20,6,89,15,12,10,8,10,5161,25,0]
 ,[1679,60,121,6,0,1,300,80,"Engraved Armor","",0,78,10,0]
 ,[1680,3,121,330,4,1,250,70,"Heavy Sword","","5% chance to auto-cast level 1 [Critical Wounds] when using [Head Crush]<br><b>[Every Refine Level]</b><br>Decreases cast time of [Charge Attack] by 3%<br><b>[Refine Rate 9~10]</b><br>Increase [Critical Wounds] level to 2",5260,30,5308,20,0]
+// Akkoro Instance
+,[1681,5,51,190,4,1,200,48,"Undine Spear","","<b>[Every Refine Level]</b><br>MHP + 1%",20,1,89,15,0]
+,[1682,60,0,1,0,1,10,40,"Surfer Swimsuit","","<b>[Every Refine Level]</b><br>MSP + 2",14,30,15,5,152,30,0]
+,[1683,62,0,1,0,1,50,40,"Oxygen Bottle","","<b>[Every Refine Level]</b><br>HIT + 1, FLEE + 1",12,2,0]
+,[1684,100,0,0,0,0,0,0,"Oxygen Bottle + Scuba Mask","",0,12,3,0]
+,[1685,100,0,0,0,0,0,0,"Surfer Swimsuit + Scuba Mask","",0,11,5,0]
+,[1686,100,0,0,0,0,0,0,"Oxygen Bottle + Scuba Mask + Surfer Swimsuit","","Casting can't be interrupted",120,10,125,10,41,5,43,5,351,5,353,5,0]
+// ---
+,[1687,50,0,2,0,0,10,1,"Saiyan Hair","","People wearing this hairstyle will suddenly get immense power and speed!",1,3,12,7,0]
+,[1688,50,0,3,0,1,20,10,"Helm of Dragon General","","Once in control of a dragon, this helm will give you protection.<br>Gives you the power to reach for a dragon's heart.",19,3,39,5,59,5,0]
+// Halloween Equipment
+,[1689,60,0,5,0,1,50,40,"Prison Uniform","","Every prisoner wears this stripe uniform.<br><b>[Every Refine Level]</b><br>HIT + 1",9,5,15,5,159,20,0]
+,[1690,64,0,0,0,1,100,40,"Thief Handcuff","","These are handcuffs used only on special occasions to hold the strongest troublemakers when held or transferred from one location to another.",17,5,0]
+,[1691,100,0,0,0,0,0,0,"Prison Uniform + Thief Handcuff","", "<b>[Every Refine Level]</b> ATK + 1",0]
+,[1692,100,0,0,0,0,0,0,"Thief Handcuff + Bloodied Shackle Ball","",0,1,5,0]
+,[1693,100,0,0,0,0,0,0,"Thief Handcuff + Shackles","", "<b>[Every Refine Level]</b> MSP + 1%",0]
+,[1694,100,0,0,0,0,0,0,"Prison Uniform + Thief Handcuff + Shackles + Bloodied Shackle Ball","", "Casting can't be interrupted",5,5,9,5,15,5,67,10,68,10,69,10,121,10,126,10,0]
+// ---
+,[1695,50,0,0,0,0,100,10,"Star Dust Hairband","","<br>A hairband with a romantic glowing large star",50,-10,120,5,0]
+// Eclase
+,[1696,62,1,2,0,1,40,60,"Menblatt Wing Manteau","","A short coat that immitates Menblatt's feathers.<br>[Every Refine Level]<br>SP Recovery + 3%<br>[Every 2 Refine Levels]<br>MDEF + 1",25,2,76,10,0]
+,[1697,61,1001,3,0,1,100,70,"Rose of Eden","","A shield made with Heaven's Roses.",0]
+,[1698,100,0,0,0,0,0,0,"Rose of Eden + Angelic Ring","","[Vanilla Mode] DEX + 2 instead.",5,3,91,10,93,10,94,10,0]
+,[1699,62,108,2,0,1,60,60,"Enforcer Cape","","<br>[Every Refine Level]<br>HIT + 1<br>Increase [Meteor Assault] damage by 1%.",9,10,16,10,5084,10,5264,10,0]
+,[1700,63,108,2,0,1,40,60,"Enforcer Shoes","","Reduce SP Cost of [Grimtooth] by 1.<br>Reduce SP Cost of [Meteor Assault] by 8.<br>[Every Refine Level]<br>HIT + 1",15,10,0]
+,[1701,100,0,0,0,0,0,0,"Enforcer Cape + Enforcer Shoes","", "[Meteor Assault] 10% Aftercast Reduction ",7264,30,0]
+,[1702,64,1001,0,0,1,10,70,"Sprint Glove","","",73,-1,74,1,0]
+,[1703,100,0,0,0,0,0,0,"Sprint Glove + Sprint Ring + Sprint Mail + Sprint Shoes","","Fast movement all the time.",15,8,16,8,73,-9,0]
+,[1704,64,1001,0,0,"0 / 1",10,1,"STR Glove","","<br>[Every 10 points of STR]<br>ATK + 1<br>[Base STR >= 80]<br>ATK + 1%",13,100,14,20,0]
+,[1705,64,1001,0,0,"0 / 1",10,1,"AGI Glove","","<br>[Every 10 points of AGI]<br>FLEE + 1<br>[Base AGI >= 80]<br>Perfect Dodge + 1",13,100,14,20,0]
+,[1706,64,1001,0,0,"0 / 1",10,1,"VIT Glove","","<br>[Every 10 points of VIT]<br>MaxHP + 50<br>[Base VIT >= 80]<br>DEF + 1",13,100,14,20,0]
+,[1707,64,1001,0,0,"0 / 1",10,1,"INT Glove","","<br>[Every 6 points of INT]<br>MATK + 1<br>[Base INT >= 80]<br>MATK + 1%",13,100,14,20,0]
+,[1708,64,1001,0,0,"0 / 1",10,1,"DEX Glove","","<br>[Every 4 points of DEX]<br>HIT + 1<br>[Base DEX >= 80]<br>Ranged Attack + 2%",13,100,14,20,0]
+,[1709,64,1001,0,0,"0 / 1",10,1,"LUK Glove","","<br>[Every 10 points of LUK]<br>CRIT + 1<br>[Base LUK >= 60]<br>Critical Attack + 3%",13,100,14,20,0]
+,[1710,64,1,1,0,0,10,20,"Ring of Fire","","A mysterious ring that is blessed by the Spirit of Fire.",63,5,0]
+,[1711,64,1,1,0,0,10,20,"Ring of Wind","","A mysterious ring that is blessed by the Spirit of Wind.",64,5,0]
+,[1712,64,1,1,0,0,10,20,"Ring of Earth","","A mysterious ring that is blessed by the Spirit of Earth.",62,5,0]
+// ---
+,[1713,9,77,70,4,2,60,60,"Shadow Staff","","<br><b>[Every Refine Level]</b><br> Add a 0.2% chance of auto-casting [Sight Blaster] on yourself when using magic attacks.<br>1% MDEF pierce against Demon Race.",89,20,220,60,343,5,357,5,221,143,0]
 ];
-
 
 //Test code for finding the values in Skill.js AutoSpellSkill
 //,[1620,64,0,1,0,1,10,93,"AAt","","This shit is a test for developing comments for skills.js",221,17,0]
@@ -3438,6 +3476,39 @@ ItemID = [
 ,[1678,1,13440]
 ,[1679,1,15066]
 ,[1680,1,1195]
+,[1681,1,1494]
+,[1682,1,21113]
+,[1683,1,21114]
+,[1684,2,5397,21114]
+,[1685,2,5397,21113]
+,[1686,2,5397,21113,21114]
+,[1687,1,18740]
+,[1688,1,18555]
+,[1689,1,21136]
+,[1690,1,21137]
+,[1691,2,21136,21137]
+,[1692,2,21137,2655]
+,[1693,2,21137,2408]
+,[1694,2,21136,21137,2655,2408]
+,[1695,1,18685]
+,[1696,1,21396]
+,[1697,1,2192]
+,[1698,2,21396,2192]
+,[1699,1,21397]
+,[1700,1,21398]
+,[1701,2,21397,21398]
+,[1702,1,2935]
+,[1703,2,1702,2744,2387,2440]
+,[1704,1,2917]
+,[1705,1,2918]
+,[1706,1,2919]
+,[1707,1,2920]
+,[1708,1,2921]
+,[1709,1,2922]
+,[1710,1,2683]
+,[1711,1,2684]
+,[1712,1,2685]
+,[1713,1,1639]
 ];
 
 /*
@@ -3766,15 +3837,15 @@ function Item_Setumei(nC1,nC2)
    if(89 == nC1)
 		CBIstr += "MATK"+ wIS + nC2 +"%<BR>";
 	if(91 == nC1)
-		CBIstr += "Heal amount increased by "+ wIS + nC2 +"%<BR>";
+		CBIstr += "Heal effectiveness increased by "+ wIS + nC2 +"%<BR>";
 	if(92 == nC1)
-		CBIstr += "Healing received increased by "+ wIS + nC2 +"%<BR>";
+		CBIstr += "Heal received from [Heal] increased by "+ wIS + nC2 +"%<BR>";
 	if(93 == nC1)
-		CBIstr += "Heal damage increase on undead by "+ wIS + nC2 +"%<BR>";
+		CBIstr += "Potion Pitcher effectiveness increased by "+ wIS + nC2 +"%<BR>";
 	if(94 == nC1)
 		CBIstr += "Sanctuary effectiveness increased by "+ wIS + nC2 +"%<BR>";
 	if(96 == nC1)
-		CBIstr += "Sanctuary damage effectiveness against Demon increased by "+ wIS + nC2 +"%<BR>";
+		CBIstr += "Heal received from [Sanctuary] increased by "+ wIS + nC2 +"%<BR>";
    if(97 == nC1)
       CBIstr += "Increases magical damage against bosstype monsters by "+ nC2 +"%<BR>";
    if(98 == nC1)
@@ -4054,6 +4125,16 @@ w_SE = [[737,436,475,"NULL"]
 ,[1669,1667,644,"NULL"] //Custom TalonRO - 2018-07-13 - Love Guard + Staff of Recovery [NattWara]
 ,[1670,1667,863,"NULL"] //Custom TalonRO - 2018-07-13 - Love Guard + Holy Stick [NattWara]
 ,[1673,899,1376,"NULL"] //Custom TalonRO - 2018-07-26 - Valorous Gladiator Blade + Aegis Shield [Amor]
+,[1684,1213,1683,"NULL"] //Custom TalonRO - Oxygen Bottle + Scuba Mask
+,[1685,1213,1682,"NULL"] //Custom TalonRO - Surfer Swimsuit + Scuba Mask
+,[1686,1213,1682,1683,"NULL"] //Custom TalonRO - Oxygen Bottle + Surfer Swimsuit + Scuba Mask
+,[1691,1689,1690,"NULL"] //Custom TalonRO - Prison Uniform + Thief Handcuff
+,[1692,1690,725,"NULL"] //Custom TalonRO - Thief Handcuff + Bloodied Shackle Ball
+,[1693,1690,323,"NULL"] //Custom TalonRO - Thief Handcuff + Shackles
+,[1694,1689,1690,725,323,"NULL"] //Custom TalonRO - Prison Uniform + Thief Handcuff + Bloodied Shackle Ball + Shackles
+,[1698,1697,1000,"NULL"] //Custom TalonRO - Rose of Eden + Angelic Ring
+,[1701,1699,1700,"NULL"] //Custom TalonRO - Enforcer Cape + Enforcer Shoes
+,[1703,1702,1001,987,998,"NULL"] //Custom TalonRO - Sprint Glove + Sprint Ring + Sprint Mail + Sprint Shoes
 ];
 SE_MAXnum = w_SE.length -1;
 for(var i=0;i<=SE_MAXnum;i++){

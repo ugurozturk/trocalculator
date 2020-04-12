@@ -244,7 +244,7 @@ cardOBJ = [
 ,[222,3,"Arclouse","If refined to +5 or less, gain DEF+2, MDEF+3",0]
 ,[223,1,"Assaulter",0,70,10,117,7,0]
 ,[224,4,"Anolian","If you know [Improve Concentration]Lv 10, you will autocast Lv10 instead",221,56,0]
-,[225,4,"Apocalipse","If armor is refined to +9 or higher, Max HP + 800",3,2,0]
+,[225,4,"Apocalypse","If armor is refined to +9 or higher, Max HP + 800",3,2,0]
 ,[226,7,"Li Me Mang Ryang","1% chance to obtain [Box of Sunlight] as a drop when killing an Angel race monster",0]
 ,[227,6,"Am Mut",0,127,10,57,-20,0]
 ,[228,6,"Amon Ra","If you have 99 base INT, the chance to autocast [Kyrie Eleison] increases to 10%",7,1,221,57,0]
@@ -351,7 +351,7 @@ cardOBJ = [
 ,[329,1,"Diabolic","Regain 5 SP when killing a Demon race monster with a ATK based attack<BR>Drains 5 SP when the weapon is unequipped",0]
 ,[330,4,"Demon Pungus","6% chance of inflicting [Sleep] status when receiving ATK based damage",0]
 ,[331,4,"Wraith Dead","6% chance of inflicting [Curse] status when receiving ATK based damage",0]
-,[332,2,"Bacsojin","Potion Pitcher effectiveness increased by + 20%<BR>Increase SP consumption by 15%",57,-10,91,20,94,20,0] //custom TalonRO heal-stuff +20% instead of +30; +10% dmg from demi-human
+,[332,2,"Bacsojin","Increase SP consumption by 15%",57,-10,91,20,93,20,94,20,0] //custom TalonRO heal-stuff +20% instead of +30; +10% dmg from demi-human
 ,[333,4,"Sky Deleter","Regain 100 HP each time a monster is killed with a ATK based attack",75,-100,0]
 ,[334,4,"Earth Deleter","Regain 10 SP each time a monster is killed with a ATK based attack<BR>Drains 100 SP when the armor is unequipped",76,-100,0]
 ,[335,7,"Greatest General","0.2% chance of casting level 5 Summon Spirit Sphere when doing a ATK based attack<BR>If equipped by an Acolyte job type: 2% chance instead",0]
@@ -463,9 +463,9 @@ cardOBJ = [
 ,[441,100,0,0,7,1,0]
 ,[442,100,0,0,9,18,0]
 ,[443,100,0,"TalonRO: nothing",0] //custom TalonRO Toad+Roda Frog have no combo
-,[444,999,0]
-,[445,999,0]
-,[446,999,0]
+,[444,3,"Khalitzburg Knight",0,78,5,191,15,192,15,0]
+,[445,4,"White Knight",0,17,5,28,15,29,15,0]
+,[446,100,"Khalitzburg Knight + White Knight",0,17,10,78,10,28,5,29,5,0]
 ,[447,999,0]
 ,[448,100,0,0,13,300,14,60,0]
 ,[449,100,0,0,221,86,0]
@@ -520,7 +520,7 @@ cardOBJ = [
 ,[498,1,"Hillsrion",0,17,25,0]
 ,[499,1,"Centipede Larva",0,4,1,98,3,0]
 ,[500,4,"Banshee Master",0,4,1,98,10,0]
-,[501,4,"Entweihen Crothen",0,98,100,0]
+,[501,4,"Entweihen Crothen",0,5,1,98,50,0]
 ,[502,3,"Aqua Elemental",0,61,20,41,5,0]
 ,[503,3,"Centipede",0,65,20,45,5,0]
 ,[504,3,"Cornus",0,66,20,46,5,0]
@@ -528,11 +528,11 @@ cardOBJ = [
 ,[506,3,"Dark Shadow",0,67,20,47,5,0]
 ,[507,3,"Luciola Vespa",0,64,20,44,5,0]
 ,[508,3,"Tatacho",0,62,20,42,5,0]
-,[509,999,"Rata",0,98,10,0]
+,[509,2,"Rata","[Refine Rate +7 or higher]<br/>Increases magic damage against Boss monsters by an additional 5%.<br/>[Refine Rate +9 or higher]<br/>Increases magic damage against Boss monsters by an additional 5%.",98,15,97,5,0]
 ,[510,2,"Dark Pinguicula","<b>[Alchemist Class]</b><br>Nullifies the use of Bottle Grenades when casting the Demonstration skill<br>Increases SP usage of Demonstration by 15 SP<br><b>Only works in PvM</b>",0]
-,[511,999,"Duneyrr",0,17,10,0]
-,[512,999,"Phylla",0,2,1,5,1,0]
-,[513,999,"Rhyncho","+3% recovery with skill [Potion Pitcher]<BR>Increase SP consumption by 5%",91,3,94,3,0]
+,[511,2,"Duneyrr","When dealing physical damage, has a 2% chance of gaining Perfect Dodge + 10 for 15 seconds.<br/>[Lord Knight]<br/>When activated during Frenzy, add another Perfect Dodge + 10.",17,15,0]
+,[512,2,"Phylla",0,2,1,5,1,89,2,221,142,0]
+,[513,6,"Rhyncho","<br/><b>[On Deluge/Hidden Water]<b><br/>Increase Resistance to Fire property by 10%.",15,10,75,25,76,25,0]
 //custom TalonRO [Update 2013-10-06]
 ,[514,2,"Dolomedes","<b>[Archer Class]</b><br>DEX + 1 for every 3 refines<br><b>[Other Class]</b><br>INT + 1 for every 3 refines",3,2,0]
 ,[515,1,"Queen Scaraba",0,8,35,80,15,0]
@@ -571,7 +571,7 @@ cardOBJ = [
 ,[544,1,"Nightmare Minorous",0,32,10,31,10,0]
 ,[545,6,"Nightmare Mummy","When receiving physical attacks, add a 3% chance to cause Sleep to your target.",155,20,0]
 ,[546,5,"Nightmare Ancient Mummy","Every 3 refines of garment increase magical Fire damage by 4%.",60,15,0]
-,[547,6,"Nightmare Verit","Increases magical damage by 3%<br>When using magic attacks, there is a 2% chance to recover 40 HP and 20 SP every 2 seconds for a total of 8 seconds<br><b>[For Every 2 Refines]</b><br> Increases the HP/SP recovery activation chance by an additional 1%<br><b>[Refine Rate >= 5]</b><br>Increases magical damage by an additional 1%<br><b>[Refine Rate >= 7]</b><br>Increases magical damage by an additional 1%",15,4,16,4,296,3,297,3,0]
+,[547,6,"Nightmare Verit","Increases magical damage by 3%<br>When using magic attacks, there is a 2% chance to recover 40 HP and 20 SP every 2 seconds for a total of 8 seconds<br><b>[For Every 2 Refines]</b><br> Increases the HP/SP recovery activation chance by an additional 1%<br><b>[Refine Rate >= 5]</b><br>Increases magical damage by an additional 1%<br><b>[Refine Rate >= 7]</b><br>Increases magical damage by an additional 1%",15,4,16,4,96,3,97,3,0]
 ,[548,100,0,0,52,5,51,5,312,20,311,20,0]
 ,[549,100,0,0,52,5,51,5,302,30,301,30,0]
 ,[550,100,0,"Increase the probability of causing Sleep by an additional 2%.",155,10,60,5,0]
@@ -580,7 +580,7 @@ cardOBJ = [
 ,[553,3,"Buwaya",0,77,20,79,-35,97,7,0]
 ,[554,2,"Bungisngis","For every refine after +5, MaxHP + 1%, MaxSP + 1%.",15,5,16,5,0]
 ,[555,2,"Engkanto","Ignore 25% of Plant monster defense.",45,25,0]
-,[556,1,"Manananggal",0,93,20,92,3,94,3,0]
+,[556,1,"Manananggal",0,5025,20,92,3,95,3,0]
 ,[557,4,"Mangkukulam",0,16,10,0]
 ,[558,2,"Tikbalang","[Refine Rate +7 or higher]<br/>Add another 5% damage with Wind Magic.<br/>[Refine Rate +9 or higher]<br/>Add another 5% damage with Wind Magic.",98,10,344,5,0]
 ,[559,7,"Tiyanak",0,117,7,112,7,115,7,0]
@@ -599,7 +599,32 @@ cardOBJ = [
 ,[572,2,"Jaguar","[Refine Rate +7 or higher]<br/>Increases magic damage against Brute race by an additional 5%<br/>[Refine Rate +9 or higher]<br/>Increases magic damage against Brute race by an additional 5%",98,10,172,5,0]
 ,[573,7,"Headless Mule",0,5,2,361,4,366,4,0]
 ,[574,4,"Boitata",0,44,20,42,20,32,20,34,20,0]
-,[575,100,0,"Increase SP Consumption of skills by 10%",5,6,14,100,0]
+,[575,100,"Obeaune + Iara","Increase SP Consumption of skills by 10%",5,6,14,100,0]
+,[576,100,"Entweihen Crothen + Naght Sieger",0,73,-10,0]
+,[577,100,"Entweihen Crothen + Dark Illusion",0,15,-10,16,-10,73,5,0]
+,[578,4,"Nidhoggur Shadow","[Swordman Class, Merchant Class, Thief Class]<br/>When using short-range physical skills, monsters will not switch targets to you if they are currently attacking another target.<br/>Lose 1% HP every 2 seconds.", 0]
+,[579,2,"Naght Sieger","[Soul Linker]<br/>Ghost property magical attack is 15% instead.",19,5,348,30,350,10,0]
+,[580,100,"Rhyncho + Phylla","Add a 3% chance of auto casting level 3 [Deluge] on the user when attacking normally.",0]
+,[581,4,"Hardrock Mammoth","[Every Refine Level]<br/>MaxHP + 2%",15,10,18,5,19,5,0]
+,[582,1,"Tendrillion",0,8,35,17,45,0]
+,[583,1,"Aunoe",0,4,1,89,1,0]
+,[584,100,"Aunoe + Isilla","Double the Duration of Isilla's Cast Reduction and Flee Boost.<br/>Vanberk not equipped & Vanilla Mode: Long Range Resist + 10%.",12,10,0]
+,[585,1,"Fanat",0,17,30,0]
+,[586,100,"Fanat + Vanberk","Triple the Duration and Double the Chance of Vanberk's CRIT Boost.<br/>Isilla not equipped & Vanilla Mode: Long Range Resist + 10%.",12,10,0]
+,[587,1,"Beholder Master",0,25,10,0]
+,[588,100,"Beholder Master + Beholder",0,12,10,5,3,0]
+,[589,100,"Beholder Master + Seeker",0,57,15,0]
+,[590,6,"Heavy Metaling",0,1,2,5066,50,0]
+,[591,1,"Naga","Causes Stun effect to enemies when using [Mist Slash] at a 12% chance.",5400,35,0]
+,[592,1,"Draco Egg","[Crimson Fire Formation] shoves the enemy 2 cells back <b>does not stack</b>.",5053,25,5408,25,0]
+,[593,1,"Bradium Golem","Increase Kick Skill rate by 5%.",8,15,5331,15,5333,15,5335,15,5337,15,0]
+,[594,1,"Ancient Tree",0,75,15,16,15,5375,5,0]
+,[595,6,"Zakudam","<br/>[Monk Class]<br/>Reduce DemiHuman monster damage to 10%.",37,20,177,7,5197,-10,5321,-10,0]
+,[596,100,"Zakudam + Archdam","[Vanilla Mode]<br/>Cast Time - 30%",0]
+,[597,2,"Cobalt Mineral",0,17,15,19,5,0]
+,[598,100,"Cobalt Mineral + Mineral","[Knight, Blacksmith, Assassin][Vanilla Mode]<br/>Horn Card Not Equipped: Long Range Resist + 20%",17,25,152,50,0]
+,[599,2,"Hell Apocalypse",0,15,5,13,200,0]
+,[600,100,"Hell Apocalypse + Apocalypse","[If Apocalypse Card Equipped on Meteor Plate]<br/>Gain protection from the Freeze status.",15,5,152,50,0]
 ];
 /*
 ID, Location, description, 0 - seperator, stat, value added/subtracted
@@ -1078,9 +1103,9 @@ cardID = [
 ,[441,2,0]
 ,[442,2,0]
 ,[443,2,0]
-,[444,3,0]
-,[445,3,0]
-,[446,3,0]
+,[444,1,4609]
+,[445,1,4608]
+,[446,2,0]
 ,[447,3,0]
 ,[448,2,0]
 ,[449,2,0]
@@ -1143,11 +1168,11 @@ cardID = [
 ,[506,1,4449]
 ,[507,1,4445]
 ,[508,1,4442]
-,[509,3,0]
+,[509,1,4459]
 ,[510,1,4468]
-,[511,3,0]
-,[512,3,0]
-,[513,3,0]
+,[511,1,4458]
+,[512,1,4461]
+,[513,1,4460]
 ,[514,1,4506]
 ,[515,1,4507]
 ,[516,1,4505]
@@ -1210,6 +1235,31 @@ cardID = [
 ,[573,1,27125]
 ,[574,1,27126]
 ,[575,2,0]
+,[576,2,0]
+,[577,2,0]
+,[578,1,4456]
+,[579,1,4457]
+,[580,2,0]
+,[581,1,4462]
+,[582,1,4463]
+,[583,1,4464]
+,[584,2,0]
+,[585,1,4465]
+,[586,2,0]
+,[587,1,4466]
+,[588,2,0]
+,[589,2,0]
+,[590,1,4467]
+,[591,1,4469]
+,[592,1,4471]
+,[593,1,4472]
+,[594,1,4473]
+,[595,1,4474]
+,[596,2,0]
+,[597,1,4475]
+,[598,2,0]
+,[599,1,4477]
+,[600,2,0]
 ];
 
 CardNum = cardOBJ.length -1;
@@ -1389,6 +1439,7 @@ w_SC = [[429,235,306,"NULL"],
 [442,372,64,"NULL"],
 [442,369,68,"NULL"],
 [443,338,72,"NULL"],
+[446,444,445,"NULL"],
 [448,218,212,"NULL"],
 [449,248,247,"NULL"],
 [450,223,317,347,354,362,"NULL"],
@@ -1411,7 +1462,17 @@ w_SC = [[429,235,306,"NULL"],
 [548,542,543,"NULL"],
 [549,542,544,"NULL"],
 [550,545,546,"NULL"],
-[575,568,148,"NULL"]
+[575,568,148,"NULL"],
+[576,501,579,"NULL"],
+[577,501,320,"NULL"],
+[580,512,513,"NULL"],
+[584,583,472,"NULL"],
+[586,585,471,"NULL"],
+[588,587,411,"NULL"],
+[589,587,468,"NULL"],
+[596,595,190,"NULL"],
+[598,597,184,"NULL"],
+[600,599,225,"NULL"]
 ];
 SC_MAXnum = w_SC.length;
 
