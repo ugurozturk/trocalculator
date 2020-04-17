@@ -1615,7 +1615,7 @@ function StAllCalc()
 		n_A_DEF += 5;
 	}
 
-	n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 0.66 + 0.5);
+	n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 0.66);
 
 	if(n_tok[24])
 		n_A_totalDEF = Math.floor(n_A_totalDEF / n_tok[24]);
