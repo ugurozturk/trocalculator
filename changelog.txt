@@ -1,3 +1,8 @@
+[2020-04-19]
+- Fixed hard DEF formula
+- Added Candy Hat, Pitch Black Evil Druid Hat
+- Fixed some monsters properties
+
 [2020-04-11]
 - Fixed aspd computation for double dagger
 - Added Eclage food

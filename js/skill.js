@@ -753,7 +753,8 @@ AutoSpellSkill = [
 [140,1,291,1,1,1], //[Custom TalonRO - 2018-07-26 - Valorous Battle Fist change of casting DSS 1% in normal attack]
 [141,1,409,2,5,1],
 [142,1,128,2,2,1], //When performing a ATK based attack, there's a 2 % chance to cast the skill [Water Ball]Lv 2
-[143,1,124,2,0,4] //When performing a magical attack, there's a chance to cast the skill [Sightrasher]Lv 2
+[143,1,124,2,0,4], //When performing a magical attack, there's a chance to cast the skill [Sightrasher]Lv 2
+[144,1,25,3,5,6] //When recieving ATK based damage, there's a 5 % chance to cast the skill [Heal]Lv 3
 ];
 //ID - Gets called in second spot(221(effect),1(ID)), autocast id = 1 by default, skill Id,Skill Lvl, chance %, attacktype(1atkbased,2shortrange,3longrange,4magical,5attacking,6receivingATKbased,0 by default, 0=low chance, 1=medium chance, 2=high chance)
 

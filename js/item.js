@@ -1762,6 +1762,13 @@ ItemOBJ = [
 ,[1712,64,1,1,0,0,10,20,"Ring of Earth","","A mysterious ring that is blessed by the Spirit of Earth.",62,5,0]
 // ---
 ,[1713,9,77,70,4,2,60,60,"Shadow Staff","","<br><b>[Every Refine Level]</b><br> Add a 0.2% chance of auto-casting [Sight Blaster] on yourself when using magic attacks.<br>1% MDEF pierce against Demon Race.",89,20,220,60,343,5,357,5,221,143,0]
+,[1714,50,1,3,0,0,20,20,"Candy Hat","",0,221,144,0]
+,[1715,50,0,5,0,0,50,40,"Pitch Dark Evil Druid Hat","","Crafted by Demons specifically for the Dark Lord. Has several powers stored from Dark Lords of past generations. Hidden abilities are unlocked with certain Mid Headgears.",1,3,2,3,4,3,5,3,196,4,0]
+,[1716,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Evil Wing Ears","",0,1,1,80,5,0]
+,[1717,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Angel Wing Ears","",0,1,1,12,3,0]
+,[1718,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Peco Peco Ears","",0,2,1,9,5,0]
+,[1719,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Black Frame Glasses","",0,4,1,89,2,0]
+,[1720,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Dark Blinder","",0,5,1,9,5,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3509,6 +3516,13 @@ ItemID = [
 ,[1711,1,2684]
 ,[1712,1,2685]
 ,[1713,1,1639]
+,[1714,1,18708]
+,[1715,1,21135]
+,[1716,2,21135,5068]
+,[1717,2,21135,5074]
+,[1718,2,21135,5358]
+,[1719,2,21135,5401]
+,[1720,2,21135,5104]
 ];
 
 /*
@@ -3904,6 +3918,10 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Cannot be broken<BR>";
 	if(195 == nC1)
 		CBIstr += "<b>Two-Handed Staff</b><BR>";
+	if(196 == nC1)
+		CBIstr += "Experience gained from normal monsters "+ wIS + nC2 +"%<BR>";
+	if(197 == nC1)
+		CBIstr += "Experience gained from bosstype monsters "+ wIS + nC2 +"%<BR>";
 	if(198 == nC1)
 		CBIstr += "Armor becomes "+ ZokuseiOBJ[nC2] +" element<BR>";
 	if(212 <= nC1 && nC1 <= 215)
@@ -3981,6 +3999,9 @@ function Item_Setumei(nC1,nC2)
    if(360 <= nC1 && nC1 <=369)
       CBIstr += "Pierce MDEF of [" + ZokuseiOBJ[nC1-360] +"] element monsters by "+ nC2 +"%<BR>";
    //Physical damage against specific monster
+   if(370 <= nC1 && nC1 <=379)
+      CBIstr += "Experience gained from [" + ZokuseiOBJ[nC1-370] +"] elements monsters " + wIS + nC2 +"%<BR>";
+   
    if(1000 <= nC1 && nC1 <=1999)
       CBIstr += wIS + nC2 + "% Physical damage inflicted against <b>" + MonsterOBJ[nC1-1000][1] + "</b><br>";
    //Incease Damage of skill by %
@@ -4135,7 +4156,13 @@ w_SE = [[737,436,475,"NULL"]
 ,[1698,1697,1000,"NULL"] //Custom TalonRO - Rose of Eden + Angelic Ring
 ,[1701,1699,1700,"NULL"] //Custom TalonRO - Enforcer Cape + Enforcer Shoes
 ,[1703,1702,1001,987,998,"NULL"] //Custom TalonRO - Sprint Glove + Sprint Ring + Sprint Mail + Sprint Shoes
+,[1716,1715,381,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Evil Wing Ears
+,[1717,1715,385,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Angel Wing Ears
+,[1718,1715,805,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Peco Peco Ears
+,[1719,1715,887,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Black Frame Glasses
+,[1720,1715,643,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Dark Blinder
 ];
+
 SE_MAXnum = w_SE.length -1;
 for(var i=0;i<=SE_MAXnum;i++){
 	for(var k=1;w_SE[i][k] != "NULL";k++){

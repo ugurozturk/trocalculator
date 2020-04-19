@@ -7175,6 +7175,11 @@ if(n_B_IJYOU[1]){
 
 		w1_Exp += n_tok[120+n_B[2]] + n_tok[370 + Math.floor(n_B[3] / 10)];
 
+		if (n_B[19]) // Experience bonus on bosstype monsters
+			w1_Exp += n_tok[197];
+		else // Experience bonus on normal monsters
+			w1_Exp += n_tok[196];
+		
 		var w2_Exp = 0;
 
 		if(n_A_JobSearch()==3 && CardNumSearch(452) && (n_B[2]==1 || n_B[2]==6))

@@ -619,7 +619,7 @@ cardOBJ = [
 ,[592,1,"Draco Egg","[Crimson Fire Formation] shoves the enemy 2 cells back <b>does not stack</b>.",5053,25,5408,25,0]
 ,[593,1,"Bradium Golem","Increase Kick Skill rate by 5%.",8,15,5331,15,5333,15,5335,15,5337,15,0]
 ,[594,1,"Ancient Tree",0,75,15,16,15,5375,5,0]
-,[595,6,"Zakudam","<br/>[Monk Class]<br/>Reduce DemiHuman monster damage to 10%.",37,20,177,7,5197,-10,5321,-10,0]
+,[595,6,"Zakudam","<br/>[Monk Class]<br/>Reduces physical damage against [Demi-Human] race monsters by 10%.",37,20,177,7,5197,-10,5321,-10,0]
 ,[596,100,"Zakudam + Archdam","[Vanilla Mode]<br/>Cast Time - 30%",0]
 ,[597,2,"Cobalt Mineral",0,17,15,19,5,0]
 ,[598,100,"Cobalt Mineral + Mineral","[Knight, Blacksmith, Assassin][Vanilla Mode]<br/>Horn Card Not Equipped: Long Range Resist + 20%",17,25,152,50,0]

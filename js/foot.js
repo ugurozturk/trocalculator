@@ -1430,6 +1430,10 @@ function StAllCalc()
 	if(EquipNumSearch(1646)){
 		w += n_A_HEAD_DEF_PLUS * 5;
 	}
+
+	// Pitch Dark Evil Druid Hat#1714 - [For every refine] MDEF + 1
+	n_tok[19] += n_A_HEAD_DEF_PLUS * EquipNumSearch(1715);
+	
 	//Red Minstrel Hat [For Every Refine > 5] MDEF + 1, MSP + 10 - [Loa] - 2018-07-03
 	if(EquipNumSearch(1139) && n_A_HEAD_DEF_PLUS > 5){
 		w += (n_A_HEAD_DEF_PLUS - 5) * 10;
@@ -3445,7 +3449,7 @@ function StAllCalc()
 	
 	// Zakudam Card#595 [Monk Class] Reduce DemiHuman monster damage to 10%
 	if(CardNumSearch(595) && n_A_JobSearch2() == 15)
-		n_tok[36] += 10;
+		n_tok[37] -= 10;
 
 	if(EquipNumSearch(628) && n_A_Arrow == 4)
 		n_tok[25] += 25;
