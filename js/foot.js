@@ -3325,27 +3325,16 @@ function StAllCalc()
 		n_tok[74] += n_A_Weapon2_ATKplus;
 	}
 
-	var w = n_A_PassSkill3[2];
+	var w = n_A_PassSkill3[2]; // Musical Lesson
 	if(w){
 		// custom TalonRO Poem of Bragi after cast delay
-		//before
-		//{
-		//custom TalonRO Poem of Bragi 3% delay reduction per skilllv on lv 10 instead of 5% (https://forum.talonro.com/index.php?topic=63445.0)
-		//before
-		//if(w==10)
-			//n_tok[74] += w * 5 + n_A_PassSkill3[32] *2 + Math.floor(n_A_PassSkill3[29] /5);
-		//else
-			//n_tok[74] += w * 3 + n_A_PassSkill3[32] *2 + Math.floor(n_A_PassSkill3[29] /5);
-		//after
-		//n_tok[74] += w * 3 + n_A_PassSkill3[32] *2 + Math.floor(n_A_PassSkill3[29] /5);
-		//}
-		//after
-		if (n_A_PassSkill3[45]==1 && w==10)
-			n_tok[74] += w * 5 + n_A_PassSkill3[32] *2 + Math.floor(n_A_PassSkill3[29] /5);
-		else
-			n_tok[74] += w * 3 + n_A_PassSkill3[32] *2 + Math.floor(n_A_PassSkill3[29] /5);
-
+		// "we strongly think that the stacking of Bragi with items that grant ACD reduction is something to avoid" - GM Team, applied only to PvM
+		if (n_A_PassSkill3[45] == 1) // PvP Mode
+			n_tok[74] += w * 3 + 20 * Math.floor(w / 10) + n_A_PassSkill3[32] * 2 + Math.floor(n_A_PassSkill3[29] / 5);
+		else // PvM Mode
+			n_tok[74] = w * 3 + n_A_PassSkill3[32] * 2 + Math.floor(n_A_PassSkill3[29] / 5); // Override all previous acd reduction bonus
 	}
+	
 	if(n_tok[74] > 100)
 		n_tok[74] = 100;
 

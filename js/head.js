@@ -375,7 +375,7 @@ function BattleCalc999()
 		n_Enekyori=1;
 
 
-	if(n_A_ActiveSkill==0 || (n_A_ActiveSkill==86 && (50 <= n_B[3] && n_B[3] < 60))){
+	if(n_A_ActiveSkill==0 || (n_A_ActiveSkill==86 && (50 <= n_B[3] && n_B[3] < 60))){ // Poison React [Counter]#86
 		myInnerHtml("CRIATKname",SubName[3],0);
 		myInnerHtml("CRInumname",SubName[4],0);
 
@@ -440,20 +440,11 @@ function BattleCalc999()
 
 			ATKbai02(wbairitu,0);
 
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0) {
-				w_left_Minatk = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_left_Minatk/200);
-				w_left_Maxatk = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_left_Maxatk/200);
-				w_left_Aveatk = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_left_Aveatk/200);
-			}
-
 			n_Min_DMG += w_left_Minatk;
 			n_Max_DMG += w_left_Maxatk;
 
 			w_DMG[0] = BattleCalc(n_A_DMG[0],0);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[0] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[0]/200);
+
 			var wX = w_DMG[0] + EDP_DMG(0);
 
 			Last_DMG_A[0] = Last_DMG_B[0] = wX + w_left_Minatk;
@@ -467,9 +458,7 @@ function BattleCalc999()
 			w_DMG[0] = n_Min_DMG;
 
 			w_DMG[2] = BattleCalc(n_A_DMG[2],2);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[2] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[2]/200);
+
 			var wX = w_DMG[2] + EDP_DMG(2) + w_left_Maxatk;
 			Last_DMG_A[2] = Last_DMG_B[2] = wX + w_left_Maxatk;
 			InnStr[2] += w_DMG[2] + EDP_DMG(2) +" ("+ w_left_Maxatk +")";
@@ -482,9 +471,7 @@ function BattleCalc999()
 			w_DMG[2] = n_Max_DMG;
 
 			w_DMG[1] = BattleCalc(n_A_DMG[1],1);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[1] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[1]/200);
+
 			var wX = w_DMG[1] + EDP_DMG(1);
 			Last_DMG_A[1] = Last_DMG_B[1] = wX + w_left_Aveatk;
 			InnStr[1] += wX +" ("+ w_left_Aveatk +")";
@@ -497,11 +484,7 @@ function BattleCalc999()
 
 			var wX = BattleCalc2(0);
 			var wX2 = Math.floor(w_left_star * (0.3 + SkillSearch(80) /10));
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0){
-				wX = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wX/200);
-				wX2 = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wX2/200);
-			}
+
 			n_PerHIT_DMG = wX + wX2;
 			str_PerHIT_DMG = wX +"+"+ wX2;
 
@@ -519,7 +502,7 @@ function BattleCalc999()
 			//debug_atk+="\n --- (BattleCalc999) Triple Attack ---";
 			//debug_atk+="\nb_n_Min_DMG:"+n_Min_DMG;
 			//debug_atk+="\nb_n_Max_DMG:"+n_Max_DMG;
-			if(SkillSearch(187)){
+			if(SkillSearch(187)){ // Triple Attack#187
 				TyouEnkakuSousa3dan = -1;
 				wBC3_3danAtkBairitu = SkillSearch(187) * 0.2;
 				var san = [0,0,0];
@@ -531,9 +514,6 @@ function BattleCalc999()
 					san[i] = Math.floor(san[i] /3) *3;
 					if(n_B[19] == 5)
 						san[i] = 3;
-					//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-					if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-						san[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*san[i]/200);
 				}
 				str_bSUBname += "Raging Trifecta Blow Damage<BR>";
 				str_bSUB += san[0] +"~"+ san[2] +" ("+ (30 - SkillSearch(187)) +"% Chance)<BR>";
@@ -561,9 +541,6 @@ function BattleCalc999()
 					debug_dmg_avg=0;
 					debug_atk+="\na_BattleCalc (w_DMG[1]):"+w_DMG[i];
 				}
-				//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-				if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-					w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 			}
 
 			var w_KATARU = [0,0,0];
@@ -633,7 +610,7 @@ function BattleCalc999()
 		if (debug_mode)
 			alert(debug_atk);
 		return;
-	}else if(n_A_ActiveSkill==272 || n_A_ActiveSkill==401){
+	}else if(n_A_ActiveSkill==272 || n_A_ActiveSkill==401){ // Sharp Shooting#272, Shadow Slash#401
 		myInnerHtml("CRIATKname","Critical Hit",0);
 		myInnerHtml("CRInumname","Critical Attack chance",0);
 
@@ -655,12 +632,9 @@ function BattleCalc999()
 		ATKbai02(wbairitu,1);
 
 		wCriTyuu=1;
-		for(var i=0;i<=2;i++){
+		for(var i=0;i<=2;i++)
 			n_A_CriATK[i] = BattleCalc(n_A_CriATK[i],10);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				n_A_CriATK[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*n_A_CriATK[i]/200);
-		}
+
 		wCriTyuu=0;
 
 
@@ -677,9 +651,6 @@ function BattleCalc999()
 
 		for(var i=0;i<=2;i++){
 			w_DMG[i] = BattleCalc(n_A_DMG[i],i);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i] + EDP_DMG(i);
 			InnStr[i] += Last_DMG_A[i];
 		}
@@ -993,9 +964,6 @@ function BattleCalc999()
 			w_DMG[i] = BattleCalc(n_A_DMG[i],i);
 			if(wActiveHitNum > 1)
 				w_DMG[i] = Math.floor(w_DMG[i] / wActiveHitNum) * wActiveHitNum;
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i] + EDP_DMG(i);
 			InnStr[i] += Last_DMG_A[i];
@@ -1003,22 +971,15 @@ function BattleCalc999()
 				InnStr[i] += " ("+ (w_DMG[i] / wActiveHitNum) +" x "+ wActiveHitNum +"Hit)";
 		}
 		w_MagiclBulet = 1;
-		//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-		//before
-		//w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) *(100-w_HIT))/100;
-		//after
-		wcustomtromod = BattleCalc2(0);
-		if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-			wcustomtromod = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wcustomtromod/200);
-		w_DMG[1] = (w_DMG[1] * w_HIT + wcustomtromod *(100-w_HIT))/100;
 
+		w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) *(100-w_HIT))/100;
 
 		EDPplus(1);
 
 		if(cast_kotei == 0)
 			CastAndDelay();
 		BattleCalc998();
-	}else if(n_A_ActiveSkill==275){
+	}else if(n_A_ActiveSkill==275){ // Magic Crasher#275
 		n_Enekyori=1;
 		wCast = 0.3;
 		n_Delay[2] = 0.3;
@@ -1026,10 +987,6 @@ function BattleCalc999()
 
 		for(var i=0;i<=2;i++){
 			w_DMG[i] = BattleCalc(BK_n_A_MATK[i],i);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i] + EDP_DMG(i);
 			InnStr[i] += Last_DMG_A[i];
 		}
@@ -1104,9 +1061,6 @@ function BattleCalc999()
 			}
 			if(n_A_ActiveSkill==391 && n_B[2]!=2 && n_B[2]!=4)
 				w_DMG[i] = 0;
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 
 			w_DMG[i] += EDP_DMG(i);
 			Last_DMG_B[i] = w_DMG[i];
@@ -1123,10 +1077,6 @@ function BattleCalc999()
 			w_DMG[i] *= wHITsuu;
 		}
 		var wX = BattleCalc2(0);
-		//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				wX = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wX/200);
-
 		w_DMG[1] = (w_DMG[1] * w_HIT + wX * wHITsuu *(100-w_HIT))/100;
 
 		if(wHITsuu == 0 && n_A_ActiveSkill==192){
@@ -1165,9 +1115,6 @@ function BattleCalc999()
 			wCast = 1.5 * n_A_CAST;
 			n_Delay[2] = 1;
 		}
-		//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-		if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-			wBT = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wBT/200);
 
 		for(var i=0;i<=2;i++){
 			Last_DMG_A[i] = Last_DMG_B[i] = wBT;
@@ -1192,9 +1139,6 @@ function BattleCalc999()
 		for(var i=0;i<=2;i++){
 			w_DMG[i] = BattleCalc(n_A_DMG[i],i);
 			w_DMG[i] = Math.floor(w_DMG[i] * zokusei[n_B[3]][5]);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i] + EDP_DMG(i);
 			InnStr[i] += Last_DMG_A[i];
@@ -1349,9 +1293,6 @@ function BattleCalc999()
 
 			if(w_DMG[i] < 1)w_DMG[i] = 1;
 			w_DMG[i] = Math.floor(w_DMG[i] * zokusei[n_B[3]][0]);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
 			InnStr[i] += Last_DMG_A[i];
@@ -1408,9 +1349,6 @@ function BattleCalc999()
 			if(w_DMG[i] < 1)
 				w_DMG[i] = 1;
 			w_DMG[i] = Math.floor(w_DMG[i] * zokusei[n_B[3]][0]);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 
 			Last_DMG_A[i] = w_DMG[i];
 			Last_DMG_B[i] = Math.floor(w_DMG[i]/5);
@@ -1445,10 +1383,6 @@ function BattleCalc999()
 		w_DMG[2] = BaiCI(w_DMG[2]);
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_B[i] = w_DMG[i] + EDP_DMG(i);
 			Last_DMG_A[i] = Last_DMG_B[i] * 5;
 			InnStr[i] += Last_DMG_A[i] + " ("+ Last_DMG_B[i] + SubName[8] +"5hit)";
@@ -1475,9 +1409,6 @@ function BattleCalc999()
 			for(var i=0;i<=2;i++){
 				w_DMG[i] = BattleCalc(n_A_DMG[i],i);
 				w_DMG[i] = Math.floor(w_DMG[i]);
-				//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-				if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-					w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 			}
 		}else if(n_B[19] == 5){
 			w_DMG[0] = w_DMG[1] = w_DMG[2] = 1;
@@ -1511,20 +1442,12 @@ function BattleCalc999()
 		for(var i=0;i<=2;i++){
 			w_DMG[i] = BattleCalc(n_A_DMG[i],i);
 			w_DMG[i] *= n_A_ActiveSkillLV;
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0){
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-				w_SBr[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_SBr[i]/200);
-			}
 
-				Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i] + w_SBr[i];
+			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i] + w_SBr[i];
 			InnStr[i] += Last_DMG_A[i] +" ("+ w_DMG[i] +" + "+ w_SBr[i] +")";
 			w_DMG[i] = Last_DMG_A[i];
 		}
 		var wX = BattleCalc2(0) * n_A_ActiveSkillLV;
-		//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-		if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-			wX = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wX/200);
 
 		n_PerHIT_DMG = wX + w_SBr[1];
 		str_PerHIT_DMG = (wX + w_SBr[0]) +"~"+ (wX + w_SBr[2]);
@@ -1574,10 +1497,6 @@ function BattleCalc999()
 			w_DMG[i] = Math.floor(w_DMG[i] * zokusei[n_A_BodyZokusei * 10 +1][6]);
 
 			w_DMG[i] = Math.floor(w_DMG[i] /2);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 		}
 		myInnerHtml("CRInum",'<Font color="#FF0000">'+3+ SubName[8] + w_DMG[0] +"~"+ w_DMG[2] +" Damage</Font>",0);
 
@@ -1604,9 +1523,6 @@ function BattleCalc999()
 			w_DMG[i] = tPlusDamCut(Math.floor((w+w_DMG[i])*((100+wcustomtromod) /100)*zokusei[n_B[3]][6]));
 			//original end damage calculation:
 			//w_DMG[i] = tPlusDamCut(Math.floor((w+w_DMG[i])*zokusei[n_B[3]][6]));
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
 
 			if(w_DMG[i] < 1)w_DMG[i]=1;
 			if(60<=n_B[3]&&n_B[3]<=69)w_DMG[i]=0;
@@ -1657,22 +1573,12 @@ function BattleCalc999()
 			w_DMG[b] = BattleCalc(n_A_DMG[b],b);
 			w_DMG[b] += Math.floor(BattleCalc(CR_n_A_DMG[b],b) * CRbai);
 			w_DMG[b] = Math.floor(w_DMG[b] * zokusei[n_B[3]][0]);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b] + EDP_DMG(b);
 			InnStr[b] += Last_DMG_A[b];
 		}
-		//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-		//before
-		//w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) * 2 *(100-w_HIT))/100;
-		//after
-		wcustomtromod = BattleCalc2(0);
-		if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-			wcustomtromod = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wcustomtromod/200);
-		w_DMG[1] = (w_DMG[1] * w_HIT + wcustomtromod * 2 *(100-w_HIT))/100;
 
+		w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) * 2 *(100-w_HIT))/100;
 		w_DMG[1] = Math.floor(w_DMG[1] * zokusei[n_B[3]][0]);
 
 		EDPplus(1);
@@ -1681,7 +1587,7 @@ function BattleCalc999()
 		BattleCalc998();
 	}
 
-	else if(n_A_ActiveSkill==283)
+	else if(n_A_ActiveSkill==283) // Pressure#283
 	{
 		n_PerHIT_DMG = 0;
 		w_DMG[2] = 500 + 300 * n_A_ActiveSkillLV;
@@ -1689,10 +1595,6 @@ function BattleCalc999()
 			w_DMG[2] = 1;
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
 			InnStr[i] += Last_DMG_A[i];
 		}
@@ -1703,7 +1605,7 @@ function BattleCalc999()
 		BattleCalc998();
 	}
 
-	else if(n_A_ActiveSkill==284)
+	else if(n_A_ActiveSkill==284) // Sacrifice#284
 	{
 		n_PerHIT_DMG = 0;
 		n_A_Weapon_zokusei = 0;
@@ -1712,10 +1614,6 @@ function BattleCalc999()
 		w_DMG[2] = Math.floor(w_DMG[2] * zokusei[n_B[3]][0]);
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
 			InnStr[i] += Last_DMG_A[i];
 		}
@@ -1742,9 +1640,6 @@ function BattleCalc999()
 			w_DMG[b] = Math.floor(Math.floor(BK_n_A_DMG[b] * wbairitu) * (work_B_DEF2[b]+n_B[14]) /50);
 			w_DMG[b] = BaiCI(w_DMG[b]);
 			w_DMG[b] = Math.floor(w_DMG[b] * zokusei[n_B[3]][0]);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b] + EDP_DMG(b);
 			InnStr[b] += Last_DMG_A[b];
@@ -1790,9 +1685,6 @@ function BattleCalc999()
 			}
 			if(n_A_PassSkill5[3] == 1)
 				w_DMG[b] = 2*w_DMG[b];									//Gospel +100% atk
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 			//Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b] + EDP_DMG(b);
 			w_DMG[b] += EDP_DMG(b);
@@ -1842,21 +1734,12 @@ function BattleCalc999()
 		for(var b=0;b<=2;b++){
 			w_DMG[b] = BattleCalc(n_A_DMG[b],b);
 			w_DMG[b] = Math.floor(w_DMG[b] * zokusei[n_B[3]][0]);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b];
 			InnStr[b] += Last_DMG_A[b];
 		}
-		//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-		//before
-		//w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) * zokusei[n_B[3]][0] *(100-w_HIT))/100;
-		//after
-		wcustomtromod = BattleCalc2(0);
-		if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-			wcustomtromod = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wcustomtromod/200);
-		w_DMG[1] = (w_DMG[1] * w_HIT + wcustomtromod * zokusei[n_B[3]][0] *(100-w_HIT))/100;
+
+		w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) * zokusei[n_B[3]][0] *(100-w_HIT))/100;
 
 		n_PerHIT_DMG = BattleCalc2(0) * zokusei[n_B[3]][0];
 
@@ -1875,9 +1758,6 @@ function BattleCalc999()
 		for(var b=0;b<=2;b++){
 			w_DMG[b] = BattleCalc(n_A_DMG[b],b);
 			w_DMG[b] = Math.floor(w_DMG[b] * zokusei[n_B[3]][0]);
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 			Last_DMG_B[b] = w_DMG[b];
 			Last_DMG_A[b] = w_DMG[b] * 3;
@@ -1885,9 +1765,6 @@ function BattleCalc999()
 			w_DMG[b] = Last_DMG_A[b];
 		}
 		var wX = Math.floor(BattleCalc2(0) * zokusei[n_B[3]][0]);
-		//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-		if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-			wX = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wX/200);
 
 		w_DMG[1] = (w_DMG[1] * w_HIT + wX * 3 *(100-w_HIT))/100;
 		n_PerHIT_DMG = wX * 3;
@@ -1910,22 +1787,13 @@ function BattleCalc999()
 			w_DMG[b] = Math.floor(w_DMG[b] * zokusei[n_B[3]][0]);
 			if(wActiveHitNum > 1)
 				w_DMG[b] = Math.floor(w_DMG[b] / wActiveHitNum) * wActiveHitNum;
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b];
 			InnStr[b] += Last_DMG_A[b];
 			InnStr[b] += " ("+ (Last_DMG_A[b] / wActiveHitNum) +" x "+ wActiveHitNum +"Hit)";
 		}
-		//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-		//before
-		//w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0)* zokusei[n_B[3]][0] *(100-w_HIT))/100;
-		//after
-		wcustomtromod = BattleCalc2(0);
-		if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-			wcustomtromod = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*wcustomtromod/200);
-		w_DMG[1] = (w_DMG[1] * w_HIT + wcustomtromod* zokusei[n_B[3]][0] *(100-w_HIT))/100;
+
+		w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0)* zokusei[n_B[3]][0] *(100-w_HIT))/100;
 
 		n_PerHIT_DMG = BattleCalc2(0) * zokusei[n_B[3]][0];
 
@@ -1951,10 +1819,6 @@ function BattleCalc999()
 
 		w_DMG[2] = w_DMG[1] = w_DMG[0];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
 			InnStr[i] += Last_DMG_A[i];
 		}
@@ -1976,9 +1840,6 @@ function BattleCalc999()
 			w_DMG[b] = Math.floor((BK_n_A_DMG[b] - n_B_DEF2[b]) * wbairitu);
 			w_DMG[b] = Math.floor(w_DMG[b] * zokusei[n_B[3]][0]);
 			w_DMG[b] = Math.floor(BaiCI(w_DMG[b]));
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b];
 			InnStr[b] += Last_DMG_A[b];
@@ -2004,10 +1865,6 @@ function BattleCalc999()
 			w_DMG[2] = Math.floor(w_DMG[2] /2);
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_B[i] = w_DMG[i];
 			Last_DMG_A[i] = w_DMG[i] * wHITsuu;
 			InnStr[i] += Last_DMG_A[i] + " ("+ Last_DMG_B[i] + SubName[8] +wHITsuu+"hit)";
@@ -2049,10 +1906,6 @@ function BattleCalc999()
 		w_DMG[2] = tPlusDamCut(w_DMG[2]);
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
 			InnStr[i] += Last_DMG_A[i];
 		}
@@ -2079,10 +1932,6 @@ function BattleCalc999()
 		w_DMG[2] = Math.floor(w_DMG[2] * (1 + (StPlusCalc2(5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill)) / 100));
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
 			InnStr[i] += Last_DMG_A[i];
 		}
@@ -2116,10 +1965,6 @@ function BattleCalc999()
 		w_DMG[2] = Math.floor(w_DMG[2] * (1 + (StPlusCalc2(5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill)) / 100));
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
 			InnStr[i] += Last_DMG_A[i];
 		}
@@ -2156,13 +2001,9 @@ function BattleCalc999()
 			w_DMG[0] = Math.floor(w_DMG[0] * zokusei[n_B[3]][n_A_Weapon_zokusei]);
 			w_DMG[1] = Math.round((n_B[6] * w + w_DMG[0] * (100-w)/100));
 		}
-		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
+		for(var i=0;i<=2;i++)
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
-		}
+
 		InnStr[0] += w_DMG[0] +" (Damage on Failure)";
 		InnStr[1] += w_DMG[1] +" (Considering the Success Chance)";
 		InnStr[2] += Math.floor(w_DMG[2] * zokusei[n_B[3]][n_A_Weapon_zokusei]) +" (" +Math.floor(w *10000)/100 +"% Success Chance)";
@@ -2172,7 +2013,7 @@ function BattleCalc999()
 		CastAndDelay();
 		BattleCalc998();
 	}
-	else if(n_A_ActiveSkill==325){
+	else if(n_A_ActiveSkill==325){ // Gravitation Field#325
 		n_PerHIT_DMG = 0;
 		n_A_Weapon_zokusei = 0;
 		n_Delay[6] = 9;
@@ -2188,10 +2029,6 @@ function BattleCalc999()
 			w_DMG[2] = 400;
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
 		for(var i=0;i<=2;i++){
-			//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-			if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-				w_DMG[i] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[i]/200);
-
 			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i] * wHITsuu;
 			w_DMG[i] = Last_DMG_A[i]
 		}
@@ -2494,14 +2331,6 @@ function BattleCalc999()
 					debug_dmg_avg=0;
 					debug_atk+="\na_BattleMagicCalc:"+w_DMG[1];
 				}
-				//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-				//skilllvb = skill level of Bragi
-				//skilllvm = skill level of Musical Lesson
-				//int = int stat of the character
-				//input_damage = damage after everything has been applied (card modifiers, etc.)
-				//final_damage = (200-((2*skilllvb+int/5)+2*skilllvm))*input_damage/200;
-				if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-					w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 				if(SG_Special_HITnum != 0){
 					SG_Special_DMG[b] = w_DMG[b];
@@ -2514,14 +2343,6 @@ function BattleCalc999()
 		}else{
 			for(var b=0;b<=2;b++){//magia especial - Dragon Fire Formation, n�o acho mais nenhuma skill que tenha esta formula em uso
 				w_DMG[b] = Math.floor(BattleMagicCalc(n_A_MATK[b] * wbairitu) / wHITsuu);
-				//custom TalonRO adjustment: Poem of Bragi reduces damage proportional to delay (PVM only)
-				//skilllvb = skill level of Bragi
-				//skilllvm = skill level of Musical Lesson
-				//int = int stat of the character
-				//input_damage = damage after everything has been applied (card modifiers, etc.)
-				//final_damage = (200-((2*skilllvb+int/5)+2*skilllvm))*input_damage/200;
-				if (n_A_PassSkill3[2]>0 && n_A_PassSkill3[45]==0)
-					w_DMG[b] = Math.floor((200-((2*n_A_PassSkill3[2]+n_A_PassSkill3[29]/5)+2*n_A_PassSkill3[32]))*w_DMG[b]/200);
 
 				Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b] * wHITsuu;
 				InnStr[b] += Last_DMG_A[b] + " ("+ w_DMG[b] + SubName[8] + wHITsuu +"hit)";
@@ -3813,10 +3634,6 @@ with(document.calcForm){
 		str += '<TR><TD id="EN0_1"></TD><TD id="EN0_2"></TD><TD id="EN0_3"></TD><TD id="EN0_4"></TD><TD id="EN0_5"></TD><TD id="EN0_6"></TD></TR>';
 		str += '<TR><TD id="EN1_1"></TD><TD id="EN1_2"></TD><TD id="EN1_3"></TD><TD id="EN1_4"></TD><TD id="EN1_5"></TD><TD id="EN1_6"></TD></TR>';
 		// custom TalonRO Poem of Bragi after cast delay: after cast delay is reduced for PVM but not for PVP/WOE, thus a checkbox is needed to decide which mode is active
-		//old
-		//str += '<TR><TD RowSpan=2 id="EN2_1"></TD><TD RowSpan=2 id="EN2_2"></TD><TD id="EN2_3"></TD><TD id="EN2_4"></TD><TD RowSpan=2 id="EN2_7"></TD><TD RowSpan=2 id="EN2_8"></TD></TR>';
-		//str += '<TR><TD id="EN2_5"></TD><TD id="EN2_6"></TD></TR>';
-		//new
 		str += '<TR><TD RowSpan=2 id="EN2_1"></TD><TD RowSpan=2 id="EN2_2"></TD><TD id="EN2_3"></TD><TD id="EN2_4"></TD><TD id="EN2_7"></TD><TD id="EN2_8"></TD></TR>';
 		str += '<TR><TD id="EN2_5"></TD><TD id="EN2_6"></TD><TD id="EN2_9"></TD><TD id="EN2_10"></TD></TR>';
 		str += '<TR><TD id="EN3_1"></TD><TD id="EN3_2"></TD><TD id="EN3_3"></TD><TD id="EN3_4"></TD><TD id="EN3_5"></TD><TD id="EN3_6"></TD></TR>';
