@@ -7536,9 +7536,9 @@ function BattleCalc2(w999)
 		debug_atk+="\nb_SSS:"+w999;
 	}
 	if(n_A_JOB==15||n_A_JOB==29)
-		w999 += 3 * SkillSearch(185);
+		w999 += 3 * SkillSearch(185) * SkillSearch(185);
 	else
-		w999 += 3 * n_A_PassSkill2[10];
+		w999 += 3 * n_A_PassSkill2[10] * n_A_PassSkill2[10];
 
 	w999 += 3 * SkillSearch(416);
 	if(debug_dmg_avg)
@@ -8098,6 +8098,11 @@ function BattleCalc4(wBC4,wBC4_2,wBC4_3){
 		wBC4_3=n_A_WeaponLV_seirenATK;
 	else
 		wBC4_3=n_A_Weapon2LV_seirenATK;
+	
+	// Finger Offensive#192 counts refine bonus multiple times
+	if (192 == n_A_ActiveSkill)
+		wBC4_3 *= SkillSearch(185);
+	
 	if(n_A_ActiveSkill==275)
 		return Math.floor(wBC4 * (100 - n_B[14]) /100) - n_B_DEF2[wBC4_2] + wBC4_3;
 	if(n_A_ActiveSkill==432)
