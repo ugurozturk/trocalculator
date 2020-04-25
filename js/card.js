@@ -464,7 +464,7 @@ cardOBJ = [
 ,[442,100,0,0,9,18,0]
 ,[443,100,0,"TalonRO: nothing",0] //custom TalonRO Toad+Roda Frog have no combo
 ,[444,3,"Khalitzburg Knight",0,78,5,191,15,192,15,0]
-,[445,4,"White Knight",0,17,5,28,15,29,15,0]
+,[445,1,"White Knight",0,17,5,28,15,29,15,0]
 ,[446,100,"Khalitzburg Knight + White Knight",0,17,10,78,10,28,5,29,5,0]
 ,[447,999,0]
 ,[448,100,0,0,13,300,14,60,0]
