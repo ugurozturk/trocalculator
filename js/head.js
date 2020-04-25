@@ -1221,7 +1221,7 @@ function BattleCalc999()
 				debug_atk+="\nb_M_DEF1:"+M_DEF1+"\nb_M_DEF2:"+M_DEF2;
 			}
 			//pierce def weapons
-			if(EquipNumSearch(620) || EquipNumSearch(409) || CardNumSearch(255) || EquipNumSearch(43)){
+			if(EquipNumSearch(620) || EquipNumSearch(409) || EquipNumSearch(43)){
 				M_DEF1 = n_B[14];
 				M_DEF2 = n_B_DEF2[0];
 			}else if((EquipNumSearch(393) || EquipNumSearch(904)) && n_B[2] == 7){
@@ -1340,8 +1340,11 @@ function BattleCalc999()
 				debug_atk+="\na_BaiCI (w_DMG[1]):"+w_DMG[i];
 			}
 			//alert(w_DMG[i]);
+			// Shield Chain benefit from def bypass
+			effective_def = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B[14]);
+			effective_vitdef = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B_DEF2[i]);
 			w_DMG[i] = w_DMG[i] * wbairitu2 * 5;
-			w_DMG[i] = w_DMG[i] * (100 - n_B[14]) /100 - n_B_DEF2[i];
+			w_DMG[i] = w_DMG[i] * (100 - effective_def) /100 - effective_vitdef;
 			w_DMG[i] = Math.floor(w_DMG[i]) + (wSBr * 10);
 			/*w_DMG[i] = (n_A_ATK * (100 - n_B[14]) /100 - n_B_DEF2[i]) * wbairitu2;
 			w_DMG[i] += wSC2[i];
