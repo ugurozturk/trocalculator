@@ -1,3 +1,7 @@
+[2020-04-26]
+- Shield Chain now take into consideration race defense bypass
+- Naming functionality for builds
+
 [2020-04-24]
 - Fixed Finger Offensive damage computation
 
