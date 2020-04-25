@@ -7094,11 +7094,20 @@ function StoN(n){
 SaveStr2 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14, 15,16, 17, 18, 19, 20, 21,22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159]; // Add to 159
 SaveStr1 = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1,  3, 1,  3,  3,  3,  3,  3, 1,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3];
 
+function CopyToClipboard() {
+  url = document.calcForm.URL_TEXT;
+
+  url.select();
+  url.setSelectionRange(0, 99999);
+
+  document.execCommand("copy");
+}
+
 function SaveCookie(){
 with(document.calcForm){
 	SaveData = new Array();
 
-	for(i=0;i<=159;i++){
+	for(i=0;i<=160;i++){
 		SaveData[i]=0;
 	}
 
@@ -7333,6 +7342,9 @@ with(document.calcForm){
 	SaveData[157] = ((A_MORAEAC21.value) ? eval(A_MORAEAC21.value) : 0);
 	SaveData[158] = ((A_MORAEAC22.value) ? eval(A_MORAEAC22.value) : 0);
 	SaveData[159] = ((A_MORAEAC23.value) ? eval(A_MORAEAC23.value) : 0);
+	
+	// Save build name in serialization
+	SaveData[160] = (document.calcForm.A_SlotName.value != document.calcForm.A_SlotName.defaultValue) ? document.calcForm.A_SlotName.value : "undefined";
 
 	//wak1="";
 	//for(i=0;i<=96;i++)
@@ -7353,7 +7365,7 @@ with(document.calcForm){
 
 	wStr = "" +SaveData[0];
 
-	for(i=1;i<=159;i++){
+	for(i=1;i<=160;i++){
 		wStr += ""+SaveData[i];
 	}
 
@@ -7405,7 +7417,7 @@ with(document.calcForm){
 		wStr = Base64.btou(RawDeflate.inflate(Base64.fromBase64(wStr)));
 	}
 
-	for(i=0;i<=159;i++){
+	for(i=0;i<=160;i++){
 		SaveData[i] = 0;
 	}
 
@@ -7422,6 +7434,7 @@ with(document.calcForm){
 			j+=3;
 		}
 	}
+	SaveData[160] = wStr.substr(j, wStr.length);
 
 	for(i=0;i<=159;i++){
 		if(SaveStr1[i] == 1)
@@ -7827,6 +7840,9 @@ with(document.calcForm){
 	A_MORAEAC21.value = SaveData[157];
 	A_MORAEAC22.value = SaveData[158];
 	A_MORAEAC23.value = SaveData[159];
+	
+	// Retrieve build name
+	document.calcForm.A_SlotName.value = (SaveData[160] == "undefined") ? document.calcForm.A_SlotName.defaultValue : SaveData[160];
 
 	Click_SQI_Bonus(0);
 
@@ -7882,7 +7898,7 @@ function LoadCookie3(){
 	//old
 	//for(k=1;k<=19;k++){
 	//new
-	for(k=1;k<=50;k++){
+	for(k=1;k<=100;k++){
 		cookieNum = "num0"+ (k-1);
 		if(k == 9)
 			cookieNum = "num0"+ k;
@@ -7912,15 +7928,18 @@ function LoadCookie3(){
 			SaveData[0] = 998;
 		}
 		SaveData[63] = wStr.substr(132,1);
+		SaveData[160] = wStr.substr(363, wStr.length);
+
+		build_name = (SaveData[160] == "undefined") ? "" : " - " + SaveData[160];
 
 		if(1<= SaveData[0] && SaveData[0] <=45){
 			if(SaveData[63]==0)
-				document.calcForm.A_SaveSlot.options[k-1] = new Option("Save "+k +": " + JobName[SaveData[0]],cookieNum);
+				document.calcForm.A_SaveSlot.options[k-1] = new Option("Save "+k +": " + JobName[SaveData[0]] + build_name,cookieNum);
 			else
-				document.calcForm.A_SaveSlot.options[k-1] = new Option("Save"+k +": Baby "+JobName[SaveData[0]],cookieNum);
+				document.calcForm.A_SaveSlot.options[k-1] = new Option("Save"+k +": Baby "+JobName[SaveData[0]] + build_name,cookieNum);
 		}
 		else if(SaveData[0] == 999 || SaveData[0] == 0){
-			document.calcForm.A_SaveSlot.options[k-1] = new Option("Save"+k +": Novice",cookieNum);
+			document.calcForm.A_SaveSlot.options[k-1] = new Option("Save"+k +": Novice" + build_name,cookieNum);
 		}
 		else
 			document.calcForm.A_SaveSlot.options[k-1] = new Option("Save "+k +": No Data",cookieNum);
@@ -8425,6 +8444,9 @@ with(document.calcForm){
 	SaveData[x+11] = NtoS2(parseInt(A_MORAEAC22.value),2);
 	SaveData[x+12] = NtoS2(parseInt(A_MORAEAC23.value),2);
 	x+=12;
+	
+	// Save build name in serialization
+	SaveData[x+1] = document.calcForm.A_SlotName.value;
 
 	wStr = "" +SaveData[0];
 	for(i=1;i<=x;i++){

@@ -71,11 +71,14 @@
 <table><tbody>
 <tr><td>&nbsp;</td><td>
 
-<input value="Save" onclick="SaveCookie()" type="button">
 <select name="A_SaveSlot"></select>
+<input name="A_SlotName" value="Build name/description" defaultValue="Build name/description" type="text" required minlength="4" maxlength="48" size="50">
+<input value="Save" onclick="SaveCookie()" type="button">
 <input value="Load" onclick="LoadCookie()" type="button">
 <span id="DELHTML"><font size="2"><a href="del.html">[delete saved data]</a></font></span><br>
-<input value="Save as URL" onclick="URLOUT()" type="button"><input name="URL_TEXT" size="130" type="text">
+<input value="Save as URL" onclick="URLOUT()" type="button">
+<input value="Copy" onclick="CopyToClipboard()" type="button">
+<input name="URL_TEXT" size="130" type="text">
 <table>
 <tbody>
 	<tr>
