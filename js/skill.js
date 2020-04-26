@@ -595,7 +595,7 @@ InsertSkill = [
 [51,1,130,10],//custom TalonRO SQI Bonus - Evangelist = Frost Nova lv 10
 [52,1,308,1],//custom TalonRO SQI Bonus - Mjolnir = Charge Attack lv 1
 [53,1,173,3],//custom TalonRO SQI Bonus - Tome of Ymir = Strip Shield lv 3
-[54,0,171,1],//custom TalonRO Kraken Card = Raid lv 1
+[54,1,171,1],//custom TalonRO Kraken Card = Raid lv 1
 [55,1,130,1],
 [56,1,132,3],
 [57,1,6,1],
