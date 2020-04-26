@@ -6630,7 +6630,7 @@ with(document.calcForm){
 		html_SKILL[2] = '<input type="checkbox" name="B_KYOUKA2"onClick="calc()|Click_AK(1)">';
 		html_SKILL[3] = '<input type="checkbox" name="B_KYOUKA3"onClick="calc()|Click_AK(1)">';
 		html_SKILL[4] = '<input type="checkbox" name="B_KYOUKA4"onClick="calc()|Click_AK(1)">';
-		html_SKILL[5] = '<select name="B_KYOUKA5"onChange="calc()|Click_AK(1)"></select>';
+		html_SKILL[5] = '<input type="checkbox" name="B_KYOUKA5"onClick="calc()|Click_AK(1)">';
 		html_SKILL[6] = '<select name="B_KYOUKA6"onChange="calc()|Click_AK(1)"></select>';
 		html_SKILL[7] = '<select name="B_KYOUKA7"onChange="calc()|Click_AK(1)"></select>';
 		html_SKILL[8] = '<select name="B_KYOUKA8"onChange="calc()|Click_AK(1)"></select>';
@@ -6650,7 +6650,6 @@ with(document.calcForm){
 			for(i=2;i<=9;i++)
 				myInnerHtml("ID_Kb"+i,html_SKILL[i],0);
 			for(i=0;i<=5;i++){
-				B_KYOUKA5.options[i] = new Option(i,i);
 				B_KYOUKA7.options[i] = new Option(i,i);
 				B_KYOUKA8.options[i] = new Option(i,i);
 			}
@@ -6662,7 +6661,7 @@ with(document.calcForm){
 			B_KYOUKA2.checked = n_B_KYOUKA[2];
 			B_KYOUKA3.checked = n_B_KYOUKA[3];
 			B_KYOUKA4.checked = n_B_KYOUKA[4];
-			B_KYOUKA5.value = n_B_KYOUKA[5];
+			B_KYOUKA5.checked = (n_B_KYOUKA[5] > 0);
 			B_KYOUKA6.value = n_B_KYOUKA[6];
 			B_KYOUKA7.value = n_B_KYOUKA[7];
 			B_KYOUKA8.value = n_B_KYOUKA[8];
@@ -6848,7 +6847,7 @@ if(CardNumSearch(555)){
 			n_B_KYOUKA[2] = B_KYOUKA2.checked;
 			n_B_KYOUKA[3] = B_KYOUKA3.checked;
 			n_B_KYOUKA[4] = B_KYOUKA4.checked;
-			n_B_KYOUKA[5] = eval(B_KYOUKA5.value);
+			n_B_KYOUKA[5] = B_KYOUKA5.checked ? 1 : 0;
 			n_B_KYOUKA[6] = eval(B_KYOUKA6.value);
 			n_B_KYOUKA[7] = eval(B_KYOUKA7.value);
 			n_B_KYOUKA[8] = eval(B_KYOUKA8.value);
@@ -6908,10 +6907,7 @@ if(CardNumSearch(555)){
 	if(n_B_KYOUKA[0])
 		n_B[8] += 2 + n_B_KYOUKA[0];
 
-	//[2018-08-03 - Fix NPC Flee Up to pre-renewal mechanic] [NattWara]
-	if(n_B_KYOUKA[5])
-		n_B[8] = n_B[8] * (2 + (0.2 * n_B_KYOUKA[5]));
-
+	// Quagmire agi debuff
 	if(n_B_IJYOU[1]){
 		var w;
 		var w2;
@@ -6927,7 +6923,6 @@ if(CardNumSearch(555)){
 		else
 			n_B[8] -= w;
 	}
-
 	if(n_B[19] == 0){
 		if(n_B_IJYOU[11]){
 			n_B[8] -= (n_B_IJYOU[11] + 2);
@@ -7144,12 +7139,6 @@ if(n_B_IJYOU[1]){
 		}
 	}
 
-	//[2018-08-03 - Fix NPC Flee Up to pre-renewal mechanic] [NattWara]
-	/*
-	if(n_B_KYOUKA[5])
-		n_B[27] = n_B[27] * 2;
-	*/
-
 	if(n_B_IJYOU[17]){
 		n_B[27] -= 50;
 		if(n_B[27] < 0)
@@ -7227,6 +7216,12 @@ if(n_B_IJYOU[1]){
 		}
 	}
 
+	/* [2020-04-18] - FLEE UP [Hatfun]
+	   From rAthena code, it seems to just be FLEE +100%, so just 2x
+	   Keeping n_B_KYOUKA[5] as an integer value instead of boolean to keep URL compatibility
+	*/
+	if(n_B_KYOUKA[5] > 0)
+		n_B[27] *= 2;
 
 	n_B[21] = n_B[27] + 20;
 	n_B[22] = n_B[26] + 75;
