@@ -57,7 +57,7 @@ debug_mode = 0;
 debug_dmg_avg = 0;
 
 //custom TalonRO
-EQB = [0,0,0];
+EQB = [1,0,0,0];
 //custom TalonRO fix ignore effects on left/offhand like Ice Pick or Weeder Knife
 IgnoreEffectOnLeftHand = 0;
 
@@ -2485,37 +2485,40 @@ with(document.calcForm){
 		str += '<TR><TD ColSpan="10" Bgcolor="#DDDDFF" class="subheader"><div style="float: left; padding: 3px;">'+ wstr +' Skills </div>';
 		str += '<div style="float: right; padding-right: 3px;"><input id="lab7" type="checkbox" name="B_ENSKSW"onClick="Click_EnemySkillsSW()"><label for="lab7">Show</label></div><div style="clear: both;"></div></TD></TR>';
 		if(Taijin == 0){//SK0 = EQ || SK1 = WF || SK2 = Kaupe
-			str += '<TR><TD id="EN_SK0"></TD></TR>';
-			str += '<TR><TD></TD><TD>Players in Range:&nbsp;</TD><TD id="B_SK0"></TD>';
-			str += '<TD id="EN_SK1"></TD><TD id="B_SK1"></TD>';
+			str += '<TD id="EN_SK3"></TD><TD id="B_SK3"></TD></TR>';
 			str += '<TD id="EN_SK2"></TD><TD id="B_SK2"></TD></TR>';
+			str += '<TR><TD id="EN_SK0"></TD></TR>';
+			str += '<TR><TD id="EN_SK1"></TD><TD id="B_SK1"/>';
+			str += '<TD>Players in Range:&nbsp;</TD><TD id="B_SK0"></TD>';
+
 		}
 		str += '</TABLE>';
 		myInnerHtml("MONSTER_SKILLS",str,0);
 		B_ENSKSW.checked = 1;
 
-		var name_SKILL = ["<b>Earthquake:</b>","Wall of Fog","Kaupe"];
+		var name_SKILL = ["<b>Earthquake:</b>","Level:","Wall of Fog","Kaupe"];
 		var html_SKILL = new Array();
-		for(i=0;i<=2;i++)
+		for(i=0;i<=3;i++)
 			myInnerHtml("EN_SK"+i,name_SKILL[i],0);
 
-			//html_SKILL[0] = '<select name="B_ENSK0"onChange="calc()"></select>';
-			html_SKILL[0] = '<select name="EQ_PL" onChange="calc()"></select>';
-			html_SKILL[1] = '<input type="checkbox" name="EQ_WF" onClick="calc()">';
-			html_SKILL[2] = '<input type="checkbox" name="EQ_KP" onClick="calc()">';
+		html_SKILL[0] = '<select name="EQ_PL" onChange="calc()"/>';
+		html_SKILL[1] = '<select name="EQ_LV" onChange="calc()"/>';
+		html_SKILL[2] = '<input type="checkbox" name="EQ_WF" onClick="calc()">';
+		html_SKILL[3] = '<input type="checkbox" name="EQ_KP" onClick="calc()">';
 
-		for(i=0;i<=2;i++){myInnerHtml("B_SK"+i,html_SKILL[i],0);}
+		for(i=0;i<=3;i++)
+			myInnerHtml("B_SK"+i,html_SKILL[i],0);
 
-		for(i=0;i<=30;i++){
-			document.calcForm.EQ_PL.options[i] = new Option(i,i);}
+		for(i=0;i<=10;i++)
+			document.calcForm.EQ_LV.options[i] = new Option(i,i);
+			
+		for(i=1;i<=48;i++) // GM Event up to 4 parties x 12 members
+			document.calcForm.EQ_PL.options[i-1] = new Option(i,i);
 
-			EQ_PL.value = EQB[0];
-			EQ_WF.checked = EQB[1];
-			EQ_KP.checked = EQB[2];
-
-			//n_B_ENSK[0] = eval(document.calcForm.EQ_PL.value);
-			//n_B_ENSK[1] = eval(document.calcForm.EQ_WF.value);
-			//n_B_ENSK[2] = eval(document.calcForm.EQ_KP.value);
+		EQ_PL.value = EQB[0];
+		EQ_WF.checked = EQB[1];
+		EQ_KP.checked = EQB[2];
+		EQ_LV.value = (EQ_MOBS.hasOwnProperty(n_B[0])) ? EQ_MOBS[n_B[0]] : EQB[3];
 
 	}else{
 		var str;
@@ -2525,6 +2528,8 @@ with(document.calcForm){
 		myInnerHtml("MONSTER_SKILLS",str,0);
 		B_ENSKSW.checked = 0;
 	}
+	
+	calc();
 }}
 
 function HealCalc(HealLv,HealType)
@@ -2690,69 +2695,84 @@ function BattleCalc998()
 			w = Math.round(w * (100- SkillSearch(287) *7.5))/100;
 		}
 		myInnerHtml("B_Ave2Atk",w+" Damage",0);
-
-}
-//EARTHQUAKE SKILL DMG Sem reduces de momento
-	//EQ LVL 1 - Incarnation of Morroc[Golem] e a sua vers�o de mega hp que � slave do wounded morroc que liberta constants
-	//EQ LVL 2 - Hardrock Mammoth
-	//EQ LVL 3 - Nidhoggr's Shadow
-	//EQ LVL 5 - Bapho/Orc Lord/RSX/Randgris/Ifrit
-	//EQ LVL10 - Satan Morroc/Wounded Morroc
-	if(n_B[0] == 492){
-		LV_EQ = 1;
-		EQ_ST = 1;
-	}else if(n_B[0] == 534){
-		LV_EQ = 2;
-		EQ_ST = 1;
-	}else if(n_B[0] == 546){
-		LV_EQ = 3;
-		EQ_ST = 1;
-	}else if(n_B[0] == 228 || n_B[0] == 56 || n_B[0] == 356 || n_B[0] == 440 || n_B[0] == 472){
-		LV_EQ = 5;
-		EQ_ST = 1;
-	}else if(n_B[0] == 495 || n_B[0] == 496){
-		LV_EQ = 10;
-		EQ_ST = 1;
-
-	}else{
-		EQ_ST = 0;
 	}
 
-	if(EQ_ST == 0){EQ_POWER = "Not Available";}
-	if(EQ_ST == 1){
-		//Golden Thief Bug Card - reducing earth quack damage to 0
-		if(CardNumSearch(126)){EQ_POWER = 0;}
-		else{
-			if(n_A_PassSkill2[5]){EQ_ASS = 0.5;}else{EQ_ASS = 1;} // assumpt on ou off
-			if(SkillSearch(421)){EQ_ADJ = 0.8;}else{EQ_ADJ = 1;} //Adjustment Skill de Gunslinger on ou off
-			//P_EQ =  eval(document.calcForm.EQB[0].value);
-			//if(EQB[0] == 0){EQ_PP= 1;}
-			EQ_PP = 1;
-			//if(EQB[1] == 1){EQ_WOF = 0.75;}else{EQ_WOF = 1;}
-			//if(EQ_WF.checked){EQ_WOF = 0.75;}else{EQ_WOF = 1;}
-			EQ_WOF = 1;
+	// Monster Skills
+	EQ_POWER = "N/A";
+	HJ_POWER = "N/A";
+	
+	if (document.calcForm.B_ENSKSW.checked)
+	{
+		HITS = 0;
+		
+		// Damage reduction
 
-			S_EQ1 = n_B[12];
-			S_EQ2 = n_B[13];
-			//S_EQ1*(2+LV_EQ+(LV_EQ/2)) = EQ FORMULA
+		MS_ASSUMPTIO = 1; // Assumptio
+		if (n_A_PassSkill2[5])
+			MS_ASSUMPTIO = 0.5;
 
-			EQ_POW1 = Math.floor(S_EQ1*(2+LV_EQ+(LV_EQ/2)));
-			EQ_POW2 = Math.floor((EQ_POW1*EQ_ASS)*EQ_ADJ);
-			EQ_POW3 = Math.floor(EQ_POW2*EQ_WOF);
-			EQ_POW4 = Math.floor(EQ_POW3/EQ_PP);
+		MS_ADJ = 1; // Adjustment Skill de Gunslinger
+		if (SkillSearch(421))
+			MS_ADJ = 0.8;
 
-			EQ_POWA = Math.floor(S_EQ2*(2+LV_EQ+(LV_EQ/2)));
-			EQ_POWB = Math.floor((EQ_POWA*EQ_ASS)*EQ_ADJ);
-			EQ_POWC = Math.floor(EQ_POWB*EQ_WOF);
-			EQ_POWD = Math.floor(EQ_POWC/EQ_PP);
+		MS_WOF = 1; // Wall of Fog
+		if (document.calcForm.EQ_WF.checked)
+			MS_WOF = 0.75;
 
-			//EQ_POWER = EQB[0];
-			EQ_POWER = Math.floor(EQ_POW4*3) + "~" + Math.floor(EQ_POWD*3) + " (" + EQ_POW4 + "~" + EQ_POWD + " x 3 Hits)";
+		if (document.calcForm.EQ_KP.checked) // Kaupe prevents the first hit
+			HITS -= 1;
+
+		MS_BOSS = 1 - n_tok[77] / 100; 				// Boss reduction
+		MS_RANGE = 1 - n_tok[78] / 100; 			// Range reduction
+		MS_NEUTRAL = 1 - n_tok[60] / 100; 			// Neutral reduction
+		MS_RACE = 1 - n_tok[50 + n_B[2]] / 100; 	// Race reduction
+		MS_ELEMENT = 1 - n_tok[330 + n_B[3]] / 100;	// Monster element reduction
+		
+		// NPC_EARTHQUAKE Skill
+		EQ_LV = (EQ_MOBS.hasOwnProperty(n_B[0])) ? EQ_MOBS[n_B[0]] : EQB[3];
+		document.calcForm.EQ_LV.value = EQ_LV;
+		EQ_TARGETS = eval(document.calcForm.EQ_PL.value)
+		
+		EQ_ST = Math.min(Math.min(1, EQ_LV), EQ_TARGETS);
+
+		if (EQ_ST)
+		{	
+			if (CardNumSearch(126)) //Golden Thief Bug Card - reducing earth quack damage to 0
+				EQ_POWER = "0~0";
+			else
+			{
+				HITS += 3;
+				EQ_RATIO = 2 + 1 * EQ_LV + Math.floor(EQ_LV / 2) + ((EQ_LV > 4) ? 1 : 0);
+
+				MS_RANGE = 1; // EQ is considered as short ranged attack, no damage reduction from bLongAtkDef
+				MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE;
+
+				EQ_MINDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[12] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO) / EQ_TARGETS);
+				EQ_MAXDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[13] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO) / EQ_TARGETS);
+
+				EQ_POWER = Math.floor(EQ_MINDMG * HITS) + "~" + Math.floor(EQ_MAXDMG * HITS) + " (" + EQ_MINDMG + "~" + EQ_MAXDMG + " x " + HITS + " Hits)";
 			}
+		}
+
+		// NPC_HELLJUDGEMENT Skill
+		HJ_LV = (HJ_MOBS.hasOwnProperty(n_B[0])) ? HJ_MOBS[n_B[0]] : 0;
+		
+		if (HJ_LV)
+		{
+			HITS += 1;
+			
+			HJ_RATIO = HJ_LV;
+			MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE;
+			
+			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO);
+			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO);
+
+			HJ_POWER = Math.floor(HJ_MINDMG * HITS) + "~" + Math.floor(HJ_MAXDMG * HITS);
+		}
 	}
+
 	myInnerHtml("B_EQ",EQ_POWER,0);
-
-
+	myInnerHtml("B_HJ",HJ_POWER,0);
 }
 
 function BattleHiDam(){
