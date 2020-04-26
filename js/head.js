@@ -2703,24 +2703,23 @@ function BattleCalc998()
 	
 	if (document.calcForm.B_ENSKSW.checked)
 	{
-		HITS = 0;
-		
 		// Damage reduction
 
 		MS_ASSUMPTIO = 1; // Assumptio
 		if (n_A_PassSkill2[5])
 			MS_ASSUMPTIO = 0.5;
 
-		MS_ADJ = 1; // Adjustment Skill de Gunslinger
+		MS_ADJ = 1; // Adjustment#421 Skill de Gunslinger
 		if (SkillSearch(421))
 			MS_ADJ = 0.8;
 
 		MS_WOF = 1; // Wall of Fog
 		if (document.calcForm.EQ_WF.checked)
 			MS_WOF = 0.75;
+		
+		MS_EC = 1 - 6 * SkillSearch(58) / 100; // Energy Coat#58
 
-		if (document.calcForm.EQ_KP.checked) // Kaupe prevents the first hit
-			HITS -= 1;
+		MS_KAUPE = (document.calcForm.EQ_KP.checked) ? 1 : 0; // Kaupe prevents the first hit;
 
 		MS_BOSS = 1 - n_tok[77] / 100; 				// Boss reduction
 		MS_RANGE = 1 - n_tok[78] / 100; 			// Range reduction
@@ -2741,14 +2740,13 @@ function BattleCalc998()
 				EQ_POWER = "0~0";
 			else
 			{
-				HITS += 3;
+				HITS = 3 - MS_KAUPE;
 				EQ_RATIO = 2 + 1 * EQ_LV + Math.floor(EQ_LV / 2) + ((EQ_LV > 4) ? 1 : 0);
 
-				MS_RANGE = 1; // EQ is considered as short ranged attack, no damage reduction from bLongAtkDef
-				MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE;
+				MS_REDUCTION = MS_BOSS * MS_ELEMENT * MS_NEUTRAL * MS_RACE; // EQ is considered as short ranged attack, no damage reduction from bLongAtkDef
 
-				EQ_MINDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[12] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO) / EQ_TARGETS);
-				EQ_MAXDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[13] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO) / EQ_TARGETS);
+				EQ_MINDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[12] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC) / EQ_TARGETS);
+				EQ_MAXDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[13] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC) / EQ_TARGETS);
 
 				EQ_POWER = Math.floor(EQ_MINDMG * HITS) + "~" + Math.floor(EQ_MAXDMG * HITS) + " (" + EQ_MINDMG + "~" + EQ_MAXDMG + " x " + HITS + " Hits)";
 			}
@@ -2759,13 +2757,13 @@ function BattleCalc998()
 		
 		if (HJ_LV)
 		{
-			HITS += 1;
+			HITS = 1 - MS_KAUPE;
 			
 			HJ_RATIO = HJ_LV;
 			MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE;
 			
-			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO);
-			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO);
+			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
+			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
 
 			HJ_POWER = Math.floor(HJ_MINDMG * HITS) + "~" + Math.floor(HJ_MAXDMG * HITS);
 		}
