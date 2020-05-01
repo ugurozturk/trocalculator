@@ -2194,14 +2194,8 @@ function BattleCalc999()
 		else if(n_A_ActiveSkill==132 || n_A_ActiveSkill==133 || n_A_ActiveSkill==319){
 			n_A_Weapon_zokusei = 2;
 			wHITsuu = n_A_ActiveSkillLV;
-			if(n_A_ActiveSkill==132){
-				wCast = n_A_ActiveSkillLV *0.7;
-				n_Delay[2] = 0.8 + n_A_ActiveSkillLV * 0.2;
-			}
-			else{
-				wCast = n_A_ActiveSkillLV;
-				n_Delay[2] = 1;
-			}
+			wCast = n_A_ActiveSkillLV;
+			n_Delay[2] = 0.7;
 		}
 		else if(n_A_ActiveSkill==277){
 			wHITsuu = n_A_ActiveSkillLV;
@@ -8267,7 +8261,14 @@ function CastAndDelay(){
 		wDelay = n_Delay[1];
 		w = 1;
 	}
-	n_Delay[2] = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
+	
+	acd_after_reduction = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
+	
+	if (n_A_PassSkill3[32])
+		n_Delay[2] = Math.max(acd_reduction, Math.min(n_Delay[2], 0.4));
+	else
+		n_Delay[2] = acd_after_reduction;
+	
 	if(n_Delay[2] > wDelay){
 		wDelay = n_Delay[2];
 		w = 2;
