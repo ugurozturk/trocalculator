@@ -1763,7 +1763,7 @@ ItemOBJ = [
 // ---
 ,[1713,9,77,70,4,2,60,60,"Shadow Staff","","<br><b>[Every Refine Level]</b><br> Add a 0.2% chance of auto-casting [Sight Blaster] on yourself when using magic attacks.<br>1% MDEF pierce against Demon Race.",89,20,220,60,343,5,357,5,221,143,0]
 ,[1714,50,1,3,0,0,20,20,"Candy Hat","",0,221,144,0]
-,[1715,50,0,5,0,0,50,40,"Pitch Dark Evil Druid Hat","","Crafted by Demons specifically for the Dark Lord. Has several powers stored from Dark Lords of past generations. Hidden abilities are unlocked with certain Mid Headgears.",1,3,2,3,4,3,5,3,196,4,0]
+,[1715,50,0,5,0,1,50,40,"Pitch Dark Evil Druid Hat","","Crafted by Demons specifically for the Dark Lord. Has several powers stored from Dark Lords of past generations. Hidden abilities are unlocked with certain Mid Headgears.",1,3,2,3,4,3,5,3,196,4,0]
 ,[1716,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Evil Wing Ears","",0,1,1,80,5,0]
 ,[1717,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Angel Wing Ears","",0,1,1,12,3,0]
 ,[1718,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Peco Peco Ears","",0,2,1,9,5,0]
