@@ -8670,6 +8670,7 @@ with(document.calcForm){
 			n_B_KYOUKA[8] = StoN2(w.substr(x+5,1)) % 6;
 			wn = StoN2(w.substr(x+6,1));
 			n_B_KYOUKA[9] = Math.floor(wn / 16);
+			n_B_KYOUKA[10] = 0;
 			x += 6;
 		}
 

@@ -6442,17 +6442,18 @@ with(document.calcForm){
 			str += '<TD id="ID_K3"></TD><TD id="ID_Kb3"></TD></TR>';
 			str += '<TR><TD id="ID_K4"></TD><TD id="ID_Kb4"></TD>';
 			str += '<TD id="ID_K5"></TD><TD id="ID_Kb5"></TD></TR>';
-			str += '<TR><TD id="ID_K6"></TD><TD id="ID_Kb6"></TD>';
-			str += '<TD id="ID_K7"></TD><TD id="ID_Kb7"></TD></TR>';
 			str += '<TR><TD id="ID_K8"></TD><TD id="ID_Kb8"></TD>';
 			str += '<TD id="ID_K9"></TD><TD id="ID_Kb9"></TD></TR>';
+			str += '<TR><TD id="ID_K7"></TD><TD id="ID_Kb7"></TD>';
+			str += '<TD id="ID_K6"></TD><TD id="ID_Kb6"></TD></TR>';
+			str += '<TR><TD id="ID_K10"></TD><TD id="ID_Kb10"></TD>';
 		}
 		str += '</TABLE>';
 		myInnerHtml("MONSTER_KYOUKA",str,0);
 		B_KYOUKASW.checked = 1;
 
 
-		var name_SKILL = ["Increase AGI","Assumptio","Adrenaline Rush","Maximize Power","<Font size=2>POWER UP<BR>(ATK*3, HIT*2)</Font>","FLEE UP","Change element","Stone Skin","Magic Mirror","Keeping"];
+		var name_SKILL = ["Increase AGI","Assumptio","Adrenaline Rush","Maximize Power","Power Up<BR>(ATK*3, HIT*2)","Flee Up","Change element","Stone Skin","Anti Magic","Keeping","Magic Mirror"];
 		var html_SKILL = new Array();
 		for(i=0;i<=1;i++)
 			myInnerHtml("ID_K"+i,name_SKILL[i],0);
@@ -6467,6 +6468,7 @@ with(document.calcForm){
 		html_SKILL[7] = '<select name="B_KYOUKA7"onChange="calc()|Click_AK(1)"></select>';
 		html_SKILL[8] = '<select name="B_KYOUKA8"onChange="calc()|Click_AK(1)"></select>';
 		html_SKILL[9] = '<input type="checkbox" name="B_KYOUKA9"onClick="calc()|Click_AK(1)">';
+		html_SKILL[10] = '<select name="B_KYOUKA10"onChange="calc()|Click_AK(1)"></select>';
 
 		for(i=0;i<=1;i++)
 			myInnerHtml("ID_Kb"+i,html_SKILL[i],0);
@@ -6477,13 +6479,14 @@ with(document.calcForm){
 		B_KYOUKA1.checked = n_B_KYOUKA[1];
 
 		if(Taijin==0){
-			for(i=2;i<=9;i++)
+			for(i=2;i<=10;i++)
 				myInnerHtml("ID_K"+i,name_SKILL[i],0);
-			for(i=2;i<=9;i++)
+			for(i=2;i<=10;i++)
 				myInnerHtml("ID_Kb"+i,html_SKILL[i],0);
 			for(i=0;i<=5;i++){
 				B_KYOUKA7.options[i] = new Option(i,i);
 				B_KYOUKA8.options[i] = new Option(i,i);
+				B_KYOUKA10.options[i] = new Option(i,i);
 			}
 			//Element List ID
 			var ZoHe =[["None","Neutral 1","Neutral 2","Neutral 3","Neutral 4","Water 1","Water 2","Water 3","Water 4","Earth 1","Earth 2","Earth 3","Earth 4","Fire 1","Fire 2","Fire 3","Fire 4","Wind 1","Wind 2","Wind 3","Wind 4","Poison 1","Poison 2","Poison 3","Poison 4","Holy 1","Holy 2","Holy 3","Holy 4","Shadow 1","Shadow 2","Shadow 3","Shadow 4","Ghost 1","Ghost 2","Ghost 3","Ghost 4","Undead 1","Undead 2","Undead 3","Undead 4"],
@@ -6498,6 +6501,7 @@ with(document.calcForm){
 			B_KYOUKA7.value = n_B_KYOUKA[7];
 			B_KYOUKA8.value = n_B_KYOUKA[8];
 			B_KYOUKA9.checked = n_B_KYOUKA[9];
+			B_KYOUKA10.value = n_B_KYOUKA[10];
 		}
 	}
 	else{
@@ -6515,7 +6519,7 @@ function Click_AK(n){
 	if(n==1)
 		calc();
 	var sw=0;
-	for(var i=0;i <= 9;i++)
+	for(var i=0;i <= 10;i++)
 		if(n_B_KYOUKA[i] != 0){
 			sw = 1;
 			break;
@@ -6684,6 +6688,7 @@ if(CardNumSearch(555)){
 			n_B_KYOUKA[7] = eval(B_KYOUKA7.value);
 			n_B_KYOUKA[8] = eval(B_KYOUKA8.value);
 			n_B_KYOUKA[9] = B_KYOUKA9.checked;
+			n_B_KYOUKA[10] = eval(B_KYOUKA10.value);
 		}
 	}
 	if(n_B_KYOUKA[6])
@@ -6871,8 +6876,8 @@ if(n_B_IJYOU[1]){
 		if(n_B_IJYOU[9] && n_B[2]!=1)
 			n_B[14] -= Math.floor(n_B[14] * 50 /100);
 	}
-	if(n_B_KYOUKA[9])
-		n_B[14] *= 2;
+	if(n_B_KYOUKA[9]) // NPC_KEEPING set the hard DEF to 90
+		n_B[14] = 90;
 
 	if(n_B_IJYOU[12] && (n_B[2]==6||n_B[3]>=90))
 		n_B[14] -= Math.floor(n_B[14] * (10 + n_B_IJYOU[12] * 4) /100);
@@ -6903,11 +6908,6 @@ if(n_B_IJYOU[1]){
 		}
 	}
 
-	if(Taijin==0 && n_B_KYOUKA[8]){
-		n_B[23] -= Math.floor(n_B[23] * 20 * n_B_KYOUKA[8] /100);
-		n_B[24] -= Math.floor(n_B[24] * 20 * n_B_KYOUKA[8] /100);
-	}
-
 	if(Taijin==0){
 		if(n_B_IJYOU[21])
 			n_B[24] += 90;
@@ -6936,23 +6936,16 @@ if(n_B_IJYOU[1]){
 		if(n_B_IJYOU[9] && n_B[2]!=1)
 			n_B[15] += Math.floor(n_B[15] * 25 /100);
 	}
-	//custom TalonRO Update 2014-08-30: Stone Skin ignores %-int mdef too
-	if(Taijin==0 && n_B_KYOUKA[7])
-		n_B[15] -= Math.floor(n_B[15] * 20 * n_B_KYOUKA[7] /100);
 
 	if(n_B[19] == 0){
 		if(n_B_IJYOU[18] && n_B[3]<90)
 			n_B[25] -= Math.floor(n_B[25] * (n_B_IJYOU[18] * 12) / 100);
 	}
 
-	if(Taijin==0 && n_B_KYOUKA[7])
-		n_B[25] -= Math.floor(n_B[25] * 20 * n_B_KYOUKA[7] /100);
-
 	if(Taijin==0){
 		if(n_B_IJYOU[21])
 			n_B[25] = 90;
 	}
-
 
 	if(n_B[19] == 0){
 		if(n_B_IJYOU[3]){
@@ -8262,6 +8255,11 @@ function CastAndDelay(){
 		w = 1;
 	}
 	
+	/*
+		Bragi capped after cast delay reduction to 0.4s
+		Skills that have long delays that can't normally achieve our 0.3 second delay cap without Bragi
+		can only be reduced up to 0.4 second delay while under Bragi.
+	*/
 	acd_after_reduction = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
 	
 	if (n_A_PassSkill3[32])
@@ -8447,10 +8445,16 @@ function tPlusDamCut(wPDC){
 		wPDC = Math.floor(wPDC / 2);
 	if(n_B_KYOUKA[1] && Taijin==1)
 		wPDC = Math.floor(wPDC * 2 / 3);
-	if(n_B_KYOUKA[7] && n_Enekyori != 2)
-		wPDC -= Math.floor(wPDC * 20 * n_B_KYOUKA[7] / 100);
-	if(n_B_KYOUKA[8] && n_Enekyori == 2)
-		wPDC -= Math.floor(wPDC * 20 * n_B_KYOUKA[8] / 100);
+	
+	// SC_ARMORCHANGE for Stone Skin and Anti Magic skills
+	// It does not change DEF/MDEF but rather increases/decreases the damage
+	if(n_Enekyori != 2)
+		wPDC += Math.floor(wPDC * 20 * (n_B_KYOUKA[8] - n_B_KYOUKA[7]) / 100);
+	else
+	{
+		wPDC += Math.floor(wPDC * 20 * (n_B_KYOUKA[7] - n_B_KYOUKA[8]) / 100);
+		wPDC -= Math.floor(wPDC * 20 * n_B_KYOUKA[10] / 100); // Magic Mirror
+	}
 
 	if(n_B[19] == 5){
 		wPDC = 1;

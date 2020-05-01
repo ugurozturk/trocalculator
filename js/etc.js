@@ -414,7 +414,7 @@ ITEM_SP_TIME_OBJ =[
 ,[6,"Valorous Assassin Damascus","MATK + 10% and ASPD + 20%",4,898,73,20,89,10,0]
 ,[7,"Ixion Wings","ASPD + 7%",1,821,12,7,0]
 ,[8,"Vanberk Card","CRIT + 100",2,471,10,100,0]
-,[9,"Wolfheiden","Receive -20% Physical Damage, +20% Magical Damage[Stone Skin Lv6]",1,708,0]
+,[9,"Wolfheiden","Receive -20% Physical Damage, +20% Magical Damage[Stone Skin Lv1]",1,708,0]
 ,[10,"Angelic Ring","Effectiveness of Heal, Sanctuary and Potion Pitcher increased by 20%",1,1000,91,20,93,20,94,20,0]
 ,[11,"Glorious Grenade Launcher","ASPD + 20%",1,1103,12,20,0]
 ,[12,"Glorious Jamadhar [Refine Rate 6~10]","190 ASPD",1,1091,99,190,0]
