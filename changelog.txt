@@ -1,3 +1,6 @@
+[2020-05-01]
+- Fixed Stone Skin, Anti Magic, Magic Mirror and Keeping skills
+
 [2020-04-26]
 - Shield Chain now take into consideration race defense bypass
 - Naming functionality for builds
