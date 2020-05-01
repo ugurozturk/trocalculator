@@ -2418,7 +2418,7 @@ function ATKbai02(wATKbai,ch_A02)
 		if(SkillSearch(154)==0 && n_A_PassSkill2[8])
 			wA02 += n_A_PassSkill2[8] * 5 / 5;
 	}
-	// Fighting Chant Skill#342 - FIXME : Check with IG damages
+	// Fighting Chant Skill#342
 	if(SkillSearch(342)){
 		if (SkillSearch(380) <= 1){wA02 += 0;}
 		else {wA02 += 2 * SkillSearch(342) * SkillSearch(380);}
@@ -3646,7 +3646,8 @@ with(document.calcForm){
 		str += '<TR><TD id="A3TD" ColSpan="6" Bgcolor="#DDDDFF" class="subheader"><div style="float: left; padding: 3px;">Music and Dance Skills <span id="A3used"></span></div>';
 		str += '<div style="float: right; padding-right: 3px;"><input id="lab10" type="checkbox" name="A3_SKILLSW"onClick="Click_Skill3SW()"><label for="lab10">Show</label></div>';
 		str += '<div style="clear: both;"></div></TD></TR>';
-		str += '<TR><TD id="EN0_1"></TD><TD id="EN0_2"></TD><TD id="EN0_3"></TD><TD id="EN0_4"></TD><TD id="EN0_5"></TD><TD id="EN0_6"></TD></TR>';
+		str += '<TR><TD RowSpan=2 id="EN0_1"></TD><TD RowSpan=2 id="EN0_2"></TD><TD id="EN0_3"></TD><TD id="EN0_4"></TD><TD id="EN0_7"></TD><TD id="EN0_8"></TD></TR>';
+		str += '<TR><TD id="EN0_5"></TD><TD id="EN0_6"></TD></TR>';
 		str += '<TR><TD id="EN1_1"></TD><TD id="EN1_2"></TD><TD id="EN1_3"></TD><TD id="EN1_4"></TD><TD id="EN1_5"></TD><TD id="EN1_6"></TD></TR>';
 		// custom TalonRO Poem of Bragi after cast delay: after cast delay is reduced for PVM but not for PVP/WOE, thus a checkbox is needed to decide which mode is active
 		str += '<TR><TD RowSpan=2 id="EN2_1"></TD><TD RowSpan=2 id="EN2_2"></TD><TD id="EN2_3"></TD><TD id="EN2_4"></TD><TD id="EN2_7"></TD><TD id="EN2_8"></TD></TR>';
@@ -3743,26 +3744,27 @@ with(document.calcForm){
 	if(n_A_PassSkill3[0] != 0){
 		if(SWs3sw[0] == 0){
 			if(n_A_PassSkill3[20] == 0){
-				n_A_PassSkill3[20] = 100;
-				n_A_PassSkill3[30] = 10;
-				//n_A_PassSkill3[100] = 10;
+				n_A_PassSkill3[20] = 100;	// Bard's AGI
+				n_A_PassSkill3[30] = 10;	// Musical Lessons Lv
+				n_A_PassSkill3[100] = 100;	// Bard's LUK
 			}
 			myInnerHtml("EN0_3","Bard's AGI",0);
 			myInnerHtml("EN0_4",'<select name="A3_Skill0_2"onChange="Click_A3(1)"></select>',0);
-			myInnerHtml("EN0_5","Musical Lessons",0);
-			myInnerHtml("EN0_6",'<select name="A3_Skill0_3"onChange="Click_A3(1)"></select>',0);
-			//myInnerHtml("EN0_7","Bard's LUK",0);
-			//myInnerHtml("EN0_8",'<select name="A3_Skill0_4"onChange="Click_A3(1)"></select>',0);
-			for(i=1;i<=150;i++)
+			myInnerHtml("EN0_5","Bard's LUK",0);
+			myInnerHtml("EN0_6",'<select name="A3_Skill0_4"onChange="Click_A3(1)"></select>',0);
+			myInnerHtml("EN0_7","Musical Lessons",0);
+			myInnerHtml("EN0_8",'<select name="A3_Skill0_3"onChange="Click_A3(1)"></select>',0);
+
+			for(i=1;i<=200;i++)
 				A3_Skill0_2.options[i-1] = new Option(i,i);
 			for(i=0;i<=10;i++)
 				A3_Skill0_3.options[i] = new Option(i,i);
-			//for(i=0;i<=150;i++)
-				//A3_Skill0_4.options[i-1] = new Option(i,i);
+			for(i=0;i<=230;i++)
+				A3_Skill0_4.options[i-1] = new Option(i,i);
 			SWs3sw[0] = 1;
 			A3_Skill0_2.value = n_A_PassSkill3[20];
 			A3_Skill0_3.value = n_A_PassSkill3[30];
-			//A3_Skill0_4.value = n_A_PassSkill3[100];
+			A3_Skill0_4.value = n_A_PassSkill3[100];
 		}
 	}else{
 		SWs3sw[0] = 0;
@@ -3770,8 +3772,8 @@ with(document.calcForm){
 		myInnerHtml("EN0_4","-",0);
 		myInnerHtml("EN0_5","",0);
 		myInnerHtml("EN0_6","",0);
-		//myInnerHtml("EN0_7","",0);
-		//myInnerHtml("EN0_8","",0);
+		myInnerHtml("EN0_7","",0);
+		myInnerHtml("EN0_8","",0);
 	}
 
 	if(n_A_PassSkill3[1] != 0){
@@ -4593,7 +4595,7 @@ function Click_A8(n){
 		calc();
 	var sw=0;
 	for(var i=0;i < n_A_PassSkill8.length;i++)
-		if(n_A_PassSkill8[i] != 0){
+	if(i != 3 && i != 7 && n_A_PassSkill8[i] != 0){ // Disabled activity notification when altering experience bonus
 			sw = 1;
 			break;
 		}
@@ -8263,7 +8265,7 @@ function CastAndDelay(){
 	acd_after_reduction = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
 	
 	if (n_A_PassSkill3[32])
-		n_Delay[2] = Math.max(acd_reduction, Math.min(n_Delay[2], 0.4));
+		n_Delay[2] = Math.max(acd_after_reduction, Math.min(n_Delay[2], 0.4));
 	else
 		n_Delay[2] = acd_after_reduction;
 	

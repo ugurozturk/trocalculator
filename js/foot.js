@@ -441,6 +441,7 @@ function StAllCalc()
 		if(n_A_PassSkill3[0]){
 			n_A_PassSkill3[20] = eval(A3_Skill0_2.value);
 			n_A_PassSkill3[30] = eval(A3_Skill0_3.value);
+			n_A_PassSkill3[100] = eval(A3_Skill0_4.value);
 		}
 		if(n_A_PassSkill3[1]){
 			n_A_PassSkill3[21] = eval(A3_Skill1_2.value);
@@ -1024,8 +1025,6 @@ function StAllCalc()
 	// Impositio Manus - ATK + 5 * SkillLV
 	wImp = n_A_PassSkill2[2] *5;
 
-	// FIXME : Validate that DotB is impacted or not by the Size multiplier, if that is not the case
-	// then the ATK bonus should be added to n_tok[17]
 	// A Drum on the Battlefield - ATK + 25 + 25 * SkillLV
 	if(n_A_PassSkill3[9])
 		wImp += 25 + 25 * n_A_PassSkill3[9];
@@ -2058,9 +2057,9 @@ function StAllCalc()
 	if(n_A_PassSkill8[30]){
 		n_A_FLEE += 33;
 	}
-	if(n_A_PassSkill3[0]){
-		n_A_FLEE += n_A_PassSkill3[0] + Math.floor(n_A_PassSkill3[30] /2) + Math.floor(n_A_PassSkill3[20] /10);
-	}
+	if(n_A_PassSkill3[0]) // A Whistle - Base_FLEE_Boost + Floor(AGI ÷ 10) + Music_Lessons_Lv
+		n_A_FLEE += n_A_PassSkill3[0] + n_A_PassSkill3[30] + Math.floor(n_A_PassSkill3[20] / 10);
+
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){
 		n_A_FLEE += 10;
 	}
@@ -2156,12 +2155,13 @@ function StAllCalc()
 	if (CardNumSearch(511) && SkillSearch(258) && TimeItemNumSearch(51))
 		n_tok[11] += 10;
 
+	
+	// A Whistle Skill - Base_P._D._Boost (Ceil(SkillLv / 2)) + Floor(LUK ÷ 10) + Ceil(Music_Lessons_Lv ÷ 2)
+	if (n_A_PassSkill3[0])
+		n_tok[11] += Math.ceil(n_A_PassSkill3[0] / 2) + Math.floor(n_A_PassSkill3[100] / 10) + Math.ceil(n_A_PassSkill3[30] / 2);
+
 	n_A_LUCKY = 1 + n_A_LUK * 0.1;
 	n_A_LUCKY += n_tok[11];
-
-	//A Whistle Skill - bugado, falta ver que variavel usar em vez de n_A_PassSkill3[20]
-	//if(n_A_PassSkill3[0])
-		//n_A_LUCKY += Math.floor(n_A_PassSkill3[0]/2) + Math.floor(n_A_PassSkill3[30]/2) + Math.floor(n_A_PassSkill3[20] /10);
 
 	if(n_A_JobSearch()==2)
 		n_A_LUCKY += 5 * CardNumSearch(391);
@@ -2796,9 +2796,6 @@ function StAllCalc()
 			w += 2;
 	}
 
-	// FIXME : Pagdayaw#1173 - no MATK bonus
-	if(EquipNumSearch(1173))
-		w += Math.floor(n_A_Weapon_ATKplus);
 	if(n_A_JOB==14 || n_A_JOB==28){
 		w += 10 * CardNumSearch(479);}
 
@@ -8198,8 +8195,8 @@ with(document.calcForm){
 	}
 
 	x+=1;
-	for(var i=0;i<=9 && n_B_KYOUKA[i]==0;i++);
-	if(i==10){
+	for(var i=0;i<=10 && n_B_KYOUKA[i]==0;i++);
+	if(i==11){
 		SaveData[x] = NtoS2(0,1);
 	}else{
 		SaveData[x] = NtoS2(1,1);
@@ -8208,7 +8205,8 @@ with(document.calcForm){
 		SaveData[x+3] = NtoS2(n_B_KYOUKA[6],2);
 		SaveData[x+4] = NtoS05(n_B_KYOUKA[7],n_B_KYOUKA[8]);
 		SaveData[x+5] = NtoS01(n_B_KYOUKA[9],0,0,0,0);
-		x+=5;
+		SaveData[x+6] = NtoS2(n_B_KYOUKA[10],1);
+		x+=6;
 	}
 
 	x+=1;
@@ -8265,7 +8263,8 @@ with(document.calcForm){
 		SaveData[x+29] = NtoS2(n_A_PassSkill3[35],1);
 		SaveData[x+30] = NtoS2(n_A_PassSkill3[26],2);
 		SaveData[x+31] = NtoS2(n_A_PassSkill3[36],1);
-		x+=31;
+		SaveData[x+32] = NtoS2(n_A_PassSkill3[100],2); // Bard's LUK - A Whistle
+		x+=32;
 	}
 
 	if(checkHIT[1]){
@@ -8444,14 +8443,14 @@ with(document.calcForm){
 	SaveData[x+11] = NtoS2(parseInt(A_MORAEAC22.value),2);
 	SaveData[x+12] = NtoS2(parseInt(A_MORAEAC23.value),2);
 	x+=12;
-	
-	// Save build name in serialization
-	SaveData[x+1] = document.calcForm.A_SlotName.value;
 
 	wStr = "" +SaveData[0];
 	for(i=1;i<=x;i++){
 		wStr += ""+SaveData[i];
 	}
+	
+	// Save build name in serialization
+	wStr += document.calcForm.A_SlotName.value;
 
 	//Compress String - [NattWara] - 2018-07-15
 	var comp_wStr = Base64.toBase64(RawDeflate.deflate(wStr));
@@ -8670,8 +8669,8 @@ with(document.calcForm){
 			n_B_KYOUKA[8] = StoN2(w.substr(x+5,1)) % 6;
 			wn = StoN2(w.substr(x+6,1));
 			n_B_KYOUKA[9] = Math.floor(wn / 16);
-			n_B_KYOUKA[10] = 0;
-			x += 6;
+			n_B_KYOUKA[10] = StoN2(w.substr(x+7,1));
+			x += 7;
 		}
 
 		var checkHIT = [0,0,0,0,0];
@@ -8718,7 +8717,8 @@ with(document.calcForm){
 			n_A_PassSkill3[35] = StoN2(w.substr(x+42,1));
 			n_A_PassSkill3[26] = StoN2(w.substr(x+43,2));
 			n_A_PassSkill3[36] = StoN2(w.substr(x+45,1));
-			x+=45;
+			n_A_PassSkill3[100] = StoN2(w.substr(x+46,2));
+			x+=47;
 		}
 
 		if(checkHIT[1]){
@@ -9066,6 +9066,10 @@ with(document.calcForm){
 		A_MORAEAC23.value = StoN2(w.substr(x+23,2));
 		x+=24;
 
+		// Retrieve build name
+		build_name = w.substr(x + 1, w.length - x);
+		document.calcForm.A_SlotName.value = ("" == build_name) ? document.calcForm.A_SlotName.defaultValue : build_name;
+
 		calc();
 
 		StCalc(1);
@@ -9287,22 +9291,7 @@ for(i=0;i<=15;i++)
 n_A_PassSkill3 = new Array();
 for(i=0;i<=45;i++)
 	n_A_PassSkill3[i] = 0;
-/*n_A_PassSkill3[20] = 100;
-n_A_PassSkill3[21] = 100;
-n_A_PassSkill3[22] = 130;
-n_A_PassSkill3[29] = 80;
-n_A_PassSkill3[23] = 100;
-n_A_PassSkill3[24] = 130;
-n_A_PassSkill3[25] = 50;
-n_A_PassSkill3[26] = 50;
-n_A_PassSkill3[30] = 10;
-n_A_PassSkill3[31] = 10;
-n_A_PassSkill3[32] = 10;
-n_A_PassSkill3[33] = 10;
-n_A_PassSkill3[34] = 10;
-n_A_PassSkill3[35] = 10;
-n_A_PassSkill3[36] = 10;
-*/
+
 n_A_PassSkill5 = new Array();
 for(i=0;i<=5;i++)
 	n_A_PassSkill5[i] = 0;
@@ -9316,7 +9305,7 @@ for(i=0;i<=15;i++)
 	n_A_PassSkill7[i] = 0;
 
 n_A_PassSkill8 = new Array();
-for(i=0;i<=27;i++)
+for(i=0;i<=32;i++)
 	n_A_PassSkill8[i] = 0;
 
 n_A_PassSkill8[3] = 7; //[Custom TalonRO - 6/4/2018 - Fixed the default value for BaseEXP to 8x] [Kato]
@@ -9345,7 +9334,7 @@ for(i=0;i<=24;i++)
 	n_B_IJYOU[i] = 0;
 
 n_B_KYOUKA = new Array();
-for(i=0;i<=9;i++)
+for(i=0;i<=10;i++)
 	n_B_KYOUKA[i] = 0;
 
 n_A_Equip = new Array();
