@@ -10,10 +10,10 @@
 		Taijin=0;
 		// -->
 	</script>
-	<script type="text/javascript" src="js/head.js?v=1"></script>
-	<script type="text/javascript" src="js/item.js?v=1"></script>
-	<script type="text/javascript" src="js/etc.js?v=1"></script>
-	<script type="text/javascript" src="js/skill.js?v=1"></script>
+	<script type="text/javascript" src="js/head.js?v=2"></script>
+	<script type="text/javascript" src="js/item.js?v=2"></script>
+	<script type="text/javascript" src="js/etc.js?v=2"></script>
+	<script type="text/javascript" src="js/skill.js?v=2"></script>
 	<script type="text/javascript" src="js/libs/base64.js"></script>
 	<script type="text/javascript" src="js/libs/rawinflate.js"></script>
 	<script type="text/javascript" src="js/libs/rawdeflate.js"></script>
@@ -24,7 +24,7 @@
 
 <body>
 <div id="ubernavi" align="left" style="margin-left: 7px;">
-<span class="navititle">Quick Navigation:</span> [<a href="./">PvM Calc</a>] [<a href="pvp.html">PvP Calc</a>] [<a href="https://forum.talonro.com/topic/28330-talonros-calculator-project/" target="_blank">Bug Report/Requests</a>]
+<span class="navititle">Quick Navigation:</span> [<a href="index.html">PvM Calc</a>] [<a href="pvp.html">PvP Calc</a>] [<a href="https://forum.talonro.com/topic/28330-talonros-calculator-project/" target="_blank">Bug Report/Requests</a>]
 </div>
 <form name="calcForm">
 
@@ -35,20 +35,24 @@
 <div class="topic">
 	<h3>CHANGELOG</h3>
 	<div class="pad">
-		<span><b>2020-04-12</b></span>
-		<div id="changelog20200412">
+		<span><b>2020-04-26</b></span>
+		<div id="changelog20200424">
 			<ul>
-				<li>Fixed ASDP computation for double dagger</li>
-				<li>Fixed [Heal] damage computation</li>
-				<li>Fixed flat MATK bonus for MATK computation</li>
-				<li>Fixed magical elemental damage computation</li>
-				<li>Added Old Glast Heim and April patch cards</li>
-				<li>Added new Eclase's equipment and food</li>
-				<li>Added Eclase, Valkyries' Realm, Old Glast Heim and Malangdo Culvert monsters</li>
-				<li>Added Akkorokamui instance's equipment</li>
+				<li>Naming functionality for builds</li>
+				<li>Fixed Finger Offensive damage computation</li>
+				<li>Fixed A Whistle Perfect Dodge bonus computation</li>
+				<li>Shield Chain now take into consideration race defense bypass</li>
+				<li>Fixed Stone Skin, Anti Magic, Magic Mirror and Keeping skills</li>
 			</ul>
 		</div>
 		<br/>
+		<span><b>2020-04-19</b></span>
+		<div id="changelog20200412">
+			<ul>
+				<li>Fixed Bragi behaviour</li>
+				<li>Fixed hard DEF formula</li>
+			</ul>
+		</div>
 	</div>
 </div>
 
@@ -57,11 +61,14 @@
 <table><tbody>
 <tr><td>&nbsp;</td><td>
 
-<input value="Save" onclick="SaveCookie()" type="button">
 <select name="A_SaveSlot"></select>
+<input name="A_SlotName" value="Build name/description" defaultValue="Build name/description" type="text" required minlength="4" maxlength="48" size="50">
+<input value="Save" onclick="SaveCookie()" type="button">
 <input value="Load" onclick="LoadCookie()" type="button">
 <span id="DELHTML"><font size="2"><a href="del.html">[delete saved data]</a></font></span><br>
-<input value="Save as URL" onclick="URLOUT()" type="button"><input name="URL_TEXT" size="130" type="text">
+<input value="Save as URL" onclick="URLOUT()" type="button">
+<input value="Copy" onclick="CopyToClipboard()" type="button">
+<input name="URL_TEXT" size="130" type="text">
 <table>
 <tbody>
 	<tr>
@@ -1208,9 +1215,9 @@
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="js/monster.js?v=1"></script>
-<script type="text/javascript" src="js/card.js?v=1"></script>
-<script type="text/javascript" src="js/foot.js?v=1"></script>
+<script type="text/javascript" src="js/monster.js?v=2"></script>
+<script type="text/javascript" src="js/card.js?v=2"></script>
+<script type="text/javascript" src="js/foot.js?v=2"></script>
 </form>
 		<script type="text/javascript">
 			function Toogle(x,t){

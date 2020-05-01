@@ -595,7 +595,7 @@ InsertSkill = [
 [51,1,130,10],//custom TalonRO SQI Bonus - Evangelist = Frost Nova lv 10
 [52,1,308,1],//custom TalonRO SQI Bonus - Mjolnir = Charge Attack lv 1
 [53,1,173,3],//custom TalonRO SQI Bonus - Tome of Ymir = Strip Shield lv 3
-[54,0,171,1],//custom TalonRO Kraken Card = Raid lv 1
+[54,1,171,1],//custom TalonRO Kraken Card = Raid lv 1
 [55,1,130,1],
 [56,1,132,3],
 [57,1,6,1],
@@ -753,7 +753,8 @@ AutoSpellSkill = [
 [140,1,291,1,1,1], //[Custom TalonRO - 2018-07-26 - Valorous Battle Fist change of casting DSS 1% in normal attack]
 [141,1,409,2,5,1],
 [142,1,128,2,2,1], //When performing a ATK based attack, there's a 2 % chance to cast the skill [Water Ball]Lv 2
-[143,1,124,2,0,4] //When performing a magical attack, there's a chance to cast the skill [Sightrasher]Lv 2
+[143,1,124,2,0,4], //When performing a magical attack, there's a chance to cast the skill [Sightrasher]Lv 2
+[144,1,25,3,5,6] //When recieving ATK based damage, there's a 5 % chance to cast the skill [Heal]Lv 3
 ];
 //ID - Gets called in second spot(221(effect),1(ID)), autocast id = 1 by default, skill Id,Skill Lvl, chance %, attacktype(1atkbased,2shortrange,3longrange,4magical,5attacking,6receivingATKbased,0 by default, 0=low chance, 1=medium chance, 2=high chance)
 
@@ -769,3 +770,35 @@ TRO_MAGICALSKILL_ELEMENTS = [
   [277], //Ghost
   [0], //Undead
 ];
+
+HJ_MOBS = {
+	228:5, 	// Baphomet, Lv5
+	480:2, 	// Beelzebub, Lv2
+	207:10, // Dracula, Lv10
+	175:5,	// Dark Lord, Lv5
+	479:4,	// Fallen Bishop Hibram, Lv4
+	61:10,	// Incantation Samurai, Lv10
+	578:10,	// Kraken, Lv10
+	552:5,	// Leak, Lv5
+	332:10,	// Lord of Death, Lv10
+	546:2,	// Nidhoggr's Shadow, Lv2
+	690:10,	// Corrupted Soul, Lv10
+	496:5	// Wounded Morroc, Lv5
+			// Lost Dragon, Lv1
+}
+
+EQ_MOBS = {
+	492:1,	// Incarnation of Morroc [Golem], Lv1
+			// Lost Dragon, Lv1
+	534:2,	// Hardrock Mammoth, Lv2
+	578:2,	// Kraken, Lv2
+	546:3,	// Nidhoggr's Shadow, Lv3
+	56:5,	// Orc Lord, Lv5
+	228:5,	// Baphomet, Lv5
+	356:5,	// RSX-0806, Lv5
+	440:5,	// Valkyrie Randgris, Lv5
+	472:5,	// Ifrit, Lv5
+			// Gioia, Lv5
+	495:10,	// Satan Morroc, Lv10
+	496:10	// Wounded Morroc, Lv10
+}

@@ -1,3 +1,20 @@
+[2020-05-01]
+- Fixed A Whistle Perfect Dodge bonus computation
+- Fixed Stone Skin, Anti Magic, Magic Mirror and Keeping skills
+
+[2020-04-26]
+- Shield Chain now take into consideration race defense bypass
+- Naming functionality for builds
+
+[2020-04-24]
+- Fixed Finger Offensive damage computation
+
+[2020-04-19]
+- Fixed Bragi behaviour
+- Fixed hard DEF formula
+- Added Candy Hat, Pitch Black Evil Druid Hat
+- Fixed some monsters properties
+
 [2020-04-11]
 - Fixed aspd computation for double dagger
 - Added Eclage food

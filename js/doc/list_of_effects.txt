@@ -216,8 +216,8 @@ Effect list:
 	193: Unrefinable
 	194: Cannot be broken
 	195: Two-Handed Staff
-	196: (unused)
-	197: (unused)
+	196: Experience gained from normal monsters + [value]%
+	197: Experience gained from bosstype monsters + [value]%
 	198: When [value] == 0, Armor becomes Neutral element
 	198: When [value] == 1, Armor becomes Water element
 	198: When [value] == 2, Armor becomes Earth element
