@@ -2695,7 +2695,7 @@ function BattleCalc998()
 	EQ_POWER = "N/A";
 	HJ_POWER = "N/A";
 	
-	if (document.calcForm.B_ENSKSW.checked)
+	if (0 == Taijin && document.calcForm.B_ENSKSW.checked) // Only applies to PvM
 	{
 		// Damage reduction
 
