@@ -441,7 +441,7 @@ function StAllCalc()
 		if(n_A_PassSkill3[0]){
 			n_A_PassSkill3[20] = eval(A3_Skill0_2.value);
 			n_A_PassSkill3[30] = eval(A3_Skill0_3.value);
-			n_A_PassSkill3[100] = eval(A3_Skill0_4.value);
+			n_A_PassSkill3[46] = eval(A3_Skill0_4.value);
 		}
 		if(n_A_PassSkill3[1]){
 			n_A_PassSkill3[21] = eval(A3_Skill1_2.value);
@@ -2158,7 +2158,7 @@ function StAllCalc()
 	
 	// A Whistle Skill - Base_P._D._Boost (Ceil(SkillLv / 2)) + Floor(LUK ÷ 10) + Ceil(Music_Lessons_Lv ÷ 2)
 	if (n_A_PassSkill3[0])
-		n_tok[11] += Math.ceil(n_A_PassSkill3[0] / 2) + Math.floor(n_A_PassSkill3[100] / 10) + Math.ceil(n_A_PassSkill3[30] / 2);
+		n_tok[11] += Math.ceil(n_A_PassSkill3[0] / 2) + Math.floor(n_A_PassSkill3[46] / 10) + Math.ceil(n_A_PassSkill3[30] / 2);
 
 	n_A_LUCKY = 1 + n_A_LUK * 0.1;
 	n_A_LUCKY += n_tok[11];
@@ -8263,7 +8263,7 @@ with(document.calcForm){
 		SaveData[x+29] = NtoS2(n_A_PassSkill3[35],1);
 		SaveData[x+30] = NtoS2(n_A_PassSkill3[26],2);
 		SaveData[x+31] = NtoS2(n_A_PassSkill3[36],1);
-		SaveData[x+32] = NtoS2(n_A_PassSkill3[100],2); // Bard's LUK - A Whistle
+		SaveData[x+32] = NtoS2(n_A_PassSkill3[46],2); // Bard's LUK - A Whistle
 		x+=32;
 	}
 
@@ -8717,7 +8717,7 @@ with(document.calcForm){
 			n_A_PassSkill3[35] = StoN2(w.substr(x+42,1));
 			n_A_PassSkill3[26] = StoN2(w.substr(x+43,2));
 			n_A_PassSkill3[36] = StoN2(w.substr(x+45,1));
-			n_A_PassSkill3[100] = StoN2(w.substr(x+46,2));
+			n_A_PassSkill3[46] = StoN2(w.substr(x+46,2));
 			x+=47;
 		}
 
@@ -9289,7 +9289,7 @@ for(i=0;i<=15;i++)
 	n_A_PassSkill2[i] = 0;
 
 n_A_PassSkill3 = new Array();
-for(i=0;i<=45;i++)
+for(i=0;i<=46;i++)
 	n_A_PassSkill3[i] = 0;
 
 n_A_PassSkill5 = new Array();
