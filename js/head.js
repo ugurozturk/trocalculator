@@ -3746,7 +3746,7 @@ with(document.calcForm){
 			if(n_A_PassSkill3[20] == 0){
 				n_A_PassSkill3[20] = 100;	// Bard's AGI
 				n_A_PassSkill3[30] = 10;	// Musical Lessons Lv
-				n_A_PassSkill3[100] = 100;	// Bard's LUK
+				n_A_PassSkill3[46] = 100;	// Bard's LUK
 			}
 			myInnerHtml("EN0_3","Bard's AGI",0);
 			myInnerHtml("EN0_4",'<select name="A3_Skill0_2"onChange="Click_A3(1)"></select>',0);
@@ -3764,7 +3764,7 @@ with(document.calcForm){
 			SWs3sw[0] = 1;
 			A3_Skill0_2.value = n_A_PassSkill3[20];
 			A3_Skill0_3.value = n_A_PassSkill3[30];
-			A3_Skill0_4.value = n_A_PassSkill3[100];
+			A3_Skill0_4.value = n_A_PassSkill3[46];
 		}
 	}else{
 		SWs3sw[0] = 0;
