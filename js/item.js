@@ -1769,6 +1769,7 @@ ItemOBJ = [
 ,[1718,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Peco Peco Ears","",0,2,1,9,5,0]
 ,[1719,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Black Frame Glasses","",0,4,1,89,2,0]
 ,[1720,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Dark Blinder","",0,5,1,9,5,0]
+,[1721,51,0,0,0,0,10,50,"Dragonfly Monocle","","1% chance to autocast [Steal] Lv1 when attacking.<br><br>A stylish monocle, decorated with dragonfly wings.<br>When wearing this, you will be able to grab the precious items people have with them.",2,2,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3523,6 +3524,7 @@ ItemID = [
 ,[1718,2,21135,5358]
 ,[1719,2,21135,5401]
 ,[1720,2,21135,5104]
+,[1721,1,18655]
 ];
 
 /*
