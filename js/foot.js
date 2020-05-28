@@ -4128,6 +4128,13 @@ function StAllCalc()
 		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[97] += 5;
 	}
 	
+	// Wood Goblin#562 - [Every Refine Level] Increase physical damage against Water and Earth by 1%
+	if (CardNumSearch(562))
+	{
+		n_tok[41] += n_A_BODY_DEF_PLUS;
+		n_tok[42] += n_A_BODY_DEF_PLUS;
+	}
+	
 	/* 
 		Eclage Foods 4-4-2020 Velaryon#8787
 		Increase all damage against [C] property monsters by 5%
@@ -7102,283 +7109,287 @@ function CopyToClipboard() {
 
 function SaveCookie(){
 with(document.calcForm){
-	SaveData = new Array();
+	
+	if (confirm("Saving will erase existing data, do you want to continue?"))
+	{
+		SaveData = new Array();
 
-	for(i=0;i<=160;i++){
-		SaveData[i]=0;
-	}
+		for(i=0;i<=160;i++){
+			SaveData[i]=0;
+		}
 
-	SaveData[0] = eval(A_JOB.value);
-	SaveData[1] = eval(A_BaseLV.value);
-	SaveData[2] = eval(A_JobLV.value);
-	SaveData[3] = eval(A_STR.value);
-	SaveData[4] = eval(A_AGI.value);
-	SaveData[5] = eval(A_VIT.value);
-	SaveData[6] = eval(A_DEX.value);
-	SaveData[7] = eval(A_INT.value);
-	SaveData[8] = eval(A_LUK.value);
+		SaveData[0] = eval(A_JOB.value);
+		SaveData[1] = eval(A_BaseLV.value);
+		SaveData[2] = eval(A_JobLV.value);
+		SaveData[3] = eval(A_STR.value);
+		SaveData[4] = eval(A_AGI.value);
+		SaveData[5] = eval(A_VIT.value);
+		SaveData[6] = eval(A_DEX.value);
+		SaveData[7] = eval(A_INT.value);
+		SaveData[8] = eval(A_LUK.value);
 
-	SaveData[9] = eval(A_HSE.value);
+		SaveData[9] = eval(A_HSE.value);
 
-	SaveData[10] = eval(A_WeaponType.value);
-	if(n_Nitou)
-		SaveData[11] = eval(A_Weapon2Type.value);
+		SaveData[10] = eval(A_WeaponType.value);
+		if(n_Nitou)
+			SaveData[11] = eval(A_Weapon2Type.value);
 
-	if(n_A_JobSearch()==2 || n_A_JobSearch()==4 || (n_A_JOB==45 && n_A_WeaponType!=0))
-		SaveData[12] = eval(A_Arrow.value);
+		if(n_A_JobSearch()==2 || n_A_JobSearch()==4 || (n_A_JOB==45 && n_A_WeaponType!=0))
+			SaveData[12] = eval(A_Arrow.value);
 
-	SaveData[13] = eval(A_SpeedPOT.value);
-	SaveData[14] = 4;
-	SaveData[15] = eval(A_weapon1.value);
-	SaveData[16] = eval(A_Weapon_ATKplus.value);
-	SaveData[17] = eval(A_weapon1_card1.value);
-	SaveData[18] = eval(A_weapon1_card2.value);
-	SaveData[19] = eval(A_weapon1_card3.value);
-	SaveData[20] = eval(A_weapon1_card4.value);
-	if(n_Nitou){
-		SaveData[21] = eval(A_weapon2.value);
-		SaveData[22] = eval(A_Weapon2_ATKplus.value);
-		SaveData[23] = eval(A_weapon2_card1.value);
-		SaveData[24] = eval(A_weapon2_card2.value);
-		SaveData[25] = eval(A_weapon2_card3.value);
-		SaveData[26] = eval(A_weapon2_card4.value);
-	}else{
-		SaveData[21] = 0;
-		SaveData[22] = 0;
-		SaveData[23] = 0;
-		SaveData[24] = 0;
-		SaveData[25] = 0;
-		SaveData[26] = 0;
-	}
-	SaveData[27] = eval(A_head1.value);
-	SaveData[28] = eval(A_head1_card.value);
-	SaveData[29] = eval(A_head2.value);
-	SaveData[30] = eval(A_head2_card.value);
-	SaveData[31] = eval(A_head3.value);
-	SaveData[32] = eval(A_HSE_HEAD1.value);
-	SaveData[33] = eval(A_left.value);
-	SaveData[34] = eval(A_left_card.value);
-	SaveData[35] = eval(A_body.value);
-	SaveData[36] = eval(A_body_card.value);
-	SaveData[37] = eval(A_shoulder.value);
-	SaveData[38] = eval(A_shoulder_card.value);
-	SaveData[39] = eval(A_shoes.value);
-	SaveData[40] = eval(A_shoes_card.value);
-	SaveData[41] = eval(A_acces1.value);
-	SaveData[42] = eval(A_acces1_card.value);
-	SaveData[43] = eval(A_acces2.value);
-	SaveData[44] = eval(A_acces2_card.value);
+		SaveData[13] = eval(A_SpeedPOT.value);
+		SaveData[14] = 4;
+		SaveData[15] = eval(A_weapon1.value);
+		SaveData[16] = eval(A_Weapon_ATKplus.value);
+		SaveData[17] = eval(A_weapon1_card1.value);
+		SaveData[18] = eval(A_weapon1_card2.value);
+		SaveData[19] = eval(A_weapon1_card3.value);
+		SaveData[20] = eval(A_weapon1_card4.value);
+		if(n_Nitou){
+			SaveData[21] = eval(A_weapon2.value);
+			SaveData[22] = eval(A_Weapon2_ATKplus.value);
+			SaveData[23] = eval(A_weapon2_card1.value);
+			SaveData[24] = eval(A_weapon2_card2.value);
+			SaveData[25] = eval(A_weapon2_card3.value);
+			SaveData[26] = eval(A_weapon2_card4.value);
+		}else{
+			SaveData[21] = 0;
+			SaveData[22] = 0;
+			SaveData[23] = 0;
+			SaveData[24] = 0;
+			SaveData[25] = 0;
+			SaveData[26] = 0;
+		}
+		SaveData[27] = eval(A_head1.value);
+		SaveData[28] = eval(A_head1_card.value);
+		SaveData[29] = eval(A_head2.value);
+		SaveData[30] = eval(A_head2_card.value);
+		SaveData[31] = eval(A_head3.value);
+		SaveData[32] = eval(A_HSE_HEAD1.value);
+		SaveData[33] = eval(A_left.value);
+		SaveData[34] = eval(A_left_card.value);
+		SaveData[35] = eval(A_body.value);
+		SaveData[36] = eval(A_body_card.value);
+		SaveData[37] = eval(A_shoulder.value);
+		SaveData[38] = eval(A_shoulder_card.value);
+		SaveData[39] = eval(A_shoes.value);
+		SaveData[40] = eval(A_shoes_card.value);
+		SaveData[41] = eval(A_acces1.value);
+		SaveData[42] = eval(A_acces1_card.value);
+		SaveData[43] = eval(A_acces2.value);
+		SaveData[44] = eval(A_acces2_card.value);
 
-	n_A_JobSet();
-	w = n_A_JOB;
+		n_A_JobSet();
+		w = n_A_JOB;
 
 
-	var ch = 0;
-	for(var i=0;i<=14 && ch==0;i++){
-		if(JobSkillPassOBJ[w][i]!=999){
-			var wOBJ = document.getElementById("A_skill"+i);
-			SaveData[45+i] = eval(wOBJ.value);
-		}else
-			ch = 1;
-	}
+		var ch = 0;
+		for(var i=0;i<=14 && ch==0;i++){
+			if(JobSkillPassOBJ[w][i]!=999){
+				var wOBJ = document.getElementById("A_skill"+i);
+				SaveData[45+i] = eval(wOBJ.value);
+			}else
+				ch = 1;
+		}
 
-	SaveData[63] = eval(A_youshi.checked);
-	if(SaveData[63] == true)
-		SaveData[63] = 1;
-	else if(SaveData[63] == false)
-		SaveData[63] = 0;
-	SaveData[64] = eval(A_Weapon_zokusei.value);
+		SaveData[63] = eval(A_youshi.checked);
+		if(SaveData[63] == true)
+			SaveData[63] = 1;
+		else if(SaveData[63] == false)
+			SaveData[63] = 0;
+		SaveData[64] = eval(A_Weapon_zokusei.value);
 
-	for(i=0;i<=12;i++){
-		SaveData[65+i] = n_A_PassSkill2[i];
-		if(SaveData[65+i] == true)
-			SaveData[65+i] = 1;
-		else if(SaveData[65+i] == false)
-			SaveData[65+i] = 0;
-	}
-	SaveData[78] = 0;
-	SaveData[79] = 0;
-	SaveData[80] = 0;
-	SaveData[81] = 0;
-	SaveData[82] = 0;
-	SaveData[83] = 0;
-	SaveData[84] = eval(A_HEAD_DEF_PLUS.value);
-	SaveData[85] = eval(A_BODY_DEF_PLUS.value);
-	SaveData[86] = eval(A_LEFT_DEF_PLUS.value);
-	SaveData[87] = eval(A_SHOULDER_DEF_PLUS.value);
-	SaveData[88] = eval(A_SHOES_DEF_PLUS.value);
-	//custom TalonRO Kris Enchantment Save Cookie
-	if(A_weapon1.value == 1472){
-		SaveData[89] = eval(A_KE11.value);
-		SaveData[90] = eval(A_KE12.value);
-	}else{
-		SaveData[89] = 0;
-		SaveData[90] = 0;
-	}
-	if (typeof(A_weapon2) != "undefined"){
-		if(A_weapon2.value == 1472){
-			SaveData[91] = eval(A_KE21.value);
-			SaveData[92] = eval(A_KE22.value);
+		for(i=0;i<=12;i++){
+			SaveData[65+i] = n_A_PassSkill2[i];
+			if(SaveData[65+i] == true)
+				SaveData[65+i] = 1;
+			else if(SaveData[65+i] == false)
+				SaveData[65+i] = 0;
+		}
+		SaveData[78] = 0;
+		SaveData[79] = 0;
+		SaveData[80] = 0;
+		SaveData[81] = 0;
+		SaveData[82] = 0;
+		SaveData[83] = 0;
+		SaveData[84] = eval(A_HEAD_DEF_PLUS.value);
+		SaveData[85] = eval(A_BODY_DEF_PLUS.value);
+		SaveData[86] = eval(A_LEFT_DEF_PLUS.value);
+		SaveData[87] = eval(A_SHOULDER_DEF_PLUS.value);
+		SaveData[88] = eval(A_SHOES_DEF_PLUS.value);
+		//custom TalonRO Kris Enchantment Save Cookie
+		if(A_weapon1.value == 1472){
+			SaveData[89] = eval(A_KE11.value);
+			SaveData[90] = eval(A_KE12.value);
+		}else{
+			SaveData[89] = 0;
+			SaveData[90] = 0;
+		}
+		if (typeof(A_weapon2) != "undefined"){
+			if(A_weapon2.value == 1472){
+				SaveData[91] = eval(A_KE21.value);
+				SaveData[92] = eval(A_KE22.value);
+			}else{
+				SaveData[91] = 0;
+				SaveData[92] = 0;
+			}
 		}else{
 			SaveData[91] = 0;
 			SaveData[92] = 0;
 		}
-	}else{
-		SaveData[91] = 0;
-		SaveData[92] = 0;
+		//custom TalonRO SQI interface Save Cookie
+		x_sqibonus=0;
+		for(i=0;i<=3 && SQI_Bonus_Effect[i]==0;i++);
+		if(i!=4)
+			x_sqibonus = 1;
+		if (x_sqibonus){
+			SaveData[93] = SQI_Bonus_Effect[0];
+			SaveData[94] = SQI_Bonus_Effect[1];
+			SaveData[95] = SQI_Bonus_Effect[2];
+			SaveData[96] = SQI_Bonus_Effect[3];
+		}else{
+			SaveData[93] = 0;
+			SaveData[94] = 0;
+			SaveData[95] = 0;
+			SaveData[96] = 0;
+		}
+
+		//[Custom TalonRO 2018-06-14 - Save Cookie for Malangdo] [Kato]
+		SaveData[97] = ((A_ME11.value) ? eval(A_ME11.value) : 0);
+		SaveData[98] = ((A_ME12.value) ? eval(A_ME12.value) : 0);
+
+		if (typeof(A_weapon2) != "undefined"){
+				SaveData[99] = ((A_ME21.value) ? eval(A_ME21.value) : 0);
+				SaveData[100] = ((A_ME22.value) ? eval(A_ME22.value) : 0);
+		}else{
+				SaveData[99] = 0;
+				SaveData[100] = 0;
+		}
+
+		//[Custom TalonRO 2018-07-10 - Save Cookie for Biolab Weapon] [NattWara]
+		SaveData[101] = ((A_BE11.value) ? eval(A_BE11.value) : 0);
+		SaveData[102] = ((A_BE12.value) ? eval(A_BE12.value) : 0);
+
+		if (typeof(A_weapon2) != "undefined"){
+				SaveData[103] = ((A_BE21.value) ? eval(A_BE21.value) : 0);
+				SaveData[104] = ((A_BE22.value) ? eval(A_BE22.value) : 0);
+		}else{
+				SaveData[103] = 0;
+				SaveData[104] = 0;
+		}
+
+		//[Custom TalonRO 2018-07-13 - Save Cookie for Eden Weapon] [NattWara]
+		SaveData[105] = ((A_EE11.value) ? eval(A_EE11.value) : 0);
+		SaveData[106] = ((A_EE12.value) ? eval(A_EE12.value) : 0);
+		SaveData[107] = ((A_EE13.value) ? eval(A_EE13.value) : 0);
+
+		if (typeof(A_weapon2) != "undefined"){
+				SaveData[108] = ((A_EE21.value) ? eval(A_EE21.value) : 0);
+				SaveData[109] = ((A_EE22.value) ? eval(A_EE22.value) : 0);
+				SaveData[110] = ((A_EE23.value) ? eval(A_EE23.value) : 0);
+		}else{
+				SaveData[108] = 0;
+				SaveData[109] = 0;
+				SaveData[110] = 0;
+		}
+
+		//[Custom TalonRO 2018-07-13 - Save Cookie for Biolab Armor] [NattWara]
+		SaveData[111] = ((A_BEH1.value) ? eval(A_BEH1.value) : 0);
+		SaveData[112] = ((A_BEH2.value) ? eval(A_BEH2.value) : 0);
+		SaveData[113] = ((A_BEA1.value) ? eval(A_BEA1.value) : 0);
+		SaveData[114] = ((A_BEA2.value) ? eval(A_BEA2.value) : 0);
+		SaveData[115] = ((A_BES1.value) ? eval(A_BES1.value) : 0);
+		SaveData[116] = ((A_BES2.value) ? eval(A_BES2.value) : 0);
+		SaveData[117] = ((A_BEG1.value) ? eval(A_BEG1.value) : 0);
+		SaveData[118] = ((A_BEG2.value) ? eval(A_BEG2.value) : 0);
+		SaveData[119] = ((A_BEAC11.value) ? eval(A_BEAC11.value) : 0);
+		SaveData[120] = ((A_BEAC12.value) ? eval(A_BEAC12.value) : 0);
+		SaveData[121] = ((A_BEAC21.value) ? eval(A_BEAC21.value) : 0);
+		SaveData[122] = ((A_BEAC22.value) ? eval(A_BEAC22.value) : 0);
+
+		//[Custom TalonRO 2018-07-13 - Save Cookie for Eden Armor] [NattWara]
+		SaveData[123] = ((A_EEH.value) ? eval(A_EEH.value) : 0);
+		SaveData[124] = ((A_EEA1.value) ? eval(A_EEA1.value) : 0);
+		SaveData[125] = ((A_EEA2.value) ? eval(A_EEA2.value) : 0);
+		SaveData[126] = ((A_EEG1.value) ? eval(A_EEG1.value) : 0);
+		SaveData[127] = ((A_EEG2.value) ? eval(A_EEG2.value) : 0);
+		SaveData[128] = ((A_EEF1.value) ? eval(A_EEF1.value) : 0);
+		SaveData[129] = ((A_EEF2.value) ? eval(A_EEF2.value) : 0);
+
+		//[Custom TalonRO 2018-07-13 - Save Cookie for El Dicaste] [NattWara]
+		SaveData[130] = ((A_EDG1.value) ? eval(A_EDG1.value) : 0);
+		SaveData[131] = ((A_EDG2.value) ? eval(A_EDG2.value) : 0);
+		SaveData[132] = ((A_EDG3.value) ? eval(A_EDG3.value) : 0);
+		SaveData[133] = ((A_EDF1.value) ? eval(A_EDF1.value) : 0);
+		SaveData[134] = ((A_EDF2.value) ? eval(A_EDF2.value) : 0);
+		SaveData[135] = ((A_EDF3.value) ? eval(A_EDF3.value) : 0);
+		SaveData[136] = ((A_EDAC11.value) ? eval(A_EDAC11.value) : 0);
+		SaveData[137] = ((A_EDAC12.value) ? eval(A_EDAC12.value) : 0);
+		SaveData[138] = ((A_EDAC13.value) ? eval(A_EDAC13.value) : 0);
+		SaveData[139] = ((A_EDAC21.value) ? eval(A_EDAC21.value) : 0);
+		SaveData[140] = ((A_EDAC22.value) ? eval(A_EDAC22.value) : 0);
+		SaveData[141] = ((A_EDAC23.value) ? eval(A_EDAC23.value) : 0);
+		SaveData[142] = ((A_EDLOED11.value) ? eval(A_EDLOED11.value) : 0);
+		SaveData[143] = ((A_EDLOED12.value) ? eval(A_EDLOED12.value) : 0);
+		SaveData[144] = ((A_EDLOED13.value) ? eval(A_EDLOED13.value) : 0);
+		SaveData[145] = ((A_EDLOED21.value) ? eval(A_EDLOED21.value) : 0);
+		SaveData[146] = ((A_EDLOED22.value) ? eval(A_EDLOED22.value) : 0);
+		SaveData[147] = ((A_EDLOED23.value) ? eval(A_EDLOED23.value) : 0);
+
+		//[Custom TalonRO 2018-07-13 - Save Cookie for Mora] [NattWara]
+		SaveData[148] = ((A_MORAEA1.value) ? eval(A_MORAEA1.value) : 0);
+		SaveData[149] = ((A_MORAEA2.value) ? eval(A_MORAEA2.value) : 0);
+		SaveData[150] = ((A_MORAEA3.value) ? eval(A_MORAEA3.value) : 0);
+		SaveData[151] = ((A_MORAEG1.value) ? eval(A_MORAEG1.value) : 0);
+		SaveData[152] = ((A_MORAEG2.value) ? eval(A_MORAEG2.value) : 0);
+		SaveData[153] = ((A_MORAEG3.value) ? eval(A_MORAEG3.value) : 0);
+		SaveData[154] = ((A_MORAEAC11.value) ? eval(A_MORAEAC11.value) : 0);
+		SaveData[155] = ((A_MORAEAC12.value) ? eval(A_MORAEAC12.value) : 0);
+		SaveData[156] = ((A_MORAEAC13.value) ? eval(A_MORAEAC13.value) : 0);
+		SaveData[157] = ((A_MORAEAC21.value) ? eval(A_MORAEAC21.value) : 0);
+		SaveData[158] = ((A_MORAEAC22.value) ? eval(A_MORAEAC22.value) : 0);
+		SaveData[159] = ((A_MORAEAC23.value) ? eval(A_MORAEAC23.value) : 0);
+		
+		// Save build name in serialization
+		SaveData[160] = (document.calcForm.A_SlotName.value != document.calcForm.A_SlotName.defaultValue) ? document.calcForm.A_SlotName.value : "undefined";
+
+		//wak1="";
+		//for(i=0;i<=96;i++)
+		//	wak1+=i+": "+SaveData[i]+"\n";
+		for(i=0;i<=159;i++)
+			SaveData[i] = NtoS(SaveData[i],SaveStr1[i]);
+		//for(i=0;i<=96;i++)
+		//	wak1+=i+": "+SaveData[i]+"\n";
+		//alert(wak1);
+
+		cookieNum = A_SaveSlot.value;
+
+		wDay = 99000;
+
+		wCookie = new Date();
+		wCookie.setTime(wCookie.getTime()+(wDay*1000*60*60*24));
+		expDay = wCookie.toGMTString();
+
+		wStr = "" +SaveData[0];
+
+		for(i=1;i<=160;i++){
+			wStr += ""+SaveData[i];
+		}
+
+		//Compress String - [NattWara] - 2018-07-15
+		var comp_wStr = Base64.toBase64(RawDeflate.deflate(wStr));
+		comp_wStr = comp_wStr.replace(/=/g, '');
+
+		if (comp_wStr.length < wStr.length-1) {
+			wStr = '_' + comp_wStr;
+		}
+
+		document.cookie = cookieNum +"="+ wStr +"; expires="+ expDay;
+
+		bkcN = cookieNum;
+		LoadCookie3();
+		A_SaveSlot.value = bkcN;
 	}
-	//custom TalonRO SQI interface Save Cookie
-	x_sqibonus=0;
-	for(i=0;i<=3 && SQI_Bonus_Effect[i]==0;i++);
-	if(i!=4)
-		x_sqibonus = 1;
-	if (x_sqibonus){
-		SaveData[93] = SQI_Bonus_Effect[0];
-		SaveData[94] = SQI_Bonus_Effect[1];
-		SaveData[95] = SQI_Bonus_Effect[2];
-		SaveData[96] = SQI_Bonus_Effect[3];
-	}else{
-		SaveData[93] = 0;
-		SaveData[94] = 0;
-		SaveData[95] = 0;
-		SaveData[96] = 0;
-	}
-
-	//[Custom TalonRO 2018-06-14 - Save Cookie for Malangdo] [Kato]
-	SaveData[97] = ((A_ME11.value) ? eval(A_ME11.value) : 0);
-	SaveData[98] = ((A_ME12.value) ? eval(A_ME12.value) : 0);
-
-	if (typeof(A_weapon2) != "undefined"){
-			SaveData[99] = ((A_ME21.value) ? eval(A_ME21.value) : 0);
-			SaveData[100] = ((A_ME22.value) ? eval(A_ME22.value) : 0);
-	}else{
-			SaveData[99] = 0;
-			SaveData[100] = 0;
-	}
-
-	//[Custom TalonRO 2018-07-10 - Save Cookie for Biolab Weapon] [NattWara]
-	SaveData[101] = ((A_BE11.value) ? eval(A_BE11.value) : 0);
-	SaveData[102] = ((A_BE12.value) ? eval(A_BE12.value) : 0);
-
-	if (typeof(A_weapon2) != "undefined"){
-			SaveData[103] = ((A_BE21.value) ? eval(A_BE21.value) : 0);
-			SaveData[104] = ((A_BE22.value) ? eval(A_BE22.value) : 0);
-	}else{
-			SaveData[103] = 0;
-			SaveData[104] = 0;
-	}
-
-	//[Custom TalonRO 2018-07-13 - Save Cookie for Eden Weapon] [NattWara]
-	SaveData[105] = ((A_EE11.value) ? eval(A_EE11.value) : 0);
-	SaveData[106] = ((A_EE12.value) ? eval(A_EE12.value) : 0);
-	SaveData[107] = ((A_EE13.value) ? eval(A_EE13.value) : 0);
-
-	if (typeof(A_weapon2) != "undefined"){
-			SaveData[108] = ((A_EE21.value) ? eval(A_EE21.value) : 0);
-			SaveData[109] = ((A_EE22.value) ? eval(A_EE22.value) : 0);
-			SaveData[110] = ((A_EE23.value) ? eval(A_EE23.value) : 0);
-	}else{
-			SaveData[108] = 0;
-			SaveData[109] = 0;
-			SaveData[110] = 0;
-	}
-
-	//[Custom TalonRO 2018-07-13 - Save Cookie for Biolab Armor] [NattWara]
-	SaveData[111] = ((A_BEH1.value) ? eval(A_BEH1.value) : 0);
-	SaveData[112] = ((A_BEH2.value) ? eval(A_BEH2.value) : 0);
-	SaveData[113] = ((A_BEA1.value) ? eval(A_BEA1.value) : 0);
-	SaveData[114] = ((A_BEA2.value) ? eval(A_BEA2.value) : 0);
-	SaveData[115] = ((A_BES1.value) ? eval(A_BES1.value) : 0);
-	SaveData[116] = ((A_BES2.value) ? eval(A_BES2.value) : 0);
-	SaveData[117] = ((A_BEG1.value) ? eval(A_BEG1.value) : 0);
-	SaveData[118] = ((A_BEG2.value) ? eval(A_BEG2.value) : 0);
-	SaveData[119] = ((A_BEAC11.value) ? eval(A_BEAC11.value) : 0);
-	SaveData[120] = ((A_BEAC12.value) ? eval(A_BEAC12.value) : 0);
-	SaveData[121] = ((A_BEAC21.value) ? eval(A_BEAC21.value) : 0);
-	SaveData[122] = ((A_BEAC22.value) ? eval(A_BEAC22.value) : 0);
-
-	//[Custom TalonRO 2018-07-13 - Save Cookie for Eden Armor] [NattWara]
-	SaveData[123] = ((A_EEH.value) ? eval(A_EEH.value) : 0);
-	SaveData[124] = ((A_EEA1.value) ? eval(A_EEA1.value) : 0);
-	SaveData[125] = ((A_EEA2.value) ? eval(A_EEA2.value) : 0);
-	SaveData[126] = ((A_EEG1.value) ? eval(A_EEG1.value) : 0);
-	SaveData[127] = ((A_EEG2.value) ? eval(A_EEG2.value) : 0);
-	SaveData[128] = ((A_EEF1.value) ? eval(A_EEF1.value) : 0);
-	SaveData[129] = ((A_EEF2.value) ? eval(A_EEF2.value) : 0);
-
-	//[Custom TalonRO 2018-07-13 - Save Cookie for El Dicaste] [NattWara]
-	SaveData[130] = ((A_EDG1.value) ? eval(A_EDG1.value) : 0);
-	SaveData[131] = ((A_EDG2.value) ? eval(A_EDG2.value) : 0);
-	SaveData[132] = ((A_EDG3.value) ? eval(A_EDG3.value) : 0);
-	SaveData[133] = ((A_EDF1.value) ? eval(A_EDF1.value) : 0);
-	SaveData[134] = ((A_EDF2.value) ? eval(A_EDF2.value) : 0);
-	SaveData[135] = ((A_EDF3.value) ? eval(A_EDF3.value) : 0);
-	SaveData[136] = ((A_EDAC11.value) ? eval(A_EDAC11.value) : 0);
-	SaveData[137] = ((A_EDAC12.value) ? eval(A_EDAC12.value) : 0);
-	SaveData[138] = ((A_EDAC13.value) ? eval(A_EDAC13.value) : 0);
-	SaveData[139] = ((A_EDAC21.value) ? eval(A_EDAC21.value) : 0);
-	SaveData[140] = ((A_EDAC22.value) ? eval(A_EDAC22.value) : 0);
-	SaveData[141] = ((A_EDAC23.value) ? eval(A_EDAC23.value) : 0);
-	SaveData[142] = ((A_EDLOED11.value) ? eval(A_EDLOED11.value) : 0);
-	SaveData[143] = ((A_EDLOED12.value) ? eval(A_EDLOED12.value) : 0);
-	SaveData[144] = ((A_EDLOED13.value) ? eval(A_EDLOED13.value) : 0);
-	SaveData[145] = ((A_EDLOED21.value) ? eval(A_EDLOED21.value) : 0);
-	SaveData[146] = ((A_EDLOED22.value) ? eval(A_EDLOED22.value) : 0);
-	SaveData[147] = ((A_EDLOED23.value) ? eval(A_EDLOED23.value) : 0);
-
-	//[Custom TalonRO 2018-07-13 - Save Cookie for Mora] [NattWara]
-	SaveData[148] = ((A_MORAEA1.value) ? eval(A_MORAEA1.value) : 0);
-	SaveData[149] = ((A_MORAEA2.value) ? eval(A_MORAEA2.value) : 0);
-	SaveData[150] = ((A_MORAEA3.value) ? eval(A_MORAEA3.value) : 0);
-	SaveData[151] = ((A_MORAEG1.value) ? eval(A_MORAEG1.value) : 0);
-	SaveData[152] = ((A_MORAEG2.value) ? eval(A_MORAEG2.value) : 0);
-	SaveData[153] = ((A_MORAEG3.value) ? eval(A_MORAEG3.value) : 0);
-	SaveData[154] = ((A_MORAEAC11.value) ? eval(A_MORAEAC11.value) : 0);
-	SaveData[155] = ((A_MORAEAC12.value) ? eval(A_MORAEAC12.value) : 0);
-	SaveData[156] = ((A_MORAEAC13.value) ? eval(A_MORAEAC13.value) : 0);
-	SaveData[157] = ((A_MORAEAC21.value) ? eval(A_MORAEAC21.value) : 0);
-	SaveData[158] = ((A_MORAEAC22.value) ? eval(A_MORAEAC22.value) : 0);
-	SaveData[159] = ((A_MORAEAC23.value) ? eval(A_MORAEAC23.value) : 0);
-	
-	// Save build name in serialization
-	SaveData[160] = (document.calcForm.A_SlotName.value != document.calcForm.A_SlotName.defaultValue) ? document.calcForm.A_SlotName.value : "undefined";
-
-	//wak1="";
-	//for(i=0;i<=96;i++)
-	//	wak1+=i+": "+SaveData[i]+"\n";
-	for(i=0;i<=159;i++)
-		SaveData[i] = NtoS(SaveData[i],SaveStr1[i]);
-	//for(i=0;i<=96;i++)
-	//	wak1+=i+": "+SaveData[i]+"\n";
-	//alert(wak1);
-
-	cookieNum = A_SaveSlot.value;
-
-	wDay = 99000;
-
-	wCookie = new Date();
-	wCookie.setTime(wCookie.getTime()+(wDay*1000*60*60*24));
-	expDay = wCookie.toGMTString();
-
-	wStr = "" +SaveData[0];
-
-	for(i=1;i<=160;i++){
-		wStr += ""+SaveData[i];
-	}
-
-	//Compress String - [NattWara] - 2018-07-15
-	var comp_wStr = Base64.toBase64(RawDeflate.deflate(wStr));
-	comp_wStr = comp_wStr.replace(/=/g, '');
-
-	if (comp_wStr.length < wStr.length-1) {
-		wStr = '_' + comp_wStr;
-	}
-
-	document.cookie = cookieNum +"="+ wStr +"; expires="+ expDay;
-
-	bkcN = cookieNum;
-	LoadCookie3();
-	A_SaveSlot.value = bkcN;
 }}
 
 function LoadCookie(){

@@ -1519,7 +1519,7 @@ ItemOBJ = [
 //custom TalonRO [Update 2013-10-13]
 ,[1488,50,0,1,0,1,50,10,"Little Feather Hat","","If equipped together with Sharp Arrow, increases Critical Damage by 5%<br><br><b>[Refine Rate 7-10]</b><br>Increase Critical Damage by an additional 5%",5,2,70,5,0] // fixed 2016-11-02
 ,[1489,100,0,0,0,0,0,0,"Little Feather Hat & Falken Blitz combo",0,"Reduce Sharp Shooting casting time by 15%",0] //Little Feather Hat & Falken Blitz combo
-,[1490,50,0,5,0,0,100,0,"Sting Hat","",0,1,2,3,1,19,3,42,5,63,5,221,119,0]
+,[1490,50,0,5,0,0,100,0,"Sting Hat","",0,1,2,3,1,19,3,43,5,62,5,221,119,0]
 ,[1491,50,0,4,0,1,75,50,"New Ascended Black Dragon Hat","",0,12,3,19,5,193,1,0]
 ,[1492,50,0,5,0,1,75,60,"Powerful Ascended Black Dragon Hat",0,"When defeating a monster, add a 0.1% chance to gain an Old Blue Box",12,4,19,7,193,1,0]
 ,[1493,50,0,5,0,1,75,70,"Ultimate Ascended Black Dragon Hat",0,"When defeating a monster, add a chance to gain an Old Blue Box<br>Increase EXP gained from non-Boss monsters by 5%",12,5,19,10,0]
@@ -1769,6 +1769,7 @@ ItemOBJ = [
 ,[1718,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Peco Peco Ears","",0,2,1,9,5,0]
 ,[1719,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Black Frame Glasses","",0,4,1,89,2,0]
 ,[1720,100,0,0,0,0,0,0,"Pitch Dark Evil Druid Hat + Dark Blinder","",0,5,1,9,5,0]
+,[1721,51,0,0,0,0,10,50,"Dragonfly Monocle","","1% chance to autocast [Steal] Lv1 when attacking.<br><br>A stylish monocle, decorated with dragonfly wings.<br>When wearing this, you will be able to grab the precious items people have with them.",2,2,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3523,6 +3524,7 @@ ItemID = [
 ,[1718,2,21135,5358]
 ,[1719,2,21135,5401]
 ,[1720,2,21135,5104]
+,[1721,1,18655]
 ];
 
 /*
