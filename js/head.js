@@ -1380,8 +1380,9 @@ function BattleCalc999()
 
 		wSPP = Math.floor(n_A_STR / 10);
 		w_DMG[2] = wSPP * wSPP + ItemOBJ[n_A_Equip[0]][6] * 0.8 * (1 + 0.5 * n_A_ActiveSkillLV);
-		wSPP = 1.25 -(n_B[4] * 0.25);
+		wSPP = 1.25 -(n_B[4] * 0.25); // Size modifier
 		w_DMG[2] = Math.floor(w_DMG[2] * wSPP + n_A_WeaponLV_seirenATK);
+		w_DMG[2] += SkillSearch(69) * (4 + Math.min(1, SkillSearch(78))); // Spear Mastery
 		w_DMG[2] = w_DMG[2] * zokusei[n_B[3]][n_A_Weapon_zokusei];
 		w_DMG[2] = BaiCI(w_DMG[2]);
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
