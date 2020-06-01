@@ -1341,8 +1341,14 @@ function BattleCalc999()
 			}
 			//alert(w_DMG[i]);
 			// Shield Chain benefit from def bypass
-			effective_def = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B[14]);
+			// bDefIgnoreRace
+			effective_def = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B[14]); 
 			effective_vitdef = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B_DEF2[i]);
+			
+			// bDefIgnoreClass
+			effective_def *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
+			effective_vitdef *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
+			
 			w_DMG[i] = w_DMG[i] * wbairitu2 * 5;
 			w_DMG[i] = w_DMG[i] * (100 - effective_def) /100 - effective_vitdef;
 			w_DMG[i] = Math.floor(w_DMG[i]) + (wSBr * 10);
