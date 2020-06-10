@@ -3070,18 +3070,13 @@ function StAllCalc()
 		ASPDch = 1;
 		n_tok[12] += 3 * SkillSearch(361);
 	}
-	if (n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0){
-		if (ASPDch == 0 && n_A_PassSkill2[6] == 2){
-			if (n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21)){
-				n_tok[12] += 25;
-				ASPDch = 1;
-			}
-		}
-		else if (ASPDch == 0 && 6 <= n_A_WeaponType && n_A_WeaponType<=8 && n_A_PassSkill2[6] == 1){
-			n_tok[12] += 25;
-			ASPDch = 1;
-		}else if (ASPDch == 0 && 6 <= n_A_WeaponType && n_A_WeaponType<=8 && n_A_PassSkill2[6] == 3){
-			n_tok[12] += 30;
+	
+	// Adrenaline Rush party buff
+	if (n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0){ // Cancelled by Quagmire and Decrease Agility
+		if (ASPDch == 0 && (
+			(6 <= n_A_WeaponType && n_A_WeaponType<=8 && (n_A_PassSkill2[6] == 1 || n_A_PassSkill2[6] == 3)) ||		// Adrenaline Rush
+			(n_A_PassSkill2[6] == 2 && n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21)))){ 	// Full Adrenaline Rush
+			n_tok[12] += 20;
 			ASPDch = 1;
 		}
 	}
