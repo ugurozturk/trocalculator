@@ -1809,10 +1809,12 @@ function StAllCalc()
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){n_A_MDEF += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1281)){n_A_MDEF += 7;}
 
-	if(SkillSearch(9)){
-		n_A_MDEF += SkillSearch(9);
-	}else if(SkillSearch(256)){
-		n_A_MDEF += 1;
+	if (!CardNumSearch(95))
+	{
+		if (SkillSearch(9))
+			n_A_MDEF += SkillSearch(9);
+		else if (SkillSearch(256))
+			n_A_MDEF += 1;
 	}
 
 	//custom TalonRO Armor enchant MDEF
