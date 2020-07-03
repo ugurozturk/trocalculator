@@ -662,6 +662,12 @@ function StAllCalc()
 			n_tok[17] += 20 * n_A_Weapon_ATKplus;
 	}
 	
+	if (n_A_PassSkill3[10] && n_A_WeaponLV == 4)
+		n_A_Weapon_ATK += 50 + 25 * n_A_PassSkill3[10];
+		
+	if (n_Nitou && n_A_PassSkill3[10] && n_A_Weapon2LV == 4)
+		n_A_Weapon2_ATK += 50 + 25 * n_A_PassSkill3[10];
+	
 	//Galaxy Circlet - [Loa] - 2018-07-03
 	if(EquipNumSearch(1163)){
 		n_tok[13] += n_A_HEAD_DEF_PLUS * 10;
