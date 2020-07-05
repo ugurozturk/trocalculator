@@ -1341,8 +1341,14 @@ function BattleCalc999()
 			}
 			//alert(w_DMG[i]);
 			// Shield Chain benefit from def bypass
-			effective_def = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B[14]);
+			// bDefIgnoreRace
+			effective_def = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B[14]); 
 			effective_vitdef = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B_DEF2[i]);
+			
+			// bDefIgnoreClass
+			effective_def *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
+			effective_vitdef *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
+			
 			w_DMG[i] = w_DMG[i] * wbairitu2 * 5;
 			w_DMG[i] = w_DMG[i] * (100 - effective_def) /100 - effective_vitdef;
 			w_DMG[i] = Math.floor(w_DMG[i]) + (wSBr * 10);
@@ -1380,8 +1386,9 @@ function BattleCalc999()
 
 		wSPP = Math.floor(n_A_STR / 10);
 		w_DMG[2] = wSPP * wSPP + ItemOBJ[n_A_Equip[0]][6] * 0.8 * (1 + 0.5 * n_A_ActiveSkillLV);
-		wSPP = 1.25 -(n_B[4] * 0.25);
+		wSPP = 1.25 -(n_B[4] * 0.25); // Size modifier
 		w_DMG[2] = Math.floor(w_DMG[2] * wSPP + n_A_WeaponLV_seirenATK);
+		w_DMG[2] += SkillSearch(69) * (4 + Math.min(1, SkillSearch(78))); // Spear Mastery
 		w_DMG[2] = w_DMG[2] * zokusei[n_B[3]][n_A_Weapon_zokusei];
 		w_DMG[2] = BaiCI(w_DMG[2]);
 		w_DMG[0] = w_DMG[1] = w_DMG[2];
@@ -3543,7 +3550,7 @@ with(document.calcForm){
 		myInnerHtml("SIENSKILL",str,0);
 		A2_SKILLSW.checked = 1;
 
-		name_CSSW_SKILL = ["Blessing","Increase AGI","Impositio Manus","Gloria","Angelus","Assumptio","Andrenaline Rush","Weapon Perfection","Power Thrust","Wind Walker","Spirit Spheres (GG Card)","Magnum Break Bonus","Aloevera","<Font size=2>Suffragium</Font>","<Font size=2>Providence</Font>","<Font size=2>Additional Buffs Found Below</Font>"];
+		name_CSSW_SKILL = ["Blessing","Increase AGI","Impositio Manus","Gloria","Angelus","Assumptio","Adrenaline Rush","Weapon Perfection","Power Thrust","Wind Walker","Spirit Spheres (GG Card)","Magnum Break Bonus","Aloevera","<Font size=2>Suffragium</Font>","<Font size=2>Providence</Font>","<Font size=2>Additional Buffs Found Below</Font>"];
 		html_CSSW_SKILL = new Array();
 		for(i=0;i<=15;i++)
 			myInnerHtml("AS"+i+"_1",name_CSSW_SKILL[i],0);
@@ -7275,7 +7282,6 @@ function calc()
 
 	n_A_DMG = [0,0,0];
 
-
 	if(n_A_workDEX>=n_A_Weapon_ATK || SkillSearch(155))
 		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
 	else
@@ -7482,10 +7488,6 @@ function BattleCalc(w_atk,w_2)
 		debug_atk+="\n --- (BattleCalc) The Ring of Nibelungen ---";
 		debug_atk+="\nb_w_atk:"+w_atk;
 	}
-	if(n_A_PassSkill3[10] && n_A_WeaponLV == 4)
-		w_atk += 50 + 25 * n_A_PassSkill3[10];
-	if(debug_dmg_avg)
-		debug_atk+="\na_w_atk:"+w_atk;
 
 	if(debug_dmg_avg)
 		debug_atk+="\nb_DemonBane:"+w_atk;

@@ -114,7 +114,7 @@ cardOBJ = [
 ,[92,6,"Verit",0,15,8,16,8,0]
 ,[93,6,"Zombie",0,75,20,0]
 ,[94,6,"Eggyra",0,76,15,0]
-,[95,6,"Eddga","Infinite [Endure] Effect, no Mdef Bonus. Doesn't work in GvG Maps",15,12,0] //custom TalonRO +12% HP instead of -25%
+,[95,6,"Eddga","Infinite [Endure] Effect, no Mdef Bonus. Doesn't work in GvG Maps",15,12,19,1,0] //custom TalonRO +12% HP instead of -25%
 ,[96,7,"Spore",0,3,2,0]
 ,[97,7,"Kukre",0,2,2,0]
 ,[98,7,"Tarou",0,1,2,0]

@@ -662,6 +662,12 @@ function StAllCalc()
 			n_tok[17] += 20 * n_A_Weapon_ATKplus;
 	}
 	
+	if (n_A_PassSkill3[10] && n_A_WeaponLV == 4)
+		n_A_Weapon_ATK += 50 + 25 * n_A_PassSkill3[10];
+		
+	if (n_Nitou && n_A_PassSkill3[10] && n_A_Weapon2LV == 4)
+		n_A_Weapon2_ATK += 50 + 25 * n_A_PassSkill3[10];
+	
 	//Galaxy Circlet - [Loa] - 2018-07-03
 	if(EquipNumSearch(1163)){
 		n_tok[13] += n_A_HEAD_DEF_PLUS * 10;
@@ -1809,10 +1815,12 @@ function StAllCalc()
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){n_A_MDEF += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1281)){n_A_MDEF += 7;}
 
-	if(SkillSearch(9)){
-		n_A_MDEF += SkillSearch(9);
-	}else if(SkillSearch(256)){
-		n_A_MDEF += 1;
+	if (!CardNumSearch(95))
+	{
+		if (SkillSearch(9))
+			n_A_MDEF += SkillSearch(9);
+		else if (SkillSearch(256))
+			n_A_MDEF += 1;
 	}
 
 	//custom TalonRO Armor enchant MDEF
@@ -3070,18 +3078,13 @@ function StAllCalc()
 		ASPDch = 1;
 		n_tok[12] += 3 * SkillSearch(361);
 	}
-	if (n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0){
-		if (ASPDch == 0 && n_A_PassSkill2[6] == 2){
-			if (n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21)){
-				n_tok[12] += 25;
-				ASPDch = 1;
-			}
-		}
-		else if (ASPDch == 0 && 6 <= n_A_WeaponType && n_A_WeaponType<=8 && n_A_PassSkill2[6] == 1){
-			n_tok[12] += 25;
-			ASPDch = 1;
-		}else if (ASPDch == 0 && 6 <= n_A_WeaponType && n_A_WeaponType<=8 && n_A_PassSkill2[6] == 3){
-			n_tok[12] += 30;
+	
+	// Adrenaline Rush party buff
+	if (n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0){ // Cancelled by Quagmire and Decrease Agility
+		if (ASPDch == 0 && (
+			(6 <= n_A_WeaponType && n_A_WeaponType<=8 && (n_A_PassSkill2[6] == 1 || n_A_PassSkill2[6] == 3)) ||		// Adrenaline Rush
+			(n_A_PassSkill2[6] == 2 && n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21)))){ 	// Full Adrenaline Rush
+			n_tok[12] += 20;
 			ASPDch = 1;
 		}
 	}
