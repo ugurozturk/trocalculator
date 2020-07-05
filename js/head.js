@@ -508,9 +508,8 @@ function BattleCalc999()
 				var san = [0,0,0];
 				for(var i=0;i<=2;i++){
 					san[i] = BattleCalc(n_A_DMG[i] * (wbairitu + wBC3_3danAtkBairitu),i) + EDP_DMG(i);
-					//custom TalonRO Sura's Rampage +10% Triple Attack damage
-					if (EquipNumSearch(1512))
-						san[i] = san[i] * 1.1;
+					
+					san[i] = san[i] * (1 + (StPlusCalc2(5187) +  StPlusCard(5187)) / 100);
 					san[i] = Math.floor(san[i] /3) *3;
 					if(n_B[19] == 5)
 						san[i] = 3;
@@ -3550,7 +3549,7 @@ with(document.calcForm){
 		myInnerHtml("SIENSKILL",str,0);
 		A2_SKILLSW.checked = 1;
 
-		name_CSSW_SKILL = ["Blessing","Increase AGI","Impositio Manus","Gloria","Angelus","Assumptio","Adrenaline Rush","Weapon Perfection","Power Thrust","Wind Walker","Spirit Spheres (GG Card)","Magnum Break Bonus","Aloevera","<Font size=2>Suffragium</Font>","<Font size=2>Providence</Font>","<Font size=2>Additional Buffs Found Below</Font>"];
+		name_CSSW_SKILL = ["Blessing","Increase AGI","Impositio Manus","Gloria","Angelus","Assumptio","Adrenaline Rush","Weapon Perfection","Power Thrust","Wind Walker","Spirit Spheres (GG Card)","Magnum Break Bonus","Aloevera","Suffragium","Providence","<Font size=2>Additional Buffs Found Below</Font>"];
 		html_CSSW_SKILL = new Array();
 		for(i=0;i<=15;i++)
 			myInnerHtml("AS"+i+"_1",name_CSSW_SKILL[i],0);
@@ -8300,7 +8299,7 @@ function CastAndDelay(){
 	if(w == 1){
 		if(n_A_ActiveSkill == 0){
 			if(SkillSearch(187)){
-				strSUB2name += "Attack interval (normal)<BR>Attack Interval (Raging Trifecta Blow)<BR>";
+				strSUB2name += "Attack Interval (Normal)<BR>Attack Interval (Raging Trifecta Blow)<BR>";
 				strSUB2 += n_Delay[1] +"s<BR>"+ sandanDelay +"s<BR>";
 				wDelay = n_Delay[1] * w998A /100 + sandanDelay * wBC3_3danHatudouRitu / 100;
 
