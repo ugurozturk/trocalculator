@@ -8023,7 +8023,7 @@ function BaiCI(wBaiCI)
 		[Refine Level 9~10]
 		Increases damage with [Sonic Blow] by 20%.
 	*/
-	if(n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 83 && EquipNumSearch(910)) {
+	if (n_A_Weapon_ATKplus >= 6 && (83 == n_A_ActiveSkill || 388 == n_A_ActiveSkill) && EquipNumSearch(910)) {
 		w1 += 10;
 		
 		if (n_A_Weapon_ATKplus >= 9)
