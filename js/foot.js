@@ -1753,6 +1753,13 @@ function StAllCalc()
 	// Menblatt Wing Manteau#1696 [Every 2 Refine Level] MDEF + 1
 	if (EquipNumSearch(1696))
 		n_tok[19] += Math.floor(n_A_SHOULDER_DEF_PLUS / 2);
+	
+	// MDEF armor enchant
+	var wHSE = A_HSE.value;
+	if (wHSE){
+		if (111 <= wHSE && wHSE <= 119)
+			n_tok[19] += parseInt(wHSE.substr(-1));
+	}
 
 	n_A_MDEF = n_tok[19];
 
