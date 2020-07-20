@@ -8262,13 +8262,16 @@ function CastAndDelay(){
 		Bragi capped after cast delay reduction to 0.4s
 		Skills that have long delays that can't normally achieve our 0.3 second delay cap without Bragi
 		can only be reduced up to 0.4 second delay while under Bragi.
+
+		Delay is expressed in ms, flooring operation should take that into consideration
 	*/
-	acd_after_reduction = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
-	
 	if (n_A_PassSkill3[32])
-		n_Delay[2] = Math.max(acd_after_reduction, Math.min(n_Delay[2], 0.4));
+	{
+		bragi_acd_reduction = Math.max((n_Delay[2] - 0.4), 0) * n_tok[74];
+		n_Delay[2] = Math.floor(n_Delay[2] * 100 - bragi_acd_reduction) / 100;
+	}
 	else
-		n_Delay[2] = acd_after_reduction;
+		n_Delay[2] = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
 	
 	if(n_Delay[2] > wDelay){
 		wDelay = n_Delay[2];
