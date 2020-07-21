@@ -3827,7 +3827,7 @@ with(document.calcForm){
 			myInnerHtml("EN2_10",'<input type="checkbox" name="A3_Skill2_5" id="lab16" onChange="Click_A3(1)"></input>',0);
 			for(i=1;i<=200;i++)
 				A3_Skill2_2.options[i-1] = new Option(i,i);
-			for(i=1;i<=200;i++)
+			for(i=1;i<=250;i++)
 				A3_Skill2_3.options[i-1] = new Option(i,i);
 			for(i=0;i<=10;i++)
 				A3_Skill2_4.options[i] = new Option(i,i);
