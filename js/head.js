@@ -7433,7 +7433,8 @@ function calc()
 
 	for(var i=0;i<InnStr.length;i++)
 		myInnerHtml("strID_"+i,InnStr[i],0);
-
+	
+	KakutyouKansuu();
 }
 
 

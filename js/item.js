@@ -4009,9 +4009,9 @@ function Item_Setumei(nC1,nC2)
    //Physical damage against specific monster
    if(370 <= nC1 && nC1 <=379)
       CBIstr += "Experience gained from [" + ZokuseiOBJ[nC1-370] +"] elements monsters " + wIS + nC2 +"%<BR>";
-   
-   if(1000 <= nC1 && nC1 <=1999)
-      CBIstr += wIS + nC2 + "% Physical damage inflicted against <b>" + MonsterOBJ[nC1-1000][1] + "</b><br>";
+   /*When attacking with an ATK based attack, adds a (nC1 380/382)% chance to absorb (nC1 381/383)% of the damage inflicted on the enemy as (HP/SP)*/
+   if(380 <= nC1 && nC1 <=383)
+      CBIstr +="";
    //Incease Damage of skill by %
 	if(5000 <= nC1 && nC1 <= 6999)
 		CBIstr += "["+ SkillOBJ[nC1 -5000][2] +"] damage"+ wIS + nC2 +"%<BR>";
