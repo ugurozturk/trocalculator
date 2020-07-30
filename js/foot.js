@@ -6467,10 +6467,10 @@ function KakutyouKansuu(){
 					var critChance=parseInt(document.getElementById("CRInum").textContent);
 					avergeAtk=avergeAtk*(1-critChance/100)+critAtk*critChance/100;
 					wkk17+="<table border=0>";
-					wkk17+="<tr><td><b>HP</b></td>"+"<td></td>"+"<td></td>"+"<td><b>SP</b></td>"+"<td></td></tr>";
-					wkk17+="<tr><td>Chance: "+n_tok[380]+"%</td>"+"<td></td>"+"<td></td>"+"<td>Chance: "+n_tok[382]+"%</td>"+"<td></td></tr>";
-					wkk17+="<tr><td>Absorb "+n_tok[381]+"% of the damage inflicted on the enemy as HP</td>"+"<td></td>"+"<td></td>"+"<td>Absorb "+n_tok[383]+"% of the damage inflicted on the enemy as SP</td>"+"<td></td></tr>";
-					wkk17+="<tr><td>Result: "+mobCount*n_tok[380]*n_tok[381]*avergeAtk/10000+"</td>"+"<td></td>"+"<td></td>"+"<td></td>"+"<td>Result: "+mobCount*n_tok[382]*n_tok[383]*avergeAtk/10000+"</td></tr>";
+					wkk17+="<tr><td><b>HP</b></td>"+"<td></td>"+"<td><b>SP</b></td></tr>";
+					wkk17+="<tr><td>Chance: "+n_tok[380]+"%</td>"+"<td></td>"+"<td>Chance: "+n_tok[382]+"%</td></tr>";
+					wkk17+="<tr><td>Absorb "+n_tok[381]+"% of the damage inflicted on the enemy as HP</td>"+"<td></td>"+"<td>Absorb "+n_tok[383]+"% of the damage inflicted on the enemy as SP</td></tr>";
+					wkk17+="<tr><td>Result: ~<b>"+Math.floor(mobCount*n_tok[380]*n_tok[381]*avergeAtk/10000)+"</b>("+Math.floor(mobCount*n_tok[381]*avergeAtk/100)+" maximum) per hit</td>"+"<td></td>"+"<td>Result: ~<b>"+Math.floor(mobCount*n_tok[382]*n_tok[383]*avergeAtk/10000)+"</b>("+Math.floor(mobCount*n_tok[383]*avergeAtk/100)+" maximum) per hit</td></tr>";
 					wkk17+="</table>";
 					myInnerHtml("A_KakutyouData",wkk17,0);
 				}else{
