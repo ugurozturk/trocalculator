@@ -65,7 +65,7 @@ cardOBJ = [
 ,[43,1,"Sidewinder","Enable the use of [Double Attack]Lv 1 (with all weapons)<BR>If you know a level higher than 1, you will use that level instead",0]
 ,[44,1,"Phreeoni",0,8,100,0]
 ,[45,1,"Baphomet","All regular attacks become 3x3 splash damage like a Bowling Bash Effect Permanently",8,-10,0]
-,[46,1,"Hunter Fly","Enables a 3% chance of gaining 15% of the damage inflicted on an enemy as HP with each attack",0]
+,[46,1,"Hunter Fly","Enables a 3% chance of gaining 15% of the damage inflicted on an enemy as HP with each attack",380,3,381,15,0]
 ,[47,1,"Dracula","-1500 HP on unequip (not calced)",190,4,191,4,192,4,0] //custom TalonRO -4% dmg from all sizes
 ,[48,2,"Willow",0,14,80,0]
 ,[49,2,"Elder Willow",0,4,2,0]
