@@ -6882,7 +6882,7 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 17){
 		var w;
-		w = '<Font size="2">Number of monsters<input type="text" name="A_KakutyouSelNum" value="1" size=4 onChange="StAllCalc()" style="text-align : right;"><BR>';
+		w = '<div style="float:left;margin-right:10px;padding-top:4px">Number of monsters:</div><div style="float:left"><input type="text" name="A_KakutyouSelNum" value="1" size=4 onChange="StAllCalc()" style="text-align : right"></div><div style="clear:both"></div>';
 		myInnerHtml("A_KakutyouSel",w,0);
 		return;
 	}
