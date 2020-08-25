@@ -6451,6 +6451,10 @@ function KakutyouKansuu(){
 		}else
 			myInnerHtml("A_KakutyouData","Not Available for this Class",0);
 	}
+	else if(wKK == 18){
+		var wkk18="ASD"+FAME_TOP.length; 
+		myInnerHtml("A_KakutyouData",wkk18,0);
+	}
 }
 
 function Kanma(num){
@@ -6839,6 +6843,31 @@ function KakutyouKansuu2(){
 		for(i=0;i<Cook_Kit_Max;i++){
 			document.calcForm.CKit.options[i] = new Option(Cook_Kit[i][1],i);
 			document.calcForm.CKit.value=0;}
+
+		return;
+	}
+	if(wKK == 18){
+		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="HPrec" onChange="StAllCalc()"></select></td>';
+		healtext += "<td>Learning Potion:</td>" + '<td><select name="LernPot" onChange="StAllCalc()"></select><td></tr>';
+		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="SPrec" onChange="StAllCalc()"></select></td>';
+		healtext +=  "<td>Fame Top:</td>" + '<td><select name="FamTop" onChange="StAllCalc()"></select></td></tr>';
+		healtext +=  "<td>Heal Power:</td>" + '<td>'+n_tok[92]+'</td>';
+		healtext +=  "<td>Cooking Experience:</td>" + '<td><input type="text" onChange="StAllCalc()" name="CExp" value="0" size=2></td></tr></table>';
+		
+		
+		myInnerHtml("A_KakutyouSel",healtext + "<br>",0);
+		for(i=0;i<=10;i++){
+			document.calcForm.HPrec.options[i] = new Option(i,i);
+			document.calcForm.HPrec.value=0;}
+		for(i=0;i<=10;i++){
+			document.calcForm.LernPot.options[i] = new Option(i,i);
+			document.calcForm.LernPot.value=0;}
+		for(i=0;i<=10;i++){
+			document.calcForm.SPrec.options[i] = new Option(i,i);
+			document.calcForm.SPrec.value=0;}
+		for(i=0;i<FAME_TOP.length;i++){
+			document.calcForm.FamTop.options[i] = new Option(FAME_TOP[i][1],i);
+			document.calcForm.FamTop.value=0;}
 
 		return;
 	}

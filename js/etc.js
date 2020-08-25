@@ -722,6 +722,7 @@ EXTENDED_INFO = [
  ,[13,"Forge/Potion/EDP Creation Success Rates"]
  ,[14,"Strip Chance"]
  ,[15,"Cooking Success Rates"]
+ ,[18,"Healing Items"]
 ];
 
 CARD_SHORTCUT = [
@@ -1500,4 +1501,10 @@ ITEM_HEAL = [
 		,[597,1,10,400,"Lovely Choco-Tart"]
 		,[598,1,45,65,"Light Red Potion"]
 		,[599,1,105,145,"Light Orange Potion"]
+];
+
+FAME_TOP = [
+		[0,"Unranked"]
+		,[1,"Top 10 [+50%]"]
+		,[2,"Top 20 [+25%]"]
 ];
