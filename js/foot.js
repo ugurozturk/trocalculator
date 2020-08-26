@@ -6464,7 +6464,7 @@ function KakutyouKansuu(){
 			document.calcForm.aItemBonus.value = 0;
 		}
 		var bonus = 100 + (ITEM_HEAL[ItHeal][1]==1?n_A_VIT*2:n_A_INT*2) + (ITEM_HEAL[ItHeal][1]==1?HPrec:SPrec) * 10 + LernPot * 5;
-		if(FamTop!=0&&ItHeal>=1&&ItHeal<=4){
+		if(FamTop!=0&&(ItHeal>=1&&ItHeal<=4||ItHeal>=9&&ItHeal<=12)){
 			if(FamTop==1)
 				bonus+=50;
 			if(FamTop==2)
