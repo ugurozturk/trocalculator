@@ -1200,9 +1200,6 @@ function StAllCalc()
 	// Apply flat MaxHP Bonus
 	n_A_MaxHP += n_tok[13];
 	n_A_MaxHP = Math.max(n_A_MaxHP, 1);
-	
-	if(SkillSearch(258)) // Berserk#258 MaxHP + 200%
-		n_tok[15] += 200;
 
 	if(SU_VIT >= 80 && CardNumSearch(267))
 		n_tok[15] += 3;
@@ -1219,8 +1216,8 @@ function StAllCalc()
 		n_tok[15] += 100;
 	if(EquipNumSearch(715))
 		n_tok[15] -= n_A_SHOES_DEF_PLUS;
-	if(n_A_PassSkill3[3])
-		n_tok[15] += 5 + n_A_PassSkill3[3] * 2 + n_A_PassSkill3[33] + Math.floor(n_A_PassSkill3[23] /10);
+	if (n_A_PassSkill3[3]) // Apple of Idun - HP Rate: (5 + 2 * skill_lv) + (VIT / 10) + (BA_MUSICALLESSON skill_lv / 2)
+		n_tok[15] += 5 + n_A_PassSkill3[3] * 2 + Math.floor(n_A_PassSkill3[23] /10) + Math.floor(n_A_PassSkill3[33]) / 2;
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Corsair [1] - +1% MaxHP for refine 5 to 7 (total +3%), +2% MaxHP if refine 8+ [Nattwara]
 	if(EquipNumSearch(1657)){
@@ -1289,6 +1286,10 @@ function StAllCalc()
 	}
 	
 	n_A_MaxHP = Math.floor(n_A_MaxHP * (100 + n_tok[15]) / 100);
+	
+	// Berserk#258 MaxHP*3 in TalonRO while part of n_tok[15] with 200% bonus in rAthena
+	if (SkillSearch(258))
+		n_A_MaxHP *= 3;
 
 	if(n_A_MaxHP>=100){
 		if(n_A_MaxHP>=10000)
