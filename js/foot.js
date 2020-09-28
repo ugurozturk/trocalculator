@@ -3088,13 +3088,9 @@ function StAllCalc()
 			ASPDch = 1;
 		}
 	}
-	if (n_A_PassSkill3[1] && ASPDch == 0){
+	if (n_A_PassSkill3[1] && ASPDch == 0){ // Assassin Cross of Sunset song
 		if (n_A_WeaponType != 10 && !(17 <= n_A_WeaponType && n_A_WeaponType <= 21))
-			// Custom TalonRO Assassin Cross of Sunset bugfix, higher ASPD boost than before
-			// Before
-			//	n_tok[12] += 5 + n_A_PassSkill3[1] + Math.floor(n_A_PassSkill3[31] /2) + Math.floor(n_A_PassSkill3[21] /20);
-			// After
-			n_tok[12] += 10 + n_A_PassSkill3[1] + Math.floor(n_A_PassSkill3[31] /2) + Math.floor(n_A_PassSkill3[21] /10);
+			n_tok[12] += 5 + n_A_PassSkill3[1] + Math.floor(n_A_PassSkill3[31] / 2) + Math.floor(n_A_PassSkill3[21] / 20);
 	}
 
 	// Steel Body#196
