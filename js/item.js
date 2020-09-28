@@ -1773,6 +1773,9 @@ ItemOBJ = [
 ,[1722,62,0,2,0,1,10,0,"Beach Towel","","A colorful beach towel used as protection from the sun.",9,7,19,3,60,4,0]
 ,[1723,50,0,0,0,1,10,1,"Black Tailed Ribbon","","A jet-black ribbon.",19,5,60,5,78,5,0]
 ,[1724,50,0,2,0,0,50,0,"Cookie Hat","","A Hat worn by Cookie Xmas [the idol of Toy Dungeon]. It covers the ears to protect from cold weather.",2,1,11,5,70,5,0]
+,[1725,50,0,2,0,1,120,38,"Bankruptcy Hat","","A headgear for those cursed merchants that went bankrupt and lost everything.<br>It may feel like you fell into the abyss of despair, but you can bounce back! This headgear amplifies the fighting spirit of those who wear it.",4,1,5,1,0]
+,[1726,51,0,0,0,0,49,49,"Bankruptcy Mask","","<b>Middle and Lower Headgear</b><br>Those who have lost everything due to bankruptcy are usually in deep sorrow. When you put on this hat, you can hide your sadness and climb up again!<br>When performing Magical attacks, there's a chance to get increased HP and SP recovery for 10 seconds.",0]
+,[1727,100,0,0,0,0,0,0,"Bankruptcy Hat + Mask","","<br>[Every Refine Level After +2] on Bankruptcy Hat.<br>[Neutral] element resistance + 1%",13,100,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3531,6 +3534,9 @@ ItemID = [
 ,[1722,1,2565]
 ,[1723,1,5765]
 ,[1724,1,5260]
+,[1725,1,18825]
+,[1726,1,18824]
+,[1727,2,18825,18824]
 ];
 
 /*
@@ -4169,6 +4175,7 @@ w_SE = [[737,436,475,"NULL"]
 ,[1718,1715,805,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Peco Peco Ears
 ,[1719,1715,887,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Black Frame Glasses
 ,[1720,1715,643,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Dark Blinder
+,[1727,1725,1726,"NULL"] //Custom TalonRO - Bankruptcy Hat + Mask
 ];
 
 SE_MAXnum = w_SE.length -1;

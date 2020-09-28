@@ -3624,6 +3624,10 @@ function StAllCalc()
 	//Custom TalonRO - 2018-06-07 - Enhanced Corsair [1] - 1% less damage Neutral element attack if refine +8 or above [Nattwara]
 	if(EquipNumSearch(1657) && (n_A_HEAD_DEF_PLUS > 7))
 		n_tok[60] += 1;
+	
+	// Bankruptcy Hat#1725 + Bankruptcy Mask#1726 - [Every Refine Level After +2] on Bankruptcy Hat - [Neutral] element resistance + 1%
+	if (EquipNumSearch(1727)) // Combo#1727
+		n_tok[60] += Math.max(n_A_HEAD_DEF_PLUS - 2, 0);
 
 	//Custom TalonRO - 2018-06-07 - Lord of the Dead Helm [1] + Abysmal Knight Card - Refine 6+ Receive 1% more damage from all monsters for every refine.  [Nattwara]
 	if(EquipNumSearch(1658) && CardNumSearch(31) && n_A_HEAD_DEF_PLUS > 5) {
