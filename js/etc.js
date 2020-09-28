@@ -329,7 +329,7 @@ PET_OBJ = [[0,"No Pet",0,0]
 ,[75,"Grand Peco [MHP +500, MSP +25]",0,13,500,14,25,0]
 ,[76,"High Orc [ATK +2%]",0,80,2,0]
 ,[77,"Jaguar [ASPD +5%]",0,12,5,0]
-,[78,"Savage [MHP +300, VIT +5]",0,13,500,3,5,0]
+,[78,"Savage [MHP +300, VIT +5]",0,13,300,3,5,0]
 ,[79,"Yao Jun [INT+1, VIT+1, DEF+1, MDEF+1, MHP+150, MSP+10]",0,4,1,3,1,18,1,19,1,13,150,14,10,0]
 //[Custom TalonRO - 2018-06-04 - New Pets] [Kato]
 ,[80,"Mini Ice Titan [ASPD +1%. Chance to Freeze enemy when doing physical attakcs]",0,12,1,0] // Not freeze
