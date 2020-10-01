@@ -1,3 +1,13 @@
+[2020-10-01]
+- Added Bankruptcy set
+- Added Lost Dragon MvP
+- Added Summer Cocktails
+- Fixed Savage pet bonus
+- Fixed Scuba Mask script
+- Fixed weapon and base attack bonus based
+- Fixed Apple of Idun & Berserk MaxHP formula
+- Fixed Assassin Cross of Sunset song ASDP formula
+
 [2020-07-20]
 - Fixed Bragi formula
 - Fixed MDEF armor enchantment
