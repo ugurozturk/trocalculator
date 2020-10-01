@@ -233,9 +233,11 @@ function StAllCalc()
 	n_A_Weapon_ATKplus = ((A_Weapon_ATKplus.value != "") ? eval(A_Weapon_ATKplus.value) : 0); // Changed after index revamp, default value to 0 [Kato]
 
 	W_REF = 0;
-	n_A_WeaponLV_seirenATK = 0;
+	n_A_Weapon2_ATK = 0;
 	n_A_WeaponLV_Minplus = 0;
 	n_A_WeaponLV_Maxplus = 0;
+	n_A_WeaponLV_seirenATK = 0;
+
 	if(n_A_WeaponLV == 1){
 		n_A_WeaponLV_seirenATK = n_A_Weapon_ATKplus * 2;
 		if(n_A_Weapon_ATKplus >= 8){
@@ -672,12 +674,65 @@ function StAllCalc()
 			n_tok[17] += 20 * n_A_Weapon_ATKplus;
 	}
 	
-	if (n_A_PassSkill3[10] && n_A_WeaponLV == 4)
-		n_A_Weapon_ATK += 50 + 25 * n_A_PassSkill3[10];
-		
-	if (n_Nitou && n_A_PassSkill3[10] && n_A_Weapon2LV == 4)
-		n_A_Weapon2_ATK += 50 + 25 * n_A_PassSkill3[10];
+	// Manage weapon attack bonus, those bonus are impacted by the Size multiplier
+	// A Drum on the Battlefield - Weapon ATK + 25 + 25 * SkillLV
+	if (n_A_PassSkill3[9]) {
+		n_A_Weapon_ATK += (25 + 25 * n_A_PassSkill3[9]);
+		n_A_Weapon2_ATK += (25 + 25 * n_A_PassSkill3[9]) * n_Nitou;
+	}
 	
+	// The Ring of Nibelugen - Weapon ATK + 50 + 25 * SkillLV
+	if (n_A_PassSkill3[10] && n_A_WeaponLV == 4) {
+		n_A_Weapon_ATK += 50 + 25 * n_A_PassSkill3[10];
+		n_A_Weapon2_ATK += (50 + 25 * n_A_PassSkill3[10]) * n_Nitou;
+	}
+	
+	// Volcano - ATK bonus on Fire Armor - Weapon ATK + 10 * SkillLV
+	if (n_A_PassSkill6[0] == 0 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==3) {
+		n_A_Weapon_ATK += n_A_PassSkill6[1] * 10;
+		n_A_Weapon2_ATK += n_A_PassSkill6[1] * 10 * n_Nitou;
+	}
+	
+	// Impositio Manus - Weapon ATK + 5 * SkillLV
+	n_A_Weapon_ATK += n_A_PassSkill2[2] * 5;
+	n_A_Weapon2_ATK += n_A_PassSkill2[2] * 5 * n_Nitou;	
+
+	// Concentration#256 - Weapon ATK + 5 * SkillLV
+	n_A_Weapon_ATK = Math.floor((1 + SkillSearch(256) * 0.05) * n_A_Weapon_ATK);
+	n_A_Weapon2_ATK = Math.floor((1 + SkillSearch(256) * 0.05) * n_A_Weapon2_ATK) * n_Nitou;
+
+	// Manage [SC_INCATKRATE], apply in the calc the SC with highest bonus
+	watk_incatkrate = 1;
+
+	// Venatu's Beep Cocktail - Weapon ATK Rate + 5% [SC_INCATKRATE] (Applied after SC_CONCENTRATION)
+	if (venatu_beep_cocktail)
+		watk_incatkrate = Math.max(watk_incatkrate, 1.05);
+	
+	// Gospel - Weapon ATK Rate + 100% [SC_INCATKRATE]
+	if (n_A_PassSkill5[3])
+		watk_incatkrate = Math.max(watk_incatkrate, 2);
+	
+	n_A_Weapon_ATK = Math.floor(n_A_Weapon_ATK * watk_incatkrate);
+	n_A_Weapon2_ATK = Math.floor(n_A_Weapon2_ATK * watk_incatkrate) * n_Nitou;
+
+	// Manage [SC_PROVOKE] (Applied after SC_INCATKRATE)
+	watk_provoke = 1;
+
+	// Aloevera - Provoke Lv 1 effect, does not stack with self Provoke
+	if (n_A_PassSkill2[12])
+		watk_provoke = Math.max(watk_provoke, 1.05);
+	
+	// Provoke - Weapon ATK + 2 + 3 * SkillLV
+	if (n_A_PassSkill6[5])
+		watk_provoke = Math.max(watk_provoke, 1.02 + 0.03 * n_A_PassSkill6[5]);
+	
+	// Auto Berserk - Provoke Lv 10 effect
+	if (SkillSearch(12))
+		watk_provoke = Math.max(watk_provoke, 1.32);
+	
+	n_A_Weapon_ATK = Math.floor(n_A_Weapon_ATK * watk_provoke);
+	n_A_Weapon2_ATK = Math.floor(n_A_Weapon2_ATK * watk_provoke) * n_Nitou; 
+
 	//Galaxy Circlet - [Loa] - 2018-07-03
 	if(EquipNumSearch(1163)){
 		n_tok[13] += n_A_HEAD_DEF_PLUS * 10;
@@ -983,9 +1038,7 @@ function StAllCalc()
 	
 	// Hilt Binding Skill#146 - ATK + 4
 	n_tok[17] += 4 * SkillSearch(146);
-	// Volcano - ATK bonus on Fire Armor - ATK + 10 * SkillLV
-	if (n_A_PassSkill6[0] == 0 && n_A_PassSkill6[1] >= 1 && n_A_BodyZokusei==3)
-		n_tok[17] += n_A_PassSkill6[1] * 10;
+
 	// Gatling Fever Skill#433 - ATK + 20 + 10 * SkillLV.
 	if (n_A_WeaponType==20 && SkillSearch(433))
 		n_tok[17] += 20 + 10 * SkillSearch(433);
@@ -1024,6 +1077,42 @@ function StAllCalc()
 
 	n_A_ATK += n_tok[17];
 
+	// Status Change impacting base attack
+	
+	// Manage [SC_INCATKRATE]
+	batk_incatkrate = 1;
+
+	// Venatu's Beep Cocktail - Base ATK Rate + 5% [SC_INCATKRATE]
+	if (venatu_beep_cocktail)
+		batk_incatkrate = Math.max(batk_incatkrate, 1.05);
+	
+	// Gospel - Base ATK Rate + 100% [SC_INCATKRATE]
+	if (n_A_PassSkill5[3])
+		batk_incatkrate = Math.max(batk_incatkrate, 2);
+	
+	n_A_ATK = Math.floor(n_A_ATK * batk_incatkrate);
+
+	// Manage [SC_PROVOKE] (Applied after SC_INCATKRATE)
+	batk_provoke = 1;
+
+	// Aloevera - Provoke Lv 1 effect
+	if (n_A_PassSkill2[12])
+		batk_provoke = Math.max(batk_provoke, 1.05);
+
+	// Provoke - Base ATK + 2 + SkillLV * 3%
+	if (n_A_PassSkill6[5])
+		batk_provoke = Math.max(batk_provoke, 1.02 + 0.03 * n_A_PassSkill6[5]);
+	
+	// Auto Berserk#12 - Provoke Lv 10 effect
+	if (SkillSearch(12))
+		batk_provoke = Math.max(batk_provoke, 1.32);
+		
+	n_A_ATK = Math.floor(n_A_ATK * batk_provoke);
+	
+	// Concentration#256 - Base ATK + SkillLV * 5% (Applied after SC_PROVOKE)
+	// Inconsistency with Weapon Attack bonus order
+	n_A_ATK = Math.floor((1 + SkillSearch(256) * 0.05) * n_A_ATK);
+
 	// Maiden Hat#1628 - [Every Refine Level Above 6] ATK + 1% (bAddClass bonus)
 	n_tok[80] += Math.max(0, n_A_HEAD_DEF_PLUS - 6) * EquipNumSearch(1628);
 
@@ -1040,14 +1129,6 @@ function StAllCalc()
 	}
 
 	n_A_ATK = Math.floor(n_A_ATK * (1 + n_tok[87] / 100));
-
-	// Dedicated ATK bonus variable as it is impacted by the Size multiplier
-	// Impositio Manus - ATK + 5 * SkillLV
-	wImp = n_A_PassSkill2[2] *5;
-
-	// A Drum on the Battlefield - ATK + 25 + 25 * SkillLV
-	if(n_A_PassSkill3[9])
-		wImp += 25 + 25 * n_A_PassSkill3[9];
 
 	JobHP_A = new Array(0,70,50,40,50,30,40,150,110,75,85,55,90,110,85,90,75,75,75,90,0,150,110,75,85,55,90,110,85,90,75,75,75,90, 0, 0, 0, 0, 0, 0, 0,70,90,75, 75,84);
 	JobHP_B = new Array(5, 5, 5, 5, 5, 5, 5,  5,  5, 5, 5, 5, 5,  7, 5,6.5,3, 3, 5, 5,5,  5,  5, 5, 5, 5, 5,  7, 5,6.5,3, 3, 5, 5, 0, 0, 0, 0, 0, 0, 0, 5,6.5, 5, 3, 3.5);
@@ -1660,22 +1741,6 @@ function StAllCalc()
 	//auto berserk
 	if(SkillSearch(12)){P_VIT2 = parseInt(n_A_VIT*0.55);}
 		else{P_VIT2 = 0;}
-
-	//concentration
-	/*if(SkillSearch(256)){
-		P_VIT3 = n_A_VIT*(0.05*SkillSearch(256)));
-	}*/
-
-	//T_VIT =(((n_A_VIT*(n_A_PassSkill2[4]*0.05))*(SkillSearch(12)*0.55));
-
-	//*(0.05*SkillSearch(256)) => parte do concentration
-	//T_VIT = (((vit total* (lvl de magni*0.05))*0.55)0.05*lvl de concentration)
-
-
-	//if(SkillSearch(256)){var P_VIT3 = P_VIT * (1 - 0.05 * SkillSearch(256));}
-	//else{P_VIT3 = 0;}
-	//treta da concentration, falta ela tirar vit def
-	//P_VIT4 = parseInt(n_A_VIT - P_VIT + P_VIT2 - P_VIT3;);
 
 	n_A_DEFVIT = parseInt(n_A_VIT + P_VIT1);
 
@@ -2455,12 +2520,7 @@ function StAllCalc()
 	myInnerHtml("A_CRI",n_A_CRI,0);
 
 	// Manage ATK Display
-	C_ATK = 0;
-	H_ATK = 0;
 	
-	// n_tok[87] is not applied for ATK display
-	C_ATK = n_tok[17];
-
 	// Weapon refine ATK bonus
 	if(n_A_WeaponLV == 1){W_REF = n_A_Weapon_ATKplus * 2;}
 	else if(n_A_WeaponLV == 2){W_REF = n_A_Weapon_ATKplus * 3;}
@@ -2476,62 +2536,10 @@ function StAllCalc()
 	W_ATKD = n_A_Weapon_ATK + n_A_Weapon2_ATK;}
 	else{W_ATKD = n_A_Weapon_ATK;
 		 W_REF2 = 0;}
-
-	// Manage ATK bonus display from [Impositio Manus] and [Drum on the Battlefield]
-	I_ATK = wImp;
 	
-	if(n_A_WeaponType == 10 || n_A_WeaponType == 14 || n_A_WeaponType == 15 || n_A_WeaponType == 16 || n_A_WeaponType == 17 || n_A_WeaponType == 18 || n_A_WeaponType == 19 || n_A_WeaponType == 20 || n_A_WeaponType == 21){
-		S1_A_ATK = Math.floor(n_A_DEX/10) * Math.floor(n_A_DEX/10);
-		S2_A_ATK = n_A_DEX + Math.floor(S1_A_ATK) + Math.floor(n_A_STR/5) + Math.floor(n_A_LUK/5);
-		P_ATK = Math.floor(I_ATK + C_ATK + W_ATKD + S2_A_ATK);
-	}else{
-		S1_A_ATK = Math.floor(n_A_STR/10) * Math.floor(n_A_STR/10);
-		S2_A_ATK = n_A_STR + Math.floor(S1_A_ATK) + Math.floor(n_A_DEX/5) + Math.floor(n_A_LUK/5);
-		P_ATK = Math.floor(I_ATK + C_ATK + W_ATKD + S2_A_ATK);
-	}
-
-	// ATK display modification for skills
-
-	// Concentration Skill#256 - ATK + 5 * SkillLV
-	if(SkillSearch(256)){
-		P_ATK2 = P_ATK+(P_ATK*(0.05*SkillSearch(256)));
-		P_ATK = P_ATK2;}
-	// Auto Berserk Skill#12 - ATK + 32%
-	if(SkillSearch(12)){
-		P_ATK2 = P_ATK+(P_ATK*0.32);
-		P_ATK = P_ATK2;}
-	
-	// FIXME: Following bonii should be applied on Weapon's Attack
-	// Provoke - ATK + 2 + 3 * SkillLV
-	if(n_A_PassSkill6[5])
-		P_ATK += Math.floor((.02+(.03*n_A_PassSkill6[5]))*P_ATK);
-
-	// Aloevera - Provoke Lv 1 effect, does not stack with self Provoke
-	if ((!n_A_PassSkill6[5] && n_A_PassSkill2[12]))
-	{
-		P_ATK += Math.floor(P_ATK * 0.05);
-		//n_A_Weapon_ATK = Math.floor(n_A_Weapon_ATK * 1.05);
-		
-		if (n_Nitou)
-			n_A_Weapon2_ATK = Math.floor(n_A_Weapon2_ATK * 1.05);
-	}
-
-	// Venatu's Beep Cocktail - 5% SC_INCATKRATE	
-	if (venatu_beep_cocktail)
-	{
-		P_ATK += Math.floor(P_ATK * 0.05);
-		//n_A_Weapon_ATK = Math.floor(n_A_Weapon_ATK * 1.05);
-		
-		if (n_Nitou)
-			n_A_Weapon2_ATK = Math.floor(n_A_Weapon2_ATK * 1.05);
-	}
-
-	if (P_ATK < 0){P_ATK = 0;}
-
-	// Gospel - ATK + 100%
-	if(n_A_PassSkill5[3] == 1)
-		P_ATK = 2*P_ATK;
-
+	// n_tok[87] is not really used as of today, only on Yellow/Green/Pink Sheila Hairnet
+	// So we can ignore the fact that n_tok[87] even though applied on n_A_ATK and should not be displayed
+	P_ATK = n_A_ATK + W_ATKD;
 	H_ATK = P_ATK;
 	
 	// H_ATK dedicated for WoE ATK bonus

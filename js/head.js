@@ -389,9 +389,9 @@ function BattleCalc999()
 			n_A_workDEX = Math.floor(n_A_DEX * (1 + (n_A_Weapon2LV - 1) * 0.2));
 
 			if(n_A_workDEX>=n_A_Weapon2_ATK)
-				w_left_Maxatk = n_A_ATK + n_A_Weapon2LV_Maxplus + Math.floor((n_A_Weapon2_ATK + wImp)* wCSize);
+				w_left_Maxatk = n_A_ATK + n_A_Weapon2LV_Maxplus + Math.floor(n_A_Weapon2_ATK * wCSize);
 			else
-				w_left_Maxatk = n_A_ATK + n_A_Weapon2LV_Maxplus + Math.floor((n_A_Weapon2_ATK-1 + wImp)* wCSize);
+				w_left_Maxatk = n_A_ATK + n_A_Weapon2LV_Maxplus + Math.floor((n_A_Weapon2_ATK - 1) * wCSize);
 
 			//custom TalonRO ignore effects on left/offhand like Ice Pick or Weeder Knife
 			IgnoreEffectOnLeftHand = 1;
@@ -418,7 +418,7 @@ function BattleCalc999()
 
 			if(n_A_workDEX > n_A_Weapon2_ATK)
 				n_A_workDEX = n_A_Weapon2_ATK;
-			w_left_Minatk = n_A_ATK + n_A_Weapon2LV_Minplus + Math.floor((n_A_workDEX + wImp) * wCSize);
+			w_left_Minatk = n_A_ATK + n_A_Weapon2LV_Minplus + Math.floor(n_A_workDEX * wCSize);
 
 			//custom TalonRO ignore effects on left/offhand like Ice Pick or Weeder Knife
 			IgnoreEffectOnLeftHand = 1;
@@ -2364,26 +2364,14 @@ function BattleCalc999()
 function ATKbai01()
 {
 	var wA01 = 100;
-	// FIXME : Part of following bonii should be managed through Weapon's Attack
-	if(n_A_ActiveSkill != 193 &&n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321){
-		if(SkillSearch(12))
-			wA01 += 32;
-		else if(n_A_PassSkill6[5])
-			wA01 += 2 + 3 * n_A_PassSkill6[5];
-		else if(n_A_PassSkill2[12])
-			wA01 += 5;
-		if(SkillSearch(256))
-			wA01 += SkillSearch(256) * 5;
-		if(SkillSearch(270))
+
+	if(n_A_ActiveSkill != 193 &&n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321) {
+		if (SkillSearch(270)) // True Sight#270
 			wA01 += SkillSearch(270) * 2;
-		if(n_A_PassSkill5[3])
-			wA01 += 100;
-		if(n_A_PassSkill6[2])
+		if (n_A_PassSkill6[2])
 			wA01 += 10;
-		if(StPlusCalc2(87))
+		if (StPlusCalc2(87))
 			wA01 += StPlusCalc2(87);
-		if (venatu_beep_cocktail)
-			wA01 += 5;
 
 		//Note - Issue#252
 		//Moved to foot.js
@@ -7331,9 +7319,9 @@ function calc()
 	n_A_DMG = [0,0,0];
 
 	if(n_A_workDEX>=n_A_Weapon_ATK || SkillSearch(155))
-		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
+		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * wCSize);
 	else
-		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK-1 + wImp)* wCSize);
+		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK - 1) * wCSize);
 
 	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
 	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
@@ -7344,8 +7332,8 @@ function calc()
 	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	{
-		w1 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_Weapon_ATK / 100 * wCSize) + Math.floor(wImp * wCSize);
-		w2 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_workDEX / 100 * wCSize) + Math.floor(wImp * wCSize);
+		w1 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_Weapon_ATK / 100 * wCSize);
+		w2 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_workDEX / 100 * wCSize);
 
 		w = Math.floor((ArrowOBJ[n_A_Arrow][0]-1) * wCSize);
 		w1 += w;
@@ -7358,18 +7346,18 @@ function calc()
 	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	{
-		n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_Weapon_ATK / 100 +wImp) * wCSize);
-		w = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_workDEX / 100 + wImp) * wCSize);
+		n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_Weapon_ATK / 100) * wCSize);
+		w = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_workDEX / 100) * wCSize);
 		if(n_A_DMG[0] > w)n_A_DMG[0] = w;
 	}
 	else{
 		if(n_A_workDEX >= n_A_Weapon_ATK)
-			n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK + wImp) * wCSize);
+			n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor(n_A_Weapon_ATK * wCSize);
 		else{
 
 			if(SkillSearch(155))
 				n_A_workDEX = n_A_Weapon_ATK;
-			n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_workDEX + wImp) * wCSize);
+			n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor(n_A_workDEX * wCSize);
 		}
 	}
 
@@ -7379,9 +7367,9 @@ function calc()
 
 	n_Enekyori=0;
 	n_A_CriATK = [0,0,0];
-	n_A_CriATK[1] = n_A_ATK + (n_A_WeaponLV_Minplus + n_A_WeaponLV_Maxplus) /2 + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
-	n_A_CriATK[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
-	n_A_CriATK[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
+	n_A_CriATK[1] = n_A_ATK + (n_A_WeaponLV_Minplus + n_A_WeaponLV_Maxplus) /2 + Math.floor(n_A_Weapon_ATK * wCSize);
+	n_A_CriATK[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor(n_A_Weapon_ATK * wCSize);
+	n_A_CriATK[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * wCSize);
 
 	if(n_A_WeaponType==10 || 17<=n_A_WeaponType && n_A_WeaponType <= 21){
 		n_Enekyori=1;
