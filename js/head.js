@@ -2364,6 +2364,7 @@ function BattleCalc999()
 function ATKbai01()
 {
 	var wA01 = 100;
+	// FIXME : Part of following bonii should be managed through Weapon's Attack
 	if(n_A_ActiveSkill != 193 &&n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321){
 		if(SkillSearch(12))
 			wA01 += 32;
@@ -2381,6 +2382,8 @@ function ATKbai01()
 			wA01 += 10;
 		if(StPlusCalc2(87))
 			wA01 += StPlusCalc2(87);
+		if (venatu_beep_cocktail)
+			wA01 += 5;
 
 		//Note - Issue#252
 		//Moved to foot.js
@@ -2743,7 +2746,7 @@ function BattleCalc998()
 				HITS = 3 - MS_KAUPE;
 				EQ_RATIO = 2 + 1 * EQ_LV + Math.floor(EQ_LV / 2) + ((EQ_LV > 4) ? 1 : 0);
 
-				MS_REDUCTION = MS_BOSS * MS_ELEMENT * MS_NEUTRAL * MS_RACE; // EQ is considered as short ranged attack, no damage reduction from bLongAtkDef
+				MS_REDUCTION = MS_BOSS * MS_ELEMENT * MS_NEUTRAL * MS_RACE * (blossoming_geographer_cocktail ? 0.9 : 1); // EQ is considered as short ranged attack, no damage reduction from bLongAtkDef
 
 				EQ_MINDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[12] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC) / EQ_TARGETS);
 				EQ_MAXDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[13] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC) / EQ_TARGETS);
@@ -2760,7 +2763,7 @@ function BattleCalc998()
 			HITS = 1 - MS_KAUPE;
 			
 			HJ_RATIO = HJ_LV;
-			MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE;
+			MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE * (sting_slap_cocktail ? 0.9 : 1);
 			
 			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
 			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
@@ -2905,6 +2908,18 @@ function BattleHiDam(){
 	if(n_A_PassSkill8[27]){
 		if(SUPURE_MONSTER())
 			for(i=0;i<=6;i++)
+				w_HiDam[i] -= Math.floor(w_HiDam[i] * 10 / 100);
+	}
+
+	// Sting's Slap Cocktail - Resistance to Physical attacks +10%
+	if (0 == n_Enekyori && sting_slap_cocktail) {
+		for (i = 0 ; i <= 6; ++i)
+				w_HiDam[i] -= Math.floor(w_HiDam[i] * 10 / 100);
+	}
+	
+	// Blossoming Geographer Cocktail - Resistance to Magical attacks +10%
+	if (1 == n_Enekyori && blossoming_geographer_cocktail) {
+		for (i = 0 ; i <= 6; ++i)
 				w_HiDam[i] -= Math.floor(w_HiDam[i] * 10 / 100);
 	}
 
@@ -4400,6 +4415,12 @@ with(document.calcForm){
 		str += '<TR><TD id="EN836"></TD><TD id="EN837"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Eclage Food</B></Font></TD></TR>';
 		str += '<TR><TD colspan="2" id="EN842"></TD></TR>';
+		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Summer cocktail_checks</B></Font></TD></TR>';
+		str += '<TR><TD id="EN843"></TD></TR>';
+		str += '<TR><TD id="EN844"></TD></TR><TR><TD id="EN845"></TD></TR>';
+		str += '<TR><TD id="EN846"></TD></TR><TR><TD id="EN847"></TD></TR>';
+		str += '<TR><TD id="EN848"></TD></TR><TR><TD id="EN849"></TD></TR>';
+		str += '<TR><TD id="EN850"></TD></TR><TR><TD id="EN851"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Food:</B></Font></TD></TR>';
 		str += '<TR><TD id="EN816"></TD></TR>';
 		str += '<TR><TD id="EN826"></TD><TD id="EN827"></TD></TR>';
@@ -4410,15 +4431,24 @@ with(document.calcForm){
 		A8_SKILLSW.checked = 1;
 		myInnerHtml("EN800",'<select name="A8_Skill0" onChange="Click_A8(1)"></select>',0);
 
-		/*
-			Added Eclage Food with a drop down list for selection. Velaryon#8787 4-4-2020
-		*/
+		// Added Eclage Food with a drop down list for selection. Velaryon#8787 4-4-2020
 		myInnerHtml("EN842",'<select name="eclage_food_list" onChange="Click_A8(1)"></select>',0);
 		eclage_food_list.options[0] = new Option("-",0,true,true);
 		eclage_food_list.options[1] = new Option("Snow Flip [Increases all damage against and experience from [Water] property monsters by 5%]",1);
 		eclage_food_list.options[2] = new Option("Slapping Herb [Increases all damage against and experience from [Earth] property monsters by 5%]",2);
 		eclage_food_list.options[3] = new Option("Peony Mommy [Increases all damage against and experience from [Fire] property monsters by 5%]",3);
 		eclage_food_list.options[4] = new Option("Yggdrasil Dust [Increases all damage against and experience from [Wind] property monsters by 5%]",4);
+
+		// Added Summer Cocktails under Additional Effects
+		myInnerHtml("EN843",'<input type="checkbox" name="venatu_beep_cocktail_check" 			onClick="Click_A8(1)">Venatu\'s Beep [Increase ATK by 5% for 30 minutes]',0);
+		myInnerHtml("EN844",'<input type="checkbox" name="old_dracula_mix_cocktail_check" 		onClick="Click_A8(1)">Old Dracula\'s Mix [15% more Job EXP for 30 minutes]',0);
+		myInnerHtml("EN845",'<input type="checkbox" name="spammers_heaven_cocktail_check"		onClick="Click_A8(1)">Spammers Heaven [Increase ASPD by 10% for 45 minutes]',0);
+		myInnerHtml("EN846",'<input type="checkbox" name="myst_case_suprise_cocktail_check" 	onClick="Click_A8(1)">Myst Case\'s Surprise [Increase MATK by 5% for 30 minutes]',0);
+		myInnerHtml("EN847",'<input type="checkbox" name="seductive_bathory_cocktail_check"		onClick="Click_A8(1)">Seductive Bathory [Reduce Cast Time by 10% for 45 minutes]',0);
+		myInnerHtml("EN848",'<input type="checkbox" name="sting_slap_cocktail_check"			onClick="Click_A8(1)">Sting\'s Slap [10% resistance to Physical Attacks for 30 minutes]',0);
+		myInnerHtml("EN849",'<input type="checkbox" name="blossoming_geographer_cocktail_check"	onClick="Click_A8(1)">Blossoming Geographer [10% resistance to Magic Attacks for 30 minutes]',0);
+		myInnerHtml("EN850",'<input type="checkbox" name="drip_of_yggdrasil_cocktail_check"		onClick="Click_A8(1)">Drip of Yggdrasil [10% EXP Boost for 30 minutes + No EXP loss when dying]',0);
+		myInnerHtml("EN851",'<input type="checkbox" name="moscow_headless_mule_cocktail_check"	onClick="Click_A8(1)">Moscow Headless Mule [For 10 minutes, FLEE + 30 and you regenerate 3% of your Maximum HP every 10 seconds. Can not be used while in Frenzy]',0);
 
 		var PET_OBJ_copy= new Array();
 		PET_OBJ_copy = PET_OBJ_copy.concat(PET_OBJ);
@@ -4584,7 +4614,16 @@ with(document.calcForm){
 		A_IJYOU2.checked = n_A_IJYOU[2];
 		A_IJYOU3.checked = n_A_IJYOU[3];
 		eclage_food_list.value = eclage_food;
-
+		
+		sting_slap_cocktail_check.checked = sting_slap_cocktail
+		venatu_beep_cocktail_check.checked = venatu_beep_cocktail
+		old_dracula_mix_cocktail_check.checked = old_dracula_mix_cocktail
+		spammers_heaven_cocktail_check.checked = spammers_heaven_cocktail
+		seductive_bathory_cocktail_check.checked = seductive_bathory_cocktail
+		myst_case_suprise_cocktail_check.checked = myst_case_suprise_cocktail
+		drip_of_yggdrasil_cocktail_check.checked = drip_of_yggdrasil_cocktail
+		moscow_headless_mule_cocktail_check.checked = moscow_headless_mule_cocktail
+		blossoming_geographer_cocktail_check.checked = blossoming_geographer_cocktail
 	}else{
 		var str;
 		str = '<table style="border: 1px solid #999; border-collapse: collapse; width: auto;">';
@@ -6992,38 +7031,48 @@ if(n_B_IJYOU[1]){
 	}
 
 /* [END] */
-	if(Taijin==0){
-		var w1_Exp = 100;
+	if (Taijin==0){
+		job_exp_modifier = 0;
+		base_exp_modifier = 0;
+		common_exp_modifier = 100;
 
-		w1_Exp += n_tok[120+n_B[2]] + n_tok[370 + Math.floor(n_B[3] / 10)];
+		common_exp_modifier += n_tok[120+n_B[2]] + n_tok[370 + Math.floor(n_B[3] / 10)];
 
 		if (n_B[19]) // Experience bonus on bosstype monsters
-			w1_Exp += n_tok[197];
+			common_exp_modifier += n_tok[197];
 		else // Experience bonus on normal monsters
-			w1_Exp += n_tok[196];
-		
-		var w2_Exp = 0;
+			common_exp_modifier += n_tok[196];
 
 		if(n_A_JobSearch()==3 && CardNumSearch(452) && (n_B[2]==1 || n_B[2]==6))
-			w1_Exp += 5;
+			common_exp_modifier += 5;
 		if(n_B[2] == 2 && n_A_JobSearch()==4 && CardNumSearch(453))
-			w1_Exp += 5;
+			common_exp_modifier += 5;
 		if(n_A_PassSkill8[1])
-			w1_Exp += (25 * n_A_PassSkill8[1]);
+			common_exp_modifier += (25 * n_A_PassSkill8[1]);
 		if(n_A_PassSkill8[2])
-			w2_Exp += 50;
+			job_exp_modifier += 50;
 		if(n_A_PassSkill6[2])
-			w1_Exp += 100;
+			common_exp_modifier += 100;
 		//custom TalonRO Ultimate Ascended Black Dragon Hat: +5% exp
 		if(EquipNumSearch(1493) && n_B[19]==0)
-			w1_Exp += 5;
+			common_exp_modifier += 5;
+		
+		// Manage Exp Summer Cocktails
+		// Drip of Yggdrasil Cocktail - Base Experience +10%
+		if (drip_of_yggdrasil_cocktail)
+			base_exp_modifier += 10;
+		// Old Dracula's Mix Cocktail - Job Experience +15%
+		if (old_dracula_mix_cocktail)
+			job_exp_modifier += 15;
+		
 		if(n_A_PassSkill8[14] == 3 || n_A_PassSkill6[2]){
-			w1_Exp = w1_Exp * 2;
-			w2_Exp = w2_Exp * 2;
+			common_exp_modifier = common_exp_modifier * 2;
+			job_exp_modifier = job_exp_modifier * 2;
 		}
-		if(w1_Exp != 0 || w2_Exp != 0){
-			n_B[16] = Math.floor(n_B[16] * w1_Exp / 100);
-			n_B[17] = Math.floor(n_B[17] * (w1_Exp + w2_Exp) / 100);
+
+		if(common_exp_modifier != 0 || job_exp_modifier != 0){
+			n_B[16] = Math.floor(n_B[16] * (common_exp_modifier + base_exp_modifier) / 100);
+			n_B[17] = Math.floor(n_B[17] * (common_exp_modifier + job_exp_modifier) / 100);
 		}
 		if(n_A_PassSkill8[5]){
 			n_B[16] = Math.floor(n_B[16] / (1 + n_A_PassSkill8[5]) + 1);

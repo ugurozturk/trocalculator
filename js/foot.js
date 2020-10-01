@@ -555,6 +555,16 @@ function StAllCalc()
 		n_A_IJYOU[2] = eval(A_IJYOU2.checked);
 		n_A_IJYOU[3] = eval(A_IJYOU3.checked);
 		eclage_food = eval(eclage_food_list.value);
+		
+		sting_slap_cocktail = eval(sting_slap_cocktail_check.checked) 							// [sc_start SC_DEF_RATE,1800000,10;]
+		venatu_beep_cocktail = eval(venatu_beep_cocktail_check.checked)							// [sc_start SC_INCATKRATE,1800000,5;]
+		old_dracula_mix_cocktail = eval(old_dracula_mix_cocktail_check.checked)					// [sc_start SC_JEXPBOOST,1800000,15;]
+		spammers_heaven_cocktail = eval(spammers_heaven_cocktail_check.checked)					// [sc_start SC_INCASPDRATE,2700000,10;]
+		seductive_bathory_cocktail = eval(seductive_bathory_cocktail_check.checked)				// [sc_start SC_CASTRATE,2700000,-10;]
+		myst_case_suprise_cocktail = eval(myst_case_suprise_cocktail_check.checked)				// [sc_start SC_INCMATKRATE,1800000,5;]
+		drip_of_yggdrasil_cocktail = eval(drip_of_yggdrasil_cocktail_check.checked)				// [sc_start SC_LIFEINSURANCE,1800000,0; sc_start SC_EXPBOOST,1800000,10;]
+		moscow_headless_mule_cocktail = eval(moscow_headless_mule_cocktail_check.checked)		// [specialeffect2 320; sc_start4 SC_L_LIFEPOTION,600000,-3,10,0,0; sc_start SC_INCFLEE,600000,30;]
+		blossoming_geographer_cocktail = eval(blossoming_geographer_cocktail_check.checked)		// [sc_start SC_MDEF_RATE,1800000,10;]
 	}
 	//custom TalonRO SQI
 	if(n_SQI_Bonus_SW){
@@ -2025,6 +2035,11 @@ function StAllCalc()
 	myInnerHtml("A_HIT",n_A_HIT,0);
 
 	n_A_FLEE = n_A_BaseLV + n_A_AGI;
+	
+	// Moscow Headless Mule Cocktail - FLEE +30, cannot be used while in Berserk
+	if (moscow_headless_mule_cocktail && !SkillSearch(12) && !SkillSearch(258))
+		n_tok[9] += 30;
+	
 	n_A_FLEE += n_tok[9];
 
 	if(n_A_JobSearch()==2 && CardNumSearch(295)){
@@ -2486,12 +2501,30 @@ function StAllCalc()
 		P_ATK2 = P_ATK+(P_ATK*0.32);
 		P_ATK = P_ATK2;}
 	
-	// Provoke - ATK + 2 + 3 * SkillLV FIXME : Should be covered by n_tok[87] ?
+	// FIXME: Following bonii should be applied on Weapon's Attack
+	// Provoke - ATK + 2 + 3 * SkillLV
 	if(n_A_PassSkill6[5])
 		P_ATK += Math.floor((.02+(.03*n_A_PassSkill6[5]))*P_ATK);
+
 	// Aloevera - Provoke Lv 1 effect, does not stack with self Provoke
-	if(!n_A_PassSkill6[5] && n_A_PassSkill2[12])
-		P_ATK += Math.floor(P_ATK*0.05);
+	if ((!n_A_PassSkill6[5] && n_A_PassSkill2[12]))
+	{
+		P_ATK += Math.floor(P_ATK * 0.05);
+		//n_A_Weapon_ATK = Math.floor(n_A_Weapon_ATK * 1.05);
+		
+		if (n_Nitou)
+			n_A_Weapon2_ATK = Math.floor(n_A_Weapon2_ATK * 1.05);
+	}
+
+	// Venatu's Beep Cocktail - 5% SC_INCATKRATE	
+	if (venatu_beep_cocktail)
+	{
+		P_ATK += Math.floor(P_ATK * 0.05);
+		//n_A_Weapon_ATK = Math.floor(n_A_Weapon_ATK * 1.05);
+		
+		if (n_Nitou)
+			n_A_Weapon2_ATK = Math.floor(n_A_Weapon2_ATK * 1.05);
+	}
 
 	if (P_ATK < 0){P_ATK = 0;}
 
@@ -2928,15 +2961,23 @@ function StAllCalc()
 		BK_n_A_MATK[2] -= 1;
 	BK_n_A_MATK[1] = (BK_n_A_MATK[2] + BK_n_A_MATK[0]) / 2;
 
-	//Mindbreaker [self]
-	if(n_A_PassSkill6[4]){
+
+	if (SkillSearch(276)){
+		n_A_MATK[0] = Math.floor(n_A_MATK[0] * (1+ 0.05 * SkillSearch(276)));
+		n_A_MATK[2] = Math.floor(n_A_MATK[2] * (1+ 0.05 * SkillSearch(276)));
+	}
+	
+	// Mindbreaker [self] (applied after Power Amplification)
+	if (n_A_PassSkill6[4]){
 		w = 100 + 20 * n_A_PassSkill6[4];
 		n_A_MATK[0] = Math.floor(n_A_MATK[0] * w / 100);
 		n_A_MATK[2] = Math.floor(n_A_MATK[2] * w / 100);
 	}
-	if(SkillSearch(276)){
-		n_A_MATK[0] = Math.floor(n_A_MATK[0] * (1+ 0.05 * SkillSearch(276)));
-		n_A_MATK[2] = Math.floor(n_A_MATK[2] * (1+ 0.05 * SkillSearch(276)));
+	
+	// Myst Case's Surprise Cocktail - MATK +5% (applied after Mindbreaker)
+	if (myst_case_suprise_cocktail) {
+		n_A_MATK[0] = Math.floor(n_A_MATK[0] * 1.05);
+		n_A_MATK[2] = Math.floor(n_A_MATK[2] * 1.05);
 	}
 
 	myInnerHtml("A_MATK",n_A_MATK[0] +"~"+ n_A_MATK[2],0);
@@ -3186,6 +3227,10 @@ function StAllCalc()
 	// Defender#165
 	if (SkillSearch(165))
 		n_tok[12] -= 25 - SkillSearch(165) * 5;
+	
+	// Spammers Heaven Cocktail - ASPD +10%
+	if (spammers_heaven_cocktail)
+		n_tok[12] += 10;
 
 	aspd_rate -= n_tok[12] * 10;
 	attack_motion = Math.floor(attack_motion * aspd_rate / 1000);
@@ -3300,6 +3345,10 @@ function StAllCalc()
 		n_A_CAST *= (100 - 15 * n_A_PassSkill2[13]) /100;
 	if(SkillSearch(322))
 		n_A_CAST = n_A_CAST /2;
+	
+	// Seductive Bathory Cocktail - Cast time -10% (not stacking)
+	if (seductive_bathory_cocktail)
+		n_A_CAST *= 0.9;
 
 	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
 		n_tok[74] += 5;
@@ -5990,7 +6039,7 @@ function KakutyouKansuu(){
 		myInnerHtml("A_KakutyouData",CBIstr,0);
 	}else if(wKK == 10){
 		var wkk10;
-		wkk10 = "<b>Cast Time: </b>"+ Math.round(n_A_CAST *10000)/100+" % [ "+(100 - n_B_Cast)+" % and "+n_A_DEX+" DEX ]<BR>";
+		wkk10 = "<b>Cast Time: </b>"+ Math.round(n_A_CAST *10000)/100 + " % [ "+(100 - n_B_Cast) + " % " + (seductive_bathory_cocktail ? "(10 %) " : "") + "and "+n_A_DEX+" DEX ]<BR>";
 		wkk10 += "<b>Cast Delay: </b>"+ Math.round((100 - n_tok[74]) *100)/100 +" %";
 		myInnerHtml("A_KakutyouData",wkk10,0);
 	}else if(wKK == 11){
@@ -9330,6 +9379,18 @@ n_A_PassSkill8[33] = 0;
 n_A_PassSkill8[34] = 0;
 
 eclage_food = 0;
+sting_slap_cocktail = 0;
+venatu_beep_cocktail = 0;
+old_dracula_mix_cocktail = 0;
+spammers_heaven_cocktail = 0;
+seductive_bathory_cocktail = 0;
+myst_case_suprise_cocktail = 0;
+drip_of_yggdrasil_cocktail = 0;
+moscow_headless_mule_cocktail = 0;
+blossoming_geographer_cocktail = 0;
+
+document.calcForm.B_ENSKSW.checked = 0;
+document.calcForm.A2_SKILLSW.checked = 0;
 
 n_A_PassSkill9 = new Array();
 for(i=0;i<=53;i++)
