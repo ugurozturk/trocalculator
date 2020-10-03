@@ -3524,9 +3524,8 @@ function StAllCalc()
 	}
 
 	//[Custom TalonRO - 2018-06-01 - Palace Guard if refine rate >=7 add -1% ranged reduction] [Kato]
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1545)){
-		n_tok[25] -= (n_A_HEAD_DEF_PLUS - 5);
-	}
+	if (EquipNumSearch(1545))
+		n_tok[78] += n_A_HEAD_DEF_PLUS - 5;
 
 	//[Custom TalonRO 2018-06-15 - Malandgo Enchantment for Expert Archer] [Kato]
 	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {

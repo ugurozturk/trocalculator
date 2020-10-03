@@ -1584,7 +1584,7 @@ ItemOBJ = [
 ,[1543,61,0,3,0,1,40,0,"Bayani Kalasag","","For every 3 refines, decreases Boss monster damage by 1%",0]
 ,[1544,63,0,2,0,1,60,0,"Bayani Nightmare Bangungot Boots","","For every refine, MDEF + 1<br><b>[Refine Rate 7-10]</b><br>Movement speed +25% (non-stacking)",0]
 //[Custom TalonRO Updates 2018-06-02] [Kato]
-,[1545,50,0,3,0,1,100,50,"Palace Guard Cap","","<b>[Refine Rate 7~10]</b><br>For every refine, additional increased resistance against long range physical and magic attacks by 1%",78,5,60,5,194,1,0]
+,[1545,50,0,3,0,1,100,50,"Palace Guard Cap","","<b>[Refine Rate 6~10]</b><br>For every refine, additional increased resistance against long range physical and magic attacks by 1%",78,5,60,5,194,1,0]
 ,[1546,51,124,0,0,0,10,60,"Hawk Eye","","<b>[Slottable at Chiqita NPC]</b>",5,1,25,3,0]
 ,[1547,50,0,8,0,1,100,10,"Drooping Permeter","",0,1168,20,1220,20,1255,20,1006,20,1234,20,1176,20,0]
 ,[1548,50,0,3,0,0,50,0,"Burning Crown","","Add a 1.5% chance of auto casting Level 3 Bash on an enemy when doing Physical damage.",63,20,42,20,0]
