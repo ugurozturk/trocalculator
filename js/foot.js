@@ -1074,6 +1074,12 @@ function StAllCalc()
 	// Tasty Pink Ration - ATK + 15
 	if (n_A_PassSkill8[31])
 		n_tok[17] += 15;
+	
+	// Antonio's Coat#1728 - [Every Refine Level] ATK & MATK + 1
+	if (EquipNumSearch(1728)) {
+		n_tok[17] += n_A_BODY_DEF_PLUS;
+		n_tok[98] += n_A_BODY_DEF_PLUS;
+	}
 
 	n_A_ATK += n_tok[17];
 
@@ -1604,8 +1610,6 @@ function StAllCalc()
 	else
 		myInnerHtml("A_MaxSP"," "+n_A_MaxSP,0);
 
-
-
 	n_A_DEF = n_tok[18];
 
 	for(i=2;i<=10;i++)
@@ -1837,6 +1841,9 @@ function StAllCalc()
 			n_tok[19] += parseInt(wHSE.substr(-1));
 	}
 
+	// Red Stocking Boots#1730 - [Every Refine Level] MDEF + 1
+	n_tok[19] += n_A_SHOES_DEF_PLUS * EquipNumSearch(1730);
+
 	n_A_MDEF = n_tok[19];
 
 	if(EquipNumSearch(986) && (n_A_JobSearch()==3 || n_A_JobSearch()==4 || n_A_JobSearch()==5))
@@ -1962,6 +1969,9 @@ function StAllCalc()
 	// Enforcer Cape#1699 [Every Refine Level] HIT + 1
 	// Enforcer Shoes#1700 [Every Refine Level] HIT + 1
 	n_tok[8] += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699) + n_A_SHOES_DEF_PLUS * EquipNumSearch(1700);
+
+	// Antonio's Coat + Antonio's Red Bag Combo#1732 [Every Refine Level] of Garment - HIT + 1
+	n_tok[8] += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1732);
 
 	n_A_HIT += n_tok[8];
 
@@ -2104,6 +2114,9 @@ function StAllCalc()
 	// Moscow Headless Mule Cocktail - FLEE +30, cannot be used while in Berserk
 	if (moscow_headless_mule_cocktail && !SkillSearch(12) && !SkillSearch(258))
 		n_tok[9] += 30;
+
+	// Antonio's Coat + Red Stocking Boots Combo#1731 - [Every Refine Level] of Shoes - FLEE + 1
+	n_tok[9] += n_A_SHOES_DEF_PLUS * EquipNumSearch(1731);
 	
 	n_A_FLEE += n_tok[9];
 
@@ -3829,15 +3842,6 @@ function StAllCalc()
 	if(EquipNumSearch(1511)){
 		n_tok[91] += Math.floor(n_A_Weapon_ATKplus * 3);
 		n_tok[94] += Math.floor(n_A_Weapon_ATKplus * 3);
-	}
-
-	//custom Talonro Chameleon Armor: [Swordsman, Merchant, Thief] DEF + 3 [Magician, Archer, Acolyte] MDEF + 5
-	if(EquipNumSearch(986)){
-		wSPVS = n_A_JobSearch();
-		if(wSPVS==1 || wSPVS==2 || wSPVS==6)
-			n_tok[18] += 3;
-		if(wSPVS==3 || wSPVS==4 || wSPVS==5)
-			n_tok[19] += 5;
 	}
 
 	if(EquipNumSearch(828)){

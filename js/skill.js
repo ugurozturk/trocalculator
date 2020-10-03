@@ -621,13 +621,13 @@ AutoSpellSkill = [
 [9,1,126,1,0,1], //When performing a ATK based attack, there's a chance to cast the skill [Jupitel Thunder]Lv 1
 [10,0,8,3,3,1], //When performing a ATK based attack, there's a 3 % chance to cast the skill [Provoke]Lv 1
 [11,0,100,1,1,1], //When performing a ATK based attack, there's a 1 % chance to cast the skill [Gloria]Lv 1
-[12,0,25,1,5,6], //When recieving ATK based damage, there's a 5 % chance to cast the skill [Heal]Lv 1
+[12,0,25,1,5,6], //When receiving ATK based damage, there's a 5 % chance to cast the skill [Heal]Lv 1
 [13,0,25,1,1,1], //When performing a ATK based attack, there's a 1 % chance to cast the skill [Heal]Lv 1
 [14,1,52,5,3,1], //When performing a ATK based attack, there's a 3 % chance to cast the skill [Fire Ball]Lv 5
 [15,0,27,1,0,1], //When performing a ATK based attack, there's a chance to cast the skill [Increase AGI]Lv 1
 [16,1,128,3,1,1], //When performing a ATK based attack, there's a 3 % chance to cast the skill [Water Ball]Lv 3
 [17,0,236,2,1,1], //When performing a ATK based attack, there's a 3 % chance to cast the skill [Deluge]Lv 2
-[18,0,95,1,3,6], //When recieving ATK based damage, there's a 3 % chance to cast the skill [Status Recovery]Lv 1
+[18,0,95,1,3,6], //When receiving ATK based damage, there's a 3 % chance to cast the skill [Status Recovery]Lv 1
 [19,0,30,5,3,1], //When performing a ATK based attack, there's a 3 % chance to cast the skill [Angelus]Lv 5
 [20,1,261,3,1,1], //When performing a ATK based attack, there's a 1 % chance to cast the skill [Joint Beat]Lv 3
 [21,1,70,5,3,1], //When performing a ATK based attack, there's a 3 % chance to cast the skill [Pierce]Lv 5
@@ -638,7 +638,7 @@ AutoSpellSkill = [
 [26,0,232,5,1,1], //When performing a ATK based attack, there's a 1 % chance to cast the skill [Lightning Loader]Lv 5
 [27,0,233,5,1,1], //When performing a ATK based attack, there's a 1 % chance to cast the skill [Seismic Weapon]Lv 5
 [28,1,126,3,5,1], //When performing a ATK based attack, there's a chance 5 % to cast the skill [Jupitel Thunder]Lv 3
-[29,1,130,3,5,6], //When recieving ATK based damage, there's a chance 5 % to cast the skill [Frost Nova]Lv 3
+[29,1,130,3,5,6], //When receiving ATK based damage, there's a chance 5 % to cast the skill [Frost Nova]Lv 3
 [30,1,430,5,2,1], //
 [31,1,436,6,0,1],
 [32,1,52,1,15,1],
@@ -721,7 +721,7 @@ AutoSpellSkill = [
 [109,1,51,3,0,1],
 [110,1,54,3,0,1],
 [111,1,56,3,0,1],
-[112,1,312,5,2,10], //When recieving ATK based or magical damage, there's a 2% chance to cast the skill [Dark Strike] Lv5
+[112,1,312,5,2,10], //When receiving ATK based or magical damage, there's a 2% chance to cast the skill [Dark Strike] Lv5
 [113,1,436,6,0,1],
 [114,1,51,5,10,1],	//custom TalonRO rental Fireblend = Firebolt lv 5 (10%)
 [115,1,51,6,5,1],	//custom TalonRO SQI Bonus - Djinn = Firebolt lv 6 (5%)
@@ -741,7 +741,7 @@ AutoSpellSkill = [
 [128,1,27,1,5,4],
 [129,1,27,1,5,1],
 [130,1,440,1,0,1,0,1], //When dealing physical damage there is a chance to trigger Wink of Charm.
-[131,1,267,2,3,6,0], //When recieving ATK based damage, there's a low chance to cast the skill [Assumptio]Lv 2
+[131,1,267,2,3,6,0], //When receiving ATK based damage, there's a low chance to cast the skill [Assumptio]Lv 2
 [132,1,131,2,1,1], //custom TalonRO Chilly Spell Book lv 2 Storm Gust (1%) on physical attack [NattWara]
 [133,1,51,3,3,1],
 [134,1,261,1,10,1],
@@ -754,7 +754,8 @@ AutoSpellSkill = [
 [141,1,409,2,5,1],
 [142,1,128,2,2,1], //When performing a ATK based attack, there's a 2 % chance to cast the skill [Water Ball]Lv 2
 [143,1,124,2,0,4], //When performing a magical attack, there's a chance to cast the skill [Sightrasher]Lv 2
-[144,1,25,3,5,6] //When recieving ATK based damage, there's a 5 % chance to cast the skill [Heal]Lv 3
+[144,1,25,3,5,6],  //When receiving ATK based damage, there's a 5 % chance to cast the skill [Heal]Lv 3
+[145,1,134,1,1,6]  //When receiving ATK based damage, there's a 1 % chance to cast the skill [Quagmire]Lv 1
 ];
 //ID - Gets called in second spot(221(effect),1(ID)), autocast id = 1 by default, skill Id,Skill Lvl, chance %, attacktype(1atkbased,2shortrange,3longrange,4magical,5attacking,6receivingATKbased,0 by default, 0=low chance, 1=medium chance, 2=high chance)
 

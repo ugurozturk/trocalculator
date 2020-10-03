@@ -1299,7 +1299,7 @@ ItemOBJ = [
 ,[1276,50,0,3,0,0,30,70,"Cancer Crown",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>ATK + 15<br>FLEE + 10",61,5,1,2,0]
 ,[1277,50,0,3,0,0,30,70,"Cancer Diadem",0,"<b>[Refine Rate 7~10]</b><br>MDEF + 1<br>Heal amount increased by + 3%<br>Sanctuary effectiveness increased by + 3%<br>+3% recovery with skill [Potion Pitcher]<br>MATK + 2%",61,5,4,2,0]
 ,[1278,50,0,0,0,0,10,0,"Capricorn Crown",0,"<b>[Refine Rate 7~10]</b><br>Small chance of auto casting [Warm Wind]Lv 1 [<b><font color='brown'>Earth Endow</font></b>] when doing ATK based damage",3,2,5,2,0]
-,[1279,50,0,0,0,0,10,70,"Capricorn Diadem",0,"<b>[Refine Rate 7~10]</b><br>INT + 2<br><b>[Refine Rate 8~10]</b><br>Cast Time -3%<br><b>[Refine Rate 9~10]</b><br>Heal Power + 4%<br><b>[Refine Rate 10]</b><br>When recieving ATK based damage, there's a 1% chance to cast the skill [Hammerfall]Lv 5",62,5,19,5,5,2,0]
+,[1279,50,0,0,0,0,10,70,"Capricorn Diadem",0,"<b>[Refine Rate 7~10]</b><br>INT + 2<br><b>[Refine Rate 8~10]</b><br>Cast Time -3%<br><b>[Refine Rate 9~10]</b><br>Heal Power + 4%<br><b>[Refine Rate 10]</b><br>When receiving ATK based damage, there's a 1% chance to cast the skill [Hammerfall]Lv 5",62,5,19,5,5,2,0]
 ,[1280,50,0,4,0,0,30,70,"Gemini Crown",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>MATK + 15<br>FLEE + 10<br><b><font color='green'>Wind</font></b> element resistance + 5%",19,5,17,2,2,2,0]
 ,[1281,50,0,4,0,0,30,70,"Gemini Diadem",0,"<b>[Refine Rate 7~10]</b><br>MDEF + 7<br>MATK + 8%<br><b><font color='green'>Wind</font></b> element resistance + 5%",89,2,2,2,0]
 ,[1282,50,0,3,0,0,30,70,"Leo Crown",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>FLEE + 10<br>Small chance of auto casting [Warm Wind]Lv 4 [<b><font color='red'>Fire Endow</font></b>] when receiving ATK based damage",63,5,1,2,17,15,0]
@@ -1776,6 +1776,12 @@ ItemOBJ = [
 ,[1725,50,0,2,0,1,120,38,"Bankruptcy Hat","","A headgear for those cursed merchants that went bankrupt and lost everything.<br>It may feel like you fell into the abyss of despair, but you can bounce back! This headgear amplifies the fighting spirit of those who wear it.",4,1,5,1,0]
 ,[1726,51,0,0,0,0,49,49,"Bankruptcy Mask","","<b>Middle and Lower Headgear</b><br>Those who have lost everything due to bankruptcy are usually in deep sorrow. When you put on this hat, you can hide your sadness and climb up again!<br>When performing Magical attacks, there's a chance to get increased HP and SP recovery for 10 seconds.",0]
 ,[1727,100,0,0,0,0,0,0,"Bankruptcy Hat + Mask","","<br>[Every Refine Level After +2] on Bankruptcy Hat.<br>[Neutral] element resistance + 1%",13,100,0]
+,[1728,60,0,5,0,1,50,40,"Antonio's Coat","","<b>[Every refine level]</b><br>ATK & MATK + 1",7,1,15,5,0]
+,[1729,62,0,3,0,1,60,40,"Antonio's Red Bag","","Every time you kill a monster, there is a small chance to drop Candy.<br><b>[Every refine level]</b><br>Slightly increased Candy drop rate",19,4,152,20,0]
+,[1730,63,0,3,0,1,50,40,"Red Stocking Boots","","<b>[Every refine level]</b><br>MDEF + 1<br>Increase natural HP and SP regeneration by 2%.",15,5,6,3,221,145,0]
+,[1731,100,0,0,0,0,0,0,"Antonio's Coat + Red Stocking Boots","","[Every refine level] of Red Stocking Boots<br>FLEE + 1",16,10,0]
+,[1732,100,0,0,0,0,0,0,"Antonio's Coat + Antonio's Red Bag","","[Every refine level] of Antonio's Red Bag<br>HIT + 1",12,3,0]
+,[1732,100,0,0,0,0,0,0,"Antonio's Coat + Antonio's Red Bag + Red Stocking Boots","","Increase Candy heal rate by 100%.<br>Increase Lucky Candy heal rate by 200%.<br>Casting can't be interrupted.",127,10,128,10,152,10,220,23,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3537,6 +3543,12 @@ ItemID = [
 ,[1725,1,18825]
 ,[1726,1,18824]
 ,[1727,2,18825,18824]
+,[1728,1,21149]
+,[1729,1,21150]
+,[1730,1,21148]
+,[1731,2,21149,21148]
+,[1732,2,21149,21150]
+,[1733,2,21149,21148,21150]
 ];
 
 /*
@@ -3952,7 +3964,7 @@ function Item_Setumei(nC1,nC2)
       221,6 = When performing a ATK based attack, there's a 10 % chance to cast the skill [Lightning Bolt]Lv 3
     */
 	if(221 == nC1){
-		wNAME99 = [0,"When performing a ATK based attack, ","When performing a short-range ATK based attack, ","When performing a long-range ATK based attack, ","When performing a magical attack, ","When performing a physical or magical attack, ","When recieving ATK based damage, ","When recieving short-range ATK based damage, ","When recieving long-range ATK based damage, ","When recieving magical damage, ","When recieving ATK based or magical damage, "];
+		wNAME99 = [0,"When performing a ATK based attack, ","When performing a short-range ATK based attack, ","When performing a long-range ATK based attack, ","When performing a magical attack, ","When performing a physical or magical attack, ","When receiving ATK based damage, ","When receiving short-range ATK based damage, ","When receiving long-range ATK based damage, ","When receiving magical damage, ","When receiving ATK based or magical damage, "];
 		wNAME98 = ["low","medium","high"];
 		CBIstr += wNAME99[AutoSpellSkill[nC2][5]] +"there's a ";
     //Checks the 6th line in the AutoSpellSKill array to see if its name should be wName98
@@ -4176,6 +4188,9 @@ w_SE = [[737,436,475,"NULL"]
 ,[1719,1715,887,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Black Frame Glasses
 ,[1720,1715,643,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Dark Blinder
 ,[1727,1725,1726,"NULL"] //Custom TalonRO - Bankruptcy Hat + Mask
+,[1731,1728,1730,"NULL"] //Custom TalonRO - Antonio's Coat + Red Stocking Boots
+,[1732,1728,1729,"NULL"] //Custom TalonRO - Antonio's Coat + Antonio's Red Bag
+,[1733,1728,1729,1730,"NULL"] //Custom TalonRO - Antonio's Coat + Antonio's Red Bag + Red Stocking Boots
 ];
 
 SE_MAXnum = w_SE.length -1;
