@@ -5887,8 +5887,7 @@ function KakutyouKansuu(){
 		SM_MOD = 0;
 		TU_MOD = 0; //[Custom TalonRO - 2018-06-02 - New Attack Modifier for Turtles] [Kato]
 
-		B_MOD += n_tok[80];
-		B_MOD += n_tok[26];
+		B_MOD += (2 == n_Enekyori ? n_tok[97] : n_tok[26] + n_tok[80]);
 
 		for(var i=0;i<=7;i++){
 			if(n_A_card[i] == 244){G_MOD += 40;}
@@ -5901,12 +5900,16 @@ function KakutyouKansuu(){
 		for(i=22;i<30;i+=2)
 			if(n_A_PassSkill9[i]==5)
 				SM_MOD += n_A_PassSkill9[i+1];
+		SM_MOD = (2 == n_Enekyori ? 0 : SM_MOD);
+		
 		//custom TalonRO ID_ARG - Guardian damage modifier
 		for(i=22;i<30;i+=2)
 			if(n_A_PassSkill9[i]==4)
 				G_MOD += n_A_PassSkill9[i+1];
+		G_MOD = (2 == n_Enekyori ? 0 : G_MOD);
 
 		if(EquipNumSearch(1547)){TU_MOD += 20;}  //[Custom TalonRO - 2018-06-02 - New Attack Modifier for Turtles - Item Droping Permeter] [Kato]
+		TU_MOD = (2 == n_Enekyori ? 0 : TU_MOD);
 
 		F_M1 = eval(document.calcForm.R_OBJ.value);
 		F_M2 = eval(document.calcForm.S_OBJ.value);
@@ -5914,41 +5917,41 @@ function KakutyouKansuu(){
 		F_M4 = eval(document.calcForm.B_OBJ.value);
 		F_M5 = eval(document.calcForm.SP_OBJ.value);
 
-		if(F_M1 == 0){F_M1 = n_tok[30];}
-		else if(F_M1 == 1){F_M1 = n_tok[31];}
-		else if(F_M1 == 2){F_M1 = n_tok[32];}
-		else if(F_M1 == 3){F_M1 = n_tok[33];}
-		else if(F_M1 == 4){F_M1 = n_tok[34];}
-		else if(F_M1 == 5){F_M1 = n_tok[35];}
-		else if(F_M1 == 6){F_M1 = n_tok[36];}
-		else if(F_M1 == 7){F_M1 = n_tok[37];}
-		else if(F_M1 == 8){F_M1 = n_tok[38];}
-		else if(F_M1 == 9){F_M1 = n_tok[39];}
+		if(F_M1 == 0){F_M1 = (2 == n_Enekyori ? n_tok[170] : n_tok[30]);}
+		else if(F_M1 == 1){F_M1 = (2 == n_Enekyori ? n_tok[171] : n_tok[31]);}
+		else if(F_M1 == 2){F_M1 = (2 == n_Enekyori ? n_tok[172] : n_tok[32]);}
+		else if(F_M1 == 3){F_M1 = (2 == n_Enekyori ? n_tok[173] : n_tok[33]);}
+		else if(F_M1 == 4){F_M1 = (2 == n_Enekyori ? n_tok[174] : n_tok[34]);}
+		else if(F_M1 == 5){F_M1 = (2 == n_Enekyori ? n_tok[175] : n_tok[35]);}
+		else if(F_M1 == 6){F_M1 = (2 == n_Enekyori ? n_tok[176] : n_tok[36]);}
+		else if(F_M1 == 7){F_M1 = (2 == n_Enekyori ? n_tok[177] : n_tok[37]);}
+		else if(F_M1 == 8){F_M1 = (2 == n_Enekyori ? n_tok[178] : n_tok[38]);}
+		else if(F_M1 == 9){F_M1 = (2 == n_Enekyori ? n_tok[179] : n_tok[39]);}
 
-		if(F_M2 == 0){F_M2 = n_tok[27];}
-		else if(F_M2 == 1){F_M2 = n_tok[28];}
-		else if(F_M2 == 2){F_M2 = n_tok[29];}
+		if(F_M2 == 0){F_M2 = (2 == n_Enekyori ? 0 : n_tok[27]);}
+		else if(F_M2 == 1){F_M2 = (2 == n_Enekyori ? 0 : n_tok[28]);}
+		else if(F_M2 == 2){F_M2 = (2 == n_Enekyori ? 0 : n_tok[29]);}
 
-		if(F_M3 == 0){F_M3 = n_tok[40];}
-		else if(F_M3 == 1){F_M3 = n_tok[41];}
-		else if(F_M3 == 2){F_M3 = n_tok[42];}
-		else if(F_M3 == 3){F_M3 = n_tok[43];}
-		else if(F_M3 == 4){F_M3 = n_tok[44];}
-		else if(F_M3 == 5){F_M3 = n_tok[45];}
-		else if(F_M3 == 6){F_M3 = n_tok[46];}
-		else if(F_M3 == 7){F_M3 = n_tok[47];}
-		else if(F_M3 == 8){F_M3 = n_tok[48];}
-		else if(F_M3 == 9){F_M3 = n_tok[49];}
+		if(F_M3 == 0){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[350] : n_tok[40]);}
+		else if(F_M3 == 1){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[351] : n_tok[41]);}
+		else if(F_M3 == 2){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[352] : n_tok[42]);}
+		else if(F_M3 == 3){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[353] : n_tok[43]);}
+		else if(F_M3 == 4){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[354] : n_tok[44]);}
+		else if(F_M3 == 5){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[355] : n_tok[45]);}
+		else if(F_M3 == 6){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[356] : n_tok[46]);}
+		else if(F_M3 == 7){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[357] : n_tok[47]);}
+		else if(F_M3 == 8){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[358] : n_tok[48]);}
+		else if(F_M3 == 9){F_M3 = (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[359] : n_tok[49]);}
 
-		if(F_M4 == 0){F_M4 = n_tok[80];}
+		if(F_M4 == 0){F_M4 = (2 == n_Enekyori ? n_tok[96] : n_tok[80]);}
 		else if(F_M4 == 1){F_M4 = B_MOD;}
 
 		if(F_M5 == 0){F_M5 = 0;}
-		else if(F_M5 == 1){F_M5 = n_tok[81];}
-		else if(F_M5 == 2){F_M5 = n_tok[84];}
+		else if(F_M5 == 1){F_M5 = (2 == n_Enekyori ? 0 : n_tok[81]);}
+		else if(F_M5 == 2){F_M5 = (2 == n_Enekyori ? 0 : n_tok[84]);}
 		else if(F_M5 == 3){F_M5 = G_MOD;}
-		else if(F_M5 == 4){F_M5 = n_tok[82];}
-		else if(F_M5 == 5){F_M5 = n_tok[83];}
+		else if(F_M5 == 4){F_M5 = (2 == n_Enekyori ? 0 : n_tok[82]);}
+		else if(F_M5 == 5){F_M5 = (2 == n_Enekyori ? 0 : n_tok[83]);}
 		else if(F_M5 == 6){F_M5 = SM_MOD;}
 
 		F_M1 = 1+(F_M1/100);
@@ -5959,47 +5962,47 @@ function KakutyouKansuu(){
 		F_MOD = Math.round((F_M1*F_M2*F_M3*F_M4*F_M5)*100);
 
 		CBIstr = "<table border=0>";
-		CBIstr += "<tr><td><b>" + SyuzokuOBJ[0] +"</b></td><td><b>"+ n_tok[30] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + SyuzokuOBJ[1] +"</b></td><td><b>"+ n_tok[31] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + SyuzokuOBJ[2] +"</b></td><td><b>"+ n_tok[32] +" %" + "</b></td></tr>";
-		CBIstr += "<tr><td><b>" + SyuzokuOBJ[3] +"</b></td><td><b>"+ n_tok[33] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + SyuzokuOBJ[4] +"</b></td><td><b>"+ n_tok[34] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + SyuzokuOBJ[5] +"</b></td><td><b>"+ n_tok[35] +" %" + "</b></td></tr>";
-		CBIstr += "<tr><td><b>" + SyuzokuOBJ[6] +"</b></td><td><b>"+ n_tok[36] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + SyuzokuOBJ[7] +"</b></td><td><b>"+ n_tok[37] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + SyuzokuOBJ[8] +"</b></td><td><b>"+ n_tok[38] +" %" + "</b></td></tr>";
-		CBIstr += "<tr><td></td><td></td><td><b>" + SyuzokuOBJ[9] +"</b></td><td><b>"+ n_tok[39] +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td><b>" + SyuzokuOBJ[0] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[170] : n_tok[30]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + SyuzokuOBJ[1] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[171] : n_tok[31]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + SyuzokuOBJ[2] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[172] : n_tok[32]) +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td><b>" + SyuzokuOBJ[3] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[173] : n_tok[33]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + SyuzokuOBJ[4] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[174] : n_tok[34]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + SyuzokuOBJ[5] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[175] : n_tok[35]) +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td><b>" + SyuzokuOBJ[6] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[176] : n_tok[36]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + SyuzokuOBJ[7] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[177] : n_tok[37]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + SyuzokuOBJ[8] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[178] : n_tok[38]) +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td></td><td></td><td><b>" + SyuzokuOBJ[9] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[179] : n_tok[39]) +" %" + "</b></td></tr>";
 		CBIstr += "</table><center>----//----</center>";
 
 		CBIstr += "<table border=0>";
-		CBIstr += "<tr><td><b>" + ZokuseiOBJ[0] +"</b></td><td><b>"+ n_tok[40] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + ZokuseiOBJ[1] +"</b></td><td><b>"+ n_tok[41] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + ZokuseiOBJ[2] +"</b></td><td><b>"+ n_tok[42] +" %" + "</b></td></tr>";
-		CBIstr += "<tr><td><b>" + ZokuseiOBJ[3] +"</b></td><td><b>"+ n_tok[43] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + ZokuseiOBJ[4] +"</b></td><td><b>"+ n_tok[44] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + ZokuseiOBJ[5] +"</b></td><td><b>"+ n_tok[45] +" %" + "</b></td></tr>";
-		CBIstr += "<tr><td><b>" + ZokuseiOBJ[6] +"</b></td><td><b>"+ n_tok[46] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + ZokuseiOBJ[7] +"</b></td><td><b>"+ n_tok[47] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + ZokuseiOBJ[8] +"</b></td><td><b>"+ n_tok[48] +" %" + "</b></td></tr>";
-		CBIstr += "<tr><td></td><td></td><td><b>" + ZokuseiOBJ[9] +"</b></td><td><b>"+ n_tok[49] +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td><b>" + ZokuseiOBJ[0] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[350] : n_tok[40]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + ZokuseiOBJ[1] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[351] : n_tok[41]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + ZokuseiOBJ[2] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[352] : n_tok[42]) +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td><b>" + ZokuseiOBJ[3] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[353] : n_tok[43]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + ZokuseiOBJ[4] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[354] : n_tok[44]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + ZokuseiOBJ[5] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[355] : n_tok[45]) +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td><b>" + ZokuseiOBJ[6] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[356] : n_tok[46]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + ZokuseiOBJ[7] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[357] : n_tok[47]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + ZokuseiOBJ[8] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[358] : n_tok[48]) +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td></td><td></td><td><b>" + ZokuseiOBJ[9] +"</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[340 + n_A_Weapon_zokusei] + n_tok[359] : n_tok[49]) +" %" + "</b></td></tr>";
 		CBIstr += "</table><center>----//----</center>";
 
 		CBIstr += "<table border=0>";
-		CBIstr += "<tr><td><b>" + "Goblin</b></td><td><b>"+ n_tok[81] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + "Golem</b></td><td><b>"+ n_tok[84] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + "Kobold</b></td><td><b>"+ n_tok[82] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + "Orc</b></td><td><b>"+ n_tok[83] +" %" + "</b></td>";
+		CBIstr += "<tr><td><b>" + "Goblin</b></td><td><b>"+ (2 == n_Enekyori ? 0 : n_tok[81]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + "Golem</b></td><td><b>"+ (2 == n_Enekyori ? 0 : n_tok[84]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + "Kobold</b></td><td><b>"+ (2 == n_Enekyori ? 0 : n_tok[82]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + "Orc</b></td><td><b>"+ (2 == n_Enekyori ? 0 : n_tok[83]) +" %" + "</b></td>";
 		CBIstr += "<td><b>" + "Turtle</b></td><td><b>"+ TU_MOD +" %" + "</b></td></tr>"; //[Custom TalonRO - 2018-06-02 - New Attack Modifier for Turtles] [Kato]
 		CBIstr += "<tr><td><b>" + "Guardian</b></td><td><b>"+ G_MOD +" %" + "</b></td>";
 		CBIstr += "<td><b>" + "Satan Morroc</b></td><td><b>"+ SM_MOD +" %" + "</b></td>";
 		CBIstr += "<td><b>" + "Boss</b></td><td><b>"+ B_MOD +" %" + "</b></td>";
-		CBIstr += "<td><b>" + "Normal</b></td><td><b>"+ n_tok[80] +" %" + "</b></td></tr>";
+		CBIstr += "<td><b>" + "Normal</b></td><td><b>"+ (2 == n_Enekyori ? n_tok[96] : n_tok[80]) +" %" + "</b></td></tr>";
 		CBIstr += "</table><center>----//----</center>";
 
 		CBIstr += "<table border=0>";
-		CBIstr += "<tr><td><b>" + "Small</b></td><td><b>"+ n_tok[27] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + "Medium</b></td><td><b>"+ n_tok[28] +" %" + "</b></td>";
-		CBIstr += "<td><b>" + "Large</b></td><td><b>"+ n_tok[29] +" %" + "</b></td></tr>";
+		CBIstr += "<tr><td><b>" + "Small</b></td><td><b>"+ (2 == n_Enekyori ? 0 : n_tok[27]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + "Medium</b></td><td><b>"+ (2 == n_Enekyori ? 0 : n_tok[28]) +" %" + "</b></td>";
+		CBIstr += "<td><b>" + "Large</b></td><td><b>"+ (2 == n_Enekyori ? 0 : n_tok[29]) +" %" + "</b></td></tr>";
 		CBIstr += "</table>";
 
 		CBIstr += "<hr><table border=0>";

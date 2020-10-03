@@ -7364,7 +7364,6 @@ function calc()
 
 	n_A_DMG[1] = (n_A_DMG[0] + n_A_DMG[2]) / 2;
 
-
 	n_Enekyori=0;
 	n_A_CriATK = [0,0,0];
 	n_A_CriATK[1] = n_A_ATK + (n_A_WeaponLV_Minplus + n_A_WeaponLV_Maxplus) /2 + Math.floor(n_A_Weapon_ATK * wCSize);
@@ -7433,6 +7432,8 @@ function calc()
 	debug_atk="\n --- (calc) ---";
 	debug_atk+="\nb_BattleCalc999:"+n_A_DMG[1];
 	BattleCalc999();
+	// Update Extended Info
+	KakutyouKansuu();
 	debug_atk+="\na_BattleCalc999 (w_DMG[1]):"+w_DMG[1]+"\n\tn_A_DMG[1]:"+n_A_DMG[1];
 
 	if(Taijin==1 && n_Enekyori==0){
@@ -7470,7 +7471,6 @@ function calc()
 
 	for(var i=0;i<InnStr.length;i++)
 		myInnerHtml("strID_"+i,InnStr[i],0);
-
 }
 
 

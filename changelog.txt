@@ -3,6 +3,7 @@
 - Fixed Palace Guard refine bonus
 - Added HJ and EQ skills to Lost Dragon
 - Fixed Tarou + Clamp cards combo applying twice
+- Added magical attack modifiers to Extended Info - Attack Modifiers
 
 [2020-10-01]
 - Added Bankruptcy set
