@@ -783,13 +783,13 @@ HJ_MOBS = {
 	332:10,	// Lord of Death, Lv10
 	546:2,	// Nidhoggr's Shadow, Lv2
 	690:10,	// Corrupted Soul, Lv10
-	496:5	// Wounded Morroc, Lv5
-			// Lost Dragon, Lv1
+	496:5,	// Wounded Morroc, Lv5
+	805:1	// Lost Dragon, Lv1
 }
 
 EQ_MOBS = {
 	492:1,	// Incarnation of Morroc [Golem], Lv1
-			// Lost Dragon, Lv1
+	805:1,	// Lost Dragon, Lv1
 	534:2,	// Hardrock Mammoth, Lv2
 	578:2,	// Kraken, Lv2
 	546:3,	// Nidhoggr's Shadow, Lv3
