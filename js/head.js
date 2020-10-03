@@ -2900,13 +2900,13 @@ function BattleHiDam(){
 	}
 
 	// Sting's Slap Cocktail - Resistance to Physical attacks +10%
-	if (0 == n_Enekyori && sting_slap_cocktail) {
+	if (n_Enekyori < 2 && sting_slap_cocktail) {
 		for (i = 0 ; i <= 6; ++i)
 				w_HiDam[i] -= Math.floor(w_HiDam[i] * 10 / 100);
 	}
 	
 	// Blossoming Geographer Cocktail - Resistance to Magical attacks +10%
-	if (1 == n_Enekyori && blossoming_geographer_cocktail) {
+	if (2 == n_Enekyori && blossoming_geographer_cocktail) {
 		for (i = 0 ; i <= 6; ++i)
 				w_HiDam[i] -= Math.floor(w_HiDam[i] * 10 / 100);
 	}
