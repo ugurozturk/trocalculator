@@ -4500,10 +4500,10 @@ function StPlusCalc()
 		if(n_A_JobSearch()==1)
 			wSPC_STR += Math.floor(n_A_HEAD_DEF_PLUS /3);
 
-	//Tarou+Cramp Combo
-	if(n_A_card[14] == 98 && CardNumSearch(273)){wSPC_STR += 3;}
-	if(n_A_card[15] == 98 && CardNumSearch(273)){wSPC_STR += 3;}
-	if(n_A_card[14] == 98 && n_A_card[15] == 98 && CardNumSearch(273) == 1){wSPC_STR -= 3;}
+	// Tarou#98 + Cramp#273 Combo
+	if ((n_A_card[14] == 98 || n_A_card[15] == 98) && CardNumSearch(273))
+		wSPC_STR += 3;
+
 	//Orc Hero Headdress [For Every 4 Refines] STR + 1 - [Loa] - 2018-07-03
 	if(EquipNumSearch(1142)){
 		wSPC_STR += Math.floor(n_A_HEAD_DEF_PLUS/4);

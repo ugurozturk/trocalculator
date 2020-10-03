@@ -1,4 +1,8 @@
 [2020-10-01]
+- Added HJ and EQ skills to Lost Dragon
+- Fixed Tarou + Clamp cards combo applying twice
+
+[2020-10-01]
 - Added Bankruptcy set
 - Added Lost Dragon MvP
 - Added Summer Cocktails
