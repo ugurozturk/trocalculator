@@ -602,6 +602,7 @@ InsertSkill = [
 [58,0,227,1],
 [59,0,33,1],
 [60,1,53,4],
+[61,1,10,1], // Combo Beer Hat + Empty Liquor Bottle - Moving HP Recovery lv 1
 ];
 
 

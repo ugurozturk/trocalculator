@@ -296,6 +296,7 @@ Effect list:
 	220: When [value] == 58, Allows usage of the skill [Spell Breaker]Lv 1
 	220: When [value] == 59, Allows usage of the skill [Aqua Benedicta]Lv 1
 	220: When [value] == 60, Allows usage of the skill [Fire Wall]Lv 4
+	220: When [value] == 61, Allows usage of the skill [HP Recovery While Moving]Lv 1
 	221: When X, there's a Y chance to cast the skill Z (defined in AutoSpellSkill, see below)
 	     AutoSpellSkill array looks like this:
 	     [

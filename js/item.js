@@ -853,7 +853,7 @@ ItemOBJ = [
 ,[830,60,1072,7,0,1,60,60,"Diablos Armor","",0,1,2,5,1,13,150,151,5,159,5,0]
 ,[831,61,63,5,0,0,60,50,"Sacred Scripture","",0,4,1,75,3,76,3,0]
 ,[832,61,113,6,0,1,200,80,"Cross Shield","",0,1,1,5324,30,5159,30,5384,30,0]
-,[833,61,1055,2,0,1,100,70,"Book of Charms Vol. 1","","10% chance of auto casting Stun on an enemy when the user receives Physical Damage",4,2,19,3,0]
+,[833,61,55,2,0,1,100,70,"Book of Charms Vol. 1","","10% chance of auto casting Stun on an enemy when the user receives Physical Damage",4,2,19,3,0]
 ,[834,62,1,2,0,1,25,60,"Skin of Ventoss","",0,9,10,13,200,19,2,0]
 ,[835,62,1079,5,0,1,25,0,"Diablos Manteau","",0,13,100,60,5,1495,10,1496,10,0]
 ,[836,63,1079,4,0,1,25,0,"Diablos Boots","","Maximum HP + 10 * Base Level",0]
@@ -1777,11 +1777,18 @@ ItemOBJ = [
 ,[1726,51,0,0,0,0,49,49,"Bankruptcy Mask","","<b>Middle and Lower Headgear</b><br>Those who have lost everything due to bankruptcy are usually in deep sorrow. When you put on this hat, you can hide your sadness and climb up again!<br>When performing Magical attacks, there's a chance to get increased HP and SP recovery for 10 seconds.",0]
 ,[1727,100,0,0,0,0,0,0,"Bankruptcy Hat + Mask","","<br>[Every Refine Level After +2] on Bankruptcy Hat.<br>[Neutral] element resistance + 1%",13,100,0]
 ,[1728,60,0,5,0,1,50,40,"Antonio's Coat","","<b>[Every refine level]</b><br>ATK & MATK + 1",7,1,15,5,0]
-,[1729,62,0,3,0,1,60,40,"Antonio's Red Bag","","Every time you kill a monster, there is a small chance to drop Candy.<br><b>[Every refine level]</b><br>Slightly increased Candy drop rate",19,4,152,20,0]
+,[1729,62,0,3,0,1,60,40,"Antonio's Red Bag","","Every time you kill a monster, there is a small chance to drop Candy.<br><b>[Every Refine Level]</b><br>Slightly increased Candy drop rate",19,4,152,20,0]
 ,[1730,63,0,3,0,1,50,40,"Red Stocking Boots","","<b>[Every refine level]</b><br>MDEF + 1<br>Increase natural HP and SP regeneration by 2%.",15,5,6,3,221,145,0]
 ,[1731,100,0,0,0,0,0,0,"Antonio's Coat + Red Stocking Boots","","[Every refine level] of Red Stocking Boots<br>FLEE + 1",16,10,0]
 ,[1732,100,0,0,0,0,0,0,"Antonio's Coat + Antonio's Red Bag","","[Every refine level] of Antonio's Red Bag<br>HIT + 1",12,3,0]
-,[1732,100,0,0,0,0,0,0,"Antonio's Coat + Antonio's Red Bag + Red Stocking Boots","","Increase Candy heal rate by 100%.<br>Increase Lucky Candy heal rate by 200%.<br>Casting can't be interrupted.",127,10,128,10,152,10,220,23,0]
+,[1733,100,0,0,0,0,0,0,"Antonio's Coat + Antonio's Red Bag + Red Stocking Boots","","Increase Candy heal rate by 100%.<br>Increase Lucky Candy heal rate by 200%.<br>Casting can't be interrupted.",127,10,128,10,152,10,220,23,0]
+,[1734,50,0,6,0,1,64,64,"Insectivorous Plant Hairpin","","A hairpin made of the cute leaves of a Masukipura plant.<br>It shows no mercy to any insects when eating them.",14,64,19,4,34,10,0]
+,[1735,9,96,100,4,2,200,50,"Detecting Staff","","A useful tool popularized by treasure hunters.<br>Useful for finding and fighting against metal.<br>Increases magical damage against Kiel Dungeon Monsters (except Alice), Juperos Ruins Monsters, and Guardians by 5%<br>Ignores 10% MDEF of Kiel Dungeon Monsters (except Alice), Juperos Ruins Monsters, and Guardians<br><b>[Every Refine Level]</b><br>Ignore MDEF and magic damage theming bonuses increase by 1%",4,2,5,2,89,15,0]
+,[1736,8,95,110,3,3,70,50,"Empty Liquor Bottle","","An empty liquor bottle! If you break it, it could be really sharp.<br><b>[Every Refine Level]</b><br> CRIT + 1",10,3,70,10,138,3,0]
+,[1737,100,0,0,0,0,0,0,"Empty Liquor Bottle + Beer Hat","","Skills [Increase Recuperative Power] and [Increase Spiritual Power] are increased to lv 10",9,20,220,61,0]
+,[1738,8,95,100,3,3,70,50,"Spoon","","The cursed spoon... So the legends were true!<br><b>[Every Refine Level]</b><br> HIT + 3",12,8,133,2,0]
+,[1739,50,0,2,0,1,10,1,"Preschool Hat","","A magical hat that protects the child's head from the scorching sun.<br><b>[Refine Rate 6-10]</b>Increases resistance to Fire Property by an additional 5%.",13,500,63,5,0]
+,[1740,100,0,0,0,0,0,0,"Preschool Hat + Bunny Slipper","","If the base level is less than or equal to 79, increase Movement Speed.",91,5,93,5,94,5,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3549,6 +3556,13 @@ ItemID = [
 ,[1731,2,21149,21148]
 ,[1732,2,21149,21150]
 ,[1733,2,21149,21148,21150]
+,[1734,1,18704]
+,[1735,1,2058]
+,[1736,1,16060]
+,[1737,2,16060,16039]
+,[1738,1,16039]
+,[1739,1,18860]
+,[1740,2,18860,2415]
 ];
 
 /*
@@ -4191,6 +4205,8 @@ w_SE = [[737,436,475,"NULL"]
 ,[1731,1728,1730,"NULL"] //Custom TalonRO - Antonio's Coat + Red Stocking Boots
 ,[1732,1728,1729,"NULL"] //Custom TalonRO - Antonio's Coat + Antonio's Red Bag
 ,[1733,1728,1729,1730,"NULL"] //Custom TalonRO - Antonio's Coat + Antonio's Red Bag + Red Stocking Boots
+,[1737,1736,1240,"NULL"] //Custom TalonRO - Empty Liquor Bottle + Beer Hat
+,[1740,1739,781,"NULL"] //Custom TalonRO - Preschool Hat + Bunny Slipper
 ];
 
 SE_MAXnum = w_SE.length -1;

@@ -1,3 +1,9 @@
+[2020-10-24]
+- Added Preschool Hat
+- Added new Summer Event items
+- Added Insectivorous Plant Hairpin
+- Fixed Book of Charms class restriction
+
 [2020-10-03]
 - Added Antonio's set
 - Fixed Palace Guard refine bonus

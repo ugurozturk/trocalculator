@@ -1973,6 +1973,9 @@ function StAllCalc()
 	// Antonio's Coat + Antonio's Red Bag Combo#1732 [Every Refine Level] of Garment - HIT + 1
 	n_tok[8] += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1732);
 
+	// Spoon#1738 [Every Refine Level] - HIT + 3
+	n_tok[8] += n_A_Weapon_ATKplus * 3 * EquipNumSearch(1738);
+
 	n_A_HIT += n_tok[8];
 
 	// //negative hit correction- [Loa] - 2018-06-18
@@ -2309,6 +2312,10 @@ function StAllCalc()
 	myInnerHtml("A_LUCKY",n_A_LUCKY,0);
 
 	n_A_CRI = 1 + n_A_LUK / 3.0;
+	
+	// Empty Liquor Bottle#1736 [Every Refine Level] - CRIT + 1
+	n_tok[10] += n_A_Weapon_ATKplus * EquipNumSearch(1736);
+	
 	w=0;
 	w += n_tok[10];
 
@@ -3736,6 +3743,10 @@ function StAllCalc()
 		n_tok[62] -= 15;
 	}
 
+	// Preschool Hat#1739 - [Refine Level > 5] Fire resistance + 5%
+	if (EquipNumSearch(1739) && n_A_HEAD_DEF_PLUS > 5)
+		n_tok[63] += 5; 
+
 	if(EquipNumSearch(624))
 		n_tok[191] += n_A_Weapon_ATKplus;
 
@@ -3895,6 +3906,13 @@ function StAllCalc()
 		n_tok[295] += n_tok[296];
 	if(n_B[19] == 1)
 		n_tok[295] += n_tok[297];
+	
+	/*
+		Detecting Staff#1735 - Ignores 10% MDEF of Kiel Dungeon Monsters (except Alice), Juperos Ruins Monsters, and Guardians
+		[Every Refine Level] Ignore MDEF % increased by 1%"
+	*/
+	if (EquipNumSearch(1735) && (IsAKielDungeonMonster() || IsAJuperosRuinsMonster()))
+		n_tok[295] += 10 + n_A_Weapon_ATKplus;
 	
 	/*
 		Shadow Staff#1713 - [Every Refine Level]
@@ -4217,7 +4235,10 @@ function StAllCalc()
 	}
 
 	ClickB_Enemy();
+	
+	// Update Extended Information
 	KakutyouKansuu();
+	KakutyouKansuu2();
 }}
 
 function StPlusCalc()
@@ -5733,7 +5754,10 @@ function KakutyouKansuu(){
 		}
 		//Beer Hat - [Loa] - 2018-07-04
 		else if(EquipNumSearch(1240)){
-			w = Math.floor((5 + n_A_MaxHP / 500) * 3);
+			if (EquipNumSearch(1736)) //Beer Hat + Empty Liquor Bottle Combo
+				w = Math.floor((5 + n_A_MaxHP / 500) * 10);
+			else
+				w = Math.floor((5 + n_A_MaxHP / 500) * 3);
 			myInnerHtml("A_KakutyouData","<br>Regen: "+w,0);
 		}else
 			myInnerHtml("A_KakutyouData","",0);
@@ -5746,7 +5770,10 @@ function KakutyouKansuu(){
 		}
 		//Beer Hat - [Loa] - 2018-07-04
 		else if(EquipNumSearch(1240)){
-			w = Math.floor((3 + n_A_MaxSP / 500) * 3);
+			if (EquipNumSearch(1736)) //Beer Hat + Empty Liquor Bottle Combo
+				w = Math.floor((3 + n_A_MaxSP / 500) * 10);
+			else
+				w = Math.floor((3 + n_A_MaxSP / 500) * 3);
 			myInnerHtml("A_KakutyouData","<br>Regen: "+w,0);
 		}else
 			myInnerHtml("A_KakutyouData","",0);
@@ -6555,14 +6582,14 @@ function KakutyouKansuu2(){
 			document.calcForm.A_KakutyouSelNum.value=10;
 			return;
 		}
-		//Beer Hat - [Loa] - 2018-07-04
-		else if(EquipNumSearch(1240)){
+		else if (EquipNumSearch(1737)) //Beer Hat + Empty Liquor Bottle Combo
+			myInnerHtml("A_KakutyouSel","Increased HP Recovery Level: 10",0);
+		else if (EquipNumSearch(1240)) //Beer Hat - [Loa] - 2018-07-04
 			myInnerHtml("A_KakutyouSel","Increased HP Recovery Level: 3",0);
-			return;
-		}else{
+		else
 			myInnerHtml("A_KakutyouSel","Not Available for this Class",0);
-			return;
-		}
+		
+		return;
 	}
 	if(wKK == 3){
 		if(n_A_JOB==5||n_A_JOB==9||n_A_JOB==11||n_A_JOB==18||n_A_JOB==20||n_A_JOB==23||n_A_JOB==25||n_A_JOB==32||n_A_JOB==39||n_A_JOB==44){
@@ -6575,14 +6602,14 @@ function KakutyouKansuu2(){
 			document.calcForm.A_KakutyouSelNum.value=10;
 			return;
 		}
-		//Beer Hat - [Loa] - 2018-07-04
-		else if(EquipNumSearch(1240)){
+		else if (EquipNumSearch(1737)) //Beer Hat + Empty Liquor Bottle Combo
+			myInnerHtml("A_KakutyouSel","Increased SP Recovery Level: 10",0);
+		else if (EquipNumSearch(1240)) //Beer Hat - [Loa] - 2018-07-04
 			myInnerHtml("A_KakutyouSel","Increased SP Recovery Level: 3",0);
-			return;
-		}else{
+		else
 			myInnerHtml("A_KakutyouSel","Not Available for this Class",0);
-			return;
-		}
+
+		return;
 	}
 	if(wKK == 4){
 		if(n_A_JOB==15||n_A_JOB==29){
@@ -7132,6 +7159,16 @@ function SUPURE_MONSTER(){
 			return 1;
 	}
 	return 0;
+}
+
+// Juperos Ruins, Apocalypse#9, Venatu#384-388, Dimik#389-393, Gate Controller#394, Vesper#395
+function IsAJuperosRuinsMonster(){
+	return (n_B[0] == 9 || (n_B[0] >= 384 && n_B[0] <= 395));
+}
+
+// Kiel Dungeon (Alice excluded), Constant#430, Aliza#431, Alicel#432, Aliot#433, Kiel#434, Kiel D-01#435
+function IsAKielDungeonMonster(){
+	return (n_B[0] >= 430 && n_B[0] <= 435)
 }
 
 n_NtoS =["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
