@@ -951,6 +951,14 @@ function StAllCalc()
 		n_tok[17] += 30;
 	}
 	/*
+		Gloirous Morning Star (Monk demi-human reduction)
+		[Monk/Champion Class]
+		55% Demi-human instead of 75%
+	*/
+	if(EquipNumSearch(1086) && n_A_JobSearch2() == 15) {
+		n_tok[37] -= 20;
+	}
+	/*
 		Glorious Revolver (damage)
 		[Refine level 8-10]
 		ATK + 25
