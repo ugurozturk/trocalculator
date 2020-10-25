@@ -1821,10 +1821,17 @@ function BattleCalc999()
 		if(n_A_ActiveSkill==405)
 			w_1senHP = eval(document.calcForm.SkillSubNum.value);
 		else
-			w_1senHP = n_A_MaxHP -1;
+			w_1senHP = n_A_MaxHP;
 
-		w_DMG[0] = (n_A_STR + n_A_ActiveSkillLV) * 40 + w_1senHP * (n_A_BaseLV / 100) * n_A_ActiveSkillLV / 10;
+		w_DMG[0] = Math.floor(n_A_STR * 40 + w_1senHP * 8 * n_A_ActiveSkillLV / 100);
+		
+		// Apply def reduction
 		w_DMG[0] = w_DMG[0] * (100 - n_B[14]) / 100;
+		w_DMG[0] -= n_B[7];
+
+		// Add refine bonus
+		w_DMG[0] += n_A_WeaponLV_seirenATK;
+
 		w_DMG[0] = BaiCI(w_DMG[0]);
 		w_DMG[0] = Math.floor(w_DMG[0] * zokusei[n_B[3]][0]);
 

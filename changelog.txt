@@ -2,6 +2,7 @@
 - Added Preschool Hat
 - Added new Summer Event items
 - Added Insectivorous Plant Hairpin
+- Fixed Final Strike damage computation
 - Fixed Book of Charms class restriction
 
 [2020-10-03]

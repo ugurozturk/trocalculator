@@ -437,7 +437,7 @@ SkillOBJ = [
 [435,10,"Full Buster"],
 [436,10,"Spread Attack"],
 [437,10,"Ground Drift"],
-[438,10,"Final Strike [Max HP-1]"],
+[438,10,"Final Strike [Max HP]"],
 [439,5,"Tarot Card of Fate"],
 [440,1,"Wink of Charm"],
 ];
