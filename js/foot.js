@@ -4476,9 +4476,8 @@ function StPlusCalc()
 		}
 	}
 
-	//custom TalonRO Giant Shield +5% resistance against Large sized monster if refined +9-10
-	if(n_A_LEFT_DEF_PLUS >= 9 && EquipNumSearch(1500))
-		n_tok[192] +=5;
+	// Giant Shield#1500 - [Every Refine Level > 5] Resistance against Large + 1%
+	n_tok[192] += Math.max(0, n_A_LEFT_DEF_PLUS - 5) * EquipNumSearch(1500);
 
 	if(CardNumSearch(185))wSPC_VIT += Math.floor(SU_DEX /18);
 	if(CardNumSearch(187))wSPC_STR += Math.floor(SU_INT /18);
