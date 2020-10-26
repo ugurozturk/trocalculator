@@ -7744,7 +7744,7 @@ function BaiCI(wBaiCI)
 		if(debug_dmg_avg)
 			debug_atk+="\na_wBaiCI:"+wBaiCI;
 
-		if(108<=n_B[0] && n_B[0]<=115 || n_B[0]==319)
+		if(108<=n_B[0] && n_B[0]<=115 || n_B[0]==319 || n_B[0] == 233) 
 			wBaiCI = Math.floor(wBaiCI * (100+n_tok[81]) /100);
 
 		if(116<=n_B[0] && n_B[0]<=120)

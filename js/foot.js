@@ -3380,9 +3380,9 @@ function StAllCalc()
 	if(SkillSearch(322))
 		n_A_CAST = n_A_CAST /2;
 	
-	// Seductive Bathory Cocktail - Cast time -10% (not stacking)
+	// Seductive Bathory Cocktail - Cast time -25% (not stacking)
 	if (seductive_bathory_cocktail)
-		n_A_CAST *= 0.9;
+		n_A_CAST *= 0.75;
 
 	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
 		n_tok[74] += 5;
@@ -4001,6 +4001,10 @@ function StAllCalc()
 	if (EquipNumSearch(927) && n_A_Weapon_ATKplus >= 8) {
 		n_tok[28] += 2 * n_A_Weapon_ATKplus;
 	}
+
+	// Ice Pick[0]#388, Ice Pick[1]#607 - Decreases physical damage against players by 30%
+	if (Taijin && (EquipNumSearch(388) || EquipNumSearch(607)))
+		n_tok[37] -= 30;
 
 	/*
 		Curupira Card (need to be here before the n_tok[340] logic is applied)
@@ -9451,7 +9455,9 @@ drip_of_yggdrasil_cocktail = 0;
 moscow_headless_mule_cocktail = 0;
 blossoming_geographer_cocktail = 0;
 
-document.calcForm.B_ENSKSW.checked = 0;
+if (0 == Taijin)
+	document.calcForm.B_ENSKSW.checked = 0;
+
 document.calcForm.A2_SKILLSW.checked = 0;
 
 n_A_PassSkill9 = new Array();
