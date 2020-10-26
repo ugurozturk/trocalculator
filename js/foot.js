@@ -552,6 +552,7 @@ function StAllCalc()
 		n_A_PassSkill8[30] = eval(A8_Skill30.checked);
 		n_A_PassSkill8[31] = eval(A8_Skill31.checked);
 		n_A_PassSkill8[32] = eval(A8_Skill32.checked);
+		n_A_PassSkill8[35] = eval(A8_Skill35.checked);
 		n_A_IJYOU[0] = eval(A_IJYOU0.value);
 		n_A_IJYOU[1] = eval(A_IJYOU1.value);
 		n_A_IJYOU[2] = eval(A_IJYOU2.checked);
@@ -2061,9 +2062,6 @@ function StAllCalc()
 		n_A_HIT += 3;
 	if(n_A_PassSkill8[20])
 		n_A_HIT += 10;
-	//custom TalonRO Guarana Candy Hit bonus deactivated
-	//if(n_A_PassSkill8[28])
-	//	n_A_HIT += 5;
 
 	//BGFOOD DE HIT
 	if(n_A_PassSkill8[29]){
@@ -3517,6 +3515,9 @@ function StAllCalc()
 		n_tok[36] += 10;
 	}
 	
+	if (n_A_PassSkill8[35]) // Greater Agimat of Ancient Spirit food
+		n_tok[36] += 10;
+	
 	// Zakudam Card#595 [Monk Class] Reduce DemiHuman monster damage to 10%
 	if(CardNumSearch(595) && n_A_JobSearch2() == 15)
 		n_tok[37] -= 10;
@@ -4164,6 +4165,9 @@ function StAllCalc()
 		if(n_A_HEAD_DEF_PLUS >= 7) n_tok[176] += 5;
 		if(n_A_HEAD_DEF_PLUS >= 9) n_tok[176] += 5;
 	}
+
+	if (n_A_PassSkill8[35]) // Greater Agimat of Ancient Spirit food
+		n_tok[176] += 10;
 
 	/*
 		Piranha Card

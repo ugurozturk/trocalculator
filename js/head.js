@@ -4417,15 +4417,16 @@ with(document.calcForm){
 		str += '<TR><TD id="EN836"></TD><TD id="EN837"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Eclage Food</B></Font></TD></TR>';
 		str += '<TR><TD colspan="2" id="EN842"></TD></TR>';
-		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Summer cocktail_checks</B></Font></TD></TR>';
+		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Summer Cocktails</B></Font></TD></TR>';
 		str += '<TR><TD id="EN843"></TD></TR>';
 		str += '<TR><TD id="EN844"></TD></TR><TR><TD id="EN845"></TD></TR>';
 		str += '<TR><TD id="EN846"></TD></TR><TR><TD id="EN847"></TD></TR>';
 		str += '<TR><TD id="EN848"></TD></TR><TR><TD id="EN849"></TD></TR>';
 		str += '<TR><TD id="EN850"></TD></TR><TR><TD id="EN851"></TD></TR>';
-		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Food:</B></Font></TD></TR>';
+		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Food</B></Font></TD></TR>';
 		str += '<TR><TD id="EN816"></TD></TR>';
-		str += '<TR><TD id="EN826"></TD><TD id="EN827"></TD></TR>';
+		str += '<TR><TD id="EN826"></TD></TR>';
+		str += '<TR><TD id="EN827"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Debuffs</B></Font></TD></TR>';
 		str += '<TR><TD id="EN830"></TD><TD id="EN831"></TD></TR>';
 		str += '<TR><TD id="EN832"></TD><TD id="EN833"></TD></TR></table>';
@@ -4541,7 +4542,7 @@ with(document.calcForm){
 			A8_Skill15.options[i] = new Option(i * 5,i);
 		myInnerHtml("EN814",'<input type="checkbox" name="A8_Skill16"onClick="Click_A8(1)">Set CRIT% to 0',0);
 		myInnerHtml("EN815",'<input type="checkbox" name="A8_Skill17"onClick="Click_A8(1)">Advance 1st Spirit (max stats)',0);
-		myInnerHtml("EN816",'<input type="checkbox" name="A8_Skill18"onClick="Click_A8(1)">Buche de Noel[Hit +3, CRIT +7, Recovery rate of skills and items + 3%]',0);
+		myInnerHtml("EN816",'<input type="checkbox" name="A8_Skill18"onClick="Click_A8(1)">	[Hit +3, CRIT +7, Recovery rate of skills and items + 3%]',0);
 		myInnerHtml("EN817",'<input type="checkbox" name="A8_Skill19"onClick="Click_A8(1)">Rune Strawberry Cake[ATK, MATK + 5]',0);
 		myInnerHtml("EN818",'<input type="checkbox" name="A8_Skill20"onClick="Click_A8(1)">Schwartzwald Pine Jubilee[HIT + 10 , Perfect Dodge + 20]',0);
 		myInnerHtml("EN819",'<input type="checkbox" name="A8_Skill21"onClick="Click_A8(1)">Arunafeltz Desert Sandwich[CRIT + 7]',0);
@@ -4552,10 +4553,8 @@ with(document.calcForm){
 		myInnerHtml("EN823",'<input type="checkbox" name="A8_Skill25"onClick="Click_A8(1)">Pinguicula\'s Fruit Jam[Increases physical damage on Splendide maps by 10%]',0);
 		myInnerHtml("EN824",'<input type="checkbox" name="A8_Skill26"onClick="Click_A8(1)">Cornus\' Tear[Increases magical damage on Splendide maps by 10%]',0);
 		myInnerHtml("EN825",'<input type="checkbox" name="A8_Skill27"onClick="Click_A8(1)">Luciola\'s Honey Jam[Decreases damage on Splendide maps by 10%]',0);
-
-		//custom TalonRO
-		//myInnerHtml("EN826",'<input type="checkbox" name="A8_Skill28"onClick="Click_A8(1)">Guarana Candy[ASPD+ 10%, HIT+ 5]',0);
 		myInnerHtml("EN826",'<input type="checkbox" name="A8_Skill28"onClick="Click_A8(1)">Guarana Candy[Increase AGI Level 10]',0);
+		myInnerHtml("EN827",'<input type="checkbox" name="A8_Skill35"onClick="Click_A8(1)">Greater Agimat of Ancient Spirit[Increases physical and magical damage to demon monsters by 10%]',0);
 
 		myInnerHtml("EN830",'Quagmire <select name="A_IJYOU0" onChange="Click_A8(1)"></select>',0);
 		A_IJYOU0.options[0] = new Option("-",0);
@@ -4611,6 +4610,7 @@ with(document.calcForm){
 		A8_Skill30.checked = n_A_PassSkill8[30];
 		A8_Skill31.checked = n_A_PassSkill8[31];
 		A8_Skill32.checked = n_A_PassSkill8[32];
+		A8_Skill35.checked = n_A_PassSkill8[35];
 		A_IJYOU0.value = n_A_IJYOU[0];
 		A_IJYOU1.value = n_A_IJYOU[1];
 		A_IJYOU2.checked = n_A_IJYOU[2];
