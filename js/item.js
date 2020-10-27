@@ -1354,7 +1354,7 @@ ItemOBJ = [
 ,[1329,8,53,175,3,0,0,0,"Stunner [Rental]","",0,131,10,27,40,28,40,29,40,193,1,0] //custom TalonRO rental
 ,[1330,7,0,205,4,0,0,0,"Bloody Axe [Rental]","","Movement speed +25% (non-stacking)",1,20,12,5,193,1,0] //custom TalonRO rental
 ,[1331,11,0,148,4,0,0,0,"Bloody Roar [Rental]","","Recovery 3 HP every 5 seconds",187,1,193,1,0] //custom TalonRO rental
-,[1332,10,92,170,4,0,0,0,"Bow of Evil [Rental]","","[Double Strafe] damage +25%",5,2,193,1,0] //custom TalonRO rental
+,[1332,10,92,170,4,0,0,0,"Bow of Evil [Rental]","",0,5,2,193,1,5040,25,0] //custom TalonRO rental
 ,[1333,4,1,149,4,0,0,0,"Brocca [Rental]","",0,28,20,22,1,193,1,0] //custom TalonRO rental //fixed 2016-05-05
 ,[1334,1,1,129,4,0,0,0,"Combat Knife [Rental]","","Drain 3SP from enemy per hit",57,10,56,-10,187,1,16,10,193,1,0] //custom TalonRO rental
 ,[1335,2,1,199,4,0,0,0,"Excalibur [Rental]","",0,20,6,4,10,6,10,193,1,0] //custom TalonRO rental
@@ -1364,17 +1364,17 @@ ItemOBJ = [
 ,[1339,2,1,160,4,0,0,0,"Immaterial Sword [Rental]","","Drains 45% of target's SP by a low chance<br>Drain 1 SP from its owner on each attack",20,8,193,1,194,1,0] //custom TalonRO rental
 ,[1340,11,0,189,4,0,0,0,"Infiltrator [Rental]","",0,37,70,18,3,9,5,11,2,12,5,193,1,0] //custom TalonRO rental
 ,[1341,13,1,159,4,0,0,0,"Kaiser Knuckle [Rental]","",0,20,4,12,5,31,5,41,10,42,10,43,10,44,10,193,1,0] //custom TalonRO rental
-,[1342,11,0,175,4,0,0,0,"Katar of Speed [Rental]","","[Sonic Blow] damage +25%",12,3,193,1,0] //custom TalonRO rental
-,[1343,8,1,150,3,0,0,0,"Mace of Madness [Rental]","","[Cart Revolution] damage +25%",1,2,193,1,0] //custom TalonRO rental
+,[1342,11,0,175,4,0,0,0,"Katar of Speed [Rental]","",0,12,3,193,1,5083,25,5388,25,0] //custom TalonRO rental
+,[1343,8,1,150,3,0,0,0,"Mace of Madness [Rental]","",0,1,2,193,1,5066,25,,0] //custom TalonRO rental
 ,[1344,1,1,105,4,0,0,0,"Mailbreaker [Rental]","",0,141,5,193,1,0] //custom TalonRO rental
 ,[1345,9,1,165,3,0,0,0,"Mighty Staff [Rental]","","Consume 1 SP with each physical attack",1,10,4,4,89,20,193,1,0] //custom TalonRO rental
-,[1346,13,0,150,4,0,0,0,"Monk Knuckle [Rental]","","[Finger Offensive] damage +25%",4,2,193,1,0] //custom TalonRO rental
+,[1346,13,0,150,4,0,0,0,"Monk Knuckle [Rental]","",0,4,2,193,1,5192,25,0] //custom TalonRO rental
 ,[1347,3,0,204,4,0,0,0,"Muramasa [Rental]","",0,10,30,12,8,193,1,0] //custom TalonRO rental
 ,[1348,2,1,148,4,0,0,0,"Nagan [Rental]","","Enables use of the skill [Double Attack]Lv5",37,40,193,1,0] //custom TalonRO rental
-,[1349,15,0,160,4,0,0,0,"Phenomena Whip [Rental]","","[Throw Arrow] damage +25%",5,2,193,1,0] //custom TalonRO rental
+,[1349,15,0,160,4,0,0,0,"Phenomena Whip [Rental]","",0,5,2,193,1,5207,25,0] //custom TalonRO rental
 ,[1350,12,0,140,3,0,0,0,"Book of Prayer [Rental]","",0,3,2,19,2,16,10,193,1,0] //custom TalonRO rental
 ,[1351,8,53,193,4,0,0,0,"Quadrille [Rental]","",0,31,40,36,40,37,30,193,1,0] //custom TalonRO rental
-,[1352,4,0,160,3,0,0,0,"Spear of Excellent [Rental]","","[Magnum Break] damage +25%",1,2,193,1,0] //custom TalonRO rental
+,[1352,4,0,160,3,0,0,0,"Spear of Excellent [Rental]","",0,1,2,193,1,5007,25,0] //custom TalonRO rental
 ,[1353,9,1,100,2,0,0,0,"Staff of Darkness [Rental]","",0,4,2,89,15,73,-5,193,1,0] //custom TalonRO rental
 ,[1354,9,53,10,3,0,0,0,"Staff of Healing [Rental]","",0,20,6,89,15,91,15,94,15,193,1,0] //custom TalonRO rental
 ,[1355,9,1,71,3,0,0,0,"Survivor's Rod (DEX) [Rental]","",0,89,20,5,4,13,500,193,1,0] //custom TalonRO rental

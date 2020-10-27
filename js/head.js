@@ -7494,6 +7494,8 @@ function BattleCalc(w_atk,w_2)
 		debug_atk+="\n --- (BattleCalc) def-related ---";
 		debug_atk+="\nb_BattleCalc4:"+w_atk;
 	}
+	
+	w_atk = ApplySkillAtkBonus(w_atk)
 
 	if(w_2==10)
 		w_atk += n_A_WeaponLV_seirenATK;
@@ -7811,280 +7813,6 @@ function BaiCI(wBaiCI)
 		debug_atk+="\n --- (BaiCI) card-skill Modifier ---";
 		debug_atk+="\nb_wBaiCI:"+wBaiCI;
 	}
-	//specific skill %damage bonus
-	w1=0;
-	if(n_A_ActiveSkill == 6)
-		if(n_A_SHOES_DEF_PLUS >= 9 && CardNumSearch(362))
-			w1 += 10;
-	if(n_A_ActiveSkill == 76)
-		if(n_A_WeaponType==2 || n_A_WeaponType==3)
-			w1 += 25 * CardNumSearch(464);
-	if(n_A_ActiveSkill == 41)
-		if(n_A_WeaponType==10)
-			w1 += 50 * CardNumSearch(465);
-	if(n_A_ActiveSkill == 40)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1089))
-			w1 += 20;
-	//custom TalonRO rental - Bow of Evil: Double Strafe damage +25%
-	if(n_A_ActiveSkill == 40 && EquipNumSearch(1332))
-		w1 += 25;
-	//custom TalonRO rental - Katar of Speed: Sonic Blow damage +25%
-	if(n_A_ActiveSkill == 83 || n_A_ActiveSkill == 388)
-		if(EquipNumSearch(1342))
-			w1 += 25;
-	//custom TalonRO rental - Mace of Madness: Cart Revolution damage +25%
-	if(n_A_ActiveSkill == 66)
-		if(EquipNumSearch(1343))
-			w1 += 25;
-	//custom TalonRO rental - Monk Knuckle: Finger Offensive damage +25%
-	if(n_A_ActiveSkill == 192)
-		if(EquipNumSearch(1346))
-			w1 += 25;
-	//custom TalonRO rental - Phenomena Whip: Throw Arrow damage +25%
-	if(n_A_ActiveSkill == 207)
-		if(EquipNumSearch(1349))
-			w1 += 25;
-	//custom TalonRO rental - Spear of Excellent: Magnum Break damage +25%
-	if(n_A_ActiveSkill == 7)
-		if(EquipNumSearch(1352))
-			w1 += 25;
-	//custom TalonRO SQI Bonus Twin Fang: Grimtooth damage +25%
-	if(n_A_ActiveSkill == 84)
-		if(EquipNumSearch(1375))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==7) {
-					w1 += 25;
-					break;
-				}
-	//custom TalonRO SQI Bonus Aegis Shield: Shield Chain damage +10%
-	if(n_A_ActiveSkill == 324)
-		if(EquipNumSearch(1376))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==14) {
-					w1 += 10;
-					break;
-				}
-	//custom TalonRO SQI Bonus Artemis Bow: Double Strafe damage +15%
-	if(n_A_ActiveSkill == 40)
-		if(EquipNumSearch(1377))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==24) {
-					w1 += 15;
-					break;
-				}
-	//custom TalonRO SQI Bonus Belmont Whip: Throw Arrow damage +35%
-	if(n_A_ActiveSkill == 207)
-		if(EquipNumSearch(1378))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==36) {
-					w1 += 35;
-					break;
-				}
-	if(n_A_ActiveSkill == 272 && EquipNumSearch(1045)){
-		w1 += n_A_Weapon_ATKplus * 3;
-	}
-	//custom TalonRO Imperial Guard: Shield Chain damage +2% each refine above 6
-	if(n_A_ActiveSkill == 324)
-		if(EquipNumSearch(1459))
-			if(n_A_LEFT_DEF_PLUS > 6)
-				w1 += 2*(n_A_LEFT_DEF_PLUS-6);
-	if(n_A_ActiveSkill == 169){ //backstab
-		//custom TalonRO Black Wing: Back Stab damage +2% each refine
-		if(EquipNumSearch(1463)){
-			w1 += 2*n_A_Weapon_ATKplus;
-		}
-		//brave assassin damascus [Loa] 2018-07-24
-		if(EquipNumSearch(897) && n_A_JobSearch2() == 14){
-			w1 += 10;
-		}
-	}
-	if(n_A_ActiveSkill == 171){ //raid
-		//brave assassin damascus [Loa] 2018-07-24
-		if(EquipNumSearch(897) && n_A_JobSearch2() == 14){
-			w1 += 10;
-		}
-	}
-
-	//custom TalonRO Cannon Spear: Head Crush damage +5% each 3rd refine
-	if(n_A_ActiveSkill == 260)
-		if(EquipNumSearch(1516))
-			w1 += 3*Math.floor(n_A_Weapon_ATKplus/3);
-	/*
-		Assaulter Spear
-		[Refine level 8-10]
-		Increase damage of Spiral Pierce by 20%.
-	*/
-	if (EquipNumSearch(903) && n_A_Weapon_ATKplus >= 8 && n_A_ActiveSkill == 259) {
-		w1 += 20;
-	}
-	/*
-		Glorious Tablet
-		Increase damage with [Flying Side Kick] by 10%.
-	*/
-	if (EquipNumSearch(1094) && (n_A_ActiveSkill == 339 || n_A_ActiveSkill == 305)) {
-		w1 += 10;
-	}
-	/*
-		Brave Assassin Damascus
-		[Crusader Class]
-		Add 5% more damage with [Shield Chain]
-	*/
-	if (EquipNumSearch(897) && n_A_JobSearch2() == 13 && n_A_ActiveSkill == 324) {
-		w1 += 5;
-	}
-	/*
-		Soldier Grenade Launcher
-		[Refine level 6-10]
-		Increase damage of [Ground Drift] by 25%.
-	*/
-	if (EquipNumSearch(929) && n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 437) {
-		w1 += 25;
-	}
-	/*
-		Brave Gladiator Blade
-		[Rogue and Crusader Classes]
-	*/
-	if (EquipNumSearch(900)
-			&& (n_A_JobSearch2() == 13 || n_A_JobSearch2() == 14)
-			&& n_A_ActiveSkill == 161) {
-		// Add 15% more damage with [Holy Cross] skill.
-		w1 += 15;
-		// [Refine level 7-10] Add an additional 5% more damage with [Holy Cross] skill.
-		if (n_A_Weapon_ATKplus >= 7) {
-			w1 += 5;
-		}
-		// For every refine +8 or higher, add 1% more damage with [Holy Cross] skill.
-		if (n_A_Weapon_ATKplus >= 8) {
-			w1 += n_A_Weapon_ATKplus - 7;
-		}
-	}
-	/*
-		Glorious Holy Avenger
-		[Refine Rate 7~10]
-		Increases damage with [Holy Cross] by 15%.
-	*/
-	if (EquipNumSearch(1079) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 161) {
-		w1 += 15;
-	}
-
-	if(n_A_ActiveSkill == 428)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1099))
-			w1 += 2 * n_A_Weapon_ATKplus;
-	if(n_A_ActiveSkill == 430)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1100))
-			w1 += 3 * n_A_Weapon_ATKplus;
-	if(n_A_ActiveSkill == 436)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1102))
-			w1 += 2 * n_A_Weapon_ATKplus;
-	if(n_A_ActiveSkill == 437)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1103))
-			w1 += 2 * n_A_Weapon_ATKplus;
-	if(n_A_ActiveSkill == 6 || n_A_ActiveSkill == 76)
-		if(n_A_ActiveSkillLV == 10 && EquipNumSearch(1159))
-			w1 += 50;
-	if(n_A_ActiveSkill == 65)
-		if((SU_LUK >= 90 || SU_DEX >= 90) && EquipNumSearch(1164))
-			w1 += 15;
-	if(n_A_ActiveSkill == 264)
-		if(EquipNumSearch(1176) && SkillSearch(81) == 10)
-			w1 += 20;
-
-	if(TyouEnkakuSousa3dan == -1 && EquipNumSearch(639))
-		w1 += 15;
-
-	if((n_A_ActiveSkill==83 || n_A_ActiveSkill==388) && SkillSearch(381) && wBCEDPch==0)
-		w1 += 10;
-	
-	if (n_A_ActiveSkill == 264) {
-		// Enforcer Cape#1699 - [Every Refine Level] Increase [Meteor Assault] damage by 1%
-		w1 += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
-		
-		// Brave Carnage Katar#909 - [Refine level 7~10] Increase [Meteor Assault] damage by 15%
-		if(n_A_Weapon_ATKplus >= 7)
-			w1 += 15 * EquipNumSearch(909);
-	}
-	
-	// Glorious Claw#1096
-	if (EquipNumSearch(1096)) {
-		// [Every Refine Level] Increase [Triple Attack], [Chain Combo] and [Combo Finish] damage by 5%
-		if (n_A_ActiveSkill >= 187 || n_A_ActiveSkill <= 189)
-			w1 += 5 * n_A_Weapon_ATKplus;
-		// [Every Refine Level Above +5]  Increase [Tiger Knuckle Fist] and [Chain Crush Combo] damage by 5%
-		if (n_A_ActiveSkill == 289 || n_A_ActiveSkill == 290)
-			w1 += 5 * Math.max(0, n_A_Weapon_ATKplus - 5);
-	}
-
-	// Glorious Claymore#1080 - [Every Refine Level] Increase [Bowling Bash] and [Charge Attack] damage by 1% [Amor]
-	if (n_A_ActiveSkill == 76 || n_A_ActiveSkill == 308)
-		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1080);
-
-	if (n_A_ActiveSkill == 65) {
-		// Glorious Two Handed Axe#1087 - [Every Refine Level] Increase [Mammonite] damage by 2% [Amor]
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1087);
-		
-		// Glorious Cleaver#1088 - [Every Refine Level] Increase [Mammonite] damage by 1% [Amor]
-		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1088);
-	}
-
-	// Glorious Flamberge#1077 - [Every Refine Level] Increase [Bash], [Mammonite] and [Back Stab] damage by 2% [Amor]
-	if (n_A_ActiveSkill == 65 || n_A_ActiveSkill == 6 || n_A_ActiveSkill == 169)
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1077);
-
-	// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Ground Drift] damage by 2% [Amor]
-	if (n_A_ActiveSkill == 437)
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1103);
-
-	if (n_A_ActiveSkill == 418) {
-		// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Triple Action] damage by 1% [Amor]
-		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1103);
-		
-		// Glorious Grenade Launcher#1103, Glorious Rifle#1100, Glorious Shotgun#1102 - [If Scouter Is Not Equipped] Increase [Triple Action] damage by 30%
-		if (!EquipNumSearch(1387))
-			w1 += 30 * (EquipNumSearch(1103) + EquipNumSearch(1100) + EquipNumSearch(1102));
-	}
-
-	// Glorious Huuma Shuriken#1098 - [Every Refine Level] Increase [Throw Huuma Shuriken] damage by 3% [Amor]
-	if (n_A_ActiveSkill == 396)
-		w1 += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1098);
-
-	// Glorious Revolver#1099 - [Every Refine Level] Increase [Rapid Shower] damage by 1% [Amor]
-	if (n_A_ActiveSkill == 428)
-		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1099);
-
-	// Glorious Rifle#1100 - [Every Refine Level] Increase [Tracking] and [Piercing Shot] damage by 3% [Amor]
-	if (n_A_ActiveSkill == 430 || n_A_ActiveSkill == 432)
-		w1 += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1100);
-
-	// Glorious Shotgun#1102 - [Every Refine Level] Increase [Spread Attack] damage by 2% [Amor]
-	if (n_A_ActiveSkill == 436)
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1102);
-
-	// Valorous Battle CrossBow#913 - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
-	if (n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8)
-		w1 += 10 * EquipNumSearch(913);
-
-	// Glorious Hunter Bow#1089 - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
-	if (n_A_ActiveSkill == 40)
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1089);
-
-	/*
-		Valorous Carnage Katar#910
-		[Refine Level 6~10]
-		Increases damage with [Sonic Blow] by 10%.
-		[Refine Level 9~10]
-		Increases damage with [Sonic Blow] by 20%.
-	*/
-	if (n_A_Weapon_ATKplus >= 6 && (83 == n_A_ActiveSkill || 388 == n_A_ActiveSkill) && EquipNumSearch(910)) {
-		w1 += 10;
-		
-		if (n_A_Weapon_ATKplus >= 9)
-			w1 += 20;
-	}
-
-	wBaiCI = wBaiCI * (100+StPlusCalc2(5000+n_A_ActiveSkill)+StPlusCard(5000+n_A_ActiveSkill) + w1) /100;
-
-	if(debug_dmg_avg)
-		debug_atk+="\n\tw1:"+w1+"(%)\na_wBaiCI:"+wBaiCI;
 
 	if(n_A_PassSkill8[22]){
 		if(MANUKU_MONSTER())
@@ -8098,6 +7826,217 @@ function BaiCI(wBaiCI)
 	return wBaiCI;
 }
 
+// Specific skill % damage bonus - pc_skillatk_bonus()
+function ApplySkillAtkBonus(dmg)
+{
+	skill_atk_bonus_ratio = 0;
+	if(n_A_ActiveSkill == 6 && n_A_SHOES_DEF_PLUS >= 9 && CardNumSearch(362)) // Bash#6
+			skill_atk_bonus_ratio += 10;
+	if(n_A_ActiveSkill == 76 && (n_A_WeaponType==2 || n_A_WeaponType==3)) // Bowling Bash#76
+			skill_atk_bonus_ratio += 25 * CardNumSearch(464);
+	if(n_A_ActiveSkill == 41 && n_A_WeaponType==10) // Arrow Shower#41
+			skill_atk_bonus_ratio += 50 * CardNumSearch(465);
+	if(n_A_ActiveSkill == 40 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1089)) // Double Strafe#40
+			skill_atk_bonus_ratio += 20;
+
+	// Sharp Shooting#272
+	if (n_A_ActiveSkill == 272 && EquipNumSearch(1045))
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * 3;
+
+	//custom TalonRO Imperial Guard: Shield Chain damage +2% each refine above 6
+	if (n_A_ActiveSkill == 324 && n_A_LEFT_DEF_PLUS > 6 && EquipNumSearch(1459))
+		skill_atk_bonus_ratio += 2*(n_A_LEFT_DEF_PLUS-6);
+	
+	//custom TalonRO Black Wing: Back Stab#169 damage +2% each refine
+	if (n_A_ActiveSkill == 169 && EquipNumSearch(1463))
+		skill_atk_bonus_ratio += 2*n_A_Weapon_ATKplus;
+
+	// Back Stab#169 - Brave assassin damascus [Loa] 2018-07-24
+	if (n_A_ActiveSkill == 169 && n_A_JobSearch2() == 14 && EquipNumSearch(897))
+		skill_atk_bonus_ratio += 10;
+
+	// Raid#171 - Brave assassin damascus [Loa] 2018-07-24
+	if(n_A_ActiveSkill == 171 && n_A_JobSearch2() == 14 && EquipNumSearch(897))
+		skill_atk_bonus_ratio += 10;
+
+	//custom TalonRO Cannon Spear: Head Crush damage +5% each 3rd refine
+	if(n_A_ActiveSkill == 260 && EquipNumSearch(1516))
+		skill_atk_bonus_ratio += 3 * Math.floor(n_A_Weapon_ATKplus / 3);
+
+	/*
+		Assaulter Spear
+		[Refine level 8-10]
+		Increase damage of Spiral Pierce by 20%.
+	*/
+	if (n_A_Weapon_ATKplus >= 8 && n_A_ActiveSkill == 259 && EquipNumSearch(903))
+		skill_atk_bonus_ratio += 20;
+
+	/*
+		Glorious Tablet
+		Increase damage with [Flying Side Kick] by 10%.
+	*/
+	if ((n_A_ActiveSkill == 339 || n_A_ActiveSkill == 305) && EquipNumSearch(1094))
+		skill_atk_bonus_ratio += 10;
+
+	/*
+		Brave Assassin Damascus
+		[Crusader Class]
+		Add 5% more damage with [Shield Chain]
+	*/
+	if (n_A_JobSearch2() == 13 && n_A_ActiveSkill == 324 && EquipNumSearch(897))
+		skill_atk_bonus_ratio += 5;
+
+	/*
+		Soldier Grenade Launcher
+		[Refine level 6-10]
+		Increase damage of [Ground Drift] by 25%.
+	*/
+	if (n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 437 && EquipNumSearch(929))
+		skill_atk_bonus_ratio += 25;
+
+	/*
+		Brave Gladiator Blade
+		[Rogue and Crusader Classes]
+	*/
+	if ((n_A_JobSearch2() == 13 || n_A_JobSearch2() == 14)
+		&& n_A_ActiveSkill == 161 && EquipNumSearch(900))
+	{
+		// Add 15% more damage with [Holy Cross] skill.
+		skill_atk_bonus_ratio += 15;
+		// [Refine level 7-10] Add an additional 5% more damage with [Holy Cross] skill.
+		if (n_A_Weapon_ATKplus >= 7)
+			skill_atk_bonus_ratio += 5;
+		// For every refine +8 or higher, add 1% more damage with [Holy Cross] skill.
+		if (n_A_Weapon_ATKplus >= 8)
+			skill_atk_bonus_ratio += n_A_Weapon_ATKplus - 7;
+	}
+
+	/*
+		Glorious Holy Avenger
+		[Refine Rate 7~10]
+		Increases damage with [Holy Cross] by 15%.
+	*/
+	if (n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 161 && EquipNumSearch(1079))
+		skill_atk_bonus_ratio += 15;
+
+	if (n_A_ActiveSkill == 428 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1099))
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus;
+	
+	if (n_A_ActiveSkill == 430 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1100))
+		skill_atk_bonus_ratio += 3 * n_A_Weapon_ATKplus;
+	
+	if (n_A_ActiveSkill == 436 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1102))
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus;
+	
+	if (n_A_ActiveSkill == 437 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1103))
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus;
+
+	if ((n_A_ActiveSkill == 6 || n_A_ActiveSkill == 76)
+		&& n_A_ActiveSkillLV == 10 && EquipNumSearch(1159))
+			skill_atk_bonus_ratio += 50;
+
+	if (n_A_ActiveSkill == 65 && (SU_LUK >= 90 || SU_DEX >= 90) && EquipNumSearch(1164))
+		skill_atk_bonus_ratio += 15;
+
+	if (n_A_ActiveSkill == 264 && SkillSearch(81) == 10 && EquipNumSearch(1176))
+		skill_atk_bonus_ratio += 20;
+
+	if (TyouEnkakuSousa3dan == -1 && EquipNumSearch(639))
+		skill_atk_bonus_ratio += 15;
+
+	if ((n_A_ActiveSkill==83 || n_A_ActiveSkill==388) && wBCEDPch == 0 && SkillSearch(381))
+		skill_atk_bonus_ratio += 10;
+	
+	if (n_A_ActiveSkill == 264) {
+		// Enforcer Cape#1699 - [Every Refine Level] Increase [Meteor Assault] damage by 1%
+		skill_atk_bonus_ratio += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
+		
+		// Brave Carnage Katar#909 - [Refine level 7~10] Increase [Meteor Assault] damage by 15%
+		if(n_A_Weapon_ATKplus >= 7)
+			skill_atk_bonus_ratio += 15 * EquipNumSearch(909);
+	}
+	
+	// Glorious Claw#1096
+	if (EquipNumSearch(1096)) {
+		// [Every Refine Level] Increase [Triple Attack], [Chain Combo] and [Combo Finish] damage by 5%
+		if (n_A_ActiveSkill >= 187 || n_A_ActiveSkill <= 189)
+			skill_atk_bonus_ratio += 5 * n_A_Weapon_ATKplus;
+		// [Every Refine Level Above +5]  Increase [Tiger Knuckle Fist] and [Chain Crush Combo] damage by 5%
+		if (n_A_ActiveSkill == 289 || n_A_ActiveSkill == 290)
+			skill_atk_bonus_ratio += 5 * Math.max(0, n_A_Weapon_ATKplus - 5);
+	}
+
+	// Glorious Claymore#1080 - [Every Refine Level] Increase [Bowling Bash] and [Charge Attack] damage by 1% [Amor]
+	if (n_A_ActiveSkill == 76 || n_A_ActiveSkill == 308)
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * EquipNumSearch(1080);
+
+	if (n_A_ActiveSkill == 65) {
+		// Glorious Two Handed Axe#1087 - [Every Refine Level] Increase [Mammonite] damage by 2% [Amor]
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1087);
+		
+		// Glorious Cleaver#1088 - [Every Refine Level] Increase [Mammonite] damage by 1% [Amor]
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * EquipNumSearch(1088);
+	}
+
+	// Glorious Flamberge#1077 - [Every Refine Level] Increase [Bash], [Mammonite] and [Back Stab] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 65 || n_A_ActiveSkill == 6 || n_A_ActiveSkill == 169)
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1077);
+
+	// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Ground Drift] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 437)
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1103);
+
+	if (n_A_ActiveSkill == 418) {
+		// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Triple Action] damage by 1% [Amor]
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * EquipNumSearch(1103);
+		
+		// Glorious Grenade Launcher#1103, Glorious Rifle#1100, Glorious Shotgun#1102 - [If Scouter Is Not Equipped] Increase [Triple Action] damage by 30%
+		if (!EquipNumSearch(1387))
+			skill_atk_bonus_ratio += 30 * (EquipNumSearch(1103) + EquipNumSearch(1100) + EquipNumSearch(1102));
+	}
+
+	// Glorious Huuma Shuriken#1098 - [Every Refine Level] Increase [Throw Huuma Shuriken] damage by 3% [Amor]
+	if (n_A_ActiveSkill == 396)
+		skill_atk_bonus_ratio += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1098);
+
+	// Glorious Revolver#1099 - [Every Refine Level] Increase [Rapid Shower] damage by 1% [Amor]
+	if (n_A_ActiveSkill == 428)
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * EquipNumSearch(1099);
+
+	// Glorious Rifle#1100 - [Every Refine Level] Increase [Tracking] and [Piercing Shot] damage by 3% [Amor]
+	if (n_A_ActiveSkill == 430 || n_A_ActiveSkill == 432)
+		skill_atk_bonus_ratio += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1100);
+
+	// Glorious Shotgun#1102 - [Every Refine Level] Increase [Spread Attack] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 436)
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1102);
+
+	// Valorous Battle CrossBow#913 - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
+	if (n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8)
+		skill_atk_bonus_ratio += 10 * EquipNumSearch(913);
+
+	// Glorious Hunter Bow#1089 - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
+	if (n_A_ActiveSkill == 40)
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1089);
+
+	/*
+		Valorous Carnage Katar#910
+		[Refine Level 6~10]
+		Increases damage with [Sonic Blow] by 10%.
+		[Refine Level 9~10]
+		Increases damage with [Sonic Blow] by 20%.
+	*/
+	if (n_A_Weapon_ATKplus >= 6 && (83 == n_A_ActiveSkill || 388 == n_A_ActiveSkill) && EquipNumSearch(910)) {
+		skill_atk_bonus_ratio += 10;
+		
+		if (n_A_Weapon_ATKplus >= 9)
+			skill_atk_bonus_ratio += 20;
+	}
+
+	dmg = dmg * (100 + StPlusCalc2 (5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill) + skill_atk_bonus_ratio) / 100;
+
+	return Math.floor(dmg);
+}
 
 function BattleCalc3(w998)
 {
