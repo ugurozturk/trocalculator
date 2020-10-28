@@ -7064,6 +7064,8 @@ function sort_monsters_db()
 		SortedMonsters = monsters_db.concat().sort(function(a,b){return a[sort_type] > b[sort_type]});
 
 	prefix = "";
+	document.calcForm.B_Enemy.innerHTML = null;
+
 	for (i = 0; i < SortedMonsters.length; ++i)
 	{	
 		if (3 == sort_type) // Attribute
