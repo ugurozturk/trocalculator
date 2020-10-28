@@ -7052,9 +7052,9 @@ function sort_monsters_db()
 	selected_region = eval(document.calcForm.ENEMY_SORT2.value);
 	
 	if (selected_region)
-		monsters_db = MonsterOBJ.concat().filter(x => MonMap[selected_region].includes(x[0]));
+		monsters_db = MonsterOBJ.filter(x => MonMap[selected_region].includes(x[0]));
 	else
-		monsters_db = MonsterOBJ.concat();
+		monsters_db = MonsterOBJ;
 	
 	if (!sort_type) // Alpha-numerical sort [1]
 		SortedMonsters = monsters_db.concat().sort(function(a,b){return a[1].localeCompare(b[1])});
@@ -7068,7 +7068,7 @@ function sort_monsters_db()
 
 	for (i = 0; i < SortedMonsters.length; ++i)
 	{	
-		if (3 == sort_type) // Attribute
+		if (3 == sort_type) // Attribute [3]
 			prefix = "[" + ZokuseiOBJ2[Math.floor(SortedMonsters[i][sort_type] /10)] + SortedMonsters[i][sort_type] % 10 +"] "
 		if (2 == sort_type) // Race Sort [2]
 			prefix = "[" + SyuzokuOBJ[SortedMonsters[i][sort_type]] + "] ";
