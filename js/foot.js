@@ -7046,116 +7046,37 @@ wESx = new Array();
 for(i=0;i<=EnemyNum;i++)
 	wESx[i]=new Array();
 
-function EnemySort(){
-	var len = document.calcForm.B_Enemy.length;
-	for(var i=0;i<len;i++)
-		document.calcForm.B_Enemy.options[0] = null;
+function sort_monsters_db()
+{
+	sort_type = eval(document.calcForm.ENEMY_SORT.value);
+	selected_region = eval(document.calcForm.ENEMY_SORT2.value);
+	
+	if (selected_region)
+		monsters_db = MonsterOBJ.concat().filter(x => MonMap[selected_region].includes(x[0]));
+	else
+		monsters_db = MonsterOBJ.concat();
+	
+	if (!sort_type) // Alpha-numerical sort [1]
+		SortedMonsters = monsters_db.concat().sort(function(a,b){return a[1].localeCompare(b[1])});
+	else if (8 == sort_type || 10 == sort_type)
+		SortedMonsters = monsters_db.concat().sort(function(a,b){return (a[5] + a[sort_type]) > (b[5] + b[sort_type])});
+	else
+		SortedMonsters = monsters_db.concat().sort(function(a,b){return a[sort_type] > b[sort_type]});
 
-	ESNum= [1,3,2,21,22,16,17,13,100];
+	prefix = "";
+	for (i = 0; i < SortedMonsters.length; ++i)
+	{	
+		if (3 == sort_type) // Attribute
+			prefix = "[" + ZokuseiOBJ2[Math.floor(SortedMonsters[i][sort_type] /10)] + SortedMonsters[i][sort_type] % 10 +"] "
+		if (2 == sort_type) // Race Sort [2]
+			prefix = "[" + SyuzokuOBJ[SortedMonsters[i][sort_type]] + "] ";
+		else if (8 == sort_type) // 100% Hit - MonsterOBJ[i][21] = 20 + MonsterOBJ[i][5] + MonsterOBJ[i][8];
+			prefix = "(" + (20 + SortedMonsters[i][5] + SortedMonsters[i][8]) + ") ";
+		else if (10 == sort_type) // 95% Flee - MonsterOBJ[i][22] = 75 + MonsterOBJ[i][5] + MonsterOBJ[i][10];
+			prefix = "(" + (75 + SortedMonsters[i][5] + SortedMonsters[i][10]) + ") ";
 
-	var wES2 = eval(document.calcForm.ENEMY_SORT.value);
-
-	if(wES2==0){
-		var x = new Array();
-
-		for(var i=0;i<=EnemyNum;i++)
-			x[i] = MonsterABC[i];
-		x = SZ(x);
-		var j=0;
-		for(var i=0;i<=EnemyNum;i++){
-			if(x[i] != -1){
-				document.calcForm.B_Enemy.options[j] = new Option(MonsterOBJ[x[i]][1],x[i]);
-				j++;
-			}
-		}
-		return;
+		document.calcForm.B_Enemy.options[i] = new Option(prefix + SortedMonsters[i][1], SortedMonsters[i][0]);
 	}
-
-	wES = ESNum[eval(document.calcForm.ENEMY_SORT.value)];
-	wESx[0][0] = "S";
-	wESx[0][1] = "E";
-	STERTw = 0;
-	ENDw = 0;
-	for(i=1;i<=EnemyNum;i++){
-		j=ENDw;
-		if(MonsterOBJ[i][wES] >= MonsterOBJ[j][wES]){
-			wESx[j][1] = i;
-			wESx[i][0] = j;
-			wESx[i][1] = "E";
-			ENDw=i;
-		}else{
-			j=STERTw;
-			if(MonsterOBJ[i][wES] <= MonsterOBJ[j][wES]){
-				wESx[j][0] = i;
-				wESx[i][0] = "S";
-				wESx[i][1] = j;
-				STERTw=i;
-			}else{
-				j=STERTw;
-				jbk=STERTw;
-				while(MonsterOBJ[i][wES] > MonsterOBJ[j][wES]){
-					jbk=j;
-					j = wESx[j][1];
-				}
-				wESx[jbk][1] = i;
-				wESx[i][0] = jbk;
-				wESx[i][1] = j;
-				wESx[j][0] = i;
-			}
-		}
-	}
-
-	var x = new Array();
-	var i;
-	x[0] = i = STERTw;
-	for(var j=1;wESx[i][1]!="E";j++){
-		x[j] = wESx[i][1];
-		i = wESx[i][1];
-	}
-	x = SZ(x);
-
-	ESwork2 = new Array();
-	if(wES==21||wES==22){
-		for(i=0;i<=EnemyNum;i++)
-			ESwork2[i] = MonsterOBJ[i][wES] +")";
-	}
-	else if(wES==2){
-		for(i=0;i<=EnemyNum;i++)
-			ESwork2[i] = SyuzokuOBJ[MonsterOBJ[i][2]] +")";
-	}
-	else if(wES==3){
-		for(i=0;i<=EnemyNum;i++)
-			ESwork2[i] = "["+ZokuseiOBJ2[Math.floor(MonsterOBJ[i][3] /10)] + MonsterOBJ[i][3] % 10 +"] ";
-	}
-	else{
-		for(i=0;i<=EnemyNum;i++)
-			ESwork2[i] = "";
-	}
-
-	var j=0;
-	for(i=0;i<=EnemyNum;i++){
-		if(x[i] != -1){
-			document.calcForm.B_Enemy.options[j] = new Option(ESwork2[x[i]] + MonsterOBJ[x[i]][1],x[i]);
-			j++;
-		}
-	}
-}
-
-function SZ(wSTR){
-	var w = document.calcForm.ENEMY_SORT2.value;
-	if(w != 0){
-		for(var i=0;i<=EnemyNum;i++){
-			if(wSTR[i] != -1){
-				for(var j=0;MonMap[w][j] != "N";j++){
-					if(wSTR[i] == MonMap[w][j])
-						break;
-				}
-				if(MonMap[w][j] == "N")
-					wSTR[i] = -1;
-			}
-		}
-	}
-	return wSTR;
 }
 
 var nMANUKU = [524,527,528,530,531,534,541];
@@ -9515,7 +9436,7 @@ tRO_PopulateCombos();
 document.calcForm.A_JOB.value = 0;
 ClickJob(0);
 if(Taijin==0)
-	EnemySort();
+	sort_monsters_db();
 StCalc();
 calc();
 
