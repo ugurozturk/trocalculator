@@ -7057,27 +7057,27 @@ function sort_monsters_db()
 		monsters_db = MonsterOBJ;
 	
 	if (!sort_type) // Alpha-numerical sort [1]
-		SortedMonsters = monsters_db.concat().sort(function(a,b){return a[1].localeCompare(b[1])});
+		sorted_monsters_db = monsters_db.concat().sort(function(a,b){return a[1].localeCompare(b[1])});
 	else if (8 == sort_type || 10 == sort_type)
-		SortedMonsters = monsters_db.concat().sort(function(a,b){return (a[5] + a[sort_type]) > (b[5] + b[sort_type])});
+		sorted_monsters_db = monsters_db.concat().sort(function(a,b){return (a[5] + a[sort_type]) - (b[5] + b[sort_type])});
 	else
-		SortedMonsters = monsters_db.concat().sort(function(a,b){return a[sort_type] > b[sort_type]});
+		sorted_monsters_db = monsters_db.concat().sort(function(a,b){return a[sort_type] - b[sort_type]});
 
 	prefix = "";
 	document.calcForm.B_Enemy.innerHTML = null;
 
-	for (i = 0; i < SortedMonsters.length; ++i)
+	for (i = 0; i < sorted_monsters_db.length; ++i)
 	{	
 		if (3 == sort_type) // Attribute [3]
-			prefix = "[" + ZokuseiOBJ2[Math.floor(SortedMonsters[i][sort_type] /10)] + SortedMonsters[i][sort_type] % 10 +"] "
+			prefix = "[" + ZokuseiOBJ2[Math.floor(sorted_monsters_db[i][sort_type] /10)] + sorted_monsters_db[i][sort_type] % 10 +"] "
 		if (2 == sort_type) // Race Sort [2]
-			prefix = "[" + SyuzokuOBJ[SortedMonsters[i][sort_type]] + "] ";
+			prefix = "[" + SyuzokuOBJ[sorted_monsters_db[i][sort_type]] + "] ";
 		else if (8 == sort_type) // 100% Hit - MonsterOBJ[i][21] = 20 + MonsterOBJ[i][5] + MonsterOBJ[i][8];
-			prefix = "(" + (20 + SortedMonsters[i][5] + SortedMonsters[i][8]) + ") ";
+			prefix = "(" + (20 + sorted_monsters_db[i][5] + sorted_monsters_db[i][8]) + ") ";
 		else if (10 == sort_type) // 95% Flee - MonsterOBJ[i][22] = 75 + MonsterOBJ[i][5] + MonsterOBJ[i][10];
-			prefix = "(" + (75 + SortedMonsters[i][5] + SortedMonsters[i][10]) + ") ";
+			prefix = "(" + (75 + sorted_monsters_db[i][5] + sorted_monsters_db[i][10]) + ") ";
 
-		document.calcForm.B_Enemy.options[i] = new Option(prefix + SortedMonsters[i][1], SortedMonsters[i][0]);
+		document.calcForm.B_Enemy.options[i] = new Option(prefix + sorted_monsters_db[i][1], sorted_monsters_db[i][0]);
 	}
 }
 
