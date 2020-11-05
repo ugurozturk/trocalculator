@@ -1365,7 +1365,7 @@ ItemOBJ = [
 ,[1340,11,0,189,4,0,0,0,"Infiltrator [Rental]","",0,37,70,18,3,9,5,11,2,12,5,193,1,0] //custom TalonRO rental
 ,[1341,13,1,159,4,0,0,0,"Kaiser Knuckle [Rental]","",0,20,4,12,5,31,5,41,10,42,10,43,10,44,10,193,1,0] //custom TalonRO rental
 ,[1342,11,0,175,4,0,0,0,"Katar of Speed [Rental]","",0,12,3,193,1,5083,25,5388,25,0] //custom TalonRO rental
-,[1343,8,1,150,3,0,0,0,"Mace of Madness [Rental]","",0,1,2,193,1,5066,25,,0] //custom TalonRO rental
+,[1343,8,1,150,3,0,0,0,"Mace of Madness [Rental]","",0,1,2,193,1,5066,25,0] //custom TalonRO rental
 ,[1344,1,1,105,4,0,0,0,"Mailbreaker [Rental]","",0,141,5,193,1,0] //custom TalonRO rental
 ,[1345,9,1,165,3,0,0,0,"Mighty Staff [Rental]","","Consume 1 SP with each physical attack",1,10,4,4,89,20,193,1,0] //custom TalonRO rental
 ,[1346,13,0,150,4,0,0,0,"Monk Knuckle [Rental]","",0,4,2,193,1,5192,25,0] //custom TalonRO rental
