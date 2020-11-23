@@ -4254,7 +4254,7 @@ function StAllCalc()
 	
 	// Update Extended Information
 	KakutyouKansuu();
-	KakutyouKansuu2();
+	//KakutyouKansuu2();
 }}
 
 function StPlusCalc()
@@ -6557,6 +6557,78 @@ function KakutyouKansuu(){
 		}else
 			myInnerHtml("A_KakutyouData","Not Available for this Class",0);
 	}
+	else if(wKK == 17){ // Steal Calculator
+		var wkk17 = "";
+		document.getElementById("playerDexSteal").innerHTML = n_A_DEX;
+		monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
+		stealLevel = eval(document.calcForm.stealLevel.value);
+		manuallyInsertDex = eval(document.calcForm.manuallyInsertDex.checked);
+		playerDex = n_A_DEX;
+		if (manuallyInsertDex) {
+			playerDex = eval(document.calcForm.playerDexStealManual.value);
+		}
+		monsterDex = monsterStolen[10];
+		wkk17 += "<table border=0>";
+		wkk17 += "<tr>";
+		wkk17 += "<td width=\"50%\" style=\"vertical-align:baseline\">";
+		wkk17 += "<table border=0>";
+		wkk17 += "<tr>";
+		wkk17 += "<td><b>Player DEX: </b> " + playerDex + "</td>";
+		wkk17 += "</tr>";
+		wkk17 += "<tr>";
+		wkk17 += "<td><b>Monster DEX: </b> " + monsterDex + "</td>";
+		wkk17 += "</tr>";
+		wkk17 += "<tr>";
+		wkk17 += "<td>";
+		if (monsterStolen[23] != 0) {
+			wkk17 += "<img src=\"https://panel.talonro.com/images/monster/"+monsterStolen[23]+".gif\" alt=\"no picture available =(\">";
+		} else {
+			wkk17 += "<img src=\"\" alt=\"no picture available =(\">";
+		}
+		wkk17 += "</td>";
+		wkk17 += "</tr>";
+		wkk17 += "</table>";
+		wkk17 += "</td>";
+		wkk17 += "<td width=\"50%\" style=\"vertical-align:baseline\">";
+		wkk17 += "<table border=0>";
+		if (monsterStolen[19]) {
+			wkk17 += "<tr><td>Cannot steal boss monster</td></tr>";
+		} else {
+			var baseRate = Math.floor((playerDex - monsterDex)/2 + stealLevel*6 + 4);
+			var tblItemDropRate = document.getElementById("tblItemDropRate");
+			var individualSuccess = [];
+			var stealSuccess = [];
+			if (baseRate < 1) {
+				for (i = 0; i < tblItemDropRate.rows.length; ++i) {
+					individualSuccess[i] = 0;
+					stealSuccess[i] = 0;
+				}
+			} else {
+				for (i = 0; i < tblItemDropRate.rows.length; ++i) {
+					var itemDropRate = eval(tblItemDropRate.rows[i].getElementsByTagName("input")[0].value);
+					individualSuccess[i] = Math.ceil(itemDropRate * baseRate);
+					if (individualSuccess[i] > 10000) individualSuccess[i] = 10000;
+					if (individualSuccess[i] < 0) individualSuccess[i] = 0;
+				}
+				for (i = 0; i < tblItemDropRate.rows.length; ++i) {
+					stealSuccess[i] = individualSuccess[i];
+					for (var j = i - 1; j >= 0; --j) {
+						stealSuccess[i] *= (10000 - individualSuccess[j])/10000.;
+					}
+					if (stealSuccess[i] > 10000) stealSuccess[i] = 10000;
+					if (stealSuccess[i] < 0) stealSuccess[i] = 0;
+				}
+			}
+			for (i = 1; i <= stealSuccess.length; ++i) {
+				wkk17 += "<tr><td><b>Steal Success Slot " + i + ": </b>" + (Math.round(stealSuccess[i-1]*10000)/1000000.) + "% (Individual Success: " + (individualSuccess[i-1] / 100.) + "%)</td></tr>";
+			}
+			wkk17 += "</table>";
+			wkk17 += "</td>";
+			wkk17 += "</tr>";
+			wkk17 += "</table>";
+		}
+		myInnerHtml("A_KakutyouData",wkk17,0);
+	}
 }
 
 function Kanma(num){
@@ -6948,7 +7020,78 @@ function KakutyouKansuu2(){
 
 		return;
 	}
+	if(wKK == 17){
+		stealCalcTxt = "";
+		stealCalcTxt += "<table border=0>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td width=\"50%\" style=\"vertical-align:baseline\">";
+		stealCalcTxt += "<table border=0>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Steal Level:</td>";
+		stealCalcTxt += "<td><select name=\"stealLevel\" onChange=\"StAllCalc()\"></select></td>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Player DEX:</td>";
+		stealCalcTxt += "<td id=\"playerDexSteal\">"+n_A_DEX+"</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Manually Insert DEX:</td>";
+		stealCalcTxt += "<td>";
+		stealCalcTxt += "<input type=\"checkbox\" name=\"manuallyInsertDex\" onClick=\"StAllCalc()\"/>";
+		stealCalcTxt += " ";
+		stealCalcTxt += "<input type=\"number\" name=\"playerDexStealManual\" min=\"0\" max=\"500\" step=\"1\" value=\"0\" onChange=\"StAllCalc()\"/>";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Monster:</td>";
+		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"StAllCalc()\"></select></td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "</table>";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "<td width=\"50%\" style=\"vertical-align:baseline\">";
+		stealCalcTxt += "<table id=\"tblItemDropRate\" border=0>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Item Drop Rate Slot 1:</td>";
+		stealCalcTxt += "<td>";
+		stealCalcTxt += "<input type=\"number\" name=\"itemDropRate1\" min=\"0\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
+		stealCalcTxt += " ";
+		stealCalcTxt += "<a onclick=\"addItemSlotStealCalc()\">Add</a>";
+		stealCalcTxt += " ";
+		stealCalcTxt += "<a onclick=\"delItemSlotStealCalc()\">Remove</a>";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "</table>";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "</table>";
+		myInnerHtml("A_KakutyouSel",stealCalcTxt,0);
+		for(i=1;i<=10;i++) document.calcForm.stealLevel.options[i-1] = new Option(i,i);
+		document.calcForm.stealLevel.value=1;
+		sortedMonsterArray = MonsterOBJ.concat().sort(function(a,b){return a[1].localeCompare(b[1])});
+		for (i = 0; i < sortedMonsterArray.length; ++i) {
+			document.calcForm.monsterStolen.options[i] = new Option(prefix + sortedMonsterArray[i][1], sortedMonsterArray[i][0]);
+		}
+		return;
+	}
 	myInnerHtml("A_KakutyouSel","",0);
+}
+
+function addItemSlotStealCalc() {
+	var tbl = document.getElementById("tblItemDropRate");
+	if (tbl.rows.length == 7) return;
+	var row = tbl.insertRow(-1);
+	var cell1 = row.insertCell(0);
+	var cell2 = row.insertCell(1);
+	cell1.innerHTML = "Item Drop Rate Slot " + tbl.rows.length + ":";
+	cell2.innerHTML = "<input type=\"number\" name=\"itemDropRate" + tbl.rows.length + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
+	StAllCalc();
+}
+
+function delItemSlotStealCalc() {
+	var tbl = document.getElementById("tblItemDropRate");
+	if (tbl.rows.length == 1) return;
+	tbl.deleteRow(-1);
+	StAllCalc();
 }
 
 function SetCardShort(){
