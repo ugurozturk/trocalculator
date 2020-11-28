@@ -6557,8 +6557,8 @@ function KakutyouKansuu(){
 		}else
 			myInnerHtml("A_KakutyouData","Not Available for this Class",0);
 	}
-	else if(wKK == 17){ // Steal Calculator
-		var wkk17 = "";
+	else if(wKK == 19){ // Steal Calculator
+		var wkk19 = "";
 		document.getElementById("playerDexSteal").innerHTML = n_A_DEX;
 		monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
 		stealLevel = eval(document.calcForm.stealLevel.value);
@@ -6568,31 +6568,31 @@ function KakutyouKansuu(){
 			playerDex = eval(document.calcForm.playerDexStealManual.value);
 		}
 		monsterDex = monsterStolen[10];
-		wkk17 += "<table border=0>";
-		wkk17 += "<tr>";
-		wkk17 += "<td width=\"50%\" style=\"vertical-align:baseline\">";
-		wkk17 += "<table border=0>";
-		wkk17 += "<tr>";
-		wkk17 += "<td><b>Player DEX: </b> " + playerDex + "</td>";
-		wkk17 += "</tr>";
-		wkk17 += "<tr>";
-		wkk17 += "<td><b>Monster DEX: </b> " + monsterDex + "</td>";
-		wkk17 += "</tr>";
-		wkk17 += "<tr>";
-		wkk17 += "<td>";
+		wkk19 += "<table border=0>";
+		wkk19 += "<tr>";
+		wkk19 += "<td width=\"50%\" style=\"vertical-align:baseline\">";
+		wkk19 += "<table border=0>";
+		wkk19 += "<tr>";
+		wkk19 += "<td><b>Player DEX: </b> " + playerDex + "</td>";
+		wkk19 += "</tr>";
+		wkk19 += "<tr>";
+		wkk19 += "<td><b>Monster DEX: </b> " + monsterDex + "</td>";
+		wkk19 += "</tr>";
+		wkk19 += "<tr>";
+		wkk19 += "<td>";
 		if (monsterStolen[23] != 0) {
-			wkk17 += "<img src=\"https://panel.talonro.com/images/monster/"+monsterStolen[23]+".gif\" alt=\"no picture available =(\">";
+			wkk19 += "<img src=\"https://panel.talonro.com/images/monster/"+monsterStolen[23]+".gif\" alt=\"no picture available =(\">";
 		} else {
-			wkk17 += "<img src=\"\" alt=\"no picture available =(\">";
+			wkk19 += "<img src=\"\" alt=\"no picture available =(\">";
 		}
-		wkk17 += "</td>";
-		wkk17 += "</tr>";
-		wkk17 += "</table>";
-		wkk17 += "</td>";
-		wkk17 += "<td width=\"50%\" style=\"vertical-align:baseline\">";
-		wkk17 += "<table border=0>";
+		wkk19 += "</td>";
+		wkk19 += "</tr>";
+		wkk19 += "</table>";
+		wkk19 += "</td>";
+		wkk19 += "<td width=\"50%\" style=\"vertical-align:baseline\">";
+		wkk19 += "<table border=0>";
 		if (monsterStolen[19]) {
-			wkk17 += "<tr><td>Cannot steal boss monster</td></tr>";
+			wkk19 += "<tr><td>Cannot steal boss monster</td></tr>";
 		} else {
 			var baseRate = Math.floor((playerDex - monsterDex)/2 + stealLevel*6 + 4);
 			var tblItemDropRate = document.getElementById("tblItemDropRate");
@@ -6620,14 +6620,14 @@ function KakutyouKansuu(){
 				}
 			}
 			for (i = 1; i <= stealSuccess.length; ++i) {
-				wkk17 += "<tr><td><b>Steal Success Slot " + i + ": </b>" + (Math.round(stealSuccess[i-1]*10000)/1000000.) + "% (Individual Success: " + (individualSuccess[i-1] / 100.) + "%)</td></tr>";
+				wkk19 += "<tr><td><b>Steal Success Slot " + i + ": </b>" + (Math.round(stealSuccess[i-1]*10000)/1000000.) + "% (Individual Success: " + (individualSuccess[i-1] / 100.) + "%)</td></tr>";
 			}
-			wkk17 += "</table>";
-			wkk17 += "</td>";
-			wkk17 += "</tr>";
-			wkk17 += "</table>";
+			wkk19 += "</table>";
+			wkk19 += "</td>";
+			wkk19 += "</tr>";
+			wkk19 += "</table>";
 		}
-		myInnerHtml("A_KakutyouData",wkk17,0);
+		myInnerHtml("A_KakutyouData",wkk19,0);
 	}
 }
 
@@ -7020,7 +7020,7 @@ function KakutyouKansuu2(){
 
 		return;
 	}
-	if(wKK == 17){
+	if(wKK == 19){
 		stealCalcTxt = "";
 		stealCalcTxt += "<table border=0>";
 		stealCalcTxt += "<tr>";
