@@ -6605,12 +6605,21 @@ function KakutyouKansuu(){
 				}
 			} else {
 				for (i = 0; i < tblItemDropRate.rows.length; ++i) {
-					var itemDropRate = eval(tblItemDropRate.rows[i].getElementsByTagName("input")[0].value);
+					var itemDropRate = 0;
+					if (monsterStolen[24]) {
+						itemDropRate = monsterStolen[25 + i*2];
+					} else {
+						itemDropRate = eval(tblItemDropRate.rows[i].getElementsByTagName("input")[0].value);
+					}
 					individualSuccess[i] = Math.ceil(itemDropRate * baseRate);
 					if (individualSuccess[i] > 10000) individualSuccess[i] = 10000;
 					if (individualSuccess[i] < 0) individualSuccess[i] = 0;
 				}
 				for (i = 0; i < tblItemDropRate.rows.length; ++i) {
+					if (i > 6) { // only the first 7 slots can be stolen
+						stealSuccess[i] = 0;
+						continue;
+					}
 					stealSuccess[i] = individualSuccess[i];
 					for (var j = i - 1; j >= 0; --j) {
 						stealSuccess[i] *= (10000 - individualSuccess[j])/10000.;
@@ -6619,8 +6628,11 @@ function KakutyouKansuu(){
 					if (stealSuccess[i] < 0) stealSuccess[i] = 0;
 				}
 			}
-			for (i = 1; i <= stealSuccess.length; ++i) {
-				wkk19 += "<tr><td><b>Steal Success Slot " + i + ": </b>" + (Math.round(stealSuccess[i-1]*10000)/1000000.) + "% (Individual Success: " + (individualSuccess[i-1] / 100.) + "%)</td></tr>";
+			for (i = 0; i < stealSuccess.length; ++i) {
+				if (i == 9 || monsterStolen[24 + i*2] == 0) {
+					break;
+				}
+				wkk19 += "<tr><td><b>Steal Success Slot " + (i+1) + ": </b>" + (Math.round(stealSuccess[i]*10000)/1000000.) + "% (Individual Success: " + (individualSuccess[i] / 100.) + "%)</td></tr>";
 			}
 			wkk19 += "</table>";
 			wkk19 += "</td>";
@@ -7043,7 +7055,7 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "</tr>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Monster:</td>";
-		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"StAllCalc()\"></select></td>";
+		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"loadMonsterItemDropListStealCalc();StAllCalc();\"></select></td>";
 		stealCalcTxt += "</tr>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "</table>";
@@ -7076,6 +7088,37 @@ function KakutyouKansuu2(){
 	myInnerHtml("A_KakutyouSel","",0);
 }
 
+function loadMonsterItemDropListStealCalc() {
+	var tbl = document.getElementById("tblItemDropRate");
+	while (tbl.rows.length > 0) {
+		tbl.deleteRow(-1);
+	}
+	var monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
+	if (monsterStolen[24]) {
+		for (i = 0; i < 10; ++i) {
+			var row = tbl.insertRow(-1);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var dropPercentage = monsterStolen[25 + i*2];
+			var dropItemId = monsterStolen[24 + i*2];
+			if (dropItemId == 0) {
+				continue;
+			}
+			cell2.style="text-align:right";
+			cell1.innerHTML = "";
+			cell1.innerHTML += "<img src=\"https://panel.talonro.com/images/items/small/"+dropItemId+".gif\" alt=\"no picture available =(\">";
+			if (i == 9) {
+				cell1.innerHTML += " Card Drop Rate: ";
+			} else {
+				cell1.innerHTML += " Drop Rate Slot " + (i+1) + ": ";
+			}
+			cell2.innerHTML += (+dropPercentage).toFixed(2) + "%";
+		}
+	} else {
+		addItemSlotStealCalc();
+	}
+}
+
 function addItemSlotStealCalc() {
 	var tbl = document.getElementById("tblItemDropRate");
 	if (tbl.rows.length == 7) return;
@@ -7084,6 +7127,12 @@ function addItemSlotStealCalc() {
 	var cell2 = row.insertCell(1);
 	cell1.innerHTML = "Item Drop Rate Slot " + tbl.rows.length + ":";
 	cell2.innerHTML = "<input type=\"number\" name=\"itemDropRate" + tbl.rows.length + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
+	if (tbl.rows.length == 1) {
+		cell2.innerHTML += " ";
+		cell2.innerHTML += "<a onclick=\"addItemSlotStealCalc()\">Add</a>";
+		cell2.innerHTML += " ";
+		cell2.innerHTML += "<a onclick=\"delItemSlotStealCalc()\">Remove</a>";
+	}
 	StAllCalc();
 }
 
