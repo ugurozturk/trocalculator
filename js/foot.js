@@ -6558,7 +6558,6 @@ function KakutyouKansuu(){
 			myInnerHtml("A_KakutyouData","Not Available for this Class",0);
 	}
 	else if(wKK == 19){ // Steal Calculator
-		var wkk19 = "";
 		document.getElementById("playerDexSteal").innerHTML = n_A_DEX;
 		monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
 		stealLevel = eval(document.calcForm.stealLevel.value);
@@ -6568,54 +6567,44 @@ function KakutyouKansuu(){
 			playerDex = eval(document.calcForm.playerDexStealManual.value);
 		}
 		monsterDex = monsterStolen[10];
-		wkk19 += "<table border=0>";
-		wkk19 += "<tr>";
-		wkk19 += "<td width=\"50%\" style=\"vertical-align:baseline\">";
-		wkk19 += "<table border=0>";
-		wkk19 += "<tr>";
-		wkk19 += "<td><b>Player DEX: </b> " + playerDex + "</td>";
-		wkk19 += "</tr>";
-		wkk19 += "<tr>";
-		wkk19 += "<td><b>Monster DEX: </b> " + monsterDex + "</td>";
-		wkk19 += "</tr>";
-		wkk19 += "<tr>";
-		wkk19 += "<td>";
+		document.getElementById("outputPlayerDexStealCalc").innerHTML = "<b>Player DEX: </b> " + playerDex + "</b>";
+		document.getElementById("outputMonsterDexStealCalc").innerHTML = "<b>Monster DEX: </b> " + monsterDex + "</b>";
 		if (monsterStolen[23] != 0) {
-			wkk19 += "<img src=\"https://panel.talonro.com/images/monster/"+monsterStolen[23]+".gif\" alt=\"no picture available =(\">";
+			document.getElementById("outputMonsterGifStealCalc").innerHTML = "<img src=\"https://panel.talonro.com/images/monster/"+monsterStolen[23]+".gif\" alt=\"no picture available =(\">";
 		} else {
-			wkk19 += "<img src=\"\" alt=\"no picture available =(\">";
+			document.getElementById("outputMonsterGifStealCalc").innerHTML = "<img src=\"\" alt=\"no picture available =(\">";
 		}
-		wkk19 += "</td>";
-		wkk19 += "</tr>";
-		wkk19 += "</table>";
-		wkk19 += "</td>";
-		wkk19 += "<td width=\"50%\" style=\"vertical-align:baseline\">";
-		wkk19 += "<table border=0>";
+		var tblStealCalcRight = document.getElementById("tblStealCalcRight");
 		if (monsterStolen[19]) {
-			wkk19 += "<tr><td>Cannot steal boss monster</td></tr>";
+			document.getElementById("addRemStealCalc").style = "display:none";
+			while (tblStealCalcRight.rows.length > 1) {
+				tblStealCalcRight.deleteRow(-1);
+			}
+			var cell = tblStealCalcRight.insertRow(-1).insertCell(0);
+			cell.colSpan="5";
+			cell.innerHTML += "Cannot steal boss monster";
 		} else {
 			var baseRate = Math.floor((playerDex - monsterDex)/2 + stealLevel*6 + 4);
-			var tblItemDropRate = document.getElementById("tblItemDropRate");
 			var individualSuccess = [];
 			var stealSuccess = [];
 			if (baseRate < 1) {
-				for (i = 0; i < tblItemDropRate.rows.length; ++i) {
+				for (i = 0; i < tblStealCalcRight.rows.length-1; ++i) {
 					individualSuccess[i] = 0;
 					stealSuccess[i] = 0;
 				}
 			} else {
-				for (i = 0; i < tblItemDropRate.rows.length; ++i) {
+				for (i = 0; i < tblStealCalcRight.rows.length-1; ++i) {
 					var itemDropRate = 0;
 					if (monsterStolen[24]) {
 						itemDropRate = monsterStolen[25 + i*2];
 					} else {
-						itemDropRate = eval(tblItemDropRate.rows[i].getElementsByTagName("input")[0].value);
+						itemDropRate = eval(tblStealCalcRight.rows[i+1].getElementsByTagName("input")[0].value);
 					}
 					individualSuccess[i] = Math.ceil(itemDropRate * baseRate);
 					if (individualSuccess[i] > 10000) individualSuccess[i] = 10000;
 					if (individualSuccess[i] < 0) individualSuccess[i] = 0;
 				}
-				for (i = 0; i < tblItemDropRate.rows.length; ++i) {
+				for (i = 0; i < tblStealCalcRight.rows.length-1; ++i) {
 					if (i > 6) { // only the first 7 slots can be stolen
 						stealSuccess[i] = 0;
 						continue;
@@ -6632,14 +6621,10 @@ function KakutyouKansuu(){
 				if (i == 9 || monsterStolen[24 + i*2] == 0) {
 					break;
 				}
-				wkk19 += "<tr><td><b>Steal Success Slot " + (i+1) + ": </b>" + (Math.round(stealSuccess[i]*10000)/1000000.) + "% (Individual Success: " + (individualSuccess[i] / 100.) + "%)</td></tr>";
+				tblStealCalcRight.rows[i+1].cells[3].innerHTML = (+(stealSuccess[i]/100.)).toFixed(4) + "%";
+				tblStealCalcRight.rows[i+1].cells[4].innerHTML = (+(individualSuccess[i]/100.)).toFixed(2) + "%";
 			}
-			wkk19 += "</table>";
-			wkk19 += "</td>";
-			wkk19 += "</tr>";
-			wkk19 += "</table>";
 		}
-		myInnerHtml("A_KakutyouData",wkk19,0);
 	}
 }
 
@@ -7037,7 +7022,7 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "<table border=0>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td width=\"50%\" style=\"vertical-align:baseline\">";
-		stealCalcTxt += "<table border=0>";
+		stealCalcTxt += "<table id=\"tblStealCalcLeft\"  border=0>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Steal Level:</td>";
 		stealCalcTxt += "<td><select name=\"stealLevel\" onChange=\"StAllCalc()\"></select></td>";
@@ -7058,19 +7043,39 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"loadMonsterItemDropListStealCalc();StAllCalc();\"></select></td>";
 		stealCalcTxt += "</tr>";
 		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td id=\"outputPlayerDexStealCalc\">";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "<td rowspan=\"2\" id=\"outputMonsterGifStealCalc\">";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td id=\"outputMonsterDexStealCalc\">";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
 		stealCalcTxt += "</table>";
 		stealCalcTxt += "</td>";
 		stealCalcTxt += "<td width=\"50%\" style=\"vertical-align:baseline\">";
-		stealCalcTxt += "<table id=\"tblItemDropRate\" border=0>";
-		stealCalcTxt += "<tr>";
-		stealCalcTxt += "<td>Item Drop Rate Slot 1:</td>";
-		stealCalcTxt += "<td>";
-		stealCalcTxt += "<input type=\"number\" name=\"itemDropRate1\" min=\"0\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
-		stealCalcTxt += " ";
+		stealCalcTxt += "<span id=\"addRemStealCalc\">";
 		stealCalcTxt += "<a onclick=\"addItemSlotStealCalc()\">Add</a>";
 		stealCalcTxt += " ";
-		stealCalcTxt += "<a onclick=\"delItemSlotStealCalc()\">Remove</a>";
-		stealCalcTxt += "</td>";
+		stealCalcTxt += "<a onclick=\"delItemSlotStealCalc()\">Remove</a>";	
+		stealCalcTxt += "</span>";
+		stealCalcTxt += "<table id=\"tblStealCalcRight\" border=0>";
+		stealCalcTxt += "<thead>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<th style=\"text-align:left\">Item Slot</th>";
+		stealCalcTxt += "<th style=\"text-align:left\">Image</th>";
+		stealCalcTxt += "<th style=\"text-align:right\">Drop Rate</th>";
+		stealCalcTxt += "<th style=\"text-align:right\">Steal Success</th>";
+		stealCalcTxt += "<th style=\"text-align:right\">Individual Success</th>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "</thead>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>1</td>";
+		stealCalcTxt += "<td></td>";
+		stealCalcTxt += "<td style=\"text-align:right\"><input type=\"number\" name=\"itemDropRate1\" min=\"0\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/></td>";
+		stealCalcTxt += "<td></td>";
+		stealCalcTxt += "<td></td>";
 		stealCalcTxt += "</tr>";
 		stealCalcTxt += "</table>";
 		stealCalcTxt += "</td>";
@@ -7089,56 +7094,61 @@ function KakutyouKansuu2(){
 }
 
 function loadMonsterItemDropListStealCalc() {
-	var tbl = document.getElementById("tblItemDropRate");
-	while (tbl.rows.length > 0) {
+	var tbl = document.getElementById("tblStealCalcRight");
+	while (tbl.rows.length > 1) {
 		tbl.deleteRow(-1);
 	}
 	var monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
 	if (monsterStolen[24]) {
+		document.getElementById("addRemStealCalc").style = "display:none";
 		for (i = 0; i < 10; ++i) {
 			var row = tbl.insertRow(-1);
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			var cell5 = row.insertCell(4);
+			cell3.style = "text-align:right";
+			cell4.style = "text-align:right";
+			cell5.style = "text-align:right";
 			var dropPercentage = monsterStolen[25 + i*2];
 			var dropItemId = monsterStolen[24 + i*2];
 			if (dropItemId == 0) {
 				continue;
 			}
-			cell2.style="text-align:right";
-			cell1.innerHTML = "";
-			cell1.innerHTML += "<img src=\"https://panel.talonro.com/images/items/small/"+dropItemId+".gif\" alt=\"no picture available =(\">";
+			cell1.innerHTML = (i+1);
 			if (i == 9) {
-				cell1.innerHTML += " Card Drop Rate: ";
-			} else {
-				cell1.innerHTML += " Drop Rate Slot " + (i+1) + ": ";
+				cell1.innerHTML = "Card";
 			}
-			cell2.innerHTML += (+dropPercentage).toFixed(2) + "%";
+			cell2.innerHTML += " <img src=\"https://panel.talonro.com/images/items/small/"+dropItemId+".gif\" alt=\"no picture available =(\">";
+			cell3.innerHTML += (+dropPercentage).toFixed(2) + "%";
 		}
 	} else {
+		document.getElementById("addRemStealCalc").style = "";
 		addItemSlotStealCalc();
 	}
 }
 
 function addItemSlotStealCalc() {
-	var tbl = document.getElementById("tblItemDropRate");
-	if (tbl.rows.length == 7) return;
+	var tbl = document.getElementById("tblStealCalcRight");
+	if (tbl.rows.length == 8) return;
 	var row = tbl.insertRow(-1);
 	var cell1 = row.insertCell(0);
 	var cell2 = row.insertCell(1);
-	cell1.innerHTML = "Item Drop Rate Slot " + tbl.rows.length + ":";
-	cell2.innerHTML = "<input type=\"number\" name=\"itemDropRate" + tbl.rows.length + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
-	if (tbl.rows.length == 1) {
-		cell2.innerHTML += " ";
-		cell2.innerHTML += "<a onclick=\"addItemSlotStealCalc()\">Add</a>";
-		cell2.innerHTML += " ";
-		cell2.innerHTML += "<a onclick=\"delItemSlotStealCalc()\">Remove</a>";
-	}
+	var cell3 = row.insertCell(2);
+	var cell4 = row.insertCell(3);
+	var cell5 = row.insertCell(4);
+	cell3.style = "text-align:right";
+	cell4.style = "text-align:right";
+	cell5.style = "text-align:right";
+	cell1.innerHTML = (tbl.rows.length-1);
+	cell3.innerHTML = "<input type=\"number\" name=\"itemDropRate" + (tbl.rows.length-1) + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
 	StAllCalc();
 }
 
 function delItemSlotStealCalc() {
-	var tbl = document.getElementById("tblItemDropRate");
-	if (tbl.rows.length == 1) return;
+	var tbl = document.getElementById("tblStealCalcRight");
+	if (tbl.rows.length == 2) return;
 	tbl.deleteRow(-1);
 	StAllCalc();
 }
