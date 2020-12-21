@@ -743,6 +743,28 @@ function StAllCalc()
 		n_tok[63] += Math.floor(n_A_HEAD_DEF_PLUS/2);
 	}
 
+	// Sword Master Crown#1745
+	if (EquipNumSearch(1745))
+	{
+		//[Base Level >= 75] - ATK + 5
+		if (n_A_BaseLV >= 75)
+			n_tok[17] += 5;
+		//[Sword Mastery#3] at Level 10 - HIT + 10 and reduce SP cost of skills by 5%
+		if (10 == SkillSearch(3))
+		{
+			n_tok[8] += 10;
+			n_tok[72] -= 5;
+		}
+		//[Spear Mastery#69] at Level 10 - After Cast Delay - 7%
+		n_tok[74] += 7 * Math.max(0, SkillSearch(69) - 9);
+		//[Axe Mastery#241] at Level 10 - Cast Time - 10%
+		n_tok[73] -= 10 * Math.max(0, SkillSearch(241) - 9);
+		//[Katar Mastery#81] at Level 10 - Critical Hit damage + 10%
+		n_tok[70] += 10 * Math.max(0, SkillSearch(81) - 9);
+		//[Mace Mastery#89] at Level 10 - ASPD + 7%
+		n_tok[12] += 7 * Math.max(0, SkillSearch(89) - 9);
+	}
+
 	//Jolly Roger Hat -[Loa] - 2018-07-03
 	if(EquipNumSearch(1186)){
 		if(n_A_HEAD_DEF_PLUS > 7){
@@ -1298,9 +1320,11 @@ function StAllCalc()
 		Glorious Holy Avenger
 		[Refine Rate 7~10]
 		MaxHP +1000
+		Reduce SP consumption of skills by 10%.
 	*/
 	if (EquipNumSearch(1079) && n_A_Weapon_ATKplus >= 7) {
 		n_tok[13] += 1000;
+		n_tok[72] -= 10;
 	}
 
 	// Apply flat MaxHP Bonus
@@ -4429,7 +4453,19 @@ function StPlusCalc()
 	}
 	//[TalonRO Custom - 2018-07-29 - Glorious Rapier - +1 INT per Refine][Amor]
 	if(EquipNumSearch(1078)){
-			wSPC_INT += n_A_Weapon_ATKplus;
+		wSPC_INT += n_A_Weapon_ATKplus;
+		
+		/*
+			[Refine 7-10]
+			Reduces SP consumption of skill by 10%.
+			Increases of Heal, Sanctuary and Potion Pitcher used on yourself by 10%.
+		*/
+		if (n_A_Weapon_ATKplus >= 7)
+		{
+			n_tok[72] -= 10;
+			n_tok[92] += 10;
+			n_tok[95] += 10; // FIXME: no dedicated tok for received heal from PP
+		}
 	}
 	// custom TalonRO Bakonawa Card
 	if (CardNumSearch(552)) {
@@ -4438,6 +4474,39 @@ function StPlusCalc()
 			n_tok[26] += 10;
 		else
 			n_tok[26] += 15;
+	}
+
+	// Mana Recharge#441 - Decreases SP Cost of all your skills by 4% by level. 
+	n_tok[72] -= 4 * SkillSearch(441);
+
+	// Green Whistle#1462 - [Every Refine Level > 6] - Reduce SP cost of all skills by 2%
+	n_tok[72] -= Math.max(0, n_A_Weapon_ATKplus - 6) * 2 * EquipNumSearch(1462);
+
+	// Mental Stick#1508 - [Every Refine Level > 5] - Reduce SP cost of all skills by 1%
+	// Note that SP cost will be increased if the refine rate is not high enough, no refine check in the script
+	n_tok[72] -= (n_A_Weapon_ATKplus - 5) * EquipNumSearch(1508);
+	
+	// Staff of Destruction#646 - [Every Refine Level] - Increase SP cost of all skills by 2%
+	n_tok[72] += n_A_Weapon_ATKplus * 2 * EquipNumSearch(646);
+
+	// Staff of Ord#1171 - [Dragonology] Lv 5 - Reduce SP cost of all skills by 15%
+	n_tok[72] -= 15 * Math.max(0, SkillSearch(234) - 4) * EquipNumSearch(1171);
+
+	// Stem Whip# 1454 - [Every Refine Level > 6] - Reduce SP cost of all skills by 2%
+	n_tok[72] -= Math.max(0, n_A_Weapon_ATKplus - 6) * 2 * EquipNumSearch(1454);
+	
+	// Sura Rampage#1512 - [Every Refine Level > 4] - Reduce SP cost of all skills by 1%
+	n_tok[72] -= Math.max(0, n_A_Weapon_ATKplus - 4) * EquipNumSearch(1512);
+
+	// Rose Casquette#1741
+	if (EquipNumSearch(1741))
+	{
+		// [Base DEX > 90] - Reduce SP cost of all skills by 5%
+		if (SU_DEX > 90)
+			n_tok[72] -= 5;
+		// [Base DEX > 95] - Reduce SP cost of all skills by 5%
+		if (SU_DEX > 95)
+			n_tok[72] -= 5;
 	}
 
 	wSPC_STR += StPlusCard(1) + wSPCall;
@@ -5004,10 +5073,21 @@ function StPlusCalc()
 			}
 	}
 
-		//[Custom TalonRO - 2018-07-26 - Speedy Recovery Wand +3 INT to Acolyte/Priest/High Priest] [Amor]
-		if(EquipNumSearch(920) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23)){
-			wSPC_INT += 3;
+	//[Custom TalonRO - 2018-07-26 - Speedy Recovery Wand +3 INT to Acolyte/Priest/High Priest] [Amor]
+	if(EquipNumSearch(920) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23)){
+		wSPC_INT += 3;
+		
+		/*
+			[Refine level 8-10]
+			Reduce ranged damage by 1% per refine
+			But spend 1% more SP per refine on skill usage up to 10% total at +10.
+		*/
+		if (n_A_Weapon_ATKplus > 7)
+		{
+			n_tok[72] += n_A_Weapon_ATKplus;
+			n_tok[78] += n_A_Weapon_ATKplus;
 		}
+	}
 
 	//CUSTOM (1st Transcendent Spirit)
 	if(SkillSearch(392) && (n_Tensei == 1) && (n_A_BaseLV > 10) && (n_A_BaseLV < 70)){
@@ -6059,40 +6139,8 @@ function KakutyouKansuu(){
 		myInnerHtml("A_KakutyouData",CBIstr,0);
 	}
 	else if(wKK == 9){
-		CBIstr = "<Font size=2><B>";
-		wkk9w = ["Bosstype","Long-range","Normal-monster"];
-		for(i=77;i <= 79;i++){
-			if(n_tok[i]==0){
-				wkk6a = "";
-				wkk6b = "";
-			}
-			if(n_tok[i]>0){
-				wkk6a = "<Font color=blue>";
-				wkk6b = "</Font>";
-			}
-			if(n_tok[i]<0){
-				wkk6a = "<Font color=red>";
-				wkk6b = "</Font>";
-			}
-			CBIstr += wkk6a + wkk9w[i-77] +" Resistance: "+ n_tok[i] +"%" + wkk6b +"<BR>";
-		}
-		for(i=190;i <= 192;i++){
-			if(n_tok[i]==0){
-				wkk6a = "";
-				wkk6b = "";
-			}
-			if(n_tok[i]>0){
-				wkk6a = "<Font color=blue>";
-				wkk6b = "</Font>";
-			}
-			if(n_tok[i]<0){
-				wkk6a = "<Font color=red>";
-				wkk6b = "</Font>";
-			}
-			CBIstr += wkk6a + SizeOBJ[i-190] +" Resistance: "+ n_tok[i] +"%" + wkk6b +"<BR>";
-		}
-		CBIstr += "</B></Font>";
-		myInnerHtml("A_KakutyouData",CBIstr,0);
+		wkk9 = "<b>SP Cost Modifier: </b>" + n_tok[72] + " %";
+		myInnerHtml("A_KakutyouData",wkk9,0);
 	}else if(wKK == 10){
 		var wkk10;
 		wkk10 = "<b>Cast Time: </b>"+ Math.round(n_A_CAST *10000)/100 + " % [ "+(100 - n_B_Cast) + " % " + (seductive_bathory_cocktail ? "(10 %) " : "") + "and "+n_A_DEX+" DEX ]<BR>";

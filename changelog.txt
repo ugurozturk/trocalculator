@@ -1,3 +1,15 @@
+[2020-12-21]
+- Added Sppo Egg
+- Added Rose Casquette
+- Added Normal Pope Egg
+- Added Sword Master Crown
+- Added Campus Festival Hat
+- Added Luxurious Wedding Veil
+- Added Steal Calculator
+- Added Drain Rate Calculator
+- Added SP Cost Modifier Info
+- Added Healing Item Calculator
+
 [2020-10-26]
 - Added Greater Agimat food
 - Fixed Giant Shield refine bonus

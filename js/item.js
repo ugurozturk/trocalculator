@@ -475,7 +475,7 @@ ItemOBJ = [
 ,[452,51,0,0,0,0,10,0,"Takius's Blindfold","",0,0]
 ,[453,50,81,5,0,1,30,65,"Coif [1]","","<b>Upper and Middle Headgear</b>",14,100,0]
 ,[454,64,0,0,0,0,0,0,"The Sign","",0,80,5,89,5,0]
-,[455,50,55,1,0,0,30,30,"Magic Eyes","","Increases SP consumption of skills by 20% ",19,5,73,-10,0]
+,[455,50,55,1,0,0,30,30,"Magic Eyes","",0,19,5,72,20,73,-10,0]
 ,[456,50,0,0,0,0,20,10,"Hibiscus","",0,19,5,4,1,5,1,193,1,0]
 ,[457,50,1,5,0,1,100,30,"Kabuki Mask","","<b>Upper, Middle, and Lower Headgear</b>",156,30,0]
 ,[458,50,0,1,0,1,40,10,"Kawaii Ribbon","",0,56,5,51,5,0]
@@ -641,7 +641,7 @@ ItemOBJ = [
 ,[618,4,1001,180,4,1,420,60,"Hunting Spear","","A spear designed specifically to hunt. The end tip looks like a leaf. This spear focused on using its weight to bring damage rather than to piercing the enemy.<br>Adds a 10% chance of the Meat item dropping when killing a [Brute] race monster",182,1,221,20,0]
 ,[619,5,1,170,4,"0 / 1",200,75,"Phantom Spear","","If the target enemy dies, Recovers 50 HP<BR>Small chance to cause Chaos on yourself",31,20,36,20,47,20,51,10,56,10,67,10,0]
 ,[620,5,61,120,4,0,100,65,"Ahlspiess","","Auger shaped spear that is effective at attacking enemy's weak points.",22,10,37,10,221,21,0]
-,[621,7,1,10,4,"0 / 1",600,80,"Doom Slayer","","SP cost of All Skills is doubled<br><b>If base STR >= 95:</b><br>ATK + 340<br>Causes Stun effect to enemies by 30% chance when receiving damage<br>Add a 5% chance of breaking the enemy's armor when attacking",12,-40,0]
+,[621,7,1,10,4,"0 / 1",600,80,"Doom Slayer","","<b>If base STR >= 95:</b><br>ATK + 340<br>Causes Stun effect to enemies by 30% chance when receiving damage<br>Add a 5% chance of breaking the enemy's armor when attacking",12,-40,72,100,0]
 ,[622,7,1001,200,3,2,250,70,"Bardiche","",0,191,13,192,15,0]
 ,[623,7,1001,175,4,1,200,70,"Heart Breaker","","Each upgrade gives Crit +1<br><b>[Whitesmith, Creator]</b><br>Add a chance of auto casting Level 3 Hammerfall on the enemy when attacking",10,20,12,5,0]
 ,[624,7,1001,332,4,1,350,80,"Hurricane Fury","","Hurricane shaped massive two handed axe. The power of hurricane lie hidden in an orb at the center of the axe.<br><b>For each upgrade:</b><br>ASPD +1%<br>1% less damage from [Medium] size enemies",191,10,221,22,0]
@@ -754,7 +754,7 @@ ItemOBJ = [
 ,[731,64,1051,0,0,0,10,60,"Seal of Red Silk","",0,0]
 ,[732,64,1001,0,0,1,10,90,"Orlean's Gloves","",0,5,2,89,3,0]
 ,[733,64,1001,0,0,1,10,90,"Horn of the Buffalo","",0,2,2,0]
-,[734,64,1001,0,0,1,15,50,"Expert Ring","","Increases SP consumption of skills by 5%",74,5,0]
+,[734,64,1001,0,0,1,15,50,"Expert Ring","",0,72,5,74,5,0]
 ,[735,64,1,1,0,0,20,0,"Kafra Ring","",0,19,1,1,1,2,1,4,1,6,1,0]
 ,[736,100,0,0,0,0,0,0,"No Set",0,0,0]
 ,[737,100,0,0,0,0,0,0,"Surviror's Manteau set",0,"MATK increase by Survivor's Rod refine rate<br>Increase resistance from Neutral Property attacks by refine rate * 3",13,300,89,-5,0]
@@ -852,7 +852,7 @@ ItemOBJ = [
 ,[829,60,1089,6,0,1,30,55,"Diablos Robe","",0,14,150,19,5,74,10,91,6,94,6,0]
 ,[830,60,1072,7,0,1,60,60,"Diablos Armor","",0,1,2,5,1,13,150,151,5,159,5,0]
 ,[831,61,63,5,0,0,60,50,"Sacred Scripture","",0,4,1,75,3,76,3,0]
-,[832,61,113,6,0,1,200,80,"Cross Shield","",0,1,1,5324,30,5159,30,5384,30,0]
+,[832,61,113,6,0,1,200,80,"Cross Shield","",0,1,1,72,10,5324,30,5159,30,5384,30,0]
 ,[833,61,55,2,0,1,100,70,"Book of Charms Vol. 1","","10% chance of auto casting Stun on an enemy when the user receives Physical Damage",4,2,19,3,0]
 ,[834,62,1,2,0,1,25,60,"Skin of Ventoss","",0,9,10,13,200,19,2,0]
 ,[835,62,1079,5,0,1,25,0,"Diablos Manteau","",0,13,100,60,5,1495,10,1496,10,0]
@@ -934,7 +934,7 @@ ItemOBJ = [
 ,[911,12,0,100,3,0,0,80,"Brave Battle Strategy Book","","<br><b>[Refine level 7-10]</b><br>Crit damage +1% per refine level, up to a total of +10% at +10.",1,2,4,1,10,20,8,15,89,15,37,75,307,20,194,1,0]
 ,[912,12,0,90,3,0,0,80,"Valorous Battle Strategy Book","","<b>[Sage/Professor]</b><br>Decrease [Fire Bolt], [Cold Bolt], and [Lightning Bolt] cast times by 15%. ",1,1,4,2,89,15,12,10,317,25,194,1,0]
 ,[913,10,0,100,3,0,0,80,"Valorous Battle Crossbow","","<b>[Archer Class]</b><br/>CRIT + 25<br/>Adds a 5% chance to inflict the Curse status when attacking.<br/><b>[Refine level 8-10]</b><br/>Increase damage with [Sharp Shooting] by 10%.<br/><b>[Thief Class]</b><br/>ASPD + 10%.<br/>Adds a 5% chance to auto-cast level 1 [Critical Wounds] when using ranged attack.",5,2,2,2,70,10,37,55,307,20,194,1,0]
-,[914,10,0,100,3,0,0,80,"Brave Battle CrossBow","","2% chance on normal or skill attack to activate ASPD + 15% for 20 seconds<br>Reduces SP consumption of skills by 10%<br/><b>[Rogue Class]</b><br/>Has a 2% chance to immune from all magic skill for 2 seconds when receiving magical attack.",5,2,4,10,37,55,194,1,0]
+,[914,10,0,100,3,0,0,80,"Brave Battle CrossBow","","2% chance on normal or skill attack to activate ASPD + 15% for 20 seconds<br/><b>[Rogue Class]</b><br/>Has a 2% chance to immune from all magic skill for 2 seconds when receiving magical attack.",5,2,4,10,37,55,72,-10,194,1,0]
 ,[915,13,0,30,3,0,0,80,"Valorous Battle Fist","","There is a 2% chance to add ASPD +10% for 20 seconds when attacking normally.",1,2,2,3,37,95,221,140,5187,25,5188,25,5189,25,194,1,0]
 ,[916,13,0,30,3,0,0,80,"Brave Battle Fist","","When attacking, there is a chance to completely negate the cast time on [Asura Strike] for 6 seconds.<br>When casting [Critical Explosion], there is a 10% chance to also cast [Dangerous Soul Collect]",1,2,4,1,37,95,7197,25,7321,25,0]
 ,[917,9,0,70,3,0,0,80,"Warlock's Magic Wand","","<b>[Refine level 7-10]</b><br>Adds a 5% chance to Stun opponents with your magic.<br><b>[Refine level 8-10]</b><br>Reduces cast time of Mystical Amplification by 50%.",89,15,4,4,5,3,317,25,194,1,0]
@@ -1076,7 +1076,7 @@ ItemOBJ = [
 ,[1053,100,0,0,0,0,0,0,"Dark Knight Set A",0,0,89,10,4,5,58,10,0]
 ,[1054,50,0,3,0,1,100,30,"Feather Of Bizofnil","","When the player attacks, Impositio Manus Lv3 is activated at 0.3% chance",0]
 ,[1055,50,0,1,0,0,30,30,"Shaman's Coif","",0,13,50,19,3,60,5,0]
-,[1056,64,0,0,0,1,10,30,"Shaman Ring","","SP cost of skills - 5%",0]
+,[1056,64,0,0,0,1,10,30,"Shaman Ring","",0,72,-5,0]
 ,[1057,64,0,0,0,0,10,30,"Shaman Earring","",0,4,2,0]
 ,[1058,100,0,0,0,0,0,0,"Shaman Set",0,0,13,300,89,5,60,5,0]
 ,[1059,50,0,5,0,0,100,40,"Poring Cake Hat","",0,19,5,10,5,9,5,11,5,73,-5,74,5,0]
@@ -1161,7 +1161,7 @@ ItemOBJ = [
 ,[1138,50,0,2,0,0,30,0,"Camp Fire Hat","",0,63,10,221,136,0]
 ,[1139,50,0,1,0,1,10,40,"Red Minstrel Hat","","<b>[For Every Refine > 5]</b><br>MDEF + 1<br>MSP + 10",4,1,14,80,19,3,0]
 ,[1140,50,0,2,0,1,60,45,"Tucano Hat","",0,5,3,193,1,0]
-,[1141,50,0,0,0,0,50,0,"Blazing Sun","","Increase SP Consumption of skills by 5%",7051,-5,7052,-5,5051,5,5052,5,5053,3,5125,3,193,1,0]
+,[1141,50,0,0,0,0,50,0,"Blazing Sun","",0,72,5,7051,-5,7052,-5,5051,5,5052,5,5053,3,5125,3,193,1,0]
 ,[1142,50,0,5,0,1,90,0,"Orc Hero Headdress","","Add a 1% chance of auto casting Level 3 Weapon Perfection on the user when receives Physical Damage<br><b>[For Every 4 Refines]</b><br>STR + 1<br><b>[For Every Refine > 5]</b><br>Physical Damage against Demi-Human monsters + 1%<br>Damage from Demi-Human monsters - 2%<br><b>Upper and Middle Headgear</b>",0]
 ,[1143,50,0,1,0,0,50,50,"Aladdin Prince Hat","",0,71,1,0]
 ,[1144,51,0,3,0,0,100,60,"Tiger Face","","<b>Middle and Lower Headgear</b>",52,5,32,5,172,5,0]
@@ -1191,7 +1191,7 @@ ItemOBJ = [
 ,[1168,9,77,100,4,0,10,70,"Withered Branch Staff","","<b>[Refine Rate > 5]</b><br>MHP - 200<br>MSP - 100<br><b>[For Every Refine > 5]</b><br>INT + 1",89,15,4,4,0]
 ,[1169,9,1055,30,3,2,50,50,"Lacrima Stick","","<b>For each upgrade:</b><br>MDef +1<br>Increases the damage inflicted with [Storm Gust] by 1%<br><b>[Refine Rate 10]</b><br>Reduces the cast time for [Storm Gust] by 8%",89,15,4,4,19,1,0]
 ,[1170,9,1053,30,3,1,50,50,"Croce Staff","","Adds a chance of using [Blessing]Lv 1, or the user's level if its higher, on the target when [Heal] is used",20,6,89,15,4,4,0]
-,[1171,9,1055,30,4,0,50,50,"Staff Of Ord","","If character has learned [Dragonology], SP Cost is reduced by 1%, INT + 3",89,15,4,2,5,1,0]
+,[1171,9,1055,30,4,0,50,50,"Staff Of Ord","","If character has learned [Dragonology] lv 5, SP Cost is reduced by 15%, INT + 3",89,15,4,2,5,1,0]
 ,[1172,9,55,30,4,0,100,50,"Chronos","","Adds 0.1% chance for when dealing magic damage, the user will gain MATK +12% and SP cost of skills will be increased by 20% for 5 seconds<br><b>For every two upgrades:</b><br> Int +1<br>Max HP +50",89,20,4,3,13,300,195,1,0]
 ,[1173,50,0,1,0,1,10,0,"Pagdayaw [1]","","<b>Upper, Middle, and Lower Headgear</b>",221,138,0]
 ,[1174,10,1054,100,3,2,100,50,"Falken Blitz","",0,5272,10,5040,10,5044,10,0]
@@ -1202,7 +1202,7 @@ ItemOBJ = [
 ,[1179,50,0,1,0,0,10,0,"Ribbon (Colored)","","",14,20,193,1,0]
 ,[1180,50,0,1,0,0,20,0,"Bride's Flower Crown","",0,6,3,19,2,0]
 ,[1181,50,0,1,0,1,20,0,"Heaven Maiden's Flower","",0,4,1,19,1,54,5,0]
-,[1182,50,0,3,0,1,10,70,"Neck Tie","","Increases SP Consumption by 5%",0,3,1,8,-5,0]
+,[1182,50,0,3,0,1,10,70,"Neck Tie","",0,3,1,8,-5,72,5,0]
 ,[1183,50,0,3,0,1,60,70,"Cherub Hat","","When receiving physical damage, chance to cast Level 1 Recovery on yourself",19,2,0]
 ,[1184,50,0,0,0,0,10,0,"Red Comb","",0,10,6,0]
 ,[1185,50,0,3,0,0,50,70,"Frog Hat","",0,19,1,34,12,174,12,0]
@@ -1334,7 +1334,7 @@ ItemOBJ = [
 ,[1311,100,0,0,0,0,0,0,"Dark Knight Set B",0,0,89,10,4,5,58,10,0]
 ,[1312,50,0,3,0,1,20,20,"Little Red Riding Hood Scarf","",0,10,6,0]
 ,[1313,52,0,1,0,0,10,90,"Spiked Scarf","","",3,1,0]  //custom TalonRO removed: 37,1,57,1,
-,[1314,63,131,4,0,1,30,90,"Dance Shoes","","Reduces SP cost of all skills by 10%",2,1,12,2,0]
+,[1314,63,131,4,0,1,30,90,"Dance Shoes","",0,2,1,12,2,72,-10,0]
 ,[1315,5,121,150,4,1,475,93,"Gigantic Lance","","When using Spiral Pierce, knock back your enemies 4 cells<br>When unequipping, you lose 500 sp<br><b>For every refine > 4:</b><br>ASPD + 1%",12,-10,0]
 ,[1316,51,0,1,0,0,10,50,"Hockey Mask","","<b>Middle and Lower Headgear</b>",37,5,0]
 ,[1317,50,0,4,0,1,40,25,"Jaguar Hat","","Allows usage of the skill [Loud Exclamation]Lv 1<br><b>Upper, Middle and Lower Headgear</b>",19,2,0]
@@ -1434,7 +1434,7 @@ ItemOBJ = [
 ,[1405,52,0,0,0,0,10,12,"Handkerchief In Mouth","",0,37,1,57,-1,0]
 ,[1406,52,0,0,0,0,10,0,"Lollipop","",0,14,5,0]
 ,[1407,52,0,0,0,0,20,50,"Love Piece","",0,0]
-,[1408,50,0,0,0,0,30,50,"Heart Wing Hairband","","Decreases SP taken by all skills by 5%",74,5,0]
+,[1408,50,0,0,0,0,30,50,"Heart Wing Hairband","",0,72,-5,74,5,0]
 ,[1409,100,0,0,0,0,0,0,"Love Piece set",0,0,73,-5,0]
 ,[1410,50,0,1,0,0,30,10,"Flying Angel","",0,2,1,4,1,12,3,73,-3,0]
 ,[1411,52,0,0,0,0,5,0,"Plant Stem In Mouth","",0,150,20,0]
@@ -1484,7 +1484,7 @@ ItemOBJ = [
 ,[1454,15,131,170,3,1,80,90,"Stem Whip","","When using Scream, add a 3% chance of casting Level 2 Wide Sleep<br>For every refine above +6, decrease SP cost of all skills by 2%",98,50,12,5,0]
 ,[1455,3,1051,280,3,0,340,90,"Alca Bringer","","Every 2 refines + 3% ASPD",0]
 ,[1456,3,1051,280,3,0,40,90,"Chrome Metal Two-Handed Sword","","A cold blue color sword crafted from the other world mineral Bradium.",0,2,3,15,-10,194,1,0]
-,[1457,10,1054,90,3,1,170,90,"Mystic Bow","","When using Arrow Shower, add a 5% chance of casting Level 2 Dragon Fear<br>Reduces the SP cost of all skills by 10%",4,4,5041,30,0]
+,[1457,10,1054,90,3,1,170,90,"Mystic Bow","","When using Arrow Shower, add a 5% chance of casting Level 2 Dragon Fear",4,4,72,-10,5041,30,0]
 ,[1458,8,133,150,3,1,100,90,"Red Ether Bag","",0,98,90,5248,25,0]
 ,[1459,61,127,4,0,1,250,90,"Imperial Guard","","Each refine above +6 increases [Shield Chain] attack power by an additional 2%",19,5,5324,5,0]
 ,[1460,4,127,180,3,1,180,90,"Imperial Spear","","<b>[Every [Spear Mastery] Level]</b><br>ATK + 2<br><b>[Every 2 Refine Levels]</b><br>ATK + 2",98,40,0]
@@ -1528,7 +1528,7 @@ ItemOBJ = [
 //custom TalonRO [Update 2014-08-30]
 ,[1496,60,0,15,0,0,0,0,"Used Mage Coat","",0,2,1,13,300,14,30,17,10,0]
 ,[1497,50,0,2,0,1,20,10,"Holy Marching Hat","","When doing physical damage, holy property is given to the weapon for 90 seconds at a 3% rate.",1,2,0]
-,[1498,62,1151,1,0,0,40,93,"Salvage Cape","","Allows usage of Soul level 2<br>Upon casting Soul, auto cast Illusionary Shadow level 1<br>While equipped, all SP usage will be doubled<br>When equipping, HP - 500<br>When unequipping, SP - 1500",0]
+,[1498,62,1151,1,0,0,40,93,"Salvage Cape","","Allows usage of Soul level 2<br>Upon casting Soul, auto cast Illusionary Shadow level 1<br>When equipping, HP - 500<br>When unequipping, SP - 1500",72,100,0]
 ,[1499,8,53,170,4,0,150,90,"Bloody Cross","","Adds a 1% chance to cast Level 1 Critical Wounds o Bleeding when attacking<br>The chance increases by the refine level of the weapon",20,7,0]
 ,[1500,61,1051,7,0,1,280,90,"Giant Shield","","<b>[Refine Rate 9-10]</b><br>Reduces damage by an additional 5%",192,5,0]
 ,[1501,50,0,2,0,0,30,0,"Polar Bear Cap","",0,2,1,5,1,19,3,76,3,0]
@@ -1538,11 +1538,11 @@ ItemOBJ = [
 ,[1505,50,1152,3,0,1,60,60,"Diadem Of Bruenhild","","Creates a chance of casting Level 8 Endure when you receive Physical damage<br>Consumes 100 HP every 4 seconds",59,5,60,5,194,1,0]
 ,[1506,10,124,115,3,2,150,93,"Creeper Bow","","Has a chance of activating Fiber Lock while attacking",5,1,0]
 ,[1507,61,123,4,0,1,50,95,"Bible of Promise(2nd Vol.)","",0,19,5,91,5,94,5,0]
-,[1508,9,132,40,3,1,50,90,"Mental Stick","","Reduces SP usage of all skills by 5%<br><b>[Refine 6-10]</b><br>Each refine above 5 decreases SP usage by 1%",73,-10,89,15,0]
+,[1508,9,132,40,3,1,50,90,"Mental Stick","","<b>[Refine 6-10]</b><br>Each refine above 5 decreases SP usage by 1%",72,-5,73,-10,89,15,0]
 ,[1509,64,1001,1,0,0,20,92,"Telekinetic Orb","","",4,3,14,30,19,1,221,120,0]
 ,[1510,100,0,0,0,0,0,0,"Mental Stick & Telekinetic Orb combo",0,0,221,121,0] //Mental Stick & Telekinetic Orb combo
 ,[1511,9,123,30,4,1,40,91,"Recovery Light","","<b>For every refinement</b><br>Healing done by all skills +3%<br>The skill Heal costs 5 more SP",20,6,89,15,194,1,0]
-,[1512,13,129,142,3,1,50,90,"Sura's Rampage","","Increases the SP cost of all skills by 5%<br><b>[Refine 5-10]</b><br>Each refine above +4 decreases the SP cost of skills by 1%",221,122,221,123,5187,10,0]
+,[1512,13,129,142,3,1,50,90,"Sura's Rampage","","<b>[Refine 5-10]</b><br>Each refine above +4 decreases the SP cost of skills by 1%",72,5,221,122,221,123,5187,10,0]
 ,[1513,60,133,7,0,1,66,90,"Green Surgical Gown","","",5,1,14,30,0]
 ,[1514,100,0,0,0,0,0,0,"Green Surgical Gown set",0,"Has a chance when killing animal and demi-human type monsters to drop 'Immortal Heart' and 'Alcohol'<br>Higher armor refine rate increases the chance of item drop",0] //Green Surgical Gown & Mes combo
 ,[1515,10,128,135,4,2,110,90,"Catapult","","If you have a higher level of Double Strafing, use that instead",221,124,0]
@@ -1789,9 +1789,11 @@ ItemOBJ = [
 ,[1738,8,95,100,3,3,70,50,"Spoon","","The cursed spoon... So the legends were true!<br><b>[Every Refine Level]</b><br> HIT + 3",12,8,133,2,0]
 ,[1739,50,0,2,0,1,10,1,"Preschool Hat","","A magical hat that protects the child's head from the scorching sun.<br><b>[Refine Rate 6-10]</b>Increases resistance to Fire Property by an additional 5%.",13,500,63,5,0]
 ,[1740,100,0,0,0,0,0,0,"Preschool Hat + Bunny Slipper","","If the base level is less than or equal to 79, increase Movement Speed.",91,5,93,5,94,5,0]
-,[1741,50,0,0,0,1,50,10,"Rose Casquette","","A beautiful hunting hat decorated with lace. It's very charming.<br>Reduce SP Consumption of skills by 5%.<br>When Base DEX is higher than 90, additional 5% reduced SP consumption.<br>When Base DEX is higher than 95, additional 5% reduced SP consumption.",0]
-,[1742,100,0,0,0,0,0,0,"Rose Casquette + Rose of Crimson","","Additional 5% reduced SP consumption.",0]
+,[1741,50,0,0,0,1,50,10,"Rose Casquette","","A beautiful hunting hat decorated with lace. It's very charming.<br>When Base DEX is higher than 90, additional 5% reduced SP consumption.<br>When Base DEX is higher than 95, additional 5% reduced SP consumption.",72,-5,0]
+,[1742,100,0,0,0,0,0,0,"Rose Casquette + Rose of Crimson","",0,72,-5,0]
 ,[1743,50,0,0,0,0,10,1,"Campus Festival Hat","","A handmade hat made to commemorate the Students Festival.<br>Enables use of <b>Level 2 Increase Agi</b>.",0]
+,[1744,50,0,0,0,1,50,45,"Luxurious Wedding Veil","","Only the couple which swears a truth one love will be able to use the veil of legend.",19,10,72,-3,73,-3,0]
+,[1745,50,1,0,0,1,100,50,"Sword Master Crown","","A crown that is similar to the one given to Sword Masters.<br>With [Base Level >= 75] ATK + 5.<br>With [Sword Mastery] at Level 10, HIT + 10 and 5% decreased SP usage of skills.<br>With [Spear Mastery] at Level 10, After Cast Delay - 7%.<br>With [Axe Mastery] at Level 10, Cast Time - 10%.<br>With [Katar Mastery] at Level 10, Critical Hit damage + 10%.<br>With [Mace Mastery] at Level 10, ASPD + 7%.",0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3569,6 +3571,8 @@ ItemID = [
 ,[1741,1,18803]
 ,[1742,2,18803,5548]
 ,[1743,1,18547]
+,[1744,1,5562]
+,[1745,1,18865]
 ];
 
 /*
@@ -3848,7 +3852,9 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Critical Damage +"+ nC2 +"%<BR>";
 	if(71 == nC1)
 		CBIstr += "Reflect Melee Physical Attacks by "+ nC2 +"%<BR>";
-    /*ZoneSoldier - 6/3/2018
+	if(72 == nC1)
+		CBIstr += "SP cost of all skills"+ wIS + nC2 +"%<BR>";
+	/*ZoneSoldier - 6/3/2018
       Casting Time %
       73,10 = Casting time +10%
       73,-10 = Casting Time -10%
