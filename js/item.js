@@ -1789,6 +1789,9 @@ ItemOBJ = [
 ,[1738,8,95,100,3,3,70,50,"Spoon","","The cursed spoon... So the legends were true!<br><b>[Every Refine Level]</b><br> HIT + 3",12,8,133,2,0]
 ,[1739,50,0,2,0,1,10,1,"Preschool Hat","","A magical hat that protects the child's head from the scorching sun.<br><b>[Refine Rate 6-10]</b>Increases resistance to Fire Property by an additional 5%.",13,500,63,5,0]
 ,[1740,100,0,0,0,0,0,0,"Preschool Hat + Bunny Slipper","","If the base level is less than or equal to 79, increase Movement Speed.",91,5,93,5,94,5,0]
+,[1741,50,0,0,0,1,50,10,"Rose Casquette","","A beautiful hunting hat decorated with lace. It's very charming.<br>Reduce SP Consumption of skills by 5%.<br>When Base DEX is higher than 90, additional 5% reduced SP consumption.<br>When Base DEX is higher than 95, additional 5% reduced SP consumption.",0]
+,[1742,100,0,0,0,0,0,0,"Rose Casquette + Rose of Crimson","","Additional 5% reduced SP consumption.",0]
+,[1743,50,0,0,0,0,10,1,"Campus Festival Hat","","A handmade hat made to commemorate the Students Festival.<br>Enables use of <b>Level 2 Increase Agi</b>.",0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3563,6 +3566,9 @@ ItemID = [
 ,[1738,1,16039]
 ,[1739,1,18860]
 ,[1740,2,18860,2415]
+,[1741,1,18803]
+,[1742,2,18803,5548]
+,[1743,1,18547]
 ];
 
 /*
@@ -4207,6 +4213,7 @@ w_SE = [[737,436,475,"NULL"]
 ,[1733,1728,1729,1730,"NULL"] //Custom TalonRO - Antonio's Coat + Antonio's Red Bag + Red Stocking Boots
 ,[1737,1736,1240,"NULL"] //Custom TalonRO - Empty Liquor Bottle + Beer Hat
 ,[1740,1739,781,"NULL"] //Custom TalonRO - Preschool Hat + Bunny Slipper
+,[1742,1741,1414,"NULL"] //Custom TalonRO - Rose Casquette + Rose of Crimson
 ];
 
 SE_MAXnum = w_SE.length -1;

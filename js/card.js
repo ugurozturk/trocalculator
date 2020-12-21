@@ -408,7 +408,7 @@ cardOBJ = [
 ,[386,7,"Raydric Archer","1% chance of [Box of Resentment] item dropping when killing a Demon race monster",0]
 ,[387,2,"Leib Olmai","1% chance of [Red Blood] item dropping when killing a Brute race monster",63,10,0]
 ,[388,6,"Raggler",0,1,1,3,1,0]
-,[389,7,"Hermit Plant","3% chance of [Hed Herb], 2% chance of [Yellow Herb], and 1% chance of [White Herb] item dropping when killing a Plant race monster<BR>+50% HP restoration with those items",0]
+,[389,7,"Hermit Plant","3% chance of [Red Herb], 2% chance of [Yellow Herb], and 1% chance of [White Herb] item dropping when killing a Plant race monster<BR>+50% HP restoration with those items",0]
 ,[390,1,"Rotar Zairo",0,70,10,115,7,0]
 ,[391,6,"Wild Rose","If equipped by a Thief job type: Perfect Dodge +5",2,1,0]
 ,[392,4,"Tao Gunka",0,15,100,18,-50,19,-50,0]

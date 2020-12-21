@@ -402,6 +402,8 @@ PET_OBJ = [[0,"No Pet",0,0]
 ,[147,"Saga [Physical damage against Plant and Insect +3%, Physical damage against Water Property +2%]",0,33,3,34,3,41,2,0]
 ,[148,"Geiravor Disciple [FLEE +7, ASPD +2%]",0,9,7,12,2,0]
 ,[149,"Geiravor Partisan [Adds a 2% chance of casting Lv 5 Dark Strike when casting magic attacks]",0,221,112,0]
+,[150,"Normal Pope [Increases effectiveness of your Heal, Sanctuary and Potion Pitcher by 5%. Add a 2% chance of gaining 5% of the damage inflicted on an enemy as HP with each attack.]",0,91,5,93,5,94,5,0]
+,[151,"Sppo [Increase resistance against Water Property by 2%. Increase Physical and Magical damage against Water element monsters by 2%. Add a chance to get a Glacial Heart when killing a monster.]",0,61,2,41,2,351,2,0]
 ];
 
 ITEM_SP_TIME_OBJ =[
@@ -722,6 +724,7 @@ EXTENDED_INFO = [
  ,[13,"Forge/Potion/EDP Creation Success Rates"]
  ,[14,"Strip Chance"]
  ,[15,"Cooking Success Rates"]
+ ,[19,"Steal Calculator"]
 ];
 
 CARD_SHORTCUT = [
