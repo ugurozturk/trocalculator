@@ -171,40 +171,40 @@ KunaiOBJ = [
 ];
 
 JobEquipItemOBJ = [
-[0,50,90,93,94,100,999], //Novice
-[0, 1, 51,101, 70, 71, 72, 74, 75,78,83,84,85,86,87,90,91,93,94,999], //Swordman
+[0,50,90,93,94,95,96,100,999], //Novice
+[0, 1, 51,101, 70, 71, 72, 74, 75,78,83,84,85,86,87,90,91,93,94,95,999], //Swordman
 [0, 1, 52,102, 72, 74, 75,78, 80,83,84,85,90,91,92,93,94,999], //Thief
-[0, 1, 53,103, 71, 73, 74, 77,78,85,89,152,999], //Acolyte
+[0, 1, 53,103, 71, 73, 74, 77,78,85,89,95,96,152,999], //Acolyte
 [0, 1, 54,104, 75, 76,83,89,92,999], //Archer
-[0, 1, 55,105, 71, 77,89,152,999], //Mage
-[0, 1, 56,106, 70, 71, 72, 73, 74, 75,78,83,84,85,86,90,91,93,94,999], //Merchant
+[0, 1, 55,105, 71, 77,89,96,152,999], //Mage
+[0, 1, 56,106, 70, 71, 72, 73, 74, 75,78,83,84,85,86,90,91,93,94,95,999], //Merchant
 [0, 1, 51, 61,107, 70, 71, 72, 74, 75,78,79,83,84,85,86,87,90,91,93,94,999], //Knight
 [0, 1, 52, 62,108, 72, 74, 75,78,79,81,83,84,85,90,91,93,94,999], //Assassin
-[0, 1, 53, 63,109, 71, 73, 74, 77,78,79,81,85,89,999], //Priest
+[0, 1, 53, 63,109, 71, 73, 74, 77,78,79,81,85,89,95,96,999], //Priest
 [0, 1, 54, 64,110, 75, 76,79,80,83,88,89,92,999], //Hunter
-[0, 1, 55, 65,111, 71, 77,79,89,999], //Wizard
-[0, 1, 56, 66,112, 70, 71, 72, 73, 74, 75,78,79,83,84,85,86,90,91,93,94,999], //Blacksmith
+[0, 1, 55, 65,111, 71, 77,79,89,96,999], //Wizard
+[0, 1, 56, 66,112, 70, 71, 72, 73, 74, 75,78,79,83,84,85,86,90,91,93,94,95,999], //Blacksmith
 [0, 1, 51, 61,113, 70, 71, 72, 74, 75,78,79,83,84,85,86,87,90,91,93,94,999], //Crusader
 [0, 1, 52, 62,114, 72, 74, 75, 76,78,79,80,83,84,85,88,91,92,93,94,999], //Rogue
-[0, 1, 53, 63,115, 71, 73, 74, 77,78,79,85,89,999], //Monk
+[0, 1, 53, 63,115, 71, 73, 74, 77,78,79,85,89,95,96,999], //Monk
 [0, 1, 54, 64,116, 74, 75, 76,79,83,89,92,999], //Bard
 [0, 1, 54, 64,117, 74, 75, 76,79,83,89,92,999], //Dancer
-[0, 1, 55, 65,118, 71, 77,79,89,999], //Sage
-[0, 1, 56, 66,119, 70, 71, 72, 73, 74, 75,78,79,83,84,85,86,90,91,93,94,999], //Alchemist
-[0,50,90,93,94,120,999], //High Novice
-[0, 1, 51, 61,107,121, 70, 71, 72, 74, 75,78,79,82,83,84,85,86,87,90,91,93,94,999], //Lord Knight
+[0, 1, 55, 65,118, 71, 77,79,89,96,999], //Sage
+[0, 1, 56, 66,119, 70, 71, 72, 73, 74, 75,78,79,83,84,85,86,90,91,93,94,95,999], //Alchemist
+[0,50,90,93,94,95,96,120,999], // Super Novice
+[0, 1, 51, 61,107,121, 70, 71, 72, 74, 75,78,79,82,83,84,85,86,87,90,91,93,94,95,999], //Lord Knight
 [0, 1, 52, 62,108,122, 72, 74, 75,78,79,81,82,83,84,85,90,91,93,94,999], //Assassin Cross
-[0, 1, 53, 63,109,123, 71, 73, 74, 77,78,79,81,82,85,89,151,152,999], //High Priest
+[0, 1, 53, 63,109,123, 71, 73, 74, 77,78,79,81,82,85,89,95,96,151,152,999], //High Priest
 [0, 1, 54, 64,110,124, 75, 76,79,80,82,83,88,89,92,999], //Sniper
-[0, 1, 55, 65,111,125, 71, 77,79,82,89,151,152,999], //High Wizard
-[0, 1, 56, 66,112,126, 70, 71, 72, 73, 74, 75,78,79,82,83,84,85,86,90,91,93,94,999], //Whitesmith
-[0, 1, 51, 61,113,127, 70, 71, 72, 74, 75,78,79,82,83,84,85,86,87,90,91,93,94,999], //Paladin
+[0, 1, 55, 65,111,125, 71, 77,79,82,89,96,151,152,999], //High Wizard
+[0, 1, 56, 66,112,126, 70, 71, 72, 73, 74, 75,78,79,82,83,84,85,86,90,91,93,94,95,999], //Whitesmith
+[0, 1, 51, 61,113,127, 70, 71, 72, 74, 75,78,79,82,83,84,85,86,87,90,91,93,94,95,999], //Paladin
 [0, 1, 52, 62,114,128, 72, 74, 75, 76,78,79,80,82,83,84,85,88,91,92,93,94,999], //Stalker
-[0, 1, 53, 63,115,129, 71, 73, 74,77,78,79,82,85,89,152,999], //Champion
+[0, 1, 53, 63,115,129, 71, 73, 74,77,78,79,82,85,89,95,96,152,999], //Champion
 [0, 1, 54, 64,116,130, 74, 75, 76,79,82,83,89,153,92,999], //Clown
 [0, 1, 54, 64,117,131, 74, 75, 76,79,82,83,89,153,92,999], //Gypsy
-[0, 1, 55, 65,118,132, 71,77,79,82,89,152,999], //Professor
-[0, 1, 56, 66,119,133, 70, 71, 72, 73, 74, 75,78,79,82,83,84,85,86,90,91,93,94,999], //Creator
+[0, 1, 55, 65,118,132, 71,77,79,82,89,152,96,999], //Professor
+[0, 1, 56, 66,119,133, 70, 71, 72, 73, 74, 75,78,79,82,83,84,85,86,90,91,93,94,95,999], //Creator
 [0],
 [0],
 [0],
@@ -214,7 +214,7 @@ JobEquipItemOBJ = [
 [0],
 [0, 1,141, 83,84,85,86,150,999], //Taekwon Kid //custom
 [0, 1,142, 79,83,84,85,86,87,91,150,999], //Star Gladiator
-[0, 1,143, 55, 65, 71, 77,79,89,93,999], //Soul Linker
+[0, 1,143, 55, 65, 71, 77,79,89,93,96,999], //Soul Linker
 [0, 1,144, 58, 52,91,93,999], //Ninja
 [0, 1,145, 59, 83,145,999], //Gunslinger
 ];
@@ -267,6 +267,8 @@ JobEquipItemOBJ = [
 		92 = archer class, thief, rogue
 		93 = novice, swordman class, merchant class, thief class, ninja, soul linker
 		94 = novice, swordman class, merchant class, thief class
+		95 = novice, swordman class, merchant class, acolyte class
+		96 = novice, mage class, acolyte class, soul linker
 
 		100 = novice ONLY
 		101 = swordman ONLY
@@ -389,9 +391,9 @@ function BattleCalc999()
 			n_A_workDEX = Math.floor(n_A_DEX * (1 + (n_A_Weapon2LV - 1) * 0.2));
 
 			if(n_A_workDEX>=n_A_Weapon2_ATK)
-				w_left_Maxatk = n_A_ATK + n_A_Weapon2LV_Maxplus + Math.floor((n_A_Weapon2_ATK + wImp)* wCSize);
+				w_left_Maxatk = n_A_ATK + n_A_Weapon2LV_Maxplus + Math.floor(n_A_Weapon2_ATK * wCSize);
 			else
-				w_left_Maxatk = n_A_ATK + n_A_Weapon2LV_Maxplus + Math.floor((n_A_Weapon2_ATK-1 + wImp)* wCSize);
+				w_left_Maxatk = n_A_ATK + n_A_Weapon2LV_Maxplus + Math.floor((n_A_Weapon2_ATK - 1) * wCSize);
 
 			//custom TalonRO ignore effects on left/offhand like Ice Pick or Weeder Knife
 			IgnoreEffectOnLeftHand = 1;
@@ -418,7 +420,7 @@ function BattleCalc999()
 
 			if(n_A_workDEX > n_A_Weapon2_ATK)
 				n_A_workDEX = n_A_Weapon2_ATK;
-			w_left_Minatk = n_A_ATK + n_A_Weapon2LV_Minplus + Math.floor((n_A_workDEX + wImp) * wCSize);
+			w_left_Minatk = n_A_ATK + n_A_Weapon2LV_Minplus + Math.floor(n_A_workDEX * wCSize);
 
 			//custom TalonRO ignore effects on left/offhand like Ice Pick or Weeder Knife
 			IgnoreEffectOnLeftHand = 1;
@@ -1819,10 +1821,17 @@ function BattleCalc999()
 		if(n_A_ActiveSkill==405)
 			w_1senHP = eval(document.calcForm.SkillSubNum.value);
 		else
-			w_1senHP = n_A_MaxHP -1;
+			w_1senHP = n_A_MaxHP;
 
-		w_DMG[0] = (n_A_STR + n_A_ActiveSkillLV) * 40 + w_1senHP * (n_A_BaseLV / 100) * n_A_ActiveSkillLV / 10;
+		w_DMG[0] = Math.floor(n_A_STR * 40 + w_1senHP * 8 * n_A_ActiveSkillLV / 100);
+		
+		// Apply def reduction
 		w_DMG[0] = w_DMG[0] * (100 - n_B[14]) / 100;
+		w_DMG[0] -= n_B[7];
+
+		// Add refine bonus
+		w_DMG[0] += n_A_WeaponLV_seirenATK;
+
 		w_DMG[0] = BaiCI(w_DMG[0]);
 		w_DMG[0] = Math.floor(w_DMG[0] * zokusei[n_B[3]][0]);
 
@@ -2364,22 +2373,13 @@ function BattleCalc999()
 function ATKbai01()
 {
 	var wA01 = 100;
-	if(n_A_ActiveSkill != 193 &&n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321){
-		if(SkillSearch(12))
-			wA01 += 32;
-		else if(n_A_PassSkill6[5])
-			wA01 += 2 + 3 * n_A_PassSkill6[5];
-		else if(n_A_PassSkill2[12])
-			wA01 += 5;
-		if(SkillSearch(256))
-			wA01 += SkillSearch(256) * 5;
-		if(SkillSearch(270))
+
+	if(n_A_ActiveSkill != 193 &&n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321) {
+		if (SkillSearch(270)) // True Sight#270
 			wA01 += SkillSearch(270) * 2;
-		if(n_A_PassSkill5[3])
-			wA01 += 100;
-		if(n_A_PassSkill6[2])
+		if (n_A_PassSkill6[2])
 			wA01 += 10;
-		if(StPlusCalc2(87))
+		if (StPlusCalc2(87))
 			wA01 += StPlusCalc2(87);
 
 		//Note - Issue#252
@@ -2743,7 +2743,7 @@ function BattleCalc998()
 				HITS = 3 - MS_KAUPE;
 				EQ_RATIO = 2 + 1 * EQ_LV + Math.floor(EQ_LV / 2) + ((EQ_LV > 4) ? 1 : 0);
 
-				MS_REDUCTION = MS_BOSS * MS_ELEMENT * MS_NEUTRAL * MS_RACE; // EQ is considered as short ranged attack, no damage reduction from bLongAtkDef
+				MS_REDUCTION = MS_BOSS * MS_ELEMENT * MS_NEUTRAL * MS_RACE * (blossoming_geographer_cocktail ? 0.9 : 1); // EQ is considered as short ranged attack, no damage reduction from bLongAtkDef
 
 				EQ_MINDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[12] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC) / EQ_TARGETS);
 				EQ_MAXDMG = Math.floor(Math.floor(Math.floor(Math.floor(n_B[13] * EQ_RATIO * (1 - n_A_MDEF /100) - n_A_INTMDEF) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC) / EQ_TARGETS);
@@ -2760,7 +2760,7 @@ function BattleCalc998()
 			HITS = 1 - MS_KAUPE;
 			
 			HJ_RATIO = HJ_LV;
-			MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE;
+			MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE * (sting_slap_cocktail ? 0.9 : 1);
 			
 			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
 			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
@@ -2908,6 +2908,18 @@ function BattleHiDam(){
 				w_HiDam[i] -= Math.floor(w_HiDam[i] * 10 / 100);
 	}
 
+	// Sting's Slap Cocktail - Resistance to Physical attacks +10%
+	if (n_Enekyori < 2 && sting_slap_cocktail) {
+		for (i = 0 ; i <= 6; ++i)
+				w_HiDam[i] -= Math.floor(w_HiDam[i] * 10 / 100);
+	}
+	
+	// Blossoming Geographer Cocktail - Resistance to Magical attacks +10%
+	if (2 == n_Enekyori && blossoming_geographer_cocktail) {
+		for (i = 0 ; i <= 6; ++i)
+				w_HiDam[i] -= Math.floor(w_HiDam[i] * 10 / 100);
+	}
+
 	for(i=0;i<=6;i++){
 		if(w_HiDam[i] < 1)
 			w_HiDam[i]=1;
@@ -3025,8 +3037,16 @@ function BattleMagicCalc(wBMC)
 	// Damage multiplier for race - bMagicAddRace
 	var wMRaceX = n_tok[170 + n_B[2]];
 	
-	wBMC2 = wBMC2 * (100 + wMRaceX) /100;
-	// << bMagicAddRace
+	// >> bMagicAddRace2
+	/*
+		Detecting Staff#1735 - Increases magical damage against Kiel Dungeon Monsters (except Alice), Juperos Ruins Monsters, and Guardians by 5%
+		[Every Refine Level] Magical damage increased by 1%"
+	*/
+	if (EquipNumSearch(1735) && (IsAKielDungeonMonster() || IsAJuperosRuinsMonster()))
+		wMRaceX += 5 + n_A_Weapon_ATKplus;
+	
+	wBMC2 = wBMC2 * (100 + wMRaceX) / 100;
+	// << bMagicAddRace2 << bMagicAddRace
 
 	// >> bMagicAddClass
 	var wMClassX = 0
@@ -3051,9 +3071,6 @@ function BattleMagicCalc(wBMC)
 	
 	// >> bAddMagicDamageClass
 	// << bAddMagicDamageClass
-	
-	// >> bMagicAddRace2
-	// << bMagicAddRace2
 	
 	wBMC2 = tPlusDamCut(wBMC2);
 
@@ -4400,9 +4417,16 @@ with(document.calcForm){
 		str += '<TR><TD id="EN836"></TD><TD id="EN837"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Eclage Food</B></Font></TD></TR>';
 		str += '<TR><TD colspan="2" id="EN842"></TD></TR>';
-		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Food:</B></Font></TD></TR>';
+		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Summer Cocktails</B></Font></TD></TR>';
+		str += '<TR><TD id="EN843"></TD></TR>';
+		str += '<TR><TD id="EN844"></TD></TR><TR><TD id="EN845"></TD></TR>';
+		str += '<TR><TD id="EN846"></TD></TR><TR><TD id="EN847"></TD></TR>';
+		str += '<TR><TD id="EN848"></TD></TR><TR><TD id="EN849"></TD></TR>';
+		str += '<TR><TD id="EN850"></TD></TR><TR><TD id="EN851"></TD></TR>';
+		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Food</B></Font></TD></TR>';
 		str += '<TR><TD id="EN816"></TD></TR>';
-		str += '<TR><TD id="EN826"></TD><TD id="EN827"></TD></TR>';
+		str += '<TR><TD id="EN826"></TD></TR>';
+		str += '<TR><TD id="EN827"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Debuffs</B></Font></TD></TR>';
 		str += '<TR><TD id="EN830"></TD><TD id="EN831"></TD></TR>';
 		str += '<TR><TD id="EN832"></TD><TD id="EN833"></TD></TR></table>';
@@ -4410,15 +4434,24 @@ with(document.calcForm){
 		A8_SKILLSW.checked = 1;
 		myInnerHtml("EN800",'<select name="A8_Skill0" onChange="Click_A8(1)"></select>',0);
 
-		/*
-			Added Eclage Food with a drop down list for selection. Velaryon#8787 4-4-2020
-		*/
+		// Added Eclage Food with a drop down list for selection. Velaryon#8787 4-4-2020
 		myInnerHtml("EN842",'<select name="eclage_food_list" onChange="Click_A8(1)"></select>',0);
 		eclage_food_list.options[0] = new Option("-",0,true,true);
 		eclage_food_list.options[1] = new Option("Snow Flip [Increases all damage against and experience from [Water] property monsters by 5%]",1);
 		eclage_food_list.options[2] = new Option("Slapping Herb [Increases all damage against and experience from [Earth] property monsters by 5%]",2);
 		eclage_food_list.options[3] = new Option("Peony Mommy [Increases all damage against and experience from [Fire] property monsters by 5%]",3);
 		eclage_food_list.options[4] = new Option("Yggdrasil Dust [Increases all damage against and experience from [Wind] property monsters by 5%]",4);
+
+		// Added Summer Cocktails under Additional Effects
+		myInnerHtml("EN843",'<input type="checkbox" name="venatu_beep_cocktail_check" 			onClick="Click_A8(1)">Venatu\'s Beep [Increase ATK by 5% for 30 minutes]',0);
+		myInnerHtml("EN844",'<input type="checkbox" name="old_dracula_mix_cocktail_check" 		onClick="Click_A8(1)">Old Dracula\'s Mix [15% more Job EXP for 30 minutes]',0);
+		myInnerHtml("EN845",'<input type="checkbox" name="spammers_heaven_cocktail_check"		onClick="Click_A8(1)">Spammers Heaven [Increase ASPD by 10% for 45 minutes]',0);
+		myInnerHtml("EN846",'<input type="checkbox" name="myst_case_suprise_cocktail_check" 	onClick="Click_A8(1)">Myst Case\'s Surprise [Increase MATK by 5% for 30 minutes]',0);
+		myInnerHtml("EN847",'<input type="checkbox" name="seductive_bathory_cocktail_check"		onClick="Click_A8(1)">Seductive Bathory [Reduce Cast Time by 10% for 45 minutes]',0);
+		myInnerHtml("EN848",'<input type="checkbox" name="sting_slap_cocktail_check"			onClick="Click_A8(1)">Sting\'s Slap [10% resistance to Physical Attacks for 30 minutes]',0);
+		myInnerHtml("EN849",'<input type="checkbox" name="blossoming_geographer_cocktail_check"	onClick="Click_A8(1)">Blossoming Geographer [10% resistance to Magic Attacks for 30 minutes]',0);
+		myInnerHtml("EN850",'<input type="checkbox" name="drip_of_yggdrasil_cocktail_check"		onClick="Click_A8(1)">Drip of Yggdrasil [10% EXP Boost for 30 minutes + No EXP loss when dying]',0);
+		myInnerHtml("EN851",'<input type="checkbox" name="moscow_headless_mule_cocktail_check"	onClick="Click_A8(1)">Moscow Headless Mule [For 10 minutes, FLEE + 30 and you regenerate 3% of your Maximum HP every 10 seconds. Can not be used while in Frenzy]',0);
 
 		var PET_OBJ_copy= new Array();
 		PET_OBJ_copy = PET_OBJ_copy.concat(PET_OBJ);
@@ -4509,7 +4542,7 @@ with(document.calcForm){
 			A8_Skill15.options[i] = new Option(i * 5,i);
 		myInnerHtml("EN814",'<input type="checkbox" name="A8_Skill16"onClick="Click_A8(1)">Set CRIT% to 0',0);
 		myInnerHtml("EN815",'<input type="checkbox" name="A8_Skill17"onClick="Click_A8(1)">Advance 1st Spirit (max stats)',0);
-		myInnerHtml("EN816",'<input type="checkbox" name="A8_Skill18"onClick="Click_A8(1)">Buche de Noel[Hit +3, CRIT +7, Recovery rate of skills and items + 3%]',0);
+		myInnerHtml("EN816",'<input type="checkbox" name="A8_Skill18"onClick="Click_A8(1)">	[Hit +3, CRIT +7, Recovery rate of skills and items + 3%]',0);
 		myInnerHtml("EN817",'<input type="checkbox" name="A8_Skill19"onClick="Click_A8(1)">Rune Strawberry Cake[ATK, MATK + 5]',0);
 		myInnerHtml("EN818",'<input type="checkbox" name="A8_Skill20"onClick="Click_A8(1)">Schwartzwald Pine Jubilee[HIT + 10 , Perfect Dodge + 20]',0);
 		myInnerHtml("EN819",'<input type="checkbox" name="A8_Skill21"onClick="Click_A8(1)">Arunafeltz Desert Sandwich[CRIT + 7]',0);
@@ -4520,10 +4553,8 @@ with(document.calcForm){
 		myInnerHtml("EN823",'<input type="checkbox" name="A8_Skill25"onClick="Click_A8(1)">Pinguicula\'s Fruit Jam[Increases physical damage on Splendide maps by 10%]',0);
 		myInnerHtml("EN824",'<input type="checkbox" name="A8_Skill26"onClick="Click_A8(1)">Cornus\' Tear[Increases magical damage on Splendide maps by 10%]',0);
 		myInnerHtml("EN825",'<input type="checkbox" name="A8_Skill27"onClick="Click_A8(1)">Luciola\'s Honey Jam[Decreases damage on Splendide maps by 10%]',0);
-
-		//custom TalonRO
-		//myInnerHtml("EN826",'<input type="checkbox" name="A8_Skill28"onClick="Click_A8(1)">Guarana Candy[ASPD+ 10%, HIT+ 5]',0);
 		myInnerHtml("EN826",'<input type="checkbox" name="A8_Skill28"onClick="Click_A8(1)">Guarana Candy[Increase AGI Level 10]',0);
+		myInnerHtml("EN827",'<input type="checkbox" name="A8_Skill35"onClick="Click_A8(1)">Greater Agimat of Ancient Spirit[Increases physical and magical damage to demon monsters by 10%]',0);
 
 		myInnerHtml("EN830",'Quagmire <select name="A_IJYOU0" onChange="Click_A8(1)"></select>',0);
 		A_IJYOU0.options[0] = new Option("-",0);
@@ -4579,12 +4610,22 @@ with(document.calcForm){
 		A8_Skill30.checked = n_A_PassSkill8[30];
 		A8_Skill31.checked = n_A_PassSkill8[31];
 		A8_Skill32.checked = n_A_PassSkill8[32];
+		A8_Skill35.checked = n_A_PassSkill8[35];
 		A_IJYOU0.value = n_A_IJYOU[0];
 		A_IJYOU1.value = n_A_IJYOU[1];
 		A_IJYOU2.checked = n_A_IJYOU[2];
 		A_IJYOU3.checked = n_A_IJYOU[3];
 		eclage_food_list.value = eclage_food;
-
+		
+		sting_slap_cocktail_check.checked = sting_slap_cocktail
+		venatu_beep_cocktail_check.checked = venatu_beep_cocktail
+		old_dracula_mix_cocktail_check.checked = old_dracula_mix_cocktail
+		spammers_heaven_cocktail_check.checked = spammers_heaven_cocktail
+		seductive_bathory_cocktail_check.checked = seductive_bathory_cocktail
+		myst_case_suprise_cocktail_check.checked = myst_case_suprise_cocktail
+		drip_of_yggdrasil_cocktail_check.checked = drip_of_yggdrasil_cocktail
+		moscow_headless_mule_cocktail_check.checked = moscow_headless_mule_cocktail
+		blossoming_geographer_cocktail_check.checked = blossoming_geographer_cocktail
 	}else{
 		var str;
 		str = '<table style="border: 1px solid #999; border-collapse: collapse; width: auto;">';
@@ -6992,38 +7033,48 @@ if(n_B_IJYOU[1]){
 	}
 
 /* [END] */
-	if(Taijin==0){
-		var w1_Exp = 100;
+	if (Taijin==0){
+		job_exp_modifier = 0;
+		base_exp_modifier = 0;
+		common_exp_modifier = 100;
 
-		w1_Exp += n_tok[120+n_B[2]] + n_tok[370 + Math.floor(n_B[3] / 10)];
+		common_exp_modifier += n_tok[120+n_B[2]] + n_tok[370 + Math.floor(n_B[3] / 10)];
 
 		if (n_B[19]) // Experience bonus on bosstype monsters
-			w1_Exp += n_tok[197];
+			common_exp_modifier += n_tok[197];
 		else // Experience bonus on normal monsters
-			w1_Exp += n_tok[196];
-		
-		var w2_Exp = 0;
+			common_exp_modifier += n_tok[196];
 
 		if(n_A_JobSearch()==3 && CardNumSearch(452) && (n_B[2]==1 || n_B[2]==6))
-			w1_Exp += 5;
+			common_exp_modifier += 5;
 		if(n_B[2] == 2 && n_A_JobSearch()==4 && CardNumSearch(453))
-			w1_Exp += 5;
+			common_exp_modifier += 5;
 		if(n_A_PassSkill8[1])
-			w1_Exp += (25 * n_A_PassSkill8[1]);
+			common_exp_modifier += (25 * n_A_PassSkill8[1]);
 		if(n_A_PassSkill8[2])
-			w2_Exp += 50;
+			job_exp_modifier += 50;
 		if(n_A_PassSkill6[2])
-			w1_Exp += 100;
+			common_exp_modifier += 100;
 		//custom TalonRO Ultimate Ascended Black Dragon Hat: +5% exp
 		if(EquipNumSearch(1493) && n_B[19]==0)
-			w1_Exp += 5;
+			common_exp_modifier += 5;
+		
+		// Manage Exp Summer Cocktails
+		// Drip of Yggdrasil Cocktail - Base Experience +10%
+		if (drip_of_yggdrasil_cocktail)
+			base_exp_modifier += 10;
+		// Old Dracula's Mix Cocktail - Job Experience +15%
+		if (old_dracula_mix_cocktail)
+			job_exp_modifier += 15;
+		
 		if(n_A_PassSkill8[14] == 3 || n_A_PassSkill6[2]){
-			w1_Exp = w1_Exp * 2;
-			w2_Exp = w2_Exp * 2;
+			common_exp_modifier = common_exp_modifier * 2;
+			job_exp_modifier = job_exp_modifier * 2;
 		}
-		if(w1_Exp != 0 || w2_Exp != 0){
-			n_B[16] = Math.floor(n_B[16] * w1_Exp / 100);
-			n_B[17] = Math.floor(n_B[17] * (w1_Exp + w2_Exp) / 100);
+
+		if(common_exp_modifier != 0 || job_exp_modifier != 0){
+			n_B[16] = Math.floor(n_B[16] * (common_exp_modifier + base_exp_modifier) / 100);
+			n_B[17] = Math.floor(n_B[17] * (common_exp_modifier + job_exp_modifier) / 100);
 		}
 		if(n_A_PassSkill8[5]){
 			n_B[16] = Math.floor(n_B[16] / (1 + n_A_PassSkill8[5]) + 1);
@@ -7282,9 +7333,9 @@ function calc()
 	n_A_DMG = [0,0,0];
 
 	if(n_A_workDEX>=n_A_Weapon_ATK || SkillSearch(155))
-		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
+		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * wCSize);
 	else
-		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK-1 + wImp)* wCSize);
+		n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK - 1) * wCSize);
 
 	//[Bug Fix 2018-07-16 - Bowling Bash with Bow weapon formula] [NattWara]
 	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
@@ -7295,8 +7346,8 @@ function calc()
 	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	{
-		w1 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_Weapon_ATK / 100 * wCSize) + Math.floor(wImp * wCSize);
-		w2 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_workDEX / 100 * wCSize) + Math.floor(wImp * wCSize);
+		w1 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_Weapon_ATK / 100 * wCSize);
+		w2 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_workDEX / 100 * wCSize);
 
 		w = Math.floor((ArrowOBJ[n_A_Arrow][0]-1) * wCSize);
 		w1 += w;
@@ -7309,30 +7360,29 @@ function calc()
 	//if(n_A_WeaponType==10||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	if((n_A_WeaponType==10 && n_A_ActiveSkill!=76)||n_A_WeaponType==17||n_A_WeaponType==18||n_A_WeaponType==19||n_A_WeaponType==20||n_A_WeaponType==21)
 	{
-		n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_Weapon_ATK / 100 +wImp) * wCSize);
-		w = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_workDEX / 100 + wImp) * wCSize);
+		n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_Weapon_ATK / 100) * wCSize);
+		w = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_workDEX / 100) * wCSize);
 		if(n_A_DMG[0] > w)n_A_DMG[0] = w;
 	}
 	else{
 		if(n_A_workDEX >= n_A_Weapon_ATK)
-			n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK + wImp) * wCSize);
+			n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor(n_A_Weapon_ATK * wCSize);
 		else{
 
 			if(SkillSearch(155))
 				n_A_workDEX = n_A_Weapon_ATK;
-			n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_workDEX + wImp) * wCSize);
+			n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor(n_A_workDEX * wCSize);
 		}
 	}
 
 
 	n_A_DMG[1] = (n_A_DMG[0] + n_A_DMG[2]) / 2;
 
-
 	n_Enekyori=0;
 	n_A_CriATK = [0,0,0];
-	n_A_CriATK[1] = n_A_ATK + (n_A_WeaponLV_Minplus + n_A_WeaponLV_Maxplus) /2 + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
-	n_A_CriATK[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
-	n_A_CriATK[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK + wImp)* wCSize);
+	n_A_CriATK[1] = n_A_ATK + (n_A_WeaponLV_Minplus + n_A_WeaponLV_Maxplus) /2 + Math.floor(n_A_Weapon_ATK * wCSize);
+	n_A_CriATK[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor(n_A_Weapon_ATK * wCSize);
+	n_A_CriATK[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * wCSize);
 
 	if(n_A_WeaponType==10 || 17<=n_A_WeaponType && n_A_WeaponType <= 21){
 		n_Enekyori=1;
@@ -7396,6 +7446,8 @@ function calc()
 	debug_atk="\n --- (calc) ---";
 	debug_atk+="\nb_BattleCalc999:"+n_A_DMG[1];
 	BattleCalc999();
+	// Update Extended Info
+	KakutyouKansuu();
 	debug_atk+="\na_BattleCalc999 (w_DMG[1]):"+w_DMG[1]+"\n\tn_A_DMG[1]:"+n_A_DMG[1];
 
 	if(Taijin==1 && n_Enekyori==0){
@@ -7444,6 +7496,8 @@ function BattleCalc(w_atk,w_2)
 		debug_atk+="\n --- (BattleCalc) def-related ---";
 		debug_atk+="\nb_BattleCalc4:"+w_atk;
 	}
+	
+	w_atk = ApplySkillAtkBonus(w_atk)
 
 	if(w_2==10)
 		w_atk += n_A_WeaponLV_seirenATK;
@@ -7694,7 +7748,7 @@ function BaiCI(wBaiCI)
 		if(debug_dmg_avg)
 			debug_atk+="\na_wBaiCI:"+wBaiCI;
 
-		if(108<=n_B[0] && n_B[0]<=115 || n_B[0]==319)
+		if(108<=n_B[0] && n_B[0]<=115 || n_B[0]==319 || n_B[0] == 233) 
 			wBaiCI = Math.floor(wBaiCI * (100+n_tok[81]) /100);
 
 		if(116<=n_B[0] && n_B[0]<=120)
@@ -7761,280 +7815,6 @@ function BaiCI(wBaiCI)
 		debug_atk+="\n --- (BaiCI) card-skill Modifier ---";
 		debug_atk+="\nb_wBaiCI:"+wBaiCI;
 	}
-	//specific skill %damage bonus
-	w1=0;
-	if(n_A_ActiveSkill == 6)
-		if(n_A_SHOES_DEF_PLUS >= 9 && CardNumSearch(362))
-			w1 += 10;
-	if(n_A_ActiveSkill == 76)
-		if(n_A_WeaponType==2 || n_A_WeaponType==3)
-			w1 += 25 * CardNumSearch(464);
-	if(n_A_ActiveSkill == 41)
-		if(n_A_WeaponType==10)
-			w1 += 50 * CardNumSearch(465);
-	if(n_A_ActiveSkill == 40)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1089))
-			w1 += 20;
-	//custom TalonRO rental - Bow of Evil: Double Strafe damage +25%
-	if(n_A_ActiveSkill == 40 && EquipNumSearch(1332))
-		w1 += 25;
-	//custom TalonRO rental - Katar of Speed: Sonic Blow damage +25%
-	if(n_A_ActiveSkill == 83 || n_A_ActiveSkill == 388)
-		if(EquipNumSearch(1342))
-			w1 += 25;
-	//custom TalonRO rental - Mace of Madness: Cart Revolution damage +25%
-	if(n_A_ActiveSkill == 66)
-		if(EquipNumSearch(1343))
-			w1 += 25;
-	//custom TalonRO rental - Monk Knuckle: Finger Offensive damage +25%
-	if(n_A_ActiveSkill == 192)
-		if(EquipNumSearch(1346))
-			w1 += 25;
-	//custom TalonRO rental - Phenomena Whip: Throw Arrow damage +25%
-	if(n_A_ActiveSkill == 207)
-		if(EquipNumSearch(1349))
-			w1 += 25;
-	//custom TalonRO rental - Spear of Excellent: Magnum Break damage +25%
-	if(n_A_ActiveSkill == 7)
-		if(EquipNumSearch(1352))
-			w1 += 25;
-	//custom TalonRO SQI Bonus Twin Fang: Grimtooth damage +25%
-	if(n_A_ActiveSkill == 84)
-		if(EquipNumSearch(1375))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==7) {
-					w1 += 25;
-					break;
-				}
-	//custom TalonRO SQI Bonus Aegis Shield: Shield Chain damage +10%
-	if(n_A_ActiveSkill == 324)
-		if(EquipNumSearch(1376))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==14) {
-					w1 += 10;
-					break;
-				}
-	//custom TalonRO SQI Bonus Artemis Bow: Double Strafe damage +15%
-	if(n_A_ActiveSkill == 40)
-		if(EquipNumSearch(1377))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==24) {
-					w1 += 15;
-					break;
-				}
-	//custom TalonRO SQI Bonus Belmont Whip: Throw Arrow damage +35%
-	if(n_A_ActiveSkill == 207)
-		if(EquipNumSearch(1378))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==36) {
-					w1 += 35;
-					break;
-				}
-	if(n_A_ActiveSkill == 272 && EquipNumSearch(1045)){
-		w1 += n_A_Weapon_ATKplus * 3;
-	}
-	//custom TalonRO Imperial Guard: Shield Chain damage +2% each refine above 6
-	if(n_A_ActiveSkill == 324)
-		if(EquipNumSearch(1459))
-			if(n_A_LEFT_DEF_PLUS > 6)
-				w1 += 2*(n_A_LEFT_DEF_PLUS-6);
-	if(n_A_ActiveSkill == 169){ //backstab
-		//custom TalonRO Black Wing: Back Stab damage +2% each refine
-		if(EquipNumSearch(1463)){
-			w1 += 2*n_A_Weapon_ATKplus;
-		}
-		//brave assassin damascus [Loa] 2018-07-24
-		if(EquipNumSearch(897) && n_A_JobSearch2() == 14){
-			w1 += 10;
-		}
-	}
-	if(n_A_ActiveSkill == 171){ //raid
-		//brave assassin damascus [Loa] 2018-07-24
-		if(EquipNumSearch(897) && n_A_JobSearch2() == 14){
-			w1 += 10;
-		}
-	}
-
-	//custom TalonRO Cannon Spear: Head Crush damage +5% each 3rd refine
-	if(n_A_ActiveSkill == 260)
-		if(EquipNumSearch(1516))
-			w1 += 3*Math.floor(n_A_Weapon_ATKplus/3);
-	/*
-		Assaulter Spear
-		[Refine level 8-10]
-		Increase damage of Spiral Pierce by 20%.
-	*/
-	if (EquipNumSearch(903) && n_A_Weapon_ATKplus >= 8 && n_A_ActiveSkill == 259) {
-		w1 += 20;
-	}
-	/*
-		Glorious Tablet
-		Increase damage with [Flying Side Kick] by 10%.
-	*/
-	if (EquipNumSearch(1094) && (n_A_ActiveSkill == 339 || n_A_ActiveSkill == 305)) {
-		w1 += 10;
-	}
-	/*
-		Brave Assassin Damascus
-		[Crusader Class]
-		Add 5% more damage with [Shield Chain]
-	*/
-	if (EquipNumSearch(897) && n_A_JobSearch2() == 13 && n_A_ActiveSkill == 324) {
-		w1 += 5;
-	}
-	/*
-		Soldier Grenade Launcher
-		[Refine level 6-10]
-		Increase damage of [Ground Drift] by 25%.
-	*/
-	if (EquipNumSearch(929) && n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 437) {
-		w1 += 25;
-	}
-	/*
-		Brave Gladiator Blade
-		[Rogue and Crusader Classes]
-	*/
-	if (EquipNumSearch(900)
-			&& (n_A_JobSearch2() == 13 || n_A_JobSearch2() == 14)
-			&& n_A_ActiveSkill == 161) {
-		// Add 15% more damage with [Holy Cross] skill.
-		w1 += 15;
-		// [Refine level 7-10] Add an additional 5% more damage with [Holy Cross] skill.
-		if (n_A_Weapon_ATKplus >= 7) {
-			w1 += 5;
-		}
-		// For every refine +8 or higher, add 1% more damage with [Holy Cross] skill.
-		if (n_A_Weapon_ATKplus >= 8) {
-			w1 += n_A_Weapon_ATKplus - 7;
-		}
-	}
-	/*
-		Glorious Holy Avenger
-		[Refine Rate 7~10]
-		Increases damage with [Holy Cross] by 15%.
-	*/
-	if (EquipNumSearch(1079) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 161) {
-		w1 += 15;
-	}
-
-	if(n_A_ActiveSkill == 428)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1099))
-			w1 += 2 * n_A_Weapon_ATKplus;
-	if(n_A_ActiveSkill == 430)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1100))
-			w1 += 3 * n_A_Weapon_ATKplus;
-	if(n_A_ActiveSkill == 436)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1102))
-			w1 += 2 * n_A_Weapon_ATKplus;
-	if(n_A_ActiveSkill == 437)
-		if(n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1103))
-			w1 += 2 * n_A_Weapon_ATKplus;
-	if(n_A_ActiveSkill == 6 || n_A_ActiveSkill == 76)
-		if(n_A_ActiveSkillLV == 10 && EquipNumSearch(1159))
-			w1 += 50;
-	if(n_A_ActiveSkill == 65)
-		if((SU_LUK >= 90 || SU_DEX >= 90) && EquipNumSearch(1164))
-			w1 += 15;
-	if(n_A_ActiveSkill == 264)
-		if(EquipNumSearch(1176) && SkillSearch(81) == 10)
-			w1 += 20;
-
-	if(TyouEnkakuSousa3dan == -1 && EquipNumSearch(639))
-		w1 += 15;
-
-	if((n_A_ActiveSkill==83 || n_A_ActiveSkill==388) && SkillSearch(381) && wBCEDPch==0)
-		w1 += 10;
-	
-	if (n_A_ActiveSkill == 264) {
-		// Enforcer Cape#1699 - [Every Refine Level] Increase [Meteor Assault] damage by 1%
-		w1 += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
-		
-		// Brave Carnage Katar#909 - [Refine level 7~10] Increase [Meteor Assault] damage by 15%
-		if(n_A_Weapon_ATKplus >= 7)
-			w1 += 15 * EquipNumSearch(909);
-	}
-	
-	// Glorious Claw#1096
-	if (EquipNumSearch(1096)) {
-		// [Every Refine Level] Increase [Triple Attack], [Chain Combo] and [Combo Finish] damage by 5%
-		if (n_A_ActiveSkill >= 187 || n_A_ActiveSkill <= 189)
-			w1 += 5 * n_A_Weapon_ATKplus;
-		// [Every Refine Level Above +5]  Increase [Tiger Knuckle Fist] and [Chain Crush Combo] damage by 5%
-		if (n_A_ActiveSkill == 289 || n_A_ActiveSkill == 290)
-			w1 += 5 * Math.max(0, n_A_Weapon_ATKplus - 5);
-	}
-
-	// Glorious Claymore#1080 - [Every Refine Level] Increase [Bowling Bash] and [Charge Attack] damage by 1% [Amor]
-	if (n_A_ActiveSkill == 76 || n_A_ActiveSkill == 308)
-		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1080);
-
-	if (n_A_ActiveSkill == 65) {
-		// Glorious Two Handed Axe#1087 - [Every Refine Level] Increase [Mammonite] damage by 2% [Amor]
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1087);
-		
-		// Glorious Cleaver#1088 - [Every Refine Level] Increase [Mammonite] damage by 1% [Amor]
-		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1088);
-	}
-
-	// Glorious Flamberge#1077 - [Every Refine Level] Increase [Bash], [Mammonite] and [Back Stab] damage by 2% [Amor]
-	if (n_A_ActiveSkill == 65 || n_A_ActiveSkill == 6 || n_A_ActiveSkill == 169)
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1077);
-
-	// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Ground Drift] damage by 2% [Amor]
-	if (n_A_ActiveSkill == 437)
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1103);
-
-	if (n_A_ActiveSkill == 418) {
-		// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Triple Action] damage by 1% [Amor]
-		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1103);
-		
-		// Glorious Grenade Launcher#1103, Glorious Rifle#1100, Glorious Shotgun#1102 - [If Scouter Is Not Equipped] Increase [Triple Action] damage by 30%
-		if (!EquipNumSearch(1387))
-			w1 += 30 * (EquipNumSearch(1103) + EquipNumSearch(1100) + EquipNumSearch(1102));
-	}
-
-	// Glorious Huuma Shuriken#1098 - [Every Refine Level] Increase [Throw Huuma Shuriken] damage by 3% [Amor]
-	if (n_A_ActiveSkill == 396)
-		w1 += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1098);
-
-	// Glorious Revolver#1099 - [Every Refine Level] Increase [Rapid Shower] damage by 1% [Amor]
-	if (n_A_ActiveSkill == 428)
-		w1 += n_A_Weapon_ATKplus * EquipNumSearch(1099);
-
-	// Glorious Rifle#1100 - [Every Refine Level] Increase [Tracking] and [Piercing Shot] damage by 3% [Amor]
-	if (n_A_ActiveSkill == 430 || n_A_ActiveSkill == 432)
-		w1 += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1100);
-
-	// Glorious Shotgun#1102 - [Every Refine Level] Increase [Spread Attack] damage by 2% [Amor]
-	if (n_A_ActiveSkill == 436)
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1102);
-
-	// Valorous Battle CrossBow#913 - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
-	if (n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8)
-		w1 += 10 * EquipNumSearch(913);
-
-	// Glorious Hunter Bow#1089 - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
-	if (n_A_ActiveSkill == 40)
-		w1 += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1089);
-
-	/*
-		Valorous Carnage Katar#910
-		[Refine Level 6~10]
-		Increases damage with [Sonic Blow] by 10%.
-		[Refine Level 9~10]
-		Increases damage with [Sonic Blow] by 20%.
-	*/
-	if (n_A_Weapon_ATKplus >= 6 && (83 == n_A_ActiveSkill || 388 == n_A_ActiveSkill) && EquipNumSearch(910)) {
-		w1 += 10;
-		
-		if (n_A_Weapon_ATKplus >= 9)
-			w1 += 20;
-	}
-
-	wBaiCI = wBaiCI * (100+StPlusCalc2(5000+n_A_ActiveSkill)+StPlusCard(5000+n_A_ActiveSkill) + w1) /100;
-
-	if(debug_dmg_avg)
-		debug_atk+="\n\tw1:"+w1+"(%)\na_wBaiCI:"+wBaiCI;
 
 	if(n_A_PassSkill8[22]){
 		if(MANUKU_MONSTER())
@@ -8048,6 +7828,217 @@ function BaiCI(wBaiCI)
 	return wBaiCI;
 }
 
+// Specific skill % damage bonus - pc_skillatk_bonus()
+function ApplySkillAtkBonus(dmg)
+{
+	skill_atk_bonus_ratio = 0;
+	if(n_A_ActiveSkill == 6 && n_A_SHOES_DEF_PLUS >= 9 && CardNumSearch(362)) // Bash#6
+			skill_atk_bonus_ratio += 10;
+	if(n_A_ActiveSkill == 76 && (n_A_WeaponType==2 || n_A_WeaponType==3)) // Bowling Bash#76
+			skill_atk_bonus_ratio += 25 * CardNumSearch(464);
+	if(n_A_ActiveSkill == 41 && n_A_WeaponType==10) // Arrow Shower#41
+			skill_atk_bonus_ratio += 50 * CardNumSearch(465);
+	if(n_A_ActiveSkill == 40 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1089)) // Double Strafe#40
+			skill_atk_bonus_ratio += 20;
+
+	// Sharp Shooting#272
+	if (n_A_ActiveSkill == 272 && EquipNumSearch(1045))
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * 3;
+
+	//custom TalonRO Imperial Guard: Shield Chain damage +2% each refine above 6
+	if (n_A_ActiveSkill == 324 && n_A_LEFT_DEF_PLUS > 6 && EquipNumSearch(1459))
+		skill_atk_bonus_ratio += 2*(n_A_LEFT_DEF_PLUS-6);
+	
+	//custom TalonRO Black Wing: Back Stab#169 damage +2% each refine
+	if (n_A_ActiveSkill == 169 && EquipNumSearch(1463))
+		skill_atk_bonus_ratio += 2*n_A_Weapon_ATKplus;
+
+	// Back Stab#169 - Brave assassin damascus [Loa] 2018-07-24
+	if (n_A_ActiveSkill == 169 && n_A_JobSearch2() == 14 && EquipNumSearch(897))
+		skill_atk_bonus_ratio += 10;
+
+	// Raid#171 - Brave assassin damascus [Loa] 2018-07-24
+	if(n_A_ActiveSkill == 171 && n_A_JobSearch2() == 14 && EquipNumSearch(897))
+		skill_atk_bonus_ratio += 10;
+
+	//custom TalonRO Cannon Spear: Head Crush damage +5% each 3rd refine
+	if(n_A_ActiveSkill == 260 && EquipNumSearch(1516))
+		skill_atk_bonus_ratio += 3 * Math.floor(n_A_Weapon_ATKplus / 3);
+
+	/*
+		Assaulter Spear
+		[Refine level 8-10]
+		Increase damage of Spiral Pierce by 20%.
+	*/
+	if (n_A_Weapon_ATKplus >= 8 && n_A_ActiveSkill == 259 && EquipNumSearch(903))
+		skill_atk_bonus_ratio += 20;
+
+	/*
+		Glorious Tablet
+		Increase damage with [Flying Side Kick] by 10%.
+	*/
+	if ((n_A_ActiveSkill == 339 || n_A_ActiveSkill == 305) && EquipNumSearch(1094))
+		skill_atk_bonus_ratio += 10;
+
+	/*
+		Brave Assassin Damascus
+		[Crusader Class]
+		Add 5% more damage with [Shield Chain]
+	*/
+	if (n_A_JobSearch2() == 13 && n_A_ActiveSkill == 324 && EquipNumSearch(897))
+		skill_atk_bonus_ratio += 5;
+
+	/*
+		Soldier Grenade Launcher
+		[Refine level 6-10]
+		Increase damage of [Ground Drift] by 25%.
+	*/
+	if (n_A_Weapon_ATKplus >= 6 && n_A_ActiveSkill == 437 && EquipNumSearch(929))
+		skill_atk_bonus_ratio += 25;
+
+	/*
+		Brave Gladiator Blade
+		[Rogue and Crusader Classes]
+	*/
+	if ((n_A_JobSearch2() == 13 || n_A_JobSearch2() == 14)
+		&& n_A_ActiveSkill == 161 && EquipNumSearch(900))
+	{
+		// Add 15% more damage with [Holy Cross] skill.
+		skill_atk_bonus_ratio += 15;
+		// [Refine level 7-10] Add an additional 5% more damage with [Holy Cross] skill.
+		if (n_A_Weapon_ATKplus >= 7)
+			skill_atk_bonus_ratio += 5;
+		// For every refine +8 or higher, add 1% more damage with [Holy Cross] skill.
+		if (n_A_Weapon_ATKplus >= 8)
+			skill_atk_bonus_ratio += n_A_Weapon_ATKplus - 7;
+	}
+
+	/*
+		Glorious Holy Avenger
+		[Refine Rate 7~10]
+		Increases damage with [Holy Cross] by 15%.
+	*/
+	if (n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 161 && EquipNumSearch(1079))
+		skill_atk_bonus_ratio += 15;
+
+	if (n_A_ActiveSkill == 428 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1099))
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus;
+	
+	if (n_A_ActiveSkill == 430 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1100))
+		skill_atk_bonus_ratio += 3 * n_A_Weapon_ATKplus;
+	
+	if (n_A_ActiveSkill == 436 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1102))
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus;
+	
+	if (n_A_ActiveSkill == 437 && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1103))
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus;
+
+	if ((n_A_ActiveSkill == 6 || n_A_ActiveSkill == 76)
+		&& n_A_ActiveSkillLV == 10 && EquipNumSearch(1159))
+			skill_atk_bonus_ratio += 50;
+
+	if (n_A_ActiveSkill == 65 && (SU_LUK >= 90 || SU_DEX >= 90) && EquipNumSearch(1164))
+		skill_atk_bonus_ratio += 15;
+
+	if (n_A_ActiveSkill == 264 && SkillSearch(81) == 10 && EquipNumSearch(1176))
+		skill_atk_bonus_ratio += 20;
+
+	if (TyouEnkakuSousa3dan == -1 && EquipNumSearch(639))
+		skill_atk_bonus_ratio += 15;
+
+	if ((n_A_ActiveSkill==83 || n_A_ActiveSkill==388) && wBCEDPch == 0 && SkillSearch(381))
+		skill_atk_bonus_ratio += 10;
+	
+	if (n_A_ActiveSkill == 264) {
+		// Enforcer Cape#1699 - [Every Refine Level] Increase [Meteor Assault] damage by 1%
+		skill_atk_bonus_ratio += n_A_SHOULDER_DEF_PLUS * EquipNumSearch(1699)
+		
+		// Brave Carnage Katar#909 - [Refine level 7~10] Increase [Meteor Assault] damage by 15%
+		if(n_A_Weapon_ATKplus >= 7)
+			skill_atk_bonus_ratio += 15 * EquipNumSearch(909);
+	}
+	
+	// Glorious Claw#1096
+	if (EquipNumSearch(1096)) {
+		// [Every Refine Level] Increase [Triple Attack], [Chain Combo] and [Combo Finish] damage by 5%
+		if (n_A_ActiveSkill >= 187 || n_A_ActiveSkill <= 189)
+			skill_atk_bonus_ratio += 5 * n_A_Weapon_ATKplus;
+		// [Every Refine Level Above +5]  Increase [Tiger Knuckle Fist] and [Chain Crush Combo] damage by 5%
+		if (n_A_ActiveSkill == 289 || n_A_ActiveSkill == 290)
+			skill_atk_bonus_ratio += 5 * Math.max(0, n_A_Weapon_ATKplus - 5);
+	}
+
+	// Glorious Claymore#1080 - [Every Refine Level] Increase [Bowling Bash] and [Charge Attack] damage by 1% [Amor]
+	if (n_A_ActiveSkill == 76 || n_A_ActiveSkill == 308)
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * EquipNumSearch(1080);
+
+	if (n_A_ActiveSkill == 65) {
+		// Glorious Two Handed Axe#1087 - [Every Refine Level] Increase [Mammonite] damage by 2% [Amor]
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1087);
+		
+		// Glorious Cleaver#1088 - [Every Refine Level] Increase [Mammonite] damage by 1% [Amor]
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * EquipNumSearch(1088);
+	}
+
+	// Glorious Flamberge#1077 - [Every Refine Level] Increase [Bash], [Mammonite] and [Back Stab] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 65 || n_A_ActiveSkill == 6 || n_A_ActiveSkill == 169)
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1077);
+
+	// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Ground Drift] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 437)
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1103);
+
+	if (n_A_ActiveSkill == 418) {
+		// Glorious Grenade Launcher#1103 - [Every Refine Level] Increase [Triple Action] damage by 1% [Amor]
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * EquipNumSearch(1103);
+		
+		// Glorious Grenade Launcher#1103, Glorious Rifle#1100, Glorious Shotgun#1102 - [If Scouter Is Not Equipped] Increase [Triple Action] damage by 30%
+		if (!EquipNumSearch(1387))
+			skill_atk_bonus_ratio += 30 * (EquipNumSearch(1103) + EquipNumSearch(1100) + EquipNumSearch(1102));
+	}
+
+	// Glorious Huuma Shuriken#1098 - [Every Refine Level] Increase [Throw Huuma Shuriken] damage by 3% [Amor]
+	if (n_A_ActiveSkill == 396)
+		skill_atk_bonus_ratio += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1098);
+
+	// Glorious Revolver#1099 - [Every Refine Level] Increase [Rapid Shower] damage by 1% [Amor]
+	if (n_A_ActiveSkill == 428)
+		skill_atk_bonus_ratio += n_A_Weapon_ATKplus * EquipNumSearch(1099);
+
+	// Glorious Rifle#1100 - [Every Refine Level] Increase [Tracking] and [Piercing Shot] damage by 3% [Amor]
+	if (n_A_ActiveSkill == 430 || n_A_ActiveSkill == 432)
+		skill_atk_bonus_ratio += 3 * n_A_Weapon_ATKplus * EquipNumSearch(1100);
+
+	// Glorious Shotgun#1102 - [Every Refine Level] Increase [Spread Attack] damage by 2% [Amor]
+	if (n_A_ActiveSkill == 436)
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1102);
+
+	// Valorous Battle CrossBow#913 - [Refine level 8-10] Increase damage with [Sharp Shooting] by 10%] [Gawk]
+	if (n_A_ActiveSkill == 272 && n_A_Weapon_ATKplus >= 8)
+		skill_atk_bonus_ratio += 10 * EquipNumSearch(913);
+
+	// Glorious Hunter Bow#1089 - [Every Refine] Increases [Double Strafing] damage by 2%] [Gawk]
+	if (n_A_ActiveSkill == 40)
+		skill_atk_bonus_ratio += 2 * n_A_Weapon_ATKplus * EquipNumSearch(1089);
+
+	/*
+		Valorous Carnage Katar#910
+		[Refine Level 6~10]
+		Increases damage with [Sonic Blow] by 10%.
+		[Refine Level 9~10]
+		Increases damage with [Sonic Blow] by 20%.
+	*/
+	if (n_A_Weapon_ATKplus >= 6 && (83 == n_A_ActiveSkill || 388 == n_A_ActiveSkill) && EquipNumSearch(910)) {
+		skill_atk_bonus_ratio += 10;
+		
+		if (n_A_Weapon_ATKplus >= 9)
+			skill_atk_bonus_ratio += 20;
+	}
+
+	dmg = dmg * (100 + StPlusCalc2 (5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill) + skill_atk_bonus_ratio) / 100;
+
+	return Math.floor(dmg);
+}
 
 function BattleCalc3(w998)
 {

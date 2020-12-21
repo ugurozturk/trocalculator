@@ -408,7 +408,7 @@ ItemOBJ = [
 ,[385,51,0,1,0,0,10,70,"Angel Wing Ears","",0,1,1,0]
 ,[386,51,0,2,0,0,10,0,"Goblin Leader Mask","","<b>Middle and Lower Headgear</b>",0]
 ,[387,1,1,75,4,0,50,36,"Kitchen Knife","","Adds a 50% additional chance of dropping Meat each time a Brute monster dies",37,3,10,30,0]
-,[388,1,1,80,4,0,60,36,"Ice Pick [0]","",0,23,1,37,-30,1044,-30,1547,-30,1548,-30,1063,-30,1064,-30,1065,-30,1575,-30,1576,-30,0]
+,[388,1,1,80,4,0,60,36,"Ice Pick [0]","Decreases physical damage against players by 30%",0,23,1,1044,-30,1547,-30,1548,-30,1063,-30,1064,-30,1065,-30,1575,-30,1576,-30,0]
 ,[389,1,1,84,4,0,40,0,"Princess Knife","",0,7,1,0]
 ,[390,1,1,70,4,"0 / 3",100,36,"Swordbreaker","",0,140,5,0]
 ,[391,1,1,70,4,"0 / 3",100,36,"Mailbreaker","",0,141,5,0]
@@ -627,7 +627,7 @@ ItemOBJ = [
 ,[604,60,0,4,0,1,220,45,"Lucius's Fierce Armor of Volcano [1]","",0,198,3,0]
 ,[605,60,0,4,0,1,220,45,"Saphien's Armor of Ocean [1]","",0,198,1,0]
 ,[606,60,0,4,0,1,220,45,"Aebecee's Raging Typhoon Armor [1]","",0,198,4,0]
-,[607,1,1,70,4,1,60,36,"Ice Pick [1]","",0,23,1,37,-30,1044,-30,1547,-30,1548,-30,1063,-30,1064,-30,1065,-30,1575,-30,1576,-30,0]
+,[607,1,1,70,4,1,60,36,"Ice Pick [1]","Decreases physical damage against players by 30%",0,23,1,1044,-30,1547,-30,1548,-30,1063,-30,1064,-30,1065,-30,1575,-30,1576,-30,0]
 ,[608,50,1,4,0,1,40,45,"Crown [1]","",0,4,1,0]
 ,[609,50,1,4,0,1,40,45,"Tiara [1]","",0,4,1,0]
 ,[610,1,1001,120,4,3,50,55,"Mes","",0,138,5,0]
@@ -853,7 +853,7 @@ ItemOBJ = [
 ,[830,60,1072,7,0,1,60,60,"Diablos Armor","",0,1,2,5,1,13,150,151,5,159,5,0]
 ,[831,61,63,5,0,0,60,50,"Sacred Scripture","",0,4,1,75,3,76,3,0]
 ,[832,61,113,6,0,1,200,80,"Cross Shield","",0,1,1,5324,30,5159,30,5384,30,0]
-,[833,61,1055,2,0,1,100,70,"Book of Charms Vol. 1","","10% chance of auto casting Stun on an enemy when the user receives Physical Damage",4,2,19,3,0]
+,[833,61,55,2,0,1,100,70,"Book of Charms Vol. 1","","10% chance of auto casting Stun on an enemy when the user receives Physical Damage",4,2,19,3,0]
 ,[834,62,1,2,0,1,25,60,"Skin of Ventoss","",0,9,10,13,200,19,2,0]
 ,[835,62,1079,5,0,1,25,0,"Diablos Manteau","",0,13,100,60,5,1495,10,1496,10,0]
 ,[836,63,1079,4,0,1,25,0,"Diablos Boots","","Maximum HP + 10 * Base Level",0]
@@ -1106,7 +1106,7 @@ ItemOBJ = [
 ,[1083,9,0,70,4,0,0,80,"Glorious Staff Of Destruction","","<span style='font-size: 14px;color:#ff0000;font-weight: bold'>[ONLY PvP/BG/WoE]</span><br><b>[Every Refine Level]</b><br>Adds 1% magical defense bypassing on Demi-human monster.<br>Decrease Cast Time by 2%.<br>There is a 1% chance to auto-cast [Amplify Magic Attack] when using magic attacks. For Wizard Class, it uses the level learned. Otherwise, it uses the refine rate as level.<br><b>[Refine Rate 5~10]</b><br>There is a 5% chance to add ASPD + 50% after using [Jupitel Thunder] for 5 seconds. Every refine level past +5 adds an additional 1% chance.<br><b>[Refine Rate 7~10]</b><br>Add a 5% chance to gain Uninterruptible Casting for 10 seconds when being attacked.",5,5,89,15,177,10,317,20,194,1,195,1,0]
 ,[1084,9,77,70,4,0,0,80,"Glorious Arc Wand","","<span style='font-size: 14px;color:#ff0000;font-weight: bold'>[ONLY PvP/BG/WoE]</span><br><b>[Every Refine Level]</b><br>Decrease cast time by 1%.<br><b>[2 Refine Levels]</b><br>Decreases after-cast delay by 1%.<br>Increase MATK against Demi-human monsters by 1%.<br>Adds a 1% chance to inflict 5% more magic damage to medium size targets for 15 seconds when casting magic.",5,5,177,15,317,20,194,1,0]
 ,[1085,9,77,70,4,0,0,80,"Glorious Staff of Recovery","","<span style='font-size: 14px;color:#ff0000;font-weight: bold'>[ONLY PvP/BG/WoE]</span><br><b style='color: #333399;'>[Priest/High Priest]</b><br>MATK + 15%.<br><b style='color: #333399;'>[Monk/Champion]</b><br>Recovery increase does not apply.<br><b>[Every Refine Level]</b><br>Increases recovery amount of [Heal] and [Sanctuary] by 1%.<br><b style='color: #333399;'>[Priest/High Priest]</b><br>Adds a 1% chance to double cast [Heal] at the level learned when using [Heal].",5,5,74,10,91,10,94,10,194,1,0]
-,[1086,8,0,130,4,0,0,80,"Glorious Morning Star","","<span style='font-size: 14px;color:#ff0000;font-weight: bold'>[ONLY PvP/BG/WoE]</span><br><b>[Every Refine Level]</b><br>ASPD + 1%.<br>Adds an additional 1% chance to Stun opponents.",37,75,307,25,131,5,194,1,0]
+,[1086,8,0,130,4,0,0,80,"Glorious Morning Star","","<span style='font-size: 14px;color:#ff0000;font-weight: bold'>[ONLY PvP/BG/WoE]</span><br><b>[Every Refine Level]</b><br>ASPD + 1%.<br>Adds an additional 1% chance to Stun opponents.<br><b>[Monk / Champion]</b><br>Increases physical damage against [Demi-Human] race monsters by 55% instead of 75%<br>",37,75,307,25,131,5,194,1,0]
 ,[1087,7,0,200,4,0,0,80,"Glorious Two-handed Axe",0,"<span style='font-size: 14px;color:#ff0000;font-weight: bold'>[ONLY PvP/BG/WoE]</span><br>Spend 20% less Zeny with all zeny based skills.<br><b style='color:#333399'>[Merchant Class]</b><br>ATK + 100<br><b>[Every Refine Level]</b><br>Adds a 1% defense bypassing on Demi-human monster.<br>Adds a 1% chance of auto-casting level 1 [Critical Wounds] when attacking normally<br>Increases [Mammonite] damage by 2%.<br>ASPD + 1%.<br><b>[Refine Rate 6~10]</b><br>Every refine level +6 and over adds a 2% chance of auto-casting level 2 [Critical Wounds] when using [Mammonite].<br>Every refine level +6 and over adds ASPD + 2% instead of 1%.<br>Every refine level +6 and above adds 2% long range damage reduction.",37,75,307,20,57,20,194,1,0]
 ,[1088,6,0,150,4,0,0,80,"Glorious Cleaver",0,"<span style='font-size: 14px;color:#ff0000;font-weight: bold'>[ONLY PvP/BG/WoE]</span><br>Spend 10% less zeny with all zeny based skills.<br><b style='color:#ff0000;'>[+Aegis Shield]</b><br>Increases physical attack against Demi-human monster by 55% instead of 75%.<br><b>[Every Refine Level]</b><br>Increases physical attack against Demi-human monster by 1%.<br>Adds 1% defense bypassing on Demi-human monster.<br>Increases [Mammonite] damage by 2%.<br>ASPD + 1%<br>HIT + 2<br><b>[Refine Rate 6~10]</b><br>Every refine level +6 and over adds a 1% chance of auto-casting level 1 [Critical Wounds] when attacking normally.",37,75,307,20,194,1,0]
 ,[1089,10,0,100,4,0,0,80,"Glorious Hunter Bow",0,"<span style='font-size: 14px;color:#ff0000;font-weight: bold'>[ONLY PvP/BG/WoE]</span><br><b style='color: #333399;'>[Refine Rate 8-10]</b><br>Increases physical attack against DemiHuman monsters by 10%.<br><b style='color: #333399;'>[Rogue Class]</b><br>ASPD + 5%.<br>Adds a 5% chance to auto-cast level 2 [Critical Wounds] when using ranged attacks.<br><b>[Every Refine]</b><br>Increases [Double Strafing] damage by 2%.<br><b style='color: #333399;'>[Archer Class]</b><br>For every refine, increases Critical damage by 2%.<br><b style='color: #333399;'>[Rogue Class]</b><br>For every refine, ASPD + 2%.",37,55,307,20,194,1,0]
@@ -1233,7 +1233,7 @@ ItemOBJ = [
 ,[1210,50,1,2,0,1,20,0,"Navy Hat","",0,6,3,41,10,0]
 ,[1211,50,0,2,0,0,0,0,"Shower Cap","",0,19,3,9,3,41,10,55,10,0]
 ,[1212,50,0,4,0,1,10,30,"Watermelon Hat","",0,43,3,0]
-,[1213,51,0,0,0,0,10,0,"Scuba Mask","",0,41,10,0]
+,[1213,51,0,0,0,0,10,0,"Scuba Mask","",0,61,10,0]
 ,[1214,50,0,3,0,0,40,0,"White King Tiger Doll Hat","","Increase physical damage on Brute monsters by 1% every refine",1,2,5,2,0]
 ,[1215,50,0,7,0,1,100,50,"Scooter Helm","",0,194,1,0]
 ,[1216,50,0,2,0,0,30,30,"Gentleman's Hat","",0,4,2,0]
@@ -1290,7 +1290,7 @@ ItemOBJ = [
 ,[1267,50,0,2,0,0,50,0,"White Snake Hat","",0,5,2,0]
 ,[1268,50,0,0,0,0,10,0,"Angel Blessing","","",66,5,6,1,0,]
 ,[1269,51,0,0,0,0,20,30,"Angel of Ghost","",0,80,2,89,2,0]
-,[1270,50,0,3,0,0,10,0,"White School Hat","","When receiving a physical attack, add 2% chance to trigger Level 1 Weapon Perfection<b>[Refine Rate >= 5]<b><br>Increases the trigger rate of Level 1 Weapon Perfection by 1%",0]
+,[1270,50,0,3,0,0,10,0,"White School Hat","","When receiving a physical attack, add 2% chance to trigger Level 3 Weapon Perfection<b>[Refine Rate >= 5]<b><br>Increases the trigger rate of Level 3 Weapon Perfection by 1%",0]
 ,[1271,50,0,3,0,0,10,0,"Indonesia Beret","",0,19,3,0]
 ,[1272,50,0,3,0,0,40,70,"Aries Crown",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>VIT + 1",63,5,3,2,0]
 ,[1273,50,0,3,0,0,40,70,"Aries Diadem",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>VIT + 1",63,5,3,2,0]
@@ -1299,7 +1299,7 @@ ItemOBJ = [
 ,[1276,50,0,3,0,0,30,70,"Cancer Crown",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>ATK + 15<br>FLEE + 10",61,5,1,2,0]
 ,[1277,50,0,3,0,0,30,70,"Cancer Diadem",0,"<b>[Refine Rate 7~10]</b><br>MDEF + 1<br>Heal amount increased by + 3%<br>Sanctuary effectiveness increased by + 3%<br>+3% recovery with skill [Potion Pitcher]<br>MATK + 2%",61,5,4,2,0]
 ,[1278,50,0,0,0,0,10,0,"Capricorn Crown",0,"<b>[Refine Rate 7~10]</b><br>Small chance of auto casting [Warm Wind]Lv 1 [<b><font color='brown'>Earth Endow</font></b>] when doing ATK based damage",3,2,5,2,0]
-,[1279,50,0,0,0,0,10,70,"Capricorn Diadem",0,"<b>[Refine Rate 7~10]</b><br>INT + 2<br><b>[Refine Rate 8~10]</b><br>Cast Time -3%<br><b>[Refine Rate 9~10]</b><br>Heal Power + 4%<br><b>[Refine Rate 10]</b><br>When recieving ATK based damage, there's a 1% chance to cast the skill [Hammerfall]Lv 5",62,5,19,5,5,2,0]
+,[1279,50,0,0,0,0,10,70,"Capricorn Diadem",0,"<b>[Refine Rate 7~10]</b><br>INT + 2<br><b>[Refine Rate 8~10]</b><br>Cast Time -3%<br><b>[Refine Rate 9~10]</b><br>Heal Power + 4%<br><b>[Refine Rate 10]</b><br>When receiving ATK based damage, there's a 1% chance to cast the skill [Hammerfall]Lv 5",62,5,19,5,5,2,0]
 ,[1280,50,0,4,0,0,30,70,"Gemini Crown",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>MATK + 15<br>FLEE + 10<br><b><font color='green'>Wind</font></b> element resistance + 5%",19,5,17,2,2,2,0]
 ,[1281,50,0,4,0,0,30,70,"Gemini Diadem",0,"<b>[Refine Rate 7~10]</b><br>MDEF + 7<br>MATK + 8%<br><b><font color='green'>Wind</font></b> element resistance + 5%",89,2,2,2,0]
 ,[1282,50,0,3,0,0,30,70,"Leo Crown",0,"<b>[Refine Rate 7~10]</b><br>DEF + 1<br>FLEE + 10<br>Small chance of auto casting [Warm Wind]Lv 4 [<b><font color='red'>Fire Endow</font></b>] when receiving ATK based damage",63,5,1,2,17,15,0]
@@ -1354,7 +1354,7 @@ ItemOBJ = [
 ,[1329,8,53,175,3,0,0,0,"Stunner [Rental]","",0,131,10,27,40,28,40,29,40,193,1,0] //custom TalonRO rental
 ,[1330,7,0,205,4,0,0,0,"Bloody Axe [Rental]","","Movement speed +25% (non-stacking)",1,20,12,5,193,1,0] //custom TalonRO rental
 ,[1331,11,0,148,4,0,0,0,"Bloody Roar [Rental]","","Recovery 3 HP every 5 seconds",187,1,193,1,0] //custom TalonRO rental
-,[1332,10,92,170,4,0,0,0,"Bow of Evil [Rental]","","[Double Strafe] damage +25%",5,2,193,1,0] //custom TalonRO rental
+,[1332,10,92,170,4,0,0,0,"Bow of Evil [Rental]","",0,5,2,193,1,5040,25,0] //custom TalonRO rental
 ,[1333,4,1,149,4,0,0,0,"Brocca [Rental]","",0,28,20,22,1,193,1,0] //custom TalonRO rental //fixed 2016-05-05
 ,[1334,1,1,129,4,0,0,0,"Combat Knife [Rental]","","Drain 3SP from enemy per hit",57,10,56,-10,187,1,16,10,193,1,0] //custom TalonRO rental
 ,[1335,2,1,199,4,0,0,0,"Excalibur [Rental]","",0,20,6,4,10,6,10,193,1,0] //custom TalonRO rental
@@ -1364,17 +1364,17 @@ ItemOBJ = [
 ,[1339,2,1,160,4,0,0,0,"Immaterial Sword [Rental]","","Drains 45% of target's SP by a low chance<br>Drain 1 SP from its owner on each attack",20,8,193,1,194,1,0] //custom TalonRO rental
 ,[1340,11,0,189,4,0,0,0,"Infiltrator [Rental]","",0,37,70,18,3,9,5,11,2,12,5,193,1,0] //custom TalonRO rental
 ,[1341,13,1,159,4,0,0,0,"Kaiser Knuckle [Rental]","",0,20,4,12,5,31,5,41,10,42,10,43,10,44,10,193,1,0] //custom TalonRO rental
-,[1342,11,0,175,4,0,0,0,"Katar of Speed [Rental]","","[Sonic Blow] damage +25%",12,3,193,1,0] //custom TalonRO rental
-,[1343,8,1,150,3,0,0,0,"Mace of Madness [Rental]","","[Cart Revolution] damage +25%",1,2,193,1,0] //custom TalonRO rental
+,[1342,11,0,175,4,0,0,0,"Katar of Speed [Rental]","",0,12,3,193,1,5083,25,5388,25,0] //custom TalonRO rental
+,[1343,8,1,150,3,0,0,0,"Mace of Madness [Rental]","",0,1,2,193,1,5066,25,,0] //custom TalonRO rental
 ,[1344,1,1,105,4,0,0,0,"Mailbreaker [Rental]","",0,141,5,193,1,0] //custom TalonRO rental
 ,[1345,9,1,165,3,0,0,0,"Mighty Staff [Rental]","","Consume 1 SP with each physical attack",1,10,4,4,89,20,193,1,0] //custom TalonRO rental
-,[1346,13,0,150,4,0,0,0,"Monk Knuckle [Rental]","","[Finger Offensive] damage +25%",4,2,193,1,0] //custom TalonRO rental
+,[1346,13,0,150,4,0,0,0,"Monk Knuckle [Rental]","",0,4,2,193,1,5192,25,0] //custom TalonRO rental
 ,[1347,3,0,204,4,0,0,0,"Muramasa [Rental]","",0,10,30,12,8,193,1,0] //custom TalonRO rental
 ,[1348,2,1,148,4,0,0,0,"Nagan [Rental]","","Enables use of the skill [Double Attack]Lv5",37,40,193,1,0] //custom TalonRO rental
-,[1349,15,0,160,4,0,0,0,"Phenomena Whip [Rental]","","[Throw Arrow] damage +25%",5,2,193,1,0] //custom TalonRO rental
+,[1349,15,0,160,4,0,0,0,"Phenomena Whip [Rental]","",0,5,2,193,1,5207,25,0] //custom TalonRO rental
 ,[1350,12,0,140,3,0,0,0,"Book of Prayer [Rental]","",0,3,2,19,2,16,10,193,1,0] //custom TalonRO rental
 ,[1351,8,53,193,4,0,0,0,"Quadrille [Rental]","",0,31,40,36,40,37,30,193,1,0] //custom TalonRO rental
-,[1352,4,0,160,3,0,0,0,"Spear of Excellent [Rental]","","[Magnum Break] damage +25%",1,2,193,1,0] //custom TalonRO rental
+,[1352,4,0,160,3,0,0,0,"Spear of Excellent [Rental]","",0,1,2,193,1,5007,25,0] //custom TalonRO rental
 ,[1353,9,1,100,2,0,0,0,"Staff of Darkness [Rental]","",0,4,2,89,15,73,-5,193,1,0] //custom TalonRO rental
 ,[1354,9,53,10,3,0,0,0,"Staff of Healing [Rental]","",0,20,6,89,15,91,15,94,15,193,1,0] //custom TalonRO rental
 ,[1355,9,1,71,3,0,0,0,"Survivor's Rod (DEX) [Rental]","",0,89,20,5,4,13,500,193,1,0] //custom TalonRO rental
@@ -1584,7 +1584,7 @@ ItemOBJ = [
 ,[1543,61,0,3,0,1,40,0,"Bayani Kalasag","","For every 3 refines, decreases Boss monster damage by 1%",0]
 ,[1544,63,0,2,0,1,60,0,"Bayani Nightmare Bangungot Boots","","For every refine, MDEF + 1<br><b>[Refine Rate 7-10]</b><br>Movement speed +25% (non-stacking)",0]
 //[Custom TalonRO Updates 2018-06-02] [Kato]
-,[1545,50,0,3,0,1,100,50,"Palace Guard Cap","","<b>[Refine Rate 7~10]</b><br>For every refine, additional increased resistance against long range physical and magic attacks by 1%",78,5,60,5,194,1,0]
+,[1545,50,0,3,0,1,100,50,"Palace Guard Cap","","<b>[Refine Rate 6~10]</b><br>For every refine, additional increased resistance against long range physical and magic attacks by 1%",78,5,60,5,194,1,0]
 ,[1546,51,124,0,0,0,10,60,"Hawk Eye","","<b>[Slottable at Chiqita NPC]</b>",5,1,25,3,0]
 ,[1547,50,0,8,0,1,100,10,"Drooping Permeter","",0,1168,20,1220,20,1255,20,1006,20,1234,20,1176,20,0]
 ,[1548,50,0,3,0,0,50,0,"Burning Crown","","Add a 1.5% chance of auto casting Level 3 Bash on an enemy when doing Physical damage.",63,20,42,20,0]
@@ -1660,7 +1660,7 @@ ItemOBJ = [
 ,[1616,7,1001,250,4,1,190,95,"End Sektura","","An axe made of artic ice.<br>Chance of inflicting Curse status when dealing physical damage<br>Risk of targeting yourself",20,1,194,1,0]
 ,[1617,7,1001,250,4,1,190,95,"Ygnus Stale","","A large axe made by a blacksmith from the fires of a volcano.<br>Chance of inflicting Bleeding status when dealing physical damage<br>Risk of targeting yourself",20,3,194,1,0]
 ,[1618,1,1001,107,4,0,60,93,"Ancient Dagger","","A dagger used in ancient rituals, it feels as though it holds a mysterious power.<br>When dealing physical or magical damage there's a low chance to receive the Curse status.",89,10,14,100,76,5,0]
-,[1619,64,1001,1,0,1,10,93,"Alchemy Glove","","Magic gloves made for handling corrosive chemicals, smells a bit like charcoal.",4,1,19,2,343,10,221,127,61,-25,0]
+,[1619,64,1001,1,0,1,10,80,"Alchemy Glove","","Magic gloves made for handling corrosive chemicals, smells a bit like charcoal.",4,1,19,2,343,10,221,127,61,-25,0]
 ,[1620,50,0,2,0,1,30,10,"Entweihen Hairband","","<b>For every refine > 4:<b><br>MATK + 1%",4,1,5,1,89,1,0]
 ,[1621,100,0,0,0,0,0,0,"Entweihen Hairband + Dark Thorn Staff","","<br><b>[Refine Rate 5~10]</b><br>For every refine, add +1% MATK.<br><br>When equipping [Entweihen Hairband]+[Dark Thorn Staff] at the same time:<br><b>[Refine Rate 5~10 Dark Thorn Staff]</b><br>For every 2 refines on the Dark Thorn Staff, add +10 MATK",0]
 ,[1622,15,131,150,4,0,100,92,"Rosevine","","A whip created from a magically enchanted rose that radiates the smell of roses.",7,2,10,5,89,10,221,130,0]
@@ -1773,6 +1773,25 @@ ItemOBJ = [
 ,[1722,62,0,2,0,1,10,0,"Beach Towel","","A colorful beach towel used as protection from the sun.",9,7,19,3,60,4,0]
 ,[1723,50,0,0,0,1,10,1,"Black Tailed Ribbon","","A jet-black ribbon.",19,5,60,5,78,5,0]
 ,[1724,50,0,2,0,0,50,0,"Cookie Hat","","A Hat worn by Cookie Xmas [the idol of Toy Dungeon]. It covers the ears to protect from cold weather.",2,1,11,5,70,5,0]
+,[1725,50,0,2,0,1,120,38,"Bankruptcy Hat","","A headgear for those cursed merchants that went bankrupt and lost everything.<br>It may feel like you fell into the abyss of despair, but you can bounce back! This headgear amplifies the fighting spirit of those who wear it.",4,1,5,1,0]
+,[1726,51,0,0,0,0,49,49,"Bankruptcy Mask","","<b>Middle and Lower Headgear</b><br>Those who have lost everything due to bankruptcy are usually in deep sorrow. When you put on this hat, you can hide your sadness and climb up again!<br>When performing Magical attacks, there's a chance to get increased HP and SP recovery for 10 seconds.",0]
+,[1727,100,0,0,0,0,0,0,"Bankruptcy Hat + Mask","","<br>[Every Refine Level After +2] on Bankruptcy Hat.<br>[Neutral] element resistance + 1%",13,100,0]
+,[1728,60,0,5,0,1,50,40,"Antonio's Coat","","<b>[Every refine level]</b><br>ATK & MATK + 1",7,1,15,5,0]
+,[1729,62,0,3,0,1,60,40,"Antonio's Red Bag","","Every time you kill a monster, there is a small chance to drop Candy.<br><b>[Every Refine Level]</b><br>Slightly increased Candy drop rate",19,4,152,20,0]
+,[1730,63,0,3,0,1,50,40,"Red Stocking Boots","","<b>[Every refine level]</b><br>MDEF + 1<br>Increase natural HP and SP regeneration by 2%.",15,5,6,3,221,145,0]
+,[1731,100,0,0,0,0,0,0,"Antonio's Coat + Red Stocking Boots","","[Every refine level] of Red Stocking Boots<br>FLEE + 1",16,10,0]
+,[1732,100,0,0,0,0,0,0,"Antonio's Coat + Antonio's Red Bag","","[Every refine level] of Antonio's Red Bag<br>HIT + 1",12,3,0]
+,[1733,100,0,0,0,0,0,0,"Antonio's Coat + Antonio's Red Bag + Red Stocking Boots","","Increase Candy heal rate by 100%.<br>Increase Lucky Candy heal rate by 200%.<br>Casting can't be interrupted.",127,10,128,10,152,10,220,23,0]
+,[1734,50,0,6,0,1,64,64,"Insectivorous Plant Hairpin","","A hairpin made of the cute leaves of a Masukipura plant.<br>It shows no mercy to any insects when eating them.",14,64,19,4,34,10,0]
+,[1735,9,96,100,4,2,200,50,"Detecting Staff","","A useful tool popularized by treasure hunters.<br>Useful for finding and fighting against metal.<br>Increases magical damage against Kiel Dungeon Monsters (except Alice), Juperos Ruins Monsters, and Guardians by 5%<br>Ignores 10% MDEF of Kiel Dungeon Monsters (except Alice), Juperos Ruins Monsters, and Guardians<br><b>[Every Refine Level]</b><br>Ignore MDEF and magic damage theming bonuses increase by 1%",4,2,5,2,89,15,0]
+,[1736,8,95,110,3,3,70,50,"Empty Liquor Bottle","","An empty liquor bottle! If you break it, it could be really sharp.<br><b>[Every Refine Level]</b><br> CRIT + 1",10,3,70,10,138,3,0]
+,[1737,100,0,0,0,0,0,0,"Empty Liquor Bottle + Beer Hat","","Skills [Increase Recuperative Power] and [Increase Spiritual Power] are increased to lv 10",9,20,220,61,0]
+,[1738,8,95,100,3,3,70,50,"Spoon","","The cursed spoon... So the legends were true!<br><b>[Every Refine Level]</b><br> HIT + 3",12,8,133,2,0]
+,[1739,50,0,2,0,1,10,1,"Preschool Hat","","A magical hat that protects the child's head from the scorching sun.<br><b>[Refine Rate 6-10]</b>Increases resistance to Fire Property by an additional 5%.",13,500,63,5,0]
+,[1740,100,0,0,0,0,0,0,"Preschool Hat + Bunny Slipper","","If the base level is less than or equal to 79, increase Movement Speed.",91,5,93,5,94,5,0]
+,[1741,50,0,0,0,1,50,10,"Rose Casquette","","A beautiful hunting hat decorated with lace. It's very charming.<br>Reduce SP Consumption of skills by 5%.<br>When Base DEX is higher than 90, additional 5% reduced SP consumption.<br>When Base DEX is higher than 95, additional 5% reduced SP consumption.",0]
+,[1742,100,0,0,0,0,0,0,"Rose Casquette + Rose of Crimson","","Additional 5% reduced SP consumption.",0]
+,[1743,50,0,0,0,0,10,1,"Campus Festival Hat","","A handmade hat made to commemorate the Students Festival.<br>Enables use of <b>Level 2 Increase Agi</b>.",0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3531,6 +3550,25 @@ ItemID = [
 ,[1722,1,2565]
 ,[1723,1,5765]
 ,[1724,1,5260]
+,[1725,1,18825]
+,[1726,1,18824]
+,[1727,2,18825,18824]
+,[1728,1,21149]
+,[1729,1,21150]
+,[1730,1,21148]
+,[1731,2,21149,21148]
+,[1732,2,21149,21150]
+,[1733,2,21149,21148,21150]
+,[1734,1,18704]
+,[1735,1,2058]
+,[1736,1,16060]
+,[1737,2,16060,16039]
+,[1738,1,16039]
+,[1739,1,18860]
+,[1740,2,18860,2415]
+,[1741,1,18803]
+,[1742,2,18803,5548]
+,[1743,1,18547]
 ];
 
 /*
@@ -3946,7 +3984,7 @@ function Item_Setumei(nC1,nC2)
       221,6 = When performing a ATK based attack, there's a 10 % chance to cast the skill [Lightning Bolt]Lv 3
     */
 	if(221 == nC1){
-		wNAME99 = [0,"When performing a ATK based attack, ","When performing a short-range ATK based attack, ","When performing a long-range ATK based attack, ","When performing a magical attack, ","When performing a physical or magical attack, ","When recieving ATK based damage, ","When recieving short-range ATK based damage, ","When recieving long-range ATK based damage, ","When recieving magical damage, ","When recieving ATK based or magical damage, "];
+		wNAME99 = [0,"When performing a ATK based attack, ","When performing a short-range ATK based attack, ","When performing a long-range ATK based attack, ","When performing a magical attack, ","When performing a physical or magical attack, ","When receiving ATK based damage, ","When receiving short-range ATK based damage, ","When receiving long-range ATK based damage, ","When receiving magical damage, ","When receiving ATK based or magical damage, "];
 		wNAME98 = ["low","medium","high"];
 		CBIstr += wNAME99[AutoSpellSkill[nC2][5]] +"there's a ";
     //Checks the 6th line in the AutoSpellSKill array to see if its name should be wName98
@@ -4171,6 +4209,13 @@ w_SE = [[737,436,475,"NULL"]
 ,[1718,1715,805,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Peco Peco Ears
 ,[1719,1715,887,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Black Frame Glasses
 ,[1720,1715,643,"NULL"] //Custom TalonRO - Pitch Dark Evil Druid Hat + Dark Blinder
+,[1727,1725,1726,"NULL"] //Custom TalonRO - Bankruptcy Hat + Mask
+,[1731,1728,1730,"NULL"] //Custom TalonRO - Antonio's Coat + Red Stocking Boots
+,[1732,1728,1729,"NULL"] //Custom TalonRO - Antonio's Coat + Antonio's Red Bag
+,[1733,1728,1729,1730,"NULL"] //Custom TalonRO - Antonio's Coat + Antonio's Red Bag + Red Stocking Boots
+,[1737,1736,1240,"NULL"] //Custom TalonRO - Empty Liquor Bottle + Beer Hat
+,[1740,1739,781,"NULL"] //Custom TalonRO - Preschool Hat + Bunny Slipper
+,[1742,1741,1414,"NULL"] //Custom TalonRO - Rose Casquette + Rose of Crimson
 ];
 
 SE_MAXnum = w_SE.length -1;
