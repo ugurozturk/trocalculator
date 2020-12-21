@@ -653,7 +653,7 @@ function StAllCalc()
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
-	for(i=290;i<=379;i++){
+	for(i=290;i<=383;i++){
 		n_tok[i] = 0;
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
@@ -4254,7 +4254,7 @@ function StAllCalc()
 	
 	// Update Extended Information
 	KakutyouKansuu();
-	KakutyouKansuu2();
+	//KakutyouKansuu2();
 }}
 
 function StPlusCalc()
@@ -6557,6 +6557,143 @@ function KakutyouKansuu(){
 		}else
 			myInnerHtml("A_KakutyouData","Not Available for this Class",0);
 	}
+	else if(wKK == 17){
+		var wkk17="";
+		if(n_tok[380]||n_tok[382]){
+			weapS=[0,6,7,19,40,41,44,65,70,71,72,73,76,83,84,86,111,158,161,169,171,176,188,189,192,199,207,248,260,261,264,272,288,289,290,292,302,303,305,306,307,308,326,317,318,331,333,335,337,339,382,388,391,398,400,401,418,419,423,428,429,430,431,432,434,435,436,437,"NULL"];
+			if(weapS.includes(n_A_ActiveSkill)){
+				var mobCount = eval(document.calcForm.A_KakutyouSelNum.value);
+				if(mobCount==""||mobCount<1){
+					mobCount = 1;
+					document.calcForm.A_KakutyouSelNum.value = 1;
+				}
+				var avergeAtk=parseInt(document.getElementById("strID_1").textContent);
+				if(avergeAtk>=0){
+					var critAtk=parseInt(document.getElementById("CRIATK").textContent);
+					var critChance=parseInt(document.getElementById("CRInum").textContent);
+					if(critAtk>=0 && critChance){
+						avergeAtk=avergeAtk*(1-critChance/100)+critAtk*critChance/100;
+					}
+					
+					
+					wkk17+="<table border=0>";
+					wkk17+="<tr><td><b>HP</b></td>"+"<td></td>"+"<td><b>SP</b></td></tr>";
+					wkk17+="<tr><td>Chance: "+(n_tok[380]>100?100:n_tok[380])+"%</td>"+"<td></td>"+"<td>Chance: "+(n_tok[382]>100?100:n_tok[382])+"%</td></tr>";
+					wkk17+="<tr><td>Absorb "+n_tok[381]+"% of the damage inflicted on the enemy as HP</td>"+"<td></td>"+"<td>Absorb "+n_tok[383]+"% of the damage inflicted on the enemy as SP</td></tr>";
+					wkk17+="<tr><td>Result: ~<b>"+Math.floor(mobCount*(n_tok[380]>100?100:n_tok[380])*n_tok[381]*avergeAtk/10000)+"</b>("+Math.floor(mobCount*n_tok[381]*avergeAtk/100)+" maximum) per hit</td>"+"<td></td>"+"<td>Result: ~<b>"+Math.floor(mobCount*(n_tok[382]>100?100:n_tok[382])*n_tok[383]*avergeAtk/10000)+"</b>("+Math.floor(mobCount*n_tok[383]*avergeAtk/100)+" maximum) per hit</td></tr>";
+					var dps = parseInt(document.getElementById("AveSecondATK").textContent);
+					if(dps>=0){
+						wkk17+="<tr><td>~<b>"+Math.floor(mobCount*(n_tok[380]>100?100:n_tok[380])*n_tok[381]*dps/10000)+"</b> per second</td>"+"<td></td>"+"<td>~<b>"+Math.floor(mobCount*(n_tok[382]>100?100:n_tok[382])*n_tok[383]*dps/10000)+"</b> per second</td></tr>";
+					}
+					wkk17+="</table>";
+					myInnerHtml("A_KakutyouData",wkk17,0);
+				}else{
+				myInnerHtml("A_KakutyouData","Load Problem",0);
+				}
+			}
+		}else{
+			myInnerHtml("A_KakutyouData","Not Available without drain item",0);
+    }
+  }
+	else if(wKK == 18){
+		var HPrec = eval(document.calcForm.HPrec.value);
+		var LernPot = eval(document.calcForm.LernPot.value);
+		var SPrec = eval(document.calcForm.SPrec.value);
+		var FamTop = eval(document.calcForm.FamTop.value);
+		var aItemBonus = eval(document.calcForm.aItemBonus.value);
+		var ItHeal = eval(document.calcForm.ItHeal.value);
+		var rogueSpir = eval(document.calcForm.rogueSpir.value);
+		if(aItemBonus==""||aItemBonus<0){
+			aItemBonus = 0;
+			document.calcForm.aItemBonus.value = 0;
+		}
+		var bonus = 100 + (ITEM_HEAL[ItHeal][1]==1?n_A_VIT*2:n_A_INT*2) + (ITEM_HEAL[ItHeal][1]==1?HPrec:SPrec) * 10 + LernPot * 5;
+		if(FamTop!=0&&(ItHeal>=1&&ItHeal<=4||ItHeal>=9&&ItHeal<=12)){
+			if(FamTop==1)
+				bonus+=50;
+			if(FamTop==2)
+				bonus+=25;
+			if(rogueSpir==1&&ITEM_HEAL[ItHeal][1]==1)
+				bonus+=100;
+		}
+		bonus+=ITEM_HEAL[ItHeal][1]==1?(aItemBonus+n_tok[92]):0;
+		var heal=(ITEM_HEAL[ItHeal][2]+ITEM_HEAL[ItHeal][3])/2;
+		var tmp = heal * bonus / 100;
+		if (bonus != 100 && tmp > heal)
+			heal = tmp;
+		var wkk18 =  '<table width=100% border=0><tr><td width=25%>Heal:</td>' + '<td width=25%>'+heal+'</td>';
+		wkk18 += '<td width=25%>HealPower:</td>' + '<td width=25%>'+n_tok[92]+'</td></tr></table>';
+		myInnerHtml("A_KakutyouData",wkk18,0);
+  }
+	else if(wKK == 19){ // Steal Calculator
+		document.getElementById("playerDexSteal").innerHTML = n_A_DEX;
+		monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
+		stealLevel = eval(document.calcForm.stealLevel.value);
+		manuallyInsertDex = eval(document.calcForm.manuallyInsertDex.checked);
+		playerDex = n_A_DEX;
+		if (manuallyInsertDex) {
+			playerDex = eval(document.calcForm.playerDexStealManual.value);
+		}
+		monsterDex = monsterStolen[10];
+		document.getElementById("outputPlayerDexStealCalc").innerHTML = "<b>Player DEX: </b> " + playerDex + "</b>";
+		document.getElementById("outputMonsterDexStealCalc").innerHTML = "<b>Monster DEX: </b> " + monsterDex + "</b>";
+		if (monsterStolen[23] != 0) {
+			document.getElementById("outputMonsterGifStealCalc").innerHTML = "<img src=\"https://panel.talonro.com/images/monster/"+monsterStolen[23]+".gif\" alt=\"no picture available =(\">";
+		} else {
+			document.getElementById("outputMonsterGifStealCalc").innerHTML = "<img src=\"\" alt=\"no picture available =(\">";
+		}
+		var tblStealCalcRight = document.getElementById("tblStealCalcRight");
+		if (monsterStolen[19]) {
+			document.getElementById("addRemStealCalc").style = "display:none";
+			while (tblStealCalcRight.rows.length > 1) {
+				tblStealCalcRight.deleteRow(-1);
+			}
+			var cell = tblStealCalcRight.insertRow(-1).insertCell(0);
+			cell.colSpan="5";
+			cell.innerHTML += "Cannot steal boss monster";
+		} else {
+			var baseRate = Math.floor((playerDex - monsterDex)/2 + stealLevel*6 + 4);
+			var individualSuccess = [];
+			var stealSuccess = [];
+			if (baseRate < 1) {
+				for (i = 0; i < tblStealCalcRight.rows.length-1; ++i) {
+					individualSuccess[i] = 0;
+					stealSuccess[i] = 0;
+				}
+			} else {
+				for (i = 0; i < tblStealCalcRight.rows.length-1; ++i) {
+					var itemDropRate = 0;
+					if (monsterStolen[24]) {
+						itemDropRate = monsterStolen[25 + i*2];
+					} else {
+						itemDropRate = eval(tblStealCalcRight.rows[i+1].getElementsByTagName("input")[0].value);
+					}
+					individualSuccess[i] = Math.ceil(itemDropRate * baseRate);
+					if (individualSuccess[i] > 10000) individualSuccess[i] = 10000;
+					if (individualSuccess[i] < 0) individualSuccess[i] = 0;
+				}
+				for (i = 0; i < tblStealCalcRight.rows.length-1; ++i) {
+					if (i > 6) { // only the first 7 slots can be stolen
+						stealSuccess[i] = 0;
+						continue;
+					}
+					stealSuccess[i] = individualSuccess[i];
+					for (var j = i - 1; j >= 0; --j) {
+						stealSuccess[i] *= (10000 - individualSuccess[j])/10000.;
+					}
+					if (stealSuccess[i] > 10000) stealSuccess[i] = 10000;
+					if (stealSuccess[i] < 0) stealSuccess[i] = 0;
+				}
+			}
+			for (i = 0; i < stealSuccess.length; ++i) {
+				if (i == 9 || monsterStolen[24 + i*2] == 0) {
+					break;
+				}
+				tblStealCalcRight.rows[i+1].cells[3].innerHTML = (+(stealSuccess[i]/100.)).toFixed(4) + "%";
+				tblStealCalcRight.rows[i+1].cells[4].innerHTML = (+(individualSuccess[i]/100.)).toFixed(2) + "%";
+			}
+		}
+	}
 }
 
 function Kanma(num){
@@ -6948,7 +7085,175 @@ function KakutyouKansuu2(){
 
 		return;
 	}
+	if(wKK == 17){
+		var w;
+		w = '<div style="float:left;margin-right:10px;padding-top:4px">Number of monsters:</div><div style="float:left"><input type="text" name="A_KakutyouSelNum" value="1" size=4 onChange="StAllCalc()" style="text-align : right"></div><div style="clear:both"></div>';
+		myInnerHtml("A_KakutyouSel",w,0);
+    return;
+	}
+  if(wKK == 18){
+		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="HPrec" onChange="StAllCalc()"></select></td>';
+		healtext += "<td>Learning Potion:</td>" + '<td><select name="LernPot" onChange="StAllCalc()"></select></td></tr>';
+		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="SPrec" onChange="StAllCalc()"></select></td>';
+		healtext +=  "<td>Rogue Spirit:</td>" + '<td><select name="rogueSpir" onChange="StAllCalc()"></select></td></tr>';
+		healtext +=  "<tr><td>All item bonuses:</td>" + '<td><input type="text" onChange="StAllCalc()" name="aItemBonus" value="0" size=2>%</td>';
+		healtext +=  "<td>Fame Top:</td>" + '<td><select name="FamTop" onChange="StAllCalc()"></select></td></tr>';
+		healtext +=  '<tr><td>Item:</td>' + '<td><select name="ItHeal" onChange="StAllCalc()"></select></td></tr></table>';
+		myInnerHtml("A_KakutyouSel",healtext + "<br>",0);
+		for(i=0;i<=10;i++){
+			document.calcForm.HPrec.options[i] = new Option(i,i);
+			document.calcForm.HPrec.value=0;}
+		for(i=0;i<=10;i++){
+			document.calcForm.LernPot.options[i] = new Option(i,i);
+			document.calcForm.LernPot.value=0;}
+		for(i=0;i<=10;i++){
+			document.calcForm.SPrec.options[i] = new Option(i,i);
+			document.calcForm.SPrec.value=0;}
+		for(i=0;i<FAME_TOP.length;i++){
+			document.calcForm.FamTop.options[i] = new Option(FAME_TOP[i][1],i);
+			document.calcForm.FamTop.value=0;}
+		for(i=0;i<ITEM_HEAL.length;i++){
+			document.calcForm.ItHeal.options[i] = new Option(ITEM_HEAL[i][4],i);
+			document.calcForm.ItHeal.value=0;}
+		document.calcForm.rogueSpir.options[0] = new Option("No",0);
+		document.calcForm.rogueSpir.options[1] = new Option("Yes",1);
+		document.calcForm.rogueSpir.value=0;
+		return;
+	}
+	if(wKK == 19){
+		stealCalcTxt = "";
+		stealCalcTxt += "<table border=0>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td width=\"50%\" style=\"vertical-align:baseline\">";
+		stealCalcTxt += "<table id=\"tblStealCalcLeft\"  border=0>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Steal Level:</td>";
+		stealCalcTxt += "<td><select name=\"stealLevel\" onChange=\"StAllCalc()\"></select></td>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Player DEX:</td>";
+		stealCalcTxt += "<td id=\"playerDexSteal\">"+n_A_DEX+"</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Manually Insert DEX:</td>";
+		stealCalcTxt += "<td>";
+		stealCalcTxt += "<input type=\"checkbox\" name=\"manuallyInsertDex\" onClick=\"StAllCalc()\"/>";
+		stealCalcTxt += " ";
+		stealCalcTxt += "<input type=\"number\" name=\"playerDexStealManual\" min=\"0\" max=\"500\" step=\"1\" value=\"0\" onChange=\"StAllCalc()\"/>";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>Monster:</td>";
+		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"loadMonsterItemDropListStealCalc();StAllCalc();\"></select></td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td id=\"outputPlayerDexStealCalc\">";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "<td rowspan=\"2\" id=\"outputMonsterGifStealCalc\">";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td id=\"outputMonsterDexStealCalc\">";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "</table>";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "<td width=\"50%\" style=\"vertical-align:baseline\">";
+		stealCalcTxt += "<span id=\"addRemStealCalc\">";
+		stealCalcTxt += "<a onclick=\"addItemSlotStealCalc()\">Add</a>";
+		stealCalcTxt += " ";
+		stealCalcTxt += "<a onclick=\"delItemSlotStealCalc()\">Remove</a>";	
+		stealCalcTxt += "</span>";
+		stealCalcTxt += "<table id=\"tblStealCalcRight\" border=0>";
+		stealCalcTxt += "<thead>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<th style=\"text-align:left\">Item Slot</th>";
+		stealCalcTxt += "<th style=\"text-align:left\">Image</th>";
+		stealCalcTxt += "<th style=\"text-align:right\">Drop Rate</th>";
+		stealCalcTxt += "<th style=\"text-align:right\">Steal Success</th>";
+		stealCalcTxt += "<th style=\"text-align:right\">Individual Success</th>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "</thead>";
+		stealCalcTxt += "<tr>";
+		stealCalcTxt += "<td>1</td>";
+		stealCalcTxt += "<td></td>";
+		stealCalcTxt += "<td style=\"text-align:right\"><input type=\"number\" name=\"itemDropRate1\" min=\"0\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/></td>";
+		stealCalcTxt += "<td></td>";
+		stealCalcTxt += "<td></td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "</table>";
+		stealCalcTxt += "</td>";
+		stealCalcTxt += "</tr>";
+		stealCalcTxt += "</table>";
+		myInnerHtml("A_KakutyouSel",stealCalcTxt,0);
+		for(i=1;i<=10;i++) document.calcForm.stealLevel.options[i-1] = new Option(i,i);
+		document.calcForm.stealLevel.value=1;
+		sortedMonsterArray = MonsterOBJ.concat().sort(function(a,b){return a[1].localeCompare(b[1])});
+		for (i = 0; i < sortedMonsterArray.length; ++i) {
+			document.calcForm.monsterStolen.options[i] = new Option(prefix + sortedMonsterArray[i][1], sortedMonsterArray[i][0]);
+		}
+		return;
+	}
 	myInnerHtml("A_KakutyouSel","",0);
+}
+
+function loadMonsterItemDropListStealCalc() {
+	var tbl = document.getElementById("tblStealCalcRight");
+	while (tbl.rows.length > 1) {
+		tbl.deleteRow(-1);
+	}
+	var monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
+	if (monsterStolen[24]) {
+		document.getElementById("addRemStealCalc").style = "display:none";
+		for (i = 0; i < 10; ++i) {
+			var row = tbl.insertRow(-1);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			var cell5 = row.insertCell(4);
+			cell3.style = "text-align:right";
+			cell4.style = "text-align:right";
+			cell5.style = "text-align:right";
+			var dropPercentage = monsterStolen[25 + i*2];
+			var dropItemId = monsterStolen[24 + i*2];
+			if (dropItemId == 0) {
+				continue;
+			}
+			cell1.innerHTML = (i+1);
+			if (i == 9) {
+				cell1.innerHTML = "Card";
+			}
+			cell2.innerHTML += " <img src=\"https://panel.talonro.com/images/items/small/"+dropItemId+".gif\" alt=\"no picture available =(\">";
+			cell3.innerHTML += (+dropPercentage).toFixed(2) + "%";
+		}
+	} else {
+		document.getElementById("addRemStealCalc").style = "";
+		addItemSlotStealCalc();
+	}
+}
+
+function addItemSlotStealCalc() {
+	var tbl = document.getElementById("tblStealCalcRight");
+	if (tbl.rows.length == 8) return;
+	var row = tbl.insertRow(-1);
+	var cell1 = row.insertCell(0);
+	var cell2 = row.insertCell(1);
+	var cell3 = row.insertCell(2);
+	var cell4 = row.insertCell(3);
+	var cell5 = row.insertCell(4);
+	cell3.style = "text-align:right";
+	cell4.style = "text-align:right";
+	cell5.style = "text-align:right";
+	cell1.innerHTML = (tbl.rows.length-1);
+	cell3.innerHTML = "<input type=\"number\" name=\"itemDropRate" + (tbl.rows.length-1) + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
+	StAllCalc();
+}
+
+function delItemSlotStealCalc() {
+	var tbl = document.getElementById("tblStealCalcRight");
+	if (tbl.rows.length == 2) return;
+	tbl.deleteRow(-1);
+	StAllCalc();
 }
 
 function SetCardShort(){
