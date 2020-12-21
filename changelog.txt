@@ -1,3 +1,31 @@
+[2020-10-26]
+- Added Greater Agimat food
+- Fixed Giant Shield refine bonus
+
+[2020-10-24]
+- Added Preschool Hat
+- Added new Summer Event items
+- Added Insectivorous Plant Hairpin
+- Fixed Final Strike damage computation
+- Fixed Book of Charms class restriction
+
+[2020-10-03]
+- Added Antonio's set
+- Fixed Palace Guard refine bonus
+- Added HJ and EQ skills to Lost Dragon
+- Fixed Tarou + Clamp cards combo applying twice
+- Added magical attack modifiers to Extended Info - Attack Modifiers
+
+[2020-10-01]
+- Added Bankruptcy set
+- Added Lost Dragon MvP
+- Added Summer Cocktails
+- Fixed Savage pet bonus
+- Fixed Scuba Mask script
+- Fixed weapon and base attack bonus based
+- Fixed Apple of Idun & Berserk MaxHP formula
+- Fixed Assassin Cross of Sunset song ASDP formula
+
 [2020-07-20]
 - Fixed Bragi formula
 - Fixed MDEF armor enchantment
