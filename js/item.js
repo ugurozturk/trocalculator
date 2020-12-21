@@ -758,26 +758,26 @@ ItemOBJ = [
 ,[735,64,1,1,0,0,20,0,"Kafra Ring","",0,19,1,1,1,2,1,4,1,6,1,0]
 ,[736,100,0,0,0,0,0,0,"No Set",0,0,0]
 ,[737,100,0,0,0,0,0,0,"Surviror's Manteau set",0,"MATK increase by Survivor's Rod refine rate<br>Increase resistance from Neutral Property attacks by refine rate * 3",13,300,89,-5,0]
-,[738,100,0,0,0,0,0,0,"Undershirt set",0,0,212,5,9,10,0]
+,[738,100,0,0,0,0,0,0,"Undershirt set",0,0,2,5,9,10,0]
 ,[739,100,0,0,0,0,0,0,"Shinobi Sash set",0,"Reduce SP Consumption of skills by 20%",13,300,0]
 ,[740,100,0,0,0,0,0,0,"Bloodied Shackle Ball set",0,"Reduces damage from Zombie Prisoner and Skeleton Prisoner by 20%",17,50,3147,20,3171,20,0]
 ,[741,100,0,0,0,0,0,0,"Padded Armor + Armor Charm set",0,0,13,150,18,5,0]
 ,[742,100,0,0,0,0,0,0,"Magni Cap set",0,"<b>[Swordman Class]</b><br>Additional DEF + 6",1,2,18,5,19,5,0]
-,[743,100,0,0,0,0,0,0,"Falcon Muffler set",0,0,212,3,15,5,16,5,0]
-,[744,100,0,0,0,0,0,0,"Vali's Manteau set",0,0,213,5,75,10,76,10,0]
-,[745,100,0,0,0,0,0,0,"Goibne's set",0,0,213,5,15,15,16,5,18,5,19,15,61,10,62,10,63,10,64,10,0]
+,[743,100,0,0,0,0,0,0,"Falcon Muffler set",0,0,2,3,15,5,16,5,0]
+,[744,100,0,0,0,0,0,0,"Vali's Manteau set",0,0,3,5,75,10,76,10,0]
+,[745,100,0,0,0,0,0,0,"Goibne's set",0,0,3,5,15,15,16,5,18,5,19,15,61,10,62,10,63,10,64,10,0]
 ,[746,100,0,0,0,0,0,0,"Morrigane's set",0,0,1,2,6,9,17,18,10,13,11,13,0]
 ,[747,100,0,0,0,0,0,0,"Morpheus's",0,"Casting can not be interrupted (does not work in WoE)",214,5,19,11,16,20,73,25,0]
 ,[748,100,0,0,0,0,0,0,"Novice Angelic set",0,"Add a 3% chance of auto casting Level 1 Assumptio on the user when the user receives Physical Damage",13,900,14,100,0]
 ,[749,100,0,0,0,0,0,0,"Valkyrie set",0,0,7,1,0]
-,[750,100,0,0,0,0,0,0,"Soul Staff/Wizardry Staff set",0,"Reduce Casting Time by [Wizardry Staff] or [Soul Staff] Refine Rate",89,6,215,2,0]
+,[750,100,0,0,0,0,0,0,"Soul Staff/Wizardry Staff set",0,"Reduce Casting Time by [Wizardry Staff] or [Soul Staff] Refine Rate",89,6,5,2,0]
 ,[751,100,0,0,0,0,0,0,"Clip/Rosary set",0,0,76,9,5104,30,5025,50,0]
 ,[752,100,0,0,0,0,0,0,"Orlean's set",0,0,73,-10,0]
 ,[753,100,0,0,0,0,0,0,"Horn of the Buffalo set",0,0,12,10,71,5,0]
 ,[754,100,0,0,0,0,0,0,"Tidal Shoes set",0,0,15,10,75,5,0]
 ,[755,100,0,0,0,0,0,0,"Dragon's Breath set",0,0,39,5,0]
 ,[756,100,0,0,0,0,0,0,"Black Leather Boots set",0,0,9,10,0]
-,[757,100,0,0,0,0,0,0,"Divine Cross set",0,0,215,2,89,10,51,10,56,10,0]
+,[757,100,0,0,0,0,0,0,"Divine Cross set",0,0,5,2,89,10,51,10,56,10,0]
 ,[758,50,0,0,0,0,100,30,"Vanilmirth Hat","","",19,5,193,1,194,1,221,103,221,104,221,105,0]
 ,[759,50,53,1,0,0,15,0,"Sheep Hat","",0,193,1,71,5,0]
 ,[760,50,0,0,0,0,80,75,"Sales Banner","",0,1,1,2,1,6,1,0]
@@ -834,7 +834,7 @@ ItemOBJ = [
 ,[811,50,0,2,0,0,0,10,"Guild Member Hat","",0,0]
 ,[812,12,0,110,4,1,70,80,"Battlefield Textbook","","A book containing the History of many wars and the dreams of the strategists that took part in them.",4,3,193,1,0]  //todo autocasting
 ,[813,50,0,3,0,0,70,0,"Angeling Hairpin","",0,9,5,0]
-,[814,100,0,0,0,0,0,0,"Angel's Dress set",0,0,214,2,6,2,9,5,0]
+,[814,100,0,0,0,0,0,0,"Angel's Dress set",0,0,4,2,6,2,9,5,0]
 ,[815,50,0,3,0,1,50,0,"Classic Hat","",0,1,2,13,300,0]
 ,[816,1,122,130,2,2,60,70,"Desert Twilight","",0,0]
 ,[817,1,122,50,2,4,60,70,"Desert Wind","",0,0]
@@ -844,7 +844,7 @@ ItemOBJ = [
 ,[821,10,124,135,4,1,30,70,"Ixion's Wings","","When attacking there is a 1% chance to boost Attack Speed by 7% for 7 seconds<br>Each refine boosts the chance of occurance by 0.2%",0]
 ,[822,12,0,60,3,2,30,60,"Principles of Magic","",0,89,20,4,3,76,5,0]
 ,[823,12,0,30,3,2,70,70,"Ancient Magic","",0,89,15,0]
-,[824,100,0,0,0,0,0,0,0,"Mage Coat set",0,214,4,19,8,16,10,0]
+,[824,100,0,0,0,0,0,0,0,"Mage Coat set",0,0,4,4,19,8,16,10,0]
 ,[825,9,55,30,3,0,50,50,"Radiant Wisdom","","When performing a Magical attack, there's a small chance to recover SP and HP",89,15,4,3,91,5,94,5,0]
 ,[826,50,0,0,0,0,50,0,"Phrygian Cap","",0,4,2,0]
 ,[827,50,1,2,0,1,30,40,"Rideword Hat","","5% chance to absorb 8% HP on Physical attack<br>1% chance to absorb 4% SP on Physical attack<br>You lose 10 HP each 5 seconds when equipped ",380,5,381,8,382,1,383,4,0]
@@ -878,10 +878,10 @@ ItemOBJ = [
 ,[855,100,0,0,0,0,0,0,"Tournament Shield set","","[Lord Knight]<br>Aspd -5%",18,2,80,4,0]
 ,[856,100,0,0,0,0,0,0,"Holy Stick set",0,0,5104,20,221,50,0]
 ,[857,100,0,0,0,0,0,0,"Diablos Manteau set",0,0,15,6,0]
-,[858,100,0,0,0,0,0,0,"Librarian Glove set",0,0,214,5,13,700,12,5,0]
+,[858,100,0,0,0,0,0,0,"Librarian Glove set",0,0,4,5,13,700,12,5,0]
 ,[859,64,0,0,0,0,0,0,"Decussate Ring [Rental]","",0,126,15,0]
 ,[860,100,0,0,0,0,0,0,"Monocle set",0,0,89,7,75,15,76,15,0]
-,[861,100,0,0,0,0,0,0,"Lunatic Brooch set",0,0,215,1,14,50,76,10,0]
+,[861,100,0,0,0,0,0,0,"Lunatic Brooch set",0,0,5,1,14,50,76,10,0]
 ,[862,100,0,0,0,0,0,0,"Renown Archer set",0,"Reduce SP Consumption of skills by 25%",0]
 ,[863,9,63,50,4,1,50,70,"Holy Stick","",0,20,6,89,15,7037,25,7102,25,7104,25,0]
 ,[864,999,0,0,0,0,10,0,"Autumn Leaves","",0,13,40,14,40,0]
@@ -3976,8 +3976,6 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Experience gained from bosstype monsters "+ wIS + nC2 +"%<BR>";
 	if(198 == nC1)
 		CBIstr += "Armor becomes "+ ZokuseiOBJ[nC2] +" element<BR>";
-	if(212 <= nC1 && nC1 <= 215)
-		CBIstr += wNAME1[nC1 -210] + wIS + nC2 +"<BR>";
     /*ZoneSoldier - 6/3/2018
       Allows usage of the skill
       Refer to Skill.js Each number after 220

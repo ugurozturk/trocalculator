@@ -229,12 +229,7 @@ Effect list:
 	198: When [value] == 7, Armor becomes Shadow element
 	198: When [value] == 8, Armor becomes Ghost element
 	198: When [value] == 9, Armor becomes Undead element
-	199-211: (unused)
-	212: AGI + [value] What's the difference with 3?
-	213: VIT + [value] What's the difference with 4?
-	214: INT + [value] What's the difference with 5?
-	215: DEX + [value] What's the difference with 6?
-	216-219: (unused)
+	199-219: (unused)
 	220: Allows usage of the skill InsertSkill[value] (see below)
 	220: When [value] == 0, Allows usage of the skill [Basic Attack]Lv 0
 	220: When [value] == 1, Allows usage of the skill [Cold Bolt]Lv 3

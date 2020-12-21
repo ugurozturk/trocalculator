@@ -4309,9 +4309,7 @@ function StPlusCalc()
 	wSPC_STR += StPlusCalc2(1) + wSPCall;
 	wSPC_AGI += StPlusCalc2(2) + wSPCall;
 	wSPC_VIT += StPlusCalc2(3) + wSPCall;
-	wSPC_VIT += StPlusCalc2(213);
 	wSPC_INT += StPlusCalc2(4) + wSPCall;
-	wSPC_INT += StPlusCalc2(214);
 	wSPC_DEX += StPlusCalc2(5) + wSPCall;
 	wSPC_LUK += StPlusCalc2(6) + wSPCall;
 
@@ -4352,8 +4350,6 @@ function StPlusCalc()
 		wSPC_AGI += 4;
 	}
 
-	wSPC_AGI += StPlusCalc2(212);
-	wSPC_DEX += StPlusCalc2(215);
 	if(n_A_JobSearch()==41 && EquipNumSearch(672))
 		wSPC_AGI += 1;
 	if(n_A_JobSearch()==41 && EquipNumSearch(673))
@@ -7139,7 +7135,7 @@ function KakutyouKansuu2(){
 		myInnerHtml("A_KakutyouSel",w,0);
     return;
 	}
-  if(wKK == 18){
+	if(wKK == 18){
 		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="HPrec" onChange="StAllCalc()"></select></td>';
 		healtext += "<td>Learning Potion:</td>" + '<td><select name="LernPot" onChange="StAllCalc()"></select></td></tr>';
 		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="SPrec" onChange="StAllCalc()"></select></td>';
