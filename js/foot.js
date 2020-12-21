@@ -653,7 +653,7 @@ function StAllCalc()
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
-	for(i=290;i<=379;i++){
+	for(i=290;i<=383;i++){
 		n_tok[i] = 0;
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
@@ -6557,6 +6557,42 @@ function KakutyouKansuu(){
 		}else
 			myInnerHtml("A_KakutyouData","Not Available for this Class",0);
 	}
+	else if(wKK == 17){
+		var wkk17="";
+		if(n_tok[380]||n_tok[382]){
+			weapS=[0,6,7,19,40,41,44,65,70,71,72,73,76,83,84,86,111,158,161,169,171,176,188,189,192,199,207,248,260,261,264,272,288,289,290,292,302,303,305,306,307,308,326,317,318,331,333,335,337,339,382,388,391,398,400,401,418,419,423,428,429,430,431,432,434,435,436,437,"NULL"];
+			if(weapS.includes(n_A_ActiveSkill)){
+				var mobCount = eval(document.calcForm.A_KakutyouSelNum.value);
+				if(mobCount==""||mobCount<1){
+					mobCount = 1;
+					document.calcForm.A_KakutyouSelNum.value = 1;
+				}
+				var avergeAtk=parseInt(document.getElementById("strID_1").textContent);
+				if(avergeAtk>=0){
+					var critAtk=parseInt(document.getElementById("CRIATK").textContent);
+					var critChance=parseInt(document.getElementById("CRInum").textContent);
+					if(critAtk>=0 && critChance){
+						avergeAtk=avergeAtk*(1-critChance/100)+critAtk*critChance/100;
+					}
+					
+					
+					wkk17+="<table border=0>";
+					wkk17+="<tr><td><b>HP</b></td>"+"<td></td>"+"<td><b>SP</b></td></tr>";
+					wkk17+="<tr><td>Chance: "+(n_tok[380]>100?100:n_tok[380])+"%</td>"+"<td></td>"+"<td>Chance: "+(n_tok[382]>100?100:n_tok[382])+"%</td></tr>";
+					wkk17+="<tr><td>Absorb "+n_tok[381]+"% of the damage inflicted on the enemy as HP</td>"+"<td></td>"+"<td>Absorb "+n_tok[383]+"% of the damage inflicted on the enemy as SP</td></tr>";
+					wkk17+="<tr><td>Result: ~<b>"+Math.floor(mobCount*(n_tok[380]>100?100:n_tok[380])*n_tok[381]*avergeAtk/10000)+"</b>("+Math.floor(mobCount*n_tok[381]*avergeAtk/100)+" maximum) per hit</td>"+"<td></td>"+"<td>Result: ~<b>"+Math.floor(mobCount*(n_tok[382]>100?100:n_tok[382])*n_tok[383]*avergeAtk/10000)+"</b>("+Math.floor(mobCount*n_tok[383]*avergeAtk/100)+" maximum) per hit</td></tr>";
+					var dps = parseInt(document.getElementById("AveSecondATK").textContent);
+					if(dps>=0){
+						wkk17+="<tr><td>~<b>"+Math.floor(mobCount*(n_tok[380]>100?100:n_tok[380])*n_tok[381]*dps/10000)+"</b> per second</td>"+"<td></td>"+"<td>~<b>"+Math.floor(mobCount*(n_tok[382]>100?100:n_tok[382])*n_tok[383]*dps/10000)+"</b> per second</td></tr>";
+					}
+					wkk17+="</table>";
+					myInnerHtml("A_KakutyouData",wkk17,0);
+				}else{
+				myInnerHtml("A_KakutyouData","Load Problem",0);
+				}
+			}
+		}else{
+			myInnerHtml("A_KakutyouData","Not Available without drain item",0);
 	else if(wKK == 19){ // Steal Calculator
 		document.getElementById("playerDexSteal").innerHTML = n_A_DEX;
 		monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
@@ -7017,6 +7053,10 @@ function KakutyouKansuu2(){
 
 		return;
 	}
+	if(wKK == 17){
+		var w;
+		w = '<div style="float:left;margin-right:10px;padding-top:4px">Number of monsters:</div><div style="float:left"><input type="text" name="A_KakutyouSelNum" value="1" size=4 onChange="StAllCalc()" style="text-align : right"></div><div style="clear:both"></div>';
+		myInnerHtml("A_KakutyouSel",w,0);
 	if(wKK == 19){
 		stealCalcTxt = "";
 		stealCalcTxt += "<table border=0>";
