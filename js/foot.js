@@ -653,6 +653,9 @@ function StAllCalc()
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
+	n_tok[217] = 0;
+	n_tok[218] = 0;
+	n_tok[219] = 0;
 	for(i=290;i<=383;i++){
 		n_tok[i] = 0;
 		n_tok[i] += StPlusCalc2(i);
@@ -3887,6 +3890,26 @@ function StAllCalc()
 		n_tok[91] += Math.floor(n_A_Weapon_ATKplus * 3);
 		n_tok[94] += Math.floor(n_A_Weapon_ATKplus * 3);
 	}
+	
+	// Bayani Buwaya Skin Clothes#1542, Buwaya Skin Clothes#1012
+	// [Every 3 Refines] - Received heal and healing item effectiveness increased by 1%
+	if (EquipNumSearch(1542) || EquipNumSearch(1012))
+	{
+		healing_bonus = Math.floor(n_A_SHOULDER_DEF_PLUS / 3);
+		n_tok[92] += healing_bonus;
+		n_tok[95] += healing_bonus;
+		n_tok[217] += healing_bonus;
+		n_tok[218] += healing_bonus;
+	}
+	
+	// Peace and Happiness Proof#1754
+	if (EquipNumSearch(1754))
+	{
+		// [Every Refine > 2] Increase effectiveness of healing items by 1%
+		n_tok[218] += n_A_HEAD_DEF_PLUS - 2;
+		// [Every Refine > 2] Reduces damage from DemiHuman monsters by 1%
+		n_tok[57] += n_A_HEAD_DEF_PLUS - 2;
+	}
 
 	if(EquipNumSearch(828)){
 		n_tok[151] += 2 * n_A_HEAD_DEF_PLUS;
@@ -4460,7 +4483,8 @@ function StPlusCalc()
 		{
 			n_tok[72] -= 10;
 			n_tok[92] += 10;
-			n_tok[95] += 10; // FIXME: no dedicated tok for received heal from PP
+			n_tok[95] += 10;
+			n_tok[217] += 10;
 		}
 	}
 	// custom TalonRO Bakonawa Card
@@ -6637,36 +6661,55 @@ function KakutyouKansuu(){
 			}
 		}else{
 			myInnerHtml("A_KakutyouData","Not Available without drain item",0);
-    }
-  }
-	else if(wKK == 18){
-		var HPrec = eval(document.calcForm.HPrec.value);
-		var LernPot = eval(document.calcForm.LernPot.value);
-		var SPrec = eval(document.calcForm.SPrec.value);
-		var FamTop = eval(document.calcForm.FamTop.value);
-		var aItemBonus = eval(document.calcForm.aItemBonus.value);
-		var ItHeal = eval(document.calcForm.ItHeal.value);
-		var rogueSpir = eval(document.calcForm.rogueSpir.value);
-		if(aItemBonus==""||aItemBonus<0){
-			aItemBonus = 0;
-			document.calcForm.aItemBonus.value = 0;
 		}
-		var bonus = 100 + (ITEM_HEAL[ItHeal][1]==1?n_A_VIT*2:n_A_INT*2) + (ITEM_HEAL[ItHeal][1]==1?HPrec:SPrec) * 10 + LernPot * 5;
-		if(FamTop!=0&&(ItHeal>=1&&ItHeal<=4||ItHeal>=9&&ItHeal<=12)){
-			if(FamTop==1)
-				bonus+=50;
-			if(FamTop==2)
-				bonus+=25;
-			if(rogueSpir==1&&ITEM_HEAL[ItHeal][1]==1)
-				bonus+=100;
+	}
+	else if(wKK == 18)
+	{	
+		potion_rank = eval(document.calcForm.potion_rank.value);
+		selected_item = eval(document.calcForm.selected_item.value);
+		hp_recovery_lv = eval(document.calcForm.hp_recovery_lv.value);
+		sp_recovery_lv = eval(document.calcForm.sp_recovery_lv.value);
+		additional_bonus = eval(document.calcForm.additional_bonus.value);
+		learning_potion_lv = eval(document.calcForm.learning_potion_lv.value);
+		rogue_spirit = eval(document.calcForm.rogue_spirit.value) && n_A_JobSearch2() == 14;
+		
+		item_id = ITEM_HEAL[selected_item][0]
+		
+		equipped_items = n_A_Equip.map(x => ItemOBJ[x]);
+		equipped_cards = n_A_card.map(x => cardOBJ[x]);
+
+		function reduce_item_bonus(acc, x, id, tok)
+		{
+		  i = x.findIndex(y => y == tok);
+		  return acc + (i > -1 ? (x[i+1].constructor === Array ? (x[i+1][0] == id ? x[i+1][1] : 0) : x[i+1]) : 0);
 		}
-		bonus+=ITEM_HEAL[ItHeal][1]==1?(aItemBonus+n_tok[92]):0;
-		var heal=(ITEM_HEAL[ItHeal][2]+ITEM_HEAL[ItHeal][3])/2;
-		var tmp = heal * bonus / 100;
-		if (bonus != 100 && tmp > heal)
-			heal = tmp;
-		var wkk18 =  '<table width=100% border=0><tr><td width=25%>Heal:</td>' + '<td width=25%>'+heal+'</td>';
-		wkk18 += '<td width=25%>HealPower:</td>' + '<td width=25%>'+n_tok[92]+'</td></tr></table>';
+
+		script_bonus = equipped_items.reduce((acc, x) => reduce_item_bonus(acc, x, item_id, ITEM_HEAL[selected_item][1] ? 218 : 219), 0);
+		script_bonus += equipped_cards.reduce((acc, x) => reduce_item_bonus(acc, x, item_id, ITEM_HEAL[selected_item][1] ? 218 : 219), 0);
+		script_bonus += [PET_OBJ[n_A_PassSkill8[0]]].reduce((acc, x) => reduce_item_bonus(acc, x, item_id, ITEM_HEAL[selected_item][1] ? 218 : 219), 0);
+
+		if (typeof additional_bonus == 'undefined' || additional_bonus < 0)
+		{
+			additional_bonus = 0;
+			document.calcForm.additional_bonus.value = 0;
+		}
+		
+		bonus = 100 + (ITEM_HEAL[selected_item][1] ? n_A_VIT*2 : n_A_INT*2) + (ITEM_HEAL[selected_item][1] ? hp_recovery_lv : sp_recovery_lv) * 10 + learning_potion_lv * 5;
+
+		if (potion_rank && (selected_item && selected_item < 8))
+		{
+			bonus += potion_rank * 25;
+			if (rogue_spirit && ITEM_HEAL[selected_item][1])
+				bonus += 100;
+		}
+
+		bonus += additional_bonus + script_bonus + (ITEM_HEAL[selected_item][1] ? n_tok[218] : 0);
+		
+		min_heal = Math.floor(ITEM_HEAL[selected_item][2] * bonus / 100);
+		max_heal = Math.floor(ITEM_HEAL[selected_item][3] * bonus / 100);
+		
+		wkk18 =  '<table width=100% border=0><tr><td width=25%>Heal:</td>' + '<td width=25%>' + min_heal + '~' + max_heal + '</td>';
+		wkk18 += '<td width=25%>Total Item Healing Bonus:</td>' + '<td width=25%>' + bonus + '</td></tr></table>';
 		myInnerHtml("A_KakutyouData",wkk18,0);
   }
 	else if(wKK == 19){ // Steal Calculator
@@ -7136,32 +7179,32 @@ function KakutyouKansuu2(){
     return;
 	}
 	if(wKK == 18){
-		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="HPrec" onChange="StAllCalc()"></select></td>';
-		healtext += "<td>Learning Potion:</td>" + '<td><select name="LernPot" onChange="StAllCalc()"></select></td></tr>';
-		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="SPrec" onChange="StAllCalc()"></select></td>';
-		healtext +=  "<td>Rogue Spirit:</td>" + '<td><select name="rogueSpir" onChange="StAllCalc()"></select></td></tr>';
-		healtext +=  "<tr><td>All item bonuses:</td>" + '<td><input type="text" onChange="StAllCalc()" name="aItemBonus" value="0" size=2>%</td>';
-		healtext +=  "<td>Fame Top:</td>" + '<td><select name="FamTop" onChange="StAllCalc()"></select></td></tr>';
-		healtext +=  '<tr><td>Item:</td>' + '<td><select name="ItHeal" onChange="StAllCalc()"></select></td></tr></table>';
+		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="hp_recovery_lv" onChange="StAllCalc()"></select></td>';
+		healtext += "<td>Learning Potion:</td>" + '<td><select name="learning_potion_lv" onChange="StAllCalc()"></select></td></tr>';
+		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="sp_recovery_lv" onChange="StAllCalc()"></select></td>';
+		healtext +=  "<td>Rogue Spirit:</td>" + '<td><select name="rogue_spirit" onChange="StAllCalc()"></select></td></tr>';
+		healtext +=  "<tr><td>Additional Healing Bonus:</td>" + '<td><input type="text" onChange="StAllCalc()" name="additional_bonus" value="0" size=2>%</td>';
+		healtext +=  "<td>Fame Top:</td>" + '<td><select name="potion_rank" onChange="StAllCalc()"></select></td></tr>';
+		healtext +=  '<tr><td>Item:</td>' + '<td><select name="selected_item" onChange="StAllCalc()"></select></td></tr></table>';
 		myInnerHtml("A_KakutyouSel",healtext + "<br>",0);
 		for(i=0;i<=10;i++){
-			document.calcForm.HPrec.options[i] = new Option(i,i);
-			document.calcForm.HPrec.value=0;}
+			document.calcForm.hp_recovery_lv.options[i] = new Option(i,i);
+			document.calcForm.hp_recovery_lv.value=0;}
 		for(i=0;i<=10;i++){
-			document.calcForm.LernPot.options[i] = new Option(i,i);
-			document.calcForm.LernPot.value=0;}
+			document.calcForm.learning_potion_lv.options[i] = new Option(i,i);
+			document.calcForm.learning_potion_lv.value=0;}
 		for(i=0;i<=10;i++){
-			document.calcForm.SPrec.options[i] = new Option(i,i);
-			document.calcForm.SPrec.value=0;}
+			document.calcForm.sp_recovery_lv.options[i] = new Option(i,i);
+			document.calcForm.sp_recovery_lv.value=0;}
 		for(i=0;i<FAME_TOP.length;i++){
-			document.calcForm.FamTop.options[i] = new Option(FAME_TOP[i][1],i);
-			document.calcForm.FamTop.value=0;}
+			document.calcForm.potion_rank.options[i] = new Option(FAME_TOP[i][1],i);
+			document.calcForm.potion_rank.value=0;}
 		for(i=0;i<ITEM_HEAL.length;i++){
-			document.calcForm.ItHeal.options[i] = new Option(ITEM_HEAL[i][4],i);
-			document.calcForm.ItHeal.value=0;}
-		document.calcForm.rogueSpir.options[0] = new Option("No",0);
-		document.calcForm.rogueSpir.options[1] = new Option("Yes",1);
-		document.calcForm.rogueSpir.value=0;
+			document.calcForm.selected_item.options[i] = new Option(ITEM_HEAL[i][4],i);
+			document.calcForm.selected_item.value=0;}
+		document.calcForm.rogue_spirit.options[0] = new Option("No",0);
+		document.calcForm.rogue_spirit.options[1] = new Option("Yes",1);
+		document.calcForm.rogue_spirit.value=0;
 		return;
 	}
 	if(wKK == 19){

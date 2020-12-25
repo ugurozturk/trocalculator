@@ -281,7 +281,7 @@ cardOBJ = [
 ,[259,1,"Crab","Increase damage on [Aster] by 30%",1240,30,17,5,0]
 ,[260,7,"Shinobi","10% chance of casting lv5 [Cloaking] when receiving ATK based damage",2,1,0]
 ,[261,4,"Karakasa","3% chance of inflicting [Chaos] when receiving ATK based damage<BR>If the user has 77 Base STR or higher, 9% chance instead",0]
-,[262,7,"Galapago","3% chance of obtaining Apple Juice, Banana Juice and Carrot Juice when killing an Insect race monster<BR>Increase recovery by 50% with those items",0]
+,[262,7,"Galapago","3% chance of obtaining Apple Juice, Banana Juice and Carrot Juice when killing an Insect race monster",218,[531,50],218,[532,50],218,[534,50],0]
 ,[263,1,"Gig","Regain 5 SP when killing a Insect race monster with a ATK based attack<BR>Drains 5 SP when the weapon is unequipped",0]
 ,[264,4,"Chimera","3% chance of inflicting Poison status when receiving ATK based damage<BR>If equipped by an Assassin job type, 9% chance instead",0]
 ,[265,1,"Caterpillar","Regain 5 SP when killing a Plant race monster with a ATK based attack<BR>Drains 5 SP when the weapon is unequipped",0]
@@ -316,7 +316,7 @@ cardOBJ = [
 ,[294,5,"Vagabond Wolf",0,1,1,0]
 ,[295,5,"Wanderer","If equipped by a Thief job type: Flee Rate +20",221,68,0]
 ,[296,1,"Tri Joint","Regain 5 SP when killing a Formless race monster with a ATK based attack<BR>Drains 5 SP when the weapon is unequipped",0]
-,[297,7,"Sea-Otter","3% chance of Raw Fish and Sushi dropping when killing a Fish race monster<BR>+50% HP restoration with those items",0]
+,[297,7,"Sea-Otter","3% chance of Raw Fish and Sushi dropping when killing a Fish race monster",218,[544,50],218,[551,50],0]
 ,[298,2,"Carat","If the headgear is upgraded to +9 or higher: SP +150",4,2,0]
 ,[299,4,"Kraben","6% chance of inflicting [Blind] status when receiving ATK based damage",0]
 ,[300,6,"Skeleton General",0,124,10,54,-20,0]
@@ -333,7 +333,7 @@ cardOBJ = [
 ,[311,1,"Dark Priest","+5% chance of decreasing the target's SP by 10%<BR>If equipped by a Sage job type: Regain 1 SP with each ATK based attack",0]
 ,[312,5,"Stem Worm",0,5,5,0] //custom TalonRO dex+5; diff position
 ,[313,2,"Stormy Knight",0,9,20,0] //custom TalonRO flee +20; diff position
-,[314,7,"Spring Rabbit","2% chance of [Meat] and [Monster's Feed] item dropping when killing a Brute race monster<BR>+50% HP restoration with those items",0]
+,[314,7,"Spring Rabbit","2% chance of [Meat] and [Monster's Feed] item dropping when killing a Brute race monster",218,[517,50],218,[528,50],0]
 ,[315,7,"Sleeper","1% chance of [Box of Drowsiness] item dropping when killing a Fish race monster",0]
 ,[316,7,"Sage Worm","0.3% chance of Blue/Red/Yellow Gemstone item dropping when killing a monster",0]
 ,[317,4,"Solider",0,18,2,19,2,0]
@@ -343,7 +343,7 @@ cardOBJ = [
 ,[321,4,"Dark Frame","6% chance of inflicting [Stone] status when receiving ATK based damage",0]
 ,[322,6,"Dark Lord",0,15,50,0] //custom TalonRO hp+50%; no autoskill
 ,[323,1,"Turtle General",0,80,20,0] //custom TalonRO; no autostkill
-,[324,7,"Dumpling Child","3% chance of Candy, and 1% chance of Candy Cane item dropping when killing a Demi-human race monster<BR>+50% HP restoration with those items",0]
+,[324,7,"Dumpling Child","3% chance of Candy, and 1% chance of Candy Cane item dropping when killing a Demi-human race monster",218,[529,50],218,[530,50],0]
 ,[325,1,"Chepet","(on your enemy, not yourself)",221,74,0]
 ,[326,1,"Zipper Bear","1 SP is drained with each physical attack<BR>If equipped by a Merchant job type: Weapon becomes unbreakable",17,30,0]
 ,[327,5,"Choco",0,9,10,11,5,0]
@@ -408,7 +408,7 @@ cardOBJ = [
 ,[386,7,"Raydric Archer","1% chance of [Box of Resentment] item dropping when killing a Demon race monster",0]
 ,[387,2,"Leib Olmai","1% chance of [Red Blood] item dropping when killing a Brute race monster",63,10,0]
 ,[388,6,"Raggler",0,1,1,3,1,0]
-,[389,7,"Hermit Plant","3% chance of [Red Herb], 2% chance of [Yellow Herb], and 1% chance of [White Herb] item dropping when killing a Plant race monster<BR>+50% HP restoration with those items",0]
+,[389,7,"Hermit Plant","3% chance of [Red Herb], 2% chance of [Yellow Herb], and 1% chance of [White Herb] item dropping when killing a Plant race monster",218,[507,50],218,[508,50],218,[509,50],0]
 ,[390,1,"Rotar Zairo",0,70,10,115,7,0]
 ,[391,6,"Wild Rose","If equipped by a Thief job type: Perfect Dodge +5",2,1,0]
 ,[392,4,"Tao Gunka",0,15,100,18,-50,19,-50,0]
@@ -506,7 +506,7 @@ cardOBJ = [
 ,[484,6,"Ice Titan","When receiving ATK based damage there is a 0.3% chance that you'll receive DEF + 10 for 10 seconds",3,2,0]
 ,[485,6,"Zombie Slaughter","The player recovers 50 HP each time a monster is killed with a ATK based attack",37,1,177,1,0]
 ,[486,4,"Fallen Bishop Hibram","Add a 100% chance of auto casting Level 2 Magic Mirror when the user receives Magical Damage",0] //custom TalonRO add autocast; removed matk stuff - diff position
-,[487,7,"Snowier","Adds a 20% chance to gain [Ice Cream] when killing a monster<BR>Increases recovery of the item [Ice Cream] by 100%",0]
+,[487,7,"Snowier","Adds a 20% chance to gain [Ice Cream] when killing a monster",218,[536,100],0]
 ,[488,7,"Siroma",0,5054,25,7054,25,0]
 ,[489,7,"Gazeti",0,221,94,0]
 ,[490,7,"Galion",0,8,5,41,5,0]
@@ -514,7 +514,7 @@ cardOBJ = [
 ,[492,7,"Ifrit","Increases your ATK and HIT by 1 for every 5 job levels you have<BR>Increases your Crit by 1 for every 10 job levels you have",0] //custom TalonRO atk+hit increase every 5jlvl; removed autocast
 ,[493,7,"Imp",0,5051,25,7051,25,0]
 ,[494,7,"Ragged Zombie","When dealing ATK based damage there is a 0.1% chance to cause [Bleeding] status on the opponent.",117,5,37,1,177,1,0]
-,[495,7,"Hell Poodle","Increases recovery of the item [Meat] by 100%<BR>When dealing ATK based damage there's a 0.5% chance to cause [Bleeding] status on the opponent",8,1,0]
+,[495,7,"Hell Poodle","When dealing ATK based damage there's a 0.5% chance to cause [Bleeding] status on the opponent",8,1,218,[517,100],0]
 ,[496,100,0,"Recover 2SP each time you kill a monster with a ATK based attack",0]
 ,[497,999,"Beelzebub NPC Card","<br><b>*Warning*</b>Having more then one Beelzebub NPC Card doesn't give -60% cast, it will give you -30% always.<b>*Warning*</b>",73,-30,0] //replace me
 ,[498,1,"Hillsrion",0,17,25,0]
@@ -580,7 +580,7 @@ cardOBJ = [
 ,[553,3,"Buwaya",0,77,20,79,-35,97,7,0]
 ,[554,2,"Bungisngis","For every refine after +5, MaxHP + 1%, MaxSP + 1%.",15,5,16,5,0]
 ,[555,2,"Engkanto","Ignore 25% of Plant monster defense.",45,25,0]
-,[556,1,"Manananggal",0,5025,20,92,3,95,3,0]
+,[556,1,"Manananggal",0,5025,20,92,3,95,3,217,3,0]
 ,[557,4,"Mangkukulam",0,16,10,0]
 ,[558,2,"Tikbalang","[Refine Rate +7 or higher]<br/>Add another 5% damage with Wind Magic.<br/>[Refine Rate +9 or higher]<br/>Add another 5% damage with Wind Magic.",98,10,344,5,0]
 ,[559,7,"Tiyanak",0,117,7,112,7,115,7,0]

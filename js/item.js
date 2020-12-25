@@ -732,7 +732,7 @@ ItemOBJ = [
 ,[709,62,1089,3,0,1,40,70,"Mithril Magic Manteau","","Whenever you receive Magical Damage, 20% chance to increase your MDEF by 20% for 2 seconds, but also reduce your DEF by 20% during that 2 seconds",19,3,0]
 ,[710,63,50,2,0,1,30,25,"Angel's Reincarnation","",0,13,100,0]
 ,[711,63,1,4,0,0,70,54,"Goibne's Greaves","",0,19,3,15,5,16,5,0]
-,[712,63,1,3,0,0,50,65,"Fricco's Shoes","","Increase the heal power of Red, Orange, Yellow and White Potion by 20%.<br>[Potion Pitcher] bonus only works if equipped on the caster.",2,2,93,20,0]
+,[712,63,1,3,0,0,50,65,"Fricco's Shoes","","[Potion Pitcher] bonus only works if equipped on the caster.",2,2,93,20,218,[501,20],218,[502,20],218,[503,20],218,[504,20],0]
 ,[713,63,1,4,0,0,65,65,"Vidar's Boots","",0,15,9,16,9,0]
 ,[714,63,77,2,0,1,20,40,"High Quality Sandals","",0,19,10,0]
 ,[715,63,1001,3,0,0,50,85,"Variant Shoes","","Maximum HP / Maximum SP reduced by 1% per refine rate<br>Added +1 DEF for every 2 refinement",15,20,16,20,0]
@@ -910,7 +910,7 @@ ItemOBJ = [
 ,[887,51,0,1,0,0,20,70,"Black Framed Glasses","",0,19,2,4,1,0]
 ,[888,51,0,1,0,0,20,70,"Mischievous Fairy","",0,11,3,0]
 ,[889,52,0,0,0,0,20,30,"Fish in Mouth","","Add a 2% chance of getting Fresh Fish when a monster gets killed<br>Fresh Fish recovery rate + 25%",0]
-,[890,50,0,0,0,1,50,60,"Tailring Doll Hat","","Increases healing received from White Potions and Condensed White Potions by 10%",193,1,2,2,57,5,0]
+,[890,50,0,0,0,1,50,60,"Tailring Doll Hat","",0,193,1,2,2,57,5,218,[504,10],218,[547,10],0]
 ,[891,50,0,0,0,1,50,60,"Deporte Doll Hat","","Add a 2% chance of auto casting Level 10 Angelus on the user when the user receives Physical Damage",193,1,1,2,57,5,0]
 ,[892,50,0,0,0,1,50,60,"Sorin Doll Hat","","When physically attacking there is 2% chance that for 10 seconds you'll receive ATK +50",193,1,5,2,57,5,0]
 ,[893,50,0,0,0,1,50,60,"W Doll Hat","",0,193,1,6,2,57,5,171,5,31,5,0]
@@ -1007,7 +1007,7 @@ ItemOBJ = [
 ,[984,64,59,1,0,0,0,70,"Sheriff Badge","","Add 10% chance of auto casting Blind on the enemy with long-range attacks.",80,5,89,5,10,10,13,300,14,80,0]
 ,[985,62,1001,4,0,1,70,70,"Naght Seiger Flame Manteau","",0,15,5,89,1,19,2,43,2,0]
 ,[986,60,1079,5,0,0,170,70,"Chameleon Armor","","Increases HP and SP depending by base level.<br>Adds a chance immune from all magic skill for 2 sec When receiving magical attack.<br><b>[Swordman, Merchant, Thief Class]</b><br>DEF + 3<br><b>[Mage, Archer, Acolyte Class]</b><br>MDEF + 5",0]
-,[987,60,1079,3,0,1,100,70,"Sprint Mail","",0,3,1,75,5,91,3,92,3,0]
+,[987,60,1079,3,0,1,100,70,"Sprint Mail","",0,3,1,75,5,91,3,218,3,0]
 ,[988,60,122,4,0,1,30,70,"Gandora","",0,2,1,9,5,12,2,0]
 ,[989,60,1079,5,0,1,100,70,"Naga Scale Armor","","Adds a chance ATK + 20 for 10 seconds when dealing physical damage",19,2,0]
 ,[990,60,1054,6,0,1,40,75,"Refined Tights","",0,19,2,11,3,0]
@@ -1032,7 +1032,7 @@ ItemOBJ = [
 ,[1009,64,1079,1,0,1,12,90,"Linen Glove","",0,2,2,5,1,19,1,0]
 ,[1010,100,0,0,0,0,0,0,"Refined Tights Set",0,0,11,5,0]
 ,[1011,50,0,2,0,0,150,50,"Antenna","",0,9,5,10,5,19,5,220,18,221,118,0]
-,[1012,62,0,2,0,0,20,0,"Buwaya Skin Clothes","","Healing capacity and healing item effect increases 1% per 3 refines",61,10,62,10,63,10,64,10,0]
+,[1012,62,0,2,0,0,20,0,"Buwaya Skin Clothes","","[Every 3 Refines] Received heal and healing item effectiveness increased by 1%",61,10,62,10,63,10,64,10,0]
 ,[1013,61,0,3,0,0,40,0,"Kalasag","","For every 3 refines, decreases Boss monster damage by 1%",0]
 ,[1014,63,0,2,0,1,60,0,"Nightmare Bangungot Boots","","For every refine, MDEF + 1<br><b>[Refine Rate 8-10]</b><br>Movement speed +25% (non-stacking)",0]
 ,[1015,60,0,6,0,0,50,0,"Bakonawa Scale Armor","","1% damage decrease from Boss monsters per 2 refines",7,1,0]
@@ -1214,7 +1214,7 @@ ItemOBJ = [
 ,[1191,61,1079,5,0,1,180,65,"Bradium Shield","",0,13,500,5159,60,5384,60,2,-1,0]
 ,[1192,62,1001,5,0,1,100,0,"Dragon Manteau","",0,2,1,19,5,0]
 ,[1193,62,1001,5,0,1,40,90,"Proxy Skin Fragment","","Increases SP by Level/3 + [Refine Rate * 10]<br>When dealing physical damage there's a 1% chance that you'll recover 1% of your damage as SP",382,1,383,1,19,3,61,3,62,3,63,3,64,3,65,3,66,3,67,3,68,3,69,3,0]
-,[1194,63,1001,4,0,0,50,60,"Life Tree Wooden Shoes","","Recover 30 HP every 10 seconds",15,10,3,2,19,3,92,5,93,5,95,5,0]
+,[1194,63,1001,4,0,0,50,60,"Life Tree Wooden Shoes","","Recover 30 HP every 10 seconds",15,10,3,2,19,3,92,5,93,5,95,5,217,5,218,5,0]
 ,[1195,64,0,0,0,0,10,0,"Ring of Wisdom","",0,13,50,14,20,0]
 ,[1196,64,0,0,0,1,10,70,"Eye Ring","",0,10,2,14,25,0]
 ,[1197,64,1001,0,0,1,20,75,"Waterdrop Brooch","",0,61,5,13,80,19,2,0]
@@ -1229,7 +1229,7 @@ ItemOBJ = [
 ,[1206,50,1,2,0,1,50,30,"Frog King Hat","",0,2,1,193,1,0]
 ,[1207,50,0,1,0,0,20,10,"Cashmere Hat","",0,41,10,61,10,0]
 ,[1208,51,0,0,0,0,30,50,"Falcon Mask","","<b>Middle and Lower Headgear</b>",41,5,0]
-,[1209,50,0,3,0,0,100,0,"King Prawn Hat","","Sushi and Raw Fish items restore 50% more HP",41,10,193,1,194,1,0]
+,[1209,50,0,3,0,0,100,0,"King Prawn Hat","",0,218,[544,50],218,[551,50],41,10,193,1,194,1,0]
 ,[1210,50,1,2,0,1,20,0,"Navy Hat","",0,6,3,41,10,0]
 ,[1211,50,0,2,0,0,0,0,"Shower Cap","",0,19,3,9,3,41,10,55,10,0]
 ,[1212,50,0,4,0,1,10,30,"Watermelon Hat","",0,43,3,0]
@@ -1278,7 +1278,7 @@ ItemOBJ = [
 ,[1255,50,0,2,0,1,50,30,"White Feather","","<b>[Refine Rate >= 5]</b><br>Hit - 10<br>MHP + 10%<br><b>[Refine Rate >= 7]</b><br>Hit - 3<br>MHP + 3%<br><b>[Refine Rate >= 9]</b><br>Hit - 3<br>MHP + 3%",8,20,15,-10,0]
 ,[1256,52,0,1,0,0,10,0,"4 Leaf Clover In Mouth","",0,89,1,0] //custom TalonRO
 ,[1257,100,0,0,0,0,0,0,"White Feather + Pipe","","<b>[Refine Rate >= 7]</b><br>Hit + 1<br>MHP + 2%<br><b>[Refine Rate >= 9]</b><br>Hit + 1<br>MHP + 2%",0]
-,[1258,50,0,3,0,0,0,70,"Anubis Hat",0,"[Potion Pitcher] bonus only works if equipped on the caster.",77,3,92,3,95,3,93,3,0]
+,[1258,50,0,3,0,0,0,70,"Anubis Hat","[Potion Pitcher] bonus only works if equipped on the caster.",0,77,3,92,3,83,3,95,3,217,3,218,3,0]
 ,[1259,64,0,0,0,1,10,0,"Skull Ring [1]","",0,51,1,0]
 ,[1260,50,1,3,0,1,50,20,"Wild Rose Hat",0,0,2,3,0]
 ,[1261,50,55,1,0,0,30,0,"White Mage Hat","","<font color=red><b>Bound to Game Account</b></font>",4,2,14,150,0]
@@ -1580,7 +1580,7 @@ ItemOBJ = [
 ,[1540,52,0,0,0,0,30,48,"Vajra","","",25,1,0]
 //custom TalonRO [Update 2016-11-02]
 ,[1541,60,0,6,0,1,50,0,"Bayani Bakonawa Scale Armor","","For every 2 refines, decreases Boss monster damage by 1%",7,1,0]
-,[1542,62,0,2,0,1,20,0,"Bayani Buwaya Skin Clothes","","Healing capacity and healing item effect increases 1% per 3 refines",61,7,62,7,63,7,64,7,0]
+,[1542,62,0,2,0,1,20,0,"Bayani Buwaya Skin Clothes","","[Every 3 Refines] Received heal and healing item effectiveness increased by 1%",61,7,62,7,63,7,64,7,0]
 ,[1543,61,0,3,0,1,40,0,"Bayani Kalasag","","For every 3 refines, decreases Boss monster damage by 1%",0]
 ,[1544,63,0,2,0,1,60,0,"Bayani Nightmare Bangungot Boots","","For every refine, MDEF + 1<br><b>[Refine Rate 7-10]</b><br>Movement speed +25% (non-stacking)",0]
 //[Custom TalonRO Updates 2018-06-02] [Kato]
@@ -1651,7 +1651,7 @@ ItemOBJ = [
 ,[1607,51,0,2,0,1,50,50,"Lude Mask","","Has a chance of obtaining Pumpkin Pie when killing a monster<br><b>Middle and Lower Headgear</b>",80,1,89,2,57,1,0]
 ,[1608,50,0,4,0,0,20,30,"Xmas Rudolph Hairband","","A Christmas hairband. Rudolf's excited mind for christmas is dwelled on it<br/>Movement speed +25% (non-stacking)",1,3,5,2,6,3,2,3,12,5,0]
 ,[1609,50,0,4,0,0,20,30,"Xmas Snowman Hat","","A Christmas Snowman Hat. Wearing this always makes you look forward to a White Christmas.<br/>Add a 3% chance of freezing an enemy when receiving Physical Damage.",4,3,5,2,3,3,2,3,73,-10,0]
-,[1610,50,0,2,0,0,20,40,"Xmas Rudolph Santa Hat","","Increase effectiveness of healing items by 5%.<br>[Potion Pitcher] bonus only works if equipped on the caster.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance",7,1,73,-5,80,5,93,5,0]
+,[1610,50,0,2,0,0,20,40,"Xmas Rudolph Santa Hat","","[Potion Pitcher] bonus only works if equipped on the caster.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance",7,1,73,-5,80,5,93,5,218,[520,5],218,[521,5],218,[522,5],218,[545,5],218,[508,5],218,[501,5],218,[507,5],218,[569,5],218,[549,5],218,[529,5],218,[528,5],218,[550,5],0]
 ,[1611,64,0,0,0,0,10,0,"Bakonawa Agimat Tattoo","","Agimat Tattoo with a dragon swallowing the moon pattern. It is told that the one who owns this tattoo will possess extreme power.",80,5,12,5,0]
 ,[1612,64,0,0,0,0,10,0,"Bangungot Agimat Tattoo","","Agimat Tattoo with a plump lady pattern. It is told that the one who owns this tattoo will possess extreme power.",92,7,91,4,94,4,0]
 ,[1613,64,0,0,0,1,10,0,"Cat Hand Glove","","A souvenir from Malangdo, just by equpping it will give you a happy mood.",3,1,2,1,6,1,0]
@@ -1793,7 +1793,18 @@ ItemOBJ = [
 ,[1742,100,0,0,0,0,0,0,"Rose Casquette + Rose of Crimson","",0,72,-5,0]
 ,[1743,50,0,0,0,0,10,1,"Campus Festival Hat","","A handmade hat made to commemorate the Students Festival.<br>Enables use of <b>Level 2 Increase Agi</b>.",0]
 ,[1744,50,0,0,0,1,50,45,"Luxurious Wedding Veil","","Only the couple which swears a truth one love will be able to use the veil of legend.",19,10,72,-3,73,-3,0]
-,[1745,50,1,0,0,1,100,50,"Sword Master Crown","","A crown that is similar to the one given to Sword Masters.<br>With [Base Level >= 75] ATK + 5.<br>With [Sword Mastery] at Level 10, HIT + 10 and 5% decreased SP usage of skills.<br>With [Spear Mastery] at Level 10, After Cast Delay - 7%.<br>With [Axe Mastery] at Level 10, Cast Time - 10%.<br>With [Katar Mastery] at Level 10, Critical Hit damage + 10%.<br>With [Mace Mastery] at Level 10, ASPD + 7%.",0]
+,[1745,50,0,1,0,1,100,50,"Sword Master Crown","","A crown that is similar to the one given to Sword Masters.<br>With [Base Level >= 75] ATK + 5.<br>With [Sword Mastery] at Level 10, HIT + 10 and 5% decreased SP usage of skills.<br>With [Spear Mastery] at Level 10, After Cast Delay - 7%.<br>With [Axe Mastery] at Level 10, Cast Time - 10%.<br>With [Katar Mastery] at Level 10, Critical Hit damage + 10%.<br>With [Mace Mastery] at Level 10, ASPD + 7%.",0]
+,[1746,52,0,1,0,0,10,10,"Apple in Mouth","","A healthy apple snack for during the day.<br>Add a chance of gaining 'Apple' each time an Insect monster is killed.",218,[512,50],0]
+,[1747,52,0,1,0,0,10,10,"Carrot in Mouth","","A healthy carrot snack for during the day.<br>Add a chance of gaining 'Carrot' each time an Insect monster is killed.",218,[515,50],0]
+,[1748,52,0,0,0,0,20,30,"Fish in Mouth","","A fish that can bite in mouth. It smells bad, but it won't be rot by special process.<br>Add a 2% chance of getting Fresh Fish when a monster gets killed.",218,[579,25],0]
+,[1749,52,0,1,0,0,10,10,"Ice Cream in Mouth","","An ice cream snack for during the day. Be careful of brain freeze!<br>Add a chance of gaining 'Ice Cream' each time an Insect monster is killed.",218,[536,10],0]
+,[1750,52,0,0,0,0,30,1,"Lover in Mouth","","Spread it in your mouth and you will taste varied flavors.<br>It seems that when you chew on this, your health will increase.<br>Every time you kill a monster, small chance to drop Candy or Candy Cane.",218,[529,50],218,[530,50],0]
+,[1751,52,0,1,0,0,10,10,"Orange in Mouth","","A healthy orange snack for during the day.<br>Add a chance of gaining 'Orange' each time an Insect monster is killed.",218,[582,50],0]
+,[1752,52,0,1,0,0,10,10,"Strawberry in Mouth","","A sweet strawberry snack for during the day.<br>Add a chance of gaining 'Strawberry' each time an Insect monster is killed.",218,[578,50],0]
+,[1753,50,0,2,0,1,15,1,"MVP Basketball Hat","","When equipped at the right moment, this will play a key performance. Everyone will be jealous of the person wearing this!",73,-10,218,[522,10],0]
+,[1754,50,0,2,0,1,50,1,"Peace and Happiness Proof","","The blue bird is a symbol of happiness. The white bird is a symbol of peace.<br>Them snuggling happily together on this headgear is a proof of peace and happiness.",19,3,0]
+,[1755,50,1,2,0,1,50,15,"RWC 2010 Indonesia","","A special cap with a neon sign above, dedicated to celebrating RWC 2010 in Indonesia.",10,3,57,5,218,[501,5],218,[504,5],0]
+,[1756,50,1,2,0,0,40,1,"Xmas Frozen Twin Pompom","","A cute hat that will protect you from the cold weather. Used to celebrate Christmas.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance.",7,1,73,-5,80,5,218,[520,5],218,[521,5],218,[522,5],218,[545,5],218,[508,5],218,[501,5],218,[507,5],218,[569,5],218,[549,5],218,[529,5],218,[528,5],218,[550,5],0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3573,6 +3584,17 @@ ItemID = [
 ,[1743,1,18547]
 ,[1744,1,5562]
 ,[1745,1,18865]
+,[1746,1,8512]
+,[1747,1,8513]
+,[1748,1,5403]
+,[1749,1,8515]
+,[1750,1,18546]
+,[1751,1,8516]
+,[1752,1,8517]
+,[1753,1,18729]
+,[1754,1,19762]
+,[1755,1,18509]
+,[1756,1,8802]
 ];
 
 /*
@@ -3908,6 +3930,8 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Heal received from [Heal] increased by "+ wIS + nC2 +"%<BR>";
 	if(93 == nC1)
 		CBIstr += "Potion Pitcher effectiveness increased by "+ wIS + nC2 +"%<BR>";
+	if(217 == nC1)
+		CBIstr += "Heal received from [Potion Pitcher] increased by "+ wIS + nC2 +"%<BR>";
 	if(94 == nC1)
 		CBIstr += "Sanctuary effectiveness increased by "+ wIS + nC2 +"%<BR>";
 	if(96 == nC1)
@@ -3976,7 +4000,15 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Experience gained from bosstype monsters "+ wIS + nC2 +"%<BR>";
 	if(198 == nC1)
 		CBIstr += "Armor becomes "+ ZokuseiOBJ[nC2] +" element<BR>";
-    /*ZoneSoldier - 6/3/2018
+	if (218 == nC1 || 219 == nC1)
+	{
+		if (nC2.constructor === Array)
+			CBIstr += ITEM_HEAL.find(x => x[0] === nC2[0])[4] + " healing effectiveness increased by "+ wIS + nC2[1] +"%<BR>";
+		else
+			CBIstr += (218 == nC1 ? " HP " : " SP ") + "healing items effectiveness increased by "+ wIS + nC2 +"%<BR>";
+	}
+
+	/*ZoneSoldier - 6/3/2018
       Allows usage of the skill
       Refer to Skill.js Each number after 220
       220,1 = Basic attack
