@@ -1633,10 +1633,16 @@ function StAllCalc()
 	//custom TalonRO + n_A_MaxSP_Gospel_Malus + n_A_MaxSP_Bless_Malus (not sure if here or after Service for you calculation)
 	n_A_MaxSP = Math.floor(n_A_MaxSP * (100 + w)/100) + n_A_MaxSP_Gospel_Malus + n_A_MaxSP_Bless_Malus;
 
-	//custom TalonRO update - Service for you (n_A_PassSkill3[6]) wird erst nach der normalen +% SP dazugerechnet
-	//z.b. GEC shoes +20%, Service for you +40%: MaxSP*1,2*1,4, statt MaxSP*1,6
+	/*
+		Service for you - n_A_PassSkill3[6]
+		Increase max SP and SP regeneration while reducing the SP consumption of all players within the area of effect.
+		SP consumption reduction is affected by the Dancer's INT / 10 and level of Dance Lessons / 2.
+	*/
 	if(n_A_PassSkill3[6])
-		n_A_MaxSP = n_A_MaxSP * (100 + (15 + n_A_PassSkill3[6] + n_A_PassSkill3[36] + Math.floor(n_A_PassSkill3[26] /10)))/100;
+	{
+		n_tok[72] -= 20 + 3 * n_A_PassSkill3[6] + Math.floor(n_A_PassSkill3[36] / 2) + Math.floor(n_A_PassSkill3[26] / 10);
+		n_tok[16] += 15 + n_A_PassSkill3[6] + Math.floor(n_A_PassSkill3[36] / 2) + Math.floor(n_A_PassSkill3[26] /10);
+	}
 
 	n_A_MaxSP = Math.floor(n_A_MaxSP);
 	//end - custom TalonRO update - Service for you
