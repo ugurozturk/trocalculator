@@ -648,14 +648,15 @@ function StAllCalc()
 	for(var i=0;i<=6;i++)
 		n_Delay[i] = 0;
 
-	for(i=1;i<=200;i++){
+	for(i=1;i<=199;i++){
 		n_tok[i] = 0;
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
-	n_tok[217] = 0;
+	
 	n_tok[218] = 0;
 	n_tok[219] = 0;
+	
 	for(i=290;i<=383;i++){
 		n_tok[i] = 0;
 		n_tok[i] += StPlusCalc2(i);
@@ -3904,7 +3905,7 @@ function StAllCalc()
 		healing_bonus = Math.floor(n_A_SHOULDER_DEF_PLUS / 3);
 		n_tok[92] += healing_bonus;
 		n_tok[95] += healing_bonus;
-		n_tok[217] += healing_bonus;
+		n_tok[199] += healing_bonus;
 		n_tok[218] += healing_bonus;
 	}
 	
@@ -4490,7 +4491,7 @@ function StPlusCalc()
 			n_tok[72] -= 10;
 			n_tok[92] += 10;
 			n_tok[95] += 10;
-			n_tok[217] += 10;
+			n_tok[199] += 10;
 		}
 	}
 	// custom TalonRO Bakonawa Card
@@ -6675,47 +6676,83 @@ function KakutyouKansuu(){
 		selected_item = eval(document.calcForm.selected_item.value);
 		hp_recovery_lv = eval(document.calcForm.hp_recovery_lv.value);
 		sp_recovery_lv = eval(document.calcForm.sp_recovery_lv.value);
-		additional_bonus = eval(document.calcForm.additional_bonus.value);
+		heal_rate_bonus = eval(document.calcForm.heal_rate_bonus.value);
 		learning_potion_lv = eval(document.calcForm.learning_potion_lv.value);
 		rogue_spirit = eval(document.calcForm.rogue_spirit.value) && n_A_JobSearch2() == 14;
 		
 		item_id = ITEM_HEAL[selected_item][0]
+		item_weight = Math.max(0.1, ITEM_HEAL[selected_item][5])
 		
+		// Retrieve all items bonus list
 		equipped_items = n_A_Equip.map(x => ItemOBJ[x]);
+		
+		// Retrieve all cards bonus list
 		equipped_cards = n_A_card.map(x => cardOBJ[x]);
+		
+		// Merge into one unique list to simplify underneath reduce
+		active_bonus = equipped_items.concat(equipped_cards);
+		
+		// Include pet bonus as well
+		active_bonus.push(PET_OBJ[n_A_PassSkill8[0]]);
 
-		function reduce_item_bonus(acc, x, id, tok)
+		if (typeof heal_rate_bonus == 'undefined' || heal_rate_bonus < 0)
 		{
-		  i = x.findIndex(y => y == tok);
-		  return acc + (i > -1 ? (x[i+1].constructor === Array ? (x[i+1][0] == id ? x[i+1][1] : 0) : x[i+1]) : 0);
-		}
-
-		script_bonus = equipped_items.reduce((acc, x) => reduce_item_bonus(acc, x, item_id, ITEM_HEAL[selected_item][1] ? 218 : 219), 0);
-		script_bonus += equipped_cards.reduce((acc, x) => reduce_item_bonus(acc, x, item_id, ITEM_HEAL[selected_item][1] ? 218 : 219), 0);
-		script_bonus += [PET_OBJ[n_A_PassSkill8[0]]].reduce((acc, x) => reduce_item_bonus(acc, x, item_id, ITEM_HEAL[selected_item][1] ? 218 : 219), 0);
-
-		if (typeof additional_bonus == 'undefined' || additional_bonus < 0)
-		{
-			additional_bonus = 0;
-			document.calcForm.additional_bonus.value = 0;
+			heal_rate_bonus = 0;
+			document.calcForm.heal_rate_bonus.value = 0;
 		}
 		
-		bonus = 100 + (ITEM_HEAL[selected_item][1] ? n_A_VIT*2 : n_A_INT*2) + (ITEM_HEAL[selected_item][1] ? hp_recovery_lv : sp_recovery_lv) * 10 + learning_potion_lv * 5;
+		if (ITEM_HEAL[selected_item][1]) // HP Recovery
+			bonus = 100 + n_A_VIT*2 + hp_recovery_lv * 10 + learning_potion_lv * 5;
+		else // SP Recovery
+			bonus = 100 + n_A_INT*2 + sp_recovery_lv * 10 + learning_potion_lv * 5;
 
 		if (potion_rank && (selected_item && selected_item < 8))
 		{
-			bonus += potion_rank * 25;
+			bonus *= (1 + potion_rank * 0.25);
 			if (rogue_spirit && ITEM_HEAL[selected_item][1])
-				bonus += 100;
+				bonus *= 2;
+		}
+		
+		function reduce_item_bonus(acc, x, id, tok)
+		{
+			i = -1;
+			
+			while ((i = x.indexOf(tok, i + 1)) != -1)
+			{
+				if (x[i+1].constructor === Array)
+				{
+					if (x[i+1][2]) 	// Group bonus
+						acc[2] += (x[i+1][0] == id ? x[i+1][1] : 0);
+					else 			// Individual bonus
+						acc[1] += (x[i+1][0] == id ? x[i+1][1] : 0);
+				}
+				else // Global bonus
+					acc[0] += x[i+1];
+			}
+			
+			return acc;
 		}
 
-		bonus += additional_bonus + script_bonus + (ITEM_HEAL[selected_item][1] ? n_tok[218] : 0);
+		item_bonus = active_bonus.reduce((acc, x) => reduce_item_bonus(acc, x, item_id, ITEM_HEAL[selected_item][1] ? 218 : 219), [0, 0, 0]);
+		
+		// Global healing item effectiveness bonus, only applied for HP Recovery
+		bonus += (ITEM_HEAL[selected_item][1] ? item_bonus[0] + n_tok[218] : 0);
+
+		// Item group effectiveness bonus
+		bonus = Math.floor(bonus * (100 + item_bonus[1]) / 100);
+		
+		// Individual item effectiveness bonus
+		bonus = Math.floor(bonus * (100 + item_bonus[2]) / 100);
+		
+		// Apply SC_INCHEALRATE bonus
+		bonus = Math.floor(bonus * (100 + heal_rate_bonus) / 100);
 		
 		min_heal = Math.floor(ITEM_HEAL[selected_item][2] * bonus / 100);
 		max_heal = Math.floor(ITEM_HEAL[selected_item][3] * bonus / 100);
 		
-		wkk18 =  '<table width=100% border=0><tr><td width=25%>Heal:</td>' + '<td width=25%>' + min_heal + '~' + max_heal + '</td>';
-		wkk18 += '<td width=25%>Total Item Healing Bonus:</td>' + '<td width=25%>' + bonus + '</td></tr></table>';
+		wkk18 =  '<table width=100% border=0><tr><td width=20%><b>Heal: </b>' + min_heal + '~' + max_heal + '</td>';
+		wkk18 += '<td width=31%><b>Total Item Healing Bonus: </b>' + bonus + '%</td>';
+		wkk18 += '<td width=35%><b>Weight Ratio: </b>' + Math.round(min_heal / item_weight) + '~' + Math.round(max_heal / item_weight) + '</td></tr></table>';
 		myInnerHtml("A_KakutyouData",wkk18,0);
   }
 	else if(wKK == 19){ // Steal Calculator
@@ -7189,7 +7226,7 @@ function KakutyouKansuu2(){
 		healtext += "<td>Learning Potion:</td>" + '<td><select name="learning_potion_lv" onChange="StAllCalc()"></select></td></tr>';
 		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="sp_recovery_lv" onChange="StAllCalc()"></select></td>';
 		healtext +=  "<td>Rogue Spirit:</td>" + '<td><select name="rogue_spirit" onChange="StAllCalc()"></select></td></tr>';
-		healtext +=  "<tr><td>Additional Healing Bonus:</td>" + '<td><input type="text" onChange="StAllCalc()" name="additional_bonus" value="0" size=2>%</td>';
+		healtext +=  "<tr><td>Increase Heal Rate:</td>" + '<td><input type="text" onChange="StAllCalc()" name="heal_rate_bonus" value="0" size=2>%</td>';
 		healtext +=  "<td>Fame Top:</td>" + '<td><select name="potion_rank" onChange="StAllCalc()"></select></td></tr>';
 		healtext +=  '<tr><td>Item:</td>' + '<td><select name="selected_item" onChange="StAllCalc()"></select></td></tr></table>';
 		myInnerHtml("A_KakutyouSel",healtext + "<br>",0);
@@ -7206,6 +7243,8 @@ function KakutyouKansuu2(){
 			document.calcForm.potion_rank.options[i] = new Option(FAME_TOP[i][1],i);
 			document.calcForm.potion_rank.value=0;}
 		for(i=0;i<ITEM_HEAL.length;i++){
+			if (document.calcForm.vanilla.checked && !ITEM_HEAL[i][6])
+				continue;
 			document.calcForm.selected_item.options[i] = new Option(ITEM_HEAL[i][4],i);
 			document.calcForm.selected_item.value=0;}
 		document.calcForm.rogue_spirit.options[0] = new Option("No",0);

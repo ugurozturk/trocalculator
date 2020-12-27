@@ -732,7 +732,7 @@ ItemOBJ = [
 ,[709,62,1089,3,0,1,40,70,"Mithril Magic Manteau","","Whenever you receive Magical Damage, 20% chance to increase your MDEF by 20% for 2 seconds, but also reduce your DEF by 20% during that 2 seconds",19,3,0]
 ,[710,63,50,2,0,1,30,25,"Angel's Reincarnation","",0,13,100,0]
 ,[711,63,1,4,0,0,70,54,"Goibne's Greaves","",0,19,3,15,5,16,5,0]
-,[712,63,1,3,0,0,50,65,"Fricco's Shoes","","[Potion Pitcher] bonus only works if equipped on the caster.",2,2,93,20,218,[501,20],218,[502,20],218,[503,20],218,[504,20],0]
+,[712,63,1,3,0,0,50,65,"Fricco's Shoes","","[Potion Pitcher] bonus only works if equipped on the caster.",2,2,93,20,218,[501,20,1],218,[502,20,1],218,[503,20,1],218,[504,20,1],0]
 ,[713,63,1,4,0,0,65,65,"Vidar's Boots","",0,15,9,16,9,0]
 ,[714,63,77,2,0,1,20,40,"High Quality Sandals","",0,19,10,0]
 ,[715,63,1001,3,0,0,50,85,"Variant Shoes","","Maximum HP / Maximum SP reduced by 1% per refine rate<br>Added +1 DEF for every 2 refinement",15,20,16,20,0]
@@ -909,8 +909,8 @@ ItemOBJ = [
 ,[886,50,0,0,0,0,20,80,"Filir Hat","",0,71,1,193,1,0]
 ,[887,51,0,1,0,0,20,70,"Black Framed Glasses","",0,19,2,4,1,0]
 ,[888,51,0,1,0,0,20,70,"Mischievous Fairy","",0,11,3,0]
-,[889,52,0,0,0,0,20,30,"Fish in Mouth","","Add a 2% chance of getting Fresh Fish when a monster gets killed<br>Fresh Fish recovery rate + 25%",0]
-,[890,50,0,0,0,1,50,60,"Tailring Doll Hat","",0,193,1,2,2,57,5,218,[504,10],218,[547,10],0]
+,[889,52,0,0,0,0,20,30,"Fish in Mouth","","Add a 2% chance of getting Fresh Fish when a monster gets killed.",218,[579,25,0],0]
+,[890,50,0,0,0,1,50,60,"Tailring Doll Hat","",0,193,1,2,2,57,5,218,[504,10,0],218,[547,10,0],0]
 ,[891,50,0,0,0,1,50,60,"Deporte Doll Hat","","Add a 2% chance of auto casting Level 10 Angelus on the user when the user receives Physical Damage",193,1,1,2,57,5,0]
 ,[892,50,0,0,0,1,50,60,"Sorin Doll Hat","","When physically attacking there is 2% chance that for 10 seconds you'll receive ATK +50",193,1,5,2,57,5,0]
 ,[893,50,0,0,0,1,50,60,"W Doll Hat","",0,193,1,6,2,57,5,171,5,31,5,0]
@@ -1229,7 +1229,7 @@ ItemOBJ = [
 ,[1206,50,1,2,0,1,50,30,"Frog King Hat","",0,2,1,193,1,0]
 ,[1207,50,0,1,0,0,20,10,"Cashmere Hat","",0,41,10,61,10,0]
 ,[1208,51,0,0,0,0,30,50,"Falcon Mask","","<b>Middle and Lower Headgear</b>",41,5,0]
-,[1209,50,0,3,0,0,100,0,"King Prawn Hat","",0,218,[544,50],218,[551,50],41,10,193,1,194,1,0]
+,[1209,50,0,3,0,0,100,0,"King Prawn Hat","",0,218,[544,50,1],218,[551,50,1],41,10,193,1,194,1,0]
 ,[1210,50,1,2,0,1,20,0,"Navy Hat","",0,6,3,41,10,0]
 ,[1211,50,0,2,0,0,0,0,"Shower Cap","",0,19,3,9,3,41,10,55,10,0]
 ,[1212,50,0,4,0,1,10,30,"Watermelon Hat","",0,43,3,0]
@@ -1594,7 +1594,7 @@ ItemOBJ = [
 ,[1552,60,0,5,0,1,160,40,"Aegir Armor","",0,13,500,14,50,194,1,0]
 ,[1553,50,0,2,0,1,80,40,"Aegir Helm","",0,3,3,0]
 ,[1554,100,0,0,0,0,0,0,"Aegir Helm + Aegir Shoes","","Increases CRIT against Fish type monster by 1% per refinement of Aegir Shoes",115,10,0] //Aegir Helm + Aegir Shoes
-,[1555,100,0,0,0,0,0,0,"Aegir Helm + Aegir Cloak","","Recovers 10 SP every time you kill a Fish type monster.<BR><BR>Add a chance to drop Sushi or Raw Fish when killing a Fish type monster, which increases per refinement rate of Aegir Cloak.<BR><BR>Increases natural HP recovery by 5% per refinement rate of Aegir Cloak.<BR><BR>Sushi and Raw Fish's HP recovery increase by 5%.",0] //Aegir Helm + Aegir Cloak
+,[1555,100,0,0,0,0,0,0,"Aegir Helm + Aegir Cloak","","Recovers 10 SP every time you kill a Fish type monster.<BR><BR>Add a chance to drop Sushi or Raw Fish when killing a Fish type monster, which increases per refinement rate of Aegir Cloak.<BR><BR>Increases natural HP recovery by 5% per refinement rate of Aegir Cloak.",218,[544,5,1],218,[551,5,1],0] //Aegir Helm + Aegir Cloak
 ,[1556,100,0,0,0,0,0,0,"Aegir Helm + Aegir Armor","","Decreases damage from [Fish] race monsters by 1% per refinement of Aegir Armor",55,10,0] //Aegir Helm + Aegir Armor
 ,[1557,100,0,0,0,0,0,0,"Aegir Helm + Aegir Armor + Aegir Cloak + Aegir Shoes","","",13,1000,14,100,125,20,35,50,175,50,61,30,0] //Aegir Set
 ,[1558,52,0,0,0,0,10,0,"Blood Sucker","","When doing a physical attack, add a 2% chance to absorb 5% of your damage dealt as HP.",380,2,381,5,75,-100,76,-100,0]
@@ -1651,7 +1651,7 @@ ItemOBJ = [
 ,[1607,51,0,2,0,1,50,50,"Lude Mask","","Has a chance of obtaining Pumpkin Pie when killing a monster<br><b>Middle and Lower Headgear</b>",80,1,89,2,57,1,0]
 ,[1608,50,0,4,0,0,20,30,"Xmas Rudolph Hairband","","A Christmas hairband. Rudolf's excited mind for christmas is dwelled on it<br/>Movement speed +25% (non-stacking)",1,3,5,2,6,3,2,3,12,5,0]
 ,[1609,50,0,4,0,0,20,30,"Xmas Snowman Hat","","A Christmas Snowman Hat. Wearing this always makes you look forward to a White Christmas.<br/>Add a 3% chance of freezing an enemy when receiving Physical Damage.",4,3,5,2,3,3,2,3,73,-10,0]
-,[1610,50,0,2,0,0,20,40,"Xmas Rudolph Santa Hat","","[Potion Pitcher] bonus only works if equipped on the caster.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance",7,1,73,-5,80,5,93,5,218,[520,5],218,[521,5],218,[522,5],218,[545,5],218,[508,5],218,[501,5],218,[507,5],218,[569,5],218,[549,5],218,[529,5],218,[528,5],218,[550,5],0]
+,[1610,50,0,2,0,0,20,40,"Xmas Rudolph Santa Hat","","[Potion Pitcher] bonus only works if equipped on the caster.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance",7,1,73,-5,80,5,93,5,218,[520,5,1],218,[521,5,1],218,[522,5,1],218,[545,5,1],218,[508,5,1],218,[501,5,1],218,[507,5,1],218,[569,5,1],218,[549,5,1],218,[529,5,1],218,[528,5,1],218,[550,5,1],0]
 ,[1611,64,0,0,0,0,10,0,"Bakonawa Agimat Tattoo","","Agimat Tattoo with a dragon swallowing the moon pattern. It is told that the one who owns this tattoo will possess extreme power.",80,5,12,5,0]
 ,[1612,64,0,0,0,0,10,0,"Bangungot Agimat Tattoo","","Agimat Tattoo with a plump lady pattern. It is told that the one who owns this tattoo will possess extreme power.",92,7,91,4,94,4,0]
 ,[1613,64,0,0,0,1,10,0,"Cat Hand Glove","","A souvenir from Malangdo, just by equpping it will give you a happy mood.",3,1,2,1,6,1,0]
@@ -1794,17 +1794,16 @@ ItemOBJ = [
 ,[1743,50,0,0,0,0,10,1,"Campus Festival Hat","","A handmade hat made to commemorate the Students Festival.<br>Enables use of <b>Level 2 Increase Agi</b>.",0]
 ,[1744,50,0,0,0,1,50,45,"Luxurious Wedding Veil","","Only the couple which swears a truth one love will be able to use the veil of legend.",19,10,72,-3,73,-3,0]
 ,[1745,50,0,1,0,1,100,50,"Sword Master Crown","","A crown that is similar to the one given to Sword Masters.<br>With [Base Level >= 75] ATK + 5.<br>With [Sword Mastery] at Level 10, HIT + 10 and 5% decreased SP usage of skills.<br>With [Spear Mastery] at Level 10, After Cast Delay - 7%.<br>With [Axe Mastery] at Level 10, Cast Time - 10%.<br>With [Katar Mastery] at Level 10, Critical Hit damage + 10%.<br>With [Mace Mastery] at Level 10, ASPD + 7%.",0]
-,[1746,52,0,1,0,0,10,10,"Apple in Mouth","","A healthy apple snack for during the day.<br>Add a chance of gaining 'Apple' each time an Insect monster is killed.",218,[512,50],0]
-,[1747,52,0,1,0,0,10,10,"Carrot in Mouth","","A healthy carrot snack for during the day.<br>Add a chance of gaining 'Carrot' each time an Insect monster is killed.",218,[515,50],0]
-,[1748,52,0,0,0,0,20,30,"Fish in Mouth","","A fish that can bite in mouth. It smells bad, but it won't be rot by special process.<br>Add a 2% chance of getting Fresh Fish when a monster gets killed.",218,[579,25],0]
-,[1749,52,0,1,0,0,10,10,"Ice Cream in Mouth","","An ice cream snack for during the day. Be careful of brain freeze!<br>Add a chance of gaining 'Ice Cream' each time an Insect monster is killed.",218,[536,10],0]
-,[1750,52,0,0,0,0,30,1,"Lover in Mouth","","Spread it in your mouth and you will taste varied flavors.<br>It seems that when you chew on this, your health will increase.<br>Every time you kill a monster, small chance to drop Candy or Candy Cane.",218,[529,50],218,[530,50],0]
-,[1751,52,0,1,0,0,10,10,"Orange in Mouth","","A healthy orange snack for during the day.<br>Add a chance of gaining 'Orange' each time an Insect monster is killed.",218,[582,50],0]
-,[1752,52,0,1,0,0,10,10,"Strawberry in Mouth","","A sweet strawberry snack for during the day.<br>Add a chance of gaining 'Strawberry' each time an Insect monster is killed.",218,[578,50],0]
-,[1753,50,0,2,0,1,15,1,"MVP Basketball Hat","","When equipped at the right moment, this will play a key performance. Everyone will be jealous of the person wearing this!",73,-10,218,[522,10],0]
-,[1754,50,0,2,0,1,50,1,"Peace and Happiness Proof","","The blue bird is a symbol of happiness. The white bird is a symbol of peace.<br>Them snuggling happily together on this headgear is a proof of peace and happiness.",19,3,0]
-,[1755,50,1,2,0,1,50,15,"RWC 2010 Indonesia","","A special cap with a neon sign above, dedicated to celebrating RWC 2010 in Indonesia.",10,3,57,5,218,[501,5],218,[504,5],0]
-,[1756,50,1,2,0,0,40,1,"Xmas Frozen Twin Pompom","","A cute hat that will protect you from the cold weather. Used to celebrate Christmas.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance.",7,1,73,-5,80,5,218,[520,5],218,[521,5],218,[522,5],218,[545,5],218,[508,5],218,[501,5],218,[507,5],218,[569,5],218,[549,5],218,[529,5],218,[528,5],218,[550,5],0]
+,[1746,52,0,1,0,0,10,10,"Apple in Mouth","","A healthy apple snack for during the day.<br>Add a chance of gaining 'Apple' each time an Insect monster is killed.",218,[512,50,0],0]
+,[1747,52,0,1,0,0,10,10,"Carrot in Mouth","","A healthy carrot snack for during the day.<br>Add a chance of gaining 'Carrot' each time an Insect monster is killed.",218,[515,50,0],0]
+,[1748,52,0,1,0,0,10,10,"Ice Cream in Mouth","","An ice cream snack for during the day. Be careful of brain freeze!<br>Add a chance of gaining 'Ice Cream' each time an Insect monster is killed.",218,[536,10,0],0]
+,[1749,52,0,0,0,0,30,1,"Lover in Mouth","","Spread it in your mouth and you will taste varied flavors.<br>It seems that when you chew on this, your health will increase.<br>Every time you kill a monster, small chance to drop Candy or Candy Cane.",218,[529,50,0],218,[530,50,0],0]
+,[1750,52,0,1,0,0,10,10,"Orange in Mouth","","A healthy orange snack for during the day.<br>Add a chance of gaining 'Orange' each time an Insect monster is killed.",218,[582,50,0],0]
+,[1751,52,0,1,0,0,10,10,"Strawberry in Mouth","","A sweet strawberry snack for during the day.<br>Add a chance of gaining 'Strawberry' each time an Insect monster is killed.",218,[578,50,0],0]
+,[1752,50,0,2,0,1,15,1,"MVP Basketball Hat","","When equipped at the right moment, this will play a key performance. Everyone will be jealous of the person wearing this!",73,-10,218,[522,10,0],0]
+,[1753,50,0,2,0,1,50,1,"Peace and Happiness Proof","","The blue bird is a symbol of happiness. The white bird is a symbol of peace.<br>Them snuggling happily together on this headgear is a proof of peace and happiness.",19,3,0]
+,[1754,50,1,2,0,1,50,15,"RWC 2010 Indonesia","","A special cap with a neon sign above, dedicated to celebrating RWC 2010 in Indonesia.",10,3,57,5,218,[501,5,1],218,[504,5,1],0]
+,[1755,50,1,2,0,0,40,1,"Xmas Frozen Twin Pompom","","A cute hat that will protect you from the cold weather. Used to celebrate Christmas.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance.",7,1,73,-5,80,5,218,[520,5,1],218,[521,5,1],218,[522,5,1],218,[545,5,1],218,[508,5,1],218,[501,5,1],218,[507,5,1],218,[569,5,1],218,[549,5,1],218,[529,5,1],218,[528,5,1],218,[550,5,1],0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3586,15 +3585,14 @@ ItemID = [
 ,[1745,1,18865]
 ,[1746,1,8512]
 ,[1747,1,8513]
-,[1748,1,5403]
-,[1749,1,8515]
-,[1750,1,18546]
-,[1751,1,8516]
-,[1752,1,8517]
-,[1753,1,18729]
-,[1754,1,19762]
-,[1755,1,18509]
-,[1756,1,8802]
+,[1748,1,8515]
+,[1749,1,18546]
+,[1750,1,8516]
+,[1751,1,8517]
+,[1752,1,18729]
+,[1753,1,19762]
+,[1754,1,18509]
+,[1755,1,8802]
 ];
 
 /*
@@ -3930,7 +3928,7 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Heal received from [Heal] increased by "+ wIS + nC2 +"%<BR>";
 	if(93 == nC1)
 		CBIstr += "Potion Pitcher effectiveness increased by "+ wIS + nC2 +"%<BR>";
-	if(217 == nC1)
+	if(199 == nC1)
 		CBIstr += "Heal received from [Potion Pitcher] increased by "+ wIS + nC2 +"%<BR>";
 	if(94 == nC1)
 		CBIstr += "Sanctuary effectiveness increased by "+ wIS + nC2 +"%<BR>";
@@ -4003,7 +4001,7 @@ function Item_Setumei(nC1,nC2)
 	if (218 == nC1 || 219 == nC1)
 	{
 		if (nC2.constructor === Array)
-			CBIstr += ITEM_HEAL.find(x => x[0] === nC2[0])[4] + " healing effectiveness increased by "+ wIS + nC2[1] +"%<BR>";
+			CBIstr += ITEM_HEAL.find(x => x[0] === nC2[0])[4] + (nC2[2] ? " (group)" : "") + " healing effectiveness increased by "+ wIS + nC2[1] +"%<BR>";
 		else
 			CBIstr += (218 == nC1 ? " HP " : " SP ") + "healing items effectiveness increased by "+ wIS + nC2 +"%<BR>";
 	}

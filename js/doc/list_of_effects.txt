@@ -229,12 +229,12 @@ Effect list:
 	198: When [value] == 7, Armor becomes Shadow element
 	198: When [value] == 8, Armor becomes Ghost element
 	198: When [value] == 9, Armor becomes Undead element
-	199-216: (unused)
-	217: Received heal effectiveness from [Potion Pitcher] increased by + [value]%
+	199: Received heal effectiveness from [Potion Pitcher] increased by + [value]%
+	200-217: (unused)
 	218: Increases HP recovered by n% for healing items
-	218: [id, n] Increases HP recovered by n% for healing item id
+	218: Increases HP recovered by n% for healing item id ([id, n, g = 1 for group bonus])
 	219: Increases SP recovered by n% for healing items
-	219: [id, n] Increases SP recovered by n% for healing item id
+	219: Increases SP recovered by n% for healing item id ([id, n, g = 1 for group bonus])
 	220: Allows usage of the skill InsertSkill[value] (see below)
 	220: When [value] == 0, Allows usage of the skill [Basic Attack]Lv 0
 	220: When [value] == 1, Allows usage of the skill [Cold Bolt]Lv 3
