@@ -6756,6 +6756,7 @@ function KakutyouKansuu(){
 		myInnerHtml("A_KakutyouData",wkk18,0);
   }
 	else if(wKK == 19){ // Steal Calculator
+		myInnerHtml("A_KakutyouData","",0);
 		document.getElementById("playerDexSteal").innerHTML = n_A_DEX;
 		monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
 		stealLevel = eval(document.calcForm.stealLevel.value);
@@ -7260,7 +7261,7 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "<table id=\"tblStealCalcLeft\"  border=0>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Steal Level:</td>";
-		stealCalcTxt += "<td><select name=\"stealLevel\" onChange=\"StAllCalc()\"></select></td>";
+		stealCalcTxt += "<td><select name=\"stealLevel\" onChange=\"KakutyouKansuu()\"></select></td>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Player DEX:</td>";
 		stealCalcTxt += "<td id=\"playerDexSteal\">"+n_A_DEX+"</td>";
@@ -7268,14 +7269,14 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Manually Insert DEX:</td>";
 		stealCalcTxt += "<td>";
-		stealCalcTxt += "<input type=\"checkbox\" name=\"manuallyInsertDex\" onClick=\"StAllCalc()\"/>";
+		stealCalcTxt += "<input type=\"checkbox\" name=\"manuallyInsertDex\" onClick=\"KakutyouKansuu()\"/>";
 		stealCalcTxt += " ";
-		stealCalcTxt += "<input type=\"number\" name=\"playerDexStealManual\" min=\"0\" max=\"500\" step=\"1\" value=\"0\" onChange=\"StAllCalc()\"/>";
+		stealCalcTxt += "<input type=\"number\" name=\"playerDexStealManual\" min=\"0\" max=\"500\" step=\"1\" value=\"0\" onChange=\"KakutyouKansuu()\"/>";
 		stealCalcTxt += "</td>";
 		stealCalcTxt += "</tr>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Monster:</td>";
-		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"loadMonsterItemDropListStealCalc();StAllCalc();\"></select></td>";
+		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"loadMonsterItemDropListStealCalc();KakutyouKansuu();\"></select></td>";
 		stealCalcTxt += "</tr>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td id=\"outputPlayerDexStealCalc\">";
@@ -7308,7 +7309,7 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>1</td>";
 		stealCalcTxt += "<td></td>";
-		stealCalcTxt += "<td style=\"text-align:right\"><input type=\"number\" name=\"itemDropRate1\" min=\"0\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/></td>";
+		stealCalcTxt += "<td style=\"text-align:right\"><input type=\"number\" name=\"itemDropRate1\" min=\"0\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"KakutyouKansuu()\"/></td>";
 		stealCalcTxt += "<td></td>";
 		stealCalcTxt += "<td></td>";
 		stealCalcTxt += "</tr>";
@@ -7355,7 +7356,7 @@ function loadMonsterItemDropListStealCalc() {
 			if (i == 9) {
 				cell1.innerHTML = "Card";
 			}
-			cell2.innerHTML += " <img src=\"https://panel.talonro.com/images/items/small/"+dropItemId+".gif\" alt=\"no picture available =(\">";
+			cell2.innerHTML += " <a href=\"https://panel.talonro.com/itemdb/"+dropItemId+"/\" target=\"_blank\"><img src=\"https://panel.talonro.com/images/items/small/"+dropItemId+".gif\" alt=\"no picture available =(\"></a>";
 			cell3.innerHTML += (+dropPercentage).toFixed(2) + "%";
 		}
 	} else {
@@ -7377,7 +7378,7 @@ function addItemSlotStealCalc() {
 	cell4.style = "text-align:right";
 	cell5.style = "text-align:right";
 	cell1.innerHTML = (tbl.rows.length-1);
-	cell3.innerHTML = "<input type=\"number\" name=\"itemDropRate" + (tbl.rows.length-1) + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
+	cell3.innerHTML = "<input type=\"number\" name=\"itemDropRate" + (tbl.rows.length-1) + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"KakutyouKansuu()\"/>";
 	StAllCalc();
 }
 
