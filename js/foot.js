@@ -6270,54 +6270,100 @@ function KakutyouKansuu(){
 
 		myInnerHtml("A_KakutyouData",wkk11,0);
 	}
-	else if(wKK == 12){
-		H_Bonus = 1;
-		H_Bonus2 = 1;
-		H_Bonus3 = 1;
-		if(n_A_JOB == 19 || n_A_JOB == 33 ){
-		slv = eval(document.calcForm.SL_LV.value);
-		evit = eval(document.calcForm.E_VIT.value);
-		eint = eval(document.calcForm.E_INT.value);
-		potr = eval(document.calcForm.POT_RLevel.value);
-		isp = eval(document.calcForm.ISP.value);
-		irp = eval(document.calcForm.IRP.value);
-		rank_bonus = eval(document.calcForm.RNK_BNS.value);
-		pot1 = eval(document.calcForm.PP.value);
-		prate1 = Potion_Type_2[pot1][1];
-		prate2 = Potion_Type_2[pot1][2];
+	else if(wKK == 12)
+	{
+		pp_lv = eval(document.calcForm.pp_lv.value);
+		spp_lv = eval(document.calcForm.spp_lv.value);
+		source_lv = eval(document.calcForm.pp_source_lv.value);
+		hp_recovery_lv = eval(document.calcForm.pp_isp_lv.value);
+		sp_recovery_lv = eval(document.calcForm.pp_irp_lv.value);
+		target_vit = eval(document.calcForm.pp_target_vit.value);
+		target_int = eval(document.calcForm.pp_target_int.value);
+		potion_rank = eval(document.calcForm.pp_potion_rank.value);
+		pp_consumable = eval(document.calcForm.pp_consumable.value);
+		pp_healpower = eval(document.calcForm.pp_heal_rate_bonus.value);
+		selected_consumable = eval(document.calcForm.pp_consumable.value);
+		is_source_linked = eval(document.calcForm.pp_source_link.checked);
+		learning_potion_lv = eval(document.calcForm.pp_learning_potion_lv.value);
+		pp_healpower2 = eval(document.calcForm.pp_received_heal_rate_bonus.value);
 
-		if(rank_bonus == 1){prate1 = prate1*1.5;}
-		if(rank_bonus == 1){prate2 = prate2*1.5;}
+		// Common bonus
+	
+		if (selected_consumable < 4)
+			relative_bonus = (1 + n_A_VIT * 2 / 100) * (1 + hp_recovery_lv / 10);
+		else
+			relative_bonus = (1 + n_A_INT * 2 / 100) * (1 + sp_recovery_lv / 10);
 
-		if(n_A_JOB == 33){
-			pot2 = eval(document.calcForm.SPP.value);
-			prate3 = Potion_Type_3[pot2][1];
-			prate4 = Potion_Type_3[pot2][2];}
+		rank_bonus = 1
+		if (potion_rank)
+			rank_bonus = (1 + potion_rank * 0.25);
 
-		H_Bonus += n_tok[93] / 100;
-		H_HEALS = 1+irp*.1;//Increase Recuperative Power (10%xlv da skill que se tem, max 10)
-		S_HEALS = 1+isp*.1;//Increase Spiritual Power(2%xlv da skill que se tem, max 10)
+		// Potion Pitcher
+		
+		link_bonus = 100 + (is_source_linked ? source_lv : 0);
+		bonus = (100 + pp_lv * 10 + learning_potion_lv * 5) * link_bonus / 10000 * relative_bonus * rank_bonus;
 
-		if(pot1 == 4){
-			potheal1 = Math.floor((prate1*(1+potr*.1+pot1*.05))*(1+slv/100)*(1+eint*.02)*S_HEALS);
-			potheal2 = Math.floor((prate2*(1+potr*.1+pot1*.05))*(1+slv/100)*(1+eint*.02)*S_HEALS);
-		}else{
-			potheal1 = Math.floor(((prate1*(1+potr*.1+pot1*.05))*(1+slv/100)*(1+evit*.02)*H_HEALS)*H_Bonus*H_Bonus2*H_Bonus3);
-			potheal2 = Math.floor(((prate2*(1+potr*.1+pot1*.05))*(1+slv/100)*(1+evit*.02)*H_HEALS)*H_Bonus*H_Bonus2*H_Bonus3);
+		// Retrieve all items bonus list
+		equipped_items = n_A_Equip.map(x => ItemOBJ[x]);
+		
+		// Retrieve all cards bonus list
+		equipped_cards = n_A_card.map(x => cardOBJ[x]);
+		
+		// Merge into one unique list to simplify underneath reduce
+		active_bonus = equipped_items.concat(equipped_cards);
+		
+		// Include pet bonus as well
+		active_bonus.push(PET_OBJ[n_A_PassSkill8[0]]);
+
+		function reduce_group_item_bonus(acc, x, ids, tok)
+		{
+			i = -1;
+			
+			while ((i = x.indexOf(tok, i + 1)) != -1)
+			{
+				if (x[i+1].constructor === Array)
+				{
+					if (x[i+1][2]) 	// Group bonus
+						acc += (ids.indexOf(x[i+1][0]) != -1 ? x[i+1][1] : 0);
+				}
+			}
+			
+			return acc;
 		}
 
-		if(n_A_JOB == 33){
-			potheal3 = Math.floor((prate3*(1+potr*.1+pot2*.1))*(1+evit*.02)*H_HEALS*H_Bonus3);//wtf evit*.023 para dar bem em low vit mas mal em high??
-			potheal4 = Math.floor((prate4*(1+potr*.1+pot2*.1))*(1+evit*.02)*H_HEALS*H_Bonus3);}
+		// IG_Potion group effectiveness bonus
+		bonus *= (1 + active_bonus.reduce((acc, x) => reduce_group_item_bonus(acc, x, [501,502,503,504], 218), 0) / 100);
 
-		Heal_POT = "<table border = 0><tr><td><b>Potion Pitcher heals for: </b>" + potheal1 + " ~ " + potheal2 + "</td>";
-		if(n_A_JOB == 33){
-			Heal_POT += "<td><b>Slim Potion Pitch heals for: </b>" + potheal3 + " ~ " + potheal4;}
-			Heal_POT += "</td></tr></table>";
+		// bHealPower bonus
+		bonus *= 1 + (pp_healpower / 100);
+		
+		// bHealPower2 bonus
+		bonus *=  1 + (pp_healpower2 / 100);
+		
+		min_heal = Math.floor(PP_POTIONS[selected_consumable][1] * bonus);
+		max_heal = Math.floor(PP_POTIONS[selected_consumable][2] * bonus);
+	
+		if (PP_POTIONS[selected_consumable][4] > pp_lv)
+			pp_display = "<table border = 0><tr><td><b>Potion Pitcher heals for: </b>Not available for current skill level</td>";
+		else
+			pp_display = "<table border = 0><tr><td><b>Potion Pitcher heals for: </b>" + min_heal + " ~ " + max_heal + "</td>";
+		
+		// Slim Potion Pitcher
+		bonus = (1 + (spp_lv * 10 + pp_lv * 10 + learning_potion_lv * 5) / 100) * relative_bonus * rank_bonus;
+		
+		min_heal = Math.floor(PP_POTIONS[selected_consumable][1] * bonus);
+		max_heal = Math.floor(PP_POTIONS[selected_consumable][2] * bonus);
+		
+		if (!PP_POTIONS[selected_consumable][5])
+			pp_display += "<td><b>Slim Potion Pitch heals for: </b>Not available for " + PP_POTIONS[selected_consumable][3];
+		else if (PP_POTIONS[selected_consumable][5] > spp_lv)
+			pp_display += "<td><b>Slim Potion Pitch heals for: </b>Not available for current skill level";
+		else
+			pp_display += "<td><b>Slim Potion Pitch heals for: </b>" + min_heal + " ~ " + max_heal;
+	
+		pp_display += "</td></tr></table>";
 
-		myInnerHtml("A_KakutyouData",Heal_POT,0);
-
-		}else{myInnerHtml("A_KakutyouData","Not Available for this Class",0);}
+		myInnerHtml("A_KakutyouData", pp_display, 0);
 	}
 	else if(wKK == 13){
 		if(n_A_JOB==12||n_A_JOB==26){
@@ -6855,6 +6901,49 @@ function Kanma(num){
 	return str;
 }
 
+function update_pp_calc()
+{
+	is_source = eval(document.calcForm.pp_source.checked);
+	is_target = eval(document.calcForm.pp_target.checked);
+		
+	if (is_source && !(n_A_JOB == 19 || n_A_JOB == 33))
+	{
+		is_source = false;
+		document.calcForm.pp_source.checked = false;
+	}
+	
+	if (is_source) // Update source stats accordingly
+	{
+		document.calcForm.pp_source_lv.value = n_A_BaseLV;
+		document.calcForm.pp_heal_rate_bonus.value = n_tok[93];
+		document.calcForm.pp_learning_potion_lv.value = SkillSearch(442);
+	}
+	
+	if (is_target) // Update target stats accordingly
+	{
+		document.calcForm.pp_lv.value = 5;
+		document.calcForm.spp_lv.value = 10;
+		document.calcForm.pp_source_lv.value = 99;
+		document.calcForm.pp_target_vit.value = n_A_VIT;
+		document.calcForm.pp_target_int.value = n_A_INT;
+		document.calcForm.pp_learning_potion_lv.value = 10;
+		document.calcForm.pp_irp_lv.value = SkillSearch(5);
+		document.calcForm.pp_isp_lv.value = SkillSearch(45);
+		document.calcForm.pp_received_heal_rate_bonus.value = n_tok[199];
+	}
+	
+	if (EquipNumSearch(1737)) // Empty Liquor Bottle + Beer Hat
+	{
+		document.calcForm.pp_isp_lv.value = 10;
+		document.calcForm.pp_irp_lv.value = 10;
+	}
+	else if (EquipNumSearch(1240)) // Beer Hat
+	{
+		document.calcForm.pp_isp_lv.value = 3;
+		document.calcForm.pp_irp_lv.value = 3;
+	}
+}
+
 function KakutyouKansuu2(){
 	wKK = eval(document.calcForm.A_Kakutyou.value);
 	if(wKK == 2){
@@ -7026,51 +7115,78 @@ function KakutyouKansuu2(){
 		myInnerHtml("A_KakutyouSel",w,0);
 		return;
 	}
-	if(wKK == 12){
-		if(n_A_JOB == 19 || n_A_JOB == 33 ){
-			pitpotion = "<table border=0>";
-			pitpotion += "<tr><td>Soul Linker Lv:</td>" + '<td><select name="SL_LV" onChange="StAllCalc()"></select>';
-			pitpotion += "<td>Target's VIT:</td>" + '<td><select name="E_VIT" onChange="StAllCalc()"></select></td>';
-			pitpotion += "<td>Target's INT:</td>" + '<td><select name="E_INT" onChange="StAllCalc()"></select></td></tr>';
-			pitpotion += "<tr><td>Potion Pitcher:</td>" + '<td><select name="PP" onChange="StAllCalc()"></select></td>';
-			pitpotion += "<td>Learning Potion:</td>" + '<td><select name="POT_RLevel" onChange="StAllCalc()"></select></td>';
-			pitpotion += "<td>Ranked:</td>" + '<td><select name="RNK_BNS" onChange="StAllCalc()"></select></td>';
-			pitpotion += "</tr>";
-			if(n_A_JOB == 33){
-				pitpotion += "<td>Slim Potion Pitcher:</td>" + '<td><select name="SPP" onChange="StAllCalc()"></select></td>';}
-			pitpotion += "<td>Increase Spiritual Power: " + '<td><select name="ISP" onChange="StAllCalc()"></select></td>';
-			pitpotion += "<td>Increase Recuperative Power: " + '<td><select name="IRP" onChange="StAllCalc()"></select></td>';
-			pitpotion += "</tr></table>";
-			myInnerHtml("A_KakutyouSel",pitpotion + "<br>",0);
-			for(i=0;i<Potion_Max_2;i++)
-					document.calcForm.PP.options[i] = new Option(Potion_Type_2[i][3],i);
-					document.calcForm.PP.value=0;
-			if(n_A_JOB == 33){
-				for(i=0;i<Potion_Max_3;i++)
-					document.calcForm.SPP.options[i] = new Option(Potion_Type_3[i][3],i);
-					document.calcForm.SPP.value=0;}
-			for(i=0;i<=10;i++)
-					document.calcForm.POT_RLevel.options[i] = new Option(i,i);
-					document.calcForm.POT_RLevel.value=0;
-			for(i=0;i<=1;i++)
-					document.calcForm.RNK_BNS.options[i] = new Option(Pot_Rank[i][1],i);
-					document.calcForm.RNK_BNS.value=0;
-			for(i=0;i<=200;i++)
-				document.calcForm.E_VIT.options[i] = new Option(i,i);
-				document.calcForm.E_VIT.value=0;
-			for(i=0;i<=200;i++)
-				document.calcForm.E_INT.options[i] = new Option(i,i);
-				document.calcForm.E_INT.value=0;
-			for(i=0;i<=99;i++)
-				document.calcForm.SL_LV.options[i] = new Option(i,i);
-				document.calcForm.SL_LV.value=0;
-			for(i=0;i<=10;i++)
-					document.calcForm.ISP.options[i] = new Option(i,i);
-					document.calcForm.ISP.value=0;
-			for(i=0;i<=10;i++)
-					document.calcForm.IRP.options[i] = new Option(i,i);
-					document.calcForm.IRP.value=0;
-		}else{myInnerHtml("A_KakutyouSel","",0);}
+	if(wKK == 12)
+	{
+		pp_display =  'You are the : ';
+		pp_display += '<input type="checkbox" id="pp_source" name="pp_source" value="pp_source" onclick=update_pp_calc()><label for="pp_source">Source</label>';
+		pp_display += '<input type="checkbox" id="pp_target" name="pp_target" value="pp_target" onclick=update_pp_calc()><label for="pp_target">Target</label><br>';
+		
+		pp_display += "<table border=0>";
+		pp_display += "<tr><td>Alchemist LV:</td>" + '<td><select name="pp_source_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += '<td></td><td></td><td><input type="checkbox" id="pp_source_link" name="pp_source_link" value="pp_source_link" onclick=KakutyouKansuu()><label for="pp_source_link">Alchemist Soul Linked</label></td></tr>';
+		
+		pp_display += "<td>Potion Pitcher:</td>" + '<td><select name="pp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Slim Potion Pitcher:</td>" + '<td><select name="spp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Consumable:</td>" + '<td><select name="pp_consumable" onChange="KakutyouKansuu()"></select></td></tr>';
+			
+		pp_display += "<tr><td>Learning Potion:</td>" + '<td><select name="pp_learning_potion_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td></td><td></td><td>Ranked:</td>" + '<td><select name="pp_potion_rank" onChange="KakutyouKansuu()"></select></td></tr>';
+				
+		pp_display += "<tr><td>Increase Recuperative Power: " + '<td><select name="pp_irp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Target's VIT:</td>" + '<td><select name="pp_target_vit" onChange="KakutyouKansuu()"></select></td>';
+		pp_display +=  "<td>Increase Heal Rate:</td>" + '<td><input type="text" onChange="KakutyouKansuu()" name="pp_heal_rate_bonus" value="0" size=2>%</td></tr>';
+		pp_display += "<tr><td>Increase Spiritual Power: " + '<td><select name="pp_isp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Target's INT:</td>" + '<td><select name="pp_target_int" onChange="KakutyouKansuu()"></select></td>';
+		pp_display +=  "<td>Increase Received Heal Rate:</td>" + '<td><input type="text" onChange="KakutyouKansuu()" name="pp_received_heal_rate_bonus" value="0" size=2>%</td></tr>';
+
+		pp_display += "</table><br>";
+
+		myInnerHtml("A_KakutyouSel", pp_display, 0);
+		
+		// Initialize static inputs
+		for (i = 0; i <= 5; ++i)
+			document.calcForm.pp_lv.options[i] = new Option(i,i);
+		
+		for (i = 0; i <= 10; ++i)
+		{
+			document.calcForm.spp_lv.options[i] = new Option(i,i);
+			document.calcForm.pp_isp_lv.options[i] = new Option(i,i);
+			document.calcForm.pp_irp_lv.options[i] = new Option(i,i);
+			document.calcForm.pp_learning_potion_lv.options[i] = new Option(i,i);
+		}
+		
+		for (i = 0; i <= 99; ++i)
+			document.calcForm.pp_source_lv.options[i] = new Option(i,i);
+		
+		for (i = 0; i < FAME_TOP.length; ++i)
+			document.calcForm.pp_potion_rank.options[i] = new Option(FAME_TOP[i][1],i);
+			
+		for (i = 0; i < PP_POTIONS.length; ++i)
+			document.calcForm.pp_consumable.options[i] = new Option(PP_POTIONS[i][3],i);
+		
+		for (i = 0; i <= 200; ++i)
+		{
+			document.calcForm.pp_target_vit.options[i] = new Option(i,i);
+			document.calcForm.pp_target_int.options[i] = new Option(i,i);
+		}
+
+		document.calcForm.pp_lv.value = 5;
+		document.calcForm.spp_lv.value = 10;
+		document.calcForm.pp_isp_lv.value = 0;
+		document.calcForm.pp_irp_lv.value = 0;
+		document.calcForm.pp_consumable.value = 3;
+		document.calcForm.pp_target_vit.value = 1;
+		document.calcForm.pp_target_int.value = 1;
+		document.calcForm.pp_source_lv.value = 99;
+		document.calcForm.pp_potion_rank.value = 0;
+		document.calcForm.pp_learning_potion_lv.value = 10;
+		
+		if (n_A_JOB == 19 || n_A_JOB == 33)
+			document.calcForm.pp_source.checked = true;
+		else
+			document.calcForm.pp_target.checked = true;
+		
+		update_pp_calc();
 		return;
 	}
 	if(wKK == 13){
