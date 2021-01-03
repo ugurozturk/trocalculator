@@ -6279,7 +6279,7 @@ function KakutyouKansuu(){
 		sp_recovery_lv = eval(document.calcForm.pp_irp_lv.value);
 		target_vit = eval(document.calcForm.pp_target_vit.value);
 		target_int = eval(document.calcForm.pp_target_int.value);
-		potion_rank = eval(document.calcForm.pp_potion_rank.value);
+		//potion_rank = eval(document.calcForm.pp_potion_rank.value); Rank not taken into consideration for PP/SPP
 		pp_consumable = eval(document.calcForm.pp_consumable.value);
 		pp_healpower = eval(document.calcForm.pp_heal_rate_bonus.value);
 		selected_consumable = eval(document.calcForm.pp_consumable.value);
@@ -6295,8 +6295,9 @@ function KakutyouKansuu(){
 			relative_bonus = (1 + n_A_INT * 2 / 100) * (1 + sp_recovery_lv / 10);
 
 		rank_bonus = 1
+		/* Rank not taken into consideration for PP/SPP
 		if (potion_rank)
-			rank_bonus = (1 + potion_rank * 0.25);
+			rank_bonus = (1 + potion_rank * 0.25); */
 
 		// Potion Pitcher
 		
@@ -7123,14 +7124,14 @@ function KakutyouKansuu2(){
 		
 		pp_display += "<table border=0>";
 		pp_display += "<tr><td>Alchemist LV:</td>" + '<td><select name="pp_source_lv" onChange="KakutyouKansuu()"></select></td>';
-		pp_display += '<td></td><td></td><td><input type="checkbox" id="pp_source_link" name="pp_source_link" value="pp_source_link" onclick=KakutyouKansuu()><label for="pp_source_link">Alchemist Soul Linked</label></td></tr>';
+		pp_display += '<td><input type="checkbox" id="pp_source_link" name="pp_source_link" value="pp_source_link" onclick=KakutyouKansuu()><label for="pp_source_link">Alchemist Soul Linked</label><td></td></td><td><label>(bonus only applied to Potion Pitcher)</label></td></tr>';
 		
-		pp_display += "<td>Potion Pitcher:</td>" + '<td><select name="pp_lv" onChange="KakutyouKansuu()"></select></td>';
 		pp_display += "<td>Slim Potion Pitcher:</td>" + '<td><select name="spp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Potion Pitcher:</td>" + '<td><select name="pp_lv" onChange="KakutyouKansuu()"></select></td>';
 		pp_display += "<td>Consumable:</td>" + '<td><select name="pp_consumable" onChange="KakutyouKansuu()"></select></td></tr>';
 			
-		pp_display += "<tr><td>Learning Potion:</td>" + '<td><select name="pp_learning_potion_lv" onChange="KakutyouKansuu()"></select></td>';
-		pp_display += "<td></td><td></td><td>Ranked:</td>" + '<td><select name="pp_potion_rank" onChange="KakutyouKansuu()"></select></td></tr>';
+		pp_display += "<tr><td>Learning Potion:</td>" + '<td><select name="pp_learning_potion_lv" onChange="KakutyouKansuu()"></select></td></tr>';
+		//pp_display += "<td></td><td></td><td>Ranked:</td>" + '<td><select name="pp_potion_rank" onChange="KakutyouKansuu()"></select></td></tr>'; Rank not taken into consideration for PP/SPP
 				
 		pp_display += "<tr><td>Increase Recuperative Power: " + '<td><select name="pp_irp_lv" onChange="KakutyouKansuu()"></select></td>';
 		pp_display += "<td>Target's VIT:</td>" + '<td><select name="pp_target_vit" onChange="KakutyouKansuu()"></select></td>';
@@ -7158,8 +7159,9 @@ function KakutyouKansuu2(){
 		for (i = 0; i <= 99; ++i)
 			document.calcForm.pp_source_lv.options[i] = new Option(i,i);
 		
+		/* Rank not taken into consideration for PP/SPP
 		for (i = 0; i < FAME_TOP.length; ++i)
-			document.calcForm.pp_potion_rank.options[i] = new Option(FAME_TOP[i][1],i);
+			document.calcForm.pp_potion_rank.options[i] = new Option(FAME_TOP[i][1],i); */
 			
 		for (i = 0; i < PP_POTIONS.length; ++i)
 			document.calcForm.pp_consumable.options[i] = new Option(PP_POTIONS[i][3],i);
@@ -7178,7 +7180,7 @@ function KakutyouKansuu2(){
 		document.calcForm.pp_target_vit.value = 1;
 		document.calcForm.pp_target_int.value = 1;
 		document.calcForm.pp_source_lv.value = 99;
-		document.calcForm.pp_potion_rank.value = 0;
+		//document.calcForm.pp_potion_rank.value = 0; Rank not taken into consideration for PP/SPP
 		document.calcForm.pp_learning_potion_lv.value = 10;
 		
 		if (n_A_JOB == 19 || n_A_JOB == 33)
