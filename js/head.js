@@ -1704,18 +1704,18 @@ function BattleCalc999()
 			//100% accurate for below 200k damage.
 			//~1% error for 200k-400k damage.
 			//No data available for above 400k damage.
+			
+			//Lex Aeterna for Asura Strike after soft-cap
+			if(n_B_IJYOU[6] && wLAch==0){
+				w_DMG[b] *= 2;
+			}
 
 			if(w_DMG[b] > 200000){
 				var AsuraExcessD = w_DMG[b] - 200000;
 				var AsuraNerfD = (0.5963 - 0.1471) * Math.exp(-0.000002230 * AsuraExcessD) + 0.1471;
 				w_DMG[b] = Math.floor(200000 + (AsuraExcessD * AsuraNerfD));
 			}
-
-			//Lex Aeterna for Asura Strike after soft-cap
-			if(n_B_IJYOU[6] && wLAch==0){
-				w_DMG[b] *= 2;
-			}
-
+			
 			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b]
 
 			InnStr[b] += Last_DMG_A[b];
