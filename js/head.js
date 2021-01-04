@@ -359,8 +359,9 @@ function BattleCalc999()
 		Last_DMG_B[i] = 0;
 	}
 
-	str_bSUBname = "";
 	str_bSUB = "";
+	str_bSUBname = "";
+	InnStr = ["", "", ""];
 
 	if(n_A_ActiveSkill != 0 && n_A_ActiveSkill !=272 && n_A_ActiveSkill !=401 && !(n_A_ActiveSkill == 86 && (50 <= n_B[3] && n_B[3] < 60))){
 		myInnerHtml("CRIATK","",0);

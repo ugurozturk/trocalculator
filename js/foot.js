@@ -6036,6 +6036,12 @@ function KakutyouKansuu(){
 		SM_MOD = 0;
 		TU_MOD = 0; //[Custom TalonRO - 2018-06-02 - New Attack Modifier for Turtles] [Kato]
 
+		// Frame update not dynamic, it requires OnCalc to be triggered in order to retrieve
+		// - Attack type
+		// - Attack element (can be simulated with manual element)
+		// It would require to have access to on demand skill information, so in the meantime BattleCalc999() is used. 
+		BattleCalc999();
+
 		B_MOD += (2 == n_Enekyori ? n_tok[97] : n_tok[26] + n_tok[80]);
 
 		for(var i=0;i<=7;i++){
