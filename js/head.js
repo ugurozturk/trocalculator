@@ -1190,12 +1190,12 @@ function BattleCalc999()
 		// Apply modifiers
 		damage = damage.map(x => BaiCI(x));
 		
-		total_damage = damage.map(x => Math.floor(x * nb_hits * w_HIT / 100));
+		total_damage = damage.map(x => Math.floor(x * nb_hits));
 		
 		for (i = 0; i <= 2; ++i)
 		{
 			InnStr[i] += total_damage[i] + (nb_hits - 1 ? " ("+ damage[i] + SubName[8] + nb_hits + " hits)" : "");
-			w_DMG[i] = total_damage[i];
+			w_DMG[i] = total_damage[i] * w_HIT / 100;
 		}
 
 		CastAndDelay();
