@@ -6949,7 +6949,7 @@ function KakutyouKansuu2(){
 	wKK = eval(document.calcForm.A_Kakutyou.value);
 	if(wKK == 2){
 		if(n_A_JOB==1||n_A_JOB==7||n_A_JOB==13||n_A_JOB==20||n_A_JOB==21||n_A_JOB==27){
-			myInnerHtml("A_KakutyouSel","Increased HP Recovery Level: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select>',0);
+			myInnerHtml("A_KakutyouSel","Increased HP Recovery Level: " + '<select name="A_KakutyouSelNum"onChange="KakutyouKansuu()"></select>',0);
 			for(i=0;i<=10;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
 			document.calcForm.A_KakutyouSelNum.value=10;
@@ -6969,7 +6969,7 @@ function KakutyouKansuu2(){
 			SPRname = "Increased SP Recovery Level: ";
 			if(n_A_JOB==44)
 				SPRname = "Ninja Mastery Level: ";
-			myInnerHtml("A_KakutyouSel",SPRname + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select>',0);
+			myInnerHtml("A_KakutyouSel",SPRname + '<select name="A_KakutyouSelNum"onChange="KakutyouKansuu()"></select>',0);
 			for(i=0;i<=10;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
 			document.calcForm.A_KakutyouSelNum.value=10;
@@ -6986,7 +6986,7 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 4){
 		if(n_A_JOB==15||n_A_JOB==29){
-			myInnerHtml("A_KakutyouSel","Spiritual Cadence Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select>',0);
+			myInnerHtml("A_KakutyouSel","Spiritual Cadence Lv: " + '<select name="A_KakutyouSelNum"onChange="KakutyouKansuu()"></select>',0);
 			for(i=0;i<=5;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
 			document.calcForm.A_KakutyouSelNum.value=5;
@@ -7000,7 +7000,7 @@ function KakutyouKansuu2(){
 		if(n_A_JOB==6||n_A_JOB==12||n_A_JOB==19||n_A_JOB==20||n_A_JOB==26||n_A_JOB==33){
 			// myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select><BR>'
 			// +"Enlarge Weight Limit R Lv: " + '<select name="A_KakutyouSelNum2"onChange="StAllCalc()"></select><BR>',0);
-			myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select><BR>',0);
+			myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="KakutyouKansuu()"></select><BR>',0);
 			// for(i=0;i<=10;i++)
 			// 	document.calcForm.A_KakutyouSelNum2.options[i] = new Option(i,i);
 			for(i=0;i<=10;i++)
@@ -7019,7 +7019,7 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 7){
 		CBIstr = "<table border=0>";
-		CBIstr += '<tr><td>Your Target: <select name="R_OBJ" onChange = "StAllCalc()"></select><select name="S_OBJ" onChange = "StAllCalc()"></select><select name="E_OBJ" onChange = "calc()"></select><select name="B_OBJ" onChange = "calc()"></select><select name="SP_OBJ" onChange = "calc()"></select></td></tr>';
+		CBIstr += '<tr><td>Your Target: <select name="R_OBJ" onChange = "KakutyouKansuu()"></select><select name="S_OBJ" onChange = "KakutyouKansuu()"></select><select name="E_OBJ" onChange = "KakutyouKansuu()"></select><select name="B_OBJ" onChange = "KakutyouKansuu()"></select><select name="SP_OBJ" onChange = "KakutyouKansuu()"></select></td></tr>';
 		CBIstr += "</table>";
 
 		myInnerHtml("A_KakutyouData",CBIstr,0);
@@ -7043,17 +7043,17 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 8){
 		CBIstr = "<table>";
-		CBIstr += '<tr><td>HP</td><td><input type="text" onChange="StAllCalc()" name="EN_HP" value="1" size=7></td><td>STR</td><td><input type="text" onChange="StAllCalc()" name="EN_STR" value="1" size=1></td>';
-		CBIstr += '<td>Element</td><td><select name="EN_ELEM" onChange = "StAllCalc()"></select><select name="EN_ELEM2" onChange = "StAllCalc()"></select></td><td>Flee</td><td><input type="text" onChange="StAllCalc()" name="EN_FLEE" value="1" size=1></td></tr>';
-		CBIstr += '<tr><td>VIT</td><td><input type="text" onChange="StAllCalc()" name="EN_VIT" value="1" size=1></td><td>INT</td><td><input type="text" onChange="StAllCalc()" name="EN_INT" value="1" size=1></td>';
-		CBIstr += '<td>Race</td><td><select name="EN_RACE" onChange = "StAllCalc()"></select></td><td>Perfect Dodge</td><td><input type="text" onChange="StAllCalc()" name="EN_PD" value="1" size=1></td></tr>';
-		CBIstr += '<tr><td>DEF</td><td><select name="EN_DEF" onChange = "StAllCalc()"></select></td><td>AGI</td><td><input type="text" onChange="StAllCalc()" name="EN_AGI" value="1" size=1></td>';
-		CBIstr += '<td>Size</td><td><select name="EN_SIZE" onChange = "StAllCalc()"></select></td><td>Demi-Human Resistance</td><td><select name="EN_DHR" onChange = "StAllCalc()"></select> %</td></tr>';
-		CBIstr += '<tr><td>MDEF</td><td><select name="EN_MDEF" onChange = "cStAllCalc()"></select></td><td>LUK</td><td><input type="text" onChange="StAllCalc()" name="EN_LUK" value="1" size=1></td>';
-		CBIstr += '<td>Type</td><td><select name="EN_TYPE" onChange = "StAllCalc()"></select></td><td>Long Range Resistance</td><td><select name="EN_RR" onChange = "StAllCalc()"></select> %</td></tr>';
-		CBIstr += '<tr><td>+ HP Gear</td><td><input type="text" onChange="StAllCalc()" name="EN_HP1" value="1" size=1></td><td>+% HP Gear</td><td><input type="text" onChange="StAllCalc()" name="EN_HP2" value="1" size=1></td>';
-		CBIstr += '<td>Energy Coat</td><td><select name="EN_EC" onChange = "StAllCalc()"></select></td><td>Element Resistance</td><td><select name="EN_ELR1" onChange = "StAllCalc()"></select><input type="text" onChange="StAllCalc()" name="EN_ELR11" value="1" size=1></tr>';
-		CBIstr += '<tr><td>Angelus</td><td><select name="EN_ANG" onChange = "StAllCalc()"></select></td><td>Auto-Guard</td><td><select name="EN_AG" onChange = "StAllCalc()"></select></td><td>Defender</td><td><select name="EN_DF" onChange = "StAllCalc()"></select></td><td>Element Resistance</td><td><select name="EN_ELR2" onChange = "StAllCalc()"></select><input type="text" onChange="StAllCalc()" name="EN_ELR21" value="1" size=1></tr>';
+		CBIstr += '<tr><td>HP</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_HP" value="1" size=7></td><td>STR</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_STR" value="1" size=1></td>';
+		CBIstr += '<td>Element</td><td><select name="EN_ELEM" onChange = "KakutyouKansuu()"></select><select name="EN_ELEM2" onChange = "KakutyouKansuu()"></select></td><td>Flee</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_FLEE" value="1" size=1></td></tr>';
+		CBIstr += '<tr><td>VIT</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_VIT" value="1" size=1></td><td>INT</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_INT" value="1" size=1></td>';
+		CBIstr += '<td>Race</td><td><select name="EN_RACE" onChange = "KakutyouKansuu()"></select></td><td>Perfect Dodge</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_PD" value="1" size=1></td></tr>';
+		CBIstr += '<tr><td>DEF</td><td><select name="EN_DEF" onChange = "KakutyouKansuu()"></select></td><td>AGI</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_AGI" value="1" size=1></td>';
+		CBIstr += '<td>Size</td><td><select name="EN_SIZE" onChange = "KakutyouKansuu()"></select></td><td>Demi-Human Resistance</td><td><select name="EN_DHR" onChange = "KakutyouKansuu()"></select> %</td></tr>';
+		CBIstr += '<tr><td>MDEF</td><td><select name="EN_MDEF" onChange = "KakutyouKansuu()"></select></td><td>LUK</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_LUK" value="1" size=1></td>';
+		CBIstr += '<td>Type</td><td><select name="EN_TYPE" onChange = "KakutyouKansuu()"></select></td><td>Long Range Resistance</td><td><select name="EN_RR" onChange = "KakutyouKansuu()"></select> %</td></tr>';
+		CBIstr += '<tr><td>+ HP Gear</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_HP1" value="1" size=1></td><td>+% HP Gear</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_HP2" value="1" size=1></td>';
+		CBIstr += '<td>Energy Coat</td><td><select name="EN_EC" onChange = "KakutyouKansuu()"></select></td><td>Element Resistance</td><td><select name="EN_ELR1" onChange = "KakutyouKansuu()"></select><input type="text" onChange="KakutyouKansuu()" name="EN_ELR11" value="1" size=1></tr>';
+		CBIstr += '<tr><td>Angelus</td><td><select name="EN_ANG" onChange = "KakutyouKansuu()"></select></td><td>Auto-Guard</td><td><select name="EN_AG" onChange = "KakutyouKansuu()"></select></td><td>Defender</td><td><select name="EN_DF" onChange = "KakutyouKansuu()"></select></td><td>Element Resistance</td><td><select name="EN_ELR2" onChange = "KakutyouKansuu()"></select><input type="text" onChange="KakutyouKansuu()" name="EN_ELR21" value="1" size=1></tr>';
 		CBIstr += "</table>";
 		myInnerHtml("A_KakutyouSel",CBIstr,0);
 
@@ -7111,8 +7111,8 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 11){
 		var w;
-		w = '<Font size="2">Current Base Exp<input type="text" name="A_KakutyouSelNum" value="0" size=4 onChange="StAllCalc()" style="text-align : right;">%<BR>';
-		w += 'Current Job Exp<input type="text" name="A_KakutyouSelNum2" value="0" size=4 onChange="StAllCalc()" style="text-align : right;">%<BR></Font>';
+		w = '<Font size="2">Current Base Exp<input type="text" name="A_KakutyouSelNum" value="0" size=4 onChange="KakutyouKansuu()" style="text-align : right;">%<BR>';
+		w += 'Current Job Exp<input type="text" name="A_KakutyouSelNum2" value="0" size=4 onChange="KakutyouKansuu()" style="text-align : right;">%<BR></Font>';
 		myInnerHtml("A_KakutyouSel",w,0);
 		return;
 	}
@@ -7193,15 +7193,15 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 13){
 		if(n_A_JOB==12||n_A_JOB==26){
-			forgetext = "<table border = 0><tr><td>Oridecon Research:</td>" + '<td><select name="A_OriR" onChange="StAllCalc()"></select></td>';
-			forgetext += "<td>Weapon Research:</td>" + '<td><select name="A_WepR" onChange="StAllCalc()"></select></td>';
-			forgetext +=  "<td>Smith Lvl:</td>" + '<td><select name="A_SmithT" onChange="StAllCalc()"></select></td></tr>';
-			forgetext +=  "<tr><td>Star Crumb:</td>" + '<td><select name="A_StarC" onChange="StAllCalc()"></select></td>';
-			forgetext +=  "<td>Elemental Stone:</td>" + '<td><select name="A_ElemS" onChange="StAllCalc()"></select></td>';
-			forgetext +=  "<td>Anvil:</td>" + '<td><select name="A_KakutyouSelNum" onChange="StAllCalc()"></select></td></tr>';
-			forgetext += "<tr><td>Iron Tempering</td>" + '<td><select name="A_Iron" onChange="StAllCalc()"></select></td>';
-			forgetext += "<td>Steel Tempering :</td>" + '<td><select name="A_Steel" onChange="StAllCalc()"></select></td>';
-			forgetext += "<td>Enchanted Stone Craft:</td>" + '<td><select name="A_StoneC" onChange="StAllCalc()"></select></td></tr></table>';
+			forgetext = "<table border = 0><tr><td>Oridecon Research:</td>" + '<td><select name="A_OriR" onChange="KakutyouKansuu()"></select></td>';
+			forgetext += "<td>Weapon Research:</td>" + '<td><select name="A_WepR" onChange="KakutyouKansuu()"></select></td>';
+			forgetext +=  "<td>Smith Lvl:</td>" + '<td><select name="A_SmithT" onChange="KakutyouKansuu()"></select></td></tr>';
+			forgetext +=  "<tr><td>Star Crumb:</td>" + '<td><select name="A_StarC" onChange="KakutyouKansuu()"></select></td>';
+			forgetext +=  "<td>Elemental Stone:</td>" + '<td><select name="A_ElemS" onChange="KakutyouKansuu()"></select></td>';
+			forgetext +=  "<td>Anvil:</td>" + '<td><select name="A_KakutyouSelNum" onChange="KakutyouKansuu()"></select></td></tr>';
+			forgetext += "<tr><td>Iron Tempering</td>" + '<td><select name="A_Iron" onChange="KakutyouKansuu()"></select></td>';
+			forgetext += "<td>Steel Tempering :</td>" + '<td><select name="A_Steel" onChange="KakutyouKansuu()"></select></td>';
+			forgetext += "<td>Enchanted Stone Craft:</td>" + '<td><select name="A_StoneC" onChange="KakutyouKansuu()"></select></td></tr></table>';
 			myInnerHtml("A_KakutyouSel",forgetext + "<br>",0);
 			for(i=0;i<Anvil_Max;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(Anvil_Type[i][2],i);
@@ -7233,11 +7233,11 @@ function KakutyouKansuu2(){
 
 		}else if(n_A_JOB==19||n_A_JOB==33){
 			//custom TalonRO Update 2014-09-29
-			potiontext = "<table border=0><tr><td>Potion to Create:</td>" + '<td><select name="A_KakutyouSelNum" onChange="StAllCalc()"></select></td>';
-			potiontext += "<td>Learning Potion:</td>" + '<td><select name="A_PotionRLevel" onChange="StAllCalc()"></select></td></tr>';
-			potiontext += "<tr><td>Pharmacy:</td>" + '<td><select name="A_PreparePLevel" onChange="StAllCalc()"></select></td></tr>';
-			potiontext +=  "<tr><td>Homunculi Level:</td>" + '<td><select name="A_HomunLevel" onChange="StAllCalc()"></select></td>';
-			potiontext +=  "<td>Homunculi Evolved:</td>" + '<td><select name="A_HomunEvolved" onChange="StAllCalc()"></select></td></tr></table>';
+			potiontext = "<table border=0><tr><td>Potion to Create:</td>" + '<td><select name="A_KakutyouSelNum" onChange="KakutyouKansuu()"></select></td>';
+			potiontext += "<td>Learning Potion:</td>" + '<td><select name="A_PotionRLevel" onChange="KakutyouKansuu()"></select></td></tr>';
+			potiontext += "<tr><td>Pharmacy:</td>" + '<td><select name="A_PreparePLevel" onChange="KakutyouKansuu()"></select></td></tr>';
+			potiontext +=  "<tr><td>Homunculi Level:</td>" + '<td><select name="A_HomunLevel" onChange="KakutyouKansuu()"></select></td>';
+			potiontext +=  "<td>Homunculi Evolved:</td>" + '<td><select name="A_HomunEvolved" onChange="KakutyouKansuu()"></select></td></tr></table>';
 
 			myInnerHtml("A_KakutyouSel",potiontext + "<br>",0);
 			for(i=0;i<Potion_Max;i++)
@@ -7270,14 +7270,14 @@ function KakutyouKansuu2(){
 	if(wKK == 14){
 		striptext = "";
 		if(n_A_JOB == 14 || n_A_JOB == 28){
-			striptext += "<table border=0><tr><td>Strip [Helm], [Armor], [Weapon] or [Shield] Level:</td>" + '<td><select name="S_LV" onChange="StAllCalc()"></select></td>';
-			striptext += "<td>Enemy DEX:</td>" + '<td><select name="E_DEX" onChange="StAllCalc()"></select>';
+			striptext += "<table border=0><tr><td>Strip [Helm], [Armor], [Weapon] or [Shield] Level:</td>" + '<td><select name="S_LV" onChange="KakutyouKansuu()"></select></td>';
+			striptext += "<td>Enemy DEX:</td>" + '<td><select name="E_DEX" onChange="KakutyouKansuu()"></select>';
 			if(n_A_JOB == 28){
-				striptext += "<tr><td>Full Strip Level:</td>" + '<td><select name="FS_LV" onChange="StAllCalc()"></select>';}
+				striptext += "<tr><td>Full Strip Level:</td>" + '<td><select name="FS_LV" onChange="KakutyouKansuu()"></select>';}
 			striptext += "</td></tr></table>";
 		}
 		else if((CardNumSearch(157) || CardNumSearch(413)) && (n_A_JOB != 14 && n_A_JOB != 28)){
-			striptext += "<table border=0><tr><td>Enemy DEX:</td>" + '<td><select name="E2_DEX" onChange="StAllCalc()"></select></td></tr>';
+			striptext += "<table border=0><tr><td>Enemy DEX:</td>" + '<td><select name="E2_DEX" onChange="KakutyouKansuu()"></select></td></tr>';
 			if(CardNumSearch(157)){
 				striptext += "<td>Strip [Weapon] Level: 1</td>";}
 			if(CardNumSearch(413)){
@@ -7317,10 +7317,10 @@ function KakutyouKansuu2(){
 		return;
 	}
 	if(wKK == 15){
-		cooktext = "<table border=0><tr><td>Level of the Food:</td>" + '<td><select name="Flv" onChange="StAllCalc()"></select></td>';
-		cooktext += "<td>Stat of the Food:</td>" + '<td><select name="FStat" onChange="StAllCalc()"></select><td></tr>';
-		cooktext += "<tr><td>Cooking Kit Used:</td>" + '<td><select name="CKit" onChange="StAllCalc()"></select></td>';
-		cooktext +=  "<td>Cooking Experience:</td>" + '<td><input type="text" onChange="StAllCalc()" name="CExp" value="0" size=2></td></tr></table>';
+		cooktext = "<table border=0><tr><td>Level of the Food:</td>" + '<td><select name="Flv" onChange="KakutyouKansuu()"></select></td>';
+		cooktext += "<td>Stat of the Food:</td>" + '<td><select name="FStat" onChange="KakutyouKansuu()"></select><td></tr>';
+		cooktext += "<tr><td>Cooking Kit Used:</td>" + '<td><select name="CKit" onChange="KakutyouKansuu()"></select></td>';
+		cooktext +=  "<td>Cooking Experience:</td>" + '<td><input type="text" onChange="KakutyouKansuu()" name="CExp" value="0" size=2></td></tr></table>';
 		myInnerHtml("A_KakutyouSel",cooktext + "<br>",0);
 		for(i=1;i<=10;i++){
 			document.calcForm.Flv.options[i-1] = new Option(i,i);
@@ -7336,18 +7336,18 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 17){
 		var w;
-		w = '<div style="float:left;margin-right:10px;padding-top:4px">Number of monsters:</div><div style="float:left"><input type="text" name="A_KakutyouSelNum" value="1" size=4 onChange="StAllCalc()" style="text-align : right"></div><div style="clear:both"></div>';
+		w = '<div style="float:left;margin-right:10px;padding-top:4px">Number of monsters:</div><div style="float:left"><input type="text" name="A_KakutyouSelNum" value="1" size=4 onChange="KakutyouKansuu()" style="text-align : right"></div><div style="clear:both"></div>';
 		myInnerHtml("A_KakutyouSel",w,0);
     return;
 	}
 	if(wKK == 18){
-		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="hp_recovery_lv" onChange="StAllCalc()"></select></td>';
-		healtext += "<td>Learning Potion:</td>" + '<td><select name="learning_potion_lv" onChange="StAllCalc()"></select></td></tr>';
-		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="sp_recovery_lv" onChange="StAllCalc()"></select></td>';
-		healtext +=  "<td>Rogue Spirit:</td>" + '<td><select name="rogue_spirit" onChange="StAllCalc()"></select></td></tr>';
-		healtext +=  "<tr><td>Increase Heal Rate:</td>" + '<td><input type="text" onChange="StAllCalc()" name="heal_rate_bonus" value="0" size=2>%</td>';
-		healtext +=  "<td>Fame Top:</td>" + '<td><select name="potion_rank" onChange="StAllCalc()"></select></td></tr>';
-		healtext +=  '<tr><td>Item:</td>' + '<td><select name="selected_item" onChange="StAllCalc()"></select></td></tr></table>';
+		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="hp_recovery_lv" onChange="KakutyouKansuu()"></select></td>';
+		healtext += "<td>Learning Potion:</td>" + '<td><select name="learning_potion_lv" onChange="KakutyouKansuu()"></select></td></tr>';
+		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="sp_recovery_lv" onChange="KakutyouKansuu()"></select></td>';
+		healtext +=  "<td>Rogue Spirit:</td>" + '<td><select name="rogue_spirit" onChange="KakutyouKansuu()"></select></td></tr>';
+		healtext +=  "<tr><td>Increase Heal Rate:</td>" + '<td><input type="text" onChange="KakutyouKansuu()" name="heal_rate_bonus" value="0" size=2>%</td>';
+		healtext +=  "<td>Fame Top:</td>" + '<td><select name="potion_rank" onChange="KakutyouKansuu()"></select></td></tr>';
+		healtext +=  '<tr><td>Item:</td>' + '<td><select name="selected_item" onChange="KakutyouKansuu()"></select></td></tr></table>';
 		myInnerHtml("A_KakutyouSel",healtext + "<br>",0);
 		for(i=0;i<=10;i++){
 			document.calcForm.hp_recovery_lv.options[i] = new Option(i,i);
