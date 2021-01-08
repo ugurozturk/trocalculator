@@ -1216,8 +1216,7 @@ function StAllCalc()
 
 	if(n_Tensei) // Trans job health bonus
 		n_A_MaxHP = n_A_MaxHP * 1.25;
-	if(eval(A_youshi.checked))
-		n_A_MaxHP = n_A_MaxHP * 0.7;
+	//if(eval(A_youshi.checked)) n_A_MaxHP = n_A_MaxHP * 0.7; Currently not applied on rAthena
 	n_A_MaxHP = (n_A_MaxHP - wHPSL) * (100 + n_A_VIT) / 100;
 
 
