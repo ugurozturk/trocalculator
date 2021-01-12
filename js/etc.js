@@ -408,7 +408,7 @@ PET_OBJ = [[0,"No Pet",0,0]
 
 ITEM_SP_TIME_OBJ =[
 [0,"Temporary Card/Item Effects","none",0,0,0]
-,[1,"Isilla Card","Cast Time -50%,FLEE+30",2,472,9,30,0]
+,[1,"Isilla Card","Cast Time -50%,FLEE+30",2,472,9,30,73,-50,0]
 ,[2,"Ice Titan Card","DEF+10",2,484,18,10,0]
 ,[3,"Atroce Card","ASPD+100%",2,463,12,100,0]
 ,[4,"Anolian Card","Improve Concentration Lv1",2,224,0]
@@ -493,34 +493,14 @@ Anvil_Type =[
 ];
 Anvil_Max = 4;
 
-Potion_Type_2 =[
-[0,45,65,"Red Potion"]
-,[1,105,145,"Orange Potion"]
-,[2,175,235,"Yellow Potion"]
-,[3,325,405,"White Potion"]
-,[4,40,60,"Blue Potion"]
+// Index, Minimum heal, Maximum heal, Name, PP level requirement, SPP level requirement
+PP_POTIONS =[
+[0,45,65,"Red Potion",1,1]
+,[1,105,145,"Orange Potion",2,0]
+,[2,175,235,"Yellow Potion",3,6]
+,[3,325,405,"White Potion",4,10]
+,[4,40,60,"Blue Potion",5,0]
 ];
-Potion_Max_2 = 5;
-
-Potion_Type_3 =[
-[0,45,65,"Slim Red Potion[+10%]"]
-,[1,45,65,"Slim Red Potion[+20%]"]
-,[2,45,65,"Slim Red Potion[+30%]"]
-,[3,45,65,"Slim Red Potion[+40%]"]
-,[4,45,65,"Slim Red Potion[+50%]"]
-,[5,175,235,"Slim Yellow Potion[+60%]"]
-,[6,175,235,"Slim Yellow Potion[+70%]"]
-,[7,175,235,"Slim Yellow Potion[+80%]"]
-,[8,175,235,"Slim Yellow Potion[+90%]"]
-,[9,325,405,"Slim White Potion[+100%]"]
-];
-Potion_Max_3 = 10;
-
-Pot_Rank =[
-[0,"No"]
-,[1,"Yes"]
-];
-Pot_Rank_Max = 2;
 
 Cook_Kit =[
 [0,"Outdoor Cooking Kit"]
