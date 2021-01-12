@@ -359,8 +359,9 @@ function BattleCalc999()
 		Last_DMG_B[i] = 0;
 	}
 
-	str_bSUBname = "";
 	str_bSUB = "";
+	str_bSUBname = "";
+	InnStr = ["", "", ""];
 
 	if(n_A_ActiveSkill != 0 && n_A_ActiveSkill !=272 && n_A_ActiveSkill !=401 && !(n_A_ActiveSkill == 86 && (50 <= n_B[3] && n_B[3] < 60))){
 		myInnerHtml("CRIATK","",0);
@@ -1151,221 +1152,52 @@ function BattleCalc999()
 		BattleCalc998();
 	}
 
-	else if(n_A_ActiveSkill==159 || n_A_ActiveSkill==384)
+	else if (n_A_ActiveSkill == 159 || n_A_ActiveSkill == 384 || n_A_ActiveSkill == 324) // Shield Chain#324 Shield Boomerang#159#384
 	{
-		n_PerHIT_DMG = 0;
-		n_Enekyori=1;
-		n_A_Weapon_zokusei = 0;
-		n_Delay[2] = 0.7;
-		if(n_A_ActiveSkill==384)
-			n_Delay[2] = 0.35;
-		wSBr = n_A_LEFT_DEF_PLUS*10;
-		debug_atk+="\n --- (BattleCalc999) skill calc:159,384 ---";
-		debug_atk+="\n --- (BattleCalc999) %ATK ---";
-		debug_atk+="\nb_wbairitu2 (n_A_DMG[1]):not defined(manuell)";
-		wbairitu2 = (1 + n_A_ActiveSkillLV *0.3);
-		debug_atk+="\na_wbairitu2 (n_A_DMG[1]):"+wbairitu2;
-		if(n_A_ActiveSkill==384) {
-			wbairitu2 *= 2;
-			debug_atk+="\t\n --- (BattleCalc999) %*2 Soul Link ---";
-			debug_atk+="\t\n_wbairitu2 (n_A_DMG[1]):"+wbairitu2;
-		}
-		debug_atk+="\n --- (BattleCalc999) ATK ---";
-		debug_atk+="\nb_n_A_ATK:"+n_A_ATK;
-		n_A_ATK_w = Math.round(Math.floor(n_A_STR/10) * Math.floor(n_A_STR/10));
-		n_A_ATK = n_A_STR + n_A_ATK_w + Math.floor(n_A_DEX / 5) + Math.floor(n_A_LUK / 5);
-		debug_atk+="\na_n_A_ATK:"+n_A_ATK;
-		for(var i=0;i<=2;i++){
-			if(i==1) {
-				debug_dmg_avg=1;
-				debug_atk+="\n --- (BattleCalc999) dmg overall---";
-				debug_atk+="\nb_w_DMG[1]:"+w_DMG[i];
-				debug_atk+="\n --- (BattleCalc999) IP effect ---";
-				debug_atk+="\nb_n_A_ATK:"+n_A_ATK;
-				debug_atk+="\nb_n_A_ATK_IP:"+n_A_ATK_IP;
-			}
-			//ice pick effect com shield boomerang
-			if(EquipNumSearch(388) || EquipNumSearch(607)){
-				/*
-				//custom TalonRO not even sure if it's custom or supposed to be the regular calculation
-				//because the original calc's way is totally off
-				IP_1 = Math.round(n_A_ATK +(n_A_ATK*(n_B_DEF2[0]+n_B[14])/100)+n_A_WeaponLV_seirenATK);
-				IP_2 = Math.round(n_A_ATK +(n_A_ATK*(n_B_DEF2[1]+n_B[14])/100)+n_A_WeaponLV_seirenATK);
-				IP_3 = Math.round((n_A_ATK*(n_B_DEF2[2]+n_B[14])/100)+n_A_WeaponLV_seirenATK);
-				n_A_ATK_IP = IP_1 + IP_2 + IP_3;
-				*/
-				//custom TalonRO IP calculation
-				//TEST1
-				//old
-				/*
-				if (i==0)
-					n_A_ATK_IP = Math.round(n_A_ATK*(n_B_DEF2[2]+n_B[14])/100);
-				else if (i==1)
-					n_A_ATK_IP = Math.round(n_A_ATK*(n_B_DEF2[1]+n_B[14])/100);
-				else
-					n_A_ATK_IP = Math.round(n_A_ATK*(n_B_DEF2[0]+n_B[14])/100);
-				*/
-				//new
-				if (i==0)
-					n_A_ATK_IP = Math.round((n_A_ATK+ItemOBJ[n_A_Equip[5]][6])*(n_B_DEF2[2]+n_B[14])/100);
-				else if (i==1)
-					n_A_ATK_IP = Math.round((n_A_ATK+ItemOBJ[n_A_Equip[5]][6])*(n_B_DEF2[1]+n_B[14])/100);
-				else
-					n_A_ATK_IP = Math.round((n_A_ATK+ItemOBJ[n_A_Equip[5]][6])*(n_B_DEF2[0]+n_B[14])/100);
-
-				//wBC4 = Math.floor(wBC4 * (n_B_DEF2[1]+n_B[14])/100) +wBC4_3;
-			}else{n_A_ATK_IP = 0;}
-
-			if(i==1) {
-				debug_atk+="\na_n_A_ATK_IP:"+n_A_ATK_IP;
-				debug_atk+="\n --- (BattleCalc999) pierce effect ---";
-				debug_atk+="\nb_M_DEF1:"+M_DEF1+"\nb_M_DEF2:"+M_DEF2;
-			}
-			//pierce def weapons
-			if(EquipNumSearch(620) || EquipNumSearch(409) || EquipNumSearch(43)){
-				M_DEF1 = n_B[14];
-				M_DEF2 = n_B_DEF2[0];
-			}else if((EquipNumSearch(393) || EquipNumSearch(904)) && n_B[2] == 7){
-				M_DEF1 = n_B[14];
-				M_DEF2 = n_B_DEF2[0];
-			}else if((EquipNumSearch(392) || EquipNumSearch(401)) && n_B[2] == 3){
-				M_DEF1 = n_B[14];
-				M_DEF2 = n_B_DEF2[0];
-			}else if((EquipNumSearch(467) || EquipNumSearch(405) || EquipNumSearch(471)) && n_B[2] == 9){
-				M_DEF1 = n_B[14];
-				M_DEF2 = n_B_DEF2[0];
-			}else if(EquipNumSearch(394) && n_B[2] == 6){
-				M_DEF1 = n_B[14];
-				M_DEF2 = n_B_DEF2[0];
-			}else{
-				M_DEF1 = 0;
-				M_DEF2 = 0;}
-			if(i==1) {
-				debug_atk+="\na_M_DEF1:"+M_DEF1+"\na_M_DEF2:"+M_DEF2;
-			}
-			if(i==1) {
-				debug_atk+="\n --- (BattleCalc999) atk calc (IP incl) ---";
-				debug_atk+="\nb_w_DMG[1]:"+w_DMG[i];
-			}
-
-			//TEST1
-			//old
-			/*
-			if(EquipNumSearch(388) || EquipNumSearch(607))
-				w_DMG[i] = n_A_ATK_IP * wbairitu + ItemOBJ[n_A_Equip[5]][6];
-			else
-				w_DMG[i] = n_A_ATK * wbairitu + ItemOBJ[n_A_Equip[5]][6];
-			*/
-			//new
-			if(EquipNumSearch(388) || EquipNumSearch(607))
-				w_DMG[i] = n_A_ATK_IP * wbairitu;
-			else
-				w_DMG[i] = (n_A_ATK+ItemOBJ[n_A_Equip[5]][6]) * wbairitu;
-
-			if(i==1) {
-				debug_atk+="\na_w_DMG[1]:"+w_DMG[i];
-				debug_atk+="\n --- (BattleCalc999) atk-def (pierce incl) * %atk ---";
-				debug_atk+="\nb_w_DMG[1]:"+w_DMG[i];
-			}
-
-			//atk-def calculation without Ice Pick only
-			if(!EquipNumSearch(388) && !EquipNumSearch(607))
-				w_DMG[i] = Math.floor(w_DMG[i] * (100 - (n_B[14] - M_DEF1)) /100 - (n_B_DEF2[i] - M_DEF2));
-
-			if(i==1) {
-				debug_atk+="\na_w_DMG[1]:"+w_DMG[i];
-				debug_atk+="\n --- (BattleCalc999) %ATK (wbairitu2) ---";
-				debug_atk+="\nb_w_DMG[1]:"+w_DMG[i];
-			}
-
-			w_DMG[i] = Math.floor(w_DMG[i] * wbairitu2);
-
-			if(i==1) {
-				debug_atk+="\na_w_DMG[1]:"+w_DMG[i];
-				debug_atk+="\n --- (BattleCalc999) BaiCI effects + shield upgrade ---";
-				debug_atk+="\nb_BaiCI:"+w_DMG[i];
-			}
-			w_DMG[i] = BaiCI(w_DMG[i])+ wSBr;
-			if(i==1) {
-				debug_atk+="\na_BaiCI:"+w_DMG[i];
-			}
-			if(M_DEF1 != 0)
-				w_DMG[2] = w_DMG[1] = w_DMG[0];
-
-			if(w_DMG[i] < 1)w_DMG[i] = 1;
-			w_DMG[i] = Math.floor(w_DMG[i] * zokusei[n_B[3]][0]);
-
-			Last_DMG_A[i] = Last_DMG_B[i] = w_DMG[i];
-			InnStr[i] += Last_DMG_A[i];
-			if(i==1) {
-				debug_dmg_avg=0;
-				debug_atk+="\na_w_DMG[1]:"+w_DMG[i];
-			}
-		}
-		w_DMG[1] = (w_DMG[1] * w_HIT)/100;
-
-		CastAndDelay();
-		BattleCalc998();
-	}else if(n_A_ActiveSkill==324){ //Shield Chain
-		n_PerHIT_DMG = 0;
-		n_Enekyori=1;
-		n_A_Weapon_zokusei = 0;
-		wCast = 1 * n_A_CAST;
+		nb_hits = 5;
+		n_Enekyori = 1;
 		n_Delay[2] = 1;
-		wSBr = n_A_LEFT_DEF_PLUS;
-		wSC  = ItemOBJ[n_A_Equip[5]][6];
-
-		wbairitu2 = (1 + n_A_ActiveSkillLV *0.3);
-
-		n_A_ATK_w = Math.round(Math.floor(n_A_STR/10) * Math.floor(n_A_STR/10));
-		n_A_ATK   = n_A_STR + n_A_ATK_w + Math.floor(n_A_DEX / 5) + Math.floor(n_A_LUK / 5);
-		n_A_ATK   = n_A_ATK * wbairitu + wSC;
-		/*wSC -= 100;
-		if(wSC < 0)
-			wSC = 0;
-		wSC2 = [0,0,0];
-		wSC2[2] = 100 + wSC;
-		wSC2[1] = 100 + wSC/2;
-		wSC2[0] = 100*/
-		for(var i=0;i<=2;i++){
-			//alert("atk:"+n_A_ATK+"+15"+",wbairitu2:"+wbairitu2+",n_B[14]:"+n_B[14]+",n_B_DEF2[i]:"+n_B_DEF2[i]+",wSBr:"+wSBr);
-			//ziemlich gut: (aber nur weil 2.07 fail war, korrekt w�re 2.093
-			//w_DMG[i] = Math.floor(((n_A_ATK+15) * 2.07 * wbairitu2 *5) * (100 - n_B[14]) /100 - n_B_DEF2[i]) + (wSBr * 10);
-			if (i==1) {
-				debug_dmg_avg=1;
-				debug_atk+="\nb_BaiCI (w_DMG[1]):"+w_DMG[i]+"\n\tn_A_DMG[1]:"+n_A_DMG[i];
-			}
-			w_DMG[i] = BaiCI(n_A_ATK+n_tok[17]);
-			if (i==1) {
-				debug_dmg_avg=0;
-				debug_atk+="\na_BaiCI (w_DMG[1]):"+w_DMG[i];
-			}
-			//alert(w_DMG[i]);
-			// Shield Chain benefit from def bypass
-			// bDefIgnoreRace
-			effective_def = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B[14]); 
-			effective_vitdef = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B_DEF2[i]);
-			
-			// bDefIgnoreClass
-			effective_def *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
-			effective_vitdef *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
-			
-			w_DMG[i] = w_DMG[i] * wbairitu2 * 5;
-			w_DMG[i] = w_DMG[i] * (100 - effective_def) /100 - effective_vitdef;
-			w_DMG[i] = Math.floor(w_DMG[i]) + (wSBr * 10);
-			/*w_DMG[i] = (n_A_ATK * (100 - n_B[14]) /100 - n_B_DEF2[i]) * wbairitu2;
-			w_DMG[i] += wSC2[i];
-			w_DMG[i] = BaiCI(w_DMG[i]);*/
-			if(w_DMG[i] < 1)
-				w_DMG[i] = 1;
-			w_DMG[i] = Math.floor(w_DMG[i] * zokusei[n_B[3]][0]);
-
-			Last_DMG_A[i] = w_DMG[i];
-			Last_DMG_B[i] = Math.floor(w_DMG[i]/5);
-			InnStr[i] += Last_DMG_A[i] +" ("+ Last_DMG_B[i] + SubName[8] +"5hit)";
-			w_DMG[i] = Last_DMG_A[i];
+		n_PerHIT_DMG = 0;
+		wCast = n_A_CAST;
+		n_A_Weapon_zokusei = 0;
+		is_piercing_attack = 0; // Ice Pick 
+		shield_refine = n_A_LEFT_DEF_PLUS;
+		shield_weight  = ItemOBJ[n_A_Equip[5]][6];
+		
+		if (n_A_ActiveSkill == 159 || n_A_ActiveSkill == 384) // Shield Boomerang#159#384
+		{
+			wCast = 0;
+			nb_hits = 1;
+			is_piercing_attack = n_tok[23]; // Ice Pick effect disabled for Shield Chain
+			n_Delay[2] = (n_A_ActiveSkill == 384 ? 0.35 : 0.7);
 		}
-		w_DMG[1] = (w_DMG[1] * w_HIT)/100;
+
+		skill_ratio = (1 + n_A_ActiveSkillLV * 0.3);
+
+		damage = [0,0,0].map(x => Math.floor((n_A_ATK + shield_weight) * skill_ratio));
+		
+		// Apply skill modifiers
+		damage = damage.map(x => ApplySkillAtkBonus(x));
+		
+		// Apply status modifiers, in that case soul link
+		damage = damage.map(x => (n_A_ActiveSkill == 384 ? x * 2 : x));
+		
+		// Apply defense reduction
+		damage = ApplyDefReduction(damage, 0, is_piercing_attack);
+		
+		// Add refine bonus
+		damage = damage.map(x => x + shield_refine * 10);
+
+		// Apply modifiers
+		damage = damage.map(x => BaiCI(x));
+		
+		total_damage = damage.map(x => Math.floor(x * nb_hits));
+		
+		for (i = 0; i <= 2; ++i)
+		{
+			InnStr[i] += total_damage[i] + (nb_hits - 1 ? " ("+ damage[i] + SubName[8] + nb_hits + " hits)" : "");
+			w_DMG[i] = total_damage[i] * w_HIT / 100;
+		}
 
 		CastAndDelay();
 		BattleCalc998();
@@ -1704,18 +1536,18 @@ function BattleCalc999()
 			//100% accurate for below 200k damage.
 			//~1% error for 200k-400k damage.
 			//No data available for above 400k damage.
+			
+			//Lex Aeterna for Asura Strike after soft-cap
+			if(n_B_IJYOU[6] && wLAch==0){
+				w_DMG[b] *= 2;
+			}
 
 			if(w_DMG[b] > 200000){
 				var AsuraExcessD = w_DMG[b] - 200000;
 				var AsuraNerfD = (0.5963 - 0.1471) * Math.exp(-0.000002230 * AsuraExcessD) + 0.1471;
 				w_DMG[b] = Math.floor(200000 + (AsuraExcessD * AsuraNerfD));
 			}
-
-			//Lex Aeterna for Asura Strike after soft-cap
-			if(n_B_IJYOU[6] && wLAch==0){
-				w_DMG[b] *= 2;
-			}
-
+			
 			Last_DMG_A[b] = Last_DMG_B[b] = w_DMG[b]
 
 			InnStr[b] += Last_DMG_A[b];
@@ -6357,7 +6189,7 @@ with(document.calcForm){
 		myInnerHtml("MONSTER_IJYOU",str,0);
 		B_IJYOUSW.checked = 1;
     //Skill Array
-		var name_SKILL = ["Provoke (Non Undead)","Quagmire","Poison","Blind","Frozen (Non Undead)","Blessing (Demon/Undead)","Lex Aeterna","Stun","Sleep","Stone","Curse","Agility Down","Signum Crucis","Strip Weapon","Strip Shield","Strip Armor","Strip Helm","Spider Web","Mind Breaker","Slow Grace","Down Tempo","Eska","Eske","Elemental Change (Sage Skill)","Flying"];
+		var name_SKILL = ["Provoke (Non Undead)","Quagmire","Poison","Blind","Frozen (Non Undead)","Blessing (Demon/Undead)","Lex Aeterna","Stun","Sleep","Stone","Curse","Agility Down","Signum Crucis","Strip Weapon","Strip Shield","Strip Armor","Strip Helm","Spider Web","Mind Breaker","Slow Grace","Down Tempo","Eska","Eske","Elemental Change (Sage Skill)","Fling"];
 		var html_SKILL = new Array();
 		for(i=0;i<=20;i++)
 			myInnerHtml("BI"+i+"_1",name_SKILL[i],0);
@@ -6677,20 +6509,6 @@ Race - n_B[2] = raceID - example n_B[2] = 3, Plant
 8 - Angel
 9 - Dragon
 */
-//Engkanto card
-if(CardNumSearch(555)){
-	//Ignore 25% Plant monster defense
-	if(n_B[2] == 3){
-		n_B[14] = Math.round(n_B[14]/100*(100-25*CardNumSearch(555)));
-	}
-}
-
-	//custom TalonRO Thanatos Card
-	if(CardNumSearch(166)){
-		//Boss def /100 * (100 - 30*(if card exist/true = 1)
-		//Example - Arc angeling, 54 / 100 * (100 - 30 * 1) = 37.8, math.round = 38
-		n_B[14] = Math.round(n_B[14]/100*(100-30*CardNumSearch(166)));
-	}
 
 	n_B2[25] = Math.floor(n_B[7] / 2) + n_B[9];
 	n_B2[26] = n_B[5] + n_B[10];
@@ -6816,10 +6634,8 @@ if(CardNumSearch(555)){
 				n_B[8]=0;
 		}
 	}
-/* [START] */
 
-
-if(n_B_IJYOU[1]){
+	if(n_B_IJYOU[1]){
 		var w;
 		var w2;
 		if(Taijin){
@@ -6854,118 +6670,78 @@ if(n_B_IJYOU[1]){
 	if(n_B_IJYOU[16] && Taijin==0)
 		n_B[9] -= Math.floor(n_B[9] * 40 /100);
 
-
-
 	if(n_B[19] == 0){
 		if(n_B_IJYOU[10])
 			n_B[11] = 0;
 	}
 
-
-
-	if(Taijin==0){
+	if (Taijin == 0)
+	{
 		n_B[23] = n_B[7];
 		n_B[24] = n_B[7] + (Math.floor(n_B[7]/20) * Math.floor(n_B[7]/20) -1);
-	//custom TalonRO Thanatos Card
-	if(CardNumSearch(166)){
-		n_B[23] = Math.round(n_B[23]/100*(100-30*CardNumSearch(166)));
-		n_B[24] = Math.round(n_B[24]/100*(100-30*CardNumSearch(166)));
 	}
-		if(n_B[23] > n_B[24])
-			n_B[24] = n_B[23];
+	
+	// Manage monster defense reduction
+
+	// Apply Status Change affecting defense
+	// Status that only affect hard def
+	def_sc_reduction = 1;
+
+	if (!Taijin) // Not applied to players
+		def_sc_reduction *= 1 + 0.15 * n_B_IJYOU[14]; // SC_STRIPSHIELD
+	
+	if (n_B_IJYOU[12] && (n_B[2]==6||n_B[3]>=90)) // SC_SIGNUMCRUCIS
+		def_sc_reduction *= 1 + 0.1 + n_B_IJYOU[12] * 0.04;
+	
+	if (!n_B[19] && n_B[2] != 1)
+	{
+		def_sc_reduction *= 1 + 0.5 * n_B_IJYOU[2]; // SC_FREEZE
+		def_sc_reduction *= 1 + 0.5 * n_B_IJYOU[2]; // SC_STONE
 	}
+	
+	def_sc_reduction -= 1;
+	def_sc_reduction = Math.min(1, def_sc_reduction);
+	n_B[14] -= Math.floor(n_B[14] * def_sc_reduction);
+	
+	// Status that affect hard and vit def
+	def_sc_reduction = 1;
+	
+	if (n_B_IJYOU[0] && n_B[19] == 0 && n_B[3] < 90) // SC_PROVOKE
+		def_sc_reduction *= (1.05 + n_B_IJYOU[0] * 0.05);
+	
+	def_sc_reduction *= 1 + 0.50 * n_B_IJYOU[22]; // SC_SKE
+	def_sc_reduction *= 1 + 0.05 * n_B_IJYOU[24]; // SC_FLING
+	
+	if (!n_B[19])
+		def_sc_reduction *= 1 + 0.25 * n_B_IJYOU[2]; // SC_POISON
+	
+	def_sc_reduction -= 1;
+	def_sc_reduction = Math.min(1, def_sc_reduction);
+	n_B[14] -= Math.floor(n_B[14] * def_sc_reduction);
+	n_B[23] -= Math.floor(n_B[23] * def_sc_reduction);
+	n_B[24] -= Math.floor(n_B[24] * def_sc_reduction);
+	
+	if (n_B_KYOUKA[9]) // SC_KEEPING
+		n_B[14] = 90;
+	
+	if (n_B_IJYOU[20]) // SC_ETERNALCHAOS
+	{
+		n_B[23] = 0;
+		n_B[24] = 0;
+	}
+	
+	// Apply item script bonus affecting defense
+	def_race_reduction = n_tok[180 + n_B[2]];
+	def_class_reduction = (n_B[19] ? n_tok[22] : n_tok[21]);
+	def_reduction = Math.min(100, def_race_reduction + def_class_reduction);
+
+	n_B[14] = Math.ceil(n_B[14] * (100 - def_reduction) / 100);
+	n_B[23] = Math.ceil(n_B[23] * (100 - def_reduction) / 100);
+	n_B[24] = Math.max(n_B[23], Math.ceil(n_B[24] * (100 - def_reduction) / 100));
 	n_B[25] = Math.floor(n_B[7] / 2) + n_B[9];
 	n_B[26] = n_B[5] + n_B[10];
 	n_B[27] = n_B[5] + n_B[8];
 
-
-	var wDEF = 0;
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[0]!=0 && n_B[3]<90)
-			wDEF += 5 + n_B_IJYOU[0] * 5;
-	}
-	if(Taijin==0){
-		if(n_B_IJYOU[22])
-			wDEF += 50;
-	}
-	if(Taijin==0){
-		if(n_B_IJYOU[24])
-			wDEF += 5 * n_B_IJYOU[24];
-	}
-	if(wDEF > 100)
-		wDEF=100;
-	if(Taijin==0)
-		n_B[14] -= Math.floor(n_B[14] * wDEF /100);
-
-
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[2])
-			n_B[14] -= Math.floor(n_B[14] * 25 / 100);
-	}
-
-	var w = 0;
-	w += n_tok[290];
-	w += n_tok[300+n_B[2]];
-	if(n_A_ActiveSkill==324 || n_A_ActiveSkill==159 || n_A_ActiveSkill==384 || n_A_ActiveSkill==162 || n_A_ActiveSkill==193 || n_A_ActiveSkill==405 || n_A_ActiveSkill==438)
-		w = 0;
-	if(w){
-		if(w < 0)
-			w = 0;
-		n_B[14] -= Math.floor(n_B[14] * w /100);
-	}
-
-	if(n_B_IJYOU[14] && Taijin==0)
-		n_B[14] -= Math.floor(n_B[14] * 15 /100);
-
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[4] && n_B[2]!=1)
-			n_B[14] -= Math.floor(n_B[14] * 50 /100);
-	}
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[9] && n_B[2]!=1)
-			n_B[14] -= Math.floor(n_B[14] * 50 /100);
-	}
-	if(n_B_KYOUKA[9]) // NPC_KEEPING set the hard DEF to 90
-		n_B[14] = 90;
-
-	if(n_B_IJYOU[12] && (n_B[2]==6||n_B[3]>=90))
-		n_B[14] -= Math.floor(n_B[14] * (10 + n_B_IJYOU[12] * 4) /100);
-
-	if(n_B_IJYOU[20] && Taijin==0)
-		n_B[14] = 0;
-
-
-	n_B[23] -= Math.floor(n_B[23] * wDEF /100);
-	n_B[24] -= Math.floor(n_B[24] * wDEF /100);
-
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[2]){
-			n_B[23] -= Math.floor(n_B[23] * 25 / 100);
-			n_B[24] -= Math.floor(n_B[24] * 25 / 100);
-		}
-	}
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[4] && n_B[2]!=1){
-			n_B[23] -= Math.floor(n_B[23] * 50 /100);
-			n_B[24] -= Math.floor(n_B[24] * 50 /100);
-		}
-	}
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[9] && n_B[2]!=1){
-			n_B[23] -= Math.floor(n_B[23] * 50 /100);
-			n_B[24] -= Math.floor(n_B[24] * 50 /100);
-		}
-	}
-
-	if(Taijin==0){
-		if(n_B_IJYOU[21])
-			n_B[24] += 90;
-	}
-
-	if(n_B_IJYOU[20]){
-		n_B[23] = 0;
-		n_B[24] = 0;
-	}
 
 	var w = 0;
 	w += n_tok[295];
@@ -6991,10 +6767,8 @@ if(n_B_IJYOU[1]){
 			n_B[25] -= Math.floor(n_B[25] * (n_B_IJYOU[18] * 12) / 100);
 	}
 
-	if(Taijin==0){
-		if(n_B_IJYOU[21])
+	if (Taijin == 0 && n_B_IJYOU[21]) // Eska set INT MDEF to 90
 			n_B[25] = 90;
-	}
 
 	if(n_B[19] == 0){
 		if(n_B_IJYOU[3]){
@@ -7257,44 +7031,37 @@ function calc()
 	if(SkillSearch(187))
 		wBC3_3danHatudouRitu = 30 - SkillSearch(187);
 
-	wDA = SkillSearch(13) * 5;
-	if(n_A_WeaponType != 1)
-		wDA = 0;
-	if(CardNumSearch(43)){
-		if(SkillSearch(13) > 1)
-			wDA = SkillSearch(13) * 5;
-		else
-			wDA = 5;
-	}
-	if(EquipNumSearch(399) || EquipNumSearch(1348)){ //Nagan/Nagan [Rental] double attack - [Loa] -2018-06-26
-			wDA = 25;
-	}
-	if(EquipNumSearch(570) && n_A_WeaponType != 0){
-		if(SkillSearch(13) > 1)
-			wDA = SkillSearch(13) * 5;
-		else
-			wDA = 10;
-	}
-	// //if(EquipNumSearch(399)){
-	// if(EquipNumSearch(399) || EquipNumSearch(1348)){ //custom TalonRO rental: enable Double Attack lv 5 for Nagan R
-	// 	if(SkillSearch(13) > 5)
-	// 		wDA = SkillSearch(13) * 5;
-	// 	else
-	// 		wDA = 25;
-	// }
-	if(EquipNumSearch(1495)){ //custom TalonRO rental: enable Double Attack lv 1 for Snake Head Hat
-		if(SkillSearch(13) > 1)
-			wDA = SkillSearch(13) * 5;
-		else
-			wDA = 5;
-	}
-	if(n_A_WeaponType == 17){
+	// Manage [Double Attack]
+	wDA = 0;
+	
+	if (1 == n_A_WeaponType) // Only applies to Dagger
+		wDA = SkillSearch(13) * 5;
+		
+	// Sidewinder Card#43 - Enable [Double Attack] Lv 1 on any weapon type
+	if (CardNumSearch(43))
+		wDA = Math.max(5, SkillSearch(13) * 5);
+	
+	// Nagan#399, Nagan [Rental]#1348 - Enable [Double Attack] Lv 5
+	if (EquipNumSearch(399) || EquipNumSearch(1348))
+		wDA = Math.max(25, SkillSearch(13) * 5);
+
+	// Baby Chick#570 - Enable [Double Attack] Lv 2, does not apply on Fist
+	if (EquipNumSearch(570) && n_A_WeaponType)
+		wDA = Math.max(10, SkillSearch(13) * 5);
+
+	// Snake Head Hat#1495 - Enable [Double Attack] Lv 1, does not apply on Fist
+	if (EquipNumSearch(1495) && n_A_WeaponType)
+		wDA = Math.max(5, SkillSearch(13) * 5);
+	
+	// Chain Action#427 - Similar behaviour as Double Attack
+	if (n_A_WeaponType == 17){
 		wDA = SkillSearch(427) * 5;
 		if(CardNumSearch(43))
 			wDA = SkillSearch(427) * 5 + ((100 - SkillSearch(427) * 5) * 5 /100);
 		if(EquipNumSearch(570))
 			wDA = SkillSearch(427) * 5 + ((100 - SkillSearch(427) * 5) * 10 /100);
 	}
+
 	w_HIT_DA = w_HIT;
 	if(wDA != 0 && n_A_WeaponType != 17){
 		w_HIT_DA = w_HIT_DA * (100 + SkillSearch(13)) /100;
@@ -8090,6 +7857,49 @@ function SkillSearch(n)
 	return 0;
 }
 
+function ApplyDefReduction(damage, ignore_def, pierce_def)
+{
+	if (!ignore_def)
+	{
+		vit_def = [0, 0, 0]
+		vit_def_bonus = Math.floor(n_B_DEF2[0] / 20) * Math.floor(n_B_DEF2[0] / 20);
+		
+		if (Taijin == 0 && n_B_IJYOU[21]) // Eska increases the random part of the formula by 100
+			vit_def_bonus += 100;
+		
+		vit_def[0] = n_B_DEF2[2];
+		vit_def[1] = n_B_DEF2[1] + Math.floor(vit_def_bonus / 2);
+		vit_def[2] = n_B_DEF2[0] + vit_def_bonus;
+		
+		effective_def = n_B[14];
+
+		for (i = 0; i <= 2; ++i)
+		{
+			if (pierce_def) // bDefRatioAtkClass, Investigate
+			{
+				
+				effective_def = n_B[14] + vit_def[i];
+				damage[i] = Math.floor(damage[i] * effective_def / 100);
+			}
+			else
+			{
+				/* Defense reduction managed directly in monster properties
+				// bDefIgnoreRace
+				effective_def = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B[14]); 
+				effective_vitdef = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B_DEF2[i]);
+				
+				// bDefIgnoreClass
+				effective_def *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
+				effective_vitdef *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);*/
+			
+				effective_vitdef = n_B_DEF2[i];
+				damage[i] = Math.floor(damage[i] * (100 - effective_def) / 100 - effective_vitdef);
+			}
+		}
+	}
+	
+	return damage;
+}
 
 function BattleCalc4(wBC4,wBC4_2,wBC4_3){
 	if(wBC4_3==0)
@@ -8101,9 +7911,9 @@ function BattleCalc4(wBC4,wBC4_2,wBC4_3){
 	if (192 == n_A_ActiveSkill)
 		wBC4_3 *= SkillSearch(185);
 	
-	if(n_A_ActiveSkill==275)
+	if(n_A_ActiveSkill==275) // Magic Crasher#275
 		return Math.floor(wBC4 * (100 - n_B[14]) /100) - n_B_DEF2[wBC4_2] + wBC4_3;
-	if(n_A_ActiveSkill==432)
+	if(n_A_ActiveSkill==432) // Piercing Shot#432
 		return wBC4 + wBC4_3;
 	//custom TalonRO fix ignore effects on left/offhand like Ice Pick or Weeder Knife
 	if(n_tok[180+n_B[2]] >= 1 && IgnoreEffectOnLeftHand == 0)
@@ -8116,32 +7926,13 @@ function BattleCalc4(wBC4,wBC4_2,wBC4_3){
 		return wBC4 + wBC4_3;
 	if(SkillSearch(364))
 		return wBC4 + wBC4_3;
+
 	//custom TalonRO fix ignore effects on left/offhand like Ice Pick or Weeder Knife
-	if(n_tok[23] == 0 || IgnoreEffectOnLeftHand == 1){
-	//original
-	//if(n_tok[23] == 0)
-		if (debug_dmg_avg) {
-			debug_atk+="\n --- (BattleCalc4) atk-def ---";
-			debug_atk+="\nb_wBC4:"+wBC4+"\n\tn_B_DEF2[wBC4_2]:"+n_B_DEF2[wBC4_2]+"\n\twBC4_3:"+wBC4_3;
-		}
+	if(n_tok[23] == 0 || IgnoreEffectOnLeftHand == 1)
 		wBC4 = Math.floor(wBC4 * (100 - n_B[14]) /100) - n_B_DEF2[wBC4_2] + wBC4_3;
-		if (debug_dmg_avg)
-			debug_atk+="\na_wBC4:"+wBC4;
-	}else{
-		if (debug_dmg_avg) {
-			debug_atk+="\n --- (BattleCalc4) atk-def (Ice Pick mode)---";
-			debug_atk+="\nb_wBC4:"+wBC4+"\n\tn_B_DEF2[1]:"+n_B_DEF2[1]+"\n\tn_B[14]:"+n_B[14]+"\n\twBC4_3:"+wBC4_3;
-		}
-		if(wBC4_2==0){
-			wBC4 = Math.floor(wBC4 * (n_B_DEF2[2]+n_B[14])/100) +wBC4_3;
-		}else if(wBC4_2==1){
-			wBC4 = Math.floor(wBC4 * (n_B_DEF2[1]+n_B[14])/100) +wBC4_3;
-		}else{
-			wBC4 = Math.floor(wBC4 * (n_B_DEF2[0]+n_B[14])/100) +wBC4_3;
-		}
-		if (debug_dmg_avg)
-			debug_atk+="\na_wBC4:"+wBC4;
-	}
+	else
+		wBC4 = Math.floor(wBC4 * (n_B_DEF2[2 - wBC4_2]+n_B[14])/100) +wBC4_3;
+
 	return wBC4;
 }
 

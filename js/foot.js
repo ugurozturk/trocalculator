@@ -165,8 +165,8 @@ with(document.calcForm){
 	}
 }}
 
-function StAllCalc()
-{with(document.calcForm){
+function StAllCalc(){
+with(document.calcForm){
 	BabyJobs();
 	n_A_JobSet();
 	VanillaWep();
@@ -1216,8 +1216,7 @@ function StAllCalc()
 
 	if(n_Tensei) // Trans job health bonus
 		n_A_MaxHP = n_A_MaxHP * 1.25;
-	if(eval(A_youshi.checked))
-		n_A_MaxHP = n_A_MaxHP * 0.7;
+	//if(eval(A_youshi.checked)) n_A_MaxHP = n_A_MaxHP * 0.7; Currently not applied on rAthena
 	n_A_MaxHP = (n_A_MaxHP - wHPSL) * (100 + n_A_VIT) / 100;
 
 
@@ -3309,7 +3308,6 @@ function StAllCalc()
 
 	n_A_ASPD = (200 - n_A_ASPD) / 50;
 
-
 	n_Delay[1] = Math.floor(n_A_ASPD * 1000)/1000;
 	if(n_A_ActiveSkill==17)
 		n_Delay[1] = Math.floor(n_A_ASPD *75)/100;
@@ -3321,125 +3319,129 @@ function StAllCalc()
 			sandanDelay += 0.3;
 	}
 
-	n_A_CAST = 1 - n_A_DEX / 150;
-	if(n_A_CAST < 0)
-		n_A_CAST = 0;
+	n_A_CAST = Math.max(0, 1 - n_A_DEX / 150);
 
-	var w=100;
-	w += n_tok[73];
-	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1279)){w -= 3;}//Capricorn Diadem
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1289)){w -= 3;}//Sagittarius Diadem
-	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1289)){w -= 2;}//Sagittarius Diadem
-	if(n_A_JobSearch()==5 && CardNumSearch(454))
-		w -= 15;
-	if((n_A_JOB==18 || n_A_JOB==32) && CardNumSearch(460))
-		w -= 20;
-	if(EquipNumSearch(750))
-		w -= n_A_Weapon_ATKplus;
-	if(n_A_card[8]==177)
-		w -= n_A_HEAD_DEF_PLUS;
-	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
-		w -= 5;
-	if(n_A_PassSkill3[2] != 0)
-		w -= ((w/100)*((n_A_PassSkill3[2] * 3 + n_A_PassSkill3[32] + Math.floor(n_A_PassSkill3[22] /10))/100))*100;//eathena formula
-		//w -= n_A_PassSkill3[2] * 3 + n_A_PassSkill3[32] + Math.floor(n_A_PassSkill3[22] /10);//aegis formula
-	if(TimeItemNumSearch(1))
-		w -= 50;
-	if(EquipNumSearch(1005)& EquipNumSearch(442)){
-		w -= (n_A_Weapon_ATKplus/2);}
+	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1279)) // Capricorn Diadem
+		n_tok[73] -= 3;
+
+	// Sagittarius Diadem
+	if (n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1289))
+		n_tok[73] -= 3;
+	if (n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1289))
+		n_tok[73] -= 2;
+	
+	if (n_A_JobSearch()==5 && CardNumSearch(454))
+		n_tok[73] -= 15;
+		
+	if ((n_A_JOB==18 || n_A_JOB==32) && CardNumSearch(460))
+		n_tok[73] -= 20;
+		
+	if (EquipNumSearch(750))
+		n_tok[73] -= n_A_Weapon_ATKplus;
+		
+	if (n_A_card[8]==177)
+		n_tok[73] -= n_A_HEAD_DEF_PLUS;
+		
+	if (n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
+		n_tok[73] -= 5;
+
+	if (EquipNumSearch(1005)& EquipNumSearch(442))
+		n_tok[73] -= (n_A_Weapon_ATKplus/2);
+
 	//parade hat [refine >= 6] -5 cast time - [Loa] 2018-07-02
-	if(EquipNumSearch(1036) && n_A_HEAD_DEF_PLUS >= 6){
-		w -= 5;
-	}
-	//custom TalonRO SQI Bonus Mjolnir: 30% cast reduction with Charge Attack
-	if(n_A_ActiveSkill == 308)
-		if(EquipNumSearch(84))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==106) {
-					w -= 30;
-					break;
-				}
+	if (EquipNumSearch(1036) && n_A_HEAD_DEF_PLUS >= 6)
+		n_tok[73] -= 5;
+
 	//custom TalonRO Magical Booster & Staff of Piercing Combo
-	if(EquipNumSearch(1430)& EquipNumSearch(645))
-		if(n_A_Weapon_ATKplus==10)
-			w -= 10;
+	if (EquipNumSearch(1430)& EquipNumSearch(645) && 10 == n_A_Weapon_ATKplus)
+		n_tok[73] -= 10;
+
 	//custom TalonRO Lapine Staff
-	if(EquipNumSearch(1486))
-			w -= n_A_Weapon_ATKplus;
-	//custom TalonRO Little Feather Hat & Falken Blitz combo: -15% cast time for Sharp Shooting
-	if(EquipNumSearch(1489) && n_A_ActiveSkill == 272)
-		w -= 15;
-	//custom TalonRO Lacrima Stick: 8% cast reduction with Storm Gust
-	if(n_A_ActiveSkill == 131 && EquipNumSearch(1169) && n_A_Weapon_ATKplus == 10)
-		w -= 8;
-	//custom TalonRO Geffenia Water Book & Lacrima Stick combo: 2% cast reduction each shield refine
-	if(n_A_ActiveSkill == 131 && EquipNumSearch(1521)){
-		w -= n_A_LEFT_DEF_PLUS*2;
-	}
+	if (EquipNumSearch(1486))
+		n_tok[73] -= n_A_Weapon_ATKplus;
+
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_DEX >= 80 && EquipNumSearch(1526))
-		w -= 5;
+	if (SU_DEX >= 80 && EquipNumSearch(1526))
+		n_tok[73] -= 5;
+		
+	if (n_A_PassSkill3[2]) // Poem of Bragi, 3 * Skill LV + Musical Lesson LV + DEX / 10;
+		n_tok[73] -= n_A_PassSkill3[2] * 3 + n_A_PassSkill3[32] + Math.floor(n_A_PassSkill3[22] / 10);
+
+	n_tok[73] = Math.max(0, n_tok[73]);
+
+	n_A_CAST *= n_tok[73] / 100;
+
+	// Skill cast time reduction script bonus
+	skill_cast_reduction = 100;
+
+	// Sharp Shooting#272 - Little Feather Hat & Falken Blitz combo#1489 - Reduce Sharp Shooting casting time by 15%
+	if (n_A_ActiveSkill == 272 && EquipNumSearch(1489))
+		skill_cast_reduction -= 15;
+	
 	//[TalonRO Custom - 2019-10-30 - Heavy Sword - Decreases cast time of [Charge Attack] by 3% per refine
-	if(EquipNumSearch(1680) && n_A_ActiveSkill == 308) {
-		w -= (3 * n_A_Weapon_ATKplus);
+	if (n_A_ActiveSkill == 308 && EquipNumSearch(1680))
+		skill_cast_reduction -= (3 * n_A_Weapon_ATKplus);
+		
+	// Storm Gust#131
+	if (n_A_ActiveSkill == 131)
+	{
+		// Lacrima Stick#1169 - 8% cast reduction with Storm Gust
+		if (n_A_Weapon_ATKplus == 10 && EquipNumSearch(1169))
+			skill_cast_reduction -= 8;
+
+		// custom TalonRO Geffenia Water Book & Lacrima Stick combo: 2% cast reduction each shield refine
+		if (EquipNumSearch(1521))
+			skill_cast_reduction -= n_A_LEFT_DEF_PLUS*2;
 	}
+
 	/*
 		Brave Carnage Katar
 		[Refine level 7~10]
 		Reduce cast time of [Meteor Assault] by 15%.
 	*/
-	if(EquipNumSearch(909) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264) {
-		w -= 15;
-	}
+	if (n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264 && EquipNumSearch(909))
+		skill_cast_reduction -= 15;
+	
+	skill_cast_reduction -= StPlusCalc2(7000 + n_A_ActiveSkill);
+	skill_cast_reduction = Math.max(0, skill_cast_reduction - StPlusCard(7000 + n_A_ActiveSkill));
 
-	if(w < 0){w = 0;}
+	n_A_CAST *= skill_cast_reduction / 100;
 
-	n_B_Cast = w;
-	n_A_CAST *= w /100;
-
-	w = 100;
-	if(StPlusCalc2(7000+n_A_ActiveSkill) != 0)
-		w -= StPlusCalc2(7000+n_A_ActiveSkill);
-	if(StPlusCard(7000+n_A_ActiveSkill) != 0)
-		w -= StPlusCard(7000+n_A_ActiveSkill);
-	/*if(n_A_ActiveSkill==321 || n_A_ActiveSkill==197)
-		if(SkillSearch(195) && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1097))
-			w -= 100;*/
-	if(w < 0)
-		w = 0;
-	n_A_CAST *= w /100;
-
-	if(n_A_PassSkill2[13])
+	// Skill cast time reduction
+	if (n_A_PassSkill2[13]) // Suffragium
 		n_A_CAST *= (100 - 15 * n_A_PassSkill2[13]) /100;
-	if(SkillSearch(322))
-		n_A_CAST = n_A_CAST /2;
+	if (SkillSearch(322)) // Memorize#322
+		n_A_CAST = n_A_CAST / 2;
 	
 	// Seductive Bathory Cocktail - Cast time -25% (not stacking)
 	if (seductive_bathory_cocktail)
 		n_A_CAST *= 0.75;
 
-	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
+	if (n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
 		n_tok[74] += 5;
-	if(EquipNumSearch(936))
+	if (EquipNumSearch(936))
 		n_tok[74] += (n_A_Weapon_ATKplus * 3 / 2);
+
 	//custom TalonRO Magical Booster & Staff of Piercing Combo
-	if(EquipNumSearch(1430)& EquipNumSearch(473)){
-		if(n_A_Weapon_ATKplus==10){
-			n_tok[74] += 10;
-		}
-	}
+	if (10 == n_A_Weapon_ATKplus && EquipNumSearch(1430) && EquipNumSearch(473))
+		n_tok[74] += 10;
 
 	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse/Glorious Arc Wand - Every /2 upgrade gives after-cast delay -1%] [Amor]
-	if(EquipNumSearch(1095) || EquipNumSearch(1095) ){
+	if (EquipNumSearch(1095) || EquipNumSearch(1095))
 		n_tok[74] += (1 * Math.floor(n_A_Weapon2_ATKplus / 2));
-	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar/Glorious Guitar/Glorious Lariat - Every Upgrade gives after-cast delay -1%] [Amor]
-	if(EquipNumSearch(1090) || EquipNumSearch(1092) || EquipNumSearch(1093)){
-		n_tok[74] += n_A_Weapon2_ATKplus;
-	}
 
-	var w = n_A_PassSkill3[2]; // Musical Lesson
-	if(w){
+	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar/Glorious Guitar/Glorious Lariat - Every Upgrade gives after-cast delay -1%] [Amor]
+	if (EquipNumSearch(1090) || EquipNumSearch(1092) || EquipNumSearch(1093))
+		n_tok[74] += n_A_Weapon2_ATKplus;
+
+	// Skill delay reduction script bonus
+	skill_delay_reduction = StPlusCalc2(8000 + n_A_ActiveSkill);
+	skill_delay_reduction += StPlusCard(8000 + n_A_ActiveSkill);
+	n_tok[74] = n_tok[74] ? Math.floor(n_tok[74] * (1 + skill_delay_reduction / 100)) : skill_delay_reduction;
+
+	musical_lesson_lv = n_A_PassSkill3[2]; // Musical Lesson
+	if (musical_lesson_lv)
+	{		
 		// custom TalonRO Poem of Bragi after cast delay
 		// "we strongly think that the stacking of Bragi with items that grant ACD reduction is something to avoid" - GM Team, applied only to PvM
 		if (n_A_PassSkill3[45]) // PvP Mode
@@ -3448,8 +3450,7 @@ function StAllCalc()
 			n_tok[74] = w * 3 + n_A_PassSkill3[32] * 2 + Math.floor(n_A_PassSkill3[29] / 5); // Override all previous acd reduction bonus
 	}
 	
-	if(n_tok[74] > 100)
-		n_tok[74] = 100;
+	n_tok[74] = Math.min(100, n_tok[74]);
 
 	n_A_HPR = Math.floor(n_A_VIT /5) + Math.floor(n_A_MaxHP /200);
 	if(n_A_HPR < 1)
@@ -4013,9 +4014,9 @@ function StAllCalc()
 	if(CardNumSearch(536) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23 || n_A_JOB == 15 || n_A_JOB == 33)) {
 		n_tok[91] += 1 * Math.floor(n_A_HEAD_DEF_PLUS/2);
 	}
-	//[TalonRO Custom - Assaulter Lance  + 25% DEF Bypass for Knight/ Lord Knight] [Amor]
+	//[TalonRO Custom - Assaulter Lance  + 25% DEF Bypass on Demi-Human for Knight/ Lord Knight] [Amor]
 	if(EquipNumSearch(904) && n_A_JobSearch2() == 7){
-		n_tok[307] += 25;
+		n_tok[187] += 25;
 	}
 	//[TalonRO Custom - Glorious Cleaver 1088/Glorious Flamberge 1077/Glorious Gatiling Gun 1101/Glorious Guitar 1092/Glorious Lariat 1093/Glorious Rifle 1100/Glorious Shotgun 1102/Glorious Spear 1081/Glorious Tablet 1094/Glorious Two Handed Axe 1087 + 1% DEF Bypass for every upgrade] [Amor]
 	if(EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1101) || EquipNumSearch(1092) || EquipNumSearch(1093) || EquipNumSearch(1100) || EquipNumSearch(1102) || EquipNumSearch(1081) || EquipNumSearch(1094) || EquipNumSearch(1087)){
@@ -6036,6 +6037,12 @@ function KakutyouKansuu(){
 		SM_MOD = 0;
 		TU_MOD = 0; //[Custom TalonRO - 2018-06-02 - New Attack Modifier for Turtles] [Kato]
 
+		// Frame update not dynamic, it requires OnCalc to be triggered in order to retrieve
+		// - Attack type
+		// - Attack element (can be simulated with manual element)
+		// It would require to have access to on demand skill information, so in the meantime BattleCalc999() is used. 
+		BattleCalc999();
+
 		B_MOD += (2 == n_Enekyori ? n_tok[97] : n_tok[26] + n_tok[80]);
 
 		for(var i=0;i<=7;i++){
@@ -6170,7 +6177,7 @@ function KakutyouKansuu(){
 		myInnerHtml("A_KakutyouData",wkk9,0);
 	}else if(wKK == 10){
 		var wkk10;
-		wkk10 = "<b>Cast Time: </b>"+ Math.round(n_A_CAST *10000)/100 + " % [ "+(100 - n_B_Cast) + " % " + (seductive_bathory_cocktail ? "(10 %) " : "") + "and "+n_A_DEX+" DEX ]<BR>";
+		wkk10 = "<b>Cast Time: </b>"+ Math.round(n_A_CAST *10000)/100 + " % [ "+(100 - n_tok[73]) + " % " + (seductive_bathory_cocktail ? "(25 %) " : "") + "and "+n_A_DEX+" DEX ]<BR>";
 		wkk10 += "<b>Cast Delay: </b>"+ Math.round((100 - n_tok[74]) *100)/100 +" %";
 		myInnerHtml("A_KakutyouData",wkk10,0);
 	}else if(wKK == 11){
@@ -6270,54 +6277,101 @@ function KakutyouKansuu(){
 
 		myInnerHtml("A_KakutyouData",wkk11,0);
 	}
-	else if(wKK == 12){
-		H_Bonus = 1;
-		H_Bonus2 = 1;
-		H_Bonus3 = 1;
-		if(n_A_JOB == 19 || n_A_JOB == 33 ){
-		slv = eval(document.calcForm.SL_LV.value);
-		evit = eval(document.calcForm.E_VIT.value);
-		eint = eval(document.calcForm.E_INT.value);
-		potr = eval(document.calcForm.POT_RLevel.value);
-		isp = eval(document.calcForm.ISP.value);
-		irp = eval(document.calcForm.IRP.value);
-		rank_bonus = eval(document.calcForm.RNK_BNS.value);
-		pot1 = eval(document.calcForm.PP.value);
-		prate1 = Potion_Type_2[pot1][1];
-		prate2 = Potion_Type_2[pot1][2];
+	else if(wKK == 12)
+	{
+		pp_lv = eval(document.calcForm.pp_lv.value);
+		spp_lv = eval(document.calcForm.spp_lv.value);
+		source_lv = eval(document.calcForm.pp_source_lv.value);
+		hp_recovery_lv = eval(document.calcForm.pp_isp_lv.value);
+		sp_recovery_lv = eval(document.calcForm.pp_irp_lv.value);
+		target_vit = eval(document.calcForm.pp_target_vit.value);
+		target_int = eval(document.calcForm.pp_target_int.value);
+		//potion_rank = eval(document.calcForm.pp_potion_rank.value); Rank not taken into consideration for PP/SPP
+		pp_consumable = eval(document.calcForm.pp_consumable.value);
+		pp_healpower = eval(document.calcForm.pp_heal_rate_bonus.value);
+		selected_consumable = eval(document.calcForm.pp_consumable.value);
+		is_source_linked = eval(document.calcForm.pp_source_link.checked);
+		learning_potion_lv = eval(document.calcForm.pp_learning_potion_lv.value);
+		pp_healpower2 = eval(document.calcForm.pp_received_heal_rate_bonus.value);
 
-		if(rank_bonus == 1){prate1 = prate1*1.5;}
-		if(rank_bonus == 1){prate2 = prate2*1.5;}
+		// Common bonus
+	
+		if (selected_consumable < 4)
+			relative_bonus = (1 + n_A_VIT * 2 / 100) * (1 + hp_recovery_lv / 10);
+		else
+			relative_bonus = (1 + n_A_INT * 2 / 100) * (1 + sp_recovery_lv / 10);
 
-		if(n_A_JOB == 33){
-			pot2 = eval(document.calcForm.SPP.value);
-			prate3 = Potion_Type_3[pot2][1];
-			prate4 = Potion_Type_3[pot2][2];}
+		rank_bonus = 1
+		/* Rank not taken into consideration for PP/SPP
+		if (potion_rank)
+			rank_bonus = (1 + potion_rank * 0.25); */
 
-		H_Bonus += n_tok[93] / 100;
-		H_HEALS = 1+irp*.1;//Increase Recuperative Power (10%xlv da skill que se tem, max 10)
-		S_HEALS = 1+isp*.1;//Increase Spiritual Power(2%xlv da skill que se tem, max 10)
+		// Potion Pitcher
+		
+		link_bonus = 100 + (is_source_linked ? source_lv : 0);
+		bonus = (100 + pp_lv * 10 + learning_potion_lv * 5) * link_bonus / 10000 * relative_bonus * rank_bonus;
 
-		if(pot1 == 4){
-			potheal1 = Math.floor((prate1*(1+potr*.1+pot1*.05))*(1+slv/100)*(1+eint*.02)*S_HEALS);
-			potheal2 = Math.floor((prate2*(1+potr*.1+pot1*.05))*(1+slv/100)*(1+eint*.02)*S_HEALS);
-		}else{
-			potheal1 = Math.floor(((prate1*(1+potr*.1+pot1*.05))*(1+slv/100)*(1+evit*.02)*H_HEALS)*H_Bonus*H_Bonus2*H_Bonus3);
-			potheal2 = Math.floor(((prate2*(1+potr*.1+pot1*.05))*(1+slv/100)*(1+evit*.02)*H_HEALS)*H_Bonus*H_Bonus2*H_Bonus3);
+		// Retrieve all items bonus list
+		equipped_items = n_A_Equip.map(x => ItemOBJ[x]);
+		
+		// Retrieve all cards bonus list
+		equipped_cards = n_A_card.map(x => cardOBJ[x]);
+		
+		// Merge into one unique list to simplify underneath reduce
+		active_bonus = equipped_items.concat(equipped_cards);
+		
+		// Include pet bonus as well
+		active_bonus.push(PET_OBJ[n_A_PassSkill8[0]]);
+
+		function reduce_group_item_bonus(acc, x, ids, tok)
+		{
+			i = -1;
+			
+			while ((i = x.indexOf(tok, i + 1)) != -1)
+			{
+				if (x[i+1].constructor === Array)
+				{
+					if (x[i+1][2]) 	// Group bonus
+						acc += (ids.indexOf(x[i+1][0]) != -1 ? x[i+1][1] : 0);
+				}
+			}
+			
+			return acc;
 		}
 
-		if(n_A_JOB == 33){
-			potheal3 = Math.floor((prate3*(1+potr*.1+pot2*.1))*(1+evit*.02)*H_HEALS*H_Bonus3);//wtf evit*.023 para dar bem em low vit mas mal em high??
-			potheal4 = Math.floor((prate4*(1+potr*.1+pot2*.1))*(1+evit*.02)*H_HEALS*H_Bonus3);}
+		// IG_Potion group effectiveness bonus
+		bonus *= (1 + active_bonus.reduce((acc, x) => reduce_group_item_bonus(acc, x, [501,502,503,504], 218), 0) / 100);
 
-		Heal_POT = "<table border = 0><tr><td><b>Potion Pitcher heals for: </b>" + potheal1 + " ~ " + potheal2 + "</td>";
-		if(n_A_JOB == 33){
-			Heal_POT += "<td><b>Slim Potion Pitch heals for: </b>" + potheal3 + " ~ " + potheal4;}
-			Heal_POT += "</td></tr></table>";
+		// bHealPower bonus
+		bonus *= 1 + (pp_healpower / 100);
+		
+		// bHealPower2 bonus
+		bonus *=  1 + (pp_healpower2 / 100);
+		
+		min_heal = Math.floor(PP_POTIONS[selected_consumable][1] * bonus);
+		max_heal = Math.floor(PP_POTIONS[selected_consumable][2] * bonus);
+	
+		if (PP_POTIONS[selected_consumable][4] > pp_lv)
+			pp_display = "<table border = 0><tr><td><b>Potion Pitcher heals for: </b>Not available for current skill level</td>";
+		else
+			pp_display = "<table border = 0><tr><td><b>Potion Pitcher heals for: </b>" + min_heal + " ~ " + max_heal + "</td>";
+		
+		// Slim Potion Pitcher
+		bonus = (1 + (spp_lv * 10 + pp_lv * 10 + learning_potion_lv * 5) / 100) * relative_bonus * rank_bonus;
+		
+		min_heal = Math.floor(PP_POTIONS[selected_consumable][1] * bonus);
+		max_heal = Math.floor(PP_POTIONS[selected_consumable][2] * bonus);
+		
+		if (!PP_POTIONS[selected_consumable][5])
+			pp_display += "<td><b>Slim Potion Pitch heals for: </b>Not available for " + PP_POTIONS[selected_consumable][3];
+		else if (PP_POTIONS[selected_consumable][5] > spp_lv)
+			pp_display += "<td><b>Slim Potion Pitch heals for: </b>Not available for current skill level";
+		else
+			pp_display += "<td><b>Slim Potion Pitch heals for: </b>" + min_heal + " ~ " + max_heal;
+	
+		pp_display += "</td></tr></table>";
 
-		myInnerHtml("A_KakutyouData",Heal_POT,0);
-
-		}else{myInnerHtml("A_KakutyouData","Not Available for this Class",0);}
+		myInnerHtml("A_KakutyouData", pp_display, 0);
 	}
 	else if(wKK == 13){
 		if(n_A_JOB==12||n_A_JOB==26){
@@ -6756,6 +6810,7 @@ function KakutyouKansuu(){
 		myInnerHtml("A_KakutyouData",wkk18,0);
   }
 	else if(wKK == 19){ // Steal Calculator
+		myInnerHtml("A_KakutyouData","",0);
 		document.getElementById("playerDexSteal").innerHTML = n_A_DEX;
 		monsterStolen = MonsterOBJ[eval(document.calcForm.monsterStolen.value)];
 		stealLevel = eval(document.calcForm.stealLevel.value);
@@ -6854,11 +6909,54 @@ function Kanma(num){
 	return str;
 }
 
+function update_pp_calc()
+{
+	is_source = eval(document.calcForm.pp_source.checked);
+	is_target = eval(document.calcForm.pp_target.checked);
+		
+	if (is_source && !(n_A_JOB == 19 || n_A_JOB == 33))
+	{
+		is_source = false;
+		document.calcForm.pp_source.checked = false;
+	}
+	
+	if (is_source) // Update source stats accordingly
+	{
+		document.calcForm.pp_source_lv.value = n_A_BaseLV;
+		document.calcForm.pp_heal_rate_bonus.value = n_tok[93];
+		document.calcForm.pp_learning_potion_lv.value = SkillSearch(442);
+	}
+	
+	if (is_target) // Update target stats accordingly
+	{
+		document.calcForm.pp_lv.value = 5;
+		document.calcForm.spp_lv.value = 10;
+		document.calcForm.pp_source_lv.value = 99;
+		document.calcForm.pp_target_vit.value = n_A_VIT;
+		document.calcForm.pp_target_int.value = n_A_INT;
+		document.calcForm.pp_learning_potion_lv.value = 10;
+		document.calcForm.pp_irp_lv.value = SkillSearch(5);
+		document.calcForm.pp_isp_lv.value = SkillSearch(45);
+		document.calcForm.pp_received_heal_rate_bonus.value = n_tok[199];
+	}
+	
+	if (EquipNumSearch(1737)) // Empty Liquor Bottle + Beer Hat
+	{
+		document.calcForm.pp_isp_lv.value = 10;
+		document.calcForm.pp_irp_lv.value = 10;
+	}
+	else if (EquipNumSearch(1240)) // Beer Hat
+	{
+		document.calcForm.pp_isp_lv.value = 3;
+		document.calcForm.pp_irp_lv.value = 3;
+	}
+}
+
 function KakutyouKansuu2(){
 	wKK = eval(document.calcForm.A_Kakutyou.value);
 	if(wKK == 2){
 		if(n_A_JOB==1||n_A_JOB==7||n_A_JOB==13||n_A_JOB==20||n_A_JOB==21||n_A_JOB==27){
-			myInnerHtml("A_KakutyouSel","Increased HP Recovery Level: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select>',0);
+			myInnerHtml("A_KakutyouSel","Increased HP Recovery Level: " + '<select name="A_KakutyouSelNum"onChange="KakutyouKansuu()"></select>',0);
 			for(i=0;i<=10;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
 			document.calcForm.A_KakutyouSelNum.value=10;
@@ -6878,7 +6976,7 @@ function KakutyouKansuu2(){
 			SPRname = "Increased SP Recovery Level: ";
 			if(n_A_JOB==44)
 				SPRname = "Ninja Mastery Level: ";
-			myInnerHtml("A_KakutyouSel",SPRname + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select>',0);
+			myInnerHtml("A_KakutyouSel",SPRname + '<select name="A_KakutyouSelNum"onChange="KakutyouKansuu()"></select>',0);
 			for(i=0;i<=10;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
 			document.calcForm.A_KakutyouSelNum.value=10;
@@ -6895,7 +6993,7 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 4){
 		if(n_A_JOB==15||n_A_JOB==29){
-			myInnerHtml("A_KakutyouSel","Spiritual Cadence Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select>',0);
+			myInnerHtml("A_KakutyouSel","Spiritual Cadence Lv: " + '<select name="A_KakutyouSelNum"onChange="KakutyouKansuu()"></select>',0);
 			for(i=0;i<=5;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(i,i);
 			document.calcForm.A_KakutyouSelNum.value=5;
@@ -6909,7 +7007,7 @@ function KakutyouKansuu2(){
 		if(n_A_JOB==6||n_A_JOB==12||n_A_JOB==19||n_A_JOB==20||n_A_JOB==26||n_A_JOB==33){
 			// myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select><BR>'
 			// +"Enlarge Weight Limit R Lv: " + '<select name="A_KakutyouSelNum2"onChange="StAllCalc()"></select><BR>',0);
-			myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="StAllCalc()"></select><BR>',0);
+			myInnerHtml("A_KakutyouSel","Enlarge Weight Limit Lv: " + '<select name="A_KakutyouSelNum"onChange="KakutyouKansuu()"></select><BR>',0);
 			// for(i=0;i<=10;i++)
 			// 	document.calcForm.A_KakutyouSelNum2.options[i] = new Option(i,i);
 			for(i=0;i<=10;i++)
@@ -6928,7 +7026,7 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 7){
 		CBIstr = "<table border=0>";
-		CBIstr += '<tr><td>Your Target: <select name="R_OBJ" onChange = "StAllCalc()"></select><select name="S_OBJ" onChange = "StAllCalc()"></select><select name="E_OBJ" onChange = "calc()"></select><select name="B_OBJ" onChange = "calc()"></select><select name="SP_OBJ" onChange = "calc()"></select></td></tr>';
+		CBIstr += '<tr><td>Your Target: <select name="R_OBJ" onChange = "KakutyouKansuu()"></select><select name="S_OBJ" onChange = "KakutyouKansuu()"></select><select name="E_OBJ" onChange = "KakutyouKansuu()"></select><select name="B_OBJ" onChange = "KakutyouKansuu()"></select><select name="SP_OBJ" onChange = "KakutyouKansuu()"></select></td></tr>';
 		CBIstr += "</table>";
 
 		myInnerHtml("A_KakutyouData",CBIstr,0);
@@ -6952,17 +7050,17 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 8){
 		CBIstr = "<table>";
-		CBIstr += '<tr><td>HP</td><td><input type="text" onChange="StAllCalc()" name="EN_HP" value="1" size=7></td><td>STR</td><td><input type="text" onChange="StAllCalc()" name="EN_STR" value="1" size=1></td>';
-		CBIstr += '<td>Element</td><td><select name="EN_ELEM" onChange = "StAllCalc()"></select><select name="EN_ELEM2" onChange = "StAllCalc()"></select></td><td>Flee</td><td><input type="text" onChange="StAllCalc()" name="EN_FLEE" value="1" size=1></td></tr>';
-		CBIstr += '<tr><td>VIT</td><td><input type="text" onChange="StAllCalc()" name="EN_VIT" value="1" size=1></td><td>INT</td><td><input type="text" onChange="StAllCalc()" name="EN_INT" value="1" size=1></td>';
-		CBIstr += '<td>Race</td><td><select name="EN_RACE" onChange = "StAllCalc()"></select></td><td>Perfect Dodge</td><td><input type="text" onChange="StAllCalc()" name="EN_PD" value="1" size=1></td></tr>';
-		CBIstr += '<tr><td>DEF</td><td><select name="EN_DEF" onChange = "StAllCalc()"></select></td><td>AGI</td><td><input type="text" onChange="StAllCalc()" name="EN_AGI" value="1" size=1></td>';
-		CBIstr += '<td>Size</td><td><select name="EN_SIZE" onChange = "StAllCalc()"></select></td><td>Demi-Human Resistance</td><td><select name="EN_DHR" onChange = "StAllCalc()"></select> %</td></tr>';
-		CBIstr += '<tr><td>MDEF</td><td><select name="EN_MDEF" onChange = "cStAllCalc()"></select></td><td>LUK</td><td><input type="text" onChange="StAllCalc()" name="EN_LUK" value="1" size=1></td>';
-		CBIstr += '<td>Type</td><td><select name="EN_TYPE" onChange = "StAllCalc()"></select></td><td>Long Range Resistance</td><td><select name="EN_RR" onChange = "StAllCalc()"></select> %</td></tr>';
-		CBIstr += '<tr><td>+ HP Gear</td><td><input type="text" onChange="StAllCalc()" name="EN_HP1" value="1" size=1></td><td>+% HP Gear</td><td><input type="text" onChange="StAllCalc()" name="EN_HP2" value="1" size=1></td>';
-		CBIstr += '<td>Energy Coat</td><td><select name="EN_EC" onChange = "StAllCalc()"></select></td><td>Element Resistance</td><td><select name="EN_ELR1" onChange = "StAllCalc()"></select><input type="text" onChange="StAllCalc()" name="EN_ELR11" value="1" size=1></tr>';
-		CBIstr += '<tr><td>Angelus</td><td><select name="EN_ANG" onChange = "StAllCalc()"></select></td><td>Auto-Guard</td><td><select name="EN_AG" onChange = "StAllCalc()"></select></td><td>Defender</td><td><select name="EN_DF" onChange = "StAllCalc()"></select></td><td>Element Resistance</td><td><select name="EN_ELR2" onChange = "StAllCalc()"></select><input type="text" onChange="StAllCalc()" name="EN_ELR21" value="1" size=1></tr>';
+		CBIstr += '<tr><td>HP</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_HP" value="1" size=7></td><td>STR</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_STR" value="1" size=1></td>';
+		CBIstr += '<td>Element</td><td><select name="EN_ELEM" onChange = "KakutyouKansuu()"></select><select name="EN_ELEM2" onChange = "KakutyouKansuu()"></select></td><td>Flee</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_FLEE" value="1" size=1></td></tr>';
+		CBIstr += '<tr><td>VIT</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_VIT" value="1" size=1></td><td>INT</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_INT" value="1" size=1></td>';
+		CBIstr += '<td>Race</td><td><select name="EN_RACE" onChange = "KakutyouKansuu()"></select></td><td>Perfect Dodge</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_PD" value="1" size=1></td></tr>';
+		CBIstr += '<tr><td>DEF</td><td><select name="EN_DEF" onChange = "KakutyouKansuu()"></select></td><td>AGI</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_AGI" value="1" size=1></td>';
+		CBIstr += '<td>Size</td><td><select name="EN_SIZE" onChange = "KakutyouKansuu()"></select></td><td>Demi-Human Resistance</td><td><select name="EN_DHR" onChange = "KakutyouKansuu()"></select> %</td></tr>';
+		CBIstr += '<tr><td>MDEF</td><td><select name="EN_MDEF" onChange = "KakutyouKansuu()"></select></td><td>LUK</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_LUK" value="1" size=1></td>';
+		CBIstr += '<td>Type</td><td><select name="EN_TYPE" onChange = "KakutyouKansuu()"></select></td><td>Long Range Resistance</td><td><select name="EN_RR" onChange = "KakutyouKansuu()"></select> %</td></tr>';
+		CBIstr += '<tr><td>+ HP Gear</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_HP1" value="1" size=1></td><td>+% HP Gear</td><td><input type="text" onChange="KakutyouKansuu()" name="EN_HP2" value="1" size=1></td>';
+		CBIstr += '<td>Energy Coat</td><td><select name="EN_EC" onChange = "KakutyouKansuu()"></select></td><td>Element Resistance</td><td><select name="EN_ELR1" onChange = "KakutyouKansuu()"></select><input type="text" onChange="KakutyouKansuu()" name="EN_ELR11" value="1" size=1></tr>';
+		CBIstr += '<tr><td>Angelus</td><td><select name="EN_ANG" onChange = "KakutyouKansuu()"></select></td><td>Auto-Guard</td><td><select name="EN_AG" onChange = "KakutyouKansuu()"></select></td><td>Defender</td><td><select name="EN_DF" onChange = "KakutyouKansuu()"></select></td><td>Element Resistance</td><td><select name="EN_ELR2" onChange = "KakutyouKansuu()"></select><input type="text" onChange="KakutyouKansuu()" name="EN_ELR21" value="1" size=1></tr>';
 		CBIstr += "</table>";
 		myInnerHtml("A_KakutyouSel",CBIstr,0);
 
@@ -7020,69 +7118,97 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 11){
 		var w;
-		w = '<Font size="2">Current Base Exp<input type="text" name="A_KakutyouSelNum" value="0" size=4 onChange="StAllCalc()" style="text-align : right;">%<BR>';
-		w += 'Current Job Exp<input type="text" name="A_KakutyouSelNum2" value="0" size=4 onChange="StAllCalc()" style="text-align : right;">%<BR></Font>';
+		w = '<Font size="2">Current Base Exp<input type="text" name="A_KakutyouSelNum" value="0" size=4 onChange="KakutyouKansuu()" style="text-align : right;">%<BR>';
+		w += 'Current Job Exp<input type="text" name="A_KakutyouSelNum2" value="0" size=4 onChange="KakutyouKansuu()" style="text-align : right;">%<BR></Font>';
 		myInnerHtml("A_KakutyouSel",w,0);
 		return;
 	}
-	if(wKK == 12){
-		if(n_A_JOB == 19 || n_A_JOB == 33 ){
-			pitpotion = "<table border=0>";
-			pitpotion += "<tr><td>Soul Linker Lv:</td>" + '<td><select name="SL_LV" onChange="StAllCalc()"></select>';
-			pitpotion += "<td>Target's VIT:</td>" + '<td><select name="E_VIT" onChange="StAllCalc()"></select></td>';
-			pitpotion += "<td>Target's INT:</td>" + '<td><select name="E_INT" onChange="StAllCalc()"></select></td></tr>';
-			pitpotion += "<tr><td>Potion Pitcher:</td>" + '<td><select name="PP" onChange="StAllCalc()"></select></td>';
-			pitpotion += "<td>Learning Potion:</td>" + '<td><select name="POT_RLevel" onChange="StAllCalc()"></select></td>';
-			pitpotion += "<td>Ranked:</td>" + '<td><select name="RNK_BNS" onChange="StAllCalc()"></select></td>';
-			pitpotion += "</tr>";
-			if(n_A_JOB == 33){
-				pitpotion += "<td>Slim Potion Pitcher:</td>" + '<td><select name="SPP" onChange="StAllCalc()"></select></td>';}
-			pitpotion += "<td>Increase Spiritual Power: " + '<td><select name="ISP" onChange="StAllCalc()"></select></td>';
-			pitpotion += "<td>Increase Recuperative Power: " + '<td><select name="IRP" onChange="StAllCalc()"></select></td>';
-			pitpotion += "</tr></table>";
-			myInnerHtml("A_KakutyouSel",pitpotion + "<br>",0);
-			for(i=0;i<Potion_Max_2;i++)
-					document.calcForm.PP.options[i] = new Option(Potion_Type_2[i][3],i);
-					document.calcForm.PP.value=0;
-			if(n_A_JOB == 33){
-				for(i=0;i<Potion_Max_3;i++)
-					document.calcForm.SPP.options[i] = new Option(Potion_Type_3[i][3],i);
-					document.calcForm.SPP.value=0;}
-			for(i=0;i<=10;i++)
-					document.calcForm.POT_RLevel.options[i] = new Option(i,i);
-					document.calcForm.POT_RLevel.value=0;
-			for(i=0;i<=1;i++)
-					document.calcForm.RNK_BNS.options[i] = new Option(Pot_Rank[i][1],i);
-					document.calcForm.RNK_BNS.value=0;
-			for(i=0;i<=200;i++)
-				document.calcForm.E_VIT.options[i] = new Option(i,i);
-				document.calcForm.E_VIT.value=0;
-			for(i=0;i<=200;i++)
-				document.calcForm.E_INT.options[i] = new Option(i,i);
-				document.calcForm.E_INT.value=0;
-			for(i=0;i<=99;i++)
-				document.calcForm.SL_LV.options[i] = new Option(i,i);
-				document.calcForm.SL_LV.value=0;
-			for(i=0;i<=10;i++)
-					document.calcForm.ISP.options[i] = new Option(i,i);
-					document.calcForm.ISP.value=0;
-			for(i=0;i<=10;i++)
-					document.calcForm.IRP.options[i] = new Option(i,i);
-					document.calcForm.IRP.value=0;
-		}else{myInnerHtml("A_KakutyouSel","",0);}
+	if(wKK == 12)
+	{
+		pp_display =  'You are the : ';
+		pp_display += '<input type="checkbox" id="pp_source" name="pp_source" value="pp_source" onclick=update_pp_calc()><label for="pp_source">Source</label>';
+		pp_display += '<input type="checkbox" id="pp_target" name="pp_target" value="pp_target" onclick=update_pp_calc()><label for="pp_target">Target</label><br>';
+		
+		pp_display += "<table border=0>";
+		pp_display += "<tr><td>Alchemist LV:</td>" + '<td><select name="pp_source_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += '<td><input type="checkbox" id="pp_source_link" name="pp_source_link" value="pp_source_link" onclick=KakutyouKansuu()><label for="pp_source_link">Alchemist Soul Linked</label><td></td></td><td><label>(bonus only applied to Potion Pitcher)</label></td></tr>';
+		
+		pp_display += "<td>Slim Potion Pitcher:</td>" + '<td><select name="spp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Potion Pitcher:</td>" + '<td><select name="pp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Consumable:</td>" + '<td><select name="pp_consumable" onChange="KakutyouKansuu()"></select></td></tr>';
+			
+		pp_display += "<tr><td>Learning Potion:</td>" + '<td><select name="pp_learning_potion_lv" onChange="KakutyouKansuu()"></select></td></tr>';
+		//pp_display += "<td></td><td></td><td>Ranked:</td>" + '<td><select name="pp_potion_rank" onChange="KakutyouKansuu()"></select></td></tr>'; Rank not taken into consideration for PP/SPP
+				
+		pp_display += "<tr><td>Increase Recuperative Power: " + '<td><select name="pp_irp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Target's VIT:</td>" + '<td><select name="pp_target_vit" onChange="KakutyouKansuu()"></select></td>';
+		pp_display +=  "<td>Increase Heal Rate:</td>" + '<td><input type="text" onChange="KakutyouKansuu()" name="pp_heal_rate_bonus" value="0" size=2>%</td></tr>';
+		pp_display += "<tr><td>Increase Spiritual Power: " + '<td><select name="pp_isp_lv" onChange="KakutyouKansuu()"></select></td>';
+		pp_display += "<td>Target's INT:</td>" + '<td><select name="pp_target_int" onChange="KakutyouKansuu()"></select></td>';
+		pp_display +=  "<td>Increase Received Heal Rate:</td>" + '<td><input type="text" onChange="KakutyouKansuu()" name="pp_received_heal_rate_bonus" value="0" size=2>%</td></tr>';
+
+		pp_display += "</table><br>";
+
+		myInnerHtml("A_KakutyouSel", pp_display, 0);
+		
+		// Initialize static inputs
+		for (i = 0; i <= 5; ++i)
+			document.calcForm.pp_lv.options[i] = new Option(i,i);
+		
+		for (i = 0; i <= 10; ++i)
+		{
+			document.calcForm.spp_lv.options[i] = new Option(i,i);
+			document.calcForm.pp_isp_lv.options[i] = new Option(i,i);
+			document.calcForm.pp_irp_lv.options[i] = new Option(i,i);
+			document.calcForm.pp_learning_potion_lv.options[i] = new Option(i,i);
+		}
+		
+		for (i = 0; i <= 99; ++i)
+			document.calcForm.pp_source_lv.options[i] = new Option(i,i);
+		
+		/* Rank not taken into consideration for PP/SPP
+		for (i = 0; i < FAME_TOP.length; ++i)
+			document.calcForm.pp_potion_rank.options[i] = new Option(FAME_TOP[i][1],i); */
+			
+		for (i = 0; i < PP_POTIONS.length; ++i)
+			document.calcForm.pp_consumable.options[i] = new Option(PP_POTIONS[i][3],i);
+		
+		for (i = 0; i <= 200; ++i)
+		{
+			document.calcForm.pp_target_vit.options[i] = new Option(i,i);
+			document.calcForm.pp_target_int.options[i] = new Option(i,i);
+		}
+
+		document.calcForm.pp_lv.value = 5;
+		document.calcForm.spp_lv.value = 10;
+		document.calcForm.pp_isp_lv.value = 0;
+		document.calcForm.pp_irp_lv.value = 0;
+		document.calcForm.pp_consumable.value = 3;
+		document.calcForm.pp_target_vit.value = 1;
+		document.calcForm.pp_target_int.value = 1;
+		document.calcForm.pp_source_lv.value = 99;
+		//document.calcForm.pp_potion_rank.value = 0; Rank not taken into consideration for PP/SPP
+		document.calcForm.pp_learning_potion_lv.value = 10;
+		
+		if (n_A_JOB == 19 || n_A_JOB == 33)
+			document.calcForm.pp_source.checked = true;
+		else
+			document.calcForm.pp_target.checked = true;
+		
+		update_pp_calc();
 		return;
 	}
 	if(wKK == 13){
 		if(n_A_JOB==12||n_A_JOB==26){
-			forgetext = "<table border = 0><tr><td>Oridecon Research:</td>" + '<td><select name="A_OriR" onChange="StAllCalc()"></select></td>';
-			forgetext += "<td>Weapon Research:</td>" + '<td><select name="A_WepR" onChange="StAllCalc()"></select></td>';
-			forgetext +=  "<td>Smith Lvl:</td>" + '<td><select name="A_SmithT" onChange="StAllCalc()"></select></td></tr>';
-			forgetext +=  "<tr><td>Star Crumb:</td>" + '<td><select name="A_StarC" onChange="StAllCalc()"></select></td>';
-			forgetext +=  "<td>Elemental Stone:</td>" + '<td><select name="A_ElemS" onChange="StAllCalc()"></select></td>';
-			forgetext +=  "<td>Anvil:</td>" + '<td><select name="A_KakutyouSelNum" onChange="StAllCalc()"></select></td></tr>';
-			forgetext += "<tr><td>Iron Tempering</td>" + '<td><select name="A_Iron" onChange="StAllCalc()"></select></td>';
-			forgetext += "<td>Steel Tempering :</td>" + '<td><select name="A_Steel" onChange="StAllCalc()"></select></td>';
-			forgetext += "<td>Enchanted Stone Craft:</td>" + '<td><select name="A_StoneC" onChange="StAllCalc()"></select></td></tr></table>';
+			forgetext = "<table border = 0><tr><td>Oridecon Research:</td>" + '<td><select name="A_OriR" onChange="KakutyouKansuu()"></select></td>';
+			forgetext += "<td>Weapon Research:</td>" + '<td><select name="A_WepR" onChange="KakutyouKansuu()"></select></td>';
+			forgetext +=  "<td>Smith Lvl:</td>" + '<td><select name="A_SmithT" onChange="KakutyouKansuu()"></select></td></tr>';
+			forgetext +=  "<tr><td>Star Crumb:</td>" + '<td><select name="A_StarC" onChange="KakutyouKansuu()"></select></td>';
+			forgetext +=  "<td>Elemental Stone:</td>" + '<td><select name="A_ElemS" onChange="KakutyouKansuu()"></select></td>';
+			forgetext +=  "<td>Anvil:</td>" + '<td><select name="A_KakutyouSelNum" onChange="KakutyouKansuu()"></select></td></tr>';
+			forgetext += "<tr><td>Iron Tempering</td>" + '<td><select name="A_Iron" onChange="KakutyouKansuu()"></select></td>';
+			forgetext += "<td>Steel Tempering :</td>" + '<td><select name="A_Steel" onChange="KakutyouKansuu()"></select></td>';
+			forgetext += "<td>Enchanted Stone Craft:</td>" + '<td><select name="A_StoneC" onChange="KakutyouKansuu()"></select></td></tr></table>';
 			myInnerHtml("A_KakutyouSel",forgetext + "<br>",0);
 			for(i=0;i<Anvil_Max;i++)
 				document.calcForm.A_KakutyouSelNum.options[i] = new Option(Anvil_Type[i][2],i);
@@ -7114,11 +7240,11 @@ function KakutyouKansuu2(){
 
 		}else if(n_A_JOB==19||n_A_JOB==33){
 			//custom TalonRO Update 2014-09-29
-			potiontext = "<table border=0><tr><td>Potion to Create:</td>" + '<td><select name="A_KakutyouSelNum" onChange="StAllCalc()"></select></td>';
-			potiontext += "<td>Learning Potion:</td>" + '<td><select name="A_PotionRLevel" onChange="StAllCalc()"></select></td></tr>';
-			potiontext += "<tr><td>Pharmacy:</td>" + '<td><select name="A_PreparePLevel" onChange="StAllCalc()"></select></td></tr>';
-			potiontext +=  "<tr><td>Homunculi Level:</td>" + '<td><select name="A_HomunLevel" onChange="StAllCalc()"></select></td>';
-			potiontext +=  "<td>Homunculi Evolved:</td>" + '<td><select name="A_HomunEvolved" onChange="StAllCalc()"></select></td></tr></table>';
+			potiontext = "<table border=0><tr><td>Potion to Create:</td>" + '<td><select name="A_KakutyouSelNum" onChange="KakutyouKansuu()"></select></td>';
+			potiontext += "<td>Learning Potion:</td>" + '<td><select name="A_PotionRLevel" onChange="KakutyouKansuu()"></select></td></tr>';
+			potiontext += "<tr><td>Pharmacy:</td>" + '<td><select name="A_PreparePLevel" onChange="KakutyouKansuu()"></select></td></tr>';
+			potiontext +=  "<tr><td>Homunculi Level:</td>" + '<td><select name="A_HomunLevel" onChange="KakutyouKansuu()"></select></td>';
+			potiontext +=  "<td>Homunculi Evolved:</td>" + '<td><select name="A_HomunEvolved" onChange="KakutyouKansuu()"></select></td></tr></table>';
 
 			myInnerHtml("A_KakutyouSel",potiontext + "<br>",0);
 			for(i=0;i<Potion_Max;i++)
@@ -7151,14 +7277,14 @@ function KakutyouKansuu2(){
 	if(wKK == 14){
 		striptext = "";
 		if(n_A_JOB == 14 || n_A_JOB == 28){
-			striptext += "<table border=0><tr><td>Strip [Helm], [Armor], [Weapon] or [Shield] Level:</td>" + '<td><select name="S_LV" onChange="StAllCalc()"></select></td>';
-			striptext += "<td>Enemy DEX:</td>" + '<td><select name="E_DEX" onChange="StAllCalc()"></select>';
+			striptext += "<table border=0><tr><td>Strip [Helm], [Armor], [Weapon] or [Shield] Level:</td>" + '<td><select name="S_LV" onChange="KakutyouKansuu()"></select></td>';
+			striptext += "<td>Enemy DEX:</td>" + '<td><select name="E_DEX" onChange="KakutyouKansuu()"></select>';
 			if(n_A_JOB == 28){
-				striptext += "<tr><td>Full Strip Level:</td>" + '<td><select name="FS_LV" onChange="StAllCalc()"></select>';}
+				striptext += "<tr><td>Full Strip Level:</td>" + '<td><select name="FS_LV" onChange="KakutyouKansuu()"></select>';}
 			striptext += "</td></tr></table>";
 		}
 		else if((CardNumSearch(157) || CardNumSearch(413)) && (n_A_JOB != 14 && n_A_JOB != 28)){
-			striptext += "<table border=0><tr><td>Enemy DEX:</td>" + '<td><select name="E2_DEX" onChange="StAllCalc()"></select></td></tr>';
+			striptext += "<table border=0><tr><td>Enemy DEX:</td>" + '<td><select name="E2_DEX" onChange="KakutyouKansuu()"></select></td></tr>';
 			if(CardNumSearch(157)){
 				striptext += "<td>Strip [Weapon] Level: 1</td>";}
 			if(CardNumSearch(413)){
@@ -7198,10 +7324,10 @@ function KakutyouKansuu2(){
 		return;
 	}
 	if(wKK == 15){
-		cooktext = "<table border=0><tr><td>Level of the Food:</td>" + '<td><select name="Flv" onChange="StAllCalc()"></select></td>';
-		cooktext += "<td>Stat of the Food:</td>" + '<td><select name="FStat" onChange="StAllCalc()"></select><td></tr>';
-		cooktext += "<tr><td>Cooking Kit Used:</td>" + '<td><select name="CKit" onChange="StAllCalc()"></select></td>';
-		cooktext +=  "<td>Cooking Experience:</td>" + '<td><input type="text" onChange="StAllCalc()" name="CExp" value="0" size=2></td></tr></table>';
+		cooktext = "<table border=0><tr><td>Level of the Food:</td>" + '<td><select name="Flv" onChange="KakutyouKansuu()"></select></td>';
+		cooktext += "<td>Stat of the Food:</td>" + '<td><select name="FStat" onChange="KakutyouKansuu()"></select><td></tr>';
+		cooktext += "<tr><td>Cooking Kit Used:</td>" + '<td><select name="CKit" onChange="KakutyouKansuu()"></select></td>';
+		cooktext +=  "<td>Cooking Experience:</td>" + '<td><input type="text" onChange="KakutyouKansuu()" name="CExp" value="0" size=2></td></tr></table>';
 		myInnerHtml("A_KakutyouSel",cooktext + "<br>",0);
 		for(i=1;i<=10;i++){
 			document.calcForm.Flv.options[i-1] = new Option(i,i);
@@ -7217,18 +7343,18 @@ function KakutyouKansuu2(){
 	}
 	if(wKK == 17){
 		var w;
-		w = '<div style="float:left;margin-right:10px;padding-top:4px">Number of monsters:</div><div style="float:left"><input type="text" name="A_KakutyouSelNum" value="1" size=4 onChange="StAllCalc()" style="text-align : right"></div><div style="clear:both"></div>';
+		w = '<div style="float:left;margin-right:10px;padding-top:4px">Number of monsters:</div><div style="float:left"><input type="text" name="A_KakutyouSelNum" value="1" size=4 onChange="KakutyouKansuu()" style="text-align : right"></div><div style="clear:both"></div>';
 		myInnerHtml("A_KakutyouSel",w,0);
     return;
 	}
 	if(wKK == 18){
-		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="hp_recovery_lv" onChange="StAllCalc()"></select></td>';
-		healtext += "<td>Learning Potion:</td>" + '<td><select name="learning_potion_lv" onChange="StAllCalc()"></select></td></tr>';
-		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="sp_recovery_lv" onChange="StAllCalc()"></select></td>';
-		healtext +=  "<td>Rogue Spirit:</td>" + '<td><select name="rogue_spirit" onChange="StAllCalc()"></select></td></tr>';
-		healtext +=  "<tr><td>Increase Heal Rate:</td>" + '<td><input type="text" onChange="StAllCalc()" name="heal_rate_bonus" value="0" size=2>%</td>';
-		healtext +=  "<td>Fame Top:</td>" + '<td><select name="potion_rank" onChange="StAllCalc()"></select></td></tr>';
-		healtext +=  '<tr><td>Item:</td>' + '<td><select name="selected_item" onChange="StAllCalc()"></select></td></tr></table>';
+		healtext = "<table border=0><tr><td>Increase HP Recovery:</td>" + '<td><select name="hp_recovery_lv" onChange="KakutyouKansuu()"></select></td>';
+		healtext += "<td>Learning Potion:</td>" + '<td><select name="learning_potion_lv" onChange="KakutyouKansuu()"></select></td></tr>';
+		healtext += "<tr><td>Increase SP Recovery:</td>" + '<td><select name="sp_recovery_lv" onChange="KakutyouKansuu()"></select></td>';
+		healtext +=  "<td>Rogue Spirit:</td>" + '<td><select name="rogue_spirit" onChange="KakutyouKansuu()"></select></td></tr>';
+		healtext +=  "<tr><td>Increase Heal Rate:</td>" + '<td><input type="text" onChange="KakutyouKansuu()" name="heal_rate_bonus" value="0" size=2>%</td>';
+		healtext +=  "<td>Fame Top:</td>" + '<td><select name="potion_rank" onChange="KakutyouKansuu()"></select></td></tr>';
+		healtext +=  '<tr><td>Item:</td>' + '<td><select name="selected_item" onChange="KakutyouKansuu()"></select></td></tr></table>';
 		myInnerHtml("A_KakutyouSel",healtext + "<br>",0);
 		for(i=0;i<=10;i++){
 			document.calcForm.hp_recovery_lv.options[i] = new Option(i,i);
@@ -7260,7 +7386,7 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "<table id=\"tblStealCalcLeft\"  border=0>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Steal Level:</td>";
-		stealCalcTxt += "<td><select name=\"stealLevel\" onChange=\"StAllCalc()\"></select></td>";
+		stealCalcTxt += "<td><select name=\"stealLevel\" onChange=\"KakutyouKansuu()\"></select></td>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Player DEX:</td>";
 		stealCalcTxt += "<td id=\"playerDexSteal\">"+n_A_DEX+"</td>";
@@ -7268,14 +7394,14 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Manually Insert DEX:</td>";
 		stealCalcTxt += "<td>";
-		stealCalcTxt += "<input type=\"checkbox\" name=\"manuallyInsertDex\" onClick=\"StAllCalc()\"/>";
+		stealCalcTxt += "<input type=\"checkbox\" name=\"manuallyInsertDex\" onClick=\"KakutyouKansuu()\"/>";
 		stealCalcTxt += " ";
-		stealCalcTxt += "<input type=\"number\" name=\"playerDexStealManual\" min=\"0\" max=\"500\" step=\"1\" value=\"0\" onChange=\"StAllCalc()\"/>";
+		stealCalcTxt += "<input type=\"number\" name=\"playerDexStealManual\" min=\"0\" max=\"500\" step=\"1\" value=\"0\" onChange=\"KakutyouKansuu()\"/>";
 		stealCalcTxt += "</td>";
 		stealCalcTxt += "</tr>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>Monster:</td>";
-		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"loadMonsterItemDropListStealCalc();StAllCalc();\"></select></td>";
+		stealCalcTxt += "<td><select name=\"monsterStolen\" onChange=\"loadMonsterItemDropListStealCalc();KakutyouKansuu();\"></select></td>";
 		stealCalcTxt += "</tr>";
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td id=\"outputPlayerDexStealCalc\">";
@@ -7308,7 +7434,7 @@ function KakutyouKansuu2(){
 		stealCalcTxt += "<tr>";
 		stealCalcTxt += "<td>1</td>";
 		stealCalcTxt += "<td></td>";
-		stealCalcTxt += "<td style=\"text-align:right\"><input type=\"number\" name=\"itemDropRate1\" min=\"0\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/></td>";
+		stealCalcTxt += "<td style=\"text-align:right\"><input type=\"number\" name=\"itemDropRate1\" min=\"0\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"KakutyouKansuu()\"/></td>";
 		stealCalcTxt += "<td></td>";
 		stealCalcTxt += "<td></td>";
 		stealCalcTxt += "</tr>";
@@ -7355,7 +7481,7 @@ function loadMonsterItemDropListStealCalc() {
 			if (i == 9) {
 				cell1.innerHTML = "Card";
 			}
-			cell2.innerHTML += " <img src=\"https://panel.talonro.com/images/items/small/"+dropItemId+".gif\" alt=\"no picture available =(\">";
+			cell2.innerHTML += " <a href=\"https://panel.talonro.com/itemdb/"+dropItemId+"/\" target=\"_blank\"><img src=\"https://panel.talonro.com/images/items/small/"+dropItemId+".gif\" alt=\"no picture available =(\"></a>";
 			cell3.innerHTML += (+dropPercentage).toFixed(2) + "%";
 		}
 	} else {
@@ -7377,7 +7503,7 @@ function addItemSlotStealCalc() {
 	cell4.style = "text-align:right";
 	cell5.style = "text-align:right";
 	cell1.innerHTML = (tbl.rows.length-1);
-	cell3.innerHTML = "<input type=\"number\" name=\"itemDropRate" + (tbl.rows.length-1) + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"StAllCalc()\"/>";
+	cell3.innerHTML = "<input type=\"number\" name=\"itemDropRate" + (tbl.rows.length-1) + "\" min=\"0.01\" max=\"100\" step=\"0.01\" value=\"0.01\" onChange=\"KakutyouKansuu()\"/>";
 	StAllCalc();
 }
 
