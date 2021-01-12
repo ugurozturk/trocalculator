@@ -1160,7 +1160,7 @@ function BattleCalc999()
 		n_PerHIT_DMG = 0;
 		wCast = n_A_CAST;
 		n_A_Weapon_zokusei = 0;
-		is_piercing_attack = n_tok[23]; // Ice Pick 
+		is_piercing_attack = 0; // Ice Pick 
 		shield_refine = n_A_LEFT_DEF_PLUS;
 		shield_weight  = ItemOBJ[n_A_Equip[5]][6];
 		
@@ -1168,6 +1168,7 @@ function BattleCalc999()
 		{
 			wCast = 0;
 			nb_hits = 1;
+			is_piercing_attack = n_tok[23]; // Ice Pick effect disabled for Shield Chain
 			n_Delay[2] = (n_A_ActiveSkill == 384 ? 0.35 : 0.7);
 		}
 
@@ -6188,7 +6189,7 @@ with(document.calcForm){
 		myInnerHtml("MONSTER_IJYOU",str,0);
 		B_IJYOUSW.checked = 1;
     //Skill Array
-		var name_SKILL = ["Provoke (Non Undead)","Quagmire","Poison","Blind","Frozen (Non Undead)","Blessing (Demon/Undead)","Lex Aeterna","Stun","Sleep","Stone","Curse","Agility Down","Signum Crucis","Strip Weapon","Strip Shield","Strip Armor","Strip Helm","Spider Web","Mind Breaker","Slow Grace","Down Tempo","Eska","Eske","Elemental Change (Sage Skill)","Flying"];
+		var name_SKILL = ["Provoke (Non Undead)","Quagmire","Poison","Blind","Frozen (Non Undead)","Blessing (Demon/Undead)","Lex Aeterna","Stun","Sleep","Stone","Curse","Agility Down","Signum Crucis","Strip Weapon","Strip Shield","Strip Armor","Strip Helm","Spider Web","Mind Breaker","Slow Grace","Down Tempo","Eska","Eske","Elemental Change (Sage Skill)","Fling"];
 		var html_SKILL = new Array();
 		for(i=0;i<=20;i++)
 			myInnerHtml("BI"+i+"_1",name_SKILL[i],0);
@@ -6633,7 +6634,6 @@ Race - n_B[2] = raceID - example n_B[2] = 3, Plant
 				n_B[8]=0;
 		}
 	}
-/* [START] */
 
 	if(n_B_IJYOU[1]){
 		var w;
