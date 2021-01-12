@@ -408,7 +408,7 @@ PET_OBJ = [[0,"No Pet",0,0]
 
 ITEM_SP_TIME_OBJ =[
 [0,"Temporary Card/Item Effects","none",0,0,0]
-,[1,"Isilla Card","Cast Time -50%,FLEE+30",2,472,9,30,0]
+,[1,"Isilla Card","Cast Time -50%,FLEE+30",2,472,9,30,73,-50,0]
 ,[2,"Ice Titan Card","DEF+10",2,484,18,10,0]
 ,[3,"Atroce Card","ASPD+100%",2,463,12,100,0]
 ,[4,"Anolian Card","Improve Concentration Lv1",2,224,0]

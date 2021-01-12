@@ -165,8 +165,8 @@ with(document.calcForm){
 	}
 }}
 
-function StAllCalc()
-{with(document.calcForm){
+function StAllCalc(){
+with(document.calcForm){
 	BabyJobs();
 	n_A_JobSet();
 	VanillaWep();
@@ -3308,7 +3308,6 @@ function StAllCalc()
 
 	n_A_ASPD = (200 - n_A_ASPD) / 50;
 
-
 	n_Delay[1] = Math.floor(n_A_ASPD * 1000)/1000;
 	if(n_A_ActiveSkill==17)
 		n_Delay[1] = Math.floor(n_A_ASPD *75)/100;
@@ -3320,125 +3319,129 @@ function StAllCalc()
 			sandanDelay += 0.3;
 	}
 
-	n_A_CAST = 1 - n_A_DEX / 150;
-	if(n_A_CAST < 0)
-		n_A_CAST = 0;
+	n_A_CAST = Math.max(0, 1 - n_A_DEX / 150);
 
-	var w=100;
-	w += n_tok[73];
-	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1279)){w -= 3;}//Capricorn Diadem
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1289)){w -= 3;}//Sagittarius Diadem
-	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1289)){w -= 2;}//Sagittarius Diadem
-	if(n_A_JobSearch()==5 && CardNumSearch(454))
-		w -= 15;
-	if((n_A_JOB==18 || n_A_JOB==32) && CardNumSearch(460))
-		w -= 20;
-	if(EquipNumSearch(750))
-		w -= n_A_Weapon_ATKplus;
-	if(n_A_card[8]==177)
-		w -= n_A_HEAD_DEF_PLUS;
-	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
-		w -= 5;
-	if(n_A_PassSkill3[2] != 0)
-		w -= ((w/100)*((n_A_PassSkill3[2] * 3 + n_A_PassSkill3[32] + Math.floor(n_A_PassSkill3[22] /10))/100))*100;//eathena formula
-		//w -= n_A_PassSkill3[2] * 3 + n_A_PassSkill3[32] + Math.floor(n_A_PassSkill3[22] /10);//aegis formula
-	if(TimeItemNumSearch(1))
-		w -= 50;
-	if(EquipNumSearch(1005)& EquipNumSearch(442)){
-		w -= (n_A_Weapon_ATKplus/2);}
+	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1279)) // Capricorn Diadem
+		n_tok[73] -= 3;
+
+	// Sagittarius Diadem
+	if (n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1289))
+		n_tok[73] -= 3;
+	if (n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1289))
+		n_tok[73] -= 2;
+	
+	if (n_A_JobSearch()==5 && CardNumSearch(454))
+		n_tok[73] -= 15;
+		
+	if ((n_A_JOB==18 || n_A_JOB==32) && CardNumSearch(460))
+		n_tok[73] -= 20;
+		
+	if (EquipNumSearch(750))
+		n_tok[73] -= n_A_Weapon_ATKplus;
+		
+	if (n_A_card[8]==177)
+		n_tok[73] -= n_A_HEAD_DEF_PLUS;
+		
+	if (n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
+		n_tok[73] -= 5;
+
+	if (EquipNumSearch(1005)& EquipNumSearch(442))
+		n_tok[73] -= (n_A_Weapon_ATKplus/2);
+
 	//parade hat [refine >= 6] -5 cast time - [Loa] 2018-07-02
-	if(EquipNumSearch(1036) && n_A_HEAD_DEF_PLUS >= 6){
-		w -= 5;
-	}
-	//custom TalonRO SQI Bonus Mjolnir: 30% cast reduction with Charge Attack
-	if(n_A_ActiveSkill == 308)
-		if(EquipNumSearch(84))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==106) {
-					w -= 30;
-					break;
-				}
+	if (EquipNumSearch(1036) && n_A_HEAD_DEF_PLUS >= 6)
+		n_tok[73] -= 5;
+
 	//custom TalonRO Magical Booster & Staff of Piercing Combo
-	if(EquipNumSearch(1430)& EquipNumSearch(645))
-		if(n_A_Weapon_ATKplus==10)
-			w -= 10;
+	if (EquipNumSearch(1430)& EquipNumSearch(645) && 10 == n_A_Weapon_ATKplus)
+		n_tok[73] -= 10;
+
 	//custom TalonRO Lapine Staff
-	if(EquipNumSearch(1486))
-			w -= n_A_Weapon_ATKplus;
-	//custom TalonRO Little Feather Hat & Falken Blitz combo: -15% cast time for Sharp Shooting
-	if(EquipNumSearch(1489) && n_A_ActiveSkill == 272)
-		w -= 15;
-	//custom TalonRO Lacrima Stick: 8% cast reduction with Storm Gust
-	if(n_A_ActiveSkill == 131 && EquipNumSearch(1169) && n_A_Weapon_ATKplus == 10)
-		w -= 8;
-	//custom TalonRO Geffenia Water Book & Lacrima Stick combo: 2% cast reduction each shield refine
-	if(n_A_ActiveSkill == 131 && EquipNumSearch(1521)){
-		w -= n_A_LEFT_DEF_PLUS*2;
-	}
+	if (EquipNumSearch(1486))
+		n_tok[73] -= n_A_Weapon_ATKplus;
+
 	//custom TalonRO Halloween Midas Whisper
-	if(SU_DEX >= 80 && EquipNumSearch(1526))
-		w -= 5;
+	if (SU_DEX >= 80 && EquipNumSearch(1526))
+		n_tok[73] -= 5;
+		
+	if (n_A_PassSkill3[2]) // Poem of Bragi, 3 * Skill LV + Musical Lesson LV + DEX / 10;
+		n_tok[73] -= n_A_PassSkill3[2] * 3 + n_A_PassSkill3[32] + Math.floor(n_A_PassSkill3[22] / 10);
+
+	n_tok[73] = Math.max(0, n_tok[73]);
+
+	n_A_CAST *= n_tok[73] / 100;
+
+	// Skill cast time reduction script bonus
+	skill_cast_reduction = 100;
+
+	// Sharp Shooting#272 - Little Feather Hat & Falken Blitz combo#1489 - Reduce Sharp Shooting casting time by 15%
+	if (n_A_ActiveSkill == 272 && EquipNumSearch(1489))
+		skill_cast_reduction -= 15;
+	
 	//[TalonRO Custom - 2019-10-30 - Heavy Sword - Decreases cast time of [Charge Attack] by 3% per refine
-	if(EquipNumSearch(1680) && n_A_ActiveSkill == 308) {
-		w -= (3 * n_A_Weapon_ATKplus);
+	if (n_A_ActiveSkill == 308 && EquipNumSearch(1680))
+		skill_cast_reduction -= (3 * n_A_Weapon_ATKplus);
+		
+	// Storm Gust#131
+	if (n_A_ActiveSkill == 131)
+	{
+		// Lacrima Stick#1169 - 8% cast reduction with Storm Gust
+		if (n_A_Weapon_ATKplus == 10 && EquipNumSearch(1169))
+			skill_cast_reduction -= 8;
+
+		// custom TalonRO Geffenia Water Book & Lacrima Stick combo: 2% cast reduction each shield refine
+		if (EquipNumSearch(1521))
+			skill_cast_reduction -= n_A_LEFT_DEF_PLUS*2;
 	}
+
 	/*
 		Brave Carnage Katar
 		[Refine level 7~10]
 		Reduce cast time of [Meteor Assault] by 15%.
 	*/
-	if(EquipNumSearch(909) && n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264) {
-		w -= 15;
-	}
+	if (n_A_Weapon_ATKplus >= 7 && n_A_ActiveSkill == 264 && EquipNumSearch(909))
+		skill_cast_reduction -= 15;
+	
+	skill_cast_reduction -= StPlusCalc2(7000 + n_A_ActiveSkill);
+	skill_cast_reduction = Math.max(0, skill_cast_reduction - StPlusCard(7000 + n_A_ActiveSkill));
 
-	if(w < 0){w = 0;}
+	n_A_CAST *= skill_cast_reduction / 100;
 
-	n_B_Cast = w;
-	n_A_CAST *= w /100;
-
-	w = 100;
-	if(StPlusCalc2(7000+n_A_ActiveSkill) != 0)
-		w -= StPlusCalc2(7000+n_A_ActiveSkill);
-	if(StPlusCard(7000+n_A_ActiveSkill) != 0)
-		w -= StPlusCard(7000+n_A_ActiveSkill);
-	/*if(n_A_ActiveSkill==321 || n_A_ActiveSkill==197)
-		if(SkillSearch(195) && n_A_Weapon_ATKplus >= 9 && EquipNumSearch(1097))
-			w -= 100;*/
-	if(w < 0)
-		w = 0;
-	n_A_CAST *= w /100;
-
-	if(n_A_PassSkill2[13])
+	// Skill cast time reduction
+	if (n_A_PassSkill2[13]) // Suffragium
 		n_A_CAST *= (100 - 15 * n_A_PassSkill2[13]) /100;
-	if(SkillSearch(322))
-		n_A_CAST = n_A_CAST /2;
+	if (SkillSearch(322)) // Memorize#322
+		n_A_CAST = n_A_CAST / 2;
 	
 	// Seductive Bathory Cocktail - Cast time -25% (not stacking)
 	if (seductive_bathory_cocktail)
 		n_A_CAST *= 0.75;
 
-	if(n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
+	if (n_A_Weapon_ATKplus >= 9 &&EquipNumSearch(1095))
 		n_tok[74] += 5;
-	if(EquipNumSearch(936))
+	if (EquipNumSearch(936))
 		n_tok[74] += (n_A_Weapon_ATKplus * 3 / 2);
+
 	//custom TalonRO Magical Booster & Staff of Piercing Combo
-	if(EquipNumSearch(1430)& EquipNumSearch(473)){
-		if(n_A_Weapon_ATKplus==10){
-			n_tok[74] += 10;
-		}
-	}
+	if (10 == n_A_Weapon_ATKplus && EquipNumSearch(1430) && EquipNumSearch(473))
+		n_tok[74] += 10;
 
 	//[TalonRO Custom - 2018-07-27 - Glorious Apocalipse/Glorious Arc Wand - Every /2 upgrade gives after-cast delay -1%] [Amor]
-	if(EquipNumSearch(1095) || EquipNumSearch(1095) ){
+	if (EquipNumSearch(1095) || EquipNumSearch(1095))
 		n_tok[74] += (1 * Math.floor(n_A_Weapon2_ATKplus / 2));
-	}
-	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar/Glorious Guitar/Glorious Lariat - Every Upgrade gives after-cast delay -1%] [Amor]
-	if(EquipNumSearch(1090) || EquipNumSearch(1092) || EquipNumSearch(1093)){
-		n_tok[74] += n_A_Weapon2_ATKplus;
-	}
 
-	var w = n_A_PassSkill3[2]; // Musical Lesson
-	if(w){
+	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar/Glorious Guitar/Glorious Lariat - Every Upgrade gives after-cast delay -1%] [Amor]
+	if (EquipNumSearch(1090) || EquipNumSearch(1092) || EquipNumSearch(1093))
+		n_tok[74] += n_A_Weapon2_ATKplus;
+
+	// Skill delay reduction script bonus
+	skill_delay_reduction = StPlusCalc2(8000 + n_A_ActiveSkill);
+	skill_delay_reduction += StPlusCard(8000 + n_A_ActiveSkill);
+	n_tok[74] = n_tok[74] ? Math.floor(n_tok[74] * (1 + skill_delay_reduction / 100)) : skill_delay_reduction;
+
+	musical_lesson_lv = n_A_PassSkill3[2]; // Musical Lesson
+	if (musical_lesson_lv)
+	{		
 		// custom TalonRO Poem of Bragi after cast delay
 		// "we strongly think that the stacking of Bragi with items that grant ACD reduction is something to avoid" - GM Team, applied only to PvM
 		if (n_A_PassSkill3[45]) // PvP Mode
@@ -3447,8 +3450,7 @@ function StAllCalc()
 			n_tok[74] = w * 3 + n_A_PassSkill3[32] * 2 + Math.floor(n_A_PassSkill3[29] / 5); // Override all previous acd reduction bonus
 	}
 	
-	if(n_tok[74] > 100)
-		n_tok[74] = 100;
+	n_tok[74] = Math.min(100, n_tok[74]);
 
 	n_A_HPR = Math.floor(n_A_VIT /5) + Math.floor(n_A_MaxHP /200);
 	if(n_A_HPR < 1)
@@ -6175,7 +6177,7 @@ function KakutyouKansuu(){
 		myInnerHtml("A_KakutyouData",wkk9,0);
 	}else if(wKK == 10){
 		var wkk10;
-		wkk10 = "<b>Cast Time: </b>"+ Math.round(n_A_CAST *10000)/100 + " % [ "+(100 - n_B_Cast) + " % " + (seductive_bathory_cocktail ? "(10 %) " : "") + "and "+n_A_DEX+" DEX ]<BR>";
+		wkk10 = "<b>Cast Time: </b>"+ Math.round(n_A_CAST *10000)/100 + " % [ "+(100 - n_tok[73]) + " % " + (seductive_bathory_cocktail ? "(25 %) " : "") + "and "+n_A_DEX+" DEX ]<BR>";
 		wkk10 += "<b>Cast Delay: </b>"+ Math.round((100 - n_tok[74]) *100)/100 +" %";
 		myInnerHtml("A_KakutyouData",wkk10,0);
 	}else if(wKK == 11){

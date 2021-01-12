@@ -100,7 +100,7 @@ Effect list:
 	70: Critical Damage +[value]%
 	71: Reflect Melee Physical Attacks by [value]%
 	72: If [value] > 0, SP Cost + [value]%
-	72: If [value] > 0, SP Cost - [value]%
+	72: If [value] < 0, SP Cost - [value]%
 	73: If [value] > 0, Cast Time + [value]%
 	73: If [value] < 0, Cast Time - [value]%
 	74: If [value] > 0, Cast Delay -[value]%
@@ -535,5 +535,7 @@ Effect list:
 	1000-1999: + [value]% Physical damage inflicted against a specific monster (MonsterOBJ[ID - 1000])
 	2000-4999: (unused)
 	5000-6999: specific skill damage + [value]% (SkillOBJ[ID - 5000])
-	7000-8999: When [value] > 0, specific skill Cast Time -[value]% (SkillOBJ[ID - 7000])
-	7000-8999: When [value] < 0, specific skill Cast Time +[value]% (SkillOBJ[ID - 7000])
+	7000-7999: When [value] > 0, specific skill Cast Time +[value]% (SkillOBJ[ID - 7000])
+	7000-7999: When [value] < 0, specific skill Cast Time -[value]% (SkillOBJ[ID - 7000])
+	8000-8999: When [value] > 0, specific skill Cast Delay -[value]% (SkillOBJ[ID - 8000])
+	8000-8999: When [value] < 0, specific skill Cast Delay +[value]% (SkillOBJ[ID - 8000])
