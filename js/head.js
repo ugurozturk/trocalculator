@@ -7031,44 +7031,37 @@ function calc()
 	if(SkillSearch(187))
 		wBC3_3danHatudouRitu = 30 - SkillSearch(187);
 
-	wDA = SkillSearch(13) * 5;
-	if(n_A_WeaponType != 1)
-		wDA = 0;
-	if(CardNumSearch(43)){
-		if(SkillSearch(13) > 1)
-			wDA = SkillSearch(13) * 5;
-		else
-			wDA = 5;
-	}
-	if(EquipNumSearch(399) || EquipNumSearch(1348)){ //Nagan/Nagan [Rental] double attack - [Loa] -2018-06-26
-			wDA = 25;
-	}
-	if(EquipNumSearch(570) && n_A_WeaponType != 0){
-		if(SkillSearch(13) > 1)
-			wDA = SkillSearch(13) * 5;
-		else
-			wDA = 10;
-	}
-	// //if(EquipNumSearch(399)){
-	// if(EquipNumSearch(399) || EquipNumSearch(1348)){ //custom TalonRO rental: enable Double Attack lv 5 for Nagan R
-	// 	if(SkillSearch(13) > 5)
-	// 		wDA = SkillSearch(13) * 5;
-	// 	else
-	// 		wDA = 25;
-	// }
-	if(EquipNumSearch(1495)){ //custom TalonRO rental: enable Double Attack lv 1 for Snake Head Hat
-		if(SkillSearch(13) > 1)
-			wDA = SkillSearch(13) * 5;
-		else
-			wDA = 5;
-	}
-	if(n_A_WeaponType == 17){
+	// Manage [Double Attack]
+	wDA = 0;
+	
+	if (1 == n_A_WeaponType) // Only applies to Dagger
+		wDA = SkillSearch(13) * 5;
+		
+	// Sidewinder Card#43 - Enable [Double Attack] Lv 1 on any weapon type
+	if (CardNumSearch(43))
+		wDA = Math.max(5, SkillSearch(13) * 5);
+	
+	// Nagan#399, Nagan [Rental]#1348 - Enable [Double Attack] Lv 5
+	if (EquipNumSearch(399) || EquipNumSearch(1348))
+		wDA = Math.max(25, SkillSearch(13) * 5);
+
+	// Baby Chick#570 - Enable [Double Attack] Lv 2, does not apply on Fist
+	if (EquipNumSearch(570) && n_A_WeaponType)
+		wDA = Math.max(10, SkillSearch(13) * 5);
+
+	// Snake Head Hat#1495 - Enable [Double Attack] Lv 1, does not apply on Fist
+	if (EquipNumSearch(1495) && n_A_WeaponType)
+		wDA = Math.max(5, SkillSearch(13) * 5);
+	
+	// Chain Action#427 - Similar behaviour as Double Attack
+	if (n_A_WeaponType == 17){
 		wDA = SkillSearch(427) * 5;
 		if(CardNumSearch(43))
 			wDA = SkillSearch(427) * 5 + ((100 - SkillSearch(427) * 5) * 5 /100);
 		if(EquipNumSearch(570))
 			wDA = SkillSearch(427) * 5 + ((100 - SkillSearch(427) * 5) * 10 /100);
 	}
+
 	w_HIT_DA = w_HIT;
 	if(wDA != 0 && n_A_WeaponType != 17){
 		w_HIT_DA = w_HIT_DA * (100 + SkillSearch(13)) /100;
