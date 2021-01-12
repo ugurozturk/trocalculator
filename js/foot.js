@@ -4012,9 +4012,9 @@ function StAllCalc()
 	if(CardNumSearch(536) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23 || n_A_JOB == 15 || n_A_JOB == 33)) {
 		n_tok[91] += 1 * Math.floor(n_A_HEAD_DEF_PLUS/2);
 	}
-	//[TalonRO Custom - Assaulter Lance  + 25% DEF Bypass for Knight/ Lord Knight] [Amor]
+	//[TalonRO Custom - Assaulter Lance  + 25% DEF Bypass on Demi-Human for Knight/ Lord Knight] [Amor]
 	if(EquipNumSearch(904) && n_A_JobSearch2() == 7){
-		n_tok[307] += 25;
+		n_tok[187] += 25;
 	}
 	//[TalonRO Custom - Glorious Cleaver 1088/Glorious Flamberge 1077/Glorious Gatiling Gun 1101/Glorious Guitar 1092/Glorious Lariat 1093/Glorious Rifle 1100/Glorious Shotgun 1102/Glorious Spear 1081/Glorious Tablet 1094/Glorious Two Handed Axe 1087 + 1% DEF Bypass for every upgrade] [Amor]
 	if(EquipNumSearch(1088) || EquipNumSearch(1077) || EquipNumSearch(1101) || EquipNumSearch(1092) || EquipNumSearch(1093) || EquipNumSearch(1100) || EquipNumSearch(1102) || EquipNumSearch(1081) || EquipNumSearch(1094) || EquipNumSearch(1087)){

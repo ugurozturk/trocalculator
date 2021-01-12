@@ -28,9 +28,8 @@ Effect list:
 	20: When [value] == 7, Shadow Element Weapon
 	20: When [value] == 8, Ghost Element Weapon
 	20: When [value] == 9, Undead Element Weapon
-	21: (unused)
-	22: When [value] >= 1, Bypass Enemy defence [Not on bosstype]
-	22: When [value] >= 10, Bypass Enemy defence [Also works on bosstype]
+	21: Ignore [Normal] class monsters defense by [value]%
+	22: Ignore [Boss] class monsters defense by [value]%
 	23: Enemy's DEF and VIT increases damage (//custom TalonRO fix ignore effects on left/offhand like Ice Pick or Weeder Knife)
 	24: Reduces your defence by 1/[value]
 	25: Increases ranged damage by [value]%
@@ -198,16 +197,16 @@ Effect list:
 	177: Increases magical damage against [Demi-Human] race monsters by [value]%
 	178: Increases magical damage against [Angel] race monsters by [value]%
 	179: Increases magical damage against [Dragon] race monsters by [value]%
-	180: Completely ignore defense of [Formless] race monsters
-	181: Completely ignore defense of [Undead] race monsters
-	182: Completely ignore defense of [Brute] race monsters
-	183: Completely ignore defense of [Plant] race monsters
-	184: Completely ignore defense of [Insect] race monsters
-	185: Completely ignore defense of [Fish] race monsters
-	186: Completely ignore defense of [Demon] race monsters
-	187: Completely ignore defense of [Demi-Human] race monsters
-	188: Completely ignore defense of [Angel] race monsters
-	189: Completely ignore defense of [Dragon] race monsters
+	180: Ignore [Formless] race monsters defense by [value]%
+	181: Ignore [Undead] race monsters defense by [value]%
+	182: Ignore [Brute] race monsters defense by [value]%
+	183: Ignore [Plant] race monsters defense by [value]%
+	184: Ignore [Insect] race monsters defense by [value]%
+	185: Ignore [Fish] race monsters defense by [value]%
+	186: Ignore [Demon] race monsters defense by [value]%
+	187: Ignore [Demi-Human] race monsters defense by [value]%
+	188: Ignore [Angel] race monsters defense by [value]%
+	189: Ignore [Dragon] race monsters defense by [value]%
 	190: When [value] > 0, Decrease damage from [Small] size monsters by [value]%
 	190: When [value] < 0, Increase damage from [Small] size monsters by [value]%
 	191: When [value] > 0, Decrease damage from [Medium] size monsters by [value]%
@@ -453,27 +452,11 @@ Effect list:
 	221: When [value] == 141, When performing a ATK based attack, there's a 5% chance to cast the skill [Dragon Fire Formation learned] Lv2
 	221: When [value] == 142, When performing a ATK based attack, there's a 2% chance to cast the skill [Water Ball] Lv2
 	221: When [value] == 143, When performing a ATK based attack, there's a 0.2 * staff refine level)% chance to cast the skill [Sightrasher] Lv2
-	222-289: (unused)
-	290: On (all?) monsters, ignore [value]% DEF
-	291: On Normal monsters, ignore [value]% DEF
-	292: On Bosstype monsters, ignore [value]% DEF
-	293: (unused)
-	294: (unused)
+	222-294: (unused)
 	295: On (all?) monsters, ignore [value]% MDEF
 	296: On Normal monsters, ignore [value]% MDEF
 	297: On Bosstype monsters, ignore [value]% MDEF
-	298: (unused)
-	299: (unused)
-	300: On Formless race monsters, ignore [value]% DEF
-	301: On Undead race monsters, ignore [value]% DEF
-	302: On Brute race monsters, ignore [value]% DEF
-	303: On Plant race monsters, ignore [value]% DEF
-	304: On Insect race monsters, ignore [value]% DEF
-	305: On Fish race monsters, ignore [value]% DEF
-	306: On Demon race monsters, ignore [value]% DEF
-	307: On Demi-Human race monsters, ignore [value]% DEF
-	308: On Angel race monsters, ignore [value]% DEF
-	309: On Dragon race monsters, ignore [value]% DEF
+	298-309: (unused)
 	310: On Formless race monsters, ignore [value]% MDEF
 	311: On Undead race monsters, ignore [value]% MDEF
 	312: On Brute race monsters, ignore [value]% MDEF

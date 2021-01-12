@@ -6508,20 +6508,6 @@ Race - n_B[2] = raceID - example n_B[2] = 3, Plant
 8 - Angel
 9 - Dragon
 */
-//Engkanto card
-if(CardNumSearch(555)){
-	//Ignore 25% Plant monster defense
-	if(n_B[2] == 3){
-		n_B[14] = Math.round(n_B[14]/100*(100-25*CardNumSearch(555)));
-	}
-}
-
-	//custom TalonRO Thanatos Card
-	if(CardNumSearch(166)){
-		//Boss def /100 * (100 - 30*(if card exist/true = 1)
-		//Example - Arc angeling, 54 / 100 * (100 - 30 * 1) = 37.8, math.round = 38
-		n_B[14] = Math.round(n_B[14]/100*(100-30*CardNumSearch(166)));
-	}
 
 	n_B2[25] = Math.floor(n_B[7] / 2) + n_B[9];
 	n_B2[26] = n_B[5] + n_B[10];
@@ -6649,8 +6635,7 @@ if(CardNumSearch(555)){
 	}
 /* [START] */
 
-
-if(n_B_IJYOU[1]){
+	if(n_B_IJYOU[1]){
 		var w;
 		var w2;
 		if(Taijin){
@@ -6685,113 +6670,78 @@ if(n_B_IJYOU[1]){
 	if(n_B_IJYOU[16] && Taijin==0)
 		n_B[9] -= Math.floor(n_B[9] * 40 /100);
 
-
-
 	if(n_B[19] == 0){
 		if(n_B_IJYOU[10])
 			n_B[11] = 0;
 	}
 
-
-
-	if(Taijin==0){
+	if (Taijin == 0)
+	{
 		n_B[23] = n_B[7];
 		n_B[24] = n_B[7] + (Math.floor(n_B[7]/20) * Math.floor(n_B[7]/20) -1);
-	//custom TalonRO Thanatos Card
-	if(CardNumSearch(166)){
-		n_B[23] = Math.round(n_B[23]/100*(100-30*CardNumSearch(166)));
-		n_B[24] = Math.round(n_B[24]/100*(100-30*CardNumSearch(166)));
 	}
-		if(n_B[23] > n_B[24])
-			n_B[24] = n_B[23];
+	
+	// Manage monster defense reduction
+
+	// Apply Status Change affecting defense
+	// Status that only affect hard def
+	def_sc_reduction = 1;
+
+	if (!Taijin) // Not applied to players
+		def_sc_reduction *= 1 + 0.15 * n_B_IJYOU[14]; // SC_STRIPSHIELD
+	
+	if (n_B_IJYOU[12] && (n_B[2]==6||n_B[3]>=90)) // SC_SIGNUMCRUCIS
+		def_sc_reduction *= 1 + 0.1 + n_B_IJYOU[12] * 0.04;
+	
+	if (!n_B[19] && n_B[2] != 1)
+	{
+		def_sc_reduction *= 1 + 0.5 * n_B_IJYOU[2]; // SC_FREEZE
+		def_sc_reduction *= 1 + 0.5 * n_B_IJYOU[2]; // SC_STONE
 	}
+	
+	def_sc_reduction -= 1;
+	def_sc_reduction = Math.min(1, def_sc_reduction);
+	n_B[14] -= Math.floor(n_B[14] * def_sc_reduction);
+	
+	// Status that affect hard and vit def
+	def_sc_reduction = 1;
+	
+	if (n_B_IJYOU[0] && n_B[19] == 0 && n_B[3] < 90) // SC_PROVOKE
+		def_sc_reduction *= (1.05 + n_B_IJYOU[0] * 0.05);
+	
+	def_sc_reduction *= 1 + 0.50 * n_B_IJYOU[22]; // SC_SKE
+	def_sc_reduction *= 1 + 0.05 * n_B_IJYOU[24]; // SC_FLING
+	
+	if (!n_B[19])
+		def_sc_reduction *= 1 + 0.25 * n_B_IJYOU[2]; // SC_POISON
+	
+	def_sc_reduction -= 1;
+	def_sc_reduction = Math.min(1, def_sc_reduction);
+	n_B[14] -= Math.floor(n_B[14] * def_sc_reduction);
+	n_B[23] -= Math.floor(n_B[23] * def_sc_reduction);
+	n_B[24] -= Math.floor(n_B[24] * def_sc_reduction);
+	
+	if (n_B_KYOUKA[9]) // SC_KEEPING
+		n_B[14] = 90;
+	
+	if (n_B_IJYOU[20]) // SC_ETERNALCHAOS
+	{
+		n_B[23] = 0;
+		n_B[24] = 0;
+	}
+	
+	// Apply item script bonus affecting defense
+	def_race_reduction = n_tok[180 + n_B[2]];
+	def_class_reduction = (n_B[19] ? n_tok[22] : n_tok[21]);
+	def_reduction = Math.min(100, def_race_reduction + def_class_reduction);
+
+	n_B[14] = Math.ceil(n_B[14] * (100 - def_reduction) / 100);
+	n_B[23] = Math.ceil(n_B[23] * (100 - def_reduction) / 100);
+	n_B[24] = Math.max(n_B[23], Math.ceil(n_B[24] * (100 - def_reduction) / 100));
 	n_B[25] = Math.floor(n_B[7] / 2) + n_B[9];
 	n_B[26] = n_B[5] + n_B[10];
 	n_B[27] = n_B[5] + n_B[8];
 
-
-	var wDEF = 0;
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[0]!=0 && n_B[3]<90)
-			wDEF += 5 + n_B_IJYOU[0] * 5;
-	}
-	if(Taijin==0){
-		if(n_B_IJYOU[22])
-			wDEF += 50;
-	}
-	if(Taijin==0){
-		if(n_B_IJYOU[24])
-			wDEF += 5 * n_B_IJYOU[24];
-	}
-	if(wDEF > 100)
-		wDEF=100;
-	if(Taijin==0)
-		n_B[14] -= Math.floor(n_B[14] * wDEF /100);
-
-
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[2])
-			n_B[14] -= Math.floor(n_B[14] * 25 / 100);
-	}
-
-	var w = 0;
-	w += n_tok[290];
-	w += n_tok[300+n_B[2]];
-	if(n_A_ActiveSkill==324 || n_A_ActiveSkill==159 || n_A_ActiveSkill==384 || n_A_ActiveSkill==162 || n_A_ActiveSkill==193 || n_A_ActiveSkill==405 || n_A_ActiveSkill==438)
-		w = 0;
-	if(w){
-		if(w < 0)
-			w = 0;
-		n_B[14] -= Math.floor(n_B[14] * w /100);
-	}
-
-	if(n_B_IJYOU[14] && Taijin==0)
-		n_B[14] -= Math.floor(n_B[14] * 15 /100);
-
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[4] && n_B[2]!=1)
-			n_B[14] -= Math.floor(n_B[14] * 50 /100);
-	}
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[9] && n_B[2]!=1)
-			n_B[14] -= Math.floor(n_B[14] * 50 /100);
-	}
-	if(n_B_KYOUKA[9]) // NPC_KEEPING set the hard DEF to 90
-		n_B[14] = 90;
-
-	if(n_B_IJYOU[12] && (n_B[2]==6||n_B[3]>=90))
-		n_B[14] -= Math.floor(n_B[14] * (10 + n_B_IJYOU[12] * 4) /100);
-
-	if(n_B_IJYOU[20] && Taijin==0)
-		n_B[14] = 0;
-
-
-	n_B[23] -= Math.floor(n_B[23] * wDEF /100);
-	n_B[24] -= Math.floor(n_B[24] * wDEF /100);
-
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[2]){
-			n_B[23] -= Math.floor(n_B[23] * 25 / 100);
-			n_B[24] -= Math.floor(n_B[24] * 25 / 100);
-		}
-	}
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[4] && n_B[2]!=1){
-			n_B[23] -= Math.floor(n_B[23] * 50 /100);
-			n_B[24] -= Math.floor(n_B[24] * 50 /100);
-		}
-	}
-	if(n_B[19] == 0){
-		if(n_B_IJYOU[9] && n_B[2]!=1){
-			n_B[23] -= Math.floor(n_B[23] * 50 /100);
-			n_B[24] -= Math.floor(n_B[24] * 50 /100);
-		}
-	}
-
-	if(n_B_IJYOU[20]){
-		n_B[23] = 0;
-		n_B[24] = 0;
-	}
 
 	var w = 0;
 	w += n_tok[295];
@@ -7928,8 +7878,10 @@ function ApplyDefReduction(damage, ignore_def, pierce_def)
 		vit_def[1] = n_B_DEF2[1] + Math.floor(vit_def_bonus / 2);
 		vit_def[2] = n_B_DEF2[0] + vit_def_bonus;
 		
+		effective_def = n_B[14];
+
 		for (i = 0; i <= 2; ++i)
-		{		
+		{
 			if (pierce_def) // bDefRatioAtkClass, Investigate
 			{
 				
@@ -7938,14 +7890,16 @@ function ApplyDefReduction(damage, ignore_def, pierce_def)
 			}
 			else
 			{
+				/* Defense reduction managed directly in monster properties
 				// bDefIgnoreRace
 				effective_def = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B[14]); 
 				effective_vitdef = Math.abs((n_tok[180 + n_B[2]] - 1) * n_B_DEF2[i]);
 				
 				// bDefIgnoreClass
 				effective_def *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
-				effective_vitdef *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);
+				effective_vitdef *= Math.abs(Math.min((n_B[19] ? Math.floor(n_tok[22] / 10) : n_tok[22]), 1) - 1);*/
 			
+				effective_vitdef = n_B_DEF2[i];
 				damage[i] = Math.floor(damage[i] * (100 - effective_def) / 100 - effective_vitdef);
 			}
 		}
@@ -7964,9 +7918,9 @@ function BattleCalc4(wBC4,wBC4_2,wBC4_3){
 	if (192 == n_A_ActiveSkill)
 		wBC4_3 *= SkillSearch(185);
 	
-	if(n_A_ActiveSkill==275)
+	if(n_A_ActiveSkill==275) // Magic Crasher#275
 		return Math.floor(wBC4 * (100 - n_B[14]) /100) - n_B_DEF2[wBC4_2] + wBC4_3;
-	if(n_A_ActiveSkill==432)
+	if(n_A_ActiveSkill==432) // Piercing Shot#432
 		return wBC4 + wBC4_3;
 	//custom TalonRO fix ignore effects on left/offhand like Ice Pick or Weeder Knife
 	if(n_tok[180+n_B[2]] >= 1 && IgnoreEffectOnLeftHand == 0)
@@ -7979,32 +7933,13 @@ function BattleCalc4(wBC4,wBC4_2,wBC4_3){
 		return wBC4 + wBC4_3;
 	if(SkillSearch(364))
 		return wBC4 + wBC4_3;
+
 	//custom TalonRO fix ignore effects on left/offhand like Ice Pick or Weeder Knife
-	if(n_tok[23] == 0 || IgnoreEffectOnLeftHand == 1){
-	//original
-	//if(n_tok[23] == 0)
-		if (debug_dmg_avg) {
-			debug_atk+="\n --- (BattleCalc4) atk-def ---";
-			debug_atk+="\nb_wBC4:"+wBC4+"\n\tn_B_DEF2[wBC4_2]:"+n_B_DEF2[wBC4_2]+"\n\twBC4_3:"+wBC4_3;
-		}
+	if(n_tok[23] == 0 || IgnoreEffectOnLeftHand == 1)
 		wBC4 = Math.floor(wBC4 * (100 - n_B[14]) /100) - n_B_DEF2[wBC4_2] + wBC4_3;
-		if (debug_dmg_avg)
-			debug_atk+="\na_wBC4:"+wBC4;
-	}else{
-		if (debug_dmg_avg) {
-			debug_atk+="\n --- (BattleCalc4) atk-def (Ice Pick mode)---";
-			debug_atk+="\nb_wBC4:"+wBC4+"\n\tn_B_DEF2[1]:"+n_B_DEF2[1]+"\n\tn_B[14]:"+n_B[14]+"\n\twBC4_3:"+wBC4_3;
-		}
-		if(wBC4_2==0){
-			wBC4 = Math.floor(wBC4 * (n_B_DEF2[2]+n_B[14])/100) +wBC4_3;
-		}else if(wBC4_2==1){
-			wBC4 = Math.floor(wBC4 * (n_B_DEF2[1]+n_B[14])/100) +wBC4_3;
-		}else{
-			wBC4 = Math.floor(wBC4 * (n_B_DEF2[0]+n_B[14])/100) +wBC4_3;
-		}
-		if (debug_dmg_avg)
-			debug_atk+="\na_wBC4:"+wBC4;
-	}
+	else
+		wBC4 = Math.floor(wBC4 * (n_B_DEF2[2 - wBC4_2]+n_B[14])/100) +wBC4_3;
+
 	return wBC4;
 }
 

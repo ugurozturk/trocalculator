@@ -185,7 +185,7 @@ cardOBJ = [
 ,[163,1,"Breeze",0,17,5,138,5,0]
 ,[164,1,"Solace","When equipped by a priest:<BR>When attacking with an ATK based attack, adds a chance to autocast [Grand Cross]Lv 5",0]
 ,[165,1,"Thanatos Maero",0,17,5,221,55,0]
-,[166,1,"Thanatos","Bypass 30% of enemy DEF (both boss and non-boss)",18,-15,9,-15,0] //custom TalonRO 30% def bypass (boss+non-boss), def-15;flee-15;no ice pick effect
+,[166,1,"Thanatos",0,18,-15,9,-15,21,30,22,30,0] //custom TalonRO 30% def bypass (boss+non-boss), def-15;flee-15;no ice pick effect
 ,[167,1,"Hill Wind","When unequipping the weapon with this card, drains 50 sp from you",5057,5,5126,5,5127,5,0]
 ,[168,1,"Laurell Weinder","When un equipping the weapon with this card, drains 50 sp from you.",5130,3,5131,3,0]
 ,[169,1,"Deathword","When un equipping the weapon with this card, drains 50 sp from you",5046,5,5047,5,5277,5,0]
@@ -579,7 +579,7 @@ cardOBJ = [
 ,[552,3,"Bakonawa","For Non-Monk classes, increase physical damage against Boss monsters by 15%.<br/>For Monk classes, increase physical damage against Boss monsters by 10%.",77,20,79,-35,0]
 ,[553,3,"Buwaya",0,77,20,79,-35,97,7,0]
 ,[554,2,"Bungisngis","For every refine after +5, MaxHP + 1%, MaxSP + 1%.",15,5,16,5,0]
-,[555,2,"Engkanto","Ignore 25% of Plant monster defense.",45,25,0]
+,[555,2,"Engkanto",0,45,25,183,25,0]
 ,[556,1,"Manananggal",0,5025,20,92,3,95,3,217,3,0]
 ,[557,4,"Mangkukulam",0,16,10,0]
 ,[558,2,"Tikbalang","[Refine Rate +7 or higher]<br/>Add another 5% damage with Wind Magic.<br/>[Refine Rate +9 or higher]<br/>Add another 5% damage with Wind Magic.",98,10,344,5,0]
