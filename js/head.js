@@ -6560,7 +6560,7 @@ Race - n_B[2] = raceID - example n_B[2] = 3, Plant
 	}
 	if(n_B_KYOUKA[6])
 		n_B[3] = n_B_KYOUKA[6];
-	if(n_B_IJYOU[23])
+	if (!n_B[19] && n_B_IJYOU[23]) // SA_ELEMENTCHANGE does not applies on boss type monsters
 		n_B[3] = n_B_IJYOU[23] * 10 + (n_B[3] % 10);
 
 	if(n_B[19] == 0){
