@@ -558,6 +558,7 @@ with(document.calcForm){
 		n_A_IJYOU[2] = eval(A_IJYOU2.checked);
 		n_A_IJYOU[3] = eval(A_IJYOU3.checked);
 		eclage_food = eval(eclage_food_list.value);
+		abrasive_food = eval(abrasive_food_check.checked);
 		
 		sting_slap_cocktail = eval(sting_slap_cocktail_check.checked) 							// [sc_start SC_DEF_RATE,1800000,10;]
 		venatu_beep_cocktail = eval(venatu_beep_cocktail_check.checked)							// [sc_start SC_INCATKRATE,1800000,5;]
@@ -2352,43 +2353,72 @@ with(document.calcForm){
 
 	n_A_CRI = 1 + n_A_LUK / 3.0;
 	
+	// Following Status Change are taken into consideration for Katar Crit bonus
+	
+	sc_inccri_bonus = 0;
+	// SC_INCCRI - Abrasive - CRIT + 30
+	if (abrasive_food)
+		sc_inccri_bonus = 30;
+	// SC_INCCRI - Buche De Noel - CRIT + 7
+	if (n_A_PassSkill8[18])
+		sc_inccri_bonus = Math.max(7, sc_inccri_bonus);
+	// SC_INCCRI - Arunafeltz Desert Sandwich - CRIT + 7
+	if (n_A_PassSkill8[21])
+		sc_inccri_bonus = Math.max(7, sc_inccri_bonus);	
+	
+	n_A_CRI += sc_inccri_bonus;
+	
+	// SC_EXPLOSIONSPIRITS - Critical Explosion - CRIT + 7.5 + Skill Lv * 2.5
+	if (SkillSearch(195))
+		n_A_CRI += 7.5 + SkillSearch(195) * 2.5;
+	if (SkillSearch(253)) // Super Novice Fury State
+		n_A_CRI += 50;
+	
+	// SC_FORTUNE
+	if (n_A_PassSkill3[5]) // Fortune's Kiss
+		n_A_CRI += 10 + n_A_PassSkill3[5] + Math.floor(n_A_PassSkill3[35] /2) + Math.floor(n_A_PassSkill3[25] /10);
+	
+	// SC_TRUESIGHT
+	if (n_A_JOB == 24)
+		n_A_CRI += SkillSearch(270);
+
+	// SC_CLOAKING - CRIT * 2
+	n_A_CRI += n_A_CRI * Math.min(1, SkillSearch(82));
+	
+	if (n_A_WeaponType == 11) // Katar CRIT bonus, only applied to LUK CRIT and above SC
+		n_A_CRI *= 2;
+	
+	n_tok[10] += n_tok[110+n_B[2]];
+	
 	// Empty Liquor Bottle#1736 [Every Refine Level] - CRIT + 1
 	n_tok[10] += n_A_Weapon_ATKplus * EquipNumSearch(1736);
-	
-	w=0;
-	w += n_tok[10];
 
-	w += n_tok[110+n_B[2]];
-
-	if(CardNumSearch(402))
-		w += n_A_SHOULDER_DEF_PLUS;
-	if(n_A_JobSearch()==2)
-		w += 4 * CardNumSearch(328);
-	if(n_A_JobSearch()==3){
-		if(n_B[2]==1 || n_B[2]==6)
-			w += 9 * CardNumSearch(253);
-	}
-	if(SU_LUK >= 80 && CardNumSearch(267))
-		w += 3;
-	if(n_A_WeaponType==3 || n_A_WeaponType==2)
-		w += CardNumSearch(464) * 5;
-	if(n_A_WeaponType==10)
-		w += CardNumSearch(465) * 5;
-	if(CardNumSearch(492))
-		w += Math.floor(n_A_JobLV /10) * CardNumSearch(492);
-	if(n_A_HEAD_DEF_PLUS >= 6 && EquipNumSearch(785))
-		w += (n_A_HEAD_DEF_PLUS -5);
-	if(EquipNumSearch(640))
-		w += Math.floor(SU_LUK / 5);
+	if (CardNumSearch(402))
+		n_tok[10] += n_A_SHOULDER_DEF_PLUS;
+	if (n_A_JobSearch()==2)
+		n_tok[10] += 4 * CardNumSearch(328);
+	if (n_A_JobSearch()==3 && (n_B[2]==1 || n_B[2]==6))
+		n_tok[10] += 9 * CardNumSearch(253);
+	if (SU_LUK >= 80 && CardNumSearch(267))
+		n_tok[10] += 3;
+	if (n_A_WeaponType==3 || n_A_WeaponType==2)
+		n_tok[10] += CardNumSearch(464) * 5;
+	if (n_A_WeaponType==10)
+		n_tok[10] += CardNumSearch(465) * 5;
+	if (CardNumSearch(492))
+		n_tok[10] += Math.floor(n_A_JobLV /10) * CardNumSearch(492);
+	if (n_A_HEAD_DEF_PLUS >= 6 && EquipNumSearch(785))
+		n_tok[10] += (n_A_HEAD_DEF_PLUS -5);
+	if (EquipNumSearch(640))
+		n_tok[10] += Math.floor(SU_LUK / 5);
 
 	//custom TalonRO rental Giant Encyclopedia +1crit each 5luk
-	if(EquipNumSearch(1324))
-		w += Math.floor(SU_LUK / 5);
+	if (EquipNumSearch(1324))
+		n_tok[10] += Math.floor(SU_LUK / 5);
 
 	//custom Talonro Improved Bunny Band: If refine > 6 CRIT + 5
-	if(EquipNumSearch(1648) && n_A_HEAD_DEF_PLUS > 6){
-		w += 5;
-	}
+	if (EquipNumSearch(1648) && n_A_HEAD_DEF_PLUS > 6)
+		n_tok[10] += 5;
 
 	/*Element - n_B[3] = elementID - example n_B[3] = 4, Neutral4(on site)
 	Neutral - 1 - 4
@@ -2416,158 +2446,115 @@ with(document.calcForm){
 	9 - Dragon
 	*/
 
-	if(EquipNumSearch(689))
-		w += Math.floor(SU_LUK / 10);
-	if(SU_AGI >= 90 && EquipNumSearch(442))
-		w += 10 * EquipNumSearch(442);
+	if (EquipNumSearch(689))
+		n_tok[10] += Math.floor(SU_LUK / 10);
+	if (SU_AGI >= 90 && EquipNumSearch(442))
+		n_tok[10] += 10 * EquipNumSearch(442);
 
-	if(n_A_JobSearch()==41 && EquipNumSearch(675))
-		w += 5;
-	if(EquipNumSearch(623))
-		w += n_A_Weapon_ATKplus;
-	if(EquipNumSearch(1122) && n_A_JobSearch()==6)
-		w += 5;
-	if(EquipNumSearch(1161))
-		w += (2 * SkillSearch(89));
-	if(SU_DEX >= 90 && EquipNumSearch(1164))
-		w += 5;
+	if (n_A_JobSearch()==41 && EquipNumSearch(675))
+		n_tok[10] += 5;
+	if (EquipNumSearch(623))
+		n_tok[10] += n_A_Weapon_ATKplus;
+	if (EquipNumSearch(1122) && n_A_JobSearch()==6)
+		n_tok[10] += 5;
+	if (EquipNumSearch(1161))
+		n_tok[10] += (2 * SkillSearch(89));
+	if (SU_DEX >= 90 && EquipNumSearch(1164))
+		n_tok[10] += 5;
 	//custom TalonRO fix so crit rate is increased for Sharp Shooting too by Drosera/Sharp Arrow
-	if(n_A_WeaponType == 10 && n_A_Arrow == 15)
-		w += 20;
-	if(n_A_WeaponType==10 || 17<=n_A_WeaponType && n_A_WeaponType<=21)
-		w += CardNumSearch(462) * 15;
-	//original
-	/*if(n_A_ActiveSkill != 272){
-		if(n_A_WeaponType == 10 && n_A_Arrow == 15)
-			w += 20;
-		if(n_A_WeaponType==10 || 17<=n_A_WeaponType && n_A_WeaponType<=21)
-			w += CardNumSearch(462) * 15;
-	}*/
+	if (n_A_WeaponType == 10 && n_A_Arrow == 15)
+		n_tok[10] += 20;
+	if (n_A_WeaponType==10 || 17<=n_A_WeaponType && n_A_WeaponType<=21)
+		n_tok[10] += CardNumSearch(462) * 15;
 
-	if(SkillSearch(195))
-		w += 7.5 + SkillSearch(195) * 2.5;
-	else if(TimeItemNumSearch(34))
-		w += 10;
-	if(SkillSearch(253))
-			w += 50;
-	if(n_A_JOB == 24)
-			w += SkillSearch(270);
-	if(n_A_PassSkill8[18])
-		w += 7;
-	if(n_A_PassSkill8[21])
-		w += 7;
+	else if (TimeItemNumSearch(34))
+		n_tok[10] += 10;
 
 	//[TalonRO Custom - 2018-07-26 - Valorous Battle CrossBow +25 CRIT for Archer Classes] [Amor]
 	if(EquipNumSearch(913) && n_A_JobSearch() == 4) {
-		w +=25;
+		n_tok[10] += 25;
 	}
 	//[TalonRO Custom - 2018-07-28 - Glorious Gatiling Gun +3 CRIT per refine] [Amor]
 	if(EquipNumSearch(1101)) {
-		w += (3 * n_A_Weapon_ATKplus);
+		n_tok[10] += (3 * n_A_Weapon_ATKplus);
 	}
 	//[TalonRO Custom - 2018-07-28 - Glorious Gladious +10 CRIT per refine for Soul Linker] [Amor]
-	if(EquipNumSearch(1076) && n_A_JOB == 43) {
-		w += (10 * n_A_Weapon_ATKplus);
-	}
-	/*
-		Brave Battle Strategy Book
-		[Refine level 7-10]
-		Crit damage +1% per refine level, up to a total of +10% at +10.
-	*/
-	if(EquipNumSearch(911) && n_A_Weapon_ATKplus >= 7) {
-		w += (1 * n_A_Weapon_ATKplus);
-	}
+	if(EquipNumSearch(1076) && n_A_JOB == 43)
+		n_tok[10] += (10 * n_A_Weapon_ATKplus);
 
 	//custom TalonRO Armor enchant CRIT
 	var wHSE = document.calcForm.A_HSE.value;
 	if(wHSE){
 		if(151 <= wHSE && wHSE <= 159)
-			w += parseInt(wHSE.substr(-1));
+			n_tok[10] += parseInt(wHSE.substr(-1));
 	}
 
 	//custom TalonRO Halloween Midas Whisper
 	if(SU_LUK >= 80 && EquipNumSearch(1526))
-		w += 5;
-
+		n_tok[10] += 5;
 
 	//[Custom TalonRO - 2018-06-02 - Aegir shoes + helm combo(CRIT + 1% * refinement for Fish type monsters)] [Kato/Nattwara]
-	if(n_B[2] == 5 && EquipNumSearch(1554)){ // Race = 5 (Fish)
-		w += n_A_SHOES_DEF_PLUS * EquipNumSearch(1554);
-	}
+	if (n_B[2] == 5 && EquipNumSearch(1554)) // Race = 5 (Fish)
+		n_tok[10] += n_A_SHOES_DEF_PLUS * EquipNumSearch(1554);
 
 	//[Custom TalonRO 2018-06-15 - Malangdo Enchantment for Sharp - CRIT [Kato]
-	for(i=0; i < tRO_MalangdoEnchantment.length; i++) {
+	for (i=0; i < tRO_MalangdoEnchantment.length; i++) {
 		var vME = tRO_MalangdoEnchantment[i];
-		if(vME >= 1081 && vME <= 1085) {
-			if(vME.substr(-1) == 1){
-				w += 3;
-			}
+		if (vME >= 1081 && vME <= 1085) {
+			if (vME.substr(-1) == 1)
+				n_tok[10] += 3;
 			else
-			{
-				w += 3 + parseInt(vME.substr(-1));
-			}
+				n_tok[10] += 3 + parseInt(vME.substr(-1));
 		}
 	}
 
 	//[Custom TalonRO 2018-07-10 - Biolab Weapon Enchantment for Sharp - CRIT [NattWara]
-	for(i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
+	for (i=0; i < tRO_BiolabWeaponEnchantment.length; i++) {
 		var vBE = tRO_BiolabWeaponEnchantment[i];
-		if(vBE >= 1081 && vBE <= 1085) {
-			if(vBE.substr(-1) == 1){
-				w += 3;
-			}
+		if (vBE >= 1081 && vBE <= 1085) {
+			if(vBE.substr(-1) == 1)
+				n_tok[10] += 3;
 			else
-			{
-				w += 3 + parseInt(vBE.substr(-1));
-			}
+				n_tok[10] += 3 + parseInt(vBE.substr(-1));
 		}
 	}
 
 	//[Custom TalonRO 2018-07-12 - Eden Armor Enchantment for CRIT] [NattWara]
-	for(i=0; i < tRO_EdenArmorEnchantment.length; i++) {
+	for (i=0; i < tRO_EdenArmorEnchantment.length; i++) {
 		var vEE = tRO_EdenArmorEnchantment[i];
-		if(151 <= vEE && vEE <= 159) {
+		if (151 <= vEE && vEE <= 159) {
 			var val = parseInt(vEE.substr(-1));
-			w += val;
+			n_tok[10] += val;
 		}
 	}
 
 	//[Custom TalonRO 2018-07-12 - El Dicaste Enchantment for CRIT] [NattWara]
-	for(i=0; i < tRO_EDEnchantment.length; i++) {
+	for (i=0; i < tRO_EDEnchantment.length; i++) {
 		var vED = tRO_EDEnchantment[i];
-		if(151 <= vED && vED <= 159) {
+		if (151 <= vED && vED <= 159) {
 			var val = parseInt(vED.substr(-1));
-			w += val;
+			n_tok[10] += val;
 		}
 	}
 
 	//[Custom TalonRO 2018-07-12 - Mora Enchantment for CRIT] [NattWara]
-	for(i=0; i < tRO_MoraEnchantment.length; i++) {
+	for (i=0; i < tRO_MoraEnchantment.length; i++) {
 		var vMORA = tRO_MoraEnchantment[i];
-		if(151 <= vMORA && vMORA <= 159) {
+		if (151 <= vMORA && vMORA <= 159) {
 			var val = parseInt(vMORA.substr(-1));
-			w += val;
+			n_tok[10] += val;
 		}
 	}
 
 	//[TalonRO Custom 2018-07-25 - Assaulter Lance +30 CRIT Crusader/Paladin] [Amor]
-	if(EquipNumSearch(904) && n_A_JobSearch2() == 13){
-		w += 30;
-	}
+	if (EquipNumSearch(904) && n_A_JobSearch2() == 13)
+		n_tok[10] += 30;
 
-	n_A_CRI += w;
-
-	if(n_A_PassSkill3[5]){
-		n_A_CRI += 10 + n_A_PassSkill3[5] + Math.floor(n_A_PassSkill3[35] /2) + Math.floor(n_A_PassSkill3[25] /10);
-	}
+	n_A_CRI += n_tok[10];
 
 	//custom TalonRO Gryphon Card
 	if(CardNumSearch(277)) {
 		n_A_CRI -= Math.floor(SU_STR /11) * 2 * CardNumSearch(277);
-	}
-
-	if(n_A_WeaponType == 11) {
-		n_A_CRI *= 2;
 	}
 
 	n_A_CRI = Math.round(n_A_CRI * 10) / 10;
@@ -3633,6 +3620,14 @@ with(document.calcForm){
 	//custom TalonRO Evil Marching Hat: if refine rate >=7 +10% critical damage
 	if(EquipNumSearch(1539) && n_A_HEAD_DEF_PLUS >= 7)
 		n_tok[70] += 10;
+
+	/*
+		Brave Battle Strategy Book
+		[Refine level 7-10]
+		Crit damage +1% per refine level, up to a total of +10% at +10.
+	*/
+	if(n_A_Weapon_ATKplus >= 7 && EquipNumSearch(911))
+		n_tok[70] += n_A_Weapon_ATKplus;
 
 	//custom TalonRO Improved Joker Jester: If refine rate >6 +5% critical damage - [Loa] - 2018-06-07
 	if(EquipNumSearch(1647) && n_A_HEAD_DEF_PLUS > 6){
@@ -9931,6 +9926,7 @@ n_A_PassSkill8[33] = 0;
 n_A_PassSkill8[34] = 0;
 
 eclage_food = 0;
+abrasive_food = 0;
 sting_slap_cocktail = 0;
 venatu_beep_cocktail = 0;
 old_dracula_mix_cocktail = 0;
