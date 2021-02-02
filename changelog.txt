@@ -1,3 +1,9 @@
+[2021-01-24]
+- Added Thanatos Despero Mask
+- Fixed critical rate with Katar
+- Reworked Potion Pitcher Calculator
+- Fixed Shield Chain and Shield Boomerang damage computation
+
 [2020-12-21]
 - Added Sppo Egg
 - Added Rose Casquette
