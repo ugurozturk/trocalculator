@@ -1804,6 +1804,7 @@ ItemOBJ = [
 ,[1753,50,0,2,0,1,50,1,"Peace and Happiness Proof","","The blue bird is a symbol of happiness. The white bird is a symbol of peace.<br>Them snuggling happily together on this headgear is a proof of peace and happiness.",19,3,0]
 ,[1754,50,1,2,0,1,50,15,"RWC 2010 Indonesia","","A special cap with a neon sign above, dedicated to celebrating RWC 2010 in Indonesia.",10,3,57,5,218,[501,5,1],218,[504,5,1],0]
 ,[1755,50,1,2,0,0,40,1,"Xmas Frozen Twin Pompom","","A cute hat that will protect you from the cold weather. Used to celebrate Christmas.<br>Gain a Christmas Firecracker when killing monsters of Non-Boss type by low chance.",7,1,73,-5,80,5,218,[520,5,1],218,[521,5,1],218,[522,5,1],218,[545,5,1],218,[508,5,1],218,[501,5,1],218,[507,5,1],218,[569,5,1],218,[549,5,1],218,[529,5,1],218,[528,5,1],218,[550,5,1],0]
+,[1756,51,0,0,0,0,10,20,"Thanatos Despero Mask","","A mask worn by Thanatos Despero.<br>It feels very powerful, but the design is charming.",6,-5,9,4,0]
 ];
 
 //Test code for finding the values in Skill.js AutoSpellSkill
@@ -3593,6 +3594,7 @@ ItemID = [
 ,[1753,1,19762]
 ,[1754,1,18509]
 ,[1755,1,8802]
+,[1756,1,18530]
 ];
 
 /*
