@@ -663,6 +663,8 @@ with(document.calcForm){
 		n_tok[i] += StPlusCalc2(i);
 		n_tok[i] += StPlusCard(i);
 	}
+	
+	manage_sqi_bonus();
 	StPlusCalc();
 
 	if(n_A_WeaponType != 10 && n_A_WeaponType !=14 && n_A_WeaponType !=15 && n_A_WeaponType !=17 && n_A_WeaponType !=18 && n_A_WeaponType !=19 && n_A_WeaponType !=20 && n_A_WeaponType !=21){
@@ -737,7 +739,7 @@ with(document.calcForm){
 		watk_provoke = Math.max(watk_provoke, 1.32);
 	
 	n_A_Weapon_ATK = Math.floor(n_A_Weapon_ATK * watk_provoke);
-	n_A_Weapon2_ATK = Math.floor(n_A_Weapon2_ATK * watk_provoke) * n_Nitou; 
+	n_A_Weapon2_ATK = Math.floor(n_A_Weapon2_ATK * watk_provoke) * n_Nitou;
 
 	//Galaxy Circlet - [Loa] - 2018-07-03
 	if(EquipNumSearch(1163)){
@@ -1351,7 +1353,11 @@ with(document.calcForm){
 	if(EquipNumSearch(715))
 		n_tok[15] -= n_A_SHOES_DEF_PLUS;
 	if (n_A_PassSkill3[3]) // Apple of Idun - HP Rate: (5 + 2 * skill_lv) + (VIT / 10) + (BA_MUSICALLESSON skill_lv / 2)
-		n_tok[15] += 5 + n_A_PassSkill3[3] * 2 + Math.floor(n_A_PassSkill3[23] /10) + Math.floor(n_A_PassSkill3[33]) / 2;
+	{
+		// #66 - [The Apple of Idun] MaxHP Rate + 2%. Heals three times as often and twice as much
+		apple_of_idun_sqi_bonus = (SQI_Bonus_Effect.findIndex(x => x - 1 == 67) > -1 ? 2 : 0);
+		n_tok[15] += 5 + n_A_PassSkill3[3] * 2 + Math.floor(n_A_PassSkill3[23] /10) + Math.floor(n_A_PassSkill3[33]) / 2 + apple_of_idun_sqi_bonus;
+	}
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Corsair [1] - +1% MaxHP for refine 5 to 7 (total +3%), +2% MaxHP if refine 8+ [Nattwara]
 	if(EquipNumSearch(1657)){
@@ -1374,25 +1380,6 @@ with(document.calcForm){
 			n_tok[15] += n_A_HEAD_DEF_PLUS-5;
 		}
 	}
-
-	//custom TalonRO SQI Eversong Greaves: [Taekwon] +10% MaxHP; [Taekwon Master] +20% MaxHP (the item itself)
-	if(EquipNumSearch(1383))
-		//alert(n_A_JOB+","+n_A_JobSearch());
-		if(n_A_JOB==41)
-			n_tok[15] += 10;
-		else if(n_A_JOB==42)
-			n_tok[15] += 20;
-	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon] +10% MaxHP; [Taekwon Master] +20% MaxHP (the actual bonus)
-	if(EquipNumSearch(1383))
-		for(i=0;i<SQI_Bonus_Effect.length;i++)
-			if(SQI_Bonus_Effect[i]==73) {
-				//alert(n_A_JOB+","+n_A_JobSearch());
-				if(n_A_JOB==41)
-					n_tok[15] += 10;
-				else if(n_A_JOB==42)
-					n_tok[15] += 20;
-				break;
-			}
 
 	//custom TalonRO Lady Tanee Card: +1% HP per 8 base AGI
 	if(CardNumSearch(409))
@@ -2036,21 +2023,6 @@ with(document.calcForm){
 		n_A_HIT += Math.floor(n_A_JobLV /5) * CardNumSearch(492); //custom TalonRO Ifrit Card +1hit every 5 Joblv
 		//n_A_HIT += Math.floor(n_A_JobLV /10) * CardNumSearch(492); //custom TalonRO Ifrit Card +1hit every 5 Joblv
 
-	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon] HIT + 25 (the item itself)
-	if(EquipNumSearch(1383))
-		//alert(n_A_JOB+","+n_A_JobSearch());
-		if(n_A_JOB==41)
-			n_A_HIT += 25;
-
-	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon] +40 Hit (the actual bonus)
-	if(EquipNumSearch(1383))
-		for(i=0;i<SQI_Bonus_Effect.length;i++)
-			if(SQI_Bonus_Effect[i]==74) {
-				//alert(n_A_JOB+","+n_A_JobSearch());
-				if(n_A_JOB==41)
-					n_A_HIT += 40;
-				break;
-			}
 
 	if(SU_STR >= 90 && EquipNumSearch(442))
 		n_A_HIT += 10 * EquipNumSearch(442);
@@ -2201,8 +2173,12 @@ with(document.calcForm){
 	if(n_A_PassSkill8[30]){
 		n_A_FLEE += 33;
 	}
-	if(n_A_PassSkill3[0]) // A Whistle - Base_FLEE_Boost + Floor(AGI ÷ 10) + Music_Lessons_Lv
-		n_A_FLEE += n_A_PassSkill3[0] + n_A_PassSkill3[30] + Math.floor(n_A_PassSkill3[20] / 10);
+	if(n_A_PassSkill3[0]) // A Whistle - Base_FLEE_Boost - Skill Lv + Floor(AGI / 10) + Floor(Music_Lessons_Lv / 2)
+	{
+		// #67 - [A Whistle] FLEE Rate + 20% and Perfect Dodge Rate + 3%
+		a_whistle_sqi_bonus = (SQI_Bonus_Effect.findIndex(x => x - 1 == 68) > -1 ? 20 : 0);
+		n_A_FLEE += n_A_PassSkill3[0] + Math.Floor(n_A_PassSkill3[30] / 2) + Math.floor(n_A_PassSkill3[20] / 10) + a_whistle_sqi_bonus;
+	}
 
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1276)){
 		n_A_FLEE += 10;
@@ -2300,9 +2276,13 @@ with(document.calcForm){
 		n_tok[11] += 10;
 
 	
-	// A Whistle Skill - Base_P._D._Boost (Ceil(SkillLv / 2)) + Floor(LUK ÷ 10) + Ceil(Music_Lessons_Lv ÷ 2)
+	// A Whistle Skill - Base_P._D._Boost - Floor((Skill Lv + 1) / 2 + LUK / 30) + Floor(Music_Lessons_Lv / 5)
 	if (n_A_PassSkill3[0])
-		n_tok[11] += Math.ceil(n_A_PassSkill3[0] / 2) + Math.floor(n_A_PassSkill3[46] / 10) + Math.ceil(n_A_PassSkill3[30] / 2);
+	{
+		// #67 - [A Whistle] FLEE Rate + 20% and Perfect Dodge Rate + 3%
+		a_whistle_sqi_bonus = (SQI_Bonus_Effect.findIndex(x => x - 1 == 68) > -1 ? 3 : 0);
+		n_tok[11] += Math.floor((n_A_PassSkill3[0] + 1) / 2 + n_A_PassSkill3[46] / 30) + Math.floor(n_A_PassSkill3[30] / 5) + a_whistle_sqi_bonus;
+	}
 
 	n_A_LUCKY = 1 + n_A_LUK * 0.1;
 	n_A_LUCKY += n_tok[11];
@@ -2376,7 +2356,11 @@ with(document.calcForm){
 	
 	// SC_FORTUNE
 	if (n_A_PassSkill3[5]) // Fortune's Kiss
-		n_A_CRI += 10 + n_A_PassSkill3[5] + Math.floor(n_A_PassSkill3[35] /2) + Math.floor(n_A_PassSkill3[25] /10);
+	{
+		// #39 - [Fortune's Kiss] CRIT Rate + 5%; and buffs yourself without [Bard and Dancer Spirits]; when its user leaves the AoE it lasts 40 seconds
+		fortunes_kiss_sqi_bonus = (SQI_Bonus_Effect.findIndex(x => x - 1 == 39) > -1 ? 5 : 0);
+		n_A_CRI += 10 + n_A_PassSkill3[5] + Math.floor(n_A_PassSkill3[35] /2) + Math.floor(n_A_PassSkill3[25] /10) + fortunes_kiss_sqi_bonus;
+	}
 	
 	// SC_TRUESIGHT
 	if (n_A_JOB == 24)
@@ -2945,14 +2929,7 @@ with(document.calcForm){
 		n_tok[98] += 15;
 	}
 
-	//custom TalonRO SQI Bonus Angel of Blades: +50 MATK
-	if(EquipNumSearch(1379))
-		for(i=0;i<SQI_Bonus_Effect.length;i++)
-			if(SQI_Bonus_Effect[i]==41) {
-				n_A_MATK[0] += 50;
-				n_A_MATK[2] += 50;
-				break;
-			}
+
 	//custom TalonRO Magical Booster & Staff of Piercing Combo
 	if(EquipNumSearch(1430)& EquipNumSearch(645)){
 		n_tok[98] += 3 * n_A_Weapon_ATKplus;
@@ -2967,15 +2944,7 @@ with(document.calcForm){
 			n_tok[98] += 25;
 		}
 	}
-	//custom TalonRO SQI Bonus Sherwood Bow: +50 MATK
-	if(EquipNumSearch(1388)) {
-		for(i = 0; i < SQI_Bonus_Effect.length; i++) {
-			if(SQI_Bonus_Effect[i] == 131) {
-				n_tok[98] += 50;
-				break;
-			}
-		}
-	}
+
 	//custom TalonRO ID_ARG + MATK
 	n_tok[98] += n_A_PassSkill9[42];
 	
@@ -3121,17 +3090,6 @@ with(document.calcForm){
 
 	if (SU_STR >= 95 && EquipNumSearch(1167))
 		n_tok[12] += 3;
-
-
-	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon] +30% ASPD
-	if (EquipNumSearch(1383))
-		for (i=0;i<SQI_Bonus_Effect.length;i++)
-			if (SQI_Bonus_Effect[i]==75) {
-				//alert(n_A_JOB+","+n_A_JobSearch());
-				if (n_A_JOB==41)
-					n_tok[12] += 30;
-				break;
-			}
 
 	//custom TalonRO Alca Bringer: +3% ASPD every 2 refines
 	if (EquipNumSearch(1455))
@@ -3428,13 +3386,16 @@ with(document.calcForm){
 
 	musical_lesson_lv = n_A_PassSkill3[2]; // Musical Lesson
 	if (musical_lesson_lv)
-	{		
+	{
+		// #68 - [Poem of Bragi] Aftercast Rate + 2%
+		bragi_sqi_bonus = (SQI_Bonus_Effect.findIndex(x => x - 1 == 69) > -1 ? 2 : 0);
+		
 		// custom TalonRO Poem of Bragi after cast delay
 		// "we strongly think that the stacking of Bragi with items that grant ACD reduction is something to avoid" - GM Team, applied only to PvM
 		if (n_A_PassSkill3[45]) // PvP Mode
-			n_tok[74] += w * 3 + 20 * Math.floor(w / 10) + n_A_PassSkill3[32] * 2 + Math.floor(n_A_PassSkill3[29] / 5);
+			n_tok[74] += musical_lesson_lv * 3 + 20 * Math.floor(musical_lesson_lv / 10) + n_A_PassSkill3[32] * 2 + Math.floor(n_A_PassSkill3[29] / 5) + bragi_sqi_bonus;
 		else // PvM Mode
-			n_tok[74] = w * 3 + n_A_PassSkill3[32] * 2 + Math.floor(n_A_PassSkill3[29] / 5); // Override all previous acd reduction bonus
+			n_tok[74] = musical_lesson_lv * 3 + n_A_PassSkill3[32] * 2 + Math.floor(n_A_PassSkill3[29] / 5) + bragi_sqi_bonus; // Override all previous acd reduction bonus
 	}
 	
 	n_tok[74] = Math.min(100, n_tok[74]);
@@ -4312,139 +4273,113 @@ function StPlusCalc()
 	n_A_JobSet();
 	n_A_JobLV = eval(document.calcForm.A_JobLV.value);
 
-	var w2 = [0,0,0,0,0,0];
+	// Apply job stats bonus
+	job_id = (n_A_JOB == 0 && n_Tensei) ? 34 : n_A_JOB;
 	for(var i=0;JobBOBJ[n_A_JOB][i] <= n_A_JobLV && JobBOBJ[n_A_JOB][i] != "n";i+=2)
-			w2[JobBOBJ[n_A_JOB][i+1]] += 1;
-	if(n_A_JOB == 0 && n_Tensei){
-		for(var i=0;JobBOBJ[34][i] <= n_A_JobLV && JobBOBJ[34][i] != "n";i+=2)
-				w2[JobBOBJ[34][i+1]] += 1;
-	}
-	if(n_A_JobLV >= 70 && SkillSearch(309)){
-		for(var i=0;i<6;i++)
-			w2[i] += 10;
-	}
-	var wSPC_STR = w2[0];
-	var wSPC_AGI = w2[1];
-	var wSPC_VIT = w2[2];
-	var wSPC_INT = w2[3];
-	var wSPC_DEX = w2[4];
-	var wSPC_LUK = w2[5];
+		n_tok[JobBOBJ[job_id][i+1] + 1] += 1;
 
+	if (n_A_JobLV >= 70 && SkillSearch(309)) // SuNo No Death Bonus#309
+		n_tok[7] += 10;
 
-	wSPCall = StPlusCalc2(7);
-	wSPC_STR += StPlusCalc2(1) + wSPCall;
-	wSPC_AGI += StPlusCalc2(2) + wSPCall;
-	wSPC_VIT += StPlusCalc2(3) + wSPCall;
-	wSPC_INT += StPlusCalc2(4) + wSPCall;
-	wSPC_DEX += StPlusCalc2(5) + wSPCall;
-	wSPC_LUK += StPlusCalc2(6) + wSPCall;
-
-	wSPC_DEX += SkillSearch(38);
-	if(SkillSearch(68))
-		wSPC_STR += 4;
-	wSPC_STR += SkillSearch(146);
-	wSPC_STR += SkillSearch(404);
-	wSPC_INT += SkillSearch(404);
-	if(SkillSearch(234))
-		wSPC_INT += Math.round(SkillSearch(234) /2);
-	if(SkillSearch(286)){
-		if(SkillSearch(286)==5)wSPC_STR +=16;
-		if(SkillSearch(286)==4)wSPC_STR +=8;
-		if(SkillSearch(286)==3)wSPC_STR +=4;
-		if(SkillSearch(286)==2)wSPC_STR +=2;
-		if(SkillSearch(286)==1)wSPC_STR +=1;
-	}
+	n_tok[1] += SkillSearch(146);
+	n_tok[1] += SkillSearch(404);
+	n_tok[1] += 4 * SkillSearch(68);
+	n_tok[1] += Math.floor(Math.pow(2, SkillSearch(286) - 1)); //Stealth [STR+]#286
+	
+	n_tok[4] += SkillSearch(404);
+	n_tok[4] += Math.round(SkillSearch(234) / 2);
+	
+	n_tok[5] += SkillSearch(38);
 
 	var w = SkillSearch(42);
 	if(w){
 		w += 102;
-		wSPC_DEX = Math.floor((n_A_DEX + wSPC_DEX) * w / 100) - n_A_DEX;
-		wSPC_AGI = Math.floor((n_A_AGI + wSPC_AGI) * w / 100) - n_A_AGI;
+		n_tok[5] = Math.floor((n_A_DEX + n_tok[5]) * w / 100) - n_A_DEX;
+		n_tok[2] = Math.floor((n_A_AGI + n_tok[2]) * w / 100) - n_A_AGI;
 	}else if(n_A_PassSkill6[3]){
-		wSPC_DEX = Math.floor((n_A_DEX + wSPC_DEX) * (102 + n_A_PassSkill6[3]) / 100) - n_A_DEX;
-		wSPC_AGI = Math.floor((n_A_AGI + wSPC_AGI) * (102 + n_A_PassSkill6[3]) / 100) - n_A_AGI;
+		n_tok[5] = Math.floor((n_A_DEX + n_tok[5]) * (102 + n_A_PassSkill6[3]) / 100) - n_A_DEX;
+		n_tok[2] = Math.floor((n_A_AGI + n_tok[2]) * (102 + n_A_PassSkill6[3]) / 100) - n_A_AGI;
 	}else if(TimeItemNumSearch(31)){
-		wSPC_DEX = Math.floor((n_A_DEX + wSPC_DEX) * 104 / 100) - n_A_DEX;
-		wSPC_AGI = Math.floor((n_A_AGI + wSPC_AGI) * 104 / 100) - n_A_AGI;
+		n_tok[5] = Math.floor((n_A_DEX + n_tok[5]) * 104 / 100) - n_A_DEX;
+		n_tok[2] = Math.floor((n_A_AGI + n_tok[2]) * 104 / 100) - n_A_AGI;
 	}else if(TimeItemNumSearch(4)){
-		wSPC_DEX = Math.floor((n_A_DEX + wSPC_DEX) * 103 / 100) - n_A_DEX;
-		wSPC_AGI = Math.floor((n_A_AGI + wSPC_AGI) * 103 / 100) - n_A_AGI;
+		n_tok[5] = Math.floor((n_A_DEX + n_tok[5]) * 103 / 100) - n_A_DEX;
+		n_tok[2] = Math.floor((n_A_AGI + n_tok[2]) * 103 / 100) - n_A_AGI;
 	}
 	if(SkillSearch(422)){
 
-		wSPC_DEX += 4;
-		wSPC_AGI += 4;
+		n_tok[5] += 4;
+		n_tok[2] += 4;
 	}
 
 	if(n_A_JobSearch()==41 && EquipNumSearch(672))
-		wSPC_AGI += 1;
+		n_tok[2] += 1;
 	if(n_A_JobSearch()==41 && EquipNumSearch(673))
-		wSPC_INT += 1;
+		n_tok[4] += 1;
 	if(n_A_JobSearch()==41 && EquipNumSearch(675))
-		wSPC_LUK += 2;
+		n_tok[6] += 2;
 	if(n_A_JobSearch()==41 && EquipNumSearch(676))
-		wSPC_DEX += 2;
+		n_tok[5] += 2;
 	if(n_A_JobSearch()==41 && EquipNumSearch(678))
-		wSPC_LUK += 1;
+		n_tok[6] += 1;
 	if(n_A_SHOES_DEF_PLUS >= 9 && EquipNumSearch(717))
-		wSPC_AGI += 2;
+		n_tok[2] += 2;
 	if(n_A_HEAD_DEF_PLUS >= 5 && EquipNumSearch(1069))
-		wSPC_LUK += (n_A_HEAD_DEF_PLUS - 4);
+		n_tok[6] += (n_A_HEAD_DEF_PLUS - 4);
 	if(n_A_Weapon_ATKplus >= 6 && EquipNumSearch(1168))
-		wSPC_INT += (n_A_Weapon_ATKplus - 5);
+		n_tok[4] += (n_A_Weapon_ATKplus - 5);
 	if(EquipNumSearch(1171) && SkillSearch(234) == 5)
-		wSPC_INT += 3;
+		n_tok[4] += 3;
 	if(EquipNumSearch(1172))
-		wSPC_INT += Math.floor(n_A_Weapon_ATKplus / 2);
+		n_tok[4] += Math.floor(n_A_Weapon_ATKplus / 2);
 
 	if(EquipNumSearch(649))
-		wSPC_DEX -= SU_DEX;
+		n_tok[5] -= SU_DEX;
 
 	if(n_A_WeaponType==9)
-		wSPC_INT += CardNumSearch(466);
+		n_tok[4] += CardNumSearch(466);
 
-	wSPCall = StPlusCard(7);
 	//custom TalonRO pet Pinguicula + Poring Cake Hat combo
 	if(n_A_PassSkill8[0]==57 && EquipNumSearch(1059))
-		wSPCall += 1;
+		n_tok[7] += 1;
 
 	//[Custom TalonRO - 6/4/2018 - Pet Pandaring + Panda Hat combo] [Kato]
 	if(n_A_PassSkill8[0]==101 && EquipNumSearch(202))
-		wSPC_INT += 4;
+		n_tok[4] += 4;
 
 	//[Custom TalonRO - 6/4/2018 - Pet Galapago + Galapago Hat combo] [Kato]
 	if(n_A_PassSkill8[0]==93 && EquipNumSearch(502))
-		wSPC_LUK += 4;
+		n_tok[6] += 4;
 
 	//[Custom TalonRO - 6/4/2018 - Pet Jejeling + Baseball Cap combo] [Kato]
 	if(n_A_PassSkill8[0]==119 && EquipNumSearch(787))
-		wSPC_DEX += 4;
+		n_tok[5] += 4;
 
 	//[Custom TalonRO - 6/4/2018 - Pet Wild Rider  + Drooping Cat combo] [Kato]
 	if(n_A_PassSkill8[0]==131 && EquipNumSearch(355))
-		wSPC_DEX += 3;
+		n_tok[5] += 3;
 
 	//custom TalonRO Gentlemen Fez, Refine Rate 8-10 +1dex, Refine Rate 10 +1dex
 	if (EquipNumSearch(1531)){
 		if (n_A_HEAD_DEF_PLUS >= 8)
-			wSPC_DEX += 1;
+			n_tok[5] += 1;
 		if (n_A_HEAD_DEF_PLUS == 10)
-			wSPC_DEX += 1;
+			n_tok[5] += 1;
 	}
 
 	//custom TalonRo Improved Mage Hat: Every Refine level 7 or higher adds INT + 1 - [Loa] - 2018-06-07
 	if(EquipNumSearch(1645) && n_A_HEAD_DEF_PLUS > 6){
-		wSPC_INT += n_A_HEAD_DEF_PLUS - 6;
+		n_tok[4] += n_A_HEAD_DEF_PLUS - 6;
 	}
 
 	//custom TalonRo Improved Magician Hat: Every Refine level 7 or higher adds DEX + 1 - [Loa] - 2018-06-07
 	if(EquipNumSearch(1646) && n_A_HEAD_DEF_PLUS > 6){
-		wSPC_DEX += n_A_HEAD_DEF_PLUS - 6;
+		n_tok[5] += n_A_HEAD_DEF_PLUS - 6;
 	}
 		
 	// Rose of Eden#1697 + Angelic Ring#1000 Set#1698 [Vanilla Mode] DEX + 2 instead of DEX + 3
 	if (document.calcForm.vanilla.checked && EquipNumSearch(1698))
-		wSPC_DEX -= 1;
+		n_tok[5] -= 1;
 
 	//Custom TalonRO - 2018-06-07 - Enhanced Helm of Angel [1] - AGI & LUK Part [Nattwara]
 	/*
@@ -4455,27 +4390,27 @@ function StPlusCalc()
 	*/
 	if(EquipNumSearch(1655)){
 		if(n_A_HEAD_DEF_PLUS>4){
-			wSPC_AGI += 1;
-			wSPC_LUK += 1;
+			n_tok[2] += 1;
+			n_tok[6] += 1;
 		}
 		if(n_A_HEAD_DEF_PLUS>5){
-			wSPC_AGI += 1;
-			wSPC_LUK += 1;
+			n_tok[2] += 1;
+			n_tok[6] += 1;
 		}
 	}
 
 	//[TalonRO Custom - 2018-07-27 - Glorious Bloody Roar - Every Upgrade gives + 1 INT] [Amor]
 	if(EquipNumSearch(1090)){
-		wSPC_INT += n_A_Weapon2_ATKplus;
+		n_tok[4] += n_A_Weapon2_ATKplus;
 	}
 
 	//[TalonRO Custom - 2018-07-28 - Glorious Gladius - +5 DEX for Rogue/Stalker/Ninja/SL][Amor]
 	if(EquipNumSearch(1076) && (n_A_JobSearch2() == 14 || n_A_JOB== 43 || n_A_JOB == 44)){
-			wSPC_DEX += 5;
+			n_tok[5] += 5;
 	}
 	//[TalonRO Custom - 2018-07-29 - Glorious Rapier - +1 INT per Refine][Amor]
 	if(EquipNumSearch(1078)){
-		wSPC_INT += n_A_Weapon_ATKplus;
+		n_tok[4] += n_A_Weapon_ATKplus;
 		
 		/*
 			[Refine 7-10]
@@ -4532,112 +4467,82 @@ function StPlusCalc()
 			n_tok[72] -= 5;
 	}
 
-	wSPC_STR += StPlusCard(1) + wSPCall;
-	wSPC_AGI += StPlusCard(2) + wSPCall;
-	wSPC_VIT += StPlusCard(3) + wSPCall;
-	wSPC_INT += StPlusCard(4) + wSPCall;
-	wSPC_DEX += StPlusCard(5) + wSPCall;
-	wSPC_LUK += StPlusCard(6) + wSPCall;
-
 	if(n_A_JobSearch()==3)
-		wSPC_INT += CardNumSearch(383);
-	if(CardNumSearch(173))wSPC_INT += n_A_LEFT_DEF_PLUS;
-	if(CardNumSearch(402))wSPC_LUK += n_A_SHOULDER_DEF_PLUS;
-	if(CardNumSearch(406))wSPC_AGI += n_A_SHOES_DEF_PLUS;
-	if(CardNumSearch(198))wSPC_VIT += n_A_BODY_DEF_PLUS;
-	if(n_A_card[8] == 180)wSPC_STR += n_A_HEAD_DEF_PLUS;
+		n_tok[4] += CardNumSearch(383);
+	if(CardNumSearch(173))n_tok[4] += n_A_LEFT_DEF_PLUS;
+	if(CardNumSearch(402))n_tok[6] += n_A_SHOULDER_DEF_PLUS;
+	if(CardNumSearch(406))n_tok[2] += n_A_SHOES_DEF_PLUS;
+	if(CardNumSearch(198))n_tok[3] += n_A_BODY_DEF_PLUS;
+	if(n_A_card[8] == 180)n_tok[1] += n_A_HEAD_DEF_PLUS;
 	//zodiac hats
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1272)){wSPC_VIT += 1;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1273)){wSPC_VIT += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1272)){n_tok[3] += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1273)){n_tok[3] += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1277)){n_tok[91] += 3;n_tok[94] += 3;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1279)){wSPC_INT += 2;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1279)){n_tok[4] += 2;}
 	if(n_A_HEAD_DEF_PLUS >= 9 && EquipNumSearch(1279)){n_tok[91] += 4;n_tok[94] += 4;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1280)){n_tok[64] += 5;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1281)){n_tok[64] += 5;}
-	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1288)){wSPC_AGI += 2;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1291)){wSPC_DEX += 1;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1292)){wSPC_DEX += 1;}
-	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1293)){wSPC_DEX += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 8 && EquipNumSearch(1288)){n_tok[2] += 2;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1291)){n_tok[5] += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1292)){n_tok[5] += 1;}
+	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1293)){n_tok[5] += 1;}
 	if(n_A_HEAD_DEF_PLUS >= 7 && EquipNumSearch(1294)){n_tok[62] += 5;}
 
 	//[Custom TalonRO - 2018-07-09 Ancient Gold Adornment - Stats] [NattWara]
 	if(EquipNumSearch(1663)){
-		if(n_A_JobLV == 70){
-			wSPC_STR += 1;
-			wSPC_AGI += 1;
-			wSPC_VIT += 1;
-			wSPC_INT += 1;
-			wSPC_DEX += 1;
-			wSPC_LUK += 1;
-		}
+		if(n_A_JobLV == 70)
+			n_tok[7] += 1;
+		
 		var wHPVS = n_A_JobSearch();
 		if(wHPVS==4){
-			wSPC_DEX += 1;
+			n_tok[5] += 1;
 		}
 	}
 
 	// Giant Shield#1500 - [Every Refine Level > 5] Resistance against Large + 1%
 	n_tok[192] += Math.max(0, n_A_LEFT_DEF_PLUS - 5) * EquipNumSearch(1500);
 
-	if(CardNumSearch(185))wSPC_VIT += Math.floor(SU_DEX /18);
-	if(CardNumSearch(187))wSPC_STR += Math.floor(SU_INT /18);
-	if(CardNumSearch(189))wSPC_LUK += Math.floor(SU_AGI /18);
-	if(CardNumSearch(191))wSPC_AGI += Math.floor(SU_LUK /18);
-	if(CardNumSearch(196))wSPC_INT += Math.floor(SU_STR /18);
-	if(CardNumSearch(197))wSPC_DEX += Math.floor(SU_VIT /18);
+	if(CardNumSearch(185))n_tok[3] += Math.floor(SU_DEX /18);
+	if(CardNumSearch(187))n_tok[1] += Math.floor(SU_INT /18);
+	if(CardNumSearch(189))n_tok[6] += Math.floor(SU_AGI /18);
+	if(CardNumSearch(191))n_tok[2] += Math.floor(SU_LUK /18);
+	if(CardNumSearch(196))n_tok[4] += Math.floor(SU_STR /18);
+	if(CardNumSearch(197))n_tok[5] += Math.floor(SU_VIT /18);
 
 	//custom TalonRO Gryphon Card
-	if(CardNumSearch(277))wSPC_LUK += Math.floor(SU_STR /11)*2*CardNumSearch(277);
+	if(CardNumSearch(277))n_tok[6] += Math.floor(SU_STR /11)*2*CardNumSearch(277);
 
-	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon Master] +15 LUK
-	if(EquipNumSearch(1383))
-		for(i=0;i<SQI_Bonus_Effect.length;i++)
-			if(SQI_Bonus_Effect[i]==74) {
-				//alert(n_A_JOB+","+n_A_JobSearch());
-				if(n_A_JOB==42)
-					wSPC_LUK += 15;
-				break;
-			}
-	//custom TalonRO SQI Bonus Eversong Greaves: [Taekwon Master] +10 DEX
-	if(EquipNumSearch(1383))
-		for(i=0;i<SQI_Bonus_Effect.length;i++)
-			if(SQI_Bonus_Effect[i]==75) {
-				//alert(n_A_JOB+","+n_A_JobSearch());
-				if(n_A_JOB==42)
-					wSPC_DEX += 10;
-				break;
-			}
 	//custom King Poring Hat
 	if(EquipNumSearch(1444)){
-		wSPC_DEX += Math.floor(n_A_HEAD_DEF_PLUS/3);
-		wSPC_LUK += Math.floor(n_A_HEAD_DEF_PLUS/3);
+		n_tok[5] += Math.floor(n_A_HEAD_DEF_PLUS/3);
+		n_tok[6] += Math.floor(n_A_HEAD_DEF_PLUS/3);
 	}
 	//custom TalonRO Meginjard
 	if(EquipNumSearch(348))
-		if((n_A_JOB!=8) && (n_A_JOB!=22))wSPC_STR +=30*EquipNumSearch(348);;
+		if((n_A_JOB!=8) && (n_A_JOB!=22))n_tok[1] +=30*EquipNumSearch(348);;
 	//alert(n_A_JOB+","+n_A_JobSearch());
 	//custom TalonRO Dolomedes Card
 	if(CardNumSearch(514))
 		if(n_A_JobSearch()==4)
-			wSPC_DEX += Math.floor(n_A_HEAD_DEF_PLUS /3);
+			n_tok[5] += Math.floor(n_A_HEAD_DEF_PLUS /3);
 		else
-			wSPC_INT += Math.floor(n_A_HEAD_DEF_PLUS /3);
+			n_tok[4] += Math.floor(n_A_HEAD_DEF_PLUS /3);
 	//custom TalonRO Cendrawasih Card
 	if(CardNumSearch(517))
 		if(n_A_JobSearch()==5)
-			wSPC_INT += Math.floor(n_A_HEAD_DEF_PLUS /3);
+			n_tok[4] += Math.floor(n_A_HEAD_DEF_PLUS /3);
 	//custom TalonRO King Dramoh
 	if(CardNumSearch(527))
 		if(n_A_JobSearch()==1)
-			wSPC_STR += Math.floor(n_A_HEAD_DEF_PLUS /3);
+			n_tok[1] += Math.floor(n_A_HEAD_DEF_PLUS /3);
 
 	// Tarou#98 + Cramp#273 Combo
 	if ((n_A_card[14] == 98 || n_A_card[15] == 98) && CardNumSearch(273))
-		wSPC_STR += 3;
+		n_tok[1] += 3;
 
 	//Orc Hero Headdress [For Every 4 Refines] STR + 1 - [Loa] - 2018-07-03
 	if(EquipNumSearch(1142)){
-		wSPC_STR += Math.floor(n_A_HEAD_DEF_PLUS/4);
+		n_tok[1] += Math.floor(n_A_HEAD_DEF_PLUS/4);
 	}
 	//Phoenix Crown
 	if(EquipNumSearch(872)){
@@ -4650,7 +4555,7 @@ function StPlusCalc()
 	if(EquipNumSearch(1543) || EquipNumSearch(1013)){
 		n_tok[77] += Math.floor(n_A_LEFT_DEF_PLUS /3);
 	}
-	if(EquipNumSearch(1268))wSPC_INT += Math.floor(SU_INT/24);
+	if(EquipNumSearch(1268))n_tok[4] += Math.floor(SU_INT/24);
 
 	/*
 		Assaulter Lance
@@ -4658,17 +4563,17 @@ function StPlusCalc()
 		VIT + 5.
 	*/
 	if (EquipNumSearch(904) && n_A_JobSearch2() == 13) {
-		wSPC_VIT += 5;
+		n_tok[3] += 5;
 	}
 	// Brave Assassin Damascus
 	if (EquipNumSearch(897)) {
 		// [Rogue Class]
 		if (n_A_JobSearch2() == 14) {
-			wSPC_DEX += 2; // DEX + 2
+			n_tok[5] += 2; // DEX + 2
 		}
 		// [Ninja Class]
 		else if (n_A_JOB == 44) {
-			wSPC_DEX += 2; // DEX + 2
+			n_tok[5] += 2; // DEX + 2
 		}
 	}
 	/*
@@ -4676,111 +4581,74 @@ function StPlusCalc()
 		[Ninja Class, Rogue or Stalker]
 	*/
 	if (EquipNumSearch(898) && (n_A_JobSearch2() == 14 || n_A_JOB == 44)) {
-		wSPC_DEX += 1; // DEX + 1
+		n_tok[5] += 1; // DEX + 1
 		if (n_A_Weapon_ATKplus >= 6) {
-			wSPC_DEX += 2; // DEX + 2
+			n_tok[5] += 2; // DEX + 2
 		}
 		if (n_A_Weapon_ATKplus >= 9) {
-			wSPC_DEX += 3; // DEX + 3
+			n_tok[5] += 3; // DEX + 3
 		}
 	}
 
 	if(CardNumSearch(405)){
 		if(n_A_JobSearch()==1 || n_A_JobSearch()==2 || n_A_JobSearch()==6)
-			wSPC_STR += 2;
+			n_tok[1] += 2;
 		if(n_A_JobSearch()==3 || n_A_JobSearch()==4 || n_A_JobSearch()==5)
-			wSPC_INT += 2;
+			n_tok[4] += 2;
 	}
 
-	wSPC_STR += n_A_PassSkill2[0];
-	wSPC_INT += n_A_PassSkill2[0];
-	wSPC_DEX += n_A_PassSkill2[0];
+	n_tok[1] += n_A_PassSkill2[0];
+	n_tok[4] += n_A_PassSkill2[0];
+	n_tok[5] += n_A_PassSkill2[0];
 	//custom TalonRO Guarana Candy Agi Increase Level 10 (n_A_IJYOU[0]=Quagmire, n_A_IJYOU[1]=Agi Decrease)
 	//if(n_A_PassSkill2[1] > 0 && n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0)
 	if(n_A_PassSkill2[1] > 0 || n_A_PassSkill8[28] && n_A_IJYOU[0] == 0 && n_A_IJYOU[1] == 0)
 		if(n_A_PassSkill8[28])
-			wSPC_AGI += 12;
+			n_tok[2] += 12;
 		else
-			wSPC_AGI += n_A_PassSkill2[1] +2;
+			n_tok[2] += n_A_PassSkill2[1] +2;
 
-	wSPC_LUK += (n_A_PassSkill2[3] * 30);
+	n_tok[6] += (n_A_PassSkill2[3] * 30);
+
 	if(n_A_JOB == 24 && SkillSearch(270))
-	{
-		wSPC_STR += 5;
-		wSPC_AGI += 5;
-		wSPC_VIT += 5;
-		wSPC_DEX += 5;
-		wSPC_INT += 5;
-		wSPC_LUK += 5;
-	}
+		n_tok[7] += 5;
 
 	if(SkillSearch(379) && n_A_WeaponType==0)
-		wSPC_STR += 10;
+		n_tok[1] += 10;
 
 	if(n_A_PassSkill3[40]){
-		wSPC_STR += 5;
-		wSPC_DEX += 5;
-		wSPC_INT += 5;
+		n_tok[1] += 5;
+		n_tok[5] += 5;
+		n_tok[4] += 5;
 	}
-	wSPC_STR += n_A_PassSkill3[41];
-	wSPC_VIT += n_A_PassSkill3[42];
-	wSPC_AGI += n_A_PassSkill3[43];
-	wSPC_DEX += n_A_PassSkill3[44];
+	n_tok[1] += n_A_PassSkill3[41];
+	n_tok[3] += n_A_PassSkill3[42];
+	n_tok[2] += n_A_PassSkill3[43];
+	n_tok[5] += n_A_PassSkill3[44];
 
-	if(n_A_PassSkill5[0]){
-		wSPC_STR += 20;
-		wSPC_AGI += 20;
-		wSPC_VIT += 20;
-		wSPC_DEX += 20;
-		wSPC_INT += 20;
-		wSPC_LUK += 20;
-	}
-
-	if(n_A_PassSkill6[2] == 1){
-		wSPC_STR += 3;
-		wSPC_AGI += 3;
-		wSPC_VIT += 3;
-		wSPC_DEX += 3;
-		wSPC_INT += 3;
-		wSPC_LUK += 3;
-	}
-	if(n_A_PassSkill6[2] == 2){
-		wSPC_STR += 5;
-		wSPC_AGI += 5;
-		wSPC_VIT += 5;
-		wSPC_DEX += 5;
-		wSPC_INT += 5;
-		wSPC_LUK += 5;
-	}
-	if(n_A_PassSkill8[4]){
-		wSPC_STR += 1;
-		wSPC_AGI += 1;
-		wSPC_VIT += 1;
-		wSPC_DEX += 1;
-		wSPC_INT += 1;
-		wSPC_LUK += 1;
-	}
-	if(SkillSearch(310)){
-		wSPC_STR -= 1;
-		wSPC_AGI -= 1;
-		wSPC_VIT -= 1;
-		wSPC_DEX -= 1;
-		wSPC_INT -= 1;
-		wSPC_LUK -= 1;
-	}
+	if(n_A_PassSkill5[0])
+		n_tok[7] += 20;
+	if(n_A_PassSkill6[2] == 1)
+		n_tok[7] += 3;
+	if(n_A_PassSkill6[2] == 2)
+		n_tok[7] += 5;
+	if(n_A_PassSkill8[4])
+		n_tok[7] += 1;
+	if(SkillSearch(310))
+		n_tok[7] -= 1;
 
 	if(n_A_PassSkill7[3])
-		wSPC_STR += n_A_PassSkill7[3];
+		n_tok[1] += n_A_PassSkill7[3];
 	if(n_A_PassSkill7[4])
-		wSPC_AGI += n_A_PassSkill7[4];
+		n_tok[2] += n_A_PassSkill7[4];
 	if(n_A_PassSkill7[5])
-		wSPC_VIT += n_A_PassSkill7[5];
+		n_tok[3] += n_A_PassSkill7[5];
 	if(n_A_PassSkill7[6])
-		wSPC_INT += n_A_PassSkill7[6];
+		n_tok[4] += n_A_PassSkill7[6];
 	if(n_A_PassSkill7[7])
-		wSPC_DEX += n_A_PassSkill7[7];
+		n_tok[5] += n_A_PassSkill7[7];
 	if(n_A_PassSkill7[8])
-		wSPC_LUK += n_A_PassSkill7[8];
+		n_tok[6] += n_A_PassSkill7[8];
 
 	//Armor Hidden Slot Enchant STAT
 	/*
@@ -4788,17 +4656,17 @@ function StPlusCalc()
 	if(wHSE){
 		var w = wHSE % 10;
 		if(1 <= wHSE && wHSE <= 9)
-			wSPC_STR += w;
+			n_tok[1] += w;
 		if(11 <= wHSE && wHSE <= 19)
-			wSPC_AGI += w;
+			n_tok[2] += w;
 		if(21 <= wHSE && wHSE <= 29)
-			wSPC_VIT += w;
+			n_tok[3] += w;
 		if(31 <= wHSE && wHSE <= 39)
-			wSPC_INT += w;
+			n_tok[4] += w;
 		if(41 <= wHSE && wHSE <= 49)
-			wSPC_DEX += w;
+			n_tok[5] += w;
 		if(51 <= wHSE && wHSE <= 59)
-			wSPC_LUK += w;
+			n_tok[6] += w;
 	}
 	*/
 	var wHSE = document.calcForm.A_HSE.value;
@@ -4807,12 +4675,12 @@ function StPlusCalc()
 		var val = parseInt(wHSE.substr(-1));
 
 		switch(op) {
-				case '1': wSPC_STR += val; break;
-				case '2': wSPC_AGI += val; break;
-				case '3': wSPC_VIT += val; break;
-				case '4': wSPC_INT += val; break;
-				case '5': wSPC_DEX += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '1': n_tok[1] += val; break;
+				case '2': n_tok[2] += val; break;
+				case '3': n_tok[3] += val; break;
+				case '4': n_tok[4] += val; break;
+				case '5': n_tok[5] += val; break;
+				case '6': n_tok[6] += val; break;
 		}
 	}
 
@@ -4824,13 +4692,13 @@ function StPlusCalc()
 		if(wKE){
 			var w = wKE % 10;
 			if(41 <= wKE && wKE <= 49)
-				wSPC_VIT += w;
+				n_tok[3] += w;
 			if(51 <= wKE && wKE <= 59)
-				wSPC_INT += w;
+				n_tok[4] += w;
 			if(61 <= wKE && wKE <= 69)
-				wSPC_DEX += w;
+				n_tok[5] += w;
 			if(71 <= wKE && wKE <= 79)
-				wSPC_LUK += w;
+				n_tok[6] += w;
 		}
 	}
 	*/
@@ -4845,10 +4713,10 @@ function StPlusCalc()
 		var val = parseInt(wKE.substr(-1));
 
 		switch(op) {
-				case '3': wSPC_VIT += val; break;
-				case '4': wSPC_INT += val; break;
-				case '5': wSPC_DEX += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '3': n_tok[3] += val; break;
+				case '4': n_tok[4] += val; break;
+				case '5': n_tok[5] += val; break;
+				case '6': n_tok[6] += val; break;
 		}
 	}
 
@@ -4862,12 +4730,12 @@ function StPlusCalc()
 		var val = parseInt(vME.substr(-1));
 
 		switch(op) {
-				case '1': wSPC_STR += val; break;
-				case '2': wSPC_AGI += val; break;
-				case '3': wSPC_VIT += val; break;
-				case '4': wSPC_INT += val; break;
-				case '5': wSPC_DEX += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '1': n_tok[1] += val; break;
+				case '2': n_tok[2] += val; break;
+				case '3': n_tok[3] += val; break;
+				case '4': n_tok[4] += val; break;
+				case '5': n_tok[5] += val; break;
+				case '6': n_tok[6] += val; break;
 		}
 	}
 
@@ -4881,12 +4749,12 @@ function StPlusCalc()
 		var val = parseInt(vBE.substr(-1));
 
 		switch(op) {
-				case '1': wSPC_STR += val; break;
-				case '2': wSPC_AGI += val; break;
-				case '3': wSPC_VIT += val; break;
-				case '4': wSPC_INT += val; break;
-				case '5': wSPC_DEX += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '1': n_tok[1] += val; break;
+				case '2': n_tok[2] += val; break;
+				case '3': n_tok[3] += val; break;
+				case '4': n_tok[4] += val; break;
+				case '5': n_tok[5] += val; break;
+				case '6': n_tok[6] += val; break;
 		}
 	}
 
@@ -4900,12 +4768,12 @@ function StPlusCalc()
 		var val = parseInt(vBE.substr(-1));
 
 		switch(op) {
-				case '1': wSPC_STR += val; break;
-				case '2': wSPC_AGI += val; break;
-				case '3': wSPC_VIT += val; break;
-				case '4': wSPC_INT += val; break;
-				case '5': wSPC_DEX += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '1': n_tok[1] += val; break;
+				case '2': n_tok[2] += val; break;
+				case '3': n_tok[3] += val; break;
+				case '4': n_tok[4] += val; break;
+				case '5': n_tok[5] += val; break;
+				case '6': n_tok[6] += val; break;
 		}
 	}
 
@@ -4919,12 +4787,12 @@ function StPlusCalc()
 		var val = parseInt(vEE.substr(-1));
 
 		switch(op) {
-				case '1': wSPC_STR += val; break;
-				case '2': wSPC_AGI += val; break;
-				case '3': wSPC_VIT += val; break;
-				case '4': wSPC_INT += val; break;
-				case '5': wSPC_DEX += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '1': n_tok[1] += val; break;
+				case '2': n_tok[2] += val; break;
+				case '3': n_tok[3] += val; break;
+				case '4': n_tok[4] += val; break;
+				case '5': n_tok[5] += val; break;
+				case '6': n_tok[6] += val; break;
 		}
 	}
 
@@ -4938,12 +4806,12 @@ function StPlusCalc()
 		var val = parseInt(vED.substr(-1));
 
 		switch(op) {
-				case '1': wSPC_STR += val; break;
-				case '2': wSPC_AGI += val; break;
-				case '3': wSPC_VIT += val; break;
-				case '4': wSPC_INT += val; break;
-				case '5': wSPC_DEX += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '1': n_tok[1] += val; break;
+				case '2': n_tok[2] += val; break;
+				case '3': n_tok[3] += val; break;
+				case '4': n_tok[4] += val; break;
+				case '5': n_tok[5] += val; break;
+				case '6': n_tok[6] += val; break;
 		}
 	}
 
@@ -4957,12 +4825,12 @@ function StPlusCalc()
 		var val = parseInt(vMORA.substr(-1));
 
 		switch(op) {
-				case '1': wSPC_STR += val; break;
-				case '2': wSPC_AGI += val; break;
-				case '3': wSPC_VIT += val; break;
-				case '4': wSPC_INT += val; break;
-				case '5': wSPC_DEX += val; break;
-				case '6': wSPC_LUK += val; break;
+				case '1': n_tok[1] += val; break;
+				case '2': n_tok[2] += val; break;
+				case '3': n_tok[3] += val; break;
+				case '4': n_tok[4] += val; break;
+				case '5': n_tok[5] += val; break;
+				case '6': n_tok[6] += val; break;
 		}
 	}
 
@@ -4970,17 +4838,17 @@ function StPlusCalc()
 	if(wHSE2){
 		var w = wHSE2 % 10;
 		if(1 <= wHSE2 && wHSE2 <= 9)
-			wSPC_STR += w;
+			n_tok[1] += w;
 		if(11 <= wHSE2 && wHSE2 <= 19)
-			wSPC_AGI += w;
+			n_tok[2] += w;
 		if(21 <= wHSE2 && wHSE2 <= 29)
-			wSPC_VIT += w;
+			n_tok[3] += w;
 		if(31 <= wHSE2 && wHSE2 <= 39)
-			wSPC_INT += w;
+			n_tok[4] += w;
 		if(41 <= wHSE2 && wHSE2 <= 49)
-			wSPC_DEX += w;
+			n_tok[5] += w;
 		if(51 <= wHSE2 && wHSE2 <= 59)
-			wSPC_LUK += w;
+			n_tok[6] += w;
 	}
 	if(Math.floor(wHSE / 10) == Math.floor(wHSE2 / 10)){
 		var w1 = wHSE % 10;
@@ -4988,117 +4856,117 @@ function StPlusCalc()
 		if(w1 > w2)
 			w1 = w2;
 		if(1 <= wHSE && wHSE <= 9)
-			wSPC_STR -= w1;
+			n_tok[1] -= w1;
 		if(11 <= wHSE && wHSE <= 19)
-			wSPC_AGI -= w1;
+			n_tok[2] -= w1;
 		if(21 <= wHSE && wHSE <= 29)
-			wSPC_VIT -= w1;
+			n_tok[3] -= w1;
 		if(31 <= wHSE && wHSE <= 39)
-			wSPC_INT -= w1;
+			n_tok[4] -= w1;
 		if(41 <= wHSE && wHSE <= 49)
-			wSPC_DEX -= w1;
+			n_tok[5] -= w1;
 		if(51 <= wHSE && wHSE <= 59)
-			wSPC_LUK -= w1;
+			n_tok[6] -= w1;
 	}*/
 	//E lá se foi todo o headgear calc e etc...
 	if(n_A_PassSkill8[17]){
 		 if(n_Tensei && 1<= n_A_JOB && n_A_JOB <= 6 && n_A_BaseLV < 70){
-			if(n_A_STR + wSPC_STR <= 50)
-					wSPC_STR = 50 - n_A_STR;
-			if(n_A_AGI + wSPC_AGI <= 50)
-					wSPC_AGI = 50 - n_A_AGI;
-			if(n_A_VIT + wSPC_VIT <= 50)
-					wSPC_VIT = 50 - n_A_VIT;
-			if(n_A_INT + wSPC_INT <= 50)
-					wSPC_INT = 50 - n_A_INT;
-			if(n_A_DEX + wSPC_DEX <= 50)
-					wSPC_DEX = 50 - n_A_DEX;
-			if(n_A_LUK + wSPC_LUK <= 50)
-					wSPC_LUK = 50 - n_A_LUK;
+			if(n_A_STR + n_tok[1] <= 50)
+					n_tok[1] = 50 - n_A_STR;
+			if(n_A_AGI + n_tok[2] <= 50)
+					n_tok[2] = 50 - n_A_AGI;
+			if(n_A_VIT + n_tok[3] <= 50)
+					n_tok[3] = 50 - n_A_VIT;
+			if(n_A_INT + n_tok[4] <= 50)
+					n_tok[4] = 50 - n_A_INT;
+			if(n_A_DEX + n_tok[5] <= 50)
+					n_tok[5] = 50 - n_A_DEX;
+			if(n_A_LUK + n_tok[6] <= 50)
+					n_tok[6] = 50 - n_A_LUK;
 		}
 	}
 
 	if(n_A_PassSkill3[11] && n_A_PassSkill3[18]==0){
-		if(n_A_STR + wSPC_STR < 99){
-			if(n_A_STR + wSPC_STR + Math.floor(n_A_PassSkill3[12]/2) < 99)
-				wSPC_STR += Math.floor(n_A_PassSkill3[12]/2);
+		if(n_A_STR + n_tok[1] < 99){
+			if(n_A_STR + n_tok[1] + Math.floor(n_A_PassSkill3[12]/2) < 99)
+				n_tok[1] += Math.floor(n_A_PassSkill3[12]/2);
 			else
-				wSPC_STR = (99 - n_A_STR);
+				n_tok[1] = (99 - n_A_STR);
 		}
-		if(n_A_AGI + wSPC_AGI < 99){
-			if(n_A_AGI + wSPC_AGI + Math.floor(n_A_PassSkill3[13]/2) < 99)
-				wSPC_AGI += Math.floor(n_A_PassSkill3[13]/2);
+		if(n_A_AGI + n_tok[2] < 99){
+			if(n_A_AGI + n_tok[2] + Math.floor(n_A_PassSkill3[13]/2) < 99)
+				n_tok[2] += Math.floor(n_A_PassSkill3[13]/2);
 			else
-				wSPC_AGI = (99 - n_A_AGI);
+				n_tok[2] = (99 - n_A_AGI);
 		}
-		if(n_A_VIT + wSPC_VIT < 99){
-			if(n_A_VIT + wSPC_VIT + Math.floor(n_A_PassSkill3[14]/2) < 99)
-				wSPC_VIT += Math.floor(n_A_PassSkill3[14]/2);
+		if(n_A_VIT + n_tok[3] < 99){
+			if(n_A_VIT + n_tok[3] + Math.floor(n_A_PassSkill3[14]/2) < 99)
+				n_tok[3] += Math.floor(n_A_PassSkill3[14]/2);
 			else
-				wSPC_VIT = (99 - n_A_VIT);
+				n_tok[3] = (99 - n_A_VIT);
 		}
-		if(n_A_INT + wSPC_INT < 99){
-			if(n_A_INT + wSPC_INT + Math.floor(n_A_PassSkill3[15]/2) < 99)
-				wSPC_INT += Math.floor(n_A_PassSkill3[15]/2);
+		if(n_A_INT + n_tok[4] < 99){
+			if(n_A_INT + n_tok[4] + Math.floor(n_A_PassSkill3[15]/2) < 99)
+				n_tok[4] += Math.floor(n_A_PassSkill3[15]/2);
 			else
-				wSPC_INT = (99 - n_A_INT);
+				n_tok[4] = (99 - n_A_INT);
 		}
-		if(n_A_DEX + wSPC_DEX < 99){
-			if(n_A_DEX + wSPC_DEX + Math.floor(n_A_PassSkill3[16]/2) < 99)
-				wSPC_DEX += Math.floor(n_A_PassSkill3[16]/2);
+		if(n_A_DEX + n_tok[5] < 99){
+			if(n_A_DEX + n_tok[5] + Math.floor(n_A_PassSkill3[16]/2) < 99)
+				n_tok[5] += Math.floor(n_A_PassSkill3[16]/2);
 			else
-				wSPC_DEX = (99 - n_A_DEX);
+				n_tok[5] = (99 - n_A_DEX);
 		}
-		if(n_A_LUK + wSPC_LUK < 99){
-			if(n_A_LUK + wSPC_LUK + Math.floor(n_A_PassSkill3[17]/2) < 99)
-				wSPC_LUK += Math.floor(n_A_PassSkill3[17]/2);
+		if(n_A_LUK + n_tok[6] < 99){
+			if(n_A_LUK + n_tok[6] + Math.floor(n_A_PassSkill3[17]/2) < 99)
+				n_tok[6] += Math.floor(n_A_PassSkill3[17]/2);
 			else
-				wSPC_LUK = (99 - n_A_LUK);
+				n_tok[6] = (99 - n_A_LUK);
 		}
 
 	//Marionette stat compensation rework - [Loa] - 2018-06-17
 	}else if(n_A_PassSkill3[11] && n_A_PassSkill3[18]){
 			if(n_A_STR + w2[0] + Math.floor(n_A_PassSkill3[12]/2) < 99){
-				wSPC_STR += Math.floor(n_A_PassSkill3[12]/2);
+				n_tok[1] += Math.floor(n_A_PassSkill3[12]/2);
 			}
 			else{
-				wSPC_STR += Math.max((99 - n_A_STR - w2[0]), 0);
+				n_tok[1] += Math.max((99 - n_A_STR - w2[0]), 0);
 			}
 			if(n_A_AGI + w2[1] + Math.floor(n_A_PassSkill3[13]/2) < 99){
-				wSPC_AGI += Math.floor(n_A_PassSkill3[13]/2);
+				n_tok[2] += Math.floor(n_A_PassSkill3[13]/2);
 			}
 			else{
-				wSPC_AGI += Math.max((99 - n_A_AGI - w2[1]), 0);
+				n_tok[2] += Math.max((99 - n_A_AGI - w2[1]), 0);
 			}
 			if(n_A_VIT + w2[2] + Math.floor(n_A_PassSkill3[14]/2) < 99){
-				wSPC_VIT += Math.floor(n_A_PassSkill3[14]/2);
+				n_tok[3] += Math.floor(n_A_PassSkill3[14]/2);
 			}
 			else{
-				wSPC_VIT += Math.max((99 - n_A_VIT - w2[2]), 0);
+				n_tok[3] += Math.max((99 - n_A_VIT - w2[2]), 0);
 			}
 			if(n_A_INT + w2[3] + Math.floor(n_A_PassSkill3[15]/2) < 99){
-				wSPC_INT += Math.floor(n_A_PassSkill3[15]/2);
+				n_tok[4] += Math.floor(n_A_PassSkill3[15]/2);
 			}
 			else{
-				wSPC_INT += Math.max((99 - n_A_INT - w2[3]), 0);
+				n_tok[4] += Math.max((99 - n_A_INT - w2[3]), 0);
 			}
 			if(n_A_DEX + w2[4] + Math.floor(n_A_PassSkill3[16]/2) < 99){
-				wSPC_DEX += Math.floor(n_A_PassSkill3[16]/2);
+				n_tok[5] += Math.floor(n_A_PassSkill3[16]/2);
 			}
 			else{
-				wSPC_DEX += Math.max((99 - n_A_DEX - w2[4]), 0);
+				n_tok[5] += Math.max((99 - n_A_DEX - w2[4]), 0);
 			}
 			if(n_A_LUK + w2[5] + Math.floor(n_A_PassSkill3[17]/2) < 99){
-				wSPC_LUK += Math.floor(n_A_PassSkill3[17]/2);
+				n_tok[6] += Math.floor(n_A_PassSkill3[17]/2);
 			}
 			else{
-				wSPC_LUK += Math.max((99 - n_A_LUK - w2[5]), 0);
+				n_tok[6] += Math.max((99 - n_A_LUK - w2[5]), 0);
 			}
 	}
 
 	//[Custom TalonRO - 2018-07-26 - Speedy Recovery Wand +3 INT to Acolyte/Priest/High Priest] [Amor]
 	if(EquipNumSearch(920) && (n_A_JOB == 3 || n_A_JOB == 9 || n_A_JOB == 23)){
-		wSPC_INT += 3;
+		n_tok[4] += 3;
 		
 		/*
 			[Refine level 8-10]
@@ -5114,96 +4982,104 @@ function StPlusCalc()
 
 	//CUSTOM (1st Transcendent Spirit)
 	if(SkillSearch(392) && (n_Tensei == 1) && (n_A_BaseLV > 10) && (n_A_BaseLV < 70)){
-	//alert("wSPC_STR:"+wSPC_STR+"\nn_A_STR:"+n_A_STR+"\nSU_STR:"+SU_STR);
+	//alert("n_tok[1]:"+n_tok[1]+"\nn_A_STR:"+n_A_STR+"\nSU_STR:"+SU_STR);
 		var linkboni = n_A_BaseLV - 10;
 		//custom TALONRO fix
 		//new:
-		if (n_A_STR+wSPC_STR < 51 && n_A_STR+wSPC_STR < linkboni && linkboni < 51)
-			wSPC_STR +=linkboni-(n_A_STR+wSPC_STR);
-		else if (n_A_STR+wSPC_STR < 51 && linkboni > 50)
-			wSPC_STR += 50 - (n_A_STR+wSPC_STR);
-		if (n_A_AGI+wSPC_AGI < 51 && n_A_AGI+wSPC_AGI < linkboni && linkboni < 51)
-			wSPC_AGI +=linkboni-(n_A_AGI+wSPC_AGI);
-		else if (n_A_AGI+wSPC_AGI < 51 && linkboni > 50)
-			wSPC_AGI += 50 - (n_A_AGI+wSPC_AGI);
-		if (n_A_VIT+wSPC_VIT < 51 && n_A_VIT+wSPC_VIT < linkboni && linkboni < 51)
-			wSPC_VIT +=linkboni-(n_A_VIT+wSPC_VIT);
-		else if (n_A_VIT+wSPC_VIT < 51 && linkboni > 50)
-			wSPC_VIT += 50 - (n_A_VIT+wSPC_VIT);
-		if (n_A_INT+wSPC_INT < 51 && n_A_INT+wSPC_INT < linkboni && linkboni < 51)
-			wSPC_INT +=linkboni-(n_A_INT+wSPC_INT);
-		else if (n_A_INT+wSPC_INT < 51 && linkboni > 50)
-			wSPC_INT += 50 - (n_A_INT+wSPC_INT);
-		if (n_A_DEX+wSPC_DEX < 51 && n_A_DEX+wSPC_DEX < linkboni && linkboni < 51)
-			wSPC_DEX +=linkboni-(n_A_DEX+wSPC_DEX);
-		else if (n_A_DEX+wSPC_DEX < 51 && linkboni > 50)
-			wSPC_DEX += 50 - (n_A_DEX+wSPC_DEX);
-		if (n_A_LUK+wSPC_LUK < 51 && n_A_LUK+wSPC_LUK < linkboni && linkboni < 51)
-			wSPC_LUK +=linkboni-(n_A_LUK+wSPC_LUK);
-		else if (n_A_LUK+wSPC_LUK < 51 && linkboni > 50)
-			wSPC_LUK += 50 - (n_A_LUK+wSPC_LUK);
+		if (n_A_STR+n_tok[1] < 51 && n_A_STR+n_tok[1] < linkboni && linkboni < 51)
+			n_tok[1] +=linkboni-(n_A_STR+n_tok[1]);
+		else if (n_A_STR+n_tok[1] < 51 && linkboni > 50)
+			n_tok[1] += 50 - (n_A_STR+n_tok[1]);
+		if (n_A_AGI+n_tok[2] < 51 && n_A_AGI+n_tok[2] < linkboni && linkboni < 51)
+			n_tok[2] +=linkboni-(n_A_AGI+n_tok[2]);
+		else if (n_A_AGI+n_tok[2] < 51 && linkboni > 50)
+			n_tok[2] += 50 - (n_A_AGI+n_tok[2]);
+		if (n_A_VIT+n_tok[3] < 51 && n_A_VIT+n_tok[3] < linkboni && linkboni < 51)
+			n_tok[3] +=linkboni-(n_A_VIT+n_tok[3]);
+		else if (n_A_VIT+n_tok[3] < 51 && linkboni > 50)
+			n_tok[3] += 50 - (n_A_VIT+n_tok[3]);
+		if (n_A_INT+n_tok[4] < 51 && n_A_INT+n_tok[4] < linkboni && linkboni < 51)
+			n_tok[4] +=linkboni-(n_A_INT+n_tok[4]);
+		else if (n_A_INT+n_tok[4] < 51 && linkboni > 50)
+			n_tok[4] += 50 - (n_A_INT+n_tok[4]);
+		if (n_A_DEX+n_tok[5] < 51 && n_A_DEX+n_tok[5] < linkboni && linkboni < 51)
+			n_tok[5] +=linkboni-(n_A_DEX+n_tok[5]);
+		else if (n_A_DEX+n_tok[5] < 51 && linkboni > 50)
+			n_tok[5] += 50 - (n_A_DEX+n_tok[5]);
+		if (n_A_LUK+n_tok[6] < 51 && n_A_LUK+n_tok[6] < linkboni && linkboni < 51)
+			n_tok[6] +=linkboni-(n_A_LUK+n_tok[6]);
+		else if (n_A_LUK+n_tok[6] < 51 && linkboni > 50)
+			n_tok[6] += 50 - (n_A_LUK+n_tok[6]);
 		//old:
-		/*if(wSPC_STR > 50);
-		else if((wSPC_STR + linkboni) > 50)
-			wSPC_STR = 50;
+		/*if(n_tok[1] > 50);
+		else if((n_tok[1] + linkboni) > 50)
+			n_tok[1] = 50;
 		else
-			wSPC_STR += linkboni;
-		if(wSPC_AGI > 50);
-		else if((wSPC_AGI + linkboni) > 50)
-			wSPC_AGI = 50;
+			n_tok[1] += linkboni;
+		if(n_tok[2] > 50);
+		else if((n_tok[2] + linkboni) > 50)
+			n_tok[2] = 50;
 		else
-			wSPC_AGI += linkboni;
-		if(wSPC_VIT > 50);
-		else if((wSPC_VIT + linkboni) > 50)
-			wSPC_VIT = 50;
+			n_tok[2] += linkboni;
+		if(n_tok[3] > 50);
+		else if((n_tok[3] + linkboni) > 50)
+			n_tok[3] = 50;
 		else
-			wSPC_VIT += linkboni;
-		if(wSPC_INT > 50);
-		else if((wSPC_INT + linkboni) > 50)
-			wSPC_INT = 50;
+			n_tok[3] += linkboni;
+		if(n_tok[4] > 50);
+		else if((n_tok[4] + linkboni) > 50)
+			n_tok[4] = 50;
 		else
-			wSPC_INT += linkboni;
-		if(wSPC_DEX > 50);
-		else if((wSPC_DEX + linkboni) > 50)
-			wSPC_DEX = 50;
+			n_tok[4] += linkboni;
+		if(n_tok[5] > 50);
+		else if((n_tok[5] + linkboni) > 50)
+			n_tok[5] = 50;
 		else
-			wSPC_DEX += linkboni;
-		if(wSPC_LUK > 50);
-		else if((wSPC_LUK + linkboni) > 50)
-			wSPC_LUK = 50;
+			n_tok[5] += linkboni;
+		if(n_tok[6] > 50);
+		else if((n_tok[6] + linkboni) > 50)
+			n_tok[6] = 50;
 		else
-			wSPC_LUK += linkboni;*/
+			n_tok[6] += linkboni;*/
 		//end fix
 	}
 	//END CUSTOM
 
 	if(n_A_IJYOU[0]){
-		var w1 = Math.floor((n_A_AGI + wSPC_AGI) / 2);
+		var w1 = Math.floor((n_A_AGI + n_tok[2]) / 2);
 		var w2;
 		if(Taijin)
 			w2 = 5 * n_A_IJYOU[0];
 		else
 			w2 = 10 * n_A_IJYOU[0];
 		if(w1 > w2)
-			wSPC_AGI -= w2;
+			n_tok[2] -= w2;
 		else
-			wSPC_AGI -= w1;
-		w1 = Math.floor((n_A_DEX + wSPC_DEX) / 2);
+			n_tok[2] -= w1;
+		w1 = Math.floor((n_A_DEX + n_tok[5]) / 2);
 		if(w1 > w2)
-			wSPC_DEX -= w2;
+			n_tok[5] -= w2;
 		else
-			wSPC_DEX -= w1;
+			n_tok[5] -= w1;
 	}
 	if(n_A_IJYOU[1])
-		wSPC_AGI -= (n_A_IJYOU[1] + 2);
+		n_tok[2] -= (n_A_IJYOU[1] + 2);
 	if(n_A_IJYOU[3])
-		wSPC_LUK = -1 * n_A_LUK;
+		n_tok[6] = -1 * n_A_LUK;
 
 		//[Custom TalonRO - 2018-06-05 - Siorava gives LUK+3 * refine for Merchant and Above Classes] [Kato]
 		if(CardNumSearch(535) && n_A_HEAD_DEF_PLUS > 3 && (n_A_JobSearch() == 6 || n_A_JobSearch() == 12 || n_A_JobSearch() == 26 || n_A_JobSearch() == 19 || n_A_JobSearch() == 33)) {
-			wSPC_LUK += Math.floor(n_A_HEAD_DEF_PLUS/3) * 1;
+			n_tok[6] += Math.floor(n_A_HEAD_DEF_PLUS/3) * 1;
 		}
 
+	wSPC_STR = n_tok[1] + n_tok[7];
+	wSPC_AGI = n_tok[2] + n_tok[7];
+	wSPC_VIT = n_tok[3] + n_tok[7];
+	wSPC_INT = n_tok[4] + n_tok[7];
+	wSPC_DEX = n_tok[5] + n_tok[7];
+	wSPC_LUK = n_tok[6] + n_tok[7];
+
+	// Add bonus stats to global stats
 	n_A_STR += wSPC_STR;
 	n_A_AGI += wSPC_AGI;
 	n_A_VIT += wSPC_VIT;
@@ -5211,30 +5087,13 @@ function StPlusCalc()
 	n_A_DEX += wSPC_DEX;
 	n_A_LUK += wSPC_LUK;
 
-	if(wSPC_STR >= 0)
-		myInnerHtml("A_STRp","+"+wSPC_STR,0);
-	else
-		myInnerHtml("A_STRp",wSPC_STR,0);
-	if(wSPC_AGI >= 0)
-		myInnerHtml("A_AGIp","+"+wSPC_AGI,0);
-	else
-		myInnerHtml("A_AGIp",wSPC_AGI,0);
-	if(wSPC_VIT >= 0)
-		myInnerHtml("A_VITp","+"+wSPC_VIT,0);
-	else
-		myInnerHtml("A_VITp",wSPC_VIT,0);
-	if(wSPC_INT >= 0)
-		myInnerHtml("A_INTp","+"+wSPC_INT,0);
-	else
-		myInnerHtml("A_INTp",wSPC_INT,0);
-	if(wSPC_DEX >= 0)
-		myInnerHtml("A_DEXp","+"+wSPC_DEX,0);
-	else
-		myInnerHtml("A_DEXp",wSPC_DEX,0);
-	if(wSPC_LUK >= 0)
-		myInnerHtml("A_LUKp","+"+wSPC_LUK,0);
-	else
-		myInnerHtml("A_LUKp",wSPC_LUK,0);
+	// Update bonus stats display
+	myInnerHtml("A_STRp",(wSPC_STR >= 0 ? "+" : "") + wSPC_STR,0);
+	myInnerHtml("A_AGIp",(wSPC_AGI >= 0 ? "+" : "") + wSPC_AGI,0);
+	myInnerHtml("A_VITp",(wSPC_VIT >= 0 ? "+" : "") + wSPC_VIT,0);
+	myInnerHtml("A_INTp",(wSPC_INT >= 0 ? "+" : "") + wSPC_INT,0);
+	myInnerHtml("A_DEXp",(wSPC_DEX >= 0 ? "+" : "") + wSPC_DEX,0);
+	myInnerHtml("A_LUKp",(wSPC_LUK >= 0 ? "+" : "") + wSPC_LUK,0);
 }
 
 function StPlusCalc2(nSTP2)
@@ -6873,6 +6732,145 @@ function KakutyouKansuu(){
 				tblStealCalcRight.rows[i+1].cells[4].innerHTML = (+(individualSuccess[i]/100.)).toFixed(2) + "%";
 			}
 		}
+	}
+}
+
+function manage_sqi_bonus()
+{
+	// Scouter#1387 - Gunslinger
+	if (45 == n_A_JOB && 1387 == n_A_Equip[3])
+	{
+		// #134 - CRIT + 15 (30 with Rifles) and 20% more damage with Critical Hits
+		if (18 == n_A_WeaponType && SQI_Bonus_Effect.findIndex(x => x - 1 == 135) > -1)
+			n_tok[10] += 15;
+		
+		// #135 - Shotgun Equipped: 15% Aftercast reduction and immunity to Blind status
+		if (19 == n_A_WeaponType && SQI_Bonus_Effect.findIndex(x => x - 1 == 136) > -1)
+		{
+			n_tok[74] += 15;
+			n_tok[154] += 100;
+		}
+		
+		// #136 - Grenade Launcher Equipped: Add a 10% chance to pierce 20% of enemy defense for 10 seconds after using [Triple Action]
+		if (21 == n_A_WeaponType && SQI_Bonus_Effect.findIndex(x => x - 1 == 137) > -1)
+		{
+			n_tok[200] += 20;
+			n_tok[201] += 20;
+		}
+		
+		// #137 - Ignore [Gatling Fever] FLEE and Movement Speed penalties. Dispell [Gatling Fever] on unequip
+		if (20 == n_A_WeaponType && SQI_Bonus_Effect.findIndex(x => x - 1 == 138) > -1)
+			n_A_FLEE -= 5 * SkillSearch(433);
+	}
+
+	// Eversong Greaves#1383 - Taekwon
+	if (41 == n_A_JOB && 1383 == n_A_Equip[8])
+	{
+		// Base stats
+		n_tok[8] += 75;  // HIT + 75
+		n_tok[12] += 30; // ASPD + 30%
+		
+		// #78 - [Taekwon] +10% MaxHP/MaxSP
+		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 79) > -1)
+		{
+			n_tok[15] += 10;
+			n_tok[16] += 10;
+		}
+		
+		// #79 - [Taekwon] Ignore 20% of enemy Defense
+		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 80) > -1)
+		{
+			n_tok[21] += 20;
+			n_tok[22] += 20;
+		}
+	}
+	
+	// Eversong Greaves#1383 - Star Gladiator
+	if (42 == n_A_JOB && 1383 == n_A_Equip[8])
+	{
+		// Base stats
+		n_tok[5] += 10; // DEX + 10
+		n_tok[6] += 15; // LUK + 15
+		
+		// #78 - [Star Gladiator] +20% MaxHP/MaxSP
+		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 79) > -1)
+		{
+			n_tok[15] += 20;
+			n_tok[16] += 20;
+		}
+	}
+
+	// Tome of Ymir#1391 - Sage/Professor
+	if (1383 == n_A_Equip[0])
+	{
+		// #179 - Pierce 10% of enemy MDEF when using [Fire Bolt], [Cold Bolt], [Lightning Bolt], or [Earth Spike]
+		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 179) > -1 && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill))
+			n_tok[295] += 10;
+		
+		// #182 - Autospell#229 Mastered: Add ASPD + 12% and FLEE + 15 during [Autospell]
+		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 182) > -1 && 10 == SkillSearch(229))
+		{
+			n_tok[9] += 15;
+			n_tok[12] += 12;
+		}
+	}
+	
+	// Artemis#1377 - Hunter/Sniper
+	if (1377 == n_A_Equip[0])
+	{
+		// #26 - Add a 10% chance to auto-cast Level 2 [NPC_BLEEDING] when attacking normally - HIT + 20
+		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 26) > -1)
+			n_tok[8] += 20;
+
+		// #27 - + 15 FLEE on [Wind Walk]
+		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 27) > -1 && SkillSearch(273))
+			n_tok[9] += 15;	
+	}
+	
+	// Aegis Shield#1376 - Crusader/Paladin
+	if (1376 == n_A_Equip[5])
+	{
+		// #19 - Increase effectiveness of [Heal] by 20% (10% in PvP/WoE)
+		if (Taijin && SQI_Bonus_Effect.findIndex(x => x - 1 == 19) > -1)
+			n_tok[90] -= 10;
+	}
+	
+	// Stats bonus disabled for Super Novice
+	if (20 == n_A_JOB)
+	{
+		if (84 == n_A_Equip[0]) // Mjolnir#84
+		{
+			n_tok[5] -= 15; // DEX + 5
+			n_tok[6] -= 15; // LUK + 5
+			n_tok[8] -= 30; // HIT bonus disabled
+		}	
+		else if (1380 == n_A_Equip[0]) // Djinn#1380
+		{
+			n_tok[5] -= 10; // DEX + 5
+			n_tok[6] -= 15; // LUK + 5
+		}
+		else if (1382 == n_A_Equip[0]) // Evangelist#1382
+		{
+			n_tok[4] -= 10; // INT + 5
+			n_tok[5] -= 10; // DEX + 5
+			n_tok[8] -= 35; // HIT bonus disabled
+		}
+		else if (1384 == n_A_Equip[0]) // Ghostdancer#1384
+		{
+			n_tok[4] -= 10; // INT + 5
+			n_tok[5] -= 10; // DEX + 5
+			n_tok[89] -= 5; // MATK + 15%
+		}
+		else if (1387 == n_A_Equip[3]) // Scouter#1387
+		{
+			n_tok[12] -= 10; // ASPD + 15%
+			n_tok[15] -= 20; // MHP bonus disabled
+			n_tok[16] -= 20; // MSP bonus disabled
+			n_tok[77] -= 20; // Non-boss resistance bonus disabled
+			n_tok[79] -= 20; // Boss resistance bonus disabled
+		}
+		else if (1389 == n_A_Equip[0]) // Staff of Magi#1389
+			n_tok[5] -= 10; // DEX + 5
 	}
 }
 

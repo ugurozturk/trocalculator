@@ -1,5 +1,5 @@
-[2021-02-02]
-- Placeholder SQI Revamp
+[2021-02-03]
+- Updated SQI
 
 [2021-01-24]
 - Added Thanatos Despero Mask

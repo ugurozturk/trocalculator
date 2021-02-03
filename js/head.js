@@ -6741,6 +6741,15 @@ Race - n_B[2] = raceID - example n_B[2] = 3, Plant
 	n_B[14] = Math.ceil(n_B[14] * (100 - def_reduction) / 100);
 	n_B[23] = Math.ceil(n_B[23] * (100 - def_reduction) / 100);
 	n_B[24] = Math.max(n_B[23], Math.ceil(n_B[24] * (100 - def_reduction) / 100));
+
+	
+	
+	// Belmont Whip#1378 - Dancer/Gypsy
+	// #37 - [Ugly Dance] reduces enemy INT by 20% for 7 seconds
+	if (1378 == n_A_Equip[0] && SQI_Bonus_Effect.findIndex(x => x - 1 == 37) > -1)
+		n_B[9] -= Math.floor(n_B[9] * 0.1);
+	
+	
 	n_B[25] = Math.floor(n_B[7] / 2) + n_B[9];
 	n_B[26] = n_B[5] + n_B[10];
 	n_B[27] = n_B[5] + n_B[8];
@@ -7055,6 +7064,11 @@ function calc()
 	// Snake Head Hat#1495 - Enable [Double Attack] Lv 1, does not apply on Fist
 	if (EquipNumSearch(1495) && n_A_WeaponType)
 		wDA = Math.max(5, SkillSearch(13) * 5);
+	
+	// Sherwood Bow#1388 - Rogue/Stalker
+	// #148 - Enable [Double Attack] usage
+	if (1388 == n_A_Equip[0] && SQI_Bonus_Effect.findIndex(x => x - 1 == 149) > -1)
+		wDA = Math.max(wDA, SkillSearch(13) * 5);
 	
 	// Chain Action#427 - Similar behaviour as Double Attack
 	if (n_A_WeaponType == 17){
@@ -7804,6 +7818,11 @@ function ApplySkillAtkBonus(dmg)
 		if (n_A_Weapon_ATKplus >= 9)
 			skill_atk_bonus_ratio += 20;
 	}
+	
+	// Nibelungen#1386 - Knight/Lord Knight
+	// #124 - Increase damage inflicted on Large size monster by 15% when using [Pierce#70] or [Brandish Spear#73]
+	if (1386 == n_A_Equip[0] && (70 == n_A_ActiveSkill || 73 == n_A_ActiveSkill) && SQI_Bonus_Effect.findIndex(x => x - 1 == 26) > -1)
+		skill_atk_bonus_ratio += 20;
 
 	dmg = dmg * (100 + StPlusCalc2 (5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill) + skill_atk_bonus_ratio) / 100;
 
