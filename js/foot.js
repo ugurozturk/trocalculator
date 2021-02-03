@@ -3312,9 +3312,9 @@ with(document.calcForm){
 	if (n_A_PassSkill3[2]) // Poem of Bragi, 3 * Skill LV + Musical Lesson LV + DEX / 10;
 		n_tok[73] -= n_A_PassSkill3[2] * 3 + n_A_PassSkill3[32] + Math.floor(n_A_PassSkill3[22] / 10);
 
-	n_tok[73] = Math.max(0, n_tok[73]);
+	n_tok[73] = Math.max(-100, n_tok[73]);
 
-	n_A_CAST *= n_tok[73] / 100;
+	n_A_CAST *= 1 + n_tok[73] / 100;
 
 	// Skill cast time reduction script bonus
 	skill_cast_reduction = 100;
