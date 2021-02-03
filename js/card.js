@@ -544,7 +544,7 @@ cardOBJ = [
 ,[521,5,"Leak","Chance of causing Confusion on target enemy when doing magic damage",4,5,190,10,191,10,192,10,0]
 ,[522,4,"Comodo",0,9,-20,18,8,0]
 ,[523,1,"Sropho",0,17,5,152,3,158,3,0]
-,[524,1,"Sedora","<b>[Thief Class]</b><br>Flee Rate +4",10,15,0]
+,[524,1,"Sedora","<b>[Thief Class]</b><br>Flee Rate +4",70,15,0]
 ,[525,4,"Pot Dofle",0,55,10,64,10,63,-10,198,1,0]
 ,[526,5,"Kraken","25% chance of causing Sleep effect when using Raid",9,20,220,22,220,54,0]
 ,[527,2,"King Dramoh","<b>[Swordsman Class]</b><br>STR + 1 for every 3 refines",1,2,0]

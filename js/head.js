@@ -4256,6 +4256,7 @@ with(document.calcForm){
 		str += '<TR><TD id="EN848"></TD></TR><TR><TD id="EN849"></TD></TR>';
 		str += '<TR><TD id="EN850"></TD></TR><TR><TD id="EN851"></TD></TR>';
 		str += '<TR><TD colspan="2"><Font size=2 color=black><B>Other Food</B></Font></TD></TR>';
+		str += '<TR><TD id="EN852"></TD></TR>';
 		str += '<TR><TD id="EN816"></TD></TR>';
 		str += '<TR><TD id="EN826"></TD></TR>';
 		str += '<TR><TD id="EN827"></TD></TR>';
@@ -4374,10 +4375,11 @@ with(document.calcForm){
 			A8_Skill15.options[i] = new Option(i * 5,i);
 		myInnerHtml("EN814",'<input type="checkbox" name="A8_Skill16"onClick="Click_A8(1)">Set CRIT% to 0',0);
 		myInnerHtml("EN815",'<input type="checkbox" name="A8_Skill17"onClick="Click_A8(1)">Advance 1st Spirit (max stats)',0);
-		myInnerHtml("EN816",'<input type="checkbox" name="A8_Skill18"onClick="Click_A8(1)">	[Hit +3, CRIT +7, Recovery rate of skills and items + 3%]',0);
+		myInnerHtml("EN816",'<input type="checkbox" name="A8_Skill18"onClick="Click_A8(1)">Buche de Noël[HIT +3, CRIT + 7, Recovery rate of skills and items + 3%]',0);
 		myInnerHtml("EN817",'<input type="checkbox" name="A8_Skill19"onClick="Click_A8(1)">Rune Strawberry Cake[ATK, MATK + 5]',0);
 		myInnerHtml("EN818",'<input type="checkbox" name="A8_Skill20"onClick="Click_A8(1)">Schwartzwald Pine Jubilee[HIT + 10 , Perfect Dodge + 20]',0);
 		myInnerHtml("EN819",'<input type="checkbox" name="A8_Skill21"onClick="Click_A8(1)">Arunafeltz Desert Sandwich[CRIT + 7]',0);
+		myInnerHtml("EN852",'<input type="checkbox" name="abrasive_food_check" onClick="Click_A8(1)">Abrasive[CRIT + 30]',0);
 
 		myInnerHtml("EN820",'<input type="checkbox" name="A8_Skill22"onClick="Click_A8(1)">Manuk\'s Sturdiness[Increases physical damage on Manuk maps by 10%]',0);
 		myInnerHtml("EN821",'<input type="checkbox" name="A8_Skill23"onClick="Click_A8(1)">Manuk\'s Faith[Increases magical damage on Manuk maps by 10%]',0);
@@ -4448,6 +4450,7 @@ with(document.calcForm){
 		A_IJYOU2.checked = n_A_IJYOU[2];
 		A_IJYOU3.checked = n_A_IJYOU[3];
 		eclage_food_list.value = eclage_food;
+		abrasive_food_check.checked = abrasive_food;
 		
 		sting_slap_cocktail_check.checked = sting_slap_cocktail
 		venatu_beep_cocktail_check.checked = venatu_beep_cocktail
@@ -6560,7 +6563,7 @@ Race - n_B[2] = raceID - example n_B[2] = 3, Plant
 	}
 	if(n_B_KYOUKA[6])
 		n_B[3] = n_B_KYOUKA[6];
-	if(n_B_IJYOU[23])
+	if (!n_B[19] && n_B_IJYOU[23]) // SA_ELEMENTCHANGE does not applies on boss type monsters
 		n_B[3] = n_B_IJYOU[23] * 10 + (n_B[3] % 10);
 
 	if(n_B[19] == 0){
