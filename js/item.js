@@ -1403,7 +1403,7 @@ ItemOBJ = [
 ,[1376,61,113,8,0,1,400,0,"Aegis Shield","","<font color='blue'>SQI</font>",1,3,3,5,4,3,19,10,194,1,61,10,62,10,63,10,64,10,0] //custom TalonRO SQI
 ,[1377,10,110,200,4,3,150,0,"Artemis Bow","","<font color='blue'>SQI</font>",4,15,6,20,5040,10,0] //custom TalonRO SQI
 ,[1378,15,117,190,4,3,70,0,"Belmont Whip","","<font color='blue'>SQI</font><br>Ignore [Adpation to Circumstances] delay.<br>Enable to use Level 5 [Providence] and Level 5 [Aspersio]",2,10,5,15,6,4,12,13,20,3,0] //custom TalonRO SQI
-,[1379,1,50,150,4,3,150,0,"Blade of Angels","","<font color='blue'>SQI</font>",1,10,8,50,15,50,14,1250,89,25,0] //custom TalonRO SQI
+,[1379,1,50,150,4,3,150,0,"Blade of Angels","","Resistance against misc attacks + 20% (Traps, Tarot, Pressure, ...)<br><font color='blue'>SQI</font>",1,10,8,50,15,50,14,1250,89,25,100,20,101,20,78,20,0] //custom TalonRO SQI
 ,[1380,6,119,350,4,3,600,0,"Djinn","","<br><b>[Super Novice]</b><br>DEX + 5<br>LUK + 5<br><br><font color='blue'>SQI</font>",4,5,5,15,6,20,20,2,0] //custom TalonRO SQI
 ,[1381,14,0,190,4,3,100,0,"Electric Guitar","","Ignore [Adpation to Circumstances] delay.<br><br><font color='blue'>SQI</font>",4,4,3,4,5,15,20,4,89,15,220,49,0]
 ,[1382,8,109,250,4,3,150,0,"Evangelist","","<br><b>[Super Novice]</b><br>INT + 5<br>DEX + 5<br>Allows usage of the skill [Magic Crasher]Lv 1<br><br><font color='blue'>SQI</font>",4,15,5,15,8,35,20,1,220,50,0] //custom TalonRO SQI
@@ -3920,7 +3920,7 @@ function Item_Setumei(nC1,nC2)
 	if(88 == nC1)
 		CBIstr += "MATK"+ wIS + nC2 +"% (Staff Type)<BR>";
     //Increase MATK by %
-   if(89 == nC1)
+	if(89 == nC1)
 		CBIstr += "MATK"+ wIS + nC2 +"%<BR>";
 	if(91 == nC1)
 		CBIstr += "Heal effectiveness increased by "+ wIS + nC2 +"%<BR>";
@@ -3934,12 +3934,17 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Sanctuary effectiveness increased by "+ wIS + nC2 +"%<BR>";
 	if(96 == nC1)
 		CBIstr += "Heal received from [Sanctuary] increased by "+ wIS + nC2 +"%<BR>";
-   if(97 == nC1)
-      CBIstr += "Increases magical damage against bosstype monsters by "+ nC2 +"%<BR>";
-   if(98 == nC1)
-      CBIstr += "MATK" + wIS + nC2 + "<BR>";
-   if(99 == nC1)
-      CBIstr += "ASPD" + wIS + nC2 + "<BR>";
+	if(97 == nC1)
+		CBIstr += "Increases magical damage against bosstype monsters by "+ nC2 +"%<BR>";
+	if(98 == nC1)
+		CBIstr += "MATK" + wIS + nC2 + "<BR>";
+	if(99 == nC1)
+		CBIstr += "ASPD" + wIS + nC2 + "<BR>";
+	if(100 == nC1)
+		CBIstr += "Resistance against melee attacks" + wIS + nC2 +"%<BR>";
+	if(101 == nC1)
+		CBIstr += "Resistance against magic attacks" + wIS + nC2 +"%<BR>";
+  
     /*Increase Crital Rate on race by an amount.
       110 = Formless
       111 = Undead
