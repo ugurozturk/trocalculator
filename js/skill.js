@@ -606,6 +606,8 @@ InsertSkill = [
 [59,0,33,1],
 [60,1,53,4],
 [61,1,10,1], // Combo Beer Hat + Empty Liquor Bottle - Moving HP Recovery lv 1
+[62,1,162,10], // custom TalonRO SQI Bonus - Blade of Angel - Grand Cross lv 10
+[63,1,128,10], // custom TalonRO SQI Bonus - Staff of Magi - Water Ball lv 10
 ];
 
 
@@ -729,7 +731,7 @@ AutoSpellSkill = [
 [113,1,436,6,0,1],
 [114,1,51,5,10,1],	//custom TalonRO rental Fireblend = Firebolt lv 5 (10%)
 [115,1,51,6,5,1],	//custom TalonRO SQI Bonus - Djinn = Firebolt lv 6 (5%)
-[116,1,49,1,3,1],	//custom TalonRO SQI Bonus - Scouter = Stone Curse lv 1 (3%)
+[116,1,49,1,5,1],	//custom TalonRO SQI Bonus - Scouter = Stone Curse lv 1 (5%)
 [117,1,174,1,20,1], //custom TalonRO SQI Bonus - Sherwood Bow = Strip Armor lv 1 (20%)
 [118,1,56,3,3,6],
 //autocastid,,skillid,lvl,chance,attacktype(1atkbased,2shortrange,3longrange,4magical,5attacking,6receivingATKbased,[...?])

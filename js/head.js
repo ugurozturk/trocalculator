@@ -1898,29 +1898,40 @@ function BattleCalc999()
 		n_Enekyori=2;
 		wbairitu = 1;
 		n_bunkatuHIT = 0;
-		//fire bolt
-		if(n_A_ActiveSkill==51){
+		support_autospell = 0;
+		support_double_casting = 0;
+		
+
+		if (n_A_ActiveSkill == 51) // Fire Bolt#51
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 3;
+			support_double_casting = 1;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2] = 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
-		//cold bolt
-		else if(n_A_ActiveSkill==54){
+		else if (n_A_ActiveSkill == 54) // Cold Bolt#54
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 1;
+			support_double_casting = 1;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2]= 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
-		//lightning bolt
-		else if(n_A_ActiveSkill==56){
+		else if (n_A_ActiveSkill == 56) // Lightning Bolt#56
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 4;
+			support_double_casting = 1;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2] = 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
 		//fire ball
 		else if(n_A_ActiveSkill==52){
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 3;
 			if(n_A_ActiveSkillLV <=5){
 				wCast = 1.5;
@@ -1940,6 +1951,7 @@ function BattleCalc999()
 		}
 		//frost diver
 		else if(n_A_ActiveSkill==55){
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 1;
 			wCast = 0.8;
 			n_Delay[2] = 1.5;
@@ -1952,7 +1964,9 @@ function BattleCalc999()
 			n_Delay[2] = 2;
 			wbairitu = 0.8;
 		}
-		else if(n_A_ActiveSkill==46){
+		else if(n_A_ActiveSkill==46) // Napalm Beat#46
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 8;
 			wCast = 0.5;
 			if(n_A_ActiveSkillLV==10)
@@ -1969,8 +1983,9 @@ function BattleCalc999()
 				n_Delay[2] = 1;
 			wbairitu = 0.7 + n_A_ActiveSkillLV * 0.1;
 		}
-		//soul strike
-		else if(n_A_ActiveSkill==47){
+		else if(n_A_ActiveSkill==47) // Soul Strike#47
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 8;
 			wHITsuu = Math.round(n_A_ActiveSkillLV / 2);
 			wCast = 0.5;
@@ -2468,6 +2483,24 @@ function BattleCalc998()
 			myInnerHtml("MaxATKnum",SubName[5],0);
 	}
 
+	damage_per_second = 1 / (wCast + wDelay) * w_DMG[1];
+	
+	if (2 == n_Enekyori)
+	{
+		if (support_autospell && SkillSearch(229)) // AutoSpell#229
+			damage_per_second = 1 / wDelay * (.05 + SkillSearch(229) / 50) * w_DMG[1];
+		
+		if (support_double_casting && SkillSearch(443)) // Double Casting#443
+			damage_per_second *= 1.3 + SkillSearch(443) / 10;
+	}
+	
+	damage_per_second = Math.round(damage_per_second);
+
+	if(n_Delay[0])
+		myInnerHtml("AveSecondATK","Special",0);
+	else
+		myInnerHtml("AveSecondATK", damage_per_second, 0);
+
 	w = Math.floor(n_B[6] / w_DMG[1]);
 	if(n_B[6] % w_DMG[1] != 0)
 		w += 1;
@@ -2485,32 +2518,18 @@ function BattleCalc998()
 	{
 		myInnerHtml("AveATKnum",w,0);
 
-		n_AveATKnum = w;
-
-
-		var w2 = (wCast + wDelay) * n_AveATKnum;
-		w2 = Math.floor(w2 * 100) / 100;
+		average_battle_duration = Math.floor(n_B[6] / damage_per_second * 100) / 100;
 
 		if(n_Delay[0])
 			myInnerHtml("BattleTime","Special",0);
 		else
-			myInnerHtml("BattleTime",w2 + "s",0);
+			myInnerHtml("BattleTime", average_battle_duration + "s",0);
 	}
 	else
 	{
 		myInnerHtml("AveATKnum",SubName[5],0);
 		myInnerHtml("BattleTime",SubName[6],0);
 	}
-
-	var w = 1 / (wCast + wDelay) * w_DMG[1];
-	w *= 100;
-	w = Math.round(w);
-	w /= 100;
-
-	if(n_Delay[0])
-		myInnerHtml("AveSecondATK","Special",0);
-	else
-		myInnerHtml("AveSecondATK",w,0);
 
 	if(Taijin==0){
 		w = BattleHiDam();
@@ -2594,8 +2613,8 @@ function BattleCalc998()
 			HJ_RATIO = HJ_LV;
 			MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE * (sting_slap_cocktail ? 0.9 : 1);
 			
-			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
-			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
+			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_DEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
+			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_DEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
 
 			HJ_POWER = Math.floor(HJ_MINDMG * HITS) + "~" + Math.floor(HJ_MAXDMG * HITS);
 		}
@@ -2619,13 +2638,13 @@ function BattleHiDam(){
 	if(n_B[12] == n_B[13])
 		w_HiDam[6] = wBHD - 1;
 
-	w_HiDam[0] = w_HiDam[0] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[2];
-	w_HiDam[1] = w_HiDam[1] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[2];
-	w_HiDam[2] = w_HiDam[2] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[2];
-	w_HiDam[3] = w_HiDam[3] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[1];
-	w_HiDam[4] = w_HiDam[4] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[0];
-	w_HiDam[5] = w_HiDam[5] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[0];
-	w_HiDam[6] = w_HiDam[6] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[0];
+	w_HiDam[0] = w_HiDam[0] * (100-n_A_DEF) / 100 - n_A_VITDEF[2];
+	w_HiDam[1] = w_HiDam[1] * (100-n_A_DEF) / 100 - n_A_VITDEF[2];
+	w_HiDam[2] = w_HiDam[2] * (100-n_A_DEF) / 100 - n_A_VITDEF[2];
+	w_HiDam[3] = w_HiDam[3] * (100-n_A_DEF) / 100 - n_A_VITDEF[1];
+	w_HiDam[4] = w_HiDam[4] * (100-n_A_DEF) / 100 - n_A_VITDEF[0];
+	w_HiDam[5] = w_HiDam[5] * (100-n_A_DEF) / 100 - n_A_VITDEF[0];
+	w_HiDam[6] = w_HiDam[6] * (100-n_A_DEF) / 100 - n_A_VITDEF[0];
 
 
 	if(SkillSearch(23) && (n_B[3]>=90 || n_B[2]==6)){
@@ -2686,16 +2705,14 @@ function BattleHiDam(){
 				w_HiDam[i] -= Math.floor(w_HiDam[i] * wBHD /100);
 		}
 	}
-	//custom TalonRO SQI Bonus Sherwood Bow: 15% Melee resistance
-	if(n_B[20]==0){
-		if(EquipNumSearch(1388))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==135) {
-					for(j=0;j<=6;j++)
-						w_HiDam[j] -= Math.floor(w_HiDam[j] * 15 /100);
-					break;
-				}
+
+	// bNearAtkDef - Apply melee resistance
+	if (!n_B[20])
+	{
+		for(j=0;j<=6;j++)
+			w_HiDam[j] -= Math.floor(w_HiDam[j] * n_tok[100] / 100);
 	}
+
 	//Port Malaya set damage reduction - [Loa] - 2018-06-29
 	portMalayaMob = [596,597,598,599,600,601,602,603,671,672,673,674,676,677]
 	if(EquipNumSearch(1017)){
@@ -6741,6 +6758,15 @@ Race - n_B[2] = raceID - example n_B[2] = 3, Plant
 	n_B[14] = Math.ceil(n_B[14] * (100 - def_reduction) / 100);
 	n_B[23] = Math.ceil(n_B[23] * (100 - def_reduction) / 100);
 	n_B[24] = Math.max(n_B[23], Math.ceil(n_B[24] * (100 - def_reduction) / 100));
+
+	
+	
+	// Belmont Whip#1378 - Dancer/Gypsy
+	// #37 - [Ugly Dance] reduces enemy INT by 20% for 7 seconds
+	if (1378 == n_A_Equip[0] && SQI_Bonus_Effect.findIndex(x => x - 1 == 37) > -1)
+		n_B[9] -= Math.floor(n_B[9] * 0.1);
+	
+	
 	n_B[25] = Math.floor(n_B[7] / 2) + n_B[9];
 	n_B[26] = n_B[5] + n_B[10];
 	n_B[27] = n_B[5] + n_B[8];
@@ -7055,6 +7081,11 @@ function calc()
 	// Snake Head Hat#1495 - Enable [Double Attack] Lv 1, does not apply on Fist
 	if (EquipNumSearch(1495) && n_A_WeaponType)
 		wDA = Math.max(5, SkillSearch(13) * 5);
+	
+	// Sherwood Bow#1388 - Rogue/Stalker
+	// #148 - Enable [Double Attack] usage
+	if (1388 == n_A_Equip[0] && SQI_Bonus_Effect.findIndex(x => x - 1 == 149) > -1)
+		wDA = Math.max(wDA, SkillSearch(13) * 5);
 	
 	// Chain Action#427 - Similar behaviour as Double Attack
 	if (n_A_WeaponType == 17){
@@ -7804,6 +7835,11 @@ function ApplySkillAtkBonus(dmg)
 		if (n_A_Weapon_ATKplus >= 9)
 			skill_atk_bonus_ratio += 20;
 	}
+	
+	// Nibelungen#1386 - Knight/Lord Knight
+	// #125 - Increase damage inflicted on Large size monster by 15% when using [Pierce#70] or [Brandish Spear#73]
+	if (1386 == n_A_Equip[0] && 2 == n_B[4] && (70 == n_A_ActiveSkill || 73 == n_A_ActiveSkill) && SQI_Bonus_Effect.findIndex(x => x - 1 == 125) > -1)
+		skill_atk_bonus_ratio += 20;
 
 	dmg = dmg * (100 + StPlusCalc2 (5000 + n_A_ActiveSkill) + StPlusCard(5000 + n_A_ActiveSkill) + skill_atk_bonus_ratio) / 100;
 
@@ -8029,7 +8065,8 @@ function EDP_DMG(num){
 
 
 function CastAndDelay(){
-	if(wCast != 0){
+	if (!SkillSearch(229) && wCast) // Disable cast time if AutoSpell#229 is active
+	{
 		str_bSUBname += SubName[9] +"<BR>";
 		str_bSUB += Math.floor(wCast *100)/100 + SubName[1] +"<BR>";
 	}
@@ -8044,34 +8081,36 @@ function CastAndDelay(){
 		w = 1;
 	}
 	
-	/*
-		Bragi capped after cast delay reduction to 0.4s
-		Skills that have long delays that can't normally achieve our 0.3 second delay cap without Bragi
-		can only be reduced up to 0.4 second delay while under Bragi.
-
-		Delay is expressed in ms, flooring operation should take that into consideration
-	*/
-	if (n_A_PassSkill3[32])
+	if (!(2 == n_Enekyori && support_autospell && SkillSearch(229)))
 	{
-		bragi_acd_reduction = Math.max((n_Delay[2] - 0.4), 0) * n_tok[74];
-		n_Delay[2] = Math.floor(n_Delay[2] * 100 - bragi_acd_reduction) / 100;
+		/*
+			Bragi capped after cast delay reduction to 0.4s
+			Skills that have long delays that can't normally achieve our 0.3 second delay cap without Bragi
+			can only be reduced up to 0.4 second delay while under Bragi.
+
+			Delay is expressed in ms, flooring operation should take that into consideration
+		*/
+		if (n_A_PassSkill3[32])
+		{
+			bragi_acd_reduction = Math.max((n_Delay[2] - 0.4), 0) * n_tok[74];
+			n_Delay[2] = Math.floor(n_Delay[2] * 100 - bragi_acd_reduction) / 100;
+		}
+		else
+			n_Delay[2] = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
+		
+		if(n_Delay[2] > wDelay){
+			wDelay = n_Delay[2];
+			w = 2;
+		}
+		if(n_Delay[3] > wDelay){
+			wDelay = n_Delay[3];
+			w = 3;
+		}
 	}
-	else
-		n_Delay[2] = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
 	
-	if(n_Delay[2] > wDelay){
-		wDelay = n_Delay[2];
-		w = 2;
-	}
-	if(n_Delay[3] > wDelay){
-		wDelay = n_Delay[3];
-		w = 3;
-	}
-	if(n_A_ActiveSkill != 0 && n_A_ActiveSkill != 284){
+	if(n_A_ActiveSkill != 0 && n_A_ActiveSkill != 284)
 		n_Delay[4] = 0.33; // [Custom TalonRO 2016-06-02 - Added fixed TRO's Minimun Delay for Skills] [Kato]
 
-
-	}
 	if(n_Delay[4] > (wDelay + wCast)){
 		wDelay = n_Delay[4] - wCast;
 		w = 4;

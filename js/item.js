@@ -104,7 +104,7 @@ ItemOBJ = [
 ,[81,8,53,110,4,"1 / 2",80,40,"Golden Mace","",0,49,10,194,1,0]
 ,[82,8,53,135,4,0,80,40,"Long Mace","","Capable of damaging enemies 3 cells away from his owner",78,10,0]
 ,[83,8,53,140,4,"0 / 1",150,40,"Grand Cross","","Regain 1 SP for each attack on an Undead Monster<BR>Regain 3 SP for each killed Undead Monster",20,6,221,5,0]
-,[84,8,112,220,4,3,600,0,"Mjolnir","","<font color='blue'>SQI</font>",1,5,5,5,6,5,20,4,0] //custom TalonRO SQI
+,[84,8,112,220,4,3,600,0,"Mjolnir","","<br><br><b>[Super Novice]</b><br>DEX + 5<br>LUK + 5<br><br><font color='blue'>SQI</font>",1,5,5,20,6,20,8,30,20,4,220,8,0] //custom TalonRO SQI
 ,[85,9,0,15,1,"3 / 4",40,0,"Rod","",0,89,15,0]
 ,[86,9,0,25,2,"2 / 3",40,12,"Wand","",0,4,1,89,15,0]
 ,[87,9,1,40,2,"2 / 3",40,12,"Staff","",0,4,2,89,15,0]
@@ -1399,23 +1399,23 @@ ItemOBJ = [
 ,[1373,51,0,1,0,1,10,0,"+1 AGI [1]","",0,2,1,0] //custom TalonRO +1 agi mid
 ,[1374,51,0,1,0,1,10,0,"+1 INT [1]","",0,4,1,0] //custom TalonRO +1 int mid
 //custom TalonRO SQI
-,[1375,11,0,140,4,4,150,0,"Twin Fang","","<font color='blue'>SQI</font>",2,5,10,5,0] //custom TalonRO SQI
-,[1376,61,113,8,0,1,400,0,"Aegis Shield","","<font color='blue'>SQI</font>",1,3,3,5,4,3,19,5,0] //custom TalonRO SQI
-,[1377,10,110,200,4,3,150,0,"Artemis Bow","","<font color='blue'>SQI</font>",4,5,6,5,0] //custom TalonRO SQI
-,[1378,15,117,190,4,3,70,0,"Belmont Whip","","<font color='blue'>SQI</font>",2,4,5,5,6,4,20,3,0] //custom TalonRO SQI
-,[1379,1,50,150,4,3,150,0,"Blade of Angels","","<font color='blue'>SQI</font>",1,10,3,10,8,40,15,20,14,250,0] //custom TalonRO SQI
-,[1380,6,119,250,4,3,600,0,"Djinn","","<font color='blue'>SQI</font>",3,3,5,5,6,5,20,2,194,1,0] //custom TalonRO SQI
-,[1381,14,0,190,4,3,100,0,"Electric Guitar","","<font color='blue'>SQI</font>",20,4,5,5,4,4,3,4,0]
-,[1382,8,109,250,4,3,150,0,"Evangelist","","<font color='blue'>SQI</font>",4,5,5,5,20,1,194,1,220,50,0] //custom TalonRO SQI
-,[1383,63,150,4,0,1,150,0,"Eversong Greaves","","Movement speed increased (same as Increase AGI)<BR><font color='blue'>SQI</font><BR>[Taekwon]<BR>MaxHP + 10%<BR>HIT + 25<BR>[Taekwon Master]<BR>MaxHP + 20%",15,10,19,10,0] //custom TalonRO SQI
-,[1384,9,143,225,4,3,150,0,"Ghostdancer Staff","","<font color='blue'>SQI</font>",4,5,5,5,89,15,0] //custom TalonRO SQI
-,[1385,16,144,250,4,3,100,0,"Hira Shurikat","","Negates the need for ninja stones<br><font color='blue'>SQI</font>",20,4,5,5,15,20,16,20,18,8,77,20,79,20,0] //custom TalonRO SQI
-,[1386,4,107,200,4,3,550,0,"Nibelungen","","Enable to use Level 1 [Enchant Poison]<BR><font color='blue'>SQI</font>",1,5,8,10,0] //custom TalonRO SQI
-,[1387,51,145,7,0,1,10,0,"Scouter","","Enable use of [Monster Property]<br>Power Level: &gt;9000<BR><font color='blue'>SQI</font>",5,10,12,15,0] //custom TalonRO SQI
-,[1388,10,114,150,4,3,150,0,"Sherwood Bow","","Enable to use [Arrow Crafting]<BR><font color='blue'>SQI</font>",2,5,5,5,0] //custom TalonRO SQI
-,[1389,9,111,250,4,3,50,0,"Staff of Magi","","<font color='blue'>SQI</font>",20,3,4,5,5,5,89,20,0] //custom TalonRO SQI
-,[1390,13,115,150,4,3,60,0,"Suiken","","<font color='blue'>SQI</font>",20,1,1,5,2,3,5,5,0] //custom TalonRO SQI
-,[1391,12,118,250,4,3,80,0,"Tome of Ymir","","<font color='blue'>SQI</font>",3,3,4,4,5,5,194,1,0] //custom TalonRO SQI
+,[1375,11,0,180,4,4,150,0,"Twin Fang","","<font color='blue'>SQI</font><br>15% Non-Boss and Boss resistance.",2,5,10,20,8,50,9,30,0] //custom TalonRO SQI
+,[1376,61,113,8,0,1,400,0,"Aegis Shield","","<font color='blue'>SQI</font>",1,3,3,5,4,3,19,10,194,1,61,10,62,10,63,10,64,10,0] //custom TalonRO SQI
+,[1377,10,110,200,4,3,150,0,"Artemis Bow","","<font color='blue'>SQI</font>",4,15,6,20,5040,10,0] //custom TalonRO SQI
+,[1378,15,117,190,4,3,70,0,"Belmont Whip","","<font color='blue'>SQI</font><br>Ignore [Adpation to Circumstances] delay.<br>Enable to use Level 5 [Providence] and Level 5 [Aspersio]",2,10,5,15,6,4,12,13,20,3,0] //custom TalonRO SQI
+,[1379,1,50,150,4,3,150,0,"Blade of Angels","","Resistance against misc attacks + 20% (Traps, Tarot, Pressure, ...)<br><font color='blue'>SQI</font>",1,10,8,50,15,50,14,1250,89,25,100,20,101,20,78,20,0] //custom TalonRO SQI
+,[1380,6,119,350,4,3,600,0,"Djinn","","<br><b>[Super Novice]</b><br>DEX + 5<br>LUK + 5<br><br><font color='blue'>SQI</font>",4,5,5,15,6,20,20,2,0] //custom TalonRO SQI
+,[1381,14,0,190,4,3,100,0,"Electric Guitar","","Ignore [Adpation to Circumstances] delay.<br><br><font color='blue'>SQI</font>",4,4,3,4,5,15,20,4,89,15,220,49,0]
+,[1382,8,109,250,4,3,150,0,"Evangelist","","<br><b>[Super Novice]</b><br>INT + 5<br>DEX + 5<br>Allows usage of the skill [Magic Crasher]Lv 1<br><br><font color='blue'>SQI</font>",4,15,5,15,8,35,20,1,220,50,0] //custom TalonRO SQI
+,[1383,63,150,4,0,1,150,0,"Eversong Greaves","","Fast movement all the time.<br><br><b>[Taekwon]</b><br>ASPD + 30%<br>HIT + 75<br><br><b>[Taekwon Master]</b><br>DEX + 10<br>LUK + 15<br><br><font color='blue'>SQI</font>",15,20,16,10,17,130,19,10,0] //custom TalonRO SQI
+,[1384,9,143,250,4,3,150,0,"Ghostdancer Staff","","<br><br><b>[Super Novice]</b><br>INT + 5<br>DEX + 5<br>MATK + 15%<br><br><font color='blue'>SQI</font>",4,15,5,15,15,20,16,20,89,20,220,50,0] //custom TalonRO SQI
+,[1385,16,144,250,4,3,100,0,"Hira Shurikat","","Negates the need for ninja stones<br><font color='blue'>SQI</font>",20,4,5,15,12,13,15,20,16,20,18,8,77,20,79,20,89,20,0] //custom TalonRO SQI
+,[1386,4,107,200,4,3,550,0,"Nibelungen","","Enable to use Level 4 [Warm Wind], dispell [Warm Wind] on unequip<BR><font color='blue'>SQI</font>",1,5,8,50,12,13,0] //custom TalonRO SQI
+,[1387,51,145,7,0,1,10,0,"Scouter","","Enable use of [Monster Property] and [Body Relocation]<br><br><b>[Super Novice]</b><br>DEX + 10<br>ASPD + 15%<br>Enable use of [Monster Property]<br><br><font color='blue'>SQI</font>",5,10,12,25,15,20,16,20,77,20,79,20,0] //custom TalonRO SQI
+,[1388,10,114,150,4,3,150,0,"Sherwood Bow","","Enable to use [Arrow Crafting]<BR>Additional Range + 6<font color='blue'>SQI</font>",2,5,5,15,9,30,89,15,0] //custom TalonRO SQI
+,[1389,9,111,250,4,3,50,0,"Staff of Magi","","<br><br><b>[Super Novice]</b><br>INT + 5<br>DEX + 5<br>MATK + 20%<br><br><font color='blue'>SQI</font>",20,3,4,5,5,15,89,20,0] //custom TalonRO SQI
+,[1390,13,115,150,4,3,60,0,"Suiken","","<font color='blue'>SQI</font>",20,1,1,10,5,10,8,40,12,13,0] //custom TalonRO SQI
+,[1391,12,118,250,4,3,80,0,"Tome of Ymir","","Ignore gemstone requirement.<font color='blue'>SQI</font>",4,4,5,15,12,13,89,20,0] //custom TalonRO SQI
 //custom TalonRO equip combos
 ,[1392,100,0,0,0,0,0,0,"Survivor's Manteau [Rental] set",0,0,60,25,89,5,0]
 //custom TalonRO etc (low/mid-headgears)
@@ -3920,7 +3920,7 @@ function Item_Setumei(nC1,nC2)
 	if(88 == nC1)
 		CBIstr += "MATK"+ wIS + nC2 +"% (Staff Type)<BR>";
     //Increase MATK by %
-   if(89 == nC1)
+	if(89 == nC1)
 		CBIstr += "MATK"+ wIS + nC2 +"%<BR>";
 	if(91 == nC1)
 		CBIstr += "Heal effectiveness increased by "+ wIS + nC2 +"%<BR>";
@@ -3934,12 +3934,17 @@ function Item_Setumei(nC1,nC2)
 		CBIstr += "Sanctuary effectiveness increased by "+ wIS + nC2 +"%<BR>";
 	if(96 == nC1)
 		CBIstr += "Heal received from [Sanctuary] increased by "+ wIS + nC2 +"%<BR>";
-   if(97 == nC1)
-      CBIstr += "Increases magical damage against bosstype monsters by "+ nC2 +"%<BR>";
-   if(98 == nC1)
-      CBIstr += "MATK" + wIS + nC2 + "<BR>";
-   if(99 == nC1)
-      CBIstr += "ASPD" + wIS + nC2 + "<BR>";
+	if(97 == nC1)
+		CBIstr += "Increases magical damage against bosstype monsters by "+ nC2 +"%<BR>";
+	if(98 == nC1)
+		CBIstr += "MATK" + wIS + nC2 + "<BR>";
+	if(99 == nC1)
+		CBIstr += "ASPD" + wIS + nC2 + "<BR>";
+	if(100 == nC1)
+		CBIstr += "Resistance against melee attacks" + wIS + nC2 +"%<BR>";
+	if(101 == nC1)
+		CBIstr += "Resistance against magic attacks" + wIS + nC2 +"%<BR>";
+  
     /*Increase Crital Rate on race by an amount.
       110 = Formless
       111 = Undead
