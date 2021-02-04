@@ -573,7 +573,7 @@ SQI_BONUS =[
 ,[46,1379,"Blade of Angels","Enables use of level 5  [Aspersio]",0]
 ,[47,1379,"Blade of Angels","Enables use of Level 10 [Auto Spell]",0]
 ,[48,1379,"Blade of Angels","Enables use of level 10 [Grand Cross]",220,62,0]
-,[49,1379,"Blade of Angels","Enables use of Level 5  [Aura Blade](activates Aura Blade lv 5)",0]
+,[49,1379,"Blade of Angels","Enables use of Level 5  [Aura Blade] (Toggle)",0]
 ,[50,1380,"Djinn","+15% MaxHP",15,15,0]
 ,[51,1380,"Djinn","+5 INT",4,5,0]
 ,[52,1380,"Djinn","5% chance to reflect 40% of damage for 8 seconds when attacked",0]

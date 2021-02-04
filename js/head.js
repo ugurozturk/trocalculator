@@ -2613,8 +2613,8 @@ function BattleCalc998()
 			HJ_RATIO = HJ_LV;
 			MS_REDUCTION = MS_BOSS * MS_RANGE * MS_ELEMENT * MS_NEUTRAL * MS_RACE * (sting_slap_cocktail ? 0.9 : 1);
 			
-			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
-			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_totalDEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
+			HJ_MINDMG = Math.floor(Math.floor(Math.floor(n_B[12] * HJ_RATIO * (1 - n_A_DEF /100) - n_A_VITDEF[0]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
+			HJ_MAXDMG = Math.floor(Math.floor(Math.floor(n_B[13] * HJ_RATIO * (1 - n_A_DEF /100) - n_A_VITDEF[2]) * MS_REDUCTION) * MS_WOF * MS_ASSUMPTIO * MS_EC);
 
 			HJ_POWER = Math.floor(HJ_MINDMG * HITS) + "~" + Math.floor(HJ_MAXDMG * HITS);
 		}
@@ -2638,13 +2638,13 @@ function BattleHiDam(){
 	if(n_B[12] == n_B[13])
 		w_HiDam[6] = wBHD - 1;
 
-	w_HiDam[0] = w_HiDam[0] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[2];
-	w_HiDam[1] = w_HiDam[1] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[2];
-	w_HiDam[2] = w_HiDam[2] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[2];
-	w_HiDam[3] = w_HiDam[3] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[1];
-	w_HiDam[4] = w_HiDam[4] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[0];
-	w_HiDam[5] = w_HiDam[5] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[0];
-	w_HiDam[6] = w_HiDam[6] * (100-n_A_totalDEF) / 100 - n_A_VITDEF[0];
+	w_HiDam[0] = w_HiDam[0] * (100-n_A_DEF) / 100 - n_A_VITDEF[2];
+	w_HiDam[1] = w_HiDam[1] * (100-n_A_DEF) / 100 - n_A_VITDEF[2];
+	w_HiDam[2] = w_HiDam[2] * (100-n_A_DEF) / 100 - n_A_VITDEF[2];
+	w_HiDam[3] = w_HiDam[3] * (100-n_A_DEF) / 100 - n_A_VITDEF[1];
+	w_HiDam[4] = w_HiDam[4] * (100-n_A_DEF) / 100 - n_A_VITDEF[0];
+	w_HiDam[5] = w_HiDam[5] * (100-n_A_DEF) / 100 - n_A_VITDEF[0];
+	w_HiDam[6] = w_HiDam[6] * (100-n_A_DEF) / 100 - n_A_VITDEF[0];
 
 
 	if(SkillSearch(23) && (n_B[3]>=90 || n_B[2]==6)){

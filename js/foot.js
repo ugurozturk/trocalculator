@@ -1641,6 +1641,7 @@ with(document.calcForm){
 		myInnerHtml("A_MaxSP"," "+n_A_MaxSP,0);
 
 	n_A_DEF = n_tok[18];
+	n_A_DEF2 = n_A_VIT;
 
 	for(i=2;i<=10;i++)
 	{
@@ -1742,74 +1743,76 @@ with(document.calcForm){
 		n_A_DEF += 5;
 	}
 
-	n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 0.66);
+	// Apply refine bonus before status changes
+	n_A_DEF += Math.round(n_A_DEFplus * 0.66);
 
-	if(n_tok[24])
-		n_A_totalDEF = Math.floor(n_A_totalDEF / n_tok[24]);
-	if(n_tok[85])
-		n_A_totalDEF -= Math.floor(n_A_totalDEF * n_tok[85] /100);
-
-	if(SkillSearch(256))
-			n_A_totalDEF = Math.floor(n_A_totalDEF * (1 - 0.05 * SkillSearch(256)));
-
-	if(n_A_IJYOU[2]){
-		n_A_totalDEF -= Math.floor(n_A_totalDEF * 25 / 100);
+	if (n_tok[24])
+	{
+		n_A_DEF = Math.floor(n_A_DEF / n_tok[24]);
+		n_A_DEF2 = Math.floor(n_A_DEF2 / n_tok[24]);
 	}
+
+	if (n_tok[85])
+		n_A_DEF -= Math.floor(n_A_DEF * n_tok[85] /100);
+
+	if (SkillSearch(258)) // Berserk#258
+	{
+		n_A_DEF = 0;
+		n_A_DEF2 = 0;
+	}
+
+	if (SkillSearch(256)) // Concentration#256
+	{
+		n_A_DEF = Math.floor(n_A_DEF * (1 - 0.05 * SkillSearch(256)));
+		n_A_DEF2 = Math.floor(n_A_DEF2 * (1 - 0.05 * SkillSearch(256)));
+	}
+
+	if (n_A_IJYOU[2]) // Poisoned Status
+	{
+		n_A_DEF = Math.floor(n_A_DEF * 0.75);
+		n_A_DEF2 = Math.floor(n_A_DEF2 * 0.75);
+	}
+	
+	if (n_A_PassSkill5[5]) // Gospel DEF+25%
+		n_A_DEF += Math.floor(n_A_DEF * .25);
+	
 	//def reduction when mobbed updated [Loa] 2018-07-24
-	let defReduc = (n_A_PassSkill8[12] + (n_A_PassSkill8[33] * 2) + (n_A_PassSkill8[34] * 3)) * 3 / 100;
-	if(defReduc > 1){defReduc = 1;}
-	if(defReduc){
-		n_A_totalDEF = Math.floor(n_A_totalDEF * (1 - defReduc));
-	}
+	defReduc = Math.min(1, (n_A_PassSkill8[12] + (n_A_PassSkill8[33] * 2) + (n_A_PassSkill8[34] * 3)) * 3 / 100);
+	n_A_DEF = Math.floor(n_A_DEF * (1 - defReduc));
 
-	if(SkillSearch(196)){
-		n_A_totalDEF = 90;
-	}
+	if (SkillSearch(196)) // Steel Body#196 not affected by def reduction
+		n_A_DEF = 90;
 
-	/*if(n_A_totalDEF >= 100)
-		n_A_totalDEF = 99;*/
-	//angelus
-	for(i=0;i<11;i++){
-		if(n_A_PassSkill2[4] == i){P_VIT1 = n_A_VIT*(0.05*i);}
-	}
-	//auto berserk
-	if(SkillSearch(12)){P_VIT2 = parseInt(n_A_VIT*0.55);}
-		else{P_VIT2 = 0;}
+	if(SkillSearch(12)) // Auto Berserk#12
+		n_A_DEF2 = Math.floor(n_A_DEF2 * 0.45);
 
-	n_A_DEFVIT = parseInt(n_A_VIT + P_VIT1);
+	if (n_A_PassSkill2[12]) // Aloevera
+		n_A_DEF2 = Math.floor(n_A_DEF2 * 0.9);
 
-	//aloevera
-	if(n_A_PassSkill2[12]){n_A_DEFVIT -= Math.floor(n_A_DEFVIT*0.1);}
+	if (n_A_PassSkill6[5]) // Provoke
+		n_A_DEF2 = Math.floor(n_A_DEF2 * (0.95 - 0.05 * n_A_PassSkill6[5]));
 
-	//provoke
-	if(n_A_PassSkill6[5]){n_A_DEFVIT -= Math.floor((.05+(.05*n_A_PassSkill6[5]))*n_A_DEFVIT);}
+	//[Grimtooth also reduces Vit Def by 1/2] [Kato]
+	if (EquipNumSearch(15))
+		n_A_DEF2 -= Math.floor(n_A_DEF2 * .50);
 
-	if(n_A_PassSkill5[5])
-		n_A_totalDEF += Math.floor(n_A_totalDEF*.25);
+	//[Masamune also reduces Vit Def by 1/3] [Kato]
+	if (EquipNumSearch(47))
+		n_A_DEF2 -= Math.floor(n_A_DEF2 * .67);
 
-	//berserk
-	if(SkillSearch(258)){
-		n_A_totalDEF = 0;
-		n_A_DEFVIT = 0;}
-
-		//[Grimtooth also reduces Vit Def by 1/2] [Kato]
-		if(EquipNumSearch(15)){
-			n_A_DEFVIT -= Math.floor(n_A_DEFVIT*.50);
-		}
-		//[Masamune also reduces Vit Def by 1/3] [Kato]
-		if(EquipNumSearch(47)){
-			n_A_DEFVIT -= Math.floor(n_A_DEFVIT*.67);
-		}
 	//[Spike 0/2 also reduces Vit Def by 1/3] [Kato]
-		if(EquipNumSearch(420)){
-			n_A_DEFVIT -= Math.floor(n_A_DEFVIT*.67);
-		}
+	if (EquipNumSearch(420))
+		n_A_DEF2 -= Math.floor(n_A_DEF2 * .67);
 
-	myInnerHtml("A_totalDEF",n_A_totalDEF + "+" + n_A_DEFVIT,0);
+	// Angelus
+	n_A_DEF2 = Math.floor(n_A_DEF2 * (1 + 0.05 * n_A_PassSkill2[4]));
 
+	myInnerHtml("A_totalDEF", n_A_DEF + "+" + n_A_DEF2, 0);
+	
+	// VITDEF is different than DEF2, as the reduced damage from DEF2 is not a fixed value hence represented by VITDEF
 	n_A_VITDEF = new Array();
-	n_A_VITDEF[0] = Math.floor(n_A_VIT * 0.5) + Math.floor(n_A_VIT * 0.3);
-	n_A_VITDEF[2] = Math.floor(n_A_VIT * 0.5) + Math.floor(n_A_VIT * n_A_VIT / 150) -1;
+	n_A_VITDEF[0] = Math.floor(n_A_DEF2 * 0.5) + Math.floor(n_A_DEF2 * 0.3);
+	n_A_VITDEF[2] = Math.floor(n_A_DEF2 * 0.5) + Math.floor(n_A_DEF2 * n_A_DEF2 / 150) -1;
 	if(n_A_VITDEF[2] > n_A_VITDEF[0]){
 		n_A_VITDEF[1] = (n_A_VITDEF[0] + n_A_VITDEF[2]) / 2;
 	}
@@ -1817,48 +1820,13 @@ with(document.calcForm){
 		n_A_VITDEF[1] = n_A_VITDEF[0];
 		n_A_VITDEF[2] = n_A_VITDEF[0];
 	}
-	if(SkillSearch(12)){
-		for(i=0;i<=2;i++)
-			n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] * 0.45);
-	}
-	else if(n_A_PassSkill6[5]){
-			for(i=0;i<=2;i++)
-				n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] * (0.95 - 0.05 * n_A_PassSkill6[5]));
-	}
-	else{
-		if(n_A_PassSkill2[12]){
-			for(i=0;i<=2;i++)
-				n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] * 0.9);
-		}
-	}
-	if(n_tok[24]){
-		for(i=0;i<=2;i++)
-			n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] / n_tok[24]);
-	}
-	if(SkillSearch(256)){
-		for(i=0;i<=2;i++)
-			n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] * (1 - 0.05 * SkillSearch(256)));
-	}
-	if(n_A_PassSkill2[4]){
-		for(i=0;i<=2;i++)
-			n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] * (1 + 0.05 * n_A_PassSkill2[4]));
-	}
-	if(TimeItemNumSearch(33))
-		for(i=0;i<=2;i++)
-			n_A_VITDEF[i] -= Math.floor(n_A_VITDEF[i] * 20 / 100);
-	if(n_A_IJYOU[2])
-		for(i=0;i<=2;i++)
-			n_A_VITDEF[i] -= Math.floor(n_A_VITDEF[i] * 25 / 100);
 
-	if(SkillSearch(258)){
-		for(i=0;i<=2;i++)
-			n_A_VITDEF[i] = 0;
-	}
 	//soft def reduction when mobbed updated [Loa] 2081-08-11
-	if(defReduc){
-		for(i=0;i<=2;i++){
+	if (!SkillSearch(196)) // Steel Body#196 not affected by vit def reduction
+	{
+		for (i = 0; i <= 2;i++)
 			n_A_VITDEF[i] = Math.floor(n_A_VITDEF[i] * (1 - defReduc));
-	}}
+	}
 
 	// Menblatt Wing Manteau#1696 [Every 2 Refine Level] MDEF + 1
 	if (EquipNumSearch(1696))
@@ -1939,7 +1907,7 @@ with(document.calcForm){
 	var wHSE = A_HSE.value;
 	if(wHSE){
 		if(111 <= wHSE && wHSE <= 119)
-			n_A_DEF += parseInt(wHSE.substr(-1));
+			n_A_MDEF += parseInt(wHSE.substr(-1));
 	}
 
 	//custom TalonRO Kris enchant MDEF
