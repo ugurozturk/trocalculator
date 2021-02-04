@@ -6804,7 +6804,7 @@ function manage_sqi_bonus()
 	if (1383 == n_A_Equip[0])
 	{
 		// #179 - Pierce 10% of enemy MDEF when using [Fire Bolt], [Cold Bolt], [Lightning Bolt], or [Earth Spike]
-		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 179) > -1 && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill))
+		if (SQI_Bonus_Effect.findIndex(x => x - 1 == 179) > -1 && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 132 == n_A_ActiveSkill))
 			n_tok[295] += 10;
 		
 		// #182 - Autospell#229 Mastered: Add ASPD + 12% and FLEE + 15 during [Autospell]
