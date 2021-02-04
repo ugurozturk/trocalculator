@@ -1898,29 +1898,40 @@ function BattleCalc999()
 		n_Enekyori=2;
 		wbairitu = 1;
 		n_bunkatuHIT = 0;
-		//fire bolt
-		if(n_A_ActiveSkill==51){
+		support_autospell = 0;
+		support_double_casting = 0;
+		
+
+		if (n_A_ActiveSkill == 51) // Fire Bolt#51
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 3;
+			support_double_casting = 1;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2] = 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
-		//cold bolt
-		else if(n_A_ActiveSkill==54){
+		else if (n_A_ActiveSkill == 54) // Cold Bolt#54
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 1;
+			support_double_casting = 1;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2]= 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
-		//lightning bolt
-		else if(n_A_ActiveSkill==56){
+		else if (n_A_ActiveSkill == 56) // Lightning Bolt#56
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 4;
+			support_double_casting = 1;
 			wHITsuu = n_A_ActiveSkillLV;
 			wCast = 0.7 * n_A_ActiveSkillLV;
 			n_Delay[2] = 0.8 + n_A_ActiveSkillLV * 0.2;
 		}
 		//fire ball
 		else if(n_A_ActiveSkill==52){
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 3;
 			if(n_A_ActiveSkillLV <=5){
 				wCast = 1.5;
@@ -1940,6 +1951,7 @@ function BattleCalc999()
 		}
 		//frost diver
 		else if(n_A_ActiveSkill==55){
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 1;
 			wCast = 0.8;
 			n_Delay[2] = 1.5;
@@ -1952,7 +1964,9 @@ function BattleCalc999()
 			n_Delay[2] = 2;
 			wbairitu = 0.8;
 		}
-		else if(n_A_ActiveSkill==46){
+		else if(n_A_ActiveSkill==46) // Napalm Beat#46
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 8;
 			wCast = 0.5;
 			if(n_A_ActiveSkillLV==10)
@@ -1969,8 +1983,9 @@ function BattleCalc999()
 				n_Delay[2] = 1;
 			wbairitu = 0.7 + n_A_ActiveSkillLV * 0.1;
 		}
-		//soul strike
-		else if(n_A_ActiveSkill==47){
+		else if(n_A_ActiveSkill==47) // Soul Strike#47
+		{
+			support_autospell = 1;
 			n_A_Weapon_zokusei = 8;
 			wHITsuu = Math.round(n_A_ActiveSkillLV / 2);
 			wCast = 0.5;
@@ -2468,6 +2483,24 @@ function BattleCalc998()
 			myInnerHtml("MaxATKnum",SubName[5],0);
 	}
 
+	damage_per_second = 1 / (wCast + wDelay) * w_DMG[1];
+	
+	if (2 == n_Enekyori)
+	{
+		if (support_autospell && SkillSearch(229)) // AutoSpell#229
+			damage_per_second = 1 / wDelay * (.05 + SkillSearch(229) / 50) * w_DMG[1];
+		
+		if (support_double_casting && SkillSearch(443)) // Double Casting#443
+			damage_per_second *= 1.3 + SkillSearch(443) / 10;
+	}
+	
+	damage_per_second = Math.round(damage_per_second);
+
+	if(n_Delay[0])
+		myInnerHtml("AveSecondATK","Special",0);
+	else
+		myInnerHtml("AveSecondATK", damage_per_second, 0);
+
 	w = Math.floor(n_B[6] / w_DMG[1]);
 	if(n_B[6] % w_DMG[1] != 0)
 		w += 1;
@@ -2485,32 +2518,18 @@ function BattleCalc998()
 	{
 		myInnerHtml("AveATKnum",w,0);
 
-		n_AveATKnum = w;
-
-
-		var w2 = (wCast + wDelay) * n_AveATKnum;
-		w2 = Math.floor(w2 * 100) / 100;
+		average_battle_duration = Math.floor(n_B[6] / damage_per_second * 100) / 100;
 
 		if(n_Delay[0])
 			myInnerHtml("BattleTime","Special",0);
 		else
-			myInnerHtml("BattleTime",w2 + "s",0);
+			myInnerHtml("BattleTime", average_battle_duration + "s",0);
 	}
 	else
 	{
 		myInnerHtml("AveATKnum",SubName[5],0);
 		myInnerHtml("BattleTime",SubName[6],0);
 	}
-
-	var w = 1 / (wCast + wDelay) * w_DMG[1];
-	w *= 100;
-	w = Math.round(w);
-	w /= 100;
-
-	if(n_Delay[0])
-		myInnerHtml("AveSecondATK","Special",0);
-	else
-		myInnerHtml("AveSecondATK",w,0);
 
 	if(Taijin==0){
 		w = BattleHiDam();
@@ -8046,7 +8065,8 @@ function EDP_DMG(num){
 
 
 function CastAndDelay(){
-	if(wCast != 0){
+	if (!SkillSearch(229) && wCast) // Disable cast time if AutoSpell#229 is active
+	{
 		str_bSUBname += SubName[9] +"<BR>";
 		str_bSUB += Math.floor(wCast *100)/100 + SubName[1] +"<BR>";
 	}
@@ -8061,34 +8081,36 @@ function CastAndDelay(){
 		w = 1;
 	}
 	
-	/*
-		Bragi capped after cast delay reduction to 0.4s
-		Skills that have long delays that can't normally achieve our 0.3 second delay cap without Bragi
-		can only be reduced up to 0.4 second delay while under Bragi.
-
-		Delay is expressed in ms, flooring operation should take that into consideration
-	*/
-	if (n_A_PassSkill3[32])
+	if (!(2 == n_Enekyori && support_autospell && SkillSearch(229)))
 	{
-		bragi_acd_reduction = Math.max((n_Delay[2] - 0.4), 0) * n_tok[74];
-		n_Delay[2] = Math.floor(n_Delay[2] * 100 - bragi_acd_reduction) / 100;
+		/*
+			Bragi capped after cast delay reduction to 0.4s
+			Skills that have long delays that can't normally achieve our 0.3 second delay cap without Bragi
+			can only be reduced up to 0.4 second delay while under Bragi.
+
+			Delay is expressed in ms, flooring operation should take that into consideration
+		*/
+		if (n_A_PassSkill3[32])
+		{
+			bragi_acd_reduction = Math.max((n_Delay[2] - 0.4), 0) * n_tok[74];
+			n_Delay[2] = Math.floor(n_Delay[2] * 100 - bragi_acd_reduction) / 100;
+		}
+		else
+			n_Delay[2] = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
+		
+		if(n_Delay[2] > wDelay){
+			wDelay = n_Delay[2];
+			w = 2;
+		}
+		if(n_Delay[3] > wDelay){
+			wDelay = n_Delay[3];
+			w = 3;
+		}
 	}
-	else
-		n_Delay[2] = Math.floor(n_Delay[2] * (100 - n_tok[74])) / 100;
 	
-	if(n_Delay[2] > wDelay){
-		wDelay = n_Delay[2];
-		w = 2;
-	}
-	if(n_Delay[3] > wDelay){
-		wDelay = n_Delay[3];
-		w = 3;
-	}
-	if(n_A_ActiveSkill != 0 && n_A_ActiveSkill != 284){
+	if(n_A_ActiveSkill != 0 && n_A_ActiveSkill != 284)
 		n_Delay[4] = 0.33; // [Custom TalonRO 2016-06-02 - Added fixed TRO's Minimun Delay for Skills] [Kato]
 
-
-	}
 	if(n_Delay[4] > (wDelay + wCast)){
 		wDelay = n_Delay[4] - wCast;
 		w = 4;
