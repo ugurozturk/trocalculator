@@ -2686,16 +2686,14 @@ function BattleHiDam(){
 				w_HiDam[i] -= Math.floor(w_HiDam[i] * wBHD /100);
 		}
 	}
-	//custom TalonRO SQI Bonus Sherwood Bow: 15% Melee resistance
-	if(n_B[20]==0){
-		if(EquipNumSearch(1388))
-			for(i=0;i<SQI_Bonus_Effect.length;i++)
-				if(SQI_Bonus_Effect[i]==135) {
-					for(j=0;j<=6;j++)
-						w_HiDam[j] -= Math.floor(w_HiDam[j] * 15 /100);
-					break;
-				}
+
+	// bNearAtkDef - Apply melee resistance
+	if (!n_B[20])
+	{
+		for(j=0;j<=6;j++)
+			w_HiDam[j] -= Math.floor(w_HiDam[j] * n_tok[100] / 100);
 	}
+
 	//Port Malaya set damage reduction - [Loa] - 2018-06-29
 	portMalayaMob = [596,597,598,599,600,601,602,603,671,672,673,674,676,677]
 	if(EquipNumSearch(1017)){
